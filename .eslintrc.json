@@ -1,0 +1,118 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "promise"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:why/error"
+  ],
+  "rules": {
+    "@typescript-eslint/default-param-last": ["error"],
+    "@typescript-eslint/no-explicit-any": [ "error", { "ignoreRestArgs": false }],
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "none",
+        "varsIgnorePattern": "inject|param|(\\w+)Bindings",
+        "ignoreRestSiblings": false
+      }
+    ],
+    "arrow-body-style": ["error", "always"],
+    "class-methods-use-this": 0,
+    "default-param-last": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "mjs": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": [0, {
+      "commonjs": true,
+      "caseSensitive": true
+    }],
+    "import/prefer-default-export": "off",
+    "jest/no-disabled-tests": "error",
+    "jest/no-focused-tests": "error",
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/label-has-associated-control": [2, {
+      "labelComponents": ["CustomInputLabel"],
+      "labelAttributes": ["label"],
+      "controlComponents": ["CustomInput"],
+      "depth": 3
+    }],
+    "jsx-a11y/label-has-for": [2, {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
+    "react/default-props-match-prop-types": 0,
+    "react/destructuring-assignment": "off",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/jsx-no-useless-fragment": ["error", { "allowExpressions": true }],
+    "react/jsx-props-no-spreading": 0,
+    "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
+    "react/require-default-props": "off",
+    "max-len": ["error", { "code": 200 }],
+    "no-async-promise-executor": [ "error" ],
+    "no-unused-vars": [ "off" ],
+    "no-shadow": "off",
+    "no-undef": ["error", { "typeof": false }],
+    "no-console": [ "error" ],
+    "no-useless-constructor": 0,
+    "no-empty-function": [ "error", { "allow": [ "constructors" ]}],
+    "no-param-reassign": "off",
+    "promise/prefer-await-to-then": "error"
+  },
+  "globals": {
+    "window": "readonly",
+    "document": "readonly",
+    "navigator": "readonly",
+    "expect": "readonly",
+    "it": "readonly",
+    "test": "readonly",
+    "after": "readonly",
+    "afterAll": "readonly",
+    "afterEach": "readonly",
+    "before": "readonly",
+    "beforeAll": "readonly",
+    "beforeEach": "readonly",
+    "describe": "readonly",
+    "jest": "readonly",
+    "File": "readonly",
+    "FileReader": "readonly",
+    "FileError": "readonly",
+    "Blob": "readonly",
+    "ProgressEvent": "readonly",
+    "fetch": "readonly",
+    "context": "readonly",
+    "JSX": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".json"
+        ]
+      }
+    }
+  },
+  "env": {
+    "browser": true
+  }
+}
