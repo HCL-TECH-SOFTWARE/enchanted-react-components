@@ -1784,6 +1784,51 @@ import Icon from './Icon';
 export default {
   title: 'Data display/IconPreview',
   component: Icon,
+  argTypes: {
+    children: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-children',
+      defaultValue: { summary: false },
+    },
+    classes: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-classes',
+      defaultValue: { summary: false },
+    },
+    htmlColor: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    shapeRendering: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    sx: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-sx',
+      defaultValue: { summary: false },
+    },
+    titleAccess: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    viewBox: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+    },
+    inheritViewBox: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+    },
+  },
 } as Meta<typeof Icon>;
 
 const renderGridItem = (iconFileName: string, icon: JSX.Element) => {

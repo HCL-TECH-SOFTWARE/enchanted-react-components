@@ -26,229 +26,117 @@ export default {
   title: 'Inputs/Button',
   component: Button,
   argTypes: {
-    onClick: {
-      if: { arg: 'interactive' },
-      action: 'clicked',
-    },
-    startIcon: {
-      description: 'startIcon of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    href: {
-      description: 'href of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    endIcon: {
-      description: 'endIcon of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    disableFocusRipple: {
-      description: 'disableFocusRipple of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     disableElevation: {
       description: 'disableElevation of Button component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    touchRippleRef: {
-      description: 'touchRippleRef of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    TouchRippleProps: {
-      description: 'TouchRippleProps of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    onFocusVisible: {
-      description: 'onFocusVisible of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    LinkComponent: {
-      description: 'LinkComponent of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    focusVisibleClassName: {
-      description: 'focusVisibleClassName of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    focusRipple: {
-      description: 'focusRipple of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    disableTouchRipple: {
-      description: 'disableTouchRipple of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    disableRipple: {
-      description: 'disableRipple of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    centerRipple: {
-      description: 'centerRipple of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     size: {
       description: 'Sizes of Button component.',
       options: ['small', 'medium', 'large'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     fullWidth: {
       description: 'fullWidth of Button component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    action: {
-      description: 'action of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disabled: {
       description: 'disabled of Button component.',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: {
-          summary: 'default',
-        },
+        defaultValue: { summary: false },
       },
     },
     color: {
       description: 'color of Button component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     tabIndex: {
       description: 'tabIndex of Button component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     variant: {
       description: 'variant of Button component.',
       options: ['text', 'outlined', 'contained'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     sx: {
-      description: 'sx of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/button/#button-prop-sx',
+      control: false,
     },
     children: {
-      description: 'children of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/button/#button-prop-children',
+      control: false,
     },
     classes: {
-      description: 'classes of Button component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/button/#button-prop-classes',
+      control: false,
+    },
+    onClick: {
+      control: false,
+      action: 'clicked',
+      description: 'https://mui.com/material-ui/api/button/',
+    },
+    startIcon: {
+      description: 'https://mui.com/material-ui/api/button/#button-prop-startIcon',
+      control: false,
+    },
+    href: {
+      description: 'https://mui.com/material-ui/api/button/#button-prop-href',
+      control: false,
+    },
+    endIcon: {
+      description: 'https://mui.com/material-ui/api/button/#button-prop-endIcon',
+      control: false,
+    },
+    disableFocusRipple: {
+      description: 'https://mui.com/material-ui/api/button/#button-prop-disableFocusRipple',
+      control: false,
+    },
+    touchRippleRef: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
+      control: false,
+    },
+    TouchRippleProps: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+      control: false,
+    },
+    onFocusVisible: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+      control: false,
+    },
+    LinkComponent: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+      control: false,
+    },
+    focusVisibleClassName: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+      control: false,
+    },
+    focusRipple: {
+      description: 'https://mui.com/material-ui/api/button/',
+      control: false,
+    },
+    disableTouchRipple: {
+      description: 'https://mui.com/material-ui/api/button/',
+      control: false,
+    },
+    disableRipple: {
+      description: 'https://mui.com/material-ui/api/button/#button-prop-disableRipple',
+      control: false,
+    },
+    centerRipple: {
+      description: 'https://mui.com/material-ui/api/button/',
+      control: false,
+    },
+    action: {
+      description: 'https://mui.com/material-ui/api/button/',
+      control: false,
+    },
+    hover: {
+      description: 'https://mui.com/material-ui/api/button/',
+      control: false,
     },
   },
 } as Meta<typeof Button>;

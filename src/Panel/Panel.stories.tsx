@@ -58,42 +58,31 @@ export default {
     },
     selectedTabValue: {
       description: 'Index of the current selected tab',
-      if: { arg: 'interactive' },
+      control: false,
     },
     toggleClose: {
       description: 'Event handler for close button',
-      if: { arg: 'interactive' },
+      control: false,
     },
     handleTabChange: {
       description: 'Event handler for changing tab',
-      if: { arg: 'interactive' },
+      control: false,
     },
     ref: {
       description: 'ref of Panel component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
+    },
+    sidebar: {
+      description: 'sidebar of Panel component.',
+      control: false,
     },
     BackdropComponent: {
       description: 'BackdropComponent of Panel component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
     },
     BackdropProps: {
       description: 'BackdropProps of Panel component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
     },
   },
 } as Meta<typeof Panel>;

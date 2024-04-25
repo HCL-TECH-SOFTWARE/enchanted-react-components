@@ -108,35 +108,20 @@ export default {
       },
     },
     footerActionFunction: {
-      description: 'Callback fired when action Button is clicked.',
-      if: { arg: 'interactive' },
+      description: 'handles the function call in the footer',
+      control: false,
     },
     ref: {
-      description: 'ref of Menu component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/menu/',
+      control: false,
     },
     BackdropComponent: {
-      description: 'BackdropComponent of Menu component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/menu/',
+      control: false,
     },
     BackdropProps: {
-      description: 'BackdropProps of Menu component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/menu/',
+      control: false,
     },
   },
 } as Meta<typeof Menu>;

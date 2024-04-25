@@ -29,6 +29,24 @@ import {
 export default {
   title: 'Data display/DataGridCell',
   component: DataGridCell,
+  argTypes: {
+    rows: {
+      description: 'Set of rows of type GridColDef[].',
+    },
+    columns: {
+      description: 'Set of columns of type GridColDef[].',
+    },
+    pageSize: {
+      control: false,
+      description: 'Number of row per page.',
+    },
+    checkboxSelection: {
+      description: 'If true, it will activate checkbox selection.',
+    },
+    hideFooter: {
+      description: 'If true, the footer will be hidden.',
+    },
+  },
 } as Meta<typeof DataGridCell>;
 
 const Template: StoryFn<typeof DataGridCell> = (args) => {

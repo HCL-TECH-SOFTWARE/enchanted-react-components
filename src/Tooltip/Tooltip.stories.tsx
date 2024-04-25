@@ -75,14 +75,13 @@ export default {
         },
       },
     },
-    ref: {
-      description: 'ref of tooltip component.',
+    title: {
+      description: 'Tooltip title. Zero-length titles string, undefined, null and false are never displayed.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/tooltip/',
+      control: false,
     },
   },
 } as Meta<typeof Tooltip>;

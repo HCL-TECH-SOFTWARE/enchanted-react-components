@@ -36,11 +36,153 @@ export default {
   argTypes: {
     error: {
       control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description:
+        'Indicates the combobox value is invalid.',
     },
     emptyOptions: {
       control: 'boolean',
       description:
         'Adds freeSolo and empty options array to the MultiSelectChip which would allow it to accept free undetermined values (e.g. any word or phrase)',
+    },
+    helperIconTooltip: {
+      table: {
+        defaultValue: {
+          summary: 'Some information about that component.',
+        },
+      },
+      description: 'Tooltip text hovering on ? mark for MultiSelectChip component',
+    },
+    required: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: true,
+        },
+      },
+      description: 'Indicates that multiSelectchip is required field if it is true',
+    },
+    label: {
+      table: {
+        defaultValue: {
+          summary: 'Label',
+        },
+      },
+      description: 'Label for MultiSelectChip component',
+    },
+    helperText: {
+      table: {
+        defaultValue: {
+          summary: 'Helper text',
+        },
+      },
+      description: 'The helper text content.',
+    },
+    sx: {
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    placeholder: {
+      description: 'The short hint displayed in the input before the user enters a value.',
+      table: {
+        defaultValue: {
+          summary: 'Placeholder',
+        },
+      },
+    },
+    focused: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'If `true`, the component is displayed in focused state.',
+    },
+    hiddenLabel: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description:
+        'If `true`, the label is hidden.',
+    },
+    nonEdit: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'If `true` value cannot be editable',
+    },
+    actionProps: {
+      description: 'Contains the action props and key-value',
+    },
+    disabled: {
+      description: 'If true, the component is disabled.',
+    },
+    fullWidth: {
+      description: 'If true, the input will take up the full width of its container.',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+    },
+    filterSelectedOptions: {
+      description: 'If true, hide the selected options from the list box.',
+      table: {
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
+    options: {
+      description: 'Array of options.',
+    },
+    id: {
+      description: 'Id of the component.',
+      table: {
+        defaultValue: {
+          summary: 'id',
+        },
+      },
+    },
+    clearIcon: {
+      control: false,
+      description:
+        'The clear Icon used to clear chips.',
+    },
+    endAdornmentAction: {
+      control: false,
+      description: 'End Adornment Action of the component.',
+    },
+    renderNonEditInput: {
+      control: false,
+      description: 'Render the component Non Edittable Input',
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/',
+    },
+    getOptionLabel: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/',
+    },
+    autoFocus: {
+      control: false,
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'https://mui.com/material-ui/api/chip/',
     },
   },
 } as Meta<typeof MultipleSelectChip>;

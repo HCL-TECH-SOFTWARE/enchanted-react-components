@@ -7,6 +7,7 @@
 ### Fixed
 
 ### Changed
+  - Cleanup Storybook controls and description
 
 #### Breaking changes
 

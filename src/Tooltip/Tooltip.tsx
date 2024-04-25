@@ -63,7 +63,7 @@ export const getMuiTooltipThemeOverrides = (): Components<Omit<Theme, 'component
       styleOverrides: {
         tooltip: ({ ownerState, theme }) => {
           return ({
-            backgroundColor: theme.palette.action.active,
+            backgroundColor: theme.palette.background.dark,
             color: theme.palette.text.tertiary1,
             borderRadius: '2px',
             '&.MuiTooltip-tooltip': {

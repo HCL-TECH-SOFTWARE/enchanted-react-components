@@ -49,6 +49,46 @@ export default {
         defaultValue: { summary: false },
       },
     },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/radio/',
+    },
+    action: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/radio/',
+    },
+    focusVisibleClassName: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+    },
+    LinkComponent: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+    },
+    onFocusVisible: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+    },
+    touchRippleRef: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
+    },
+    TouchRippleProps: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+    },
+    centerRipple: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/radio/',
+    },
+    disableTouchRipple: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/radio/',
+    },
+    focusRipple: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/radio/',
+    },
   },
 } as Meta<typeof Radio>;
 
