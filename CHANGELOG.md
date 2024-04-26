@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+  - Fixing console error - Warning: Received `false` for a non-boolean attribute `focus`.
 
 ### Changed
   - Cleanup Storybook controls and description

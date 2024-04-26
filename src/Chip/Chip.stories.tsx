@@ -84,7 +84,9 @@ export default {
     },
     focus: {
       if: { arg: 'interactive' },
-      description: 'Toggles focus state for Storybook use only - adds :active state to component root',
+      description: 'Toggles focus state for Storybook use only - adds :focus state to component root',
+      control: { type: 'radio' },
+      options: [0, 1],
     },
     label: {
       if: { arg: 'interactive' },
@@ -174,7 +176,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -192,7 +194,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -210,7 +212,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -228,7 +230,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -246,7 +248,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -264,7 +266,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               disabled
             />
           </Grid>
@@ -283,7 +285,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus
+              focus={1}
               disabled={false}
             />
           </Grid>
@@ -311,7 +313,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -330,7 +332,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -349,7 +351,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -368,7 +370,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -387,7 +389,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -406,7 +408,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               disabled
               variant={ChipVariants.OUTLINED}
             />
@@ -426,7 +428,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus
+              focus={1}
               disabled={false}
               variant={ChipVariants.OUTLINED}
             />
@@ -459,7 +461,7 @@ InteractiveExample.args = {
   onDeleteFunc: () => { console.log('Delete chip'); },
   hideTrailingIcon: false,
   selected: false,
-  focus: false,
+  focus: 0,
 };
 
 export const VisualTest = VisualTestTemplate.bind({});
@@ -480,5 +482,5 @@ VisualTest.args = {
   onDeleteFunc: () => { console.log('Delete chip'); },
   hideTrailingIcon: false,
   selected: false,
-  focus: false,
+  focus: 0,
 };
