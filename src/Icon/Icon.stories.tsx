@@ -867,6 +867,7 @@ import IconIntrusionPrevention from '@hcl-software/enchanted-icons/dist/carbon/e
 import IconInventoryManagement from '@hcl-software/enchanted-icons/dist/carbon/es/inventory-management';
 import IconIotConnect from '@hcl-software/enchanted-icons/dist/carbon/es/iot--connect';
 import IconIotPlatform from '@hcl-software/enchanted-icons/dist/carbon/es/iot--platform';
+import IconItemSearchEmpty from '@hcl-software/enchanted-icons/dist/apps/es/items--search--empty';
 import IconJoinFull from '@hcl-software/enchanted-icons/dist/carbon/es/join--full';
 import IconJoinInner from '@hcl-software/enchanted-icons/dist/carbon/es/join--inner';
 import IconJoinLeft from '@hcl-software/enchanted-icons/dist/carbon/es/join--left';
@@ -2694,6 +2695,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../inventory-management', <IconInventoryManagement {...args} />)}
       {renderGridItem('../iot--connect', <IconIotConnect {...args} />)}
       {renderGridItem('../iot--platform', <IconIotPlatform {...args} />)}
+      {renderGridItem('../items--search--empty', <IconItemSearchEmpty {...args} />)}
       {renderGridItem('../join--full', <IconJoinFull {...args} />)}
       {renderGridItem('../join--inner', <IconJoinInner {...args} />)}
       {renderGridItem('../join--left', <IconJoinLeft {...args} />)}
