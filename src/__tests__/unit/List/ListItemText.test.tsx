@@ -19,7 +19,7 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import ListItemText from '../../../hidden_components/List/ListItemText';
 import MenuItem from '../../../Menu/MenuItem';
 
@@ -28,14 +28,14 @@ afterEach(cleanup);
 describe('ListItemText', () => {
   it('ListItemText should render without crash', async () => {
     const test = 'sample value';
-    render(<ThemeProvider theme={createLtrTheme()}><ListItemText>{test}</ListItemText></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><ListItemText>{test}</ListItemText></ThemeProvider>);
     expect(screen.getByText(test)).not.toBeNull();
   });
 
   it('ListItemText should render indention', async () => {
     const test = 'sample value';
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <MenuItem size="small">
           <ListItemText primary={test} inset />
         </MenuItem>

@@ -18,7 +18,7 @@ import {
   render, fireEvent, screen, configure, cleanup,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Autocomplete from '../../../Autocomplete';
 
 afterEach(cleanup);
@@ -53,7 +53,7 @@ describe('Autocomplete', () => {
     const actionLabel = 'Action';
     const actionHref = 'https://www.hcltech.com/';
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Autocomplete
           options={[]}
           actionProps={[{

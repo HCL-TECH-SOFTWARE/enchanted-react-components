@@ -21,7 +21,9 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/dom';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import Radio from '../../../Radio/Radio';
 import { ColorNames, Colors } from '../../../colors';
 
@@ -29,7 +31,7 @@ afterEach(cleanup);
 
 describe('Radio', () => {
   it('Radio default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Radio data-testid="Radio" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Radio data-testid="Radio" /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Radio');
     const style = window.getComputedStyle(anchor);
@@ -38,7 +40,7 @@ describe('Radio', () => {
   });
 
   it('Radio disable style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Radio data-testid="Radio" disabled /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Radio data-testid="Radio" disabled /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Radio');
     const style = window.getComputedStyle(anchor);
@@ -48,7 +50,7 @@ describe('Radio', () => {
 
   it('Radio focus style', async () => {
     const user = userEvent.tab;
-    render(<ThemeProvider theme={createLtrTheme()}><Radio data-testid="Radio" tabIndex={0} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Radio data-testid="Radio" tabIndex={0} /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Radio');
     await act(async () => {

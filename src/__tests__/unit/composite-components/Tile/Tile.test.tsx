@@ -19,7 +19,7 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
-import { createLtrTheme } from '../../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../../theme';
 import Tile from '../../../../composite_components/Tile/Tile';
 import { getItemActions } from '../../../../composite_components/Tile/TileData';
 import { TileActionTestIds } from '../../../../composite_components/Tile/TileActionMenu';
@@ -34,7 +34,7 @@ describe('Tile component', () => {
   const overflowTooltip = 'More Actions';
   it('Should render the ImageListItemBar with the correct title', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -53,7 +53,7 @@ describe('Tile component', () => {
 
   it('Should render the ImageListItemBar with the correct SubTitle', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -72,7 +72,7 @@ describe('Tile component', () => {
 
   it('Should render the correct Image', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -91,7 +91,7 @@ describe('Tile component', () => {
 
   it('Should call itemClickedAction when clicked', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -111,7 +111,7 @@ describe('Tile component', () => {
 
   it('Should render the checkbox', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -131,7 +131,7 @@ describe('Tile component', () => {
 
   it('Should render the overflow icon when there are more than 2 actions', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
@@ -150,7 +150,7 @@ describe('Tile component', () => {
 
   it('Should render the overflow icon tooltip when there are more than 2 actions', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           itemId="3"
@@ -174,7 +174,7 @@ describe('Tile component', () => {
 
   it('shows tooltip on title hover', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           itemId="3"
@@ -198,7 +198,7 @@ describe('Tile component', () => {
 
   it('renders menu and menu items when overflow icon is clicked', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           itemId="3"
@@ -224,7 +224,7 @@ describe('Tile component', () => {
 
   it('renders menu and menu items when overflow icon is clicked', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           itemId="3"
@@ -254,7 +254,7 @@ describe('Tile component', () => {
 
   it('renders all the menu items which is passed as props', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           itemId="3"

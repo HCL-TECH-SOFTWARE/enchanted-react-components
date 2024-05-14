@@ -23,14 +23,16 @@ import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/dom';
 
 import Link from '../../../Link';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import { ColorNames, Colors } from '../../../colors';
 
 afterEach(cleanup);
 
 describe('Link', () => {
   it('link default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Link>Link</Link></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Link>Link</Link></ThemeProvider>);
 
     const anchor = screen.getByText('Link');
     const style = window.getComputedStyle(anchor);
@@ -39,7 +41,7 @@ describe('Link', () => {
   });
 
   it('link disable style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Link disabled>Link</Link></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Link disabled>Link</Link></ThemeProvider>);
 
     const anchor = screen.getByText('Link');
     const style = window.getComputedStyle(anchor);
@@ -49,7 +51,7 @@ describe('Link', () => {
 
   it('link focus style', async () => {
     const user = userEvent.setup();
-    render(<ThemeProvider theme={createLtrTheme()}><Link tabIndex={0}>Link</Link></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Link tabIndex={0}>Link</Link></ThemeProvider>);
 
     const anchor = screen.getByText('Link');
     await act(async () => {

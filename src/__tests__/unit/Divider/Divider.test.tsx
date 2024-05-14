@@ -18,28 +18,30 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Divider, { DividerTypes } from '../../../Divider/Divider';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import { ColorNames, Colors } from '../../../colors';
 
 afterEach(cleanup);
 
 describe('Divider unit test', () => {
   it('Render primary type divider', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Divider type={DividerTypes.PRIMARY} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Divider type={DividerTypes.PRIMARY} /></ThemeProvider>);
     expect(screen.findByTestId('Divider')).toBeTruthy();
     const anchor = screen.getByTestId('Divider');
     const style = window.getComputedStyle(anchor);
     expect(style.borderColor).toBe(ensureToGetColor(Colors.get(ColorNames.BLACK32P)));
   });
   it('Render secondary type divider', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Divider type={DividerTypes.SECONDARY} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Divider type={DividerTypes.SECONDARY} /></ThemeProvider>);
     expect(screen.findByTestId('Divider')).toBeTruthy();
     const anchor = screen.getByTestId('Divider');
     const style = window.getComputedStyle(anchor);
     expect(style.borderColor).toBe(ensureToGetColor(Colors.get(ColorNames.BLACK20P)));
   });
   it('Render with margin type divider', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Divider type={DividerTypes.WITHMARGIN} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Divider type={DividerTypes.WITHMARGIN} /></ThemeProvider>);
     expect(screen.findByTestId('Divider')).toBeTruthy();
     const anchor = screen.getByTestId('Divider');
     const style = window.getComputedStyle(anchor);
