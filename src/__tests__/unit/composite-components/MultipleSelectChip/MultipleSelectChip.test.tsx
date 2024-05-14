@@ -46,7 +46,20 @@ describe('MultipleSelectChip', () => {
 
   it('Render with chip value', () => {
     const placeholder = 'Select label';
-    render(<MultipleSelectChip multiple filterSelectedOptions placeholder={placeholder} options={itemType} value={['SiteArea', 'ContentTemplate', 'Workflow']} />);
+    render(
+      <MultipleSelectChip
+        multiple
+        filterSelectedOptions
+        placeholder={placeholder}
+        options={itemType}
+        isOptionEqualToValue={(option, value) => { return option.label === value.label; }}
+        value={[
+          { label: 'SiteArea' },
+          { label: 'ContentTemplate' },
+          { label: 'Workflow' },
+        ]}
+      />,
+    );
 
     expect(screen.getByText('SiteArea')).not.toBeNull();
     expect(screen.getByText('ContentTemplate')).not.toBeNull();

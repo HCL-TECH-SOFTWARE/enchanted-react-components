@@ -108,11 +108,11 @@ describe('TablePagination', () => {
 
     const element = screen.getAllByRole('combobox')[0];
 
-    act(async () => {
+    await act(async () => {
       await ue.type(element, 'invalid-pagesize');
     });
 
-    act(async () => {
+    await act(async () => {
       await ue.type(element, '{Enter}');
     });
 

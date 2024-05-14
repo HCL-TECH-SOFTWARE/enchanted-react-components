@@ -30,10 +30,6 @@ const defaultProps: TabsProps = {
   visibleScrollbar: false,
   tabIndex: 0,
   disabled: false,
-  centerRipple: false,
-  disableRipple: false,
-  disableTouchRipple: false,
-  focusRipple: false,
 };
 
 Tabs.defaultProps = defaultProps;

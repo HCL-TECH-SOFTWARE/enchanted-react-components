@@ -19,14 +19,14 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { gridClasses } from '@mui/x-data-grid';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import DataGrid from '../../../DataGrid';
 import {
   sampleColumnsByDefaultLeft, sampleColumnsModifiedRight, sampleRowContainsAll,
   baseColumnConfig, iconEndColumnConfig, avatarColumnConfig, iconColumnConfig, endActionColumnConfig, allColumnConfig, sampleRowMultiStartIconAndTooltip, sampleColumnsMultiStartIconAndTooltip,
 } from '../../../DataGridCell/sampleCellConfig';
 
-const theme = createLtrTheme();
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 afterEach(cleanup);
 

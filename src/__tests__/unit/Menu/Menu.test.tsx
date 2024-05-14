@@ -18,7 +18,9 @@ import {
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import Menu from '../../../Menu/Menu';
 import MenuItem from '../../../Menu/MenuItem';
 import { ColorNames, Colors } from '../../../colors';
@@ -42,7 +44,7 @@ describe('<Menu /> integration', () => {
   });
   it('Menu item style - test default style', async () => {
     const { getAllByRole } = render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Menu data-testid="test" anchorEl={document.body} open variant="menu" size="medium">
           <MenuItem>Profile</MenuItem>
           <MenuItem>My account</MenuItem>

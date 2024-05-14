@@ -21,11 +21,11 @@ import { Grid } from '@mui/material';
 import IconTools from '@hcl-software/enchanted-icons/dist/carbon/es/tools';
 import IconOverflowHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';
 
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import IconButton from '../../../IconButton/IconButton';
 import Panel, { PanelVariants } from '../../../Panel';
 
-const theme = createLtrTheme();
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 afterEach(cleanup);
 

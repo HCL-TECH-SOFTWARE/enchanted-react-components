@@ -18,26 +18,26 @@ import {
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
 import Switch from '../../../Switch/Switch';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
 
 afterEach(cleanup);
 
 describe('Switch', () => {
   it('Switch default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Switch data-testid="Switch" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Switch data-testid="Switch" /></ThemeProvider>);
     const anchor = screen.getByTestId('Switch');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgb(255, 255, 255)');
   });
   it('Switch checked style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Switch data-testid="Switch" checked /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Switch data-testid="Switch" checked /></ThemeProvider>);
     const anchor = screen.getByTestId('Switch');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgb(5, 80, 220)');
   });
   it('Switch disable style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Switch data-testid="Switch" disabled /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Switch data-testid="Switch" disabled /></ThemeProvider>);
     const anchor = screen.getByTestId('Switch');
     const style = window.getComputedStyle(anchor);
     expect(style.pointerEvents).toBe('none');
