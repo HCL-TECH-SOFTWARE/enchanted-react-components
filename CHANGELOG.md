@@ -13,6 +13,7 @@
 ### Changed
 - Cleanup Storybook controls and description
 - refactored tests to no longer use deprecated theme creation
+- Change the Tooltip background
 
 #### Breaking changes
 
