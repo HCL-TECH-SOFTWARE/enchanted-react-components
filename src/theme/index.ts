@@ -300,7 +300,7 @@ const PALETTE_LIGHT: PaletteOptions = {
     paper: ensureToGetColor(Colors.get(ColorNames.WHITE100P)),
     secondary: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY150)),
     tertiary: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY200)),
-    dark: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY1000)),
+    dark: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY900)),
     overlay: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY1000_80)),
     primary: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_12P)),
     success: ensureToGetColor(Colors.get(ColorNames.GREEN100)),
@@ -364,7 +364,7 @@ const PALETTE_LIGHT_COOL_GRAY: PaletteOptions = {
     default: ensureToGetColor(Colors.get(ColorNames.COOLGREY100)),
     secondary: ensureToGetColor(Colors.get(ColorNames.COOLGREY150)),
     tertiary: ensureToGetColor(Colors.get(ColorNames.COOLGREY200)),
-    dark: ensureToGetColor(Colors.get(ColorNames.COOLGREY1000)),
+    dark: ensureToGetColor(Colors.get(ColorNames.COOLGREY900)),
     overlay: ensureToGetColor(Colors.get(ColorNames.COOLGREY1000_80)),
   },
   action: {

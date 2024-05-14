@@ -28,12 +28,6 @@ export default {
     variant: {
       description: 'Determines if the checkbox has padding or not.',
     },
-    disableRipple: {
-      description: 'If `true`, the ripple effect is disabled.',
-      table: {
-        defaultValue: { summary: true },
-      },
-    },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
@@ -49,9 +43,57 @@ export default {
     },
     required: {
       description: 'If `true`, the `input` element is required.',
+      control: false,
       table: {
         defaultValue: { summary: false },
       },
+    },
+    disableRipple: {
+      description: 'If `true`, the ripple effect is disabled.',
+      control: false,
+      table: {
+        defaultValue: { summary: true },
+      },
+    },
+    centerRipple: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-centerRipple',
+      control: false,
+    },
+    disableTouchRipple: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-disableTouchRipple',
+      control: false,
+    },
+    focusRipple: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusRipple',
+      control: false,
+    },
+    focusVisibleClassName: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+      control: false,
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/checkbox/',
+    },
+    action: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/checkbox/',
+    },
+    LinkComponent: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+    },
+    onFocusVisible: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+    },
+    TouchRippleProps: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+    },
+    touchRippleRef: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
     },
   },
 } as Meta<typeof Checkbox>;

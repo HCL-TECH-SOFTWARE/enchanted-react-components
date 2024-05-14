@@ -26,125 +26,60 @@ export default {
     ref: {
       description: 'ref of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     sx: {
       description: 'sx of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     variant: {
       description: 'Variant of ButtonGroup component.',
       options: ['text', 'outlined', 'contained'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     size: {
       description: 'Sizes of ButtonGroup component.',
       options: ['small', 'medium', 'large'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     orientation: {
       description: 'Orientation of ButtonGroup component.',
       options: ['horizontal', 'vertical'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     fullWidth: {
       description: 'fullWidth of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableRipple: {
       description: 'disableRipple of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableFocusRipple: {
       description: 'disableFocusRipple of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableElevation: {
       description: 'disableFocusRipple of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disabled: {
       description: 'disabled of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     color: {
       description: 'color of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     classes: {
       description: 'classes of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     children: {
       description: 'children of ButtonGroup component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
   },
 } as Meta<typeof ButtonGroup>;

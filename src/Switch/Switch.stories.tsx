@@ -32,6 +32,34 @@ export default {
         defaultValue: { summary: false },
       },
     },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/switch/',
+    },
+    action: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/switch/',
+    },
+    focusVisibleClassName: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+    },
+    LinkComponent: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+    },
+    onFocusVisible: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+    },
+    TouchRippleProps: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+    },
+    touchRippleRef: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
+    },
   },
 } as Meta<typeof Switch>;
 

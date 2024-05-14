@@ -38,6 +38,76 @@ export default {
         'If the property `multiple` is `true` we can hide the placeholder with this property. Is `displayEmpty=true` the placeholder will be displayed.',
       defaultValue: { summary: false },
     },
+    label: {
+      description: 'The label of the input.',
+    },
+    helperText: {
+      description: 'The label of the helpertext.',
+    },
+    placeholder: {
+      description: 'The short hint displayed in the input before the user enters a value.',
+    },
+    required: {
+      description: 'If true, the input element is required.',
+    },
+    disabled: {
+      description: 'If true, the component is disabled.',
+    },
+    error: {
+      description: 'If true, the input will indicate an error.',
+    },
+    fullWidth: {
+      description: 'If true, the input will take up the full width of its container.',
+    },
+    helperIconTooltip: {
+      table: {
+        defaultValue: {
+          summary: 'Some information about that component.',
+        },
+      },
+      description: 'Tooltip text hovering on ? mark for SelectMultiple component',
+    },
+    unitLabel: {
+      description: 'Attribute which can be used to define the unit of that component',
+    },
+    hiddenLabel: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description:
+        'If `true`, the label is hidden.',
+    },
+    nonEdit: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'If `true` value cannot be editable',
+    },
+    autoFocus: {
+      description: 'If true, the input element is focused during the first mount.',
+    },
+    sx: {
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/select/',
+    },
+    actionProps: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/select/',
+    },
+
+    options: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/select/',
+    },
   },
 } as Meta<typeof Select>;
 

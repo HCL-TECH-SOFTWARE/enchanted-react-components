@@ -50,150 +50,35 @@ export default {
       if: { arg: 'interactive' },
       options: ['default'],
       control: { type: 'radio' },
-    },
-    children: {
-      description: 'The children of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'The classes of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    sx: {
-      description: 'The sx of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'The color of the component.',
     },
     tabIndex: {
       description: 'The tabIndex of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disabled: {
       description: 'The disabled of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    action: {
-      description: 'The action of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     centerRipple: {
       description: 'The centerRipple of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableRipple: {
       description: 'The disableRipple of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableTouchRipple: {
       description: 'The disableTouchRipple of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     focusRipple: {
       description: 'The focusRipple of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    focusVisibleClassName: {
-      description: 'The focusVisibleClassName of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    LinkComponent: {
-      description: 'The LinkComponent of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    onFocusVisible: {
-      description: 'The onFocusVisible of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    TouchRippleProps: {
-      description: 'The TouchRippleProps of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    touchRippleRef: {
-      description: 'The touchRippleRef of the IconButton.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     disableFocusRipple: {
       description: 'The disableFocusRipple of the IconButton.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     edge: {
       if: { arg: 'interactive' },
@@ -201,10 +86,51 @@ export default {
       options: ['false', 'end', 'start'],
       control: { type: 'radio' },
       table: {
+        disable: true,
         defaultValue: {
           summary: 'primary',
         },
       },
+    },
+    children: {
+      description: 'https://mui.com/material-ui/api/icon-button/#icon-button-prop-children',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/api/icon-button/#icon-button-prop-classes',
+      control: false,
+    },
+    sx: {
+      description: 'https://mui.com/material-ui/api/icon-button/#icon-button-prop-sx',
+      control: false,
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/icon-button/',
+      control: false,
+    },
+    action: {
+      description: 'https://mui.com/material-ui/api/icon-button/',
+      control: false,
+    },
+    focusVisibleClassName: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+      control: false,
+    },
+    LinkComponent: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+      control: false,
+    },
+    onFocusVisible: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+      control: false,
+    },
+    TouchRippleProps: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+      control: false,
+    },
+    touchRippleRef: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
+      control: false,
     },
   },
 } as Meta<typeof IconButton>;

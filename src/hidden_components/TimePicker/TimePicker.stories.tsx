@@ -75,19 +75,6 @@ export default {
         defaultValue: { summary: TimePicker.defaultProps.hiddenLabel },
       },
     },
-    format: {
-      description: 'Attribute which is used to verified the date.',
-      table: {
-        defaultValue: { summary: TimePicker.defaultProps.format },
-      },
-      control: false,
-    },
-    error: {
-      description: 'If `true`, the error state will be enabled.',
-      table: {
-        disable: true,
-      },
-    },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       table: {
@@ -117,6 +104,17 @@ export default {
       table: {
         defaultValue: { summary: '' },
       },
+    },
+    format: {
+      description: 'https://mui.com/x/api/date-pickers/time-picker/',
+      table: {
+        defaultValue: { summary: TimePicker.defaultProps.format },
+      },
+      control: false,
+    },
+    error: {
+      description: 'https://mui.com/x/api/date-pickers/time-picker/',
+      control: false,
     },
   },
 } as Meta<typeof TimePicker>;

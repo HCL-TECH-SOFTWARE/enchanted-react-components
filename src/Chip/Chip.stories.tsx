@@ -26,11 +26,6 @@ export default {
   title: 'Data display/Chip',
   component: Chip,
   argTypes: {
-    size: {
-      table: {
-        disable: true,
-      },
-    },
     variant: {
       if: { arg: 'interactive' },
       options: [ChipVariants.CONTAINED, ChipVariants.OUTLINED],
@@ -66,9 +61,9 @@ export default {
       },
       description: 'Determines type of avatar to show. If `image`, leadingImage must be defined. If `letter`, leadingLetter must be defined. If `icon`, leadingIcon must be defined.',
     },
-    leadingIcon: {
+    disabled: {
       if: { arg: 'interactive' },
-      description: 'Icon to render as avatar of type React.ReactNode',
+      description: 'disables the Chip component',
     },
     leadingLetter: {
       if: { arg: 'interactive' },
@@ -87,67 +82,71 @@ export default {
         },
       },
     },
-    leadingImageProps: {
-      if: { arg: 'interactive' },
-      description: 'ImgHTMLAttributes that will be passed by the Chip down to its Avatar child. See Avatar documentation - imgProps',
-    },
-    trailingIcon: {
-      if: { arg: 'interactive' },
-      description: 'Used to override the icon that may be clicked at the end of the chip. Common use case is for deleting the chip. If onDeleteFunc is null, this will be automatically hidden.',
-    },
-    onDeleteFunc: {
-      if: { arg: 'interactive' },
-      description: 'Callback fired when trailing icon is clicked. If undefined, it will hide trailing icon.',
-    },
-    icon: {
-      if: { arg: 'interactive' },
-      description: 'Built-in MUI prop for defining Avatar icon. Currently, this is overriden by Enchanted implementation which accepts different AvatarTypes (icon, image, letter).',
-      control: false,
-    },
-    avatar: {
-      if: { arg: 'interactive' },
-      description: 'Built-in MUI prop used to override the actual component used to render the leadingIcon. Currently, this is overriden by Enchanted implementation.',
-      control: false,
-    },
-    deleteIcon: {
-      if: { arg: 'interactive' },
-      control: false,
-    },
-    clickable: {
-      if: { arg: 'interactive' },
-      control: false,
-    },
     focus: {
       if: { arg: 'interactive' },
-      description: 'Toggles focus state for Storybook use only - adds :active state to component root',
+      description: 'Toggles focus state for Storybook use only - adds :focus state to component root',
+      control: { type: 'radio' },
+      options: [0, 1],
     },
     label: {
       if: { arg: 'interactive' },
       description: 'label of the Chip component,',
     },
+    leadingIcon: {
+      control: false,
+      description: 'Types of Avatar that can be set as image, letter or icon',
+    },
+    size: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-size',
+    },
+    leadingImageProps: {
+      control: false,
+      description: 'ImgHTMLAttributes that will be passed by the Chip down to its Avatar child. See Avatar documentation - imgProps',
+    },
+    trailingIcon: {
+      control: false,
+      description: 'Used to override the icon that may be clicked at the end of the chip. Common use case is for deleting the chip. If onDeleteFunc is null, this will be automatically hidden.',
+    },
+    onDeleteFunc: {
+      control: false,
+      description: 'Callback fired when trailing icon is clicked. If undefined, it will hide trailing icon',
+    },
+    icon: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-icon',
+    },
+    avatar: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-avatar',
+    },
+    deleteIcon: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-deleteIcon',
+    },
+    clickable: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-clickable',
+    },
     children: {
-      if: { arg: 'interactive' },
-      description: 'children of the Chip component,',
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-children',
     },
     classes: {
-      if: { arg: 'interactive' },
-      description: 'classes of the Chip component,',
-    },
-    disabled: {
-      if: { arg: 'interactive' },
-      description: 'disabled of the Chip component,',
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-classes',
     },
     onDelete: {
-      if: { arg: 'interactive' },
-      description: 'onDelete of the Chip component,',
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-onDelete',
     },
     sx: {
-      if: { arg: 'interactive' },
-      description: 'sx of the Chip component,',
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/#chip-prop-sx',
     },
     ref: {
-      if: { arg: 'interactive' },
-      description: 'ref of the Chip component,',
+      control: false,
+      description: 'https://mui.com/material-ui/api/chip/',
     },
   },
 } as Meta<typeof Chip>;
@@ -177,7 +176,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -195,7 +194,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -213,7 +212,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -231,7 +230,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -249,7 +248,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected
-              focus={false}
+              focus={0}
             />
           </Grid>
           <Grid item>
@@ -267,7 +266,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               disabled
             />
           </Grid>
@@ -286,7 +285,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus
+              focus={1}
               disabled={false}
             />
           </Grid>
@@ -314,7 +313,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -333,7 +332,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -352,7 +351,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -371,7 +370,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -390,7 +389,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected
-              focus={false}
+              focus={0}
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
@@ -409,7 +408,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus={false}
+              focus={0}
               disabled
               variant={ChipVariants.OUTLINED}
             />
@@ -429,7 +428,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               trailingIcon={<CloseIcon />}
               hideTrailingIcon={false}
               selected={false}
-              focus
+              focus={1}
               disabled={false}
               variant={ChipVariants.OUTLINED}
             />
@@ -462,7 +461,7 @@ InteractiveExample.args = {
   onDeleteFunc: () => { console.log('Delete chip'); },
   hideTrailingIcon: false,
   selected: false,
-  focus: false,
+  focus: 0,
 };
 
 export const VisualTest = VisualTestTemplate.bind({});
@@ -483,5 +482,5 @@ VisualTest.args = {
   onDeleteFunc: () => { console.log('Delete chip'); },
   hideTrailingIcon: false,
   selected: false,
-  focus: false,
+  focus: 0,
 };

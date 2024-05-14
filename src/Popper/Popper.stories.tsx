@@ -40,47 +40,32 @@ export default {
       },
     },
     onClose: {
-      description: 'Callback fired when the component requests to be closed.',
-      if: { arg: 'interactive' },
+      description: 'https://mui.com/material-ui/react-popper/',
+      control: false,
     },
     headerChildren: {
-      description: 'Header content for the popper component',
-      if: { arg: 'interactive' },
+      description: 'https://mui.com/material-ui/react-popper/',
+      control: false,
     },
     contentChildren: {
-      description: 'Body content for the popper component',
-      if: { arg: 'interactive' },
+      description: 'components inside the content body of popper',
+      control: false,
     },
     subHeaderChildren: {
-      description: 'Subheader content for the popper component',
-      if: { arg: 'interactive' },
+      description: 'components inside the header of popper',
+      control: false,
     },
     ref: {
-      description: 'ref of Popper component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/react-popper/',
+      control: false,
     },
     component: {
-      description: 'component of Menu component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/react-popper/',
+      control: false,
     },
     sx: {
-      description: 'sx of Menu component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/react-popper/',
+      control: false,
     },
   },
 } as Meta<typeof Popper>;

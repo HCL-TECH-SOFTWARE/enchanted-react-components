@@ -41,130 +41,40 @@ export default {
         AvatarColors.TEAL, AvatarColors.BLUE, AvatarColors.INDIGO, AvatarColors.PURPLE, AvatarColors.PINK],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     variant: {
       description: 'Variant of Avatar component.',
       options: ['circular', 'rounded'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    iconImage: {
-      description: 'Icon image of Avatar component when type is set to icon. This is an object and can not edit.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     imageAltProps: {
       description: 'imageAltProps of Avatar component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     alt: {
       description: 'alt of Avatar component.',
       if: { arg: 'interactive' },
       table: {
         defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    children: {
-      description: 'children of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'classes of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    imgProps: {
-      description: 'imgProps of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
+          summary: '',
         },
       },
     },
     sizes: {
       description: 'sizes of Avatar component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
     },
     src: {
       description: 'src of Avatar component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
     },
     srcSet: {
       description: 'srcSet of Avatar component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    ref: {
-      description: 'ref of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    imageProps: {
-      description: 'imageProps of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    sx: {
-      description: 'sx of Avatar component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
     },
     imageSource: {
       description: 'Image source of Avatar component when type is set to image. It can be replaced with any other image url',
@@ -184,6 +94,34 @@ export default {
           summary: 'NA',
         },
       },
+    },
+    children: {
+      description: 'https://mui.com/material-ui/api/avatar/#avatar-prop-children',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/api/avatar/#avatar-prop-classes',
+      control: false,
+    },
+    imgProps: {
+      description: 'https://mui.com/material-ui/api/avatar/#avatar-prop-imgProps',
+      control: false,
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/avatar/',
+      control: false,
+    },
+    imageProps: {
+      description: 'image props to set other props like hover, loading etc.',
+      control: false,
+    },
+    sx: {
+      description: 'https://mui.com/material-ui/api/avatar/#avatar-prop-sx',
+      control: false,
+    },
+    iconImage: {
+      description: 'Set Avatar icon image e.g. folder etc.',
+      control: false,
     },
   },
 } as Meta<typeof Avatar>;

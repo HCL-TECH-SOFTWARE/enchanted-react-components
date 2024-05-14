@@ -33,59 +33,6 @@ export default {
         },
       },
     },
-    // light is the property we want to remove from the UI
-    light: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
-    },
-    // absolute is the property we want to remove from the UI
-    absolute: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
-    },
-    // flexItem is the property we want to remove from the UI
-    flexItem: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
-    },
-    // textAlign is the property we want to remove from the UI
-    textAlign: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
-    },
-    // variant is the property we want to remove from the UI
-    variant: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      description: 'The children of the Divider.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'The classes of the Divider.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     orientation: {
       if: { arg: 'interactive' },
       description: 'The orientation of the Divider.',
@@ -93,27 +40,50 @@ export default {
       control: { type: 'radio' },
       table: {
         defaultValue: {
-          summary: 'primary',
+          summary: 'horizontal',
         },
       },
+    },
+    // light is the property we want to remove from the UI
+    light: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-light',
+    },
+    // absolute is the property we want to remove from the UI
+    absolute: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-absolute',
+    },
+    // flexItem is the property we want to remove from the UI
+    flexItem: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-flexItem',
+    },
+    // textAlign is the property we want to remove from the UI
+    textAlign: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-textAlign',
+    },
+    // variant is the property we want to remove from the UI
+    variant: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-variant',
+    },
+    children: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-children',
+    },
+    classes: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-classes',
     },
     sx: {
-      description: 'The sx of the Divider.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/divider/#divider-prop-sx',
     },
     ref: {
-      description: 'The ref of the Divider.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/divider/',
+      control: false,
     },
   },
 } as Meta<typeof Divider>;
@@ -157,7 +127,6 @@ const InteractiveExampleTemplate: StoryFn<typeof Divider> = (args) => {
     >
       <Divider
         {...args}
-        orientation="horizontal"
       />
     </Grid>
   );
@@ -171,8 +140,8 @@ InteractiveExample.args = {
   ...Divider.defaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the DividerProps
   interactive: true,
+  orientation: 'horizontal',
 };
-
 export const VisualTest = VisualTestTemplate.bind({});
 VisualTest.parameters = {
   options: { showPanel: false },

@@ -28,80 +28,38 @@ export default {
     badgeContent: {
       description: 'The badgeContent of the Badge.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    anchorOrigin: {
-      description: 'The anchorOrigin of the Badge.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'The classes of the Badge.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     color: {
-      description: 'The color of the Badge.',
+      description: 'https://mui.com/material-ui/api/badge/#badge-prop-color',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     overlap: {
       description: 'overlap of Badge component.',
       options: ['circular', 'rectangular'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    sx: {
-      description: 'sx of Badge component.',
-      options: ['circular', 'rectangular'],
-      control: { type: 'radio' },
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     variant: {
       description: 'Variant of Badge component.',
       options: ['dot', 'standard'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     ref: {
-      description: 'The ref of the Badge.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/badge/',
+      control: false,
+    },
+    anchorOrigin: {
+      description: 'https://mui.com/material-ui/api/badge/#badge-prop-anchorOrigin',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/api/badge/#badge-prop-classes',
+      control: false,
+    },
+    sx: {
+      description: 'sx of Badge component.',
+      control: false,
     },
   },
 } as Meta<typeof Badge>;

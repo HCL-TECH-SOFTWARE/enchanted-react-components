@@ -867,6 +867,7 @@ import IconIntrusionPrevention from '@hcl-software/enchanted-icons/dist/carbon/e
 import IconInventoryManagement from '@hcl-software/enchanted-icons/dist/carbon/es/inventory-management';
 import IconIotConnect from '@hcl-software/enchanted-icons/dist/carbon/es/iot--connect';
 import IconIotPlatform from '@hcl-software/enchanted-icons/dist/carbon/es/iot--platform';
+import IconItemSearchEmpty from '@hcl-software/enchanted-icons/dist/apps/es/items--search--empty';
 import IconJoinFull from '@hcl-software/enchanted-icons/dist/carbon/es/join--full';
 import IconJoinInner from '@hcl-software/enchanted-icons/dist/carbon/es/join--inner';
 import IconJoinLeft from '@hcl-software/enchanted-icons/dist/carbon/es/join--left';
@@ -1784,6 +1785,51 @@ import Icon from './Icon';
 export default {
   title: 'Data display/IconPreview',
   component: Icon,
+  argTypes: {
+    children: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-children',
+      defaultValue: { summary: false },
+    },
+    classes: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-classes',
+      defaultValue: { summary: false },
+    },
+    htmlColor: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    shapeRendering: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    sx: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-sx',
+      defaultValue: { summary: false },
+    },
+    titleAccess: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+      defaultValue: { summary: false },
+    },
+    viewBox: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+    },
+    inheritViewBox: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/',
+    },
+  },
 } as Meta<typeof Icon>;
 
 const renderGridItem = (iconFileName: string, icon: JSX.Element) => {
@@ -2649,6 +2695,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../inventory-management', <IconInventoryManagement {...args} />)}
       {renderGridItem('../iot--connect', <IconIotConnect {...args} />)}
       {renderGridItem('../iot--platform', <IconIotPlatform {...args} />)}
+      {renderGridItem('../items--search--empty', <IconItemSearchEmpty {...args} />)}
       {renderGridItem('../join--full', <IconJoinFull {...args} />)}
       {renderGridItem('../join--inner', <IconJoinInner {...args} />)}
       {renderGridItem('../join--left', <IconJoinLeft {...args} />)}

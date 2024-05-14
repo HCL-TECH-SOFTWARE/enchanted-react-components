@@ -37,20 +37,10 @@ export default {
     rows: {
       description: 'Required. Array of objects of type GridRowsProp. Must always have a unique row identifier preferably id.',
       // if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: [],
-        },
-      },
     },
     columns: {
       // if: { arg: 'interactive' },
       description: 'Required. Array of objects of type GridColumns.',
-      table: {
-        defaultValue: {
-          summary: [],
-        },
-      },
     },
     disableColumnMenu: {
       if: { arg: 'interactive' },
@@ -104,24 +94,21 @@ export default {
         },
       },
     },
-    page: {
-      if: { arg: 'interactive' },
-      description: 'Current page number - Storybook page options are dynamically computed by TablePagination component and cannot be controlled',
-      control: false,
-    },
     pageSize: {
       if: { arg: 'interactive' },
       description: 'Page size or number of rows to render',
       control: { type: 'select' },
       options: [10, 25, 50, 100],
     },
+    page: {
+      description: 'Current page number - Storybook page options are dynamically computed by TablePagination component and cannot be controlled',
+      control: false,
+    },
     totalCount: {
-      if: { arg: 'interactive' },
       description: 'Total number of rows for all pages set by the sample data so it cannot be controlled',
       control: false,
     },
     rowsPerPageOptions: {
-      if: { arg: 'interactive' },
       description: 'Customizes the options of the rows per page select field.',
       control: false,
       table: {
@@ -131,26 +118,20 @@ export default {
       },
     },
     translation: {
-      if: { arg: 'interactive' },
+      control: false,
       description: 'Use the TablePagination component\'s exported enum TablePaginationLocalizationPlaceholders to write your translations',
     },
     pagination: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/x/api/data-grid/data-grid/',
     },
     onCheckboxClick: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'Event handler for checkbox value change',
     },
     focusedRow: {
-      if: { arg: 'interactive' },
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'Props state to tell data grid what is the focused row',
     },
   },
 } as Meta<typeof DataGrid>;
@@ -372,15 +353,15 @@ InteractiveExample.args = {
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the DataGridProps
   interactive: true,
   checkboxSelection: true,
+  pageSize: 10,
+  stickyHeader: false,
+  hideFooter: false,
   // if you need to display dynamic field properties, you have to create a util to convert the original data for their rows
   // e.g. data.fullName => row['tooltip-${fullName}']
   rows: processRow(sampleRows, false),
   columns: sampleColumns,
   totalCount: sampleRows.length,
   page: 0,
-  pageSize: 10,
-  stickyHeader: false,
-  hideFooter: false,
 };
 
 export const VisualTest = VisualTestTemplate.bind({});
@@ -389,11 +370,11 @@ VisualTest.parameters = {
 };
 VisualTest.args = {
   checkboxSelection: true,
+  pageSize: 10,
+  stickyHeader: false,
   // if you need to display dynamic field properties, you have to create a util to convert the original data for their rows
   // e.g. data.fullName => row['tooltip-${fullName}']
   rows: processRow(sampleRows, false),
   columns: sampleColumns,
   page: 0,
-  pageSize: 10,
-  stickyHeader: false,
 };

@@ -45,18 +45,6 @@ export default {
       description: 'Callback fired when the component requests to be closed.',
       if: { arg: 'interactive' },
     },
-    headerChildren: {
-      description: 'Node to render inside DialogTitle',
-      if: { arg: 'interactive' },
-    },
-    contentChildren: {
-      description: 'Node to render inside DialogContent',
-      if: { arg: 'interactive' },
-    },
-    footerChildren: {
-      description: 'Node to render inside DialogActions',
-      if: { arg: 'interactive' },
-    },
     hideHeader: {
       description: 'Toggles header or DialogTitle, if `true`, then it is hidden',
       if: { arg: 'interactive' },
@@ -64,6 +52,38 @@ export default {
     hideFooter: {
       description: 'Toggles footer or DialogActions, if `true`, then it is hidden',
       if: { arg: 'interactive' },
+    },
+    BackdropComponent: {
+      description: 'https://mui.com/material-ui/api/dialog/#dialog-prop-BackdropComponent',
+      control: false,
+    },
+    headerChildren: {
+      control: false,
+      description: 'Node to render inside DialogTitle',
+    },
+    contentChildren: {
+      description: 'Node to render inside DialogContent',
+      control: false,
+    },
+    footerChildren: {
+      control: false,
+      description: 'Node to render inside DialogActions',
+    },
+    'aria-labelledby': {
+      control: false,
+      description: 'https://mui.com/material-ui/api/dialog/#dialog-prop-aria-labelledby',
+    },
+    'aria-describedby': {
+      control: false,
+      description: 'https://mui.com/material-ui/api/dialog/#dialog-prop-aria-describedby',
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/dialog/',
+      control: false,
+    },
+    BackdropProps: {
+      description: 'https://mui.com/material-ui/api/dialog/',
+      control: false,
     },
   },
 } as Meta<typeof Dialog>;

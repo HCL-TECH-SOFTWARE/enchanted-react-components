@@ -37,6 +37,7 @@ export default {
   argTypes: {
     chipChildNodes: {
       description: 'Nodes to render inside ChipLayout component as individual Chips',
+      control: false,
       table: {
         defaultValue: {
           summary: sampleDefaultSet,

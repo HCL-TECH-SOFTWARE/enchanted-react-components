@@ -33,6 +33,42 @@ export default {
         },
       },
     },
+    separator: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-separator',
+    },
+    children: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-children',
+    },
+    classes: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-classes',
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/',
+    },
+    sx: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-sx',
+    },
+    expandText: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-expandText',
+    },
+    itemsAfterCollapse: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-itemsAfterCollapse',
+    },
+    itemsBeforeCollapse: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-itemsBeforeCollapse',
+    },
+    maxItems: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/breadcrumbs/#breadcrumbs-prop-maxItems',
+    },
   },
 } as Meta<typeof Breadcrumbs>;
 
