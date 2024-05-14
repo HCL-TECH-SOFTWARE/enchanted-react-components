@@ -3,6 +3,16 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 1.1.0
+
+### Added
 - Adding the `items--search--empty` icon to the icons preview
 - PR checks for build, lint and test
 
@@ -15,7 +25,6 @@
 - refactored tests to no longer use deprecated theme creation
 - Change the Tooltip background
 
-#### Breaking changes
 
 ## 1.0.0
 
