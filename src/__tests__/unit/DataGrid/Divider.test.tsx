@@ -17,14 +17,14 @@ import {
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import DataGridDivider from '../../../DataGrid/DataGridDivider';
 
 afterEach(cleanup);
 
 describe('DataGridDivider unit test', () => {
   it('Render data grid divider', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><DataGridDivider /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><DataGridDivider /></ThemeProvider>);
     expect(screen.findByTestId('Divider')).toBeTruthy();
   });
 });

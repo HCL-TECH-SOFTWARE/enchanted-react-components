@@ -283,14 +283,14 @@ describe('Preview', () => {
     const videoPlayer = screen.getByTestId(PreviewTestIds.PREVIEW_VIDEO_PLAYER);
     expect(videoPlayer).not.toBeNull();
 
-    await act(async () => {
+    await act(() => {
       const nextButton = screen.getByTestId(PreviewTestIds.PREVIEW_NEXT_BUTTON);
       fireEvent.click(nextButton);
     });
 
     expect(screen.getByTestId(PreviewTestIds.PREVIEW_VIDEO_PLAYER).getAttribute('src')).toStrictEqual('HCL-The-Future.mp4');
 
-    await act(async () => {
+    await act(() => {
       const prevButton = screen.getByTestId(PreviewTestIds.PREVIEW_PREV_BUTTON);
       fireEvent.click(prevButton);
     });

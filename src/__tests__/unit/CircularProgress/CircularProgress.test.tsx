@@ -29,7 +29,7 @@ describe('CircularProgress', () => {
   });
 
   it('Render determinate variant with value', () => {
-    render(<CircularProgress variant={CircularProgressVariants.DETERMINATE} value={30} showprogress />);
+    render(<CircularProgress variant={CircularProgressVariants.DETERMINATE} value={30} showprogress={1} />);
     expect(screen.getAllByTestId(CircularProgressTestIds.PROGRESS_TRAIL)).not.toBeNull();
     expect(screen.getAllByTestId(CircularProgressTestIds.PROGRESS_CIRCLE)).not.toBeNull();
     expect(screen.getAllByTestId(CircularProgressTestIds.PROGRESS_LABEL)).not.toBeNull();

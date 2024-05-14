@@ -36,7 +36,7 @@ describe('ListItemText', () => {
     const test = 'sample value';
     render(
       <ThemeProvider theme={createLtrTheme()}>
-        <MenuItem cascading={false} selected={false} size="small">
+        <MenuItem size="small">
           <ListItemText primary={test} inset />
         </MenuItem>
       </ThemeProvider>,

@@ -125,15 +125,14 @@ const VisualTestTemplate: StoryFn<typeof Popper> = (args) => {
 };
 
 const InteractiveExampleTemplate: StoryFn<typeof Popper> = (args) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClick = debounce((event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
     setOpen((previousOpen) => {
       return !previousOpen;
     });
-  }, 500);
-
+  };
   const canBeOpen = open && Boolean(anchorEl);
   const id = canBeOpen ? 'transition-popper' : undefined;
 

@@ -15,6 +15,7 @@
 
 import React from 'react';
 import {
+  act,
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
@@ -51,7 +52,9 @@ describe('Link', () => {
     render(<ThemeProvider theme={createLtrTheme()}><Link tabIndex={0}>Link</Link></ThemeProvider>);
 
     const anchor = screen.getByText('Link');
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
 
     await waitFor(() => {
       const style = window.getComputedStyle(anchor);

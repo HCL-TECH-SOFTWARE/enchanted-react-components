@@ -15,6 +15,7 @@
 
 import React from 'react';
 import {
+  act,
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
@@ -50,7 +51,9 @@ describe('Radio', () => {
     render(<ThemeProvider theme={createLtrTheme()}><Radio data-testid="Radio" tabIndex={0} /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Radio');
-    await user();
+    await act(async () => {
+      await user();
+    });
 
     await waitFor(() => {
       const style = window.getComputedStyle(anchor);
