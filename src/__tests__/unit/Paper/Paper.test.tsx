@@ -19,23 +19,23 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Paper from '../../../Paper/Paper';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 
 afterEach(cleanup);
 
 describe('Paper', () => {
   it('Render Default variant as outlined variant', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Paper variant="outlined" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Paper variant="outlined" /></ThemeProvider>);
     expect(screen.findByLabelText('Paper')).toBeTruthy();
   });
 
   it('Render elevation variant', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Paper variant="elevation" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Paper variant="elevation" /></ThemeProvider>);
     expect(screen.findByLabelText('Paper')).toBeTruthy();
   });
 
   it('Render nopadding variant', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Paper variant="nopadding" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Paper variant="nopadding" /></ThemeProvider>);
     expect(screen.findByLabelText('Paper')).toBeTruthy();
   });
 });

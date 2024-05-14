@@ -18,7 +18,7 @@ import {
   render, fireEvent, screen, configure, cleanup,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Autocomplete from '../../../Autocomplete';
 
 afterEach(cleanup);
@@ -53,7 +53,7 @@ describe('Autocomplete', () => {
     const actionLabel = 'Action';
     const actionHref = 'https://www.hcltech.com/';
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Autocomplete
           options={[]}
           actionProps={[{
@@ -107,6 +107,16 @@ describe('Autocomplete', () => {
   });
 
   it('Render with non edit state', () => {
+    jest.spyOn(console, 'error').mockImplementation((message) => {
+      // since the autocomplete is not editable, the input element is not found
+      // this is expected and we suppress the error to avoid further confusion
+      if (message.includes('MUI: Unable to find the input element.')) {
+        return;
+      }
+      // eslint-why we only suppress the expected error
+      // eslint-disable-next-line no-console
+      console.error(message);
+    });
     const exampleMessage = 'Example message';
     render(
       <Autocomplete
@@ -117,5 +127,6 @@ describe('Autocomplete', () => {
     );
     const input = screen.queryByRole('input');
     expect(input).toBeNull();
+    jest.clearAllMocks();
   });
 });

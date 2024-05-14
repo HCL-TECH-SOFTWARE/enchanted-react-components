@@ -18,7 +18,7 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Dialog, { DialogTestIds, DialogSizes } from '../../../Dialog';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import DialogContentText, { DialogContentTextTestIds } from '../../../Dialog/DialogContentText';
 import Typography from '../../../Typography';
 import Button from '../../../Button';
@@ -27,7 +27,7 @@ afterEach(cleanup);
 
 describe('Dialog', () => {
   it('Render Dialog open without crashing', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Dialog open /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Dialog open /></ThemeProvider>);
     expect(screen.getByRole('dialog')).not.toBeNull();
     expect(screen.getByTestId(DialogTestIds.DIALOG_CONTENT)).not.toBeNull(); // placeholder paper
     expect(screen.getByText('Replace me')).not.toBeNull(); // placeholder paper
@@ -38,7 +38,7 @@ describe('Dialog', () => {
 
   it('Render base variant Dialog open with complete header, content, footer', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.EXTRA_SMALL}
@@ -56,7 +56,7 @@ describe('Dialog', () => {
 
   it('Render Dialog open with header but No Footer', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.SMALL}
@@ -75,7 +75,7 @@ describe('Dialog', () => {
 
   it('Render Dialog open with footer but No Header', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.MEDIUM}
@@ -94,7 +94,7 @@ describe('Dialog', () => {
 
   it('Render Dialog open with No Padding on Content', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog open withPadding={false} size={DialogSizes.LARGE} />
       </ThemeProvider>,
     );
@@ -107,7 +107,7 @@ describe('Dialog', () => {
     const mockFn = jest.fn();
 
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.EXTRA_LARGE}
@@ -125,7 +125,7 @@ describe('Dialog', () => {
   // Because we prefer the use of Typography for rendering text, this is just an optional test for coverage since MUI exposes DialogContentText
   it('Render Dialog open with optional use of DialogContentText as child of DialogContent', async () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog open contentChildren={<DialogContentText>Sample Content Text</DialogContentText>} />
       </ThemeProvider>,
     );
@@ -135,7 +135,7 @@ describe('Dialog', () => {
 
   it('Render base variant Dialog open with hidden header even if headerChildren are passed as args', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.EXTRA_SMALL}
@@ -160,7 +160,7 @@ describe('Dialog', () => {
 
   it('Render base variant Dialog open with hidden footer even if footerChildren are passed as args', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Dialog
           open
           size={DialogSizes.EXTRA_SMALL}

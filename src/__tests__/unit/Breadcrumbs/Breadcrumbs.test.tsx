@@ -15,6 +15,7 @@
 
 import React from 'react';
 import {
+  act,
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
@@ -22,7 +23,9 @@ import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/dom';
 
 import Breadcrumbs from '../../../Breadcrumbs';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import Link from '../../../Link';
 import { ColorNames, Colors } from '../../../colors';
 
@@ -30,7 +33,7 @@ afterEach(cleanup);
 
 describe('Breadcrumbs', () => {
   it('Breadcrumbs default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Breadcrumbs data-testid="test"><Link>Search</Link></Breadcrumbs></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Breadcrumbs data-testid="test"><Link>Search</Link></Breadcrumbs></ThemeProvider>);
 
     const link = screen.getByTestId('test');
     const style = window.getComputedStyle(link);
@@ -40,7 +43,11 @@ describe('Breadcrumbs', () => {
   });
 
   it('Breadcrumbs disable style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Breadcrumbs data-testid="test" disabled><Link>Search</Link></Breadcrumbs></ThemeProvider>);
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Breadcrumbs data-testid="test" disabled><Link>Search</Link></Breadcrumbs>
+      </ThemeProvider>,
+    );
 
     const link = screen.getByTestId('test');
     const style = window.getComputedStyle(link);
@@ -51,10 +58,16 @@ describe('Breadcrumbs', () => {
 
   it('Breadcrumbs focus style', async () => {
     const user = userEvent.setup();
-    render(<ThemeProvider theme={createLtrTheme()}><Breadcrumbs data-testid="test"><Link tabIndex={0}>Search</Link></Breadcrumbs></ThemeProvider>);
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Breadcrumbs data-testid="test"><Link tabIndex={0}>Search</Link></Breadcrumbs>
+      </ThemeProvider>,
+    );
 
     const anchor = screen.getByText('Search');
-    await user.tab();
+    await act(async () => {
+      await user.tab();
+    });
 
     await waitFor(() => {
       const style = window.getComputedStyle(anchor);

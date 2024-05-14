@@ -15,12 +15,15 @@
 
 import React from 'react';
 import {
+  act,
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 import { waitFor } from '@testing-library/dom';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import Checkbox from '../../../Checkbox/Checkbox';
 import { ColorNames, Colors } from '../../../colors';
 
@@ -28,7 +31,7 @@ afterEach(cleanup);
 
 describe('Checkbox', () => {
   it('Checkbox default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Checkbox data-testid="Checkbox" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Checkbox data-testid="Checkbox" /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Checkbox');
     const style = window.getComputedStyle(anchor);
@@ -37,7 +40,7 @@ describe('Checkbox', () => {
   });
 
   it('Checkbox disable style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Checkbox data-testid="Checkbox" disabled /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Checkbox data-testid="Checkbox" disabled /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Checkbox');
     const style = window.getComputedStyle(anchor);
@@ -47,10 +50,12 @@ describe('Checkbox', () => {
 
   it('Checkbox focus style', async () => {
     const user = userEvent.tab;
-    render(<ThemeProvider theme={createLtrTheme()}><Checkbox data-testid="Checkbox" tabIndex={0} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Checkbox data-testid="Checkbox" tabIndex={0} /></ThemeProvider>);
 
     const anchor = screen.getByTestId('Checkbox');
-    await user();
+    await act(async () => {
+      await user();
+    });
 
     await waitFor(() => {
       const style = window.getComputedStyle(anchor);

@@ -19,7 +19,7 @@ import {
 } from '@testing-library/react';
 import InputAdornment from '@mui/material/InputAdornment';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 
 import TextField from '../../../TextField';
 import Button from '../../../Button/Button';
@@ -59,7 +59,7 @@ describe('TextField', () => {
     const actionLabel = 'Action';
     const actionHref = 'https://www.hcltech.com/';
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <TextField actionProps={[{ href: actionHref, label: actionLabel }]} />
       </ThemeProvider>,
     );
