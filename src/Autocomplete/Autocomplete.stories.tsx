@@ -26,15 +26,6 @@ export default {
   title: 'Inputs/Autocomplete',
   component: Autocomplete,
   argTypes: {
-    size: {
-      control: 'radio',
-      table: {
-        defaultValue: {
-          summary: 'medium',
-        },
-      },
-      description: 'The size of the component.',
-    },
     label: {
       table: {
         defaultValue: {
@@ -113,15 +104,6 @@ export default {
       },
       description: 'If `true`, the component is displayed in focused state.',
     },
-    autoFocus: {
-      control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: false,
-        },
-      },
-      description: 'if `true` enables auto focus for autocomplete components',
-    },
     hiddenLabel: {
       control: 'boolean',
       table: {
@@ -141,8 +123,53 @@ export default {
       },
       description: 'If `true` value cannot be editable',
     },
+    sx: {
+      description: 'The sx prop lets you work with a superset of CSS that packages all of the style functions exposed in @mui/system .',
+    },
     options: {
       description: 'Array of options.',
+    },
+    freeSolo: {
+      description: 'If true, the Autocomplete is free solo, meaning that the user input is not bound to provided options.',
+    },
+    actionProps: {
+      control: false,
+      description: 'actionProps of the Action Buttons',
+    },
+    clearIcon: {
+      control: false,
+      description: 'clear Icon of the Autocomplete component.',
+    },
+    endAdornmentAction: {
+      control: false,
+      description: 'Action of the end endAdornment icon.',
+    },
+    renderNonEditInput: {
+      control: false,
+      description: 'render non editable Input field.',
+    },
+    ref: {
+      control: false,
+      description: 'ref of the Autocomplete component.',
+    },
+    size: {
+      control: false,
+      options: ['small', 'medium', 'large'],
+      table: {
+        defaultValue: {
+          summary: 'medium',
+        },
+      },
+      description: 'https://mui.com/material-ui/api/autocomplete/#autocomplete-prop-size',
+    },
+    autoFocus: {
+      control: false,
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'https://mui.com/material-ui/api/text-field/',
     },
   },
 } as Meta<typeof Autocomplete>;

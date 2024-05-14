@@ -36,7 +36,7 @@ export default {
     color: {
       description:
         'The color of the component. It supports both default and custom theme colors, which can be added as shown in the palette customization guide.',
-      options: ['primary', 'secondary', 'warning', 'info', 'success'],
+      options: ['primary'],
       control: { type: 'radio' },
       table: {
         defaultValue: { summary: TextField.defaultProps?.color },
@@ -110,11 +110,33 @@ export default {
         defaultValue: { summary: TextField.defaultProps?.required },
       },
     },
+    sx: {
+      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    fullWidth: {
+      description: 'If true, the input will take up the full width of its container.',
+    },
+    autoFocus: {
+      description: 'If true, the input element is focused during the first mount.',
+    },
+    multiline: {
+      description: 'If true, a textarea element is rendered instead of an input.',
+    },
+    endAdornmentAction: {
+      control: false,
+      description: 'This can be used to add a prefix, a suffix, or an action to an input.',
+    },
     actionProps: {
+      control: false,
       description: 'Attribute to define the action href and label.',
-      table: {
-        defaultValue: { summary: '' },
-      },
+    },
+    renderNonEditInput: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/text-field/',
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/text-field/',
     },
   },
 } as Meta<typeof TextField>;

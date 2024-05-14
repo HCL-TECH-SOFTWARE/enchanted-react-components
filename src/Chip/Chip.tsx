@@ -39,6 +39,7 @@ export enum ChipTestIds {
  * @property {Function} onDeleteFunc - Callback fired when trailing icon is clicked. If undefined, it will hide trailing icon
  * @property {boolean} hideTrailingIcon - Toggles visibility of trailing icon, only for Storybook use
  * @property {boolean} selected - Toggles selected state for Storybook use only - adds same styles as :active state
+ * @property {boolean} focus - Toggles focus state for Storybook use only - adds same styles as :focus state
  */
 export type ChipProps = MuiChipProps & {
   leadingavatartype?: AvatarTypes | 'none', // none is layman's term for undefined in Storybook control as requested by UIUX
@@ -52,7 +53,7 @@ export type ChipProps = MuiChipProps & {
   // Storybook controls-related props
   hideTrailingIcon?: boolean, // By default, MuiChip hides trailing icon if onDelete is undefined
   selected?: boolean,
-  focus?: boolean,
+  focus?: boolean | 0 | 1,
 }
 
 const Chip = ({ ...props }: ChipProps) => {
@@ -122,7 +123,7 @@ export const getMuiChipThemeOverrides = (): Components<Omit<Theme, 'components'>
               ...ownerState.disabled && {
                 backgroundColor: theme.palette.action.disabledBackground,
               },
-              ...ownerState.focus === true && {
+              ...ownerState.focus === 1 && {
                 border: `2px solid ${theme.palette.action.focus}`,
                 padding: '3px',
               },
@@ -136,7 +137,7 @@ export const getMuiChipThemeOverrides = (): Components<Omit<Theme, 'components'>
               ...ownerState.disabled && {
                 border: `1px solid ${theme.palette.action.disabledOpacityModified}`,
               },
-              ...ownerState.focus === true && {
+              ...ownerState.focus === 1 && {
                 border: `2px solid ${theme.palette.action.focus}`,
                 padding: '3px',
               },
@@ -162,7 +163,7 @@ export const getMuiChipThemeOverrides = (): Components<Omit<Theme, 'components'>
                   color: theme.palette.primary.dark,
                 },
               },
-              ...ownerState.focus === true && {
+              ...ownerState.focus === 1 && {
                 border: `2px solid ${theme.palette.action.focus}`,
                 padding: '3px',
               },

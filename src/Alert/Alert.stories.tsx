@@ -67,22 +67,12 @@ export default {
       },
     },
     ref: {
-      description: 'ref of Alert component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/alert/',
+      control: false,
     },
     children: {
-      description: 'children of Alert component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/alert/#alert-prop-children',
+      control: false,
     },
   },
 } as Meta<typeof Alert>;

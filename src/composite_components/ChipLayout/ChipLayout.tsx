@@ -44,6 +44,7 @@ const ChipLayout = (props: ChipLayoutProps) => {
   const [totalChips, setTotalChips] = React.useState<Array<React.ReactNode>>([]);
   const [slicedChips, setSlicedChips] = React.useState<Array<React.ReactNode>>([]);
   const [windowWidth, setWindowWidth] = React.useState<number>(window.innerWidth);
+  const [isMounted, setIsMounted] = React.useState<boolean>(true);
   const marginRightBetweenChips = 4;
   const showMoreLength = 50;
   const maxChipCountToRender = 4;
@@ -139,12 +140,17 @@ const ChipLayout = (props: ChipLayoutProps) => {
 
   React.useEffect(() => {
     const reportWindowSize = debounce(() => {
-      setWindowWidth(window.innerWidth);
+      if (isMounted) {
+        setWindowWidth(window.innerWidth);
+      }
     }, 100);
     // Trigger this function on resize
     window.addEventListener('resize', reportWindowSize);
     //  Cleanup for componentWillUnmount
-    return () => { return window.removeEventListener('resize', reportWindowSize); };
+    return () => {
+      setIsMounted(false);
+      return window.removeEventListener('resize', reportWindowSize);
+    };
   }, []);
 
   React.useEffect(() => {

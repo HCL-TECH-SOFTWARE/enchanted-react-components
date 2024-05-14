@@ -61,15 +61,15 @@ export interface IHeaderStartSection {
 }
 
 export interface HeaderProps extends MuiContainerProps {
-  startSection: IHeaderStartSection,
+  startSection: IHeaderStartSection, // handles the rendering of the children components in the left section of the header
   hideMiddleSection?: boolean, // storybook control for toggling middleSection, rendering still depends on number of elements inside middleSection prop
   hamburgerSpace?: boolean, // storybook control for toggling display of allotted space for a hamburger menu at the start of the startSection
-  middleSection?: Array<React.ReactNode>,
-  endSection?: Array<React.ReactNode>,
+  middleSection?: Array<React.ReactNode>, // array containing the children components in the middle section of the header
+  endSection?: Array<React.ReactNode>, // handles the rendering of the children components in the right section of the header
   headerPageVariant?: HeaderPageVariant,
   headerDemoSample?: HeaderDemo,
-  onClickBackButton: Function,
-  onClickFavoritesToggle: Function,
+  onClickBackButton: Function, // handles the function call when the back button is clicked.
+  onClickFavoritesToggle: Function, // handles the function call when the favorites button is clicked.
 }
 
 const MuiContainer = styled(Container)<MuiContainerProps>((theme) => {

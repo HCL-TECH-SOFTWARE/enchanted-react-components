@@ -57,10 +57,35 @@ export default {
     handleDownload: {
       description: 'Event handler for download',
     },
+    assets: {
+      description: 'Set of images',
+    },
+    isFetchingAssets: {
+      description: 'It indicates whether the assets prop is still fetching',
+    },
+    isNextButtonDisabled: {
+      description: 'Enable/disable next button.',
+    },
+    isPreviousButtonDisabled: {
+      description: 'Enable/disable previous button.',
+    },
+    customHeaderTitle: {
+      description: 'Custom header title.',
+    },
+    overrideHandleNext: {
+      control: false,
+      description: 'Event handler that overrides the default next asset navigation',
+    },
+    overrideHandlePrevious: {
+      control: false,
+      description: 'Event handler that overrides the default privious asset navigation',
+    },
     onClickBackButton: {
+      control: false,
       description: 'Event handler for back button',
     },
     reactComponent: {
+      control: false,
       description: 'Used to render react components when necessary',
     },
   },

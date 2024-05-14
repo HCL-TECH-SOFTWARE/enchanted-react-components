@@ -23,916 +23,415 @@ export default {
   title: 'Data display/Typography',
   component: Typography,
   argTypes: {
-    children: {
-      description: 'The children of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'The classes of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    sx: {
-      description: 'The sx of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     variant: {
+      control: false,
       description: 'The variant of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    p: {
-      description: 'The p of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    color: {
-      description: 'The color of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    width: {
-      description: 'The width of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    border: {
-      description: 'The border of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    boxShadow: {
-      description: 'The boxShadow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    fontWeight: {
-      description: 'The fontWeight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    zIndex: {
-      description: 'The zIndex of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    alignContent: {
-      description: 'The alignContent of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    alignItems: {
-      description: 'The alignItems of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    alignSelf: {
-      description: 'The alignSelf of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    bottom: {
-      description: 'The bottom of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    boxSizing: {
-      description: 'The boxSizing of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    columnGap: {
-      description: 'The columnGap of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    display: {
-      description: 'The display of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flexBasis: {
-      description: 'The flexBasis of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flexDirection: {
-      description: 'The flexDirection of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flexGrow: {
-      description: 'The flexGrow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flexShrink: {
-      description: 'The flexShrink of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flexWrap: {
-      description: 'The flexWrap of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    fontFamily: {
-      description: 'The fontFamily of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    fontSize: {
-      description: 'The fontSize of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    fontStyle: {
-      description: 'The fontStyle of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridAutoColumns: {
-      description: 'The gridAutoColumns of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridAutoFlow: {
-      description: 'The gridAutoFlow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridAutoRows: {
-      description: 'The gridAutoFlow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridTemplateAreas: {
-      description: 'The gridTemplateAreas of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridTemplateColumns: {
-      description: 'The gridTemplateColumns of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridTemplateRows: {
-      description: 'The gridTemplateRows of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    height: {
-      description: 'The height of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    justifyContent: {
-      description: 'The justifyContent of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    justifyItems: {
-      description: 'The justifyItems of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    justifySelf: {
-      description: 'The justifySelf of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    left: {
-      description: 'The left of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    letterSpacing: {
-      description: 'The letterSpacing of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    lineHeight: {
-      description: 'The lineHeight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginBottom: {
-      description: 'The marginBottom of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginLeft: {
-      description: 'The marginLeft of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginRight: {
-      description: 'The marginRight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginTop: {
-      description: 'The marginTop of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    maxHeight: {
-      description: 'The maxHeight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    maxWidth: {
-      description: 'The maxWidth of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    minHeight: {
-      description: 'The minHeight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    minWidth: {
-      description: 'The minWidth of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    order: {
-      description: 'The order of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingBottom: {
-      description: 'The paddingBottom of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingLeft: {
-      description: 'The paddingLeft of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingRight: {
-      description: 'The paddingRight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingTop: {
-      description: 'The paddingTop of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    position: {
-      description: 'The position of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    right: {
-      description: 'The right of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    rowGap: {
-      description: 'The rowGap of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    textAlign: {
-      description: 'The textAlign of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    textOverflow: {
-      description: 'The textOverflow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    textTransform: {
-      description: 'The textTransform of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    top: {
-      description: 'The top of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    visibility: {
-      description: 'The visibility of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    whiteSpace: {
-      description: 'The whiteSpace of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderBottom: {
-      description: 'The borderBottom of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderColor: {
-      description: 'The borderColor of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderLeft: {
-      description: 'The borderLeft of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderRadius: {
-      description: 'The borderRadius of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderRight: {
-      description: 'The borderRight of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    borderTop: {
-      description: 'The borderTop of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    flex: {
-      description: 'The flex of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gap: {
-      description: 'The gap of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridArea: {
-      description: 'The gridArea of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridColumn: {
-      description: 'The gridColumn of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    gridRow: {
-      description: 'The gridRow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    margin: {
-      description: 'The margin of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    overflow: {
-      description: 'The overflow of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    padding: {
-      description: 'The padding of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    bgcolor: {
-      description: 'The bgcolor of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    m: {
-      description: 'The m of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    mt: {
-      description: 'The mt of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    mr: {
-      description: 'The mr of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    mb: {
-      description: 'The mb of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    mi: {
-      description: 'The mi of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    mx: {
-      description: 'The mx of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    ml: {
-      description: 'The ml of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginX: {
-      description: 'The marginX of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    my: {
-      description: 'The my of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    marginY: {
-      description: 'The marginY of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    pt: {
-      description: 'The pt of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    pr: {
-      description: 'The pr of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    pb: {
-      description: 'The pb of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    pl: {
-      description: 'The pl of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    px: {
-      description: 'The px of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingX: {
-      description: 'The paddingX of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    py: {
-      description: 'The py of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    paddingY: {
-      description: 'The paddingY of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    typography: {
-      description: 'The typography of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    displayPrint: {
-      description: 'The displayPrint of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     align: {
       description: 'The align of the Typography component.',
       options: ['inherit', 'left', 'right', 'center', 'justify'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     gutterBottom: {
       description: 'The gutterBottom of the Typography component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     noWrap: {
       description: 'The noWrap of the Typography component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     paragraph: {
       description: 'The paragraph of the Typography component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    children: {
+      description: 'https://mui.com/material-ui/api/typography/#typography-prop-children',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/api/typography/#typography-prop-classes',
+      control: false,
+    },
+    sx: {
+      description: 'https://mui.com/material-ui/api/typography/#typography-prop-sx',
+      control: false,
+    },
+    p: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    color: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    width: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    border: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    boxShadow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    fontWeight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    zIndex: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    alignContent: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    alignItems: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    alignSelf: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    bottom: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    boxSizing: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    columnGap: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    display: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flexBasis: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flexDirection: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flexGrow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flexShrink: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flexWrap: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    fontFamily: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    fontSize: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    fontStyle: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridAutoColumns: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridAutoFlow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridAutoRows: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridTemplateAreas: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridTemplateColumns: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridTemplateRows: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    height: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    justifyContent: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    justifyItems: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    justifySelf: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    left: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    letterSpacing: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    lineHeight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginBottom: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginLeft: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginRight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginTop: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    maxHeight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    maxWidth: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    minHeight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    minWidth: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    order: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingBottom: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingLeft: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingRight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingTop: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    position: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    right: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    rowGap: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    textAlign: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    textOverflow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    textTransform: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    top: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    visibility: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    whiteSpace: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderBottom: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderColor: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderLeft: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderRadius: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderRight: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    borderTop: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    flex: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gap: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridArea: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridColumn: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    gridRow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    margin: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    overflow: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    padding: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    bgcolor: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    m: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    mt: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    mr: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    mb: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    mi: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    mx: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    ml: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginX: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    my: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    marginY: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    pt: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    pr: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    pb: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    pl: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    px: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingX: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    py: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    paddingY: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    typography: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
+    },
+    displayPrint: {
+      description: 'https://mui.com/material-ui/api/typography/',
+      control: false,
     },
     variantMapping: {
-      description: 'The variantMapping of the Typography component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/typography/#typography-prop-variantMapping',
+      control: false,
     },
   },
 } as Meta<typeof Typography>;

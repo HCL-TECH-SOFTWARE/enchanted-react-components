@@ -53,28 +53,12 @@ export default {
         'Text to show inside action Button. If empty string or no corresponding buttonAction function, it will hide itself.',
       default: 'Button',
     },
-    buttonAction: {
-      description: 'Callback fired when action Button is clicked.',
-    },
-    onClose: {
-      description:
-        // eslint-why Seems appropriate to include full description from MUIv5 API so users understand this better
-        // eslint-disable-next-line max-len
-        'Callback fired when the component requests to be closed. Typically onClose is used to set state in the parent component, which is used to control the Snackbar open prop. The reason parameter can optionally be used to control the response to onClose, for example ignoring clickaway.',
-    },
     message: {
       description: 'The message to display.',
       default: 'Alert message',
     },
     open: {
       description: 'If true, the component is shown.',
-    },
-    placeholderIcon: {
-      description:
-        'The icon button shown that provides additional functionality or action to the snackbar. Typically, it is an HTML or JSX element with onClick callback to be fired when clicked.',
-    },
-    placeholderIconAction: {
-      description: 'Callback fired when placeholder icon is clicked.',
     },
     showPlaceholderIcon: {
       description: 'Used to toggle visibility of placeholder icon.',
@@ -97,6 +81,29 @@ export default {
           summary: 0,
         },
       },
+    },
+    buttonAction: {
+      control: false,
+      description: 'Callback fired when action button is clicked.',
+    },
+    onClose: {
+      control: false,
+      description:
+        `Callback fired when the component requests to be closed. Typically onClose is used to set state in the parent component, which is used to control the Snackbar open prop. The reason
+        parameter can optionally be used to control the response to onClose, for example ignoring clickaway.`,
+    },
+    placeholderIcon: {
+      control: false,
+      description:
+        'The icon button shown that provides additional functionality or action to the snackbar. Typically, it is an HTML or JSX element with onClick callback to be fired when clicked.',
+    },
+    placeholderIconAction: {
+      control: false,
+      description: 'Callback fired when placeholder icon button is clicked.',
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/snackbar/',
+      control: false,
     },
   },
 } as Meta<typeof Snackbar>;

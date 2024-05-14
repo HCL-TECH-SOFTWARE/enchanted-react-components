@@ -21,11 +21,6 @@ export default {
   title: 'Navigation/Pagination',
   component: Pagination,
   argTypes: {
-    page: {
-      description:
-        'Current page number - Storybook page options are dynamically computed by Pagination component and cannot be controlled',
-      control: false,
-    },
     rowsPerPage: {
       description: 'Page size or number of rows to render',
       control: { type: 'select' },
@@ -36,69 +31,70 @@ export default {
       control: { type: 'select' },
       options: [0, 100, 500],
     },
+    translation: {
+      description:
+        "Use the Pagination component's exported enum TablePaginationLocalizationPlaceholders to write your translations",
+    },
+    page: {
+      description:
+        'https://mui.com/material-ui/api/pagination/',
+      control: false,
+    },
     // The following controls are turned off for Enchanted because we have our own labeling and custom components inside Pagination
     labelRowsPerPage: {
-      table: {
-        disable: true,
-      },
+      control: false,
     },
     SelectProps: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     showFirstButton: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/#pagination-prop-showFirstButton',
     },
     showLastButton: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/#pagination-prop-showLastButton',
     },
     labelDisplayedRows: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     ActionsComponent: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     backIconButtonProps: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     getItemAriaLabel: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/#pagination-prop-getItemAriaLabel',
     },
     nextIconButtonProps: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     rowsPerPageOptions: {
       description: 'Customizes the options of the rows per page select field.',
       control: false,
     },
-    translation: {
-      description:
-        "Use the Pagination component's exported enum TablePaginationLocalizationPlaceholders to write your translations",
-    },
     onPageChange: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
     onRowsPerPageChange: {
-      table: {
-        disable: true,
-      },
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
+    },
+    classes: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/#pagination-prop-classes',
+    },
+    ref: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/pagination/',
     },
   },
 } as Meta<typeof Pagination>;

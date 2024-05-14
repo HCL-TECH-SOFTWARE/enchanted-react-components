@@ -23,50 +23,13 @@ export default {
   title: 'Surfaces/Paper',
   component: Paper,
   argTypes: {
-    children: {
-      description: 'The children of the Paper component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    classes: {
-      description: 'The classes of the Paper component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     elevation: {
       description: 'The elevation of the Paper component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     square: {
       description: 'The square of the Paper component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    sx: {
-      description: 'The sx of the Paper component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     variant: {
       if: { arg: 'interactive' },
@@ -79,14 +42,21 @@ export default {
         },
       },
     },
+    sx: {
+      description: 'https://mui.com/material-ui/react-paper/',
+      control: false,
+    },
+    children: {
+      description: 'https://mui.com/material-ui/react-paper/',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/react-paper/',
+      control: false,
+    },
     ref: {
-      description: 'The ref of the Paper component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/react-paper/',
+      control: false,
     },
   },
 } as Meta<typeof Paper>;

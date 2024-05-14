@@ -23,6 +23,36 @@ import Link from '../Link';
 export default {
   title: 'Data display/Table',
   component: Table,
+  argTypes: {
+    children: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-children',
+    },
+    classes: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-classes',
+    },
+    padding: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-padding',
+    },
+    size: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-size',
+    },
+    stickyHeader: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-stickyHeader',
+    },
+    sx: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/#table-prop-sx',
+    },
+    ref: {
+      table: { disable: true },
+      description: 'https://mui.com/material-ui/api/table/',
+    },
+  },
 } as Meta<typeof Table>;
 
 const Template: StoryFn<typeof Table> = (args) => {

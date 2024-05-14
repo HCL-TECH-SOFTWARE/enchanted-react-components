@@ -26,6 +26,32 @@ export default {
       story: { height: '300px', inline: true },
     },
   },
+  argTypes: {
+    children: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-children',
+      control: false,
+    },
+    components: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-components',
+      control: false,
+    },
+    componentsProps: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-componentsProps',
+      control: false,
+    },
+    classes: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-classes',
+      control: false,
+    },
+    transitionDuration: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-transitionDuration',
+      control: false,
+    },
+    sx: {
+      description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-sx',
+      control: false,
+    },
+  },
 } as Meta<typeof Backdrop>;
 
 const Template: StoryFn<typeof Backdrop> = (args) => {

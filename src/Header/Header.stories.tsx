@@ -35,135 +35,65 @@ export default {
         defaultValue: { summary: false },
       },
     },
-    startSection: {
-      description: 'startSection of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
     hideMiddleSection: {
       description: 'hideMiddleSection of Header component.',
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    middleSection: {
-      description: 'middleSection of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
-    },
-    endSection: {
-      description: 'endSection of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     headerPageVariant: {
       description: 'headerPageVariant of Header component.',
       options: ['OVERVIEW_PAGE', 'ITEM_PAGE', 'SEARCH_RESULT_PAGE', 'UPDATES_PAGE'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
     },
     headerDemoSample: {
       description: 'headerDemoSample of Header component. This is storybook control only, not an actual property of Header component.',
       options: ['CC', 'DAM', 'CR'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+    },
+    startSection: {
+      description: 'handles the rendering of the children components in the left section of the header.',
+      control: false,
+    },
+    middleSection: {
+      description: 'array containing the children components in the middle section of the header',
+      control: false,
+    },
+    endSection: {
+      description: 'handles the rendering of the children components in the right section of the header',
+      control: false,
     },
     onClickBackButton: {
-      description: 'onClickBackButton of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'handles the function call when the back button is clicked.',
+      control: false,
     },
     onClickFavoritesToggle: {
-      description: 'onClickFavoritesToggle of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'handles the function call when the favorites button is clieck.',
+      control: false,
     },
     classes: {
-      description: 'classes of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/grid/#grid-prop-classes',
+      control: false,
     },
     disableGutters: {
-      description: 'disableGutters of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/grid/',
+      control: false,
     },
     fixed: {
-      description: 'fixed of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/container/#container-prop-fixed',
+      control: false,
     },
     maxWidth: {
-      description: 'maxWidth of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/container/#container-prop-maxWidth',
+      control: false,
     },
     sx: {
-      description: 'sx of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/container/#container-prop-sx',
+      control: false,
     },
     ref: {
-      description: 'ref of Header component.',
-      if: { arg: 'interactive' },
-      table: {
-        defaultValue: {
-          summary: 'default',
-        },
-      },
+      description: 'https://mui.com/material-ui/api/container/',
+      control: false,
     },
   },
 } as Meta<typeof Header>;

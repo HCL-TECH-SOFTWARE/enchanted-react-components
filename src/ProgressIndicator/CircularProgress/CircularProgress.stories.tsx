@@ -30,15 +30,6 @@ export default {
         },
       },
     },
-    thickness: {
-      description: 'The thickness of the circle.',
-      control: false,
-      table: {
-        defaultValue: {
-          summary: 3.5,
-        },
-      },
-    },
     size: {
       description:
         'The size of the component. If using a number, the pixel unit is assumed. If using a string, you need to provide the CSS unit, e.g `3rem`.',
@@ -67,6 +58,19 @@ export default {
           summary: false,
         },
       },
+    },
+    thickness: {
+      description: 'https://mui.com/material-ui/api/circular-progress/#circular-progress-prop-thickness',
+      control: false,
+      table: {
+        defaultValue: {
+          summary: 3.5,
+        },
+      },
+    },
+    ref: {
+      description: 'https://mui.com/material-ui/api/circular-progress/',
+      control: false,
     },
   },
 } as Meta<typeof CircularProgress>;

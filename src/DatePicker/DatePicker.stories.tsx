@@ -71,25 +71,6 @@ export default {
         defaultValue: { summary: DatePicker.defaultProps.helperIconTooltip },
       },
     },
-    unitLabel: {
-      description: 'Attribute which can be used to define the unit of that component',
-      table: {
-        defaultValue: { summary: DatePicker.defaultProps.hiddenLabel },
-      },
-    },
-    format: {
-      description: 'Attribute which is used to verified the date.',
-      table: {
-        defaultValue: { summary: DatePicker.defaultProps.format },
-      },
-      control: false,
-    },
-    error: {
-      description: 'If `true`, the error state will be enabled.',
-      table: {
-        disable: true,
-      },
-    },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       table: {
@@ -108,14 +89,32 @@ export default {
         defaultValue: { summary: DatePicker.defaultProps.disabled },
       },
     },
+    fullWidth: {
+      description: 'If `true`,the component will take the max width.',
+      table: {
+        defaultValue: { summary: false },
+      },
+    },
     required: {
       description: 'If `true`, the `input` element is required.',
       table: {
         defaultValue: { summary: DatePicker.defaultProps.required },
       },
     },
+    showDaysOutsideCurrentMonth: {
+      description: 'If true, days outside the current month are rendered',
+      table: {
+        defaultValue: { summary: DatePicker.defaultProps.required },
+      },
+    },
     actionProps: {
       description: 'Attribute to define the action href and label.',
+      table: {
+        defaultValue: { summary: '' },
+      },
+    },
+    InputProps: {
+      description: 'Attribute to define the input href and label.',
       table: {
         defaultValue: { summary: '' },
       },
@@ -127,6 +126,25 @@ export default {
       table: {
         defaultValue: { summary: 'en' },
       },
+    },
+    unitLabel: {
+      control: false,
+      description: 'Attribute which can be used to define the unit of that component',
+    },
+    format: {
+      description: 'Attribute which is used to verified the date.',
+      table: {
+        defaultValue: { summary: DatePicker.defaultProps.format },
+      },
+      control: false,
+    },
+    error: {
+      description: 'If `true`, the error state will be enabled.',
+      control: false,
+    },
+    customStyles: {
+      control: false,
+      description: 'Attribute to define the customStyles.',
     },
   },
 } as Meta<typeof DatePicker>;

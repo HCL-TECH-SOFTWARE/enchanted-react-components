@@ -101,10 +101,6 @@ export default {
       if: { arg: 'interactive' },
       description: 'Label for the Search Criteria header.',
     },
-    labelProps: {
-      if: { arg: 'interactive' },
-      description: 'Props for label in Search Criteria header.',
-    },
     helperIconTooltip: {
       if: { arg: 'interactive' },
       description: 'Help text for Search Criteria.',
@@ -125,36 +121,40 @@ export default {
       if: { arg: 'interactive' },
       description: 'Secondary text for the Search Criteria summary.',
     },
-    secondaryTextProps: {
-      if: { arg: 'interactive' },
-      description: 'Props for Secondary text the Search Criteria summary.',
-    },
     expandButtonLabel: {
       if: { arg: 'interactive' },
       description: 'Label for the expand button in Search Criteria summary.',
-    },
-    expandButtonProps: {
-      if: { arg: 'interactive' },
-      description: 'Props for the expand button in Search Criteria summary.',
     },
     collapseButtonLabel: {
       if: { arg: 'interactive' },
       description: 'Label for the collapse button in Search Criteria summary.',
     },
+    secondaryTextProps: {
+      control: false,
+      description: 'Label properties for Secondary text in header.',
+    },
+    labelProps: {
+      control: false,
+      description: 'Label properties for Label in header.',
+    },
+    expandButtonProps: {
+      control: false,
+      description: 'Props of the Button for expanding Search Criteria',
+    },
     collapseButtonProps: {
-      if: { arg: 'interactive' },
-      description: 'Props for the collapse button in Search Criteria summary.',
+      control: false,
+      description: 'Props of the Button for collapsing Search Criteria',
     },
     handleExpand: {
-      if: { arg: 'interactive' },
-      description: 'Call this function when we expand Search Criteria.',
+      control: false,
+      description: 'Call this function when we expand Search Criteria',
     },
     handleCollapse: {
-      if: { arg: 'interactive' },
-      description: 'Call this function when we collapse Search Criteria.',
+      control: false,
+      description: 'Call this function when we collapse Search Criteria',
     },
     open: {
-      if: { arg: 'interactive' },
+      control: false,
       description: 'Call this function when we open Search Criteria.',
     },
   },
