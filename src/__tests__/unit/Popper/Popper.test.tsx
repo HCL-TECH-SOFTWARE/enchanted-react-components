@@ -18,8 +18,8 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Popper, { PopperTestIds } from '../../../Popper';
-import { createLtrTheme } from '../../../theme';
 import Typography from '../../../Typography';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
 
 afterEach(cleanup);
 
@@ -31,7 +31,7 @@ describe('Popper', () => {
 
   it('Render base variant with sub header', () => {
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Popper
           open
           headerChildren={<Typography variant="body1">Label</Typography>}
@@ -49,7 +49,7 @@ describe('Popper', () => {
   it('Render Popper then close', async () => {
     const mockFn = jest.fn();
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Popper
           open
           onClose={mockFn}

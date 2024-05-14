@@ -17,14 +17,14 @@ import {
   cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import ColumnSortedDescendingIcon from '../../../DataGrid/ColumnSortedDescendingIcon';
 
 afterEach(cleanup);
 
 describe('ColumnSortedDescendingIcon unit test', () => {
   it('Render ColumnSortedDescendingIcon', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><ColumnSortedDescendingIcon /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><ColumnSortedDescendingIcon /></ThemeProvider>);
     expect(screen.findByRole('img')).toBeTruthy();
   });
 });

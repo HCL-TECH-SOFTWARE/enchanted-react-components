@@ -18,7 +18,7 @@ import {
   configure, cleanup, render, screen,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Select from '../../../Select/Select';
 import MenuItem from '../../../Menu/MenuItem';
 
@@ -88,7 +88,7 @@ describe('Select', () => {
     const actionHref = 'https://www.hcltech.com/';
 
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Select actionProps={[{ href: actionHref, label: actionLabel }]} value="none">
           <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
           <MenuItem value="10">Ten</MenuItem>

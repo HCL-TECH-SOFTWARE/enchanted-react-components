@@ -19,7 +19,9 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import Avatar, { AvatarTypes } from '../../../Avatar/Avatar';
-import { createLtrTheme, ensureToGetColor } from '../../../theme';
+import {
+  ThemeDirectionType, ThemeModeType, createEnchantedTheme, ensureToGetColor,
+} from '../../../theme';
 import { ColorNames, Colors } from '../../../colors';
 
 afterEach(cleanup);
@@ -51,7 +53,7 @@ describe('Avatar', () => {
   });
 
   it('Avatar default style', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Avatar data-testid="test" variant="rounded" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Avatar data-testid="test" variant="rounded" /></ThemeProvider>);
     const anchor = screen.getByTestId('test');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgb(246, 246, 246)');

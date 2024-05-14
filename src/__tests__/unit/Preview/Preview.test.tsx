@@ -21,12 +21,12 @@ import {
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import IconAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
-import { createLtrTheme } from '../../../theme';
 import Preview, { Assets, PreviewTestIds, PreviewProps } from '../../../Preview/Preview';
 import Avatar, { AvatarColors, AvatarTestIds, AvatarTypes } from '../../../Avatar';
 import Typography from '../../../Typography';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
 
-const theme = createLtrTheme();
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 const sampleRenditionLabel = 'Rendition';
 const selectButtonTitle = 'Select';
@@ -283,14 +283,14 @@ describe('Preview', () => {
     const videoPlayer = screen.getByTestId(PreviewTestIds.PREVIEW_VIDEO_PLAYER);
     expect(videoPlayer).not.toBeNull();
 
-    await act(async () => {
+    await act(() => {
       const nextButton = screen.getByTestId(PreviewTestIds.PREVIEW_NEXT_BUTTON);
       fireEvent.click(nextButton);
     });
 
     expect(screen.getByTestId(PreviewTestIds.PREVIEW_VIDEO_PLAYER).getAttribute('src')).toStrictEqual('HCL-The-Future.mp4');
 
-    await act(async () => {
+    await act(() => {
       const prevButton = screen.getByTestId(PreviewTestIds.PREVIEW_PREV_BUTTON);
       fireEvent.click(prevButton);
     });

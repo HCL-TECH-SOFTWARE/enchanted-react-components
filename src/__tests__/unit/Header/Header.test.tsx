@@ -17,7 +17,7 @@ import {
   render, screen, fireEvent, waitFor, cleanup,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
-import { createLtrTheme } from '../../../theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Header, { HeaderTestIds } from '../../../Header';
 import { sampleDigitalAssetManagerItemPage, sampleDigitalAssetManagerOverview } from '../../../Header/sampleHeaderConfig';
 
@@ -25,7 +25,7 @@ afterEach(cleanup);
 
 describe('Header', () => {
   it('Render base Header', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Header /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Header /></ThemeProvider>);
     expect(screen.getByTestId(HeaderTestIds.HEADER_CONTAINER)).toBeTruthy();
   });
 
@@ -34,7 +34,7 @@ describe('Header', () => {
     const mockFavoritesToggleFn = jest.fn();
 
     render(
-      <ThemeProvider theme={createLtrTheme()}>
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Header {...sampleDigitalAssetManagerItemPage} onClickBackButton={mockBackBtnFn} onClickFavoritesToggle={mockFavoritesToggleFn} />
       </ThemeProvider>,
     );
@@ -68,7 +68,7 @@ describe('Header', () => {
   });
 
   it('Render Header without middle section and without back button, avatar, icon button on start section - Overview Page', async () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Header {...sampleDigitalAssetManagerOverview} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Header {...sampleDigitalAssetManagerOverview} /></ThemeProvider>);
     expect(screen.getByTestId(HeaderTestIds.HEADER_START_SECTION)).toBeTruthy();
     expect(screen.getByTestId(HeaderTestIds.HEADER_END_SECTION)).toBeTruthy();
 
@@ -104,7 +104,7 @@ describe('Header', () => {
     dirtyConfig.endSection?.push('plain text');
     /* eslint-enable no-unused-expressions */
 
-    render(<ThemeProvider theme={createLtrTheme()}><Header {...dirtyConfig} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Header {...dirtyConfig} /></ThemeProvider>);
 
     expect(screen.getByTestId(HeaderTestIds.HEADER_START_SECTION)).toBeTruthy();
 
@@ -119,7 +119,7 @@ describe('Header', () => {
     const modifiedConfig = { ...sampleDigitalAssetManagerItemPage };
     modifiedConfig.hideMiddleSection = true;
 
-    render(<ThemeProvider theme={createLtrTheme()}><Header {...modifiedConfig} /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Header {...modifiedConfig} /></ThemeProvider>);
 
     expect(screen.getByTestId(HeaderTestIds.HEADER_START_SECTION)).toBeTruthy();
     expect(screen.getByTestId(HeaderTestIds.HEADER_END_SECTION)).toBeTruthy();
@@ -132,14 +132,18 @@ describe('Header', () => {
   });
 
   it('renders with provided sx property', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Header sx={{ minHeight: '64px' }} data-testid="header" /></ThemeProvider>);
+    render(<ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}><Header sx={{ minHeight: '64px' }} data-testid="header" /></ThemeProvider>);
     const headerContainer = screen.getByTestId('header');
     const style = window.getComputedStyle(headerContainer);
     expect(style.minHeight).toBe('64px');
   });
 
   it('renders with Tooltip when title is long', () => {
-    render(<ThemeProvider theme={createLtrTheme()}><Header startSection={{ title: '1234567890123456789012345678901234567890123456789012345678901234567890' }} data-testid="header" /></ThemeProvider>);
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Header startSection={{ title: '1234567890123456789012345678901234567890123456789012345678901234567890' }} data-testid="header" />
+      </ThemeProvider>,
+    );
     const headerContainer = screen.getByTestId('header');
     fireEvent.mouseOver(headerContainer); // To hover element and show tooltip
     expect(screen.findByRole('tooltip')).not.toBeNull();

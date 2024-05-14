@@ -584,7 +584,7 @@ const Preview: React.FC<PreviewProps> = ({
                 }}
               >
                 <source
-                  data-testId={PreviewTestIds.PREVIEW_VIDEO_PLAYER}
+                  data-testid={PreviewTestIds.PREVIEW_VIDEO_PLAYER}
                   src={currentRendition.source}
                   type={currentAsset.mediaType?.mimeType}
                 />
@@ -597,7 +597,7 @@ const Preview: React.FC<PreviewProps> = ({
           <StyledImage
             key={currentRendition.source}
             ref={imageRef}
-            data-testId={PreviewTestIds.PREVIEW_IMAGE}
+            data-testid={PreviewTestIds.PREVIEW_IMAGE}
             src={currentRendition.source}
             sx={{
               transform: `scale(${zoomPercentage / 100})`,

@@ -264,7 +264,7 @@ Chip.defaultProps = {
   hideTrailingIcon: false,
   leadingavatartype: 'none',
   selected: false,
-  focus: false,
+  focus: undefined,
 };
 
 export * from '@mui/material/Chip';
