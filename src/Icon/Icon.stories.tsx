@@ -932,6 +932,7 @@ import IconListBoxes from '@hcl-software/enchanted-icons/dist/carbon/es/list--bo
 import IconListBulleted from '@hcl-software/enchanted-icons/dist/carbon/es/list--bulleted';
 import IconListChecked from '@hcl-software/enchanted-icons/dist/carbon/es/list--checked';
 import IconListDropdown from '@hcl-software/enchanted-icons/dist/carbon/es/list--dropdown';
+import IconListEdit from '@hcl-software/enchanted-icons/dist/apps/es/list--edit';
 import IconListNumbered from '@hcl-software/enchanted-icons/dist/carbon/es/list--numbered';
 import IconLoadBalancerApplication from '@hcl-software/enchanted-icons/dist/carbon/es/load-balancer--application';
 import IconLoadBalancerClassic from '@hcl-software/enchanted-icons/dist/carbon/es/load-balancer--classic';
@@ -2760,6 +2761,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../list--bulleted', <IconListBulleted {...args} />)}
       {renderGridItem('../list--checked', <IconListChecked {...args} />)}
       {renderGridItem('../list--dropdown', <IconListDropdown {...args} />)}
+      {renderGridItem('../list--edit', <IconListEdit {...args} />)}
       {renderGridItem('../list--numbered', <IconListNumbered {...args} />)}
       {renderGridItem('../load-balancer--application', <IconLoadBalancerApplication {...args} />)}
       {renderGridItem('../load-balancer--classic', <IconLoadBalancerClassic {...args} />)}
