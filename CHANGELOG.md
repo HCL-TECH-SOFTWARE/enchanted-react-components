@@ -3,18 +3,13 @@
 ## Unreleased
 
 ### Added
+- Adding the `list--edit` icon to the icons preview
 
 ### Fixed
 
 ### Changed
 
 ### Breaking changes
-
-## 1.2.0
-
-### Added
-- Adding the `list--edit` icon to the icons preview
-
 
 ## 1.1.0
 
