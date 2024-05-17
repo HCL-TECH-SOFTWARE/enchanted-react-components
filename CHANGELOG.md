@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Adding the `list--edit` icon to the icons preview
 
 ### Fixed
 
