@@ -25,11 +25,13 @@ export interface ITileActionBarProps {
   actionList?: IActions[],
   overflowTooltip?: string;
   menuSize?: string;
+  disabled?: boolean;
+  hasThumbnail?: boolean;
 }
 
 const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps) => {
   const {
-    itemId, actionList, overflowTooltip, menuSize,
+    itemId, actionList, overflowTooltip, menuSize, disabled, hasThumbnail,
   } = props;
 
   const returnActionIcon = (index: number): React.ReactNode | undefined => {
@@ -40,6 +42,7 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
             <IconButton
               data-testid={actionList[index].title}
               aria-label={actionList[index].toolTip}
+              disabled={disabled}
               id={itemId}
               onClick={(e) => { return actionList[index].handler(e, itemId); }}
               onKeyDown={(event: React.KeyboardEvent<HTMLElement>) => { if (event.key === 'Enter') event.stopPropagation(); }}
@@ -55,7 +58,7 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
 
   return (
     <>
-      {(actionList) && (
+      {hasThumbnail && (actionList) && (
       <>
         {returnActionIcon(0)}
         {(actionList.length === 2) && (
@@ -67,9 +70,20 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
           actionList={actionList}
           overflowTooltip={overflowTooltip}
           menuSize={menuSize}
+          disabled={disabled}
         />
         )}
       </>
+      )}
+      {(!hasThumbnail && actionList) && (
+      <TileActionMenu
+        itemId={itemId}
+        actionList={actionList}
+        overflowTooltip={overflowTooltip}
+        menuSize={menuSize}
+        disabled={disabled}
+        hasThumbnail={hasThumbnail}
+      />
       )}
     </>
   );
