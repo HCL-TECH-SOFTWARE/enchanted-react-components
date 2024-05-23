@@ -79,7 +79,7 @@ The ThemeProvider needs to be the first component in the component hierarchy.
 
 ```typescript
 import { ThemeProvider } from '@mui/material/styles';
-import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../src/theme';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '@hcl-software/enchanted-react-components/dist/theme';
 
 const enchantedTheme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
@@ -102,8 +102,8 @@ For 'rtl' support the `DirectionStyleProvider` is also needed. This component sh
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import DirectionStyleProvider from '../../src/DirectionStyleProvider';
-import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../src/theme';
+import DirectionStyleProvider from '@hcl-software/enchanted-react-components/dist/DirectionStyleProvider';
+import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '@hcl-software/enchanted-react-components/dist/theme';
 
 const themeDirection = ThemeDirectionType.LTR;
 const enchantedTheme = createEnchantedTheme(themeDirection, ThemeModeType.LIGHT_NEUTRAL_GREY);
