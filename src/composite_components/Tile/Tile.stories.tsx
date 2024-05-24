@@ -57,6 +57,15 @@ export default {
       description:
         ' Unique Id of the Tile component.',
     },
+    hideAvatarIfImageIsLoaded: {
+      description:
+        'Enable or disable avatar if image is loaded.',
+      table: {
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
     imageUrl: {
       control: { type: 'select' },
       options: ['green bowl_bea.png', 'Spitburg-Chair-Elemonte-Source.jpg', 'Website-banner.png', 'Business-workshop.png'],
@@ -177,6 +186,7 @@ InteractiveExample.args = {
   imageUrl: 'green bowl_bea.png',
   overflowTooltip: 'More Actions',
   hasCheckBox: true,
+  hideAvatarIfImageIsLoaded: true,
   hasThumbnail: true,
   disabled: false,
   menuSize: 'medium',
@@ -283,6 +293,7 @@ VisualTest.args = {
   tileActions: ItemActions,
   overflowTooltip: 'More Actions',
   hasCheckBox: true,
+  hideAvatarIfImageIsLoaded: true,
   menuSize: 'medium',
   hasThumbnail: true,
 };

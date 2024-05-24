@@ -165,6 +165,7 @@ export interface TilePropsType {
   avatar?: React.ReactNode,
   imageUrl?: string,
   imageAltName?: string,
+  hideAvatarIfImageIsLoaded: boolean,
   itemClickedAction?(event: React.MouseEvent<HTMLElement>, tileItemId: string): void,
   handlePreviewAction?(event: React.MouseEvent<HTMLElement>, tileItemId: string): void,
   handleCheckboxChange?(event: React.ChangeEvent<HTMLInputElement>, tileItemId: string, isChecked: boolean): void,
@@ -192,7 +193,7 @@ const Tile = (props: TilePropsType) => {
   const [isSubTitleOverflowing, setIsSubTitleOverflowing] = useState(false);
   const {
     itemId, imageUrl, avatar, itemClickedAction, handlePreviewAction, tileActions, activeItem,
-    imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef,
+    imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef, hideAvatarIfImageIsLoaded,
     subTitle, menuSize, hasCheckBox, hasThumbnail, disabled,
   } = props;
 
@@ -273,7 +274,7 @@ const Tile = (props: TilePropsType) => {
             )}
           </ImageContainer>
         )}
-        {(imageUrl && avatar) && (isImageLoaded) && (hasThumbnail) && (
+        {(imageUrl && avatar) && (isImageLoaded && hideAvatarIfImageIsLoaded) && (hasThumbnail) && (
           <ImageContainer>
             <img
               style={{
@@ -298,7 +299,7 @@ const Tile = (props: TilePropsType) => {
             )}
           </ImageContainer>
         )}
-        {(imageUrl && avatar) && (!isImageLoaded) && (hasThumbnail) && (
+        {(imageUrl && avatar) && (!hideAvatarIfImageIsLoaded || (!isImageLoaded)) && (hasThumbnail) && (
           <ImageContainer>
             <StyledBox>
               {avatar}
