@@ -29,6 +29,8 @@ export interface ITileActionMenuProps {
   actionList: IActions[],
   overflowTooltip?: string;
   menuSize?: string;
+  disabled?: boolean;
+  hasThumbnail?: boolean;
 }
 
 export enum TileActionTestIds {
@@ -38,7 +40,7 @@ export enum TileActionTestIds {
 
 const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuProps) => {
   const {
-    itemId, actionList, overflowTooltip,
+    itemId, actionList, overflowTooltip, disabled, hasThumbnail,
   } = props;
   const overflowIconTitle = overflowTooltip;
 
@@ -88,6 +90,7 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
           aria-controls="fade-menu"
           aria-haspopup="true"
           onClick={handleClick}
+          disabled={disabled}
         >
           <IconOverflowMenuHorizontal />
         </IconButton>
@@ -105,6 +108,9 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
         size={definedSize}
       >
         {actionList.map((action: IActions, index: number) => {
+          if (hasThumbnail === false) {
+            return (returnMenuItem(action));
+          }
           if (index >= 1) {
             return (returnMenuItem(action));
           }

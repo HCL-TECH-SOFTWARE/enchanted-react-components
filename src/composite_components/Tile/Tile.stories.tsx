@@ -18,7 +18,9 @@ import { Meta, StoryFn } from '@storybook/react';
 import { ImageList } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import {
-  assets, getAvatarToDisplay, getAvatarToDisplayForFileType, getItemActions,
+  IActions,
+  ItemActions,
+  assets, data, getAvatarToDisplay, getAvatarToDisplayForFileType,
 } from './TileData';
 import Tile from './Tile';
 import Typography from '../../Typography';
@@ -92,9 +94,21 @@ export default {
       description: 'Event handler for tile click',
       control: 'false',
     },
+    handlePreviewAction: {
+      description: 'Event handler for preview',
+      control: 'false',
+    },
     hasCheckBox: {
       description:
         'Enable or disable checkbox.',
+    },
+    hasThumbnail: {
+      description:
+        'Enable or disable Thumbnail.',
+    },
+    disabled: {
+      description:
+        'Enable or disable the component.',
     },
     tileRef: { table: { disable: true } },
     ariaLabel: {
@@ -124,17 +138,23 @@ const StyledImageList = styled(ImageList)({
 });
 
 const InteractiveExampleTemplate: StoryFn<typeof Tile> = (args) => {
+  const tileActions: IActions[] = args.hasThumbnail ? ItemActions : data;
   const [onSelectionFlag, setOnSelectioFlag] = useState('');
   const itemClickedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
     setOnSelectioFlag(tileItemId);
     event.stopPropagation();
   };
+
+  const handlePreviewAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
+    event.stopPropagation();
+  };
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, tileItemId: string, isChecked: boolean) => {
     event.stopPropagation();
   };
+
   return (
     <StyledImageList
-      gap={10}
+      gap={12}
       cols={0}
       sx={{
         display: 'grid',
@@ -144,8 +164,10 @@ const InteractiveExampleTemplate: StoryFn<typeof Tile> = (args) => {
     >
       <Tile
         {...args}
+        tileActions={tileActions}
         activeItem={onSelectionFlag}
         itemClickedAction={itemClickedAction}
+        handlePreviewAction={handlePreviewAction}
         handleCheckboxChange={handleCheckboxChange}
         avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
       />
@@ -165,9 +187,10 @@ InteractiveExample.args = {
   overflowTooltip: 'More Actions',
   hasCheckBox: true,
   hideAvatarIfImageIsLoaded: true,
+  hasThumbnail: true,
+  disabled: false,
   menuSize: 'medium',
   itemId: '3',
-  tileActions: getItemActions(false),
 };
 
 const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
@@ -187,7 +210,7 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
         Tile for images
       </Typography>
       <StyledImageList
-        gap={10}
+        gap={12}
         cols={0}
         sx={{
           display: 'grid',
@@ -204,12 +227,35 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
           imageUrl="green bowl_bea.png"
         />
       </StyledImageList>
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        Tile for Collections
+      </Typography>
+      <StyledImageList
+        gap={12}
+        cols={0}
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        }}
+      >
+        <Tile
+          {...args}
+          activeItem={onSelectionFlag}
+          itemClickedAction={itemClickedAction}
+          avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
+          handleCheckboxChange={handleCheckboxChange}
+          title={itemData.title}
+          imageUrl="green bowl_bea.png"
+          hasThumbnail={false}
+          tileActions={data}
+        />
+      </StyledImageList>
       &nbsp;
       <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
         Tile for different file types
       </Typography>
       <StyledImageList
-        gap={10}
+        gap={12}
         cols={0}
         sx={{
           display: 'grid',
@@ -244,9 +290,10 @@ VisualTest.parameters = {
 VisualTest.args = {
   subTitle: 'Text',
   itemId: '3',
-  tileActions: getItemActions(false),
+  tileActions: ItemActions,
   overflowTooltip: 'More Actions',
   hasCheckBox: true,
   hideAvatarIfImageIsLoaded: true,
   menuSize: 'medium',
+  hasThumbnail: true,
 };

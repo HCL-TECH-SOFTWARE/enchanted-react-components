@@ -20,9 +20,9 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../../theme';
-import Tile from '../../../../composite_components/Tile/Tile';
-import { getItemActions } from '../../../../composite_components/Tile/TileData';
+import Tile, { TileTestIds } from '../../../../composite_components/Tile/Tile';
 import { TileActionTestIds } from '../../../../composite_components/Tile/TileActionMenu';
+import { ItemActions, data } from '../../../../composite_components/Tile/TileData';
 
 afterEach(cleanup);
 
@@ -38,11 +38,11 @@ describe('Tile component', () => {
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip="More Actions"
           hasCheckBox
         />
@@ -57,11 +57,11 @@ describe('Tile component', () => {
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip="More Actions"
           hasCheckBox
         />
@@ -70,23 +70,70 @@ describe('Tile component', () => {
     expect(screen.getByText(subtitle).textContent).toBe(subtitle);
   });
 
-  it('Should render the correct Image', () => {
+  it('Should render the correct Image and favoriteIcon for Tile component with thumbnail', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip="More Actions"
           hasCheckBox
+          hasThumbnail
         />
       </ThemeProvider>,
     );
     expect(screen.getAllByRole('img')[0].getAttribute('src')).toBe(imageUrl);
+    const favoriteIcon = screen.queryByTestId('Favorite Toggle');
+    expect(favoriteIcon).not.toBeNull();
+  });
+
+  it('Should render tile component for collections', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Tile
+          title={title}
+          subTitle={subtitle}
+          hideAvatarIfImageIsLoaded={false}
+          itemId="3"
+          imageUrl={imageUrl}
+          itemClickedAction={itemClickedAction}
+          tileActions={data}
+          overflowTooltip="More Actions"
+          hasCheckBox
+          hasThumbnail={false}
+        />
+      </ThemeProvider>,
+    );
+    // Check that the image is not rendered
+    const imageElement = screen.queryByRole('img');
+    expect(imageElement).toBeNull();
+  });
+
+  it('Should render tile component for collections without a FavoriteIcon', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Tile
+          title={title}
+          subTitle={subtitle}
+          hideAvatarIfImageIsLoaded={false}
+          itemId="3"
+          imageUrl={imageUrl}
+          itemClickedAction={itemClickedAction}
+          tileActions={data}
+          overflowTooltip="More Actions"
+          hasCheckBox
+          hasThumbnail={false}
+        />
+      </ThemeProvider>,
+    );
+    // Check that the image is not rendered
+    const favoriteIcon = screen.queryByTestId('Favorite Toggle');
+    expect(favoriteIcon).toBeNull();
   });
 
   it('Should call itemClickedAction when clicked', () => {
@@ -95,11 +142,11 @@ describe('Tile component', () => {
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -115,11 +162,11 @@ describe('Tile component', () => {
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -135,11 +182,11 @@ describe('Tile component', () => {
         <Tile
           title={title}
           subTitle={subtitle}
-          itemId="3"
           hideAvatarIfImageIsLoaded={false}
+          itemId="3"
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -158,7 +205,7 @@ describe('Tile component', () => {
           hideAvatarIfImageIsLoaded={false}
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -182,7 +229,7 @@ describe('Tile component', () => {
           hideAvatarIfImageIsLoaded={false}
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -196,6 +243,58 @@ describe('Tile component', () => {
     expect(screen.getByText(title).textContent).toBe(title);
   });
 
+  it('shows previewIcon on hover', async () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Tile
+          title={title}
+          itemId="3"
+          subTitle={subtitle}
+          hideAvatarIfImageIsLoaded={false}
+          imageUrl={imageUrl}
+          itemClickedAction={itemClickedAction}
+          tileActions={ItemActions}
+          overflowTooltip={overflowTooltip}
+          hasCheckBox
+          hasThumbnail
+        />
+      </ThemeProvider>,
+    );
+
+    // Hover over the title
+    userEvent.hover(screen.getByText(title));
+
+    // Check that the previewIcon is rendered
+    const previewIconElement = screen.getByTestId(TileTestIds.TILE_PREVIEW);
+    expect(previewIconElement).not.toBeNull();
+  });
+
+  it('renders Preview text correctly', async () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Tile
+          title={title}
+          itemId="3"
+          subTitle={subtitle}
+          hideAvatarIfImageIsLoaded={false}
+          imageUrl={imageUrl}
+          itemClickedAction={itemClickedAction}
+          tileActions={ItemActions}
+          overflowTooltip={overflowTooltip}
+          hasCheckBox
+          hasThumbnail
+        />
+      </ThemeProvider>,
+    );
+
+    // Hover over the title
+    userEvent.hover(screen.getByText(title));
+
+    // Check that the preview Text is rendered
+    const previewTextElement = screen.getByText('Preview');
+    expect(previewTextElement.textContent).toBe('Preview');
+  });
+
   it('renders menu and menu items when overflow icon is clicked', async () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
@@ -206,7 +305,7 @@ describe('Tile component', () => {
           hideAvatarIfImageIsLoaded={false}
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -232,7 +331,7 @@ describe('Tile component', () => {
           hideAvatarIfImageIsLoaded={false}
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -249,7 +348,7 @@ describe('Tile component', () => {
 
     // Check that the menu items are displayed
     const menuItems = await screen.findAllByRole('menuitem');
-    expect(menuItems.length).toBe(getItemActions(false).length - 1);
+    expect(menuItems.length).toBe(ItemActions.length - 1);
   });
 
   it('renders all the menu items which is passed as props', async () => {
@@ -262,7 +361,7 @@ describe('Tile component', () => {
           hideAvatarIfImageIsLoaded={false}
           imageUrl={imageUrl}
           itemClickedAction={itemClickedAction}
-          tileActions={getItemActions(false)}
+          tileActions={ItemActions}
           overflowTooltip={overflowTooltip}
           hasCheckBox
         />
@@ -279,10 +378,10 @@ describe('Tile component', () => {
 
     // Check that the menu items are displayed
     const menuItems = await screen.findAllByRole('menuitem');
-    expect(menuItems.length).toBe(getItemActions(false).length - 1);
+    expect(menuItems.length).toBe(ItemActions.length - 1);
 
     // Check the text of each menu item
-    const AllItemActionTexts = getItemActions(false).map((action) => { return action.title; });
+    const AllItemActionTexts = ItemActions.map((action) => { return action.title; });
     const expectedMenuItemTexts = AllItemActionTexts.slice(1);
     expectedMenuItemTexts.forEach((text) => {
       expect(screen.getByText(text)).not.toBeNull();

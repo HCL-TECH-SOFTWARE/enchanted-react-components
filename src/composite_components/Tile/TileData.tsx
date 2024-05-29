@@ -21,7 +21,6 @@ import IconPpt from '@hcl-software/enchanted-icons/dist/carbon/es/PPT';
 import IconTxt from '@hcl-software/enchanted-icons/dist/carbon/es/TXT';
 import IconPdf from '@hcl-software/enchanted-icons/dist/carbon/es/PDF';
 import IconStar from '@hcl-software/enchanted-icons/dist/carbon/es/star';
-import IconStarFilled from '@hcl-software/enchanted-icons/dist/carbon/es/star--filled';
 import IconImage from '@hcl-software/enchanted-icons/dist/carbon/es/image';
 import IconRocket from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 
@@ -51,51 +50,76 @@ const itemLinkCopiedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: 
 const itemCopiedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
   event.stopPropagation();
 };
-export const getItemActions = (isFavorite: boolean): IActions[] => {
-  const actions: IActions[] = [];
-  const favoriteAction: IActions = {
-    key: 'FAVORITE',
-    title: 'Favorite Toggle',
-    iconObject: isFavorite ? <IconStarFilled /> : <IconStar />,
-    toolTip: isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
-    handler: itemAddedToFavoritesAction,
-  };
-  const editAction: IActions = {
+export const data: IActions[] = [
+  {
     key: 'OPTION1',
     title: 'Option1',
     iconObject: <IconRocket />,
     toolTip: 'Option1',
     handler: itemEditAction,
-  };
-  const copyLinkAction: IActions = {
+  },
+  {
     key: 'OPTION2',
     title: 'Option2',
     iconObject: <IconRocket />,
     toolTip: 'Option2',
     handler: itemLinkCopiedAction,
     showDivider: true,
-  };
-  const copyAction: IActions = {
+  },
+  {
     key: 'OPTION3',
     title: 'Option3',
     iconObject: <IconRocket />,
     toolTip: 'Option3',
     handler: itemCopiedAction,
-  };
-  const deleteAction: IActions = {
+  },
+  {
     key: 'OPTION4',
     title: 'Option4',
     iconObject: <IconRocket />,
     toolTip: 'Option4',
     handler: itemDeleteAction,
-  };
-  actions[0] = favoriteAction;
-  actions[1] = editAction;
-  actions[2] = copyLinkAction;
-  actions[3] = copyAction;
-  actions[4] = deleteAction;
-  return actions;
-};
+  },
+];
+
+export const ItemActions:IActions[] = [
+  {
+    key: 'FAVORITE',
+    title: 'Favorite Toggle',
+    iconObject: <IconStar />,
+    toolTip: 'Add to Favorites',
+    handler: itemAddedToFavoritesAction,
+  },
+  {
+    key: 'OPTION1',
+    title: 'Option1',
+    iconObject: <IconRocket />,
+    toolTip: 'Option1',
+    handler: itemEditAction,
+  },
+  {
+    key: 'OPTION2',
+    title: 'Option2',
+    iconObject: <IconRocket />,
+    toolTip: 'Option2',
+    handler: itemLinkCopiedAction,
+    showDivider: true,
+  },
+  {
+    key: 'OPTION3',
+    title: 'Option3',
+    iconObject: <IconRocket />,
+    toolTip: 'Option3',
+    handler: itemCopiedAction,
+  },
+  {
+    key: 'OPTION4',
+    title: 'Option4',
+    iconObject: <IconRocket />,
+    toolTip: 'Option4',
+    handler: itemDeleteAction,
+  },
+];
 
 export const getAvatarToDisplay = (itemTypeArgument: string, imageUrl?: string): React.ReactNode | undefined => {
   let itemType = '';
