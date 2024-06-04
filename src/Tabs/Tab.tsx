@@ -15,23 +15,16 @@
 
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import MuiTab, { TabProps as MuiTabProps } from '@mui/material/Tab';
+import MuiTab, { TabProps } from '@mui/material/Tab';
 
-interface TabProps extends MuiTabProps {
-  orientation?: 'horizontal' | 'vertical';
-}
-
-const TabStyled = styled(MuiTab)<TabProps>(({ theme, orientation, iconPosition }) => {
+const TabStyled = styled(MuiTab)(({ theme, iconPosition }) => {
   return {
     '&.MuiTab-root': {
       ...theme.typography.subtitle2,
       minHeight: '30px',
     },
     '& .MuiSvgIcon-root': { // This targets the icon
-      color: theme.palette.action.active,
-      width: orientation === 'horizontal' ? '16px' : '20px',
-      height: orientation === 'horizontal' ? '16px' : '20px',
-      marginBottom: (orientation === 'horizontal' && iconPosition === 'top') ? '4px' : '0px',
+      marginBottom: iconPosition === 'top' ? '4px' : '0px',
     },
     '& .MuiTab-label': { // This targets the label
       color: theme.palette.text.secondary,
@@ -53,7 +46,6 @@ const Tab = ({ ...props }: TabProps) => {
     <TabStyled
       {...props}
       sx={{
-        padding: props.orientation === 'horizontal' ? '6px 8px' : '10px',
         minHeight: 'auto',
         minWidth: 'auto',
         textTransform: 'none',

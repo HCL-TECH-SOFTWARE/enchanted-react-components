@@ -26,6 +26,9 @@ interface TabsProps extends MuiTabsProps {
 const StyledTabs = styled(MuiTabs)((props) => {
   const { theme } = props;
   return {
+    '& .MuiButtonBase-root': { // This targets the tab
+      padding: props.orientation === 'horizontal' ? '6px 8px' : '10px',
+    },
     '& .MuiTabs-indicator': { // This targets the tab indicator
       backgroundColor: theme.palette.action.active,
       marginRight: '2px',
@@ -38,6 +41,11 @@ const StyledTabs = styled(MuiTabs)((props) => {
     },
     '& .MuiTab-root:focus': { // This targets the label of the tab on focus
       border: `1px solid ${theme.palette.action.focus}`,
+    },
+    '& .MuiSvgIcon-root': { // This targets the icon
+      color: theme.palette.action.active,
+      width: props.orientation === 'horizontal' ? '16px' : '20px',
+      height: props.orientation === 'horizontal' ? '16px' : '20px',
     },
   };
 });
@@ -97,7 +105,11 @@ const Tabs = ({ ...props }: TabsProps) => {
       {...props}
       value={value}
       onChange={handleChange}
-      sx={{ borderBottom: props.orientation === 'horizontal' ? 1 : 'none', borderColor: 'divider', minHeight: '30px' }}
+      sx={{
+        borderBottom: props.orientation === 'horizontal' ? 1 : 'none',
+        borderColor: 'divider',
+        minHeight: '30px',
+      }}
       TabIndicatorProps={{
         style: indicatorStyle,
       }}

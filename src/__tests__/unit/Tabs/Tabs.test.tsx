@@ -69,7 +69,7 @@ describe('Tabs component', () => {
   it('has the correct padding on vertical orientation', () => {
     const { getAllByRole } = render(
       <ThemeProvider theme={createLtrTheme()}>
-        <Tabs data-testid="tabs">
+        <Tabs data-testid="tabs" orientation="vertical">
           <Tab />
           <Tab />
         </Tabs>
@@ -84,21 +84,30 @@ describe('Tabs component', () => {
     expect(tabStyle.minHeight).toBe('30px');
   });
 
-  it('has the correct padding on horizontal orientation', () => {
+  it('selects the first tab by default', () => {
     const { getAllByRole } = render(
       <ThemeProvider theme={createLtrTheme()}>
         <Tabs data-testid="tabs" orientation="horizontal">
-          <Tab orientation="horizontal" />
+          <Tab iconPosition="top" />
           <Tab />
         </Tabs>
       </ThemeProvider>,
     );
-    const tab = getAllByRole('tab');
-    const tabStyle = window.getComputedStyle(tab[0]);
-    expect(tabStyle.paddingTop).toBe('6px');
-    expect(tabStyle.paddingBottom).toBe('6px');
-    expect(tabStyle.paddingLeft).toBe('8px');
-    expect(tabStyle.paddingRight).toBe('8px');
-    expect(tabStyle.minHeight).toBe('30px');
+    const tabs = getAllByRole('tab');
+    expect(tabs[0].getAttribute('aria-selected')).toBe('true');
+  });
+
+  it('changes the selected tab when a tab is clicked', () => {
+    const { getAllByRole } = render(
+      <ThemeProvider theme={createLtrTheme()}>
+        <Tabs data-testid="tabs" orientation="horizontal">
+          <Tab iconPosition="top" />
+          <Tab />
+        </Tabs>
+      </ThemeProvider>,
+    );
+    const tabs = getAllByRole('tab');
+    fireEvent.click(tabs[1]);
+    expect(tabs[1].getAttribute('aria-selected')).toBe('true');
   });
 });

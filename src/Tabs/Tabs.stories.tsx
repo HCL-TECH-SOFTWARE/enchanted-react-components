@@ -116,6 +116,7 @@ export default {
     ScrollButtonComponent: { table: { disable: true } },
     centered: { table: { disable: true } },
     value: { table: { disable: true } },
+    selectionFollowsFocus: { table: { disable: true } },
 
   },
 } as Meta<typeof Tabs>;
@@ -128,7 +129,7 @@ const Template: StoryFn<typeof Tabs> = (args) => {
   return (
     <Box
       sx={{
-        flexGrow: 1, bgcolor: 'background.paper', display: 'flex',
+        flexGrow: 1, display: 'flex',
       }}
     >
       <Tabs
@@ -144,7 +145,6 @@ const Template: StoryFn<typeof Tabs> = (args) => {
               label={showLabel ? tab.label : undefined}
               icon={showIcon ? tab.iconObject : undefined}
               iconPosition={args.orientation === 'vertical' ? 'start' : args.iconposition}
-              orientation={args.orientation}
             />
           );
         })}
@@ -185,7 +185,6 @@ const VisualTestTemplate: StoryFn<typeof Tabs> = (args) => {
             label="Tab"
             icon={<IconPaintBrush />}
             iconPosition={args.iconposition}
-            orientation={args.orientation}
           />
           <Tab
             label="Tab"
