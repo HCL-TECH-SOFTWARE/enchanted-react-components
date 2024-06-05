@@ -12,11 +12,46 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
 import React from 'react';
+import { styled } from '@mui/material/styles';
 import MuiTab, { TabProps } from '@mui/material/Tab';
 
+const TabStyled = styled(MuiTab)(({ theme, iconPosition }) => {
+  return {
+    '&.MuiTab-root': {
+      ...theme.typography.subtitle2,
+      minHeight: '30px',
+    },
+    '& .MuiSvgIcon-root': { // This targets the icon
+      marginBottom: iconPosition === 'top' ? '4px' : '0px',
+    },
+    '& .MuiTab-label': { // This targets the label
+      color: theme.palette.text.secondary,
+    },
+    '&.Mui-selected': {
+      color: theme.palette.text.primary,
+    },
+    '&.Mui-disabled': { // This targets the tab when it's disabled
+      color: theme.palette.text.disabled,
+      '& .MuiSvgIcon-root': { // This targets the icon of the disabled tab
+        color: theme.palette.action.disabled,
+      },
+    },
+  };
+});
+
 const Tab = ({ ...props }: TabProps) => {
-  return <MuiTab {...props} />;
+  return (
+    <TabStyled
+      {...props}
+      sx={{
+        minHeight: 'auto',
+        minWidth: 'auto',
+        textTransform: 'none',
+      }}
+    />
+  );
 };
 
 Tab.defaultProps = {

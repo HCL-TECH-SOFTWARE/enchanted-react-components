@@ -12,7 +12,22 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import Tabs from './Tabs';
 
-export default Tabs;
-export * from './Tabs';
+import React from 'react';
+import IconPaintBrush from '@hcl-software/enchanted-icons/dist/carbon/es/paint-brush';
+
+export interface TabActions {
+  label: string,
+  iconObject: React.ReactElement,
+}
+
+export const tabIcons: TabActions[] = [
+  {
+    label: 'Tab',
+    iconObject: <IconPaintBrush />,
+  },
+  {
+    label: 'Tab',
+    iconObject: <IconPaintBrush />,
+  },
+];
