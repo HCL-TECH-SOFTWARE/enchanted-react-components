@@ -12,27 +12,8 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React from 'react';
-import MuiTabs, { TabsProps } from '@mui/material/Tabs';
 
-const Tabs = ({ ...props }: TabsProps) => {
-  return <MuiTabs {...props} />;
-};
+import Tabs from './Tabs';
 
-const defaultProps: TabsProps = {
-  allowScrollButtonsMobile: false,
-  centered: false,
-  indicatorColor: 'primary',
-  orientation: 'horizontal',
-  scrollButtons: 'auto',
-  textColor: 'primary',
-  variant: 'standard',
-  visibleScrollbar: false,
-  tabIndex: 0,
-  disabled: false,
-};
-
-Tabs.defaultProps = defaultProps;
-
-export * from '@mui/material/Tabs';
 export default Tabs;
+export * from './Tabs';

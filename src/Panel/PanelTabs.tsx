@@ -15,8 +15,8 @@
 
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Tabs from '../hidden_components/Tabs/Tabs';
-import Tab from '../hidden_components/Tabs/Tab';
+import Tabs from '../Tabs/Tabs';
+import Tab from '../Tabs/Tab';
 import { TabsPanelProps } from './Panel';
 
 export interface PanelTabsProps {

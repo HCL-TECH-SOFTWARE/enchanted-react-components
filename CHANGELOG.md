@@ -10,6 +10,7 @@
 ### Changed
 - Added hasThumbnail and disabled properties to the Tile component. 
 - Added as hover image preview icon for the Tile component.
+- Adding the `tab` component.
 
 ### Breaking changes
 
