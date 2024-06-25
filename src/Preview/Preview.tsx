@@ -97,6 +97,7 @@ export interface PreviewProps {
   overrideHandleNext?: () => void;
   isFetchingAssets?: boolean;
   customHeaderTitle?: string;
+  handleError?: (event: React.SyntheticEvent<HTMLVideoElement | HTMLImageElement, Event>) => void;
 }
 
 // Zoom button margin is 12px
@@ -292,6 +293,7 @@ const Preview: React.FC<PreviewProps> = ({
   overrideHandlePrevious,
   isFetchingAssets = false,
   customHeaderTitle,
+  handleError,
 }: PreviewProps) => {
   const fallbackAssetValue: Assets[] = [
     {
@@ -582,6 +584,9 @@ const Preview: React.FC<PreviewProps> = ({
                 onLoadedData={() => {
                   handleResize();
                 }}
+                onError={(e) => {
+                  if (handleError) handleError(e);
+                }}
               >
                 <source
                   data-testid={PreviewTestIds.PREVIEW_VIDEO_PLAYER}
@@ -605,6 +610,9 @@ const Preview: React.FC<PreviewProps> = ({
             }}
             draggable="true"
             onLoad={handleImageLoad}
+            onError={(e) => {
+              if (handleError) handleError(e);
+            }}
           />
         );
     }
