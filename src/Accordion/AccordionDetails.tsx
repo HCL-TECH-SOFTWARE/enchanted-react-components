@@ -12,21 +12,26 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
 import React from 'react';
-import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionDetails, { AccordionDetailsProps } from '@mui/material/AccordionDetails';
+import { styled } from '@mui/material/styles';
 
-const Accordion = ({ ...props }: AccordionProps) => {
-  return <MuiAccordion {...props} />;
+const StyledAccordionDetails = styled(MuiAccordionDetails)(({ theme }) => {
+  return {
+    '&:last-of-type': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
+  };
+});
+
+const AccordionDetails = ({ ...props }: AccordionDetailsProps) => {
+  return <StyledAccordionDetails {...props} />;
 };
 
-const defaultProps: AccordionProps = {
-  children: '',
-  square: false,
-  variant: 'elevation',
-  elevation: 1,
+AccordionDetails.defaultProps = {
 };
 
-Accordion.defaultProps = defaultProps;
-
-export * from '@mui/material/Accordion';
-export default Accordion;
+export * from '@mui/material/AccordionDetails';
+export default AccordionDetails;
