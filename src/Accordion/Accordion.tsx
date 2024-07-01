@@ -1,0 +1,132 @@
+/* ======================================================================== *
+ * Copyright 2024 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+import React, { useEffect, useRef, useState } from 'react';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import { styled } from '@mui/material/styles';
+
+export type AccordionPropsAll = AccordionProps & {
+  showCheckBox?: boolean,
+  disabled?: boolean,
+  isfocused?: boolean,
+  hasnested?: boolean;
+  hasDivider?: boolean;
+}
+
+const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
+  const {
+    theme, variant, isfocused, hasnested, hasDivider,
+  } = props;
+  window.console.log(isfocused, hasnested, hasDivider);
+  return {
+    '& .MuiAccordionDetails-root': {
+      ...(hasnested ? { padding: '8px 0px 8px 8px' } : { padding: '8px 8px 8px 8px' }),
+    },
+    '&.MuiAccordion-root': {
+      ...(isfocused && {
+        boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
+        zIndex: 1,
+      }),
+    },
+    '&.Mui-disabled': {
+      backgroundColor: 'transparent',
+    },
+    padding: '0px',
+    border: variant === 'outlined' ? `1px solid ${theme.palette.border.secondary}` : 'none',
+    '&.MuiPaper-root.MuiAccordion-root.MuiPaper-root': {
+      backgroundColor: 'transparent',
+    },
+    '.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded': {
+      minHeight: '32px',
+      backgroundColor: theme.palette.action.disabledOpacityModified,
+    },
+    '& .MuiButtonBase-root.Mui-focusVisible': {
+      backgroundColor: 'transparent',
+    },
+    '&.MuiAccordion-root.Mui-expanded': {
+      margin: '0px',
+    },
+    '&.MuiAccordion-root:before': {
+      content: variant === 'outlined' ? '""' : 'none',
+    },
+    '&:first-of-type': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+      borderBottomLeftRadius: '0px',
+      borderBottomRightRadius: '0px',
+    },
+    '&:last-of-type': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
+    '&:not(:last-of-type)': {
+      borderBottom: (hasDivider && (variant !== 'outlined')) ? `1px solid ${theme.palette.border.secondary}` : 'none',
+    },
+  };
+});
+
+const Accordion = ({ ...props }: AccordionPropsAll) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [usingKeyboard, setUsingKeyboard] = useState(false);
+  const accordionRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = () => {
+      setUsingKeyboard(true);
+    };
+
+    const handleMouseDown = () => {
+      setUsingKeyboard(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('mousedown', handleMouseDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, []);
+  const handleFocus = (event: React.FocusEvent) => {
+    if (usingKeyboard) {
+      if (accordionRef.current && (accordionRef.current as HTMLElement).contains(event.relatedTarget as Node)) {
+        setIsFocused(false);
+      } else {
+        setIsFocused(true);
+      }
+    }
+  };
+  return (
+    <StyledAccordion
+      ref={accordionRef}
+      onFocus={handleFocus}
+      onBlur={() => { return setIsFocused(false); }}
+      {...props}
+      isfocused={isFocused}
+      hasnested={props.hasnested}
+      hasDivider={props.hasDivider}
+    />
+  );
+};
+
+const defaultProps: AccordionProps = {
+  children: '',
+  variant: 'outlined',
+};
+
+Accordion.defaultProps = defaultProps;
+
+export * from '@mui/material/Accordion';
+export default Accordion;
