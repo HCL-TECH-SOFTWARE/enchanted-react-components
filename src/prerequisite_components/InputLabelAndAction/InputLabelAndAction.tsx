@@ -23,6 +23,7 @@ import Link, { LinkProps } from '../../Link';
 export interface ActionProps {
   href: string,
   label: string,
+  handleClick?: (React.MouseEventHandler<HTMLAnchorElement> & React.MouseEventHandler<HTMLSpanElement>) | undefined,
 }
 
 export interface InputLabelAndActionProps extends MuiInputLabelProps {
@@ -138,6 +139,9 @@ export const MuiInputActionLink = styled(Link)<LinkProps>((theme) => {
       border: 0,
       fontWeight: 600,
     },
+    ':hover': {
+      cursor: 'pointer',
+    },
     float: 'right',
     ':not(:first-of-type)': {
       borderRight: `1px solid ${theme.theme.palette.border.secondary}`,
@@ -186,15 +190,18 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
           }}
         >
           { limitedActionProps && limitedActionProps.map((actionProp, index) => {
+            const linkProps = actionProp.handleClick ? {
+              onClick: actionProp.handleClick,
+            } : { href: actionProp.href };
             return (
               <MuiInputActionLink
                 disabled={props.disabled}
-                href={actionProp.href}
                 underline="none"
                 sx={{ display: 'inline' }}
                 // eslint-why index is not the sole key definition, it is prefixed by other identifiers
                 // eslint-disable-next-line react/no-array-index-key
                 key={`${actionProp.label}-${index}`}
+                {...linkProps}
               >
                 {actionProp.label}
               </MuiInputActionLink>
