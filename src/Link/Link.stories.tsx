@@ -45,7 +45,7 @@ export default {
     },
     type: {
       description: 'Determines the type of the Link component',
-      options: ['primary', 'neutral', 'neutralPrimary'],
+      options: ['primary', 'neutralPrimary', 'neutralSecondary'],
       control: { type: 'radio' },
       table: {
         defaultValue: {
@@ -481,7 +481,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="body1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -518,7 +518,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -557,7 +557,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -595,7 +595,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -631,7 +631,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -673,7 +673,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="body2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -710,7 +710,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -749,7 +749,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -787,7 +787,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -823,7 +823,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="body2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -865,7 +865,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="subtitle1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -902,7 +902,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -941,7 +941,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -979,7 +979,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1015,7 +1015,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -1057,7 +1057,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="subtitle2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -1094,7 +1094,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -1133,7 +1133,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -1171,7 +1171,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1207,7 +1207,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -1249,7 +1249,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="overline"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -1286,7 +1286,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="overline"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -1325,7 +1325,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="overline"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -1363,7 +1363,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="overline"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1399,7 +1399,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="overline"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -1441,7 +1441,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="caption"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -1478,7 +1478,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="caption"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -1517,7 +1517,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="caption"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -1555,7 +1555,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="caption"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1591,7 +1591,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="caption"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -1637,7 +1637,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -1674,7 +1674,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -1713,7 +1713,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -1751,7 +1751,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1787,7 +1787,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h1"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -1829,7 +1829,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -1866,7 +1866,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -1905,7 +1905,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -1943,7 +1943,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -1979,7 +1979,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h2"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -2021,7 +2021,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h3"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -2058,7 +2058,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h3"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -2097,7 +2097,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h3"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -2135,7 +2135,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h3"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -2171,7 +2171,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h3"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -2213,7 +2213,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h4"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -2250,7 +2250,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h4"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -2289,7 +2289,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h4"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -2327,7 +2327,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h4"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -2363,7 +2363,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h4"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -2405,7 +2405,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h5"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -2442,7 +2442,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h5"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -2481,7 +2481,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h5"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -2519,7 +2519,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h5"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -2555,7 +2555,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h5"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link
@@ -2597,7 +2597,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4}>
                 <Link
                   variant="h6"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                 >
                   Link
@@ -2634,7 +2634,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h6"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="always"
                   className="force-to-hover"
                 >
@@ -2673,7 +2673,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h6"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   underline="none"
                   className="force-to-focus"
                 >
@@ -2711,7 +2711,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h6"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   className="force-to-focus force-to-hover"
                 >
                   Link
@@ -2747,7 +2747,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Link
                   variant="h6"
-                  type={LinkType.NEUTRAL}
+                  type={LinkType.NEUTRAL_SECONDARY}
                   disabled
                 >
                   Link

@@ -21,8 +21,8 @@ import {
 
 export enum LinkType {
   PRIMARY = 'primary',
-  NEUTRAL = 'neutral',
   NEUTRAL_PRIMARY = 'neutralPrimary',
+  NEUTRAL_SECONDARY = 'neutralSecondary',
 }
 
 /**
@@ -107,7 +107,7 @@ export const getMuiLinkThemeOverrides = (): Components<Omit<Theme, 'components'>
             ...ownerState.type === LinkType.PRIMARY && {
               color: theme.palette.primary.main,
             },
-            ...ownerState.type === LinkType.NEUTRAL && {
+            ...ownerState.type === LinkType.NEUTRAL_SECONDARY && {
               color: theme.palette.text.secondary,
             },
             ...ownerState.type === LinkType.NEUTRAL_PRIMARY && {
