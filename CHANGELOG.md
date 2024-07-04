@@ -12,6 +12,7 @@
 - Added as hover image preview icon for the Tile component.
 - Adding the `tab` component.
 - Adding props for error handling in Preview component.
+- Adding handleClick to the ActionProps interface in the InputLabelAndAction component.
 - Added spacing, type and hoverBackground properties to the Link component.
 - Added VisualTest to the Link stories.
 
