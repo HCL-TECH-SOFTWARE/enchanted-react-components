@@ -137,7 +137,7 @@ Link.defaultProps = {
   type: LinkType.PRIMARY,
   spacing: false,
   hoverBackground: true,
-  underline: 'none',
+  underline: 'hover',
 };
 
 export default Link;
