@@ -19,13 +19,24 @@ import {
   Components, Theme,
 } from '@mui/material';
 
+export enum LinkType {
+  PRIMARY = 'primary',
+  NEUTRAL_PRIMARY = 'neutralPrimary',
+  NEUTRAL_SECONDARY = 'neutralSecondary',
+}
+
 /**
  * @typedef LinkProps
  * @type {object}
  * @property {string} disabled - If `true`, the component is disabled.
+ * @property {string} spacing - If `true`, the component has padding.
+ * @property {string} type - The color of the component.
  */
 export type LinkProps = MuiLinkProps & {
   disabled?: boolean,
+  spacing?: boolean,
+  type?: LinkType,
+  hoverBackground?: boolean,
 }
 
 /**
@@ -42,7 +53,7 @@ export const getMuiLinkThemeOverrides = (): Components<Omit<Theme, 'components'>
         paragraph: false,
       },
       styleOverrides: {
-        root: ({ theme }) => {
+        root: ({ ownerState, theme }) => {
           return {
             '&[disabled]': {
               color: theme.palette.text.disabled,
@@ -56,22 +67,52 @@ export const getMuiLinkThemeOverrides = (): Components<Omit<Theme, 'components'>
               },
             },
             '&:hover': {
-              color: theme.palette.primary.dark,
-              textDecorationColor: theme.palette.primary.dark,
+              color: theme.palette.primary.main,
+              textDecorationColor: theme.palette.primary.main,
+              ...ownerState.hoverBackground === true && {
+                background: theme.palette.action.hover,
+                borderRadius: '2px',
+              },
+              ...ownerState.hoverBackground === false && {
+                background: 'none',
+              },
+            },
+            '&.force-to-hover': {
+              color: theme.palette.primary.main,
+              textDecorationColor: theme.palette.primary.main,
+              background: theme.palette.action.hover,
+              borderRadius: '2px',
+            },
+            '&.force-to-focus': {
+              border: `${theme.palette.primary.main} 1px solid`,
+              outline: 'none',
+              borderRadius: '2px',
             },
             '&.Mui-focusVisible': {
               border: `${theme.palette.primary.main} 1px solid`,
               outline: 'none',
               borderRadius: '2px',
               '&:hover': {
-                color: theme.palette.primary.dark,
-                textDecorationColor: theme.palette.primary.dark,
+                color: theme.palette.primary.main,
+                textDecorationColor: theme.palette.primary.main,
+                borderRadius: '2px',
               },
             },
-            paddingLeft: '2px',
-            paddingRight: '2px',
+            ...ownerState.spacing === true && {
+              margin: '0px 3px 0px 3px',
+            },
+            padding: '1px 3px 1px 3px',
             display: 'inline-block',
             border: 'transparent 1px solid',
+            ...ownerState.type === LinkType.PRIMARY && {
+              color: theme.palette.primary.main,
+            },
+            ...ownerState.type === LinkType.NEUTRAL_SECONDARY && {
+              color: theme.palette.text.secondary,
+            },
+            ...ownerState.type === LinkType.NEUTRAL_PRIMARY && {
+              color: theme.palette.text.primary,
+            },
           };
         },
         underlineAlways: ({ theme }) => {
@@ -93,6 +134,10 @@ const Link = ({ ...props }: LinkProps) => {
 
 Link.defaultProps = {
   disabled: false,
+  type: LinkType.PRIMARY,
+  spacing: false,
+  hoverBackground: true,
+  underline: 'hover',
 };
 
 export default Link;

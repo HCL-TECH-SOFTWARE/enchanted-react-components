@@ -15,7 +15,10 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
-import Link from './Link';
+import { Grid } from '@mui/material';
+import Link, { LinkType } from './Link';
+import Typography from '../Typography';
+import Divider from '../Divider';
 
 export default {
   title: 'Navigation/Link',
@@ -26,6 +29,27 @@ export default {
       table: {
         defaultValue: {
           summary: false,
+        },
+      },
+    },
+    spacing: {
+      description: 'Determines if the link has padding or not.',
+    },
+    hoverBackground: {
+      description: 'Determines if the link has hover background or not.',
+    },
+    underline: {
+      description: 'Determines the underline of the Link component',
+      options: ['none', 'hover', 'always'],
+      control: { type: 'radio' },
+    },
+    type: {
+      description: 'Determines the type of the Link component',
+      options: ['primary', 'neutralPrimary', 'neutralSecondary'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'primary',
         },
       },
     },
@@ -427,6 +451,2325 @@ export default {
   },
 } as Meta<typeof Link>;
 
+const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
+  return (
+    <Grid container spacing={30}>
+      <Grid item>
+        <Grid container direction="column">
+          <Grid item paddingBottom={0}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link body1
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="body1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link body2
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="body2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="body2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link subtitle1
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link subtitle2
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="subtitle2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link overline
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="overline"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="overline"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link caption
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="caption"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="caption"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid container direction="column">
+          <Grid item paddingBottom={0}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h1
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h1"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h2
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h2"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h3
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h3"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h3"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h4
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h4"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h4"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h5
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h5"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h5"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Link h6
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4}>
+                <Link
+                  variant="h6"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="always"
+                  className="force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  underline="none"
+                  className="force-to-focus"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  className="force-to-focus force-to-hover"
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_SECONDARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Link
+                  variant="h6"
+                  type={LinkType.NEUTRAL_PRIMARY}
+                  disabled
+                >
+                  Link
+                </Link>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+};
+
 const Template: StoryFn<typeof Link> = (args) => {
   return <Link {...args}>Link</Link>;
 };
@@ -438,4 +2781,11 @@ export const ExampleLink = {
     ...Link.defaultProps,
     href: '#',
   },
+};
+
+export const VisualTest = VisualTestTemplate.bind({});
+VisualTest.parameters = {
+  options: { showPanel: false },
+};
+VisualTest.args = {
 };
