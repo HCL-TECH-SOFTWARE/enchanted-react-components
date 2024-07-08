@@ -15,9 +15,7 @@
 - Adding handleClick to the ActionProps interface in the InputLabelAndAction component.
 - Added spacing, type and hoverBackground properties to the Link component.
 - Added VisualTest to the Link stories.
-- Adjusted height for `Tile` component when subTitle is empty
-- Added onKeyDown to `Tile` component for keyboard accessibility
-- Enabled preview visibility of `Tile` component with keyboard access
+- Adjusted height when subTitle is empty, added keyboard accessibility for click & preview actions of `Tile` component.
 
 ### Breaking changes
 
