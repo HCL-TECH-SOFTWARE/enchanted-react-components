@@ -254,6 +254,7 @@ describe('Colors', () => {
     expect(ColorNames.BLACK38P).toEqual('BLACK38P');
     expect(ColorNames.BLACK32P).toEqual('BLACK32P');
     expect(ColorNames.BLACK20P).toEqual('BLACK20P');
+    expect(ColorNames.BLACK15P).toEqual('BLACK15P');
     expect(ColorNames.BLACK12P).toEqual('BLACK12P');
     expect(ColorNames.BLACK8P).toEqual('BLACK8P');
     expect(ColorNames.BLACK7P).toEqual('BLACK7P');
@@ -506,6 +507,7 @@ describe('Colors', () => {
     expect(Colors.get(ColorNames.BLACK38P)).toEqual(black.BLACK38P);
     expect(Colors.get(ColorNames.BLACK32P)).toEqual(black.BLACK32P);
     expect(Colors.get(ColorNames.BLACK20P)).toEqual(black.BLACK20P);
+    expect(Colors.get(ColorNames.BLACK15P)).toEqual(black.BLACK15P);
     expect(Colors.get(ColorNames.BLACK12P)).toEqual(black.BLACK12P);
     expect(Colors.get(ColorNames.BLACK8P)).toEqual(black.BLACK8P);
     expect(Colors.get(ColorNames.BLACK7P)).toEqual(black.BLACK7P);

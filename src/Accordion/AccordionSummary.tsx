@@ -22,13 +22,12 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
     '& .MuiBox-root:nth-of-type(1)': {
       display: 'flex',
       alignItems: 'center',
+      '& .MuiBox-root': {
+        flexDirection: 'column',
+      },
     },
-    '& .MuiBox-root:nth-of-type(2)': {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    minHeight: '32px',
-    padding: '4px 6px 4px 8px',
+    minHeight: 'auto',
+    padding: theme.spacing(1, 0.75, 0.5, 1),
     '& .MuiAccordionSummary-content': {
       margin: '0px',
       '&.Mui-expanded': {
@@ -53,15 +52,11 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
       backgroundColor: theme.palette.action.hover,
     },
     '.MuiCheckbox-root': {
-      padding: '0px',
+      padding: '4px 0px',
       marginRight: '8px',
     },
     '& .MuiCheckbox-root.Mui-focusVisible': {
       margin: '0px 8px 0px 0px',
-    },
-    '&:first-of-type': {
-      borderTopLeftRadius: '4px',
-      borderTopRightRadius: '4px',
     },
     '&:last-of-type': {
       borderBottomLeftRadius: '4px',

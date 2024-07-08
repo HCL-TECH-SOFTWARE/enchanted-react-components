@@ -105,6 +105,7 @@ declare module '@mui/material/styles' {
     disabledInverse?: string,
     disabledOpacityModified?: string, // modified because TypeAction has another disabledOpacity property that accepts number only
     focusOpacityModified?: string, // modified because TypeAction has another focusOpacity property that accepts number only
+    disableOpacityHover?: string;
   }
 
   interface PaletteOptions {
@@ -335,6 +336,7 @@ const PALETTE_LIGHT: PaletteOptions = {
     disabled: ensureToGetColor(Colors.get(ColorNames.BLACK38P)),
     disabledBackground: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY150)),
     disabledOpacityModified: ensureToGetColor(Colors.get(ColorNames.BLACK8P)),
+    disableOpacityHover: ensureToGetColor(Colors.get(ColorNames.BLACK15P)),
     focus: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07)),
     focusOpacityModified: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_12P)),
     inverse: ensureToGetColor(Colors.get(ColorNames.WHITE80P)),

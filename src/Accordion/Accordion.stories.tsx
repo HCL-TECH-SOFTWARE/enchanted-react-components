@@ -17,22 +17,26 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { StoryFn, Meta } from '@storybook/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
-import Accordion from './Accordion';
+import Accordion, { AccordionTypes } from './Accordion';
 import AccordionSummary from './AccordionSummary';
 import AccordionDetails from './AccordionDetails';
 import Checkbox from '../Checkbox/Checkbox';
 import Typography from '../Typography/Typography';
 import PlaceholderArea from '../utils/PlaceholderArea';
+import IconButton, { IconButtonVariants } from '../IconButton/IconButton';
 
 export default {
   title: 'Navigation/Accordion',
   component: Accordion,
   argTypes: {
-    variant: {
-      description: 'The variant of the Accordion.',
-      options: ['outlined', 'non-outlined'],
+    type: {
+      if: { arg: 'interactive' },
+      description: 'The type of accordion to use',
+      options: [AccordionTypes.OUTLINED, AccordionTypes.NO_OUTLINE],
+      control: { type: 'radio' },
     },
     disabled: {
+      if: { arg: 'interactive' },
       description: 'If true, the accordion will be disabled',
       control: { type: 'boolean' },
       table: {
@@ -42,7 +46,8 @@ export default {
       },
     },
     showCheckBox: {
-      description: 'If true, the accordion will show a checkbox',
+      if: { arg: 'interactive' },
+      description: 'If true, the accordion will show a checkbox, only for Storybook use',
       control: { type: 'boolean' },
       table: {
         defaultValue: {
@@ -51,15 +56,11 @@ export default {
       },
     },
     hasnested: {
-      description: 'If true, the accordion will have nested accordions',
-      control: { type: 'boolean' },
-      table: {
-        defaultValue: {
-          summary: 'false',
-        },
-      },
+      description: 'should make it true if the accordion have nested accordions',
+      control: false,
     },
     hasDivider: {
+      if: { arg: 'interactive' },
       description: 'If true, the accordion will have a divider',
       control: { type: 'boolean' },
       table: {
@@ -68,34 +69,29 @@ export default {
         },
       },
     },
-    children: {
-      description: 'The content of the accordion',
-      control: false,
+    showSecondaryText: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'Show a secondary text, only for Storybook use',
     },
-    elevation: {
-      control: false,
-    },
-    square: {
-      control: false,
-    },
-    ref: {
-      description: 'https://mui.com/material-ui/api/accordion/',
-      control: false,
-    },
-    isfocused: {
-      control: false,
-    },
+    variant: { table: { disable: true } },
+    children: { table: { disable: true } },
+    elevation: { table: { disable: true } },
+    square: { table: { disable: true } },
+    ref: { table: { disable: true } },
+    isfocused: { table: { disable: true } },
   },
 } as Meta<typeof Accordion>;
 
 const Template: StoryFn<typeof Accordion> = (args) => {
-  const { showCheckBox, disabled } = args;
+  const { showCheckBox, disabled, showSecondaryText } = args;
   const [checkedItems, setCheckedItems] = useState({});
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
   };
-  window.console.log(args.variant);
   return (
     <>
       <Accordion
@@ -104,25 +100,27 @@ const Template: StoryFn<typeof Accordion> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING}><ChevronDownIcon /></IconButton>)}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox id="1" checked={checkedItems['1'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              {showSecondaryText && (
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+              )}
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -134,25 +132,27 @@ const Template: StoryFn<typeof Accordion> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox id="2" checked={checkedItems['2'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              {showSecondaryText && (
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+              )}
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -164,25 +164,27 @@ const Template: StoryFn<typeof Accordion> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox id="3" checked={checkedItems['3'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              {showSecondaryText && (
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+              )}
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -197,11 +199,13 @@ export const InteractiveExample = {
   render: Template,
 
   args: {
+    interactive: true,
     showCheckBox: true,
-    hasnested: false,
     disabled: false,
-    hasDivider: false,
     ...Accordion.defaultProps,
+    hasDivider: false,
+    showSecondaryText: true,
+    hasnested: false,
   },
 };
 const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
@@ -210,25 +214,25 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
     <>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -237,31 +241,31 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
       </Accordion>
       <Accordion disabled={disabled} {...args} hasnested>
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          <Accordion variant="nopadding">
+          <Accordion type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<ChevronDownIcon />}
+              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -271,9 +275,9 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
               <PlaceholderArea height="112px" />
             </AccordionDetails>
           </Accordion>
-          <Accordion {...args} variant="nopadding">
+          <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<ChevronDownIcon />}
+              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -283,9 +287,9 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
               <PlaceholderArea height="112px" />
             </AccordionDetails>
           </Accordion>
-          <Accordion {...args} variant="nopadding">
+          <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<ChevronDownIcon />}
+              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -299,25 +303,25 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
       </Accordion>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<ChevronDownIcon />}
+          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
         >
           <Box>
             {showCheckBox && <Checkbox />}
-          </Box>
-          <Box>
-            <Typography
-              variant="body2"
-            >
-              Level 1
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              Optional
-            </Typography>
+            <Box>
+              <Typography
+                variant="body2"
+              >
+                Level 1
+              </Typography>
+              <Typography
+                variant="caption"
+              >
+                Optional
+              </Typography>
+            </Box>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -336,4 +340,5 @@ VisualTest.args = {
   ...Accordion.defaultProps,
   showCheckBox: false,
   disabled: false,
+  hasDivider: false,
 };

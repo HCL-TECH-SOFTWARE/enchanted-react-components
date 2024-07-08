@@ -17,17 +17,24 @@ import React, { useEffect, useRef, useState } from 'react';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
 import { styled } from '@mui/material/styles';
 
+export enum AccordionTypes {
+  OUTLINED = 'outlined',
+  NO_OUTLINE = 'no-outline',
+}
+
 export type AccordionPropsAll = AccordionProps & {
   showCheckBox?: boolean,
   disabled?: boolean,
   isfocused?: boolean,
   hasnested?: boolean;
   hasDivider?: boolean;
+  showSecondaryText?: boolean,
+  type: AccordionTypes,
 }
 
 const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
   const {
-    theme, variant, isfocused, hasnested, hasDivider,
+    theme, variant, isfocused, hasnested, hasDivider, type,
   } = props;
   window.console.log(isfocused, hasnested, hasDivider);
   return {
@@ -35,25 +42,39 @@ const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
       ...(hasnested ? { padding: '8px 0px 8px 8px' } : { padding: '8px 8px 8px 8px' }),
     },
     '&.MuiAccordion-root': {
+      overflow: 'hidden',
+      '&:focus': {
+        boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
+        zIndex: 1,
+      },
       ...(isfocused && {
         boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
         zIndex: 1,
       }),
     },
+    '& .MuiAccordionSummary-expandIconWrapper': {
+      marginLeft: theme.spacing(1),
+    },
     '&.Mui-disabled': {
       backgroundColor: 'transparent',
     },
     padding: '0px',
-    border: variant === 'outlined' ? `1px solid ${theme.palette.border.secondary}` : 'none',
+    border: type === 'outlined' ? `1px solid ${theme.palette.border.secondary}` : 'none',
     '&.MuiPaper-root.MuiAccordion-root.MuiPaper-root': {
       backgroundColor: 'transparent',
     },
     '.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded': {
       minHeight: '32px',
       backgroundColor: theme.palette.action.disabledOpacityModified,
+      '&:hover': {
+        backgroundColor: theme.palette.action.disableOpacityHover,
+      },
     },
     '& .MuiButtonBase-root.Mui-focusVisible': {
       backgroundColor: 'transparent',
+      '&:hover': {
+        backgroundColor: theme.palette.action.hover,
+      },
     },
     '&.MuiAccordion-root.Mui-expanded': {
       margin: '0px',
@@ -71,8 +92,12 @@ const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
       borderBottomLeftRadius: '4px',
       borderBottomRightRadius: '4px',
     },
+    '&.MuiAccordion-root .MuiAccordion-root': {
+      borderTopRightRadius: '0px',
+      borderBottomRightRadius: '0px',
+    },
     '&:not(:last-of-type)': {
-      borderBottom: (hasDivider && (variant !== 'outlined')) ? `1px solid ${theme.palette.border.secondary}` : 'none',
+      borderBottom: (hasDivider && (type !== 'outlined')) ? `1px solid ${theme.palette.border.secondary}` : 'none',
     },
   };
 });
@@ -121,9 +146,10 @@ const Accordion = ({ ...props }: AccordionPropsAll) => {
   );
 };
 
-const defaultProps: AccordionProps = {
+const defaultProps: AccordionPropsAll = {
+  type: AccordionTypes.OUTLINED,
   children: '',
-  variant: 'outlined',
+  variant: 'nopadding',
 };
 
 Accordion.defaultProps = defaultProps;
