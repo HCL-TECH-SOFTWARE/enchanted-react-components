@@ -12,8 +12,11 @@
 - Added as hover image preview icon for the Tile component.
 - Adding the `tab` component.
 - Adding props for error handling in Preview component.
-- Adding the `Accordion` component.
-- Adding the `disableOpacityHover` color to the colors.
+- Adding handleClick to the ActionProps interface in the InputLabelAndAction component.
+- Added spacing, type and hoverBackground properties to the Link component.
+- Added VisualTest to the Link stories.
+- Added the `Accordion` component.
+- Added the `disableOpacityHover` color to the colors.
 
 ### Breaking changes
 
