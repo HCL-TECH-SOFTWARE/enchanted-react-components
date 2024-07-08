@@ -55,7 +55,7 @@ export default {
         },
       },
     },
-    hasnested: {
+    hasNested: {
       description: 'should make it true if the accordion have nested accordions',
       control: false,
     },
@@ -205,7 +205,7 @@ export const InteractiveExample = {
     ...Accordion.defaultProps,
     hasDivider: false,
     showSecondaryText: true,
-    hasnested: false,
+    hasNested: false,
   },
 };
 const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
@@ -239,7 +239,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>
-      <Accordion disabled={disabled} {...args} hasnested>
+      <Accordion disabled={disabled} {...args} hasNested>
         <AccordionSummary
           expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"

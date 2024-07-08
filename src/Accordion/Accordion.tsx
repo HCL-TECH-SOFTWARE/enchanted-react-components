@@ -26,7 +26,7 @@ export type AccordionPropsAll = AccordionProps & {
   showCheckBox?: boolean,
   disabled?: boolean,
   isfocused?: boolean,
-  hasnested?: boolean;
+  hasNested?: boolean;
   hasDivider?: boolean;
   showSecondaryText?: boolean,
   type: AccordionTypes,
@@ -34,12 +34,11 @@ export type AccordionPropsAll = AccordionProps & {
 
 const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
   const {
-    theme, variant, isfocused, hasnested, hasDivider, type,
+    theme, variant, isfocused, hasNested, hasDivider, type,
   } = props;
-  window.console.log(isfocused, hasnested, hasDivider);
   return {
     '& .MuiAccordionDetails-root': {
-      ...(hasnested ? { padding: '8px 0px 8px 8px' } : { padding: '8px 8px 8px 8px' }),
+      ...(hasNested ? { padding: '8px 0px 8px 8px' } : { padding: '8px 8px 8px 8px' }),
     },
     '&.MuiAccordion-root': {
       overflow: 'hidden',
@@ -140,7 +139,7 @@ const Accordion = ({ ...props }: AccordionPropsAll) => {
       onBlur={() => { return setIsFocused(false); }}
       {...props}
       isfocused={isFocused}
-      hasnested={props.hasnested}
+      hasNested={props.hasNested}
       hasDivider={props.hasDivider}
     />
   );
