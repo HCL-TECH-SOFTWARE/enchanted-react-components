@@ -15,6 +15,7 @@
 - Adding handleClick to the ActionProps interface in the InputLabelAndAction component.
 - Added spacing, type and hoverBackground properties to the Link component.
 - Added VisualTest to the Link stories.
+- Adjusted height when subTitle is empty, added keyboard accessibility for click & preview actions of `Tile` component.
 - Added the `Accordion` component.
 - Added the `disableOpacityHover` color to the colors.
 

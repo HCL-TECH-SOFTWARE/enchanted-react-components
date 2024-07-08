@@ -55,6 +55,9 @@ const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ them
         backgroundColor: !disabled && theme.palette.action.hover,
       },
     },
+    '.visible': {
+      opacity: 1,
+    },
   };
 });
 
@@ -115,10 +118,11 @@ const StyledImageListItembar = styled(ImageListItemBar)<ImageListContextProps>((
   const { hasThumbnail } = React.useContext(ImageListContext);
   return {
     padding: '7px',
-    height: '46px',
+    height: 'auto',
     borderTop: hasThumbnail ? `1px solid ${theme.palette.border.secondary}` : 'none',
     '& .MuiImageListItemBar-titleWrap': {
       padding: '0px',
+      marginTop: '3px',
     },
     '& .MuiImageListItemBar-actionIcon': {
       padding: '0px 0px 0px 8px',
@@ -191,6 +195,7 @@ const Tile = (props: TilePropsType) => {
   const subTitleRef = useRef<HTMLDivElement | null>(null);
   const [isTitleOverflowing, setIsTitleOverflowing] = useState(false);
   const [isSubTitleOverflowing, setIsSubTitleOverflowing] = useState(false);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const {
     itemId, imageUrl, avatar, itemClickedAction, handlePreviewAction, tileActions, activeItem,
     imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef, hideAvatarIfImageIsLoaded,
@@ -242,6 +247,11 @@ const Tile = (props: TilePropsType) => {
       <StyledImageListItem
         key={itemId}
         onClick={(event: React.MouseEvent<HTMLLIElement>) => { return handleTileClick(event, itemId); }}
+        onKeyDown={(event: React.KeyboardEvent<HTMLLIElement>) => {
+          if (event.key === 'Enter') {
+            handleTileClick(event as unknown as React.MouseEvent<HTMLLIElement>, itemId);
+          }
+        }}
         tabIndex={0}
         role="listitem"
         aria-current={activeItem === itemId}
@@ -262,10 +272,12 @@ const Tile = (props: TilePropsType) => {
               alt={imageAltName || ''}
             />
             {!disabled && (
-              <Overlay className="overlay">
+              <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
+                  onFocus={() => { return setIsOverlayVisible(true); }}
+                  onBlur={() => { return setIsOverlayVisible(false); }}
                 >
                   <CustomIconView />
                 </IconButton>
@@ -287,10 +299,12 @@ const Tile = (props: TilePropsType) => {
               alt={imageAltName || ''}
             />
             {!disabled && (
-              <Overlay className="overlay">
+              <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
+                  onFocus={() => { return setIsOverlayVisible(true); }}
+                  onBlur={() => { return setIsOverlayVisible(false); }}
                 >
                   <CustomIconView />
                 </IconButton>
@@ -305,10 +319,12 @@ const Tile = (props: TilePropsType) => {
               {avatar}
             </StyledBox>
             {!disabled && (
-              <Overlay className="overlay">
+              <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
+                  onFocus={() => { return setIsOverlayVisible(true); }}
+                  onBlur={() => { return setIsOverlayVisible(false); }}
                 >
                   <CustomIconView />
                 </IconButton>
@@ -323,10 +339,12 @@ const Tile = (props: TilePropsType) => {
               {avatar}
             </StyledBox>
             {!disabled && (
-              <Overlay className="overlay">
+              <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
+                  onFocus={() => { return setIsOverlayVisible(true); }}
+                  onBlur={() => { return setIsOverlayVisible(false); }}
                 >
                   <CustomIconView />
                 </IconButton>
