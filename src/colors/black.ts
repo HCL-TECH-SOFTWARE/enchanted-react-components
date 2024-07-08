@@ -23,6 +23,7 @@ const black: ColorType = {
   BLACK38P: 'rgba(0, 0, 0, .38)',
   BLACK32P: 'rgba(0, 0, 0, .32)',
   BLACK20P: 'rgba(0, 0, 0, .20)',
+  BLACK15P: 'rgba(0, 0, 0, .15)',
   BLACK12P: 'rgba(0, 0, 0, .12)',
   BLACK8P: 'rgba(0, 0, 0, .08)',
   BLACK7P: 'rgba(0, 0, 0, .07)',

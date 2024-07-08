@@ -197,6 +197,7 @@ export interface ColorType extends ColorPartial {
   'BLACK38P'?: string;
   'BLACK32P'?: string;
   'BLACK20P'?: string;
+  'BLACK15P'?: string;
   'BLACK12P'?: string;
   'BLACK8P'?: string;
   'BLACK7P'?: string;
@@ -484,6 +485,7 @@ export enum ColorNames {
   BLACK38P = 'BLACK38P',
   BLACK32P = 'BLACK32P',
   BLACK20P = 'BLACK20P',
+  BLACK15P = 'BLACK15P',
   BLACK12P = 'BLACK12P',
   BLACK8P = 'BLACK8P',
   BLACK7P = 'BLACK7P',
@@ -742,6 +744,7 @@ export const Colors = new Map<ColorNames, string | undefined>([
   [ColorNames.BLACK38P, black.BLACK38P],
   [ColorNames.BLACK32P, black.BLACK32P],
   [ColorNames.BLACK20P, black.BLACK20P],
+  [ColorNames.BLACK15P, black.BLACK15P],
   [ColorNames.BLACK12P, black.BLACK12P],
   [ColorNames.BLACK8P, black.BLACK8P],
   [ColorNames.BLACK7P, black.BLACK7P],

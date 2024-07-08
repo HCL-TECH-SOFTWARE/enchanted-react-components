@@ -849,6 +849,14 @@ const Template: StoryFn<typeof Colors> = () => {
           </TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>{ColorNames.BLACK15P.substring(5)}</TableCell>
+          <TableCell><Avatar variant="rounded" sx={{ background: Colors.get(ColorNames.BLACK15P) }} /></TableCell>
+          <TableCell>
+            {black.BLACK100P!.substring(1)}
+            {' 15%'}
+          </TableCell>
+        </TableRow>
+        <TableRow>
           <TableCell>{ColorNames.BLACK12P.substring(5)}</TableCell>
           <TableCell><Avatar variant="rounded" sx={{ background: Colors.get(ColorNames.BLACK12P) }} /></TableCell>
           <TableCell>
