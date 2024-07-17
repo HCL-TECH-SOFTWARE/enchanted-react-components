@@ -184,7 +184,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     width: props.fullWidth ? '100%' : '240px',
     // eslint-why - using nested ternary to reduce unnecessary code blocks
     // eslint-disable-next-line no-nested-ternary
-    marginLeft: props.fullWidth ? '0px' : (theme.direction === ThemeDirectionType.RTL ? '8px' : '-8px'),
+    marginLeft: props.fullWidth ? '-8px' : (theme.direction === ThemeDirectionType.RTL ? '8px' : '-8px'),
     marginTop: '21px',
     padding: '0',
   };
@@ -198,13 +198,26 @@ const renderInput = (props: SelectProps, id?: string) => {
   if (!paperPropsStyle.marginTop) {
     paperPropsStyle.marginTop = defaultStyle.marginTop;
   }
+
   return (
     <MuiSelect
       {...selectProps}
       MenuProps={{
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         anchorOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
-        PaperProps: { style: paperPropsStyle, elevation: 2 },
+        PaperProps: {
+          style: paperPropsStyle,
+          elevation: 2,
+          ref: (node) => {
+            if (node && props.fullWidth && props.id) {
+              // Dynamically set the Paper width to match the Select input width
+              const selectElement = document.getElementById(props.id)?.parentElement;
+              if (selectElement) {
+                node.style.width = `${selectElement.clientWidth}px`;
+              }
+            }
+          },
+        },
       }}
     />
   );
