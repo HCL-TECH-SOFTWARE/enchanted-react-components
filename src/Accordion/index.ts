@@ -12,15 +12,10 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React from 'react';
-import MuiAccordionDetails, { AccordionDetailsProps } from '@mui/material/AccordionDetails';
 
-const AccordionDetails = ({ ...props }: AccordionDetailsProps) => {
-  return <MuiAccordionDetails {...props} />;
-};
+import Accordion from './Accordion';
 
-AccordionDetails.defaultProps = {
-};
-
-export * from '@mui/material/AccordionDetails';
-export default AccordionDetails;
+export default Accordion;
+export * from './Accordion';
+export * from './AccordionSummary';
+export * from './AccordionDetails';
