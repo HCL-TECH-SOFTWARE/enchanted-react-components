@@ -184,7 +184,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     width: props.fullWidth ? '100%' : '240px',
     // eslint-why - using nested ternary to reduce unnecessary code blocks
     // eslint-disable-next-line no-nested-ternary
-    marginLeft: props.fullWidth ? '-8px' : (theme.direction === ThemeDirectionType.RTL ? '8px' : '-8px'),
+    marginLeft: props.fullWidth ? '0px' : (theme.direction === ThemeDirectionType.RTL ? '8px' : '-8px'),
     marginTop: '21px',
     padding: '0',
   };
@@ -214,6 +214,12 @@ const renderInput = (props: SelectProps, id?: string) => {
               const selectElement = document.getElementById(props.id)?.parentElement;
               if (selectElement) {
                 node.style.width = `${selectElement.clientWidth}px`;
+                // Check if the select element or its parent takes up the full width of the page
+                const isFullPage = window.innerWidth === document.body.clientWidth;
+                if (!isFullPage) {
+                  // Apply -8px marginLeft adjustment in fullWidth mode when the input box is not in full page
+                  node.style.marginLeft = '-8px';
+                }
               }
             }
           },
