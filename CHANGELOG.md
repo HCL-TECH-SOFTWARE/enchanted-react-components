@@ -18,6 +18,7 @@
 - Adjusted height when subTitle is empty, added keyboard accessibility for click & preview actions of `Tile` component.
 - Added the `Accordion` component.
 - Added the `disableOpacityHover` color to the colors.
+- Adjusted the width of dropdown menu of `Select` component when `fullWidth` is set `true`
 
 ### Breaking changes
 
