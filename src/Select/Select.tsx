@@ -198,13 +198,32 @@ const renderInput = (props: SelectProps, id?: string) => {
   if (!paperPropsStyle.marginTop) {
     paperPropsStyle.marginTop = defaultStyle.marginTop;
   }
+
   return (
     <MuiSelect
       {...selectProps}
       MenuProps={{
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         anchorOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
-        PaperProps: { style: paperPropsStyle, elevation: 2 },
+        PaperProps: {
+          style: paperPropsStyle,
+          elevation: 2,
+          ref: (node) => {
+            if (node && props.fullWidth && props.id) {
+              // Dynamically set the Paper width to match the Select input width
+              const selectElement = document.getElementById(props.id)?.parentElement;
+              if (selectElement) {
+                node.style.width = `${selectElement.clientWidth}px`;
+                // Check if the select element or its parent takes up the full width of the page
+                const isFullPage = window.innerWidth === document.body.clientWidth;
+                if (!isFullPage) {
+                  // Apply -8px marginLeft adjustment in fullWidth mode when the input box is not in full page
+                  node.style.marginLeft = '-8px';
+                }
+              }
+            }
+          },
+        },
       }}
     />
   );
