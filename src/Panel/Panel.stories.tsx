@@ -131,9 +131,6 @@ const tabList = [{
 }];
 
 const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
-  const handleTogglePanel = () => {
-    return true;
-  };
   const translations = {
     closeButtonTooltip: 'Close Panel',
     toggleButtonTooltip: args.isPanelCollapsed ? 'Expand panel' : 'Collapse panel',
@@ -142,7 +139,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
     <Panel
       {...args}
       isPanelCollapsed={args.isPanelCollapsed}
-      togglePanel={handleTogglePanel}
+      togglePanel={() => { return true; }}
       translation={translations}
     />
   );
@@ -155,6 +152,7 @@ const VisualTestTemplate: StoryFn<typeof Panel> = () => {
       {...Panel.defaultProps}
       open
       tabList={tabList}
+      togglePanel={() => { return true; }}
     />
   );
 };
