@@ -131,8 +131,7 @@ const tabList = [{
 }];
 
 const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
-  // const [isPanelCollapsed, setPanelCollapsed] = useState(false);
-  const handleToggleCollapse = () => {
+  const handleTogglePanel = () => {
     return true;
   };
   const translations = {
@@ -143,7 +142,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
     <Panel
       {...args}
       isPanelCollapsed={args.isPanelCollapsed}
-      toggleCollapse={handleToggleCollapse}
+      togglePanel={handleTogglePanel}
       translation={translations}
     />
   );

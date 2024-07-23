@@ -29,7 +29,7 @@ export interface PanelTabsProps {
   handleTabChange(event: React.ChangeEvent<{}>, newValue: number): void;
   tabs: Array<TabsPanelProps>,
   isPanelCollapsed?: boolean;
-  toggleCollapse?: (event: React.ChangeEvent<{}>) => void;
+  togglePanel?: (event: React.ChangeEvent<{}>) => void;
   translation: PanelLocalization | undefined;
 }
 
@@ -106,7 +106,7 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
   handleTabChange,
   tabs,
   isPanelCollapsed,
-  toggleCollapse,
+  togglePanel,
   translation,
 }: PanelTabsProps) => {
   return (
@@ -138,20 +138,24 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
           );
         })}
       </PanelTabsStyled>
-      <ToggleButtonContainerStyled>
-        <Tooltip title={translation && translation.toggleButtonTooltip ? translation.toggleButtonTooltip : ''}>
-          <IconButton
-            size="small"
-            variant={IconButtonVariants.WITHOUT_PADDING}
-            onClick={toggleCollapse}
-            aria-expanded={!isPanelCollapsed}
-            aria-controls="panelContent"
-            aria-label="Toggle panel"
-          >
-            { getArrowIcon(isPanelCollapsed) }
-          </IconButton>
-        </Tooltip>
-      </ToggleButtonContainerStyled>
+      {togglePanel
+        ? (
+          <ToggleButtonContainerStyled>
+            <Tooltip title={translation && translation.toggleButtonTooltip ? translation.toggleButtonTooltip : ''}>
+              <IconButton
+                size="small"
+                variant={IconButtonVariants.WITHOUT_PADDING}
+                onClick={togglePanel}
+                aria-expanded={!isPanelCollapsed}
+                aria-controls="panelContent"
+                aria-label="Toggle panel"
+              >
+                { getArrowIcon(isPanelCollapsed) }
+              </IconButton>
+            </Tooltip>
+          </ToggleButtonContainerStyled>
+        )
+        : null }
     </PanelTabContainerStyled>
   );
 };

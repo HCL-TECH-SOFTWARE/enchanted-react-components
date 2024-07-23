@@ -19,6 +19,8 @@
 - Added the `Accordion` component.
 - Added the `disableOpacityHover` color to the colors.
 - Adjusted the width of dropdown menu of `Select` component when `fullWidth` is set `true`
+- Added a toggle button to the panel component.
+- Adjusted the text alignment of the Tab component.
 
 ### Breaking changes
 
