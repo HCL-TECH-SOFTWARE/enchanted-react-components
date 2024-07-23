@@ -38,6 +38,11 @@ export default {
       if: { arg: 'interactive' },
       type: 'boolean',
     },
+    isPanelCollapsed: {
+      description: 'To expand or collapse the panel',
+      if: { arg: 'interactive' },
+      type: 'boolean',
+    },
     panelVariant: {
       description: 'Adds padding to the content of the panel',
       if: { arg: 'interactive' },
@@ -126,9 +131,20 @@ const tabList = [{
 }];
 
 const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
+  // const [isPanelCollapsed, setPanelCollapsed] = useState(false);
+  const handleToggleCollapse = () => {
+    return true;
+  };
+  const translations = {
+    closeButtonTooltip: 'Close Panel',
+    toggleButtonTooltip: args.isPanelCollapsed ? 'Expand panel' : 'Collapse panel',
+  };
   return (
     <Panel
       {...args}
+      isPanelCollapsed={args.isPanelCollapsed}
+      toggleCollapse={handleToggleCollapse}
+      translation={translations}
     />
   );
 };

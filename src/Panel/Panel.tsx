@@ -14,7 +14,6 @@
  * ======================================================================== */
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-
 import Drawer, { DrawerProps } from '../hidden_components/Drawer';
 import { neutralGrey } from '../colors';
 import PanelTabs from './PanelTabs';
@@ -41,6 +40,11 @@ export interface TabsPanelProps {
   content: TabContentProps;
 }
 
+export interface PanelLocalization {
+  closeButtonTooltip?: string;
+  toggleButtonTooltip?: string;
+}
+
 export interface InspectorPanelProps extends DrawerProps{
   open: boolean;
   tabList: TabsPanelProps[];
@@ -49,10 +53,15 @@ export interface InspectorPanelProps extends DrawerProps{
   panelVariant: PanelVariants;
   toggleClose(isCollapsed: boolean): void;
   handleTabChange?: (event: React.ChangeEvent<{}>, tabIndex: number) => void;
+  toggleCollapse?: (event: React.ChangeEvent<{}>) => void;
+  isPanelCollapsed?: boolean;
+  translation?: PanelLocalization | undefined;
 }
 
 export interface PanelProps {
   hideSidebar?: boolean;
+  isPanelCollapsed?: boolean;
+  translation?: PanelLocalization;
 }
 
 const StyledDrawer = styled(Drawer)((theme) => {
@@ -74,11 +83,17 @@ const StyledDrawer = styled(Drawer)((theme) => {
 });
 
 const PanelBody = styled('main')<PanelProps>((props) => {
+  let panelWidth = '301px'; // Default width
+  if (props.isPanelCollapsed) {
+    panelWidth = '41px';
+  } else if (props.hideSidebar) {
+    panelWidth = '260px';
+  }
   return {
     background: neutralGrey.NG100,
     display: 'flex',
     height: '100%',
-    width: (props.hideSidebar && props.hideSidebar === true) ? '260px' : '301px',
+    width: panelWidth,
   };
 });
 
@@ -91,6 +106,9 @@ const Panel: React.FC<InspectorPanelProps> = ({
   selectedTabValue,
   panelVariant,
   handleTabChange,
+  toggleCollapse,
+  isPanelCollapsed,
+  translation,
   ...rest
 }: InspectorPanelProps) => {
   const [selectedTabValueDefault, setSelelectedTabValueDefault] = React.useState(0);
@@ -107,6 +125,7 @@ const Panel: React.FC<InspectorPanelProps> = ({
     >
       <PanelBody
         hideSidebar={hideSidebar}
+        isPanelCollapsed={isPanelCollapsed}
       >
         <>
           {tabList && (
@@ -116,15 +135,21 @@ const Panel: React.FC<InspectorPanelProps> = ({
                   tabs={tabList}
                   handleTabChange={handleTabChange || handleTabChangeDefault}
                   selectedTabValue={selectedTabValue || selectedTabValueDefault}
+                  isPanelCollapsed={isPanelCollapsed}
+                  toggleCollapse={toggleCollapse}
+                  translation={translation}
                 />
               )}
+              { !isPanelCollapsed && (
               <PanelTabContent
                 open={open}
                 tabs={tabList}
                 selectedTabValue={selectedTabValue || selectedTabValueDefault}
                 variant={panelVariant || PanelVariants.WITH_PADDING}
                 toggleClose={rest.toggleClose || undefined}
+                translation={translation}
               />
+              )}
             </>
           )}
         </>
@@ -136,6 +161,7 @@ const Panel: React.FC<InspectorPanelProps> = ({
 Panel.defaultProps = {
   open: false,
   panelVariant: PanelVariants.WITH_PADDING,
+  isPanelCollapsed: false,
 };
 
 export default Panel;

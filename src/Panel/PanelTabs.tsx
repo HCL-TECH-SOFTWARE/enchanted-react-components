@@ -14,31 +14,52 @@
  * ======================================================================== */
 
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
+import IconDoubleLeft from '@hcl-software/enchanted-icons/dist/apps/es/double-left';
+import IconDoubleRight from '@hcl-software/enchanted-icons/dist/apps/es/double-right';
 import Tabs from '../Tabs/Tabs';
 import Tab from '../Tabs/Tab';
-import { TabsPanelProps } from './Panel';
+import { PanelLocalization, TabsPanelProps } from './Panel';
+import IconButton, { IconButtonVariants } from '../IconButton/IconButton';
+import { ThemeDirectionType } from '../theme';
+import Tooltip from '../Tooltip/Tooltip';
 
 export interface PanelTabsProps {
   selectedTabValue: number,
   handleTabChange(event: React.ChangeEvent<{}>, newValue: number): void;
   tabs: Array<TabsPanelProps>,
+  isPanelCollapsed?: boolean;
+  toggleCollapse?: (event: React.ChangeEvent<{}>) => void;
+  translation: PanelLocalization | undefined;
 }
+
+const PanelTabContainerStyled = styled('div')((props) => {
+  const { theme } = props;
+  return {
+    borderLeft: `solid 1px ${theme.palette.border.primary}`,
+    borderRight: `solid 1px ${theme.palette.border.primary}`,
+    width: '41px',
+    maxWidth: '41px',
+    position: 'relative',
+  };
+});
+
+const ToggleButtonContainerStyled = styled('div')(() => {
+  return {
+    position: 'absolute',
+    bottom: '0px',
+    padding: '8px 0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  };
+});
 
 const PanelTabsStyled = styled(Tabs)((props) => {
   const { theme } = props;
   return {
-    borderLeft: `solid 1px ${theme.palette.border.primary}`,
-    width: '41px',
-    maxWidth: '41px',
-    padding: '10px 0',
-    '.MuiTabs-indicator': {
-      backgroundColor: theme.palette.text.secondary,
-      maxHeight: '20px',
-      margin: '10px 0',
-      position: 'center',
-      marginRight: '2px',
-    },
+    padding: '8px 0',
     '& button:hover': {
       backgroundColor: theme.palette.action.hover,
     },
@@ -68,34 +89,70 @@ const TabStyled = styled(Tab)((props) => {
   };
 });
 
+const getArrowIcon = (isPanelCollapsed : boolean | undefined) => {
+  const theme = useTheme();
+  if (theme.direction === ThemeDirectionType.RTL && isPanelCollapsed) {
+    return <IconDoubleRight />;
+  } if (theme.direction === ThemeDirectionType.RTL && !isPanelCollapsed) {
+    return <IconDoubleLeft />;
+  } if (theme.direction !== ThemeDirectionType.RTL && isPanelCollapsed) {
+    return <IconDoubleLeft />;
+  }
+  return <IconDoubleRight />;
+};
+
 const PanelTabs: React.FC<PanelTabsProps> = ({
   selectedTabValue,
   handleTabChange,
   tabs,
+  isPanelCollapsed,
+  toggleCollapse,
+  translation,
 }: PanelTabsProps) => {
   return (
-    <PanelTabsStyled
-      value={selectedTabValue}
-      onChange={handleTabChange}
-      data-testid="panel-tabs"
-      orientation="vertical"
-      variant="scrollable"
-      tabIndex={-1}
-    >
-      {tabs.map((tab, index) => {
-        const key = index;
-        return (
-          <TabStyled
-            key={`tab-${key}`}
-            tabIndex={0}
-            data-testid={`tab-${key}`}
-            icon={tab.tabIcon.icon}
-            aria-label={tab.tabIcon.label}
-            disableFocusRipple
-          />
-        );
-      })}
-    </PanelTabsStyled>
+    <PanelTabContainerStyled>
+      <PanelTabsStyled
+        value={selectedTabValue}
+        onChange={handleTabChange}
+        data-testid="panel-tabs"
+        orientation="vertical"
+        variant="scrollable"
+        tabIndex={-1}
+      >
+        {tabs.map((tab, index) => {
+          const key = index;
+          const iconTooltip = (
+            <Tooltip title={tab.tabIcon.label}>
+              {tab.tabIcon.icon}
+            </Tooltip>
+          );
+          return (
+            <TabStyled
+              key={`tab-${key}`}
+              tabIndex={0}
+              data-testid={`tab-${key}`}
+              icon={iconTooltip}
+              aria-label={tab.tabIcon.label}
+              disableFocusRipple
+            />
+          );
+        })}
+      </PanelTabsStyled>
+      <ToggleButtonContainerStyled>
+        <Tooltip title={translation && translation.toggleButtonTooltip ? translation.toggleButtonTooltip : ''}>
+          <IconButton
+            size="small"
+            variant={IconButtonVariants.WITHOUT_PADDING}
+            onClick={toggleCollapse}
+            aria-expanded={!isPanelCollapsed}
+            aria-controls="panelContent"
+            aria-label="Toggle panel"
+          >
+            { getArrowIcon(isPanelCollapsed) }
+          </IconButton>
+        </Tooltip>
+      </ToggleButtonContainerStyled>
+    </PanelTabContainerStyled>
   );
 };
 
