@@ -27,7 +27,7 @@ export interface PanelTabContentProps {
   open: boolean;
   selectedTabValue: number;
   variant: PanelVariants;
-  toggleClose(isClosed: boolean): void;
+  toggleClose?(isClosed: boolean): void;
   tabs: Array<TabsPanelProps>;
   translation: PanelLocalization | undefined;
 }
@@ -134,6 +134,7 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                       <Grid>
                         {tab.content.actionHeaderBar}
                       </Grid>
+                      {toggleClose && (
                       <Tooltip title={(translation && translation.closeButtonTooltip) ? translation.closeButtonTooltip : ''}>
                         <CloseButtonStyled
                           variant={IconButtonVariants.WITH_PADDING}
@@ -144,6 +145,7 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                           <IconClose />
                         </CloseButtonStyled>
                       </Tooltip>
+                      )}
                     </PanelActions>
                   </TabHeaderStyled>
                   <TabBodyStyled

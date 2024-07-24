@@ -51,7 +51,7 @@ export interface InspectorPanelProps extends DrawerProps{
   selectedTabValue?: number;
   hideSidebar?: boolean;
   panelVariant: PanelVariants;
-  toggleClose(isCollapsed: boolean): void;
+  toggleClose?(isCollapsed: boolean): void;
   handleTabChange?: (event: React.ChangeEvent<{}>, tabIndex: number) => void;
   togglePanel?: (event: React.ChangeEvent<{}>) => void;
   isPanelCollapsed?: boolean;

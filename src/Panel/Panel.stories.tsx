@@ -141,6 +141,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Panel> = (args) => {
       isPanelCollapsed={args.isPanelCollapsed}
       togglePanel={() => { return true; }}
       translation={translations}
+      toggleClose={() => { return true; }}
     />
   );
 };
@@ -153,6 +154,7 @@ const VisualTestTemplate: StoryFn<typeof Panel> = () => {
       open
       tabList={tabList}
       togglePanel={() => { return true; }}
+      toggleClose={() => { return true; }}
     />
   );
 };
