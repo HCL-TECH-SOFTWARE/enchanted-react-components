@@ -38,6 +38,10 @@ const StyledTabs = styled(MuiTabs)((props) => {
     },
     '& .MuiTab-root': {
       border: '1px solid transparent',
+      justifyContent: props.orientation === 'horizontal' ? 'center' : 'flex-start',
+    },
+    '& .MuiTouchRipple-root': {
+      display: 'none',
     },
     '& .MuiTab-root:focus': { // This targets the label of the tab on focus
       border: `1px solid ${theme.palette.action.focus}`,
