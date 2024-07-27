@@ -14,12 +14,12 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiListItemIcon, { ListItemIconProps } from '@mui/material/ListItemIcon';
+import MuiListItemSecondaryAction, { ListItemSecondaryActionProps } from '@mui/material/ListItemSecondaryAction';
 import { Components, Theme } from '@mui/material';
 
-export const getMuiListItemIconThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
+export const getMuiListItemSecondaryActionThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
-    MuiListItemIcon: {
+    MuiListItemSecondaryAction: {
       styleOverrides: {
         root: () => {
           return ({
@@ -30,12 +30,14 @@ export const getMuiListItemIconThemeOverrides = (): Components<Omit<Theme, 'comp
   };
 };
 
-const ListItemIcon = ({ ...props }: ListItemIconProps) => {
-  return <MuiListItemIcon {...props} />;
+const ListItemSecondaryAction = (props: ListItemSecondaryActionProps) => {
+  return (
+    <MuiListItemSecondaryAction {...props} />
+  );
 };
 
-ListItemIcon.defaultProps = {
+ListItemSecondaryAction.defaultProps = {
 };
 
-export * from '@mui/material/ListItemIcon';
-export default ListItemIcon;
+export * from '@mui/material/ListItemAvatar';
+export default ListItemSecondaryAction;

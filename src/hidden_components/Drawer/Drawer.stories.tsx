@@ -23,11 +23,11 @@ import InboxIcon from '@hcl-software/enchanted-icons/dist/carbon/es/license';
 import EmailIcon from '@hcl-software/enchanted-icons/dist/carbon/es/email';
 
 import Drawer from './Drawer';
-import List from '../List';
-import ListItem from '../List/ListItem';
-import ListItemButton from '../List/ListItemButton';
-import ListItemIcon from '../List/ListItemIcon';
-import ListItemText from '../List/ListItemText';
+import List from '../../List';
+import ListItem from '../../List/ListItem';
+import ListItemButton from '../../List/ListItemButton';
+import ListItemIcon from '../../List/ListItemIcon';
+import ListItemText from '../../List/ListItemText';
 import Divider from '../../Divider';
 import Button from '../../Button';
 

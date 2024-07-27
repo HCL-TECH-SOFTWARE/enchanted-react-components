@@ -55,7 +55,7 @@ const StyledTabs = styled(MuiTabs)((props) => {
 });
 
 const Tabs = ({ ...props }: TabsProps) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(props.value || 0);
   const [indicatorStyle, setIndicatorStyle] = useState({});
   const tabsRef = useRef<HTMLButtonElement | null>(null);
 
