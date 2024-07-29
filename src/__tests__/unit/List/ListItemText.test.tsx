@@ -20,7 +20,7 @@ import {
 import { ThemeProvider } from '@emotion/react';
 
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
-import ListItemText from '../../../hidden_components/List/ListItemText';
+import ListItemText from '../../../List/ListItemText';
 import MenuItem from '../../../Menu/MenuItem';
 
 afterEach(cleanup);

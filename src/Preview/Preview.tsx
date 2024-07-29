@@ -31,7 +31,7 @@ import IconButton, { IconButtonVariants } from '../IconButton/IconButton';
 import Button, { ButtonVariants } from '../Button/Button';
 import Tooltip from '../Tooltip/Tooltip';
 import Backdrop from '../Backdrop/Backdrop';
-import ListItemText from '../hidden_components/List/ListItemText';
+import ListItemText from '../List/ListItemText';
 import CircularProgress from '../ProgressIndicator/CircularProgress/CircularProgress';
 import { white } from '../colors';
 

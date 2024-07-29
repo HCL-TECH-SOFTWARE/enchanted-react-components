@@ -14,16 +14,27 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiListItem, { ListItemProps } from '@mui/material/ListItem';
+import MuiListItem, { ListItemProps as MuiListItemProps } from '@mui/material/ListItem';
+
 import { Components, Theme } from '@mui/material';
+
+interface ListItemProps extends MuiListItemProps {
+  hasBorder?: boolean;
+}
 
 export const getMuiListItemThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
     MuiListItem: {
       styleOverrides: {
-        root: () => {
-          return ({
-          });
+        root: ({ ownerState, theme }) => {
+          const borderStyle = ownerState.hasBorder ? {
+            borderBottom: `1px solid ${theme.palette.border.secondary}`,
+            paddingBottom: '4px',
+            marginBottom: '4px',
+          } : {};
+          return {
+            ...borderStyle,
+          };
         },
       },
     },
@@ -31,10 +42,15 @@ export const getMuiListItemThemeOverrides = (): Components<Omit<Theme, 'componen
 };
 
 const ListItem = ({ ...props }: ListItemProps) => {
-  return <MuiListItem {...props} />;
+  return (
+    <MuiListItem
+      {...props}
+    />
+  );
 };
 
 ListItem.defaultProps = {
+  hasBorder: false,
 };
 
 export * from '@mui/material/ListItem';
