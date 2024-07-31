@@ -14,28 +14,24 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton';
+import MuiListItemIcon, { ListItemIconProps } from '@mui/material/ListItemIcon';
 import { Components, Theme } from '@mui/material';
 
-export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
+export const getMuiListItemIconThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
-    MuiListItemButton: {
+    MuiListItemIcon: {
       styleOverrides: {
-        root: () => {
-          return ({
-          });
+        root: ({ ownerState, theme }) => {
+          return ({});
         },
       },
     },
   };
 };
 
-const ListItemButton = ({ ...props }: ListItemButtonProps) => {
-  return <MuiListItemButton {...props} />;
+const ListItemIcon = ({ ...props }: ListItemIconProps) => {
+  return <MuiListItemIcon {...props} />;
 };
 
-ListItemButton.defaultProps = {
-};
-
-export * from '@mui/material/ListItemButton';
-export default ListItemButton;
+export * from '@mui/material/ListItemIcon';
+export default ListItemIcon;

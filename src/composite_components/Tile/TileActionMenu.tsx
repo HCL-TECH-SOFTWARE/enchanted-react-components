@@ -15,9 +15,9 @@
 
 import React, { ReactElement } from 'react';
 import IconOverflowMenuHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';
-import ListItemText from '../../hidden_components/List/ListItemText';
+import ListItemText from '../../List/ListItemText';
 import Menu, { MenuSizes } from '../../Menu';
-import ListItemIcon from '../../hidden_components/List/ListItemIcon';
+import ListItemIcon from '../../List/ListItemIcon';
 import { IActions } from './TileData';
 import Tooltip from '../../Tooltip';
 import IconButton from '../../IconButton';

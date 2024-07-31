@@ -14,11 +14,13 @@
  * ======================================================================== */
 
 import React from 'react';
-import { Grid, Components, Theme } from '@mui/material';
+import {
+  Grid, Components, Theme,
+} from '@mui/material';
 import MuiListItemText, { ListItemTextProps as MuiListItemTextProps } from '@mui/material/ListItemText';
-import Tooltip from '../../Tooltip';
+import Tooltip from '../Tooltip';
 
-import { isOverflown } from '../../utils/domUtils';
+import { isOverflown } from '../utils/domUtils';
 
 export type ListItemTextProps = MuiListItemTextProps & {
   tooltip?: string;
@@ -32,9 +34,10 @@ export const getMuiListItemTextThemeOverrides = (): Components<Omit<Theme, 'comp
   return {
     MuiListItemText: {
       styleOverrides: {
-        root: () => {
-          return ({
-          });
+        root: ({ ownerState, theme }) => {
+          return {
+            margin: '0',
+          };
         },
       },
     },
@@ -62,9 +65,8 @@ const ListItemText = ({
       }
     }
   }, [listRef, tooltip, forceTooltip]);
-
   let primaryReactNode = props.primary;
-  let secondaryReactNode = props.secondary;
+  let secondaryReactNode = props.secondary && props.secondary;
 
   if (tooltipValue) {
     primaryReactNode = (
@@ -86,7 +88,9 @@ const ListItemText = ({
         placement={secondaryTooltipPlacement}
       >
         <Grid container>
-          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{secondaryReactNode}</Grid>
+          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {secondaryReactNode}
+          </Grid>
         </Grid>
       </Tooltip>
     );

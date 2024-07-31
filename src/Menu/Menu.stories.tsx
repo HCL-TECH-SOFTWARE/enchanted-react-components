@@ -22,8 +22,8 @@ import IconCascading from '@hcl-software/enchanted-icons/dist/carbon/es/caret--r
 import IconEnd from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import MenuItem from './MenuItem';
 import Typography from '../Typography';
-import ListItemText from '../hidden_components/List/ListItemText';
-import ListItemIcon from '../hidden_components/List/ListItemIcon';
+import ListItemText from '../List/ListItemText';
+import ListItemIcon from '../List/ListItemIcon';
 import Button, { ButtonTestIds, ButtonVariants } from '../Button';
 import Menu, { MenuSizes } from './Menu';
 import Divider from '../Divider';
