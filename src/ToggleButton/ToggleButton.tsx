@@ -43,8 +43,8 @@ const ToggleButton = ({ ...props }: ToggleButtonProps) => {
 };
 
 ToggleButton.defaultProps = {
-  disableFocusRipple: false,
-  disableRipple: false,
+  disableFocusRipple: true,
+  disableRipple: true,
   disabled: false,
   size: ToggleButtonSizes.SMALL,
   variant: ToggleButtonVariants.WITH_PADDING,
