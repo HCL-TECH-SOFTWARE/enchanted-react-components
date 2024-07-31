@@ -21,8 +21,8 @@ import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmar
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
-import ListItemIcon from '../../hidden_components/List/ListItemIcon';
-import ListItemText from '../../hidden_components/List/ListItemText';
+import ListItemIcon from '../../List/ListItemIcon';
+import ListItemText from '../../List/ListItemText';
 import { IFilm, top100Films } from '../../Autocomplete/data';
 
 interface IChip {

@@ -18,16 +18,18 @@ import { styled } from '@mui/material/styles';
 import { Grid } from '@mui/material';
 import IconClose from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 
-import { PanelVariants, TabsPanelProps } from './Panel';
+import { PanelLocalization, PanelVariants, TabsPanelProps } from './Panel';
 import Typography from '../Typography/Typography';
 import IconButton, { IconButtonVariants } from '../IconButton/IconButton';
+import Tooltip from '../Tooltip/Tooltip';
 
 export interface PanelTabContentProps {
   open: boolean;
   selectedTabValue: number;
   variant: PanelVariants;
-  toggleClose(isClosed: boolean): void;
+  toggleClose?(isClosed: boolean): void;
   tabs: Array<TabsPanelProps>;
+  translation: PanelLocalization | undefined;
 }
 
 export interface TabBodyProps {
@@ -36,10 +38,8 @@ export interface TabBodyProps {
 }
 
 const PanelTabContentStyled = styled(Grid)((props) => {
-  const { theme } = props;
   return {
     width: '260px',
-    borderLeft: `solid 1px ${theme.palette.border.primary}`,
     overflow: 'hidden',
   };
 });
@@ -88,6 +88,7 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
   open,
   variant,
   toggleClose,
+  translation,
   ...props
 }: PanelTabContentProps) => {
   return (
@@ -133,14 +134,18 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                       <Grid>
                         {tab.content.actionHeaderBar}
                       </Grid>
-                      <CloseButtonStyled
-                        variant={IconButtonVariants.WITH_PADDING}
-                        onClick={() => {
-                          return toggleClose ? toggleClose(!open) : null;
-                        }}
-                      >
-                        <IconClose />
-                      </CloseButtonStyled>
+                      {toggleClose && (
+                      <Tooltip title={(translation && translation.closeButtonTooltip) ? translation.closeButtonTooltip : ''}>
+                        <CloseButtonStyled
+                          variant={IconButtonVariants.WITH_PADDING}
+                          onClick={() => {
+                            return toggleClose ? toggleClose(!open) : null;
+                          }}
+                        >
+                          <IconClose />
+                        </CloseButtonStyled>
+                      </Tooltip>
+                      )}
                     </PanelActions>
                   </TabHeaderStyled>
                   <TabBodyStyled

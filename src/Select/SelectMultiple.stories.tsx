@@ -20,7 +20,7 @@ import { userEvent, within } from '@storybook/testing-library';
 
 import Select, { SelectChangeEvent } from './Select';
 import MenuItem from '../Menu/MenuItem';
-import ListItemText from '../hidden_components/List/ListItemText';
+import ListItemText from '../List/ListItemText';
 
 export default {
   title: 'Inputs/SelectMultiple',

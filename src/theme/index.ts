@@ -45,12 +45,12 @@ import { getMuiTypographyThemeOverrides } from '../Typography';
 import { getMuiFormControlLabelThemeOverrides } from '../prerequisite_components/FormControlLabel';
 import { getMuiAlertThemeOverrides } from '../Alert';
 import { getMuiTablePaginationThemeOverrides } from '../Pagination';
-import { getMuiListThemeOverrides } from '../hidden_components/List/List';
-import { getMuiListItemThemeOverrides } from '../hidden_components/List/ListItem';
-import { getMuiListItemAvatarThemeOverrides } from '../hidden_components/List/ListItemAvatar';
-import { getMuiListItemButtonThemeOverrides } from '../hidden_components/List/ListItemButton';
-import { getMuiListItemIconThemeOverrides } from '../hidden_components/List/ListItemIcon';
-import { getMuiListItemTextThemeOverrides } from '../hidden_components/List/ListItemText';
+import { getMuiListThemeOverrides } from '../List/List';
+import { getMuiListItemThemeOverrides } from '../List/ListItem';
+import { getMuiListItemAvatarThemeOverrides } from '../List/ListItemAvatar';
+import { getMuiListItemButtonThemeOverrides } from '../List/ListItemButton';
+import { getMuiListItemIconThemeOverrides } from '../List/ListItemIcon';
+import { getMuiListItemTextThemeOverrides } from '../List/ListItemText';
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {

@@ -20,7 +20,7 @@ import { userEvent, within } from '@storybook/testing-library';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
-import ListItemText from '../hidden_components/List/ListItemText';
+import ListItemText from '../List/ListItemText';
 
 export default {
   title: 'Inputs/Autocomplete',

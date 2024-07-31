@@ -38,6 +38,10 @@ const StyledTabs = styled(MuiTabs)((props) => {
     },
     '& .MuiTab-root': {
       border: '1px solid transparent',
+      justifyContent: props.orientation === 'horizontal' ? 'center' : 'flex-start',
+    },
+    '& .MuiTouchRipple-root': {
+      display: 'none',
     },
     '& .MuiTab-root:focus': { // This targets the label of the tab on focus
       border: `1px solid ${theme.palette.action.focus}`,
@@ -51,7 +55,7 @@ const StyledTabs = styled(MuiTabs)((props) => {
 });
 
 const Tabs = ({ ...props }: TabsProps) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(props.value || 0);
   const [indicatorStyle, setIndicatorStyle] = useState({});
   const tabsRef = useRef<HTMLButtonElement | null>(null);
 
