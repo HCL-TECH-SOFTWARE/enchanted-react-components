@@ -80,6 +80,8 @@ export { default as Switch } from './Switch';
 export * from './Switch';
 export { default as Table } from './Table';
 export * from './Table';
+export { default as ToggleButton } from './ToggleButton';
+export * from './ToggleButton';
 export { default as Tooltip } from './Tooltip';
 export * from './Tooltip';
 export { default as Typography } from './Typography';
@@ -118,8 +120,6 @@ export { default as Tabs } from './Tabs';
 export * from './Tabs';
 export { default as TimePicker } from './hidden_components/TimePicker';
 export * from './hidden_components/TimePicker';
-export { default as ToggleButton } from './hidden_components/ToggleButton';
-export * from './hidden_components/ToggleButton';
 export { default as TreeView } from './hidden_components/TreeView';
 export * from './hidden_components/TreeView';
 
