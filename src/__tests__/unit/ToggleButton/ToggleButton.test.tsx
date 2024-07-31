@@ -32,7 +32,7 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
   });
 
   it('Render With Padding variant without crashing', () => {
@@ -45,7 +45,7 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
   });
 
   it('Render Small size without crashing', () => {
@@ -58,7 +58,7 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
   });
 
   it('Render Medium size without crashing', () => {
@@ -71,6 +71,6 @@ describe('ToggleButton', () => {
       </ToggleButton>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
   });
 });
