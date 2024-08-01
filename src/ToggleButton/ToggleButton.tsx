@@ -36,6 +36,7 @@ export enum ToggleButtonSizes {
 export interface ToggleButtonProps extends MuiToggleButtonProps {
   size?: ToggleButtonSizes,
   variant?: ToggleButtonVariants,
+  color?: 'standard',
 }
 
 const ToggleButton = ({ ...props }: ToggleButtonProps) => {
@@ -43,11 +44,13 @@ const ToggleButton = ({ ...props }: ToggleButtonProps) => {
 };
 
 ToggleButton.defaultProps = {
-  disableFocusRipple: true,
-  disableRipple: true,
-  disabled: false,
   size: ToggleButtonSizes.SMALL,
   variant: ToggleButtonVariants.WITH_PADDING,
+  disabled: false,
+  selected: false,
+  color: 'standard',
+  disableFocusRipple: true,
+  disableRipple: true,
 };
 
 export const getMuiToggleButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -93,20 +96,26 @@ export const getMuiToggleButtonThemeOverrides = (): Components<Omit<Theme, 'comp
                 backgroundColor: theme.palette.action.selectedOpacityHover,
                 color: theme.palette.primary.dark,
               },
+              '&.force-to-focusHover': {
+                outlineOffset: '2px',
+                outline: `1px solid ${theme.palette.action.focus}`,
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+                color: theme.palette.primary.dark,
+                borderRadius: '2px',
+              },
             },
             '&:hover': {
               backgroundColor: theme.palette.action.hover,
             },
             '&.force-to-focusHover': {
-              outlineOffset: '3px',
+              outlineOffset: '2px',
               outline: `1px solid ${theme.palette.action.focus}`,
-              outlineRadius: '4px',
               backgroundColor: theme.palette.action.hover,
+              borderRadius: '2px',
             },
             '&:focus, &.force-to-focus': {
-              outlineOffset: '3px',
+              outlineOffset: '2px',
               outline: `1px solid ${theme.palette.action.focus}`,
-              outlineRadius: '4px',
             },
             '&.Mui-disabled': {
               color: theme.palette.action.disabled,
