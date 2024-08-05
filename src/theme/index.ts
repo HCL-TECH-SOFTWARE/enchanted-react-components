@@ -26,7 +26,7 @@ import { getMuiCircularProgressThemeOverrides } from '../ProgressIndicator/Circu
 import { getMuiSnackbarThemeOverrides } from '../Snackbar/Snackbar';
 import { getMuiRadioThemeOverrides } from '../Radio';
 import { getMuiButtonThemeOverrides } from '../Button/Button';
-import { getMuiToggleButtonThemeOverrides } from '../ToggleButton/ToggleButton'; // DXQ-34068 - currently hidden as requested by UIUX
+import { getMuiToggleButtonThemeOverrides } from '../ToggleButton/ToggleButton';
 import { getMuiLinkThemeOverrides } from '../Link';
 import { getMuiBreadcrumbsThemeOverrides } from '../Breadcrumbs';
 import { getMuiSelectThemeOverrides } from '../Select';
