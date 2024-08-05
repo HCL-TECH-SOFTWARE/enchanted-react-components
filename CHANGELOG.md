@@ -6,7 +6,7 @@
 - Adding the `list--edit` icon to the icons preview
 - Added the `ToggleButton` component
 - Added the `HCLSoftwareBlue 07 (20P)` color
-- Added the `selectedOpacityHover` in theme.pallette.action
+- Added the `selectedOpacityHover` in theme.palette.action
 
 ### Fixed
 
