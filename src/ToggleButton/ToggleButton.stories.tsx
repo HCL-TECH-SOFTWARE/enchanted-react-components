@@ -54,12 +54,6 @@ export default {
       if: { arg: 'interactive' },
       description: 'Set the togglebutton as selected',
     },
-    color: {
-      if: { arg: 'interactive' },
-      options: ['standard'],
-      control: { type: 'radio' },
-      description: 'The color of the component.',
-    },
     tabIndex: {
       description: 'The tabIndex of the ToggleButton.',
       if: { arg: 'interactive' },
@@ -83,6 +77,12 @@ export default {
     disableFocusRipple: {
       description: 'The disableFocusRipple of the ToggleButton.',
       if: { arg: 'interactive' },
+    },
+    color: {
+      table: {
+        disable: true,
+      },
+      description: 'The color of the component.',
     },
     value: {
       description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-value',

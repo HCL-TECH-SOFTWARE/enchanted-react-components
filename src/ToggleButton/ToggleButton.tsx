@@ -36,7 +36,6 @@ export enum ToggleButtonSizes {
 export interface ToggleButtonProps extends MuiToggleButtonProps {
   size?: ToggleButtonSizes,
   variant?: ToggleButtonVariants,
-  color?: 'standard',
 }
 
 const ToggleButton = React.forwardRef(({ ...props }: ToggleButtonProps, forwardRef) => {
@@ -48,7 +47,6 @@ ToggleButton.defaultProps = {
   variant: ToggleButtonVariants.WITH_PADDING,
   disabled: false,
   selected: false,
-  color: 'standard',
   disableFocusRipple: true,
   disableRipple: true,
   centerRipple: false,
