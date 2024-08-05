@@ -54,19 +54,11 @@ export default {
       if: { arg: 'interactive' },
       description: 'Set the togglebutton as selected',
     },
-    value: {
-      description: 'The value of the ToggleButton.',
-      if: { arg: 'interactive' },
-    },
     color: {
       if: { arg: 'interactive' },
       options: ['standard'],
       control: { type: 'radio' },
       description: 'The color of the component.',
-    },
-    onClick: {
-      if: { arg: 'interactive' },
-      action: 'clicked',
     },
     tabIndex: {
       description: 'The tabIndex of the ToggleButton.',
@@ -92,12 +84,58 @@ export default {
       description: 'The disableFocusRipple of the ToggleButton.',
       if: { arg: 'interactive' },
     },
+    value: {
+      description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-value',
+      control: false,
+    },
+    fullWidth: {
+      description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-fullWidth',
+      table: {
+        disable: true,
+      },
+    },
     children: {
       description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-children',
       control: false,
     },
     classes: {
       description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-classes',
+      control: false,
+    },
+    onChange: {
+      description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-onChange',
+      control: false,
+    },
+    onClick: {
+      description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-onClick',
+      control: false,
+    },
+    onFocusVisible: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-onFocusVisible',
+      control: false,
+    },
+    focusVisibleClassName: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-focusVisibleClassName',
+      control: false,
+    },
+    sx: {
+      description: 'https://mui.com/material-ui/api/toggle-button/#toggle-button-prop-sx',
+      control: false,
+    },
+    action: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-action',
+      control: false,
+    },
+    LinkComponent: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-LinkComponent',
+      control: false,
+    },
+    TouchRippleProps: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-TouchRippleProps',
+      control: false,
+    },
+    touchRippleRef: {
+      description: 'https://mui.com/material-ui/api/button-base/#button-base-prop-touchRippleRef',
       control: false,
     },
     ref: {

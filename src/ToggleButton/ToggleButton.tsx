@@ -51,6 +51,10 @@ ToggleButton.defaultProps = {
   color: 'standard',
   disableFocusRipple: true,
   disableRipple: true,
+  centerRipple: false,
+  disableTouchRipple: false,
+  focusRipple: false,
+  tabIndex: 0,
 };
 
 export const getMuiToggleButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
