@@ -1039,6 +1039,14 @@ const Template: StoryFn<typeof Colors> = () => {
           </TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>{ColorNames.HCLSOFTWAREBLUE07_20P.substring(15)}</TableCell>
+          <TableCell><Avatar variant="rounded" sx={{ background: Colors.get(ColorNames.HCLSOFTWAREBLUE07_20P) }} /></TableCell>
+          <TableCell>
+            {hclsoftwareblue.HCLSOFTWAREBLUE07!.substring(1)}
+            {' 20%'}
+          </TableCell>
+        </TableRow>
+        <TableRow>
           <TableCell>{ColorNames.HCLSOFTWAREBLUE08.substring(15)}</TableCell>
           <TableCell><Avatar variant="rounded" sx={{ background: Colors.get(ColorNames.HCLSOFTWAREBLUE08) }} /></TableCell>
           <TableCell>{hclsoftwareblue.HCLSOFTWAREBLUE08!.substring(1)}</TableCell>

@@ -3,25 +3,28 @@
 ## Unreleased
 
 ### Added
-- Adding the `list--edit` icon to the icons preview
+- Added the `list--edit` icon to the icons preview
+- Added the `ToggleButton` component
+- Added the `HCLSoftwareBlue 07 (20P)` color
+- Added the `selectedOpacityHover` in theme.palette.action
+- Added the `Accordion` component.
+- Added the `disableOpacityHover` color to the colors.
+- Added the `List` component.
+- Added the `Tab` component.
 
 ### Fixed
 
 ### Changed
 - Added hasThumbnail and disabled properties to the Tile component. 
 - Added as hover image preview icon for the Tile component.
-- Adding the `tab` component.
 - Adding props for error handling in Preview component.
 - Adding handleClick to the ActionProps interface in the InputLabelAndAction component.
 - Added spacing, type and hoverBackground properties to the Link component.
 - Added VisualTest to the Link stories.
 - Adjusted height when subTitle is empty, added keyboard accessibility for click & preview actions of `Tile` component.
-- Added the `Accordion` component.
-- Added the `disableOpacityHover` color to the colors.
 - Adjusted the width of dropdown menu of `Select` component when `fullWidth` is set `true`
 - Added a toggle button to the panel component.
 - Adjusted the text alignment of the Tab component.
-- Added the `List` component.
 
 ### Breaking changes
 

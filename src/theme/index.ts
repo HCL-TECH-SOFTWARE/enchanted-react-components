@@ -26,7 +26,7 @@ import { getMuiCircularProgressThemeOverrides } from '../ProgressIndicator/Circu
 import { getMuiSnackbarThemeOverrides } from '../Snackbar/Snackbar';
 import { getMuiRadioThemeOverrides } from '../Radio';
 import { getMuiButtonThemeOverrides } from '../Button/Button';
-// import { getMuiToggleButtonThemeOverrides } from '../hidden_components/ToggleButton/ToggleButton'; DXQ-34068 - currently hidden as requested by UIUX
+import { getMuiToggleButtonThemeOverrides } from '../ToggleButton/ToggleButton';
 import { getMuiLinkThemeOverrides } from '../Link';
 import { getMuiBreadcrumbsThemeOverrides } from '../Breadcrumbs';
 import { getMuiSelectThemeOverrides } from '../Select';
@@ -99,6 +99,7 @@ declare module '@mui/material/styles' {
   interface TypeAction {
     activeOpacity?: string,
     selectedOpacityModified?: string, // modified because TypeAction has another selectedOpacity property that accepts number only
+    selectedOpacityHover?: string,
     hoverInverse?: string,
     hoverOpacityModified?: string,
     inverse?: string,
@@ -333,6 +334,7 @@ const PALETTE_LIGHT: PaletteOptions = {
     hoverOpacityModified: ensureToGetColor(Colors.get(ColorNames.BLACK7P)),
     selected: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07)),
     selectedOpacityModified: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_8P)),
+    selectedOpacityHover: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_20P)),
     disabled: ensureToGetColor(Colors.get(ColorNames.BLACK38P)),
     disabledBackground: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY150)),
     disabledOpacityModified: ensureToGetColor(Colors.get(ColorNames.BLACK8P)),
@@ -427,7 +429,7 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
       ...getMuiRadioThemeOverrides(),
       ...getMuiTextFieldThemeOverrides(),
       ...getMuiButtonThemeOverrides(),
-      // ...getMuiToggleButtonThemeOverrides(), DXQ-34068 - currently hidden as requested by UIUX
+      ...getMuiToggleButtonThemeOverrides(),
       ...getMuiLinkThemeOverrides(),
       ...getMuiBreadcrumbsThemeOverrides(),
       ...getMuiCircularProgressThemeOverrides(),

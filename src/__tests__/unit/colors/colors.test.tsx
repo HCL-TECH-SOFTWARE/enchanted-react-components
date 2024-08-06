@@ -283,6 +283,7 @@ describe('Colors', () => {
     expect(ColorNames.HCLSOFTWAREBLUE07).toEqual('HCLSOFTWAREBLUE07');
     expect(ColorNames.HCLSOFTWAREBLUE07_12P).toEqual('HCLSOFTWAREBLUE07 (12P)');
     expect(ColorNames.HCLSOFTWAREBLUE07_8P).toEqual('HCLSOFTWAREBLUE07 (8P)');
+    expect(ColorNames.HCLSOFTWAREBLUE07_20P).toEqual('HCLSOFTWAREBLUE07 (20P)');
     expect(ColorNames.HCLSOFTWAREBLUE08).toEqual('HCLSOFTWAREBLUE08');
     expect(ColorNames.HCLSOFTWAREBLUE09).toEqual('HCLSOFTWAREBLUE09');
     expect(ColorNames.HCLSOFTWAREBLUE09_12P).toEqual('HCLSOFTWAREBLUE09 (12P)');
