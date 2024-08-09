@@ -18,6 +18,7 @@ import {
   ImageListItem, ImageListItemBar,
 } from '@mui/material';
 import React, {
+  ReactNode,
   useEffect, useMemo, useRef, useState,
 } from 'react';
 import IconView from '@hcl-software/enchanted-icons/dist/carbon/es/view';
@@ -35,6 +36,27 @@ interface ImageListContextProps {
   hasThumbnail?: boolean;
 }
 const ImageListContext = React.createContext<ImageListContextProps>({});
+
+const StyledSyncIcon = styled('div')(({ theme }) => {
+  return {
+    position: 'absolute',
+    top: '6px',
+    right: '6px',
+    zIndex: '1',
+    display: 'flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    color: theme.palette.text.tertiary2,
+    background: theme.palette.background.overlay,
+    padding: '4px',
+    borderRadius: '2px',
+    '.MuiSvgIcon-root': {
+      fontSize: '16px',
+      marginRight: '4px',
+    },
+  };
+});
+
 const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ theme }) => {
   const { disabled, isChecked } = React.useContext(ImageListContext);
   return {
@@ -182,6 +204,8 @@ export interface TilePropsType {
   hasCheckBox: boolean;
   hasThumbnail?: boolean;
   disabled?: boolean;
+  syncIcon?: ReactNode;
+  hoverPreviewMenu?: string
 }
 
 export enum TileTestIds {
@@ -199,7 +223,7 @@ const Tile = (props: TilePropsType) => {
   const {
     itemId, imageUrl, avatar, itemClickedAction, handlePreviewAction, tileActions, activeItem,
     imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef, hideAvatarIfImageIsLoaded,
-    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled,
+    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu,
   } = props;
 
   useEffect(() => {
@@ -259,6 +283,7 @@ const Tile = (props: TilePropsType) => {
         aria-labelledby={ariaLabelledBy}
         ref={tileRef}
       >
+        {props.syncIcon && (<StyledSyncIcon>{props.syncIcon}</StyledSyncIcon>)}
         {(imageUrl && !avatar && hasThumbnail) && (
           <ImageContainer>
             <img
@@ -281,7 +306,7 @@ const Tile = (props: TilePropsType) => {
                 >
                   <CustomIconView />
                 </IconButton>
-                <PreviewTitle variant="body2">Preview</PreviewTitle>
+                <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
             )}
           </ImageContainer>
@@ -308,7 +333,7 @@ const Tile = (props: TilePropsType) => {
                 >
                   <CustomIconView />
                 </IconButton>
-                <PreviewTitle variant="body2">Preview</PreviewTitle>
+                <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
             )}
           </ImageContainer>
@@ -328,7 +353,7 @@ const Tile = (props: TilePropsType) => {
                 >
                   <CustomIconView />
                 </IconButton>
-                <PreviewTitle variant="body2">Preview</PreviewTitle>
+                <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
             )}
           </ImageContainer>
@@ -348,7 +373,7 @@ const Tile = (props: TilePropsType) => {
                 >
                   <CustomIconView />
                 </IconButton>
-                <PreviewTitle variant="body2">Preview</PreviewTitle>
+                <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
             )}
           </ImageContainer>
