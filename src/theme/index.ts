@@ -51,6 +51,7 @@ import { getMuiListItemAvatarThemeOverrides } from '../List/ListItemAvatar';
 import { getMuiListItemButtonThemeOverrides } from '../List/ListItemButton';
 import { getMuiListItemIconThemeOverrides } from '../List/ListItemIcon';
 import { getMuiListItemTextThemeOverrides } from '../List/ListItemText';
+import { getMuiToggleButtonGroupThemeOverrides } from '../ToggleButtonGroup';
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
@@ -430,6 +431,7 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
       ...getMuiTextFieldThemeOverrides(),
       ...getMuiButtonThemeOverrides(),
       ...getMuiToggleButtonThemeOverrides(),
+      ...getMuiToggleButtonGroupThemeOverrides(),
       ...getMuiLinkThemeOverrides(),
       ...getMuiBreadcrumbsThemeOverrides(),
       ...getMuiCircularProgressThemeOverrides(),
