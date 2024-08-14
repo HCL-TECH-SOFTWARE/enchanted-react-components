@@ -96,6 +96,8 @@ export { default as MultipleSelectChip } from './composite_components/MultipleSe
 export * from './composite_components/MultipleSelectChip';
 export { default as SearchCriteria } from './composite_components/SearchCriteria';
 export * from './composite_components/SearchCriteria';
+export { default as ProgressBar } from './composite_components/ProgressBar';
+export * from './composite_components/ProgressBar';
 
 /* Place hidden component module exports here below */
 export { default as Accordion } from './Accordion';
