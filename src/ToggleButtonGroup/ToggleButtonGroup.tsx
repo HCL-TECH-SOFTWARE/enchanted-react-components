@@ -17,11 +17,6 @@ import React, { useRef } from 'react';
 import MuiToggleButtonGroup, { ToggleButtonGroupProps as MuiToggleButtonGroupProps } from '@mui/material/ToggleButtonGroup';
 import { Components, Theme } from '@mui/material/styles';
 
-// export enum ToggleButtonGroupVariants {
-//   WITHOUT_PADDING = 'without padding',
-//   WITH_PADDING = 'with padding',
-// }
-
 export enum ToggleButtonGroupSizes {
   SMALL = 'small',
   MEDIUM = 'medium',
