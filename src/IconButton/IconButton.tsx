@@ -13,8 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
+import { Box, Components, Theme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconButton';
-import { Components, Theme } from '@mui/material';
+import IconChevronDown from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
+import Typography from '../Typography';
 
 export enum IconButtonVariants {
   WITHOUT_PADDING = 'without padding',
@@ -25,6 +28,23 @@ export enum IconButtonSizes {
   SMALL = 'small',
   MEDIUM = 'medium',
 }
+
+const StyledIconButtonContainer = styled(Box)((theme) => {
+  return {
+    '&:hover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
+  };
+});
+
+const StyledChevronDown = styled(Box)((theme) => {
+  return {
+    color: theme.theme.palette.action.active,
+    // width: '12px',
+    // height: '12px',
+  };
+});
 
 export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -67,8 +87,8 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
               },
             },
             '&:hover': {
-              borderRadius: '2px',
-              backgroundColor: theme.palette.action.hover,
+              // borderRadius: '2px',
+              // backgroundColor: theme.palette.action.hover,
             },
             '.MuiSvgIcon-root': { // default state
               margin: '4px',
@@ -105,16 +125,61 @@ export type IconButtonProps = MuiIconButtonProps & {
   size?: string,
   variant?: IconButtonVariants,
   color?: 'default',
+  selected?: boolean,
+  label?: string,
+  showEndIcon?: boolean,
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
-  return <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />;
+  // const handleOnClick = () => {
+  //   console.log('handleOnClick');
+  // };
+
+  return (
+    <StyledIconButtonContainer
+      sx={{
+        flexDirection: 'column',
+        justifyContent: 'center',
+        display: 'inline-flex',
+      }}
+    >
+      <Box
+        sx={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          display: 'inline-flex',
+          alignItems: 'center',
+        }}
+      >
+        <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />
+        { props.showEndIcon ? (
+          <StyledChevronDown>
+            <IconChevronDown
+              sx={(theme) => {
+                return {
+                  color: theme.palette.action.active,
+                  width: '12px',
+                  height: '12px',
+                };
+              }}
+            />
+          </StyledChevronDown>
+        ) : null}
+      </Box>
+      <Typography
+        variant="caption"
+      >
+        {props.label}
+      </Typography>
+    </StyledIconButtonContainer>
+  );
 }) as React.FC<IconButtonProps>;
 
 IconButton.defaultProps = {
   size: IconButtonSizes.SMALL,
   variant: IconButtonVariants.WITHOUT_PADDING,
   color: 'default',
+  selected: false,
   disabled: false,
   disableFocusRipple: false,
   edge: false,
