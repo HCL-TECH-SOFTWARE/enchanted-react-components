@@ -15,9 +15,9 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import IconAdd from '@hcl-software/enchanted-icons/dist/carbon/es/add';
+import { Grid } from '@mui/material';
 import IconButton, { IconButtonSizes, IconButtonVariants } from './IconButton';
 import Typography from '../Typography';
-import { Grid } from '@mui/material';
 import Divider from '../Divider';
 
 export default {
@@ -476,7 +476,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                 >
                   <IconAdd />
                 </IconButton>
@@ -495,7 +495,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   className="force-to-focus"
                 >
                   <IconAdd />
@@ -515,7 +515,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   className="force-to-focusHover"
                 >
                   <IconAdd />
@@ -535,7 +535,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   disabled
                 >
                   <IconAdd />
@@ -555,7 +555,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                 >
                   <IconAdd />
@@ -575,7 +575,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   className="force-to-focus"
                 >
@@ -596,7 +596,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   className="force-to-focusHover"
                 >
@@ -617,7 +617,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   disabled
                 >
@@ -960,7 +960,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                 >
                   <IconAdd />
                 </IconButton>
@@ -980,7 +980,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   size={IconButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                 >
                   <IconAdd />
                 </IconButton>
@@ -1000,7 +1000,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   size={IconButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                 >
                   <IconAdd />
                 </IconButton>
@@ -1019,7 +1019,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                   disabled
                 >
                   <IconAdd />
@@ -1039,7 +1039,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                 >
                   <IconAdd />
@@ -1059,7 +1059,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   className="force-to-focus"
                 >
@@ -1080,7 +1080,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   className="force-to-focusHover"
                 >
@@ -1101,7 +1101,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  label='Label'
+                  label="Label"
                   selected
                   disabled
                 >
