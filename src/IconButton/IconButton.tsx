@@ -147,10 +147,19 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
 
   return (
     <Box
-      sx={{
-        flexDirection: 'column',
-        justifyContent: 'center',
-        display: 'inline-flex',
+      className={`${props.selected ? 'selected' : ''}`}
+      sx={(theme) => {
+        return {
+          flexDirection: 'column',
+          justifyContent: 'center',
+          display: 'inline-flex',
+          '&.selected': {
+            color: theme.palette.primary.main,
+            '.MuiSvgIcon-root': {
+              color: theme.palette.primary.main,
+            },
+          },
+        };
       }}
     >
       <StyledIconButtonContainer className={`${props.selected ? 'selected' : ''}`}>
