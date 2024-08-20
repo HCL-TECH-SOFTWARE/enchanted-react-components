@@ -31,18 +31,13 @@ export enum IconButtonSizes {
 
 const StyledIconButtonContainer = styled(Box)((theme) => {
   return {
-    '&:hover': {
-      borderRadius: '2px',
-      backgroundColor: theme.theme.palette.action.hover,
-    },
+
   };
 });
 
 const StyledChevronDown = styled(Box)((theme) => {
   return {
     color: theme.theme.palette.action.active,
-    // width: '12px',
-    // height: '12px',
   };
 });
 
@@ -59,7 +54,7 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
             '&:focus': {
               '.MuiSvgIcon-root': {
                 border: `1px solid ${theme.palette.action.focus}`,
-                borderRadius: '3px',
+                borderRadius: '2px',
                 ...ownerState.variant === IconButtonVariants.WITHOUT_PADDING && {
                   margin: '2px',
                   padding: '1px',
@@ -87,8 +82,8 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
               },
             },
             '&:hover': {
-              // borderRadius: '2px',
-              // backgroundColor: theme.palette.action.hover,
+              borderRadius: '2px',
+              backgroundColor: 'transparent',
             },
             '.MuiSvgIcon-root': { // default state
               margin: '4px',
@@ -144,11 +139,21 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
       }}
     >
       <Box
-        sx={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          display: 'inline-flex',
-          alignItems: 'center',
+        sx={(theme) => {
+          return {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            display: 'inline-flex',
+            alignItems: 'center',
+            '&:hover': {
+              borderRadius: '2px',
+              backgroundColor: theme.palette.action.hover,
+            },
+            '&:focus': {
+              border: `1px solid ${theme.palette.action.focus}`,
+              borderRadius: '2px',
+            },
+          };
         }}
       >
         <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />
@@ -168,6 +173,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
       </Box>
       <Typography
         variant="caption"
+        textAlign="center"
       >
         {props.label}
       </Typography>
