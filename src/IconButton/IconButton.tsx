@@ -43,6 +43,10 @@ const StyledIconButtonContainer = styled(Box)((theme) => {
       border: `1px solid ${theme.theme.palette.action.focus}`,
       borderRadius: '2px',
     },
+    '&.selected': {
+      border: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '2px',
+    },
   };
 });
 
@@ -149,7 +153,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
         display: 'inline-flex',
       }}
     >
-      <StyledIconButtonContainer>
+      <StyledIconButtonContainer className={`${props.selected ? 'selected' : ''}`}>
         <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />
         { props.showEndIcon ? (
           <StyledChevronDown>
@@ -180,6 +184,7 @@ IconButton.defaultProps = {
   variant: IconButtonVariants.WITHOUT_PADDING,
   color: 'default',
   selected: false,
+  showEndIcon: false,
   disabled: false,
   disableFocusRipple: false,
   edge: false,
