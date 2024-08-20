@@ -31,7 +31,18 @@ export enum IconButtonSizes {
 
 const StyledIconButtonContainer = styled(Box)((theme) => {
   return {
-
+    flexDirection: 'row',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    '&:hover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
+    '&:focus': {
+      border: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '2px',
+    },
   };
 });
 
@@ -131,31 +142,14 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
   // };
 
   return (
-    <StyledIconButtonContainer
+    <Box
       sx={{
         flexDirection: 'column',
         justifyContent: 'center',
         display: 'inline-flex',
       }}
     >
-      <Box
-        sx={(theme) => {
-          return {
-            flexDirection: 'row',
-            justifyContent: 'center',
-            display: 'inline-flex',
-            alignItems: 'center',
-            '&:hover': {
-              borderRadius: '2px',
-              backgroundColor: theme.palette.action.hover,
-            },
-            '&:focus': {
-              border: `1px solid ${theme.palette.action.focus}`,
-              borderRadius: '2px',
-            },
-          };
-        }}
-      >
+      <StyledIconButtonContainer>
         <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />
         { props.showEndIcon ? (
           <StyledChevronDown>
@@ -170,14 +164,14 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
             />
           </StyledChevronDown>
         ) : null}
-      </Box>
+      </StyledIconButtonContainer>
       <Typography
         variant="caption"
         textAlign="center"
       >
         {props.label}
       </Typography>
-    </StyledIconButtonContainer>
+    </Box>
   );
 }) as React.FC<IconButtonProps>;
 
