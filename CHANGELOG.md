@@ -11,6 +11,7 @@
 - Added the `disableOpacityHover` color to the colors.
 - Added the `List` component.
 - Added the `Tab` component.
+- Added the `ProgressBar` component.
 
 ### Fixed
 
@@ -25,6 +26,8 @@
 - Adjusted the width of dropdown menu of `Select` component when `fullWidth` is set `true`
 - Added a toggle button to the panel component.
 - Adjusted the text alignment of the Tab component.
+- Added hover actions for the Accordion component.
+- Added sync icon for the Tile component.
 
 ### Breaking changes
 

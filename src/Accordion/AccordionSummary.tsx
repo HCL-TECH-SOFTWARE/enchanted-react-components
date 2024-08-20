@@ -13,9 +13,25 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
-import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
+import React, { ReactNode } from 'react';
+import MuiAccordionSummary, { AccordionSummaryProps as MuiAccordionSummaryProps } from '@mui/material/AccordionSummary';
 import { styled } from '@mui/material/styles';
+
+interface AccordionSummaryProps extends MuiAccordionSummaryProps {
+  hoveractions?: ReactNode;
+}
+
+const StyledHoverActions = styled('div')(({ theme }) => {
+  return {
+    position: 'absolute',
+    top: '50%',
+    right: '0px',
+    transform: 'translateY(-50%)', // Center the button vertically
+    visibility: 'hidden',
+    opacity: '0',
+    transition: 'opacity 0.3s ease',
+  };
+});
 
 const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled }) => {
   return {
@@ -29,6 +45,7 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
     minHeight: 'auto',
     padding: theme.spacing(1, 0.75, 0.5, 1),
     '& .MuiAccordionSummary-content': {
+      position: 'relative',
       margin: '0px',
       '&.Mui-expanded': {
         margin: '0px',
@@ -62,11 +79,29 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
       borderBottomLeftRadius: '4px',
       borderBottomRightRadius: '4px',
     },
+    '&:hover .hover-actions, &:focus-within .hover-actions': {
+      visibility: 'visible',
+      opacity: '1',
+    },
+    '& .hover-actions': {
+      '.MuiButtonBase-root': {
+        marginLeft: '8px',
+      },
+      '.MuiButtonBase-root:first-of-type': {
+        marginLeft: '0',
+      },
+    },
   };
 });
 
 const AccordionSummary = ({ ...props }: AccordionSummaryProps) => {
-  return <StyledAccordionSummary {...props} />;
+  return (
+    <StyledAccordionSummary {...props}>
+      {props.children}
+      {props.hoveractions
+      && <StyledHoverActions className="hover-actions">{props.hoveractions}</StyledHoverActions>}
+    </StyledAccordionSummary>
+  );
 };
 
 AccordionSummary.defaultProps = {
