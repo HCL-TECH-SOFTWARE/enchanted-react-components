@@ -1274,6 +1274,330 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  selected
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  selected
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Hover & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  selected
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Disabled with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  showEndIcon
+                  selected
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  selected
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  selected
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Hover & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  selected
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Disabled with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  label="Label"
+                  selected
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
           <Grid item paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               IconButton medium Without Padding
@@ -1426,6 +1750,330 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
+                  selected
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  selected
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  selected
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Hover & Focus with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  selected
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Disabled with End Icon
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  showEndIcon
+                  selected
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  disabled
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  selected
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  selected
+                  className="force-to-focus"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Hover & Focus with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
+                  selected
+                  className="force-to-focusHover"
+                >
+                  <IconAdd />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Selected Disabled with Label
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2}>
+                <IconButton
+                  value="default"
+                  size={IconButtonSizes.MEDIUM}
+                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  label="Label"
                   selected
                   disabled
                 >
