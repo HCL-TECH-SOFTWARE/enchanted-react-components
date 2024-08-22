@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Components, Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconButton';
@@ -29,32 +29,79 @@ export enum IconButtonSizes {
   MEDIUM = 'medium',
 }
 
+const StyledMainContainer = styled(Box)((theme) => {
+  return {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    '&.selected': {
+      color: theme.theme.palette.primary.main,
+      '.MuiSvgIcon-root, .MuiTypography-root': {
+        color: theme.theme.palette.primary.main,
+      },
+    },
+    '&.disabled': {
+      color: theme.theme.palette.action.disabled,
+      '.MuiSvgIcon-root, .MuiTypography-root': {
+        color: theme.theme.palette.action.disabled,
+      },
+      pointerEvents: 'none',
+    },
+  };
+});
+
+const StyledSubContainer = styled(Box)((theme) => {
+  return {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    width: 'fit-content',
+    '&:hover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
+    '&.selected': {
+      outline: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '1px',
+      backgroundColor: theme.theme.palette.action.selectedOpacityModified,
+      '&:hover': {
+        backgroundColor: theme.theme.palette.action.selectedOpacityHover,
+        color: theme.theme.palette.primary.dark,
+        outline: `1px solid ${theme.theme.palette.primary.dark}`,
+        '.MuiSvgIcon-root, + .MuiTypography-root': {
+          color: theme.theme.palette.primary.dark,
+        },
+      },
+      '&.disabled': {
+        backgroundColor: theme.theme.palette.action.disabledOpacityModified,
+        outline: `1px solid ${theme.theme.palette.border.secondary}`,
+        borderRadius: '1px',
+      },
+    },
+  };
+});
+
 const StyledIconButtonContainer = styled(Box)((theme) => {
   return {
     flexDirection: 'row',
     justifyContent: 'center',
     display: 'inline-flex',
     alignItems: 'center',
-    '&:hover': {
-      borderRadius: '2px',
-      backgroundColor: theme.theme.palette.action.hover,
-    },
     '&:focus': {
-      border: `1px solid ${theme.theme.palette.action.focus}`,
-      borderRadius: '2px',
-    },
-    '&.selected': {
-      border: `1px solid ${theme.theme.palette.action.focus}`,
-      borderRadius: '2px',
+      outline: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '3px',
+      outlineOffset: '-2px',
     },
   };
 });
 
-const StyledChevronDown = styled(Box)((theme) => {
-  return {
-    color: theme.theme.palette.action.active,
-  };
-});
+// const StyledChevronDown = styled(IconChevronDown)((theme) => {
+//   return {
+//     color: theme.theme.palette.action.active,
+//   };
+// });
 
 export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -68,45 +115,45 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
             padding: 0,
             '&:focus': {
               '.MuiSvgIcon-root': {
-                border: `1px solid ${theme.palette.action.focus}`,
-                borderRadius: '2px',
-                ...ownerState.variant === IconButtonVariants.WITHOUT_PADDING && {
-                  margin: '2px',
-                  padding: '1px',
-                  ...ownerState.size === IconButtonSizes.SMALL && {
-                    height: '20px',
-                    width: '20px',
-                  },
-                  ...ownerState.size === IconButtonSizes.MEDIUM && {
-                    height: '24px',
-                    width: '24px',
-                  },
-                },
-                ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
-                  margin: '2px',
-                  padding: '3px',
-                  ...ownerState.size === IconButtonSizes.SMALL && {
-                    height: '24px',
-                    width: '24px',
-                  },
-                  ...ownerState.size === IconButtonSizes.MEDIUM && {
-                    height: '28px',
-                    width: '28px',
-                  },
-                },
+                // border: `1px solid ${theme.palette.action.focus}`,
+                // borderRadius: '2px',
+                // ...ownerState.variant === IconButtonVariants.WITHOUT_PADDING && {
+                //   margin: '2px',
+                //   padding: '0',
+                //   ...ownerState.size === IconButtonSizes.SMALL && {
+                //     height: '16px',
+                //     width: '16px',
+                //   },
+                //   ...ownerState.size === IconButtonSizes.MEDIUM && {
+                //     height: '20px',
+                //     width: '20px',
+                //   },
+                // },
+                // ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
+                //   margin: '2px',
+                //   padding: '3px',
+                //   ...ownerState.size === IconButtonSizes.SMALL && {
+                //     height: '16px',
+                //     width: '16px',
+                //   },
+                //   ...ownerState.size === IconButtonSizes.MEDIUM && {
+                //     height: '20px',
+                //     width: '20px',
+                //   },
+                // },
               },
             },
             '&:hover': {
               borderRadius: '2px',
               backgroundColor: 'transparent',
             },
-            '.MuiSvgIcon-root': { // default state
-              margin: '4px',
+            '.MuiSvgIcon-root': {
+              margin: '0',
               padding: 0,
               outline: 'none',
               boxSizing: 'border-box',
               ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
-                margin: '6px',
+                margin: '2px',
               },
               ...ownerState.size === IconButtonSizes.SMALL && {
                 height: '16px',
@@ -141,66 +188,90 @@ export type IconButtonProps = MuiIconButtonProps & {
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
-  // const handleOnClick = () => {
-  //   console.log('handleOnClick');
-  // };
+  const iconBoxRef = React.useRef<HTMLElement>(null);
+
+  const handleOnFocus = () => {
+    iconBoxRef.current?.focus();
+  };
 
   return (
-    <Box
-      className={`${props.selected ? 'selected' : ''}`}
-      sx={(theme) => {
-        return {
-          flexDirection: 'column',
-          justifyContent: 'center',
-          display: 'inline-flex',
-          '&.selected': {
-            color: theme.palette.primary.main,
-            '.MuiSvgIcon-root': {
-              color: theme.palette.primary.main,
-            },
-          },
-        };
-      }}
+    <StyledMainContainer
+      className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''}`}
     >
-      <StyledIconButtonContainer className={`${props.selected ? 'selected' : ''}`}>
-        <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />
-        { props.showEndIcon ? (
-          <StyledChevronDown>
+      <StyledSubContainer
+        className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''}`}
+        onClick={handleOnFocus}
+        onMouseDown={handleOnFocus}
+      >
+        <StyledIconButtonContainer
+          ref={iconBoxRef}
+          tabIndex={0}
+        >
+          <MuiIconButton
+            {...props}
+            ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
+            role="button"
+            aria-disabled={props.disabled}
+          />
+          { props.showEndIcon && (
             <IconChevronDown
               sx={(theme) => {
                 return {
                   color: theme.palette.action.active,
                   width: '12px',
                   height: '12px',
+                  ...props.variant === IconButtonVariants.WITH_PADDING && {
+                    marginLeft: '-2px',
+                    ...props.size === IconButtonSizes.SMALL && {
+                      marginRight: '3px',
+                    },
+                    ...props.size === IconButtonSizes.MEDIUM && {
+                      marginRight: '2px',
+                    },
+                  },
+                  ...props.variant === IconButtonVariants.WITHOUT_PADDING && {
+                    ...props.size === IconButtonSizes.SMALL && {
+                      marginRight: '3px',
+                    },
+                    ...props.size === IconButtonSizes.MEDIUM && {
+                      marginRight: '0',
+                    },
+                  },
                 };
               }}
             />
-          </StyledChevronDown>
-        ) : null}
-      </StyledIconButtonContainer>
+          )}
+        </StyledIconButtonContainer>
+      </StyledSubContainer>
       <Typography
         variant="caption"
         textAlign="center"
+        sx={(theme) => {
+          return {
+            color: theme.palette.action.active,
+          };
+        }}
       >
         {props.label}
       </Typography>
-    </Box>
+    </StyledMainContainer>
   );
 }) as React.FC<IconButtonProps>;
 
 IconButton.defaultProps = {
-  size: IconButtonSizes.SMALL,
-  variant: IconButtonVariants.WITHOUT_PADDING,
+  size: IconButtonSizes.MEDIUM,
+  variant: IconButtonVariants.WITH_PADDING,
   color: 'default',
   selected: false,
   showEndIcon: false,
+  label: undefined,
   disabled: false,
-  disableFocusRipple: false,
+  disableFocusRipple: true,
   edge: false,
-  centerRipple: false,
-  disableRipple: false,
-  disableTouchRipple: false,
-  focusRipple: false,
+  centerRipple: true,
+  disableRipple: true,
+  disableTouchRipple: true,
+  focusRipple: true,
   tabIndex: 0,
 };
 
