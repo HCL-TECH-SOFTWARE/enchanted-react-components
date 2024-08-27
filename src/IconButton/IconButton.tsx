@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Components, Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconButton';
@@ -62,11 +62,23 @@ const StyledSubContainer = styled(Box)((theme) => {
       borderRadius: '2px',
       backgroundColor: theme.theme.palette.action.hover,
     },
+    '&.force-to-focusHover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
     '&.selected': {
       outline: `1px solid ${theme.theme.palette.action.focus}`,
       borderRadius: '1px',
       backgroundColor: theme.theme.palette.action.selectedOpacityModified,
       '&:hover': {
+        backgroundColor: theme.theme.palette.action.selectedOpacityHover,
+        color: theme.theme.palette.primary.dark,
+        outline: `1px solid ${theme.theme.palette.primary.dark}`,
+        '.MuiSvgIcon-root, + .MuiTypography-root': {
+          color: theme.theme.palette.primary.dark,
+        },
+      },
+      '&.force-to-focusHover': {
         backgroundColor: theme.theme.palette.action.selectedOpacityHover,
         color: theme.theme.palette.primary.dark,
         outline: `1px solid ${theme.theme.palette.primary.dark}`,
@@ -89,19 +101,13 @@ const StyledIconButtonContainer = styled(Box)((theme) => {
     justifyContent: 'center',
     display: 'inline-flex',
     alignItems: 'center',
-    '&:focus': {
+    '&:focus, &.force-to-focus, &.force-to-focusHover': {
       outline: `1px solid ${theme.theme.palette.action.focus}`,
       borderRadius: '3px',
       outlineOffset: '-2px',
     },
   };
 });
-
-// const StyledChevronDown = styled(IconChevronDown)((theme) => {
-//   return {
-//     color: theme.theme.palette.action.active,
-//   };
-// });
 
 export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -113,37 +119,11 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
             backgroundColor: 'transparent',
             borderRadius: '2px',
             padding: 0,
-            '&:focus': {
-              '.MuiSvgIcon-root': {
-                // border: `1px solid ${theme.palette.action.focus}`,
-                // borderRadius: '2px',
-                // ...ownerState.variant === IconButtonVariants.WITHOUT_PADDING && {
-                //   margin: '2px',
-                //   padding: '0',
-                //   ...ownerState.size === IconButtonSizes.SMALL && {
-                //     height: '16px',
-                //     width: '16px',
-                //   },
-                //   ...ownerState.size === IconButtonSizes.MEDIUM && {
-                //     height: '20px',
-                //     width: '20px',
-                //   },
-                // },
-                // ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
-                //   margin: '2px',
-                //   padding: '3px',
-                //   ...ownerState.size === IconButtonSizes.SMALL && {
-                //     height: '16px',
-                //     width: '16px',
-                //   },
-                //   ...ownerState.size === IconButtonSizes.MEDIUM && {
-                //     height: '20px',
-                //     width: '20px',
-                //   },
-                // },
-              },
-            },
             '&:hover': {
+              borderRadius: '2px',
+              backgroundColor: 'transparent',
+            },
+            '&.force-to-focusHover': {
               borderRadius: '2px',
               backgroundColor: 'transparent',
             },
@@ -196,16 +176,17 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
 
   return (
     <StyledMainContainer
-      className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''}`}
+      className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
     >
       <StyledSubContainer
-        className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''}`}
+        className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
         onClick={handleOnFocus}
         onMouseDown={handleOnFocus}
       >
         <StyledIconButtonContainer
           ref={iconBoxRef}
           tabIndex={0}
+          className={props.className}
         >
           <MuiIconButton
             {...props}
