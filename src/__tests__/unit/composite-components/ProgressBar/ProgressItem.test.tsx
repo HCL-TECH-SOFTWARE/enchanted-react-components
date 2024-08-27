@@ -22,6 +22,8 @@ import {
 import ProgressItems from '../../../../composite_components/ProgressBar/ProgressItems';
 import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../../theme';
 
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
+
 const mockProps = {
   literals: {
     learnMoreLabel: 'Learn More',
@@ -58,7 +60,7 @@ const mockProps = {
 describe('ProgressItem Component', () => {
   test('renders ProgressItem component', () => {
     render(
-      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+      <ThemeProvider theme={theme}>
         <ProgressItems {...mockProps} />
       </ThemeProvider>,
     );
@@ -137,11 +139,13 @@ describe('ProgressItem Component', () => {
   test('renders hover view location icon correctly', () => {
     const mockNavigateFolder = jest.fn();
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.SUCCESS }]}
-        navigateFolder={mockNavigateFolder}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.SUCCESS }]}
+          navigateFolder={mockNavigateFolder}
+        />
+      </ThemeProvider>,
     );
     fireEvent.mouseOver(screen.getByText('testFile.jpg'));
     expect(screen.getByTestId('navigate-folder')).not.toBeNull();
@@ -153,11 +157,13 @@ describe('ProgressItem Component', () => {
   test('renders hover retry upload icon correctly', () => {
     const mockRetryUpload = jest.fn();
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE }]}
-        retryUploadItem={mockRetryUpload}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE }]}
+          retryUploadItem={mockRetryUpload}
+        />
+      </ThemeProvider>,
     );
     fireEvent.mouseOver(screen.getByText('testFile.jpg'));
     expect(screen.getByTestId('retry-upload')).not.toBeNull();
@@ -169,11 +175,13 @@ describe('ProgressItem Component', () => {
   test('renders hover pause or stop uploading icon correctly', () => {
     const mockCancelUpload = jest.fn();
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.PROGRESS }]}
-        cancelItem={mockCancelUpload}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.PROGRESS }]}
+          cancelItem={mockCancelUpload}
+        />
+      </ThemeProvider>,
     );
     fireEvent.mouseOver(screen.getByText('testFile.jpg'));
     expect(screen.getByTestId('cancel-upload')).not.toBeNull();

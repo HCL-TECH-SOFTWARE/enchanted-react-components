@@ -21,6 +21,10 @@ import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevro
 import IconButton from '../../../IconButton';
 import Snackbar, { SnackbarVariants, SnackbarTestIds } from '../../../Snackbar';
 import { CircularProgressTestIds, CircularProgressVariants } from '../../../ProgressIndicator/CircularProgress';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
+import { ThemeProvider } from '@emotion/react';
+
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 afterEach(cleanup);
 
@@ -29,10 +33,14 @@ describe('Snackbar unit tests', () => {
   const sampleButtonText = 'Button';
 
   it('Should not render snackbar at all when open arg is false', () => {
-    render(<Snackbar
-      message={sampleMessage}
-      open={false}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open={false}
+        />
+      </ThemeProvider>,
+    );
 
     try {
       screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON);
@@ -42,18 +50,22 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Should not render placeholderIcon at all when showPlaceholderIcon arg is false', () => {
-    render(<Snackbar
-      message={sampleMessage}
-      open={false}
-      placeholderIcon={(
-        <IconButton
-          data-testid={SnackbarTestIds.SNACKBAR_PLACEHOLDER_ICON}
-        >
-          <ChevronDownIcon />
-        </IconButton>
-      )}
-      showPlaceholderIcon={false}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open={false}
+          placeholderIcon={(
+            <IconButton
+              data-testid={SnackbarTestIds.SNACKBAR_PLACEHOLDER_ICON}
+            >
+              <ChevronDownIcon />
+            </IconButton>
+          )}
+          showPlaceholderIcon={false}
+        />
+      </ThemeProvider>,
+    );
 
     try {
       screen.getAllByTestId(SnackbarTestIds.SNACKBAR_PLACEHOLDER_ICON);
@@ -63,11 +75,15 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render information variant as default', () => {
-    render(<Snackbar
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)[0].dataset.muiTest).toEqual('informationIcon');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
@@ -79,12 +95,16 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render warning variant', () => {
-    render(<Snackbar
-      variant={SnackbarVariants.WARNING}
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          variant={SnackbarVariants.WARNING}
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)[0].dataset.muiTest).toEqual('warning--altIcon');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
@@ -96,12 +116,16 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render error variant', () => {
-    render(<Snackbar
-      variant={SnackbarVariants.ERROR}
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          variant={SnackbarVariants.ERROR}
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)[0].dataset.muiTest).toEqual('warningIcon');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
@@ -113,12 +137,16 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render success variant', () => {
-    render(<Snackbar
-      variant={SnackbarVariants.SUCCESS}
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          variant={SnackbarVariants.SUCCESS}
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_ICON)[0].dataset.muiTest).toEqual('checkmark--outlineIcon');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
@@ -130,13 +158,17 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render indeterminate progress variant', () => {
-    render(<Snackbar
-      variant={SnackbarVariants.PROGRESS}
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-      progressVariant={CircularProgressVariants.INDETERMINATE}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          variant={SnackbarVariants.PROGRESS}
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+          progressVariant={CircularProgressVariants.INDETERMINATE}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_ROOT)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_CIRCLE)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_TRAIL)).not.toBeNull();
@@ -149,14 +181,18 @@ describe('Snackbar unit tests', () => {
   });
 
   it('Render determinate progress variant', () => {
-    render(<Snackbar
-      variant={SnackbarVariants.PROGRESS}
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-      progressVariant={CircularProgressVariants.DETERMINATE}
-      progressValue={50}
-    />);
+    render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          variant={SnackbarVariants.PROGRESS}
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+          progressVariant={CircularProgressVariants.DETERMINATE}
+          progressValue={50}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_ROOT)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_CIRCLE)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_TRAIL)).not.toBeNull();
@@ -172,12 +208,16 @@ describe('Snackbar unit tests', () => {
   it('Should fire buttonAction when buttonText wrapper button is clicked', async () => {
     const mockFn = jest.fn();
 
-    const { getByTestId } = render(<Snackbar
-      message={sampleMessage}
-      open
-      buttonText={sampleButtonText}
-      buttonAction={mockFn}
-    />);
+    const { getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open
+          buttonText={sampleButtonText}
+          buttonAction={mockFn}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_BUTTON)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_BUTTON)[0].innerHTML).toContain(sampleButtonText);
 
@@ -189,13 +229,17 @@ describe('Snackbar unit tests', () => {
   it('Should fire placeholderIcon action when placeholderIcon wrapper button is clicked', async () => {
     const mockFn = jest.fn();
 
-    const { getByTestId } = render(<Snackbar
-      message={sampleMessage}
-      open
-      placeholderIcon={<ChevronDownIcon />}
-      placeholderIconAction={mockFn}
-      showPlaceholderIcon
-    />);
+    const { getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open
+          placeholderIcon={<ChevronDownIcon />}
+          placeholderIconAction={mockFn}
+          showPlaceholderIcon
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_PLACEHOLDER_ICON)).not.toBeNull();
     expect((screen.getAllByTestId(SnackbarTestIds.SNACKBAR_PLACEHOLDER_ICON)[0].firstElementChild as HTMLElement).dataset.muiTest).toEqual('chevron--downIcon');
 
@@ -207,11 +251,15 @@ describe('Snackbar unit tests', () => {
   it('Should fire closeIcon action when closeIcon wrapper button is clicked', async () => {
     const mockFn = jest.fn();
 
-    const { getByTestId } = render(<Snackbar
-      message={sampleMessage}
-      open
-      onClose={mockFn}
-    />);
+    const { getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Snackbar
+          message={sampleMessage}
+          open
+          onClose={mockFn}
+        />
+      </ThemeProvider>,
+    );
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)[0].dataset.muiTest).toEqual('closeIcon');
 

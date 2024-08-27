@@ -29,6 +29,10 @@ export enum IconButtonSizes {
   MEDIUM = 'medium',
 }
 
+export enum IconButtonTestIds {
+  ICONBUTTON_END_ICON = 'iconButtonEndIcon',
+}
+
 const StyledMainContainer = styled(Box)((theme) => {
   return {
     flexDirection: 'column',
@@ -196,6 +200,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           />
           { props.showEndIcon && (
             <IconChevronDown
+              data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
               sx={(theme) => {
                 return {
                   color: theme.palette.action.active,
@@ -230,6 +235,9 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
         sx={(theme) => {
           return {
             color: theme.palette.action.active,
+            paddingLeft: '4px',
+            paddingRight: '4px',
+            marginTop: '2px',
           };
         }}
       >
