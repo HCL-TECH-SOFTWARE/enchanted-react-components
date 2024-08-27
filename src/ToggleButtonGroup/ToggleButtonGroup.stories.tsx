@@ -22,7 +22,6 @@ import ToggleButtonGroup, { ToggleButtonGroupSizes } from './ToggleButtonGroup';
 import Typography from '../Typography';
 import Divider from '../Divider';
 import ToggleButton from '../ToggleButton/ToggleButton';
-// import ToggleButton from '@mui/material';
 
 export default {
   title: 'Inputs/ToggleButtonGroup',
