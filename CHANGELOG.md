@@ -12,6 +12,7 @@
 - Added the `List` component.
 - Added the `Tab` component.
 - Added the `ProgressBar` component.
+- Added `selected`, `showEndIcon`, `label` properties in `IconButton` component
 
 ### Fixed
 
@@ -28,6 +29,7 @@
 - Adjusted the text alignment of the Tab component.
 - Added hover actions for the Accordion component.
 - Added sync icon for the Tile component.
+- Adjusted `IconButton` component styling
 
 ### Breaking changes
 
