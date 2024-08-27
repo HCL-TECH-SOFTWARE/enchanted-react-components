@@ -40,7 +40,6 @@ export interface ToggleButtonProps extends MuiToggleButtonProps {
 
 const ToggleButton = React.forwardRef(({ ...props }: ToggleButtonProps, forwardRef) => {
   return <MuiToggleButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} aria-disabled={props.disabled} />;
-  // return <MuiToggleButton {...props} />;
 }) as React.FC<ToggleButtonProps>;
 
 ToggleButton.defaultProps = {
