@@ -83,7 +83,7 @@ describe('TablePagination', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />
+        <Pagination page={0} rowsPerPage={10} count={100} onRowsPerPageChange={mockFn} />
       </ThemeProvider>,
     );
 
