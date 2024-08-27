@@ -17,12 +17,12 @@ import React from 'react';
 import {
   render, screen, fireEvent, waitFor, cleanup,
 } from '@testing-library/react';
+import { ThemeProvider } from '@emotion/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import IconButton from '../../../IconButton';
 import Snackbar, { SnackbarVariants, SnackbarTestIds } from '../../../Snackbar';
 import { CircularProgressTestIds, CircularProgressVariants } from '../../../ProgressIndicator/CircularProgress';
 import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
-import { ThemeProvider } from '@emotion/react';
 
 const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
