@@ -17,7 +17,8 @@ import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { StoryFn, Meta } from '@storybook/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
-import Accordion, { AccordionTypes } from './Accordion';
+import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
+import Accordion, { AccordionTypes, AccordionProps } from './Accordion';
 import AccordionSummary from './AccordionSummary';
 import AccordionDetails from './AccordionDetails';
 import Checkbox from '../Checkbox/Checkbox';
@@ -76,6 +77,13 @@ export default {
       },
       description: 'Show a secondary text, only for Storybook use',
     },
+    showHoverActions: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'Show a hover action button, only for Storybook use',
+    },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },
@@ -85,13 +93,31 @@ export default {
   },
 } as Meta<typeof Accordion>;
 
-const Template: StoryFn<typeof Accordion> = (args) => {
-  const { showCheckBox, disabled, showSecondaryText } = args;
+interface ExtendedAccordionProps extends AccordionProps {
+  showCheckBox: boolean,
+  showSecondaryText: boolean,
+  showHoverActions: boolean,
+}
+
+const Template: StoryFn<ExtendedAccordionProps> = (args) => {
+  const {
+    showCheckBox, disabled, showSecondaryText, showHoverActions,
+  } = args;
   const [checkedItems, setCheckedItems] = useState({});
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
   };
+  const hoveractions = (
+    <>
+      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} onBlur={() => { return null; }} onClick={() => { return null; }} id="1">
+        <RocketIcon />
+      </IconButton>
+      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} onBlur={() => { return null; }} onClick={() => { return null; }} id="2">
+        <RocketIcon />
+      </IconButton>
+    </>
+  );
   return (
     <>
       <Accordion
@@ -104,6 +130,7 @@ const Template: StoryFn<typeof Accordion> = (args) => {
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
+          hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
             {showCheckBox && <Checkbox id="1" checked={checkedItems['1'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
@@ -136,6 +163,7 @@ const Template: StoryFn<typeof Accordion> = (args) => {
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
+          hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
             {showCheckBox && <Checkbox id="2" checked={checkedItems['2'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
@@ -168,6 +196,7 @@ const Template: StoryFn<typeof Accordion> = (args) => {
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
+          hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
             {showCheckBox && <Checkbox id="3" checked={checkedItems['3'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
@@ -206,6 +235,7 @@ export const InteractiveExample = {
     hasDivider: false,
     showSecondaryText: true,
     hasNested: false,
+    showHoverActions: false,
   },
 };
 const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {

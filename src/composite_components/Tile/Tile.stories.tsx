@@ -17,12 +17,13 @@ import React, { useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
 import { ImageList } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import IconVideoChat from '@hcl-software/enchanted-icons/dist/carbon/es/video--chat';
 import {
   IActions,
   ItemActions,
   assets, data, getAvatarToDisplay, getAvatarToDisplayForFileType,
 } from './TileData';
-import Tile from './Tile';
+import Tile, { TilePropsType } from './Tile';
 import Typography from '../../Typography';
 
 export default {
@@ -76,6 +77,16 @@ export default {
       description:
         'Actions to be displayed on the tilebar.',
       control: 'false',
+    },
+    showSyncIcon: {
+      control: {
+        type: 'boolean',
+      },
+      description: 'Show a video sync icon, only for Storybook use',
+    },
+    syncIcon: {
+      control: false,
+      description: 'Show a video sync icon on the tile',
     },
     overflowTooltip: {
       description:
@@ -137,7 +148,11 @@ const StyledImageList = styled(ImageList)({
   rowHeight: 'auto',
 });
 
-const InteractiveExampleTemplate: StoryFn<typeof Tile> = (args) => {
+interface ExtendTilePropsType extends TilePropsType
+{
+  showSyncIcon: boolean;
+}
+const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
   const tileActions: IActions[] = args.hasThumbnail ? ItemActions : data;
   const [onSelectionFlag, setOnSelectioFlag] = useState('');
   const itemClickedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
@@ -151,7 +166,12 @@ const InteractiveExampleTemplate: StoryFn<typeof Tile> = (args) => {
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, tileItemId: string, isChecked: boolean) => {
     event.stopPropagation();
   };
-
+  const syncIcon = (
+    <>
+      <IconVideoChat />
+      <Typography variant="body2">Synced</Typography>
+    </>
+  );
   return (
     <StyledImageList
       gap={12}
@@ -170,6 +190,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Tile> = (args) => {
         handlePreviewAction={handlePreviewAction}
         handleCheckboxChange={handleCheckboxChange}
         avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
+        syncIcon={args.showSyncIcon ? syncIcon : undefined}
       />
     </StyledImageList>
   );
@@ -191,6 +212,7 @@ InteractiveExample.args = {
   disabled: false,
   menuSize: 'medium',
   itemId: '3',
+  showSyncIcon: false,
 };
 
 const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
@@ -296,4 +318,5 @@ VisualTest.args = {
   hideAvatarIfImageIsLoaded: true,
   menuSize: 'medium',
   hasThumbnail: true,
+  showSyncIcon: false,
 };
