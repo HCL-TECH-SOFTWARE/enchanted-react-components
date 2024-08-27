@@ -17,6 +17,7 @@ import {
   render, screen, cleanup,
 } from '@testing-library/react';
 import IconAdd from '@hcl-software/enchanted-icons/dist/carbon/es/add';
+import IconDelete from '@hcl-software/enchanted-icons/dist/carbon/es/delete';
 import ToggleButtonGroup, { ToggleButtonGroupSizes } from '../../../ToggleButtonGroup/ToggleButtonGroup';
 import ToggleButton from '../../../ToggleButton/ToggleButton';
 
@@ -36,12 +37,14 @@ describe('ToggleButtonGroup', () => {
         <ToggleButton
           value="small2"
         >
-          <IconAdd />
+          <IconDelete />
         </ToggleButton>
       </ToggleButtonGroup>,
     );
-    expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
+    expect(screen.getByRole('group')).not.toBeNull();
+    expect(screen.getAllByRole('button')).not.toBeNull();
+    expect((screen.getAllByRole('button')[0].firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
+    expect((screen.getAllByRole('button')[1].firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
   });
 
   it('Render Medium size without crashing', () => {
@@ -57,11 +60,13 @@ describe('ToggleButtonGroup', () => {
         <ToggleButton
           value="small2"
         >
-          <IconAdd />
+          <IconDelete />
         </ToggleButton>
       </ToggleButtonGroup>,
     );
-    expect(screen.getByRole('button')).not.toBeNull();
-    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
+    expect(screen.getByRole('group')).not.toBeNull();
+    expect(screen.getAllByRole('button')).not.toBeNull();
+    expect((screen.getAllByRole('button')[0].firstElementChild as HTMLElement).dataset.muiTest).toEqual('addIcon');
+    expect((screen.getAllByRole('button')[1].firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
   });
 });
