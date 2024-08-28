@@ -11,6 +11,7 @@
 - Added the `disableOpacityHover` color to the colors.
 - Added the `List` component.
 - Added the `Tab` component.
+- Added the `ToggleButtonGroup` component.
 - Added the `ProgressBar` component.
 
 ### Fixed

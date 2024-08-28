@@ -25,6 +25,7 @@ import Divider from '../Divider';
 export default {
   title: 'Inputs/ToggleButton',
   component: ToggleButton,
+  parameters: { controls: { sort: 'none' } },
   argTypes: {
     size: {
       if: { arg: 'interactive' },
@@ -808,6 +809,10 @@ InteractiveExample.parameters = {
   options: { showPanel: true },
 };
 InteractiveExample.args = {
+  size: ToggleButtonSizes.SMALL,
+  variant: ToggleButtonVariants.WITH_PADDING,
+  disabled: false,
+  selected: false,
   ...ToggleButton.defaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the IconButtonProps
   interactive: true,
