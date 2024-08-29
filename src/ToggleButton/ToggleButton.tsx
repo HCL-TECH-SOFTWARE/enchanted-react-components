@@ -43,10 +43,8 @@ const ToggleButton = React.forwardRef(({ ...props }: ToggleButtonProps, forwardR
 }) as React.FC<ToggleButtonProps>;
 
 ToggleButton.defaultProps = {
-  size: ToggleButtonSizes.SMALL,
   variant: ToggleButtonVariants.WITH_PADDING,
   disabled: false,
-  selected: false,
   disableFocusRipple: true,
   disableRipple: true,
   centerRipple: false,
