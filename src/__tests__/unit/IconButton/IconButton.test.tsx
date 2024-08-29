@@ -88,7 +88,7 @@ describe('Icon Button', () => {
   it('Render endIcon without crashing', () => {
     render(
       <ThemeProvider theme={theme}>
-        <IconButton showEndIcon>
+        <IconButton showendicon>
           <IconDelete />
         </IconButton>
       </ThemeProvider>,
