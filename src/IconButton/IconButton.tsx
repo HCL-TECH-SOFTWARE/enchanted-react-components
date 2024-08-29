@@ -13,8 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
+import { Box, Components, Theme } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconButton';
-import { Components, Theme } from '@mui/material';
+import IconChevronDown from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
+import Typography from '../Typography';
 
 export enum IconButtonVariants {
   WITHOUT_PADDING = 'without padding',
@@ -26,6 +29,90 @@ export enum IconButtonSizes {
   MEDIUM = 'medium',
 }
 
+export enum IconButtonTestIds {
+  ICONBUTTON_END_ICON = 'iconButtonEndIcon',
+}
+
+const StyledMainContainer = styled(Box)((theme) => {
+  return {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    '&.selected': {
+      color: theme.theme.palette.primary.main,
+      '.MuiSvgIcon-root, .MuiTypography-root': {
+        color: theme.theme.palette.primary.main,
+      },
+    },
+    '&.disabled': {
+      color: theme.theme.palette.action.disabled,
+      '.MuiSvgIcon-root, .MuiTypography-root': {
+        color: theme.theme.palette.action.disabled,
+      },
+      pointerEvents: 'none',
+    },
+  };
+});
+
+const StyledSubContainer = styled(Box)((theme) => {
+  return {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    width: 'fit-content',
+    '&:hover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
+    '&.force-to-focusHover': {
+      borderRadius: '2px',
+      backgroundColor: theme.theme.palette.action.hover,
+    },
+    '&.selected': {
+      outline: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '1px',
+      backgroundColor: theme.theme.palette.action.selectedOpacityModified,
+      '&:hover': {
+        backgroundColor: theme.theme.palette.action.selectedOpacityHover,
+        color: theme.theme.palette.primary.dark,
+        outline: `1px solid ${theme.theme.palette.primary.dark}`,
+        '.MuiSvgIcon-root, + .MuiTypography-root': {
+          color: theme.theme.palette.primary.dark,
+        },
+      },
+      '&.force-to-focusHover': {
+        backgroundColor: theme.theme.palette.action.selectedOpacityHover,
+        color: theme.theme.palette.primary.dark,
+        outline: `1px solid ${theme.theme.palette.primary.dark}`,
+        '.MuiSvgIcon-root, + .MuiTypography-root': {
+          color: theme.theme.palette.primary.dark,
+        },
+      },
+      '&.disabled': {
+        backgroundColor: theme.theme.palette.action.disabledOpacityModified,
+        outline: `1px solid ${theme.theme.palette.border.secondary}`,
+        borderRadius: '1px',
+      },
+    },
+  };
+});
+
+const StyledIconButtonContainer = styled(Box)((theme) => {
+  return {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    alignItems: 'center',
+    '&:focus, &.force-to-focus, &.force-to-focusHover': {
+      outline: `1px solid ${theme.theme.palette.action.focus}`,
+      borderRadius: '3px',
+      outlineOffset: '-2px',
+    },
+  };
+});
+
 export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
     MuiIconButton: {
@@ -36,47 +123,21 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
             backgroundColor: 'transparent',
             borderRadius: '2px',
             padding: 0,
-            '&:focus': {
-              '.MuiSvgIcon-root': {
-                border: `1px solid ${theme.palette.action.focus}`,
-                borderRadius: '3px',
-                ...ownerState.variant === IconButtonVariants.WITHOUT_PADDING && {
-                  margin: '2px',
-                  padding: '1px',
-                  ...ownerState.size === IconButtonSizes.SMALL && {
-                    height: '20px',
-                    width: '20px',
-                  },
-                  ...ownerState.size === IconButtonSizes.MEDIUM && {
-                    height: '24px',
-                    width: '24px',
-                  },
-                },
-                ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
-                  margin: '2px',
-                  padding: '3px',
-                  ...ownerState.size === IconButtonSizes.SMALL && {
-                    height: '24px',
-                    width: '24px',
-                  },
-                  ...ownerState.size === IconButtonSizes.MEDIUM && {
-                    height: '28px',
-                    width: '28px',
-                  },
-                },
-              },
-            },
             '&:hover': {
               borderRadius: '2px',
-              backgroundColor: theme.palette.action.hover,
+              backgroundColor: 'transparent',
             },
-            '.MuiSvgIcon-root': { // default state
-              margin: '4px',
+            '&.force-to-focusHover': {
+              borderRadius: '2px',
+              backgroundColor: 'transparent',
+            },
+            '.MuiSvgIcon-root': {
+              margin: '0',
               padding: 0,
               outline: 'none',
               boxSizing: 'border-box',
               ...ownerState.variant === IconButtonVariants.WITH_PADDING && {
-                margin: '6px',
+                margin: '2px',
               },
               ...ownerState.size === IconButtonSizes.SMALL && {
                 height: '16px',
@@ -100,28 +161,109 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
  * @property {IconButtonSizes} size - The size of the component
  * @property {IconButtonVariants} variant - Adds padding around icon svg
  * @property {string} color - The color of the component.
+ * @property {boolean} selected - Set the component as selected.
+ * @property {string} label - Label of the component.
+ * @property {boolean} showendicon - Show/hide the end icon.
  */
 export type IconButtonProps = MuiIconButtonProps & {
   size?: string,
   variant?: IconButtonVariants,
   color?: 'default',
+  selected?: boolean,
+  label?: string,
+  showendicon?: boolean,
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
-  return <MuiIconButton {...props} ref={forwardRef as ((instance: HTMLButtonElement | null) => void)} role="button" aria-disabled={props.disabled} />;
+  const iconBoxRef = React.useRef<HTMLElement>(null);
+
+  const handleOnFocus = () => {
+    iconBoxRef.current?.focus();
+  };
+
+  return (
+    <StyledMainContainer
+      className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
+    >
+      <StyledSubContainer
+        className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
+        onClick={handleOnFocus}
+        onMouseDown={handleOnFocus}
+      >
+        <StyledIconButtonContainer
+          ref={iconBoxRef}
+          tabIndex={0}
+          className={props.className}
+        >
+          <MuiIconButton
+            {...props}
+            ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
+            role="button"
+            aria-disabled={props.disabled}
+          />
+          { props.showendicon && (
+            <IconChevronDown
+              data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
+              sx={(theme) => {
+                return {
+                  color: theme.palette.action.active,
+                  width: '12px',
+                  height: '12px',
+                  ...props.variant === IconButtonVariants.WITH_PADDING && {
+                    marginLeft: '-2px',
+                    ...props.size === IconButtonSizes.SMALL && {
+                      marginRight: '3px',
+                    },
+                    ...props.size === IconButtonSizes.MEDIUM && {
+                      marginRight: '4px',
+                    },
+                  },
+                  ...props.variant === IconButtonVariants.WITHOUT_PADDING && {
+                    ...props.size === IconButtonSizes.SMALL && {
+                      marginRight: '2px',
+                    },
+                    ...props.size === IconButtonSizes.MEDIUM && {
+                      marginRight: '2px',
+                    },
+                  },
+                };
+              }}
+            />
+          )}
+        </StyledIconButtonContainer>
+      </StyledSubContainer>
+      <Typography
+        variant="caption"
+        textAlign="center"
+        sx={(theme) => {
+          return {
+            color: theme.palette.action.active,
+            paddingLeft: '4px',
+            paddingRight: '4px',
+            marginTop: '2px',
+          };
+        }}
+      >
+        {props.label}
+      </Typography>
+    </StyledMainContainer>
+  );
 }) as React.FC<IconButtonProps>;
 
 IconButton.defaultProps = {
-  size: IconButtonSizes.SMALL,
-  variant: IconButtonVariants.WITHOUT_PADDING,
+  size: IconButtonSizes.MEDIUM,
+  variant: IconButtonVariants.WITH_PADDING,
   color: 'default',
+  selected: false,
+  showendicon: false,
+  label: undefined,
   disabled: false,
-  disableFocusRipple: false,
+  disableFocusRipple: true,
   edge: false,
-  centerRipple: false,
-  disableRipple: false,
-  disableTouchRipple: false,
-  focusRipple: false,
+  centerRipple: true,
+  disableRipple: true,
+  disableTouchRipple: true,
+  focusRipple: true,
   tabIndex: 0,
 };
 

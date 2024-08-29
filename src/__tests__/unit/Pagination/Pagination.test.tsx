@@ -17,15 +17,21 @@ import {
   render, screen, fireEvent, waitFor, within, cleanup, act,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { ThemeProvider } from '@emotion/react';
 import Pagination from '../../../Pagination';
 import { TablePaginationTestIds } from '../../../Pagination/CustomTablePaginationActions';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
+
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 afterEach(cleanup);
 
 describe('TablePagination', () => {
   it('Render TablePagination', () => {
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_ACTIONS_ROOT)).not.toBeNull();
     expect(screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_ROWS_DIV)).not.toBeNull();
@@ -36,7 +42,9 @@ describe('TablePagination', () => {
     const mockFn = jest.fn();
 
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />
+      </ThemeProvider>,
     );
 
     expect(screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_PAGE_NEXT)).not.toBeNull();
@@ -54,7 +62,9 @@ describe('TablePagination', () => {
     const mockFn = jest.fn();
 
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />
+      </ThemeProvider>,
     );
 
     expect(screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_PAGE_LAST)).not.toBeNull();
@@ -72,7 +82,9 @@ describe('TablePagination', () => {
     const mockFn = jest.fn();
 
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} onRowsPerPageChange={mockFn} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} onRowsPerPageChange={mockFn} />
+      </ThemeProvider>,
     );
 
     const element = screen.getAllByRole('combobox')[0];
@@ -87,7 +99,9 @@ describe('TablePagination', () => {
     const mockFn = jest.fn();
 
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />
+      </ThemeProvider>,
     );
 
     const element = screen.getAllByRole('combobox')[1];
@@ -103,7 +117,9 @@ describe('TablePagination', () => {
     const ue = userEvent.setup();
 
     render(
-      <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} onPageChange={mockFn} />
+      </ThemeProvider>,
     );
 
     const element = screen.getAllByRole('combobox')[0];
@@ -142,7 +158,9 @@ describe('TablePagination', () => {
 
   it('should hide pagination when total count is zero', () => {
     render(
-      <Pagination page={0} rowsPerPage={0} count={0} />,
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={0} count={0} />
+      </ThemeProvider>,
     );
     expect(screen.queryByTestId(TablePaginationTestIds.TABLE_PAGINATION_ACTIONS_ROOT)).toBeNull();
     expect(screen.queryByTestId(TablePaginationTestIds.TABLE_PAGINATION_ROWS_DIV)).toBeNull();

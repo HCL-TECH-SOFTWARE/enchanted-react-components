@@ -16,17 +16,23 @@ import React from 'react';
 import {
   render, screen, cleanup,
 } from '@testing-library/react';
+import { ThemeProvider } from '@emotion/react';
 import IconDelete from '@hcl-software/enchanted-icons/dist/carbon/es/delete';
-import IconButton, { IconButtonVariants, IconButtonSizes } from '../../../IconButton';
+import IconButton, { IconButtonVariants, IconButtonSizes, IconButtonTestIds } from '../../../IconButton';
+import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
+
+const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
 afterEach(cleanup);
 
 describe('Icon Button', () => {
   it('Render Without Padding variant without crashing', () => {
     render(
-      <IconButton variant={IconButtonVariants.WITHOUT_PADDING}>
-        <IconDelete />
-      </IconButton>,
+      <ThemeProvider theme={theme}>
+        <IconButton variant={IconButtonVariants.WITHOUT_PADDING}>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
     expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
@@ -34,9 +40,11 @@ describe('Icon Button', () => {
 
   it('Render With Padding variant without crashing', () => {
     render(
-      <IconButton variant={IconButtonVariants.WITH_PADDING}>
-        <IconDelete />
-      </IconButton>,
+      <ThemeProvider theme={theme}>
+        <IconButton variant={IconButtonVariants.WITH_PADDING}>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
     expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
@@ -44,9 +52,11 @@ describe('Icon Button', () => {
 
   it('Render Small size without crashing', () => {
     render(
-      <IconButton size={IconButtonSizes.SMALL}>
-        <IconDelete />
-      </IconButton>,
+      <ThemeProvider theme={theme}>
+        <IconButton size={IconButtonSizes.SMALL}>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
     expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
@@ -54,11 +64,36 @@ describe('Icon Button', () => {
 
   it('Render Medium size without crashing', () => {
     render(
-      <IconButton size={IconButtonSizes.MEDIUM}>
-        <IconDelete />
-      </IconButton>,
+      <ThemeProvider theme={theme}>
+        <IconButton size={IconButtonSizes.MEDIUM}>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
     );
     expect(screen.getByRole('button')).not.toBeNull();
     expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+  });
+
+  it('Render label without crashing', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <IconButton label="Test Label">
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
+    );
+    expect(screen.findByText('Test Label')).not.toBeNull();
+  });
+
+  it('Render endIcon without crashing', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <IconButton showendicon>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
+    );
+    expect(screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).not.toBeNull();
+    expect((screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).dataset.muiTest).toEqual('chevron--downIcon');
   });
 });
