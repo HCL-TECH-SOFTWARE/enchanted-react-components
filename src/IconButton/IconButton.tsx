@@ -215,7 +215,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
                   },
                   ...props.variant === IconButtonVariants.WITHOUT_PADDING && {
                     ...props.size === IconButtonSizes.SMALL && {
-                      marginRight: '3px',
+                      marginRight: '2px',
                     },
                     ...props.size === IconButtonSizes.MEDIUM && {
                       marginRight: '2px',
