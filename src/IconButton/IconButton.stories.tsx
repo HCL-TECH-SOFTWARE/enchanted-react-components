@@ -310,7 +310,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -329,7 +329,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focus"
                 >
                   <IconAdd />
@@ -349,7 +349,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focusHover"
                 >
                   <IconAdd />
@@ -369,7 +369,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   disabled
                 >
                   <IconAdd />
@@ -389,7 +389,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                 >
                   <IconAdd />
@@ -409,7 +409,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focus"
                 >
@@ -430,7 +430,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focusHover"
                 >
@@ -451,7 +451,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   disabled
                 >
@@ -794,7 +794,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -814,7 +814,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   size={IconButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -834,7 +834,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   size={IconButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -853,7 +853,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   disabled
                 >
                   <IconAdd />
@@ -873,7 +873,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                 >
                   <IconAdd />
@@ -893,7 +893,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focus"
                 >
@@ -914,7 +914,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focusHover"
                 >
@@ -935,7 +935,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   disabled
                 >
@@ -1282,7 +1282,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -1301,7 +1301,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focus"
                 >
                   <IconAdd />
@@ -1321,7 +1321,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focusHover"
                 >
                   <IconAdd />
@@ -1341,7 +1341,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   disabled
                 >
                   <IconAdd />
@@ -1361,7 +1361,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                 >
                   <IconAdd />
@@ -1381,7 +1381,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focus"
                 >
@@ -1402,7 +1402,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focusHover"
                 >
@@ -1423,7 +1423,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   disabled
                 >
@@ -1766,7 +1766,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                 >
                   <IconAdd />
                 </IconButton>
@@ -1785,7 +1785,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focus"
                 >
                   <IconAdd />
@@ -1805,7 +1805,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   className="force-to-focusHover"
                 >
                   <IconAdd />
@@ -1825,7 +1825,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   disabled
                 >
                   <IconAdd />
@@ -1845,7 +1845,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                 >
                   <IconAdd />
@@ -1865,7 +1865,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focus"
                 >
@@ -1886,7 +1886,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   className="force-to-focusHover"
                 >
@@ -1907,7 +1907,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                   value="default"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
-                  showEndIcon
+                  showendicon
                   selected
                   disabled
                 >

@@ -168,7 +168,7 @@ export type IconButtonProps = MuiIconButtonProps & {
   color?: 'default',
   selected?: boolean,
   label?: string,
-  showEndIcon?: boolean,
+  showendicon?: boolean,
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
@@ -198,7 +198,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
             role="button"
             aria-disabled={props.disabled}
           />
-          { props.showEndIcon && (
+          { props.showendicon && (
             <IconChevronDown
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
               sx={(theme) => {
@@ -247,7 +247,7 @@ IconButton.defaultProps = {
   variant: IconButtonVariants.WITH_PADDING,
   color: 'default',
   selected: false,
-  showEndIcon: false,
+  showendicon: false,
   label: undefined,
   disabled: false,
   disableFocusRipple: true,
