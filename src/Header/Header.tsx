@@ -58,6 +58,7 @@ export interface IHeaderStartSection {
   avatar?: React.ReactNode,
   subtitle?: string,
   favoritesToggleIcon?: React.ReactNode,
+  backIconToolTip?: string,
 }
 
 export interface HeaderProps extends MuiContainerProps {
@@ -230,21 +231,25 @@ const Header = ({ ...props }: HeaderProps) => {
         >
           {(startSection?.withBackButton !== undefined && startSection.withBackButton && startSection?.avatar !== undefined)
             && (
-              <IconButton
-                onClick={() => { onClickBackButton(); }}
-                data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
-              >
-                { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
-              </IconButton>
+              <Tooltip title={startSection.backIconToolTip}>
+                <IconButton
+                  onClick={() => { onClickBackButton(); }}
+                  data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
+                >
+                  { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
+                </IconButton>
+              </Tooltip>
             )}
           {(startSection?.withBackButton !== undefined && startSection.withBackButton && startSection?.avatar === undefined)
             && (
-              <IconButton
-                onClick={() => { onClickBackButton(); }}
-                data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
-              >
-                { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
-              </IconButton>
+              <Tooltip title={startSection.backIconToolTip}>
+                <IconButton
+                  onClick={() => { onClickBackButton(); }}
+                  data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
+                >
+                  { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
+                </IconButton>
+              </Tooltip>
             )}
           {startSection?.avatar !== undefined && startSection.avatar}
           {startSection?.title !== undefined
