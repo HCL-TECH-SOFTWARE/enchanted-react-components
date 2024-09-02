@@ -31,6 +31,7 @@
 - Added hover actions for the Accordion component.
 - Added sync icon for the Tile component.
 - Adjusted `IconButton` component styling
+- Added tooltips for the pagination and dialogue icons
 
 ### Breaking changes
 
