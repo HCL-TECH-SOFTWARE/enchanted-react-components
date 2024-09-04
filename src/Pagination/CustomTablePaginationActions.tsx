@@ -27,6 +27,7 @@ import Typography from '../Typography/Typography';
 import Autocomplete from '../Autocomplete/Autocomplete';
 import { TYPOGRAPHY, ThemeDirectionType } from '../theme';
 import { TablePaginationProps, TablePaginationLocalizationPlaceholders } from './Pagination';
+import Tooltip from '../Tooltip/Tooltip';
 
 export enum TablePaginationTestIds {
   TABLE_PAGINATION_ACTIONS_ROOT = 'tablePaginationActionsRoot',
@@ -148,22 +149,26 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
           )}
       </div>
       <div data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_DIV}>
-        <IconButton
-          onClick={handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label={translation.firstPageAriaLabel}
-          data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_FIRST}
-        >
-          {theme.direction === ThemeDirectionType.RTL ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-        <IconButton
-          onClick={handleBackButtonClick}
-          disabled={page === 0}
-          aria-label={translation.prevPageAriaLabel}
-          data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_PREV}
-        >
-          {theme.direction === ThemeDirectionType.RTL ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-        </IconButton>
+        <Tooltip title={theme.direction === ThemeDirectionType.RTL ? translation.lastPageAriaLabel : translation.firstPageAriaLabel} placement="top">
+          <IconButton
+            onClick={handleFirstPageButtonClick}
+            disabled={page === 0}
+            aria-label={translation.firstPageAriaLabel}
+            data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_FIRST}
+          >
+            {theme.direction === ThemeDirectionType.RTL ? <LastPageIcon /> : <FirstPageIcon />}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={theme.direction === ThemeDirectionType.RTL ? translation.nextPageAriaLabel : translation.prevPageAriaLabel} placement="top">
+          <IconButton
+            onClick={handleBackButtonClick}
+            disabled={page === 0}
+            aria-label={translation.prevPageAriaLabel}
+            data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_PREV}
+          >
+            {theme.direction === ThemeDirectionType.RTL ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+          </IconButton>
+        </Tooltip>
         { atLeast480px
           && <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL}>{translation.pageLabel}</Typography>}
         <Autocomplete
@@ -224,22 +229,26 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
               {`${translation.pageDescription.replace(TablePaginationLocalizationPlaceholders.TOTAL_PAGES_COUNT, `${Math.max(0, Math.ceil(count / rowsPerPage) - 1) + 1}`)}`}
             </Typography>
           )}
-        <IconButton
-          onClick={handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label={translation.nextPageAriaLabel}
-          data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_NEXT}
-        >
-          {theme.direction === ThemeDirectionType.RTL ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </IconButton>
-        <IconButton
-          onClick={handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label={translation.lastPageAriaLabel}
-          data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LAST}
-        >
-          {theme.direction === ThemeDirectionType.RTL ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
+        <Tooltip title={theme.direction === ThemeDirectionType.RTL ? translation.prevPageAriaLabel : translation.nextPageAriaLabel} placement="top">
+          <IconButton
+            onClick={handleNextButtonClick}
+            disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+            aria-label={translation.nextPageAriaLabel}
+            data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_NEXT}
+          >
+            {theme.direction === ThemeDirectionType.RTL ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={theme.direction === ThemeDirectionType.RTL ? translation.firstPageAriaLabel : translation.lastPageAriaLabel} placement="top">
+          <IconButton
+            onClick={handleLastPageButtonClick}
+            disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+            aria-label={translation.lastPageAriaLabel}
+            data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LAST}
+          >
+            {theme.direction === ThemeDirectionType.RTL ? <FirstPageIcon /> : <LastPageIcon />}
+          </IconButton>
+        </Tooltip>
       </div>
     </Box>
   );

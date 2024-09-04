@@ -50,6 +50,7 @@ const Tab = ({ ...props }: TabProps) => {
         minWidth: 'auto',
         textTransform: 'none',
       }}
+      onClick={props.onClick}
     />
   );
 };

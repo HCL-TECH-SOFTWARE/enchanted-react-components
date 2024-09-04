@@ -97,11 +97,12 @@ const Tabs = ({ ...props }: TabsProps) => {
   }, [props.orientation]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    updateIndicatorStyle(event.currentTarget as HTMLElement);
     if (props.onChange) {
       props.onChange(event, newValue);
+    } else {
+      setValue(newValue);
     }
+    updateIndicatorStyle(event.currentTarget as HTMLElement);
   };
 
   return (

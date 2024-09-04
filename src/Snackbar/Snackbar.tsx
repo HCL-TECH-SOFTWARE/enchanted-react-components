@@ -26,6 +26,7 @@ import Button from '../Button';
 import IconButton, { IconButtonVariants } from '../IconButton';
 import Typography from '../Typography';
 import CircularProgress, { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
+import Tooltip from '../Tooltip';
 
 export enum SnackbarVariants {
   WARNING = 'warning',
@@ -205,6 +206,7 @@ export type SnackbarProps = MuiSnackbarProps & {
   variant: SnackbarVariants,
   disabledSnackbar: boolean,
   buttonText?: string,
+  buttonTextToolTip?: string,
   buttonAction: Function,
   onClose: Function,
   placeholderIcon?: JSX.Element,
@@ -212,6 +214,7 @@ export type SnackbarProps = MuiSnackbarProps & {
   showPlaceholderIcon?: boolean,
   progressVariant?: CircularProgressVariants,
   progressValue?: number,
+  closeIconToolTip?: string,
 }
 
 const Snackbar = ({ ...props }: SnackbarProps) => {
@@ -254,15 +257,17 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
         </Typography>
         { buttonText
           && (
-            <Button
-              data-testid={SnackbarTestIds.SNACKBAR_BUTTON}
-              onClick={() => { buttonAction(); }}
-              disabled={disabledSnackbar}
-              aria-disabled={disabledSnackbar}
-              {...showPlaceholderIcon && { 'data-hasplaceholdericon': 'true' }}
-            >
-              {buttonText}
-            </Button>
+            <Tooltip title={props.buttonTextToolTip}>
+              <Button
+                data-testid={SnackbarTestIds.SNACKBAR_BUTTON}
+                onClick={() => { buttonAction(); }}
+                disabled={disabledSnackbar}
+                aria-disabled={disabledSnackbar}
+                {...showPlaceholderIcon && { 'data-hasplaceholdericon': 'true' }}
+              >
+                {buttonText}
+              </Button>
+            </Tooltip>
           )}
         { (showPlaceholderIcon && React.isValidElement(placeholderIcon))
           && (
@@ -276,14 +281,16 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
               {placeholderIcon}
             </IconButton>
           )}
-        <IconButton
-          onClick={(e) => { rest.onClose(e, 'clickaway'); }} // 2nd arg is just to provide a SnackbarCloseReason for typecheck
-          disabled={disabledSnackbar}
-          aria-disabled={disabledSnackbar}
-          variant={IconButtonVariants.WITH_PADDING}
-        >
-          <CloseIcon data-testid={SnackbarTestIds.SNACKBAR_CLOSE} />
-        </IconButton>
+        <Tooltip title={props.closeIconToolTip}>
+          <IconButton
+            onClick={(e) => { rest.onClose(e, 'clickaway'); }} // 2nd arg is just to provide a SnackbarCloseReason for typecheck
+            disabled={disabledSnackbar}
+            aria-disabled={disabledSnackbar}
+            variant={IconButtonVariants.WITH_PADDING}
+          >
+            <CloseIcon data-testid={SnackbarTestIds.SNACKBAR_CLOSE} />
+          </IconButton>
+        </Tooltip>
       </Box>
     </MuiSnackbar>
   );
@@ -301,6 +308,7 @@ Snackbar.defaultProps = {
   onClose: () => {},
   /* eslint-enable no-empty-function */
   showPlaceholderIcon: false,
+  closeIconToolTip: 'Close',
 };
 
 export * from '@mui/material/Snackbar';

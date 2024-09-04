@@ -232,6 +232,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           )}
         </StyledIconButtonContainer>
       </StyledSubContainer>
+      {props.label && (
       <Typography
         variant="caption"
         textAlign="center"
@@ -246,6 +247,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
       >
         {props.label}
       </Typography>
+      )}
     </StyledMainContainer>
   );
 }) as React.FC<IconButtonProps>;

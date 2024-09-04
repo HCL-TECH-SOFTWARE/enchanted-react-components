@@ -71,6 +71,7 @@ const StyledDrawer = styled(Drawer)((theme) => {
     top: 0,
     '.MuiPaper-root': {
       padding: 0,
+      overflowX: 'hidden',
     },
     '&.MuiDrawer-root': {
       padding: 0,

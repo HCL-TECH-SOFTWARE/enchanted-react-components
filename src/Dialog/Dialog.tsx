@@ -21,6 +21,7 @@ import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import Backdrop from '../Backdrop';
+import Tooltip from '../Tooltip';
 
 export enum DialogSizes {
   EXTRA_SMALL = 'XS',
@@ -119,6 +120,7 @@ export type DialogProps = MuiDialogProps & {
   onClose: Function,
   hideHeader?: boolean,
   hideFooter?: boolean,
+  closeIconToolTip?: string,
 }
 
 const Dialog = ({ ...props }: DialogProps) => {
@@ -137,13 +139,15 @@ const Dialog = ({ ...props }: DialogProps) => {
         && (
           <DialogTitle data-testid={DialogTestIds.DIALOG_TITLE}>
             <Grid>{headerChildren}</Grid>
-            <IconButton
-              aria-label="close"
-              onClick={(e) => { rest.onClose(e, 'backdropClick'); }}
-              data-testid={DialogTestIds.DIALOG_CLOSE_ICON}
-            >
-              <CloseIcon />
-            </IconButton>
+            <Tooltip title={props.closeIconToolTip}>
+              <IconButton
+                aria-label="close"
+                onClick={(e) => { rest.onClose(e, 'backdropClick'); }}
+                data-testid={DialogTestIds.DIALOG_CLOSE_ICON}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Tooltip>
           </DialogTitle>
         )}
       <DialogContent
@@ -179,6 +183,7 @@ Dialog.defaultProps = {
   /* eslint-enable no-empty-function */
   hideHeader: false,
   hideFooter: false,
+  closeIconToolTip: 'Close',
 };
 
 export * from '@mui/material/Dialog';
