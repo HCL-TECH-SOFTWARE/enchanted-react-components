@@ -50,6 +50,18 @@ export default {
       control: { type: 'radio' },
       description: 'The color of the component.',
     },
+    selected: {
+      description: 'Set IconButton as selected.',
+      if: { arg: 'interactive' },
+    },
+    showendicon: {
+      description: 'Show endIcon if set to true.',
+      if: { arg: 'interactive' },
+    },
+    label: {
+      description: 'Label of the IconButton',
+      if: { arg: 'interactive' },
+    },
     tabIndex: {
       description: 'The tabIndex of the IconButton.',
       if: { arg: 'interactive' },
