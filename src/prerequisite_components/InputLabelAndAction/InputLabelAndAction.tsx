@@ -24,6 +24,8 @@ export interface ActionProps {
   href: string,
   label: string,
   handleClick?: React.MouseEventHandler<HTMLAnchorElement>,
+  disabled?: boolean,
+  tooltip?: string,
 }
 
 export interface InputLabelAndActionProps extends MuiInputLabelProps {
@@ -127,11 +129,9 @@ export const MuiInputActionLink = styled(Link)<LinkProps>((theme) => {
     ...theme.theme.typography.caption,
     textAlign: 'right',
     display: 'block',
-    marginTop: '6px',
-    marginBottom: '4px',
     padding: 0,
-    paddingLeft: '4px', // 4px padding between action link and border divider for multiple action links
     border: 'none',
+    lineHeight: '11px',
     '&[disabled]': {
       border: 'none',
     },
@@ -144,7 +144,20 @@ export const MuiInputActionLink = styled(Link)<LinkProps>((theme) => {
     },
     float: 'right',
     ':not(:first-of-type)': {
-      borderRight: `1px solid ${theme.theme.palette.border.secondary}`,
+      borderLeft: `1px solid ${theme.theme.palette.border.secondary}`,
+      padding: '0 4px', // 4px padding between action link and border divider for multiple action links
+    },
+  };
+});
+
+export const StyledSpan = styled('span')<LinkProps>((theme) => {
+  return {
+    display: 'inline-block',
+    marginTop: '6px',
+    marginBottom: '4px',
+    paddingRight: '4px', // 4px padding between action link and border divider for multiple action links
+    ':not(:first-of-type)': {
+      borderLeft: `1px solid ${theme.theme.palette.border.secondary}`,
       padding: '0 4px', // 4px padding between action link and border divider for multiple action links
     },
   };
@@ -191,18 +204,22 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
         >
           { limitedActionProps && limitedActionProps.map((actionProp, index) => {
             return (
-              <MuiInputActionLink
-                disabled={props.disabled}
-                href={actionProp.href}
-                onClick={actionProp.handleClick}
-                underline="none"
-                sx={{ display: 'inline' }}
-                // eslint-why index is not the sole key definition, it is prefixed by other identifiers
-                // eslint-disable-next-line react/no-array-index-key
-                key={`${actionProp.label}-${index}`}
-              >
-                {actionProp.label}
-              </MuiInputActionLink>
+              <Tooltip title={actionProp.tooltip} placement="bottom">
+                <StyledSpan>
+                  <MuiInputActionLink
+                    disabled={actionProp.disabled || props.disabled}
+                    href={actionProp.href}
+                    onClick={actionProp.handleClick}
+                    underline="none"
+                    sx={{ display: 'inline' }}
+                  // eslint-why index is not the sole key definition, it is prefixed by other identifiers
+                  // eslint-disable-next-line react/no-array-index-key
+                    key={`${actionProp.label}-${index}`}
+                  >
+                    {actionProp.label}
+                  </MuiInputActionLink>
+                </StyledSpan>
+              </Tooltip>
             );
           })}
         </MuiGrid>

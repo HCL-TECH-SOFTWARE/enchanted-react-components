@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React, {
-  ReactNode, useRef, useState,
+  ReactNode,
 } from 'react';
 import IconCaretRight from '@hcl-software/enchanted-icons/dist/carbon/es/caret--right';
 import IconCaretLeft from '@hcl-software/enchanted-icons/dist/carbon/es/caret--left';
@@ -103,6 +103,9 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
                 backgroundColor: theme.palette.action.hover,
               },
             },
+            '&:hover .MuiListItemSecondaryAction-root,&:focus-within .MuiListItemSecondaryAction-root, &.open-menu-action .MuiListItemSecondaryAction-root,&:focus .MuiListItemSecondaryAction-root': {
+              opacity: '1',
+            },
             '& .MuiTouchRipple-root': {
               display: 'none',
             },
@@ -110,6 +113,8 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
               margin: '0 8px 0 0',
             },
             '& .MuiListItemSecondaryAction-root': {
+              opacity: '0',
+              transition: 'opacity 0.3s ease',
               right: ownerState.size === ListSizes.SMALL ? '8px' : '12px',
               display: 'flex',
               justifyContent: 'center',
@@ -152,59 +157,16 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
 const ListItemButton = ({ ...props }: ListItemButtonProps) => {
   const theme = useTheme();
   const { secondaryActionButton, ...restProps } = props;
-  const [showaction, setShowaction] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const secondaryActionRef = useRef<HTMLDivElement>(null);
-  const listItemButtonRef = useRef<HTMLDivElement>(null);
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Tab' && focused && secondaryActionButton) {
-      const buttons = Array.from(event.currentTarget.querySelectorAll('button'));
-      const firstButton = buttons[0];
-      const lastButton = buttons[buttons.length - 1];
-
-      if (event.shiftKey) {
-        if (document.activeElement === firstButton) {
-          event.preventDefault();
-          event.currentTarget.focus();
-        } else {
-          const index = buttons.findIndex((btn) => { return btn === document.activeElement; });
-          if (index !== -1) {
-            buttons[index - 1]?.focus();
-            event.preventDefault();
-          }
-        }
-      } else if (document.activeElement === lastButton) {
-        event.currentTarget.focus();
-      } else {
-        const index = buttons.findIndex((btn) => { return btn === document.activeElement; });
-        if (index === undefined && buttons.length > 0) {
-          buttons[0]?.focus();
-        } else {
-          buttons[index + 1]?.focus();
-        }
-        event.preventDefault();
-      }
-    }
-  };
 
   return (
     <MuiListItemButton
       {...restProps}
-      onMouseEnter={() => { setShowaction(true); }}
-      onMouseLeave={() => { setShowaction(false); }}
-      onFocus={() => { setShowaction(true); setFocused(true); }}
-      onBlur={() => { setShowaction(false); setFocused(false); }}
-      onKeyDown={(e) => { handleKeyDown(e); }}
-      ref={listItemButtonRef}
     >
       {props.children}
       {secondaryActionButton
       && (
-      <ListItemSecondaryAction
-        ref={secondaryActionRef}
-      >
-        {showaction && secondaryActionButton}
+      <ListItemSecondaryAction>
+        {secondaryActionButton}
       </ListItemSecondaryAction>
       )}
 
