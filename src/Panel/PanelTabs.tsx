@@ -109,16 +109,18 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
   togglePanel,
   translation,
 }: PanelTabsProps) => {
-  const handleTabClick = (event: React.MouseEvent<HTMLDivElement>, index: number) => {
-    if (selectedTabValue === index) {
-      handleTabChange(event, index);
-    }
-  };
   return (
     <PanelTabContainerStyled>
       <PanelTabsStyled
         value={selectedTabValue}
-        onChange={handleTabChange}
+        onChange={(event, newValue) => {
+          handleTabChange(event, newValue);
+          event.stopPropagation();
+        }}
+        onClick={(event) => {
+          handleTabChange(event, selectedTabValue);
+          event.stopPropagation();
+        }}
         data-testid="panel-tabs"
         orientation="vertical"
         variant="scrollable"
@@ -139,7 +141,6 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
               icon={iconTooltip}
               aria-label={tab.tabIcon.label}
               disableFocusRipple
-              onClick={(event) => { handleTabClick(event, index); }}
             />
           );
         })}

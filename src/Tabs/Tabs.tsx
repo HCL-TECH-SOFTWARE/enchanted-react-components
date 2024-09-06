@@ -96,12 +96,17 @@ const Tabs = ({ ...props }: TabsProps) => {
     }
   }, [props.orientation]);
 
+  useEffect(() => {
+    if (props.value) {
+      setValue(props.value);
+    }
+  }, [props.value]);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     if (props.onChange) {
       props.onChange(event, newValue);
-    } else {
-      setValue(newValue);
     }
+    setValue(newValue);
     updateIndicatorStyle(event.currentTarget as HTMLElement);
   };
 
@@ -129,6 +134,7 @@ const defaultProps: TabsProps = {
   variant: 'standard',
   tabIndex: 0,
   disabled: false,
+  onChange: undefined,
 };
 
 Tabs.defaultProps = defaultProps;
