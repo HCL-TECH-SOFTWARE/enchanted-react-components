@@ -16,6 +16,7 @@
 - Added `selected`, `showEndIcon`, `label` properties in `IconButton` component
 
 ### Fixed
+- corrected the hex value for HCLSOFTWAREBLUE06 to #003CE6
 
 ### Changed
 - Added hasThumbnail and disabled properties to the Tile component. 
