@@ -121,26 +121,7 @@ const VisualTestTemplate: StoryFn<typeof Preview> = (args) => {
             height: '400px',
           }}
         >
-          <Preview
-            {...args}
-            // assets={[
-            //   {
-            //     title: 'Business-workshop.png',
-            //     mediaType: {
-            //       mimeType: 'image/png',
-            //       extensions: ['png'],
-            //     },
-            //     renditions: [
-            //       {
-            //         id: '5',
-            //         type: 'Source',
-            //         source: 'Business-workshop.png',
-            //         dimension: '1000 x 400',
-            //       },
-            //     ],
-            //   },
-            // ]}
-          />
+          <Preview {...args} />
         </Box>
       </Box>
     </Box>
