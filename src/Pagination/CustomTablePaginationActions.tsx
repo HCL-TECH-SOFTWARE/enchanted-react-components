@@ -143,7 +143,9 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
           <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_ROWS_TOTAL}>
             {`${translation.rowsPerPageDescription.replace(
               TablePaginationLocalizationPlaceholders.CURRENT_PAGE_TO_END_PAGE,
-              `${currentPageShownStart}-${currentPageShownEnd < count ? currentPageShownEnd : count}`,
+              theme.direction === ThemeDirectionType.RTL
+                ? `${currentPageShownEnd < count ? currentPageShownEnd : count}-${currentPageShownStart}`
+                : `${currentPageShownStart}-${currentPageShownEnd < count ? currentPageShownEnd : count}`,
             ).replace(TablePaginationLocalizationPlaceholders.TOTAL_ROWS_COUNT, `${count}`)}`}
           </Typography>
           )}
