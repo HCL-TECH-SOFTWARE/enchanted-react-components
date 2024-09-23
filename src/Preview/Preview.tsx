@@ -14,7 +14,7 @@
  * ======================================================================== */
 import * as React from 'react';
 import {
-  Grid, SelectChangeEvent,
+  Theme, Grid, SelectChangeEvent,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconDownload from '@hcl-software/enchanted-icons/dist/carbon/es/download';
@@ -53,6 +53,7 @@ import { white } from '../colors';
  * @property {function} overrideHandleNext - Event handler that overrides the default next asset navigation
  * @property {boolean} isFetchingAssets - indicate whether the assets prop is still fetching, Note: even when this is false and asset is not finished rendering, <Preview /> will still show spinner
  * @property {boolean} customHeaderTitle - custom header title
+ * @property {boolean} isVersionComparison - check if the preivew is used for version comparison
 */
 
 export interface MediaType {
@@ -98,6 +99,7 @@ export interface PreviewProps {
   isFetchingAssets?: boolean;
   customHeaderTitle?: string;
   handleError?: (event: React.SyntheticEvent<HTMLVideoElement | HTMLImageElement, Event>) => void;
+  isVersionComparison?: boolean;
 }
 
 // Zoom button margin is 12px
@@ -294,6 +296,7 @@ const Preview: React.FC<PreviewProps> = ({
   isFetchingAssets = false,
   customHeaderTitle,
   handleError,
+  isVersionComparison = false,
 }: PreviewProps) => {
   const fallbackAssetValue: Assets[] = [
     {
@@ -607,6 +610,7 @@ const Preview: React.FC<PreviewProps> = ({
             sx={{
               transform: `scale(${zoomPercentage / 100})`,
               opacity: isCurrentAssetReady ? 1 : 0,
+              transformOrigin: (zoomPercentage === zoomDefault || zoomPercentage === zoomToFitPercentage) ? 'center' : 'top left',
             }}
             draggable="true"
             onLoad={handleImageLoad}
@@ -623,15 +627,23 @@ const Preview: React.FC<PreviewProps> = ({
       open={open}
       sx={{
         zIndex: 999,
+        position: isVersionComparison ? 'relative' : 'fixed',
+        backgroundColor: (scopedTheme: Theme) => { return scopedTheme.palette.background.secondary; },
       }}
     >
       <PreviewContainer
         container
         direction="column"
         justifyContent="flex-start"
+        sx={{
+          height: isVersionComparison ? '400px' : '100vh',
+        }}
       >
         <Grid>
           <Header
+            sx={{
+              display: isVersionComparison ? 'none' : '',
+            }}
             startSection={{
               hamburgerSpace: false,
               withBackButton: true,
@@ -704,31 +716,34 @@ const Preview: React.FC<PreviewProps> = ({
             justifyContent="space-between"
             alignItems="center"
             sx={{
-              height: `calc(100% - ${isVideo ? '55' : '61'}px)`,
+              height: `calc(100% - ${isVideo ? '55' : `${isVersionComparison ? '0' : '66'}`}px)`,
+              overflow: (zoomPercentage === zoomDefault || zoomPercentage === zoomToFitPercentage) ? 'hidden' : 'auto',
             }}
           >
-            <Tooltip
-              tooltipsize="small"
-              placement="bottom-start"
-              title={tooltipTexts.previousAsset}
-            >
-              <PreviousPreviewButton>
-                <StyledArrowButton
-                  data-testid={PreviewTestIds.PREVIEW_PREV_BUTTON}
-                  disabled={isPreviousDisabled}
-                  onClick={handlePreviousAsset}
-                >
-                  <ChevronLeft />
-                </StyledArrowButton>
-              </PreviousPreviewButton>
-            </Tooltip>
+            { !isVersionComparison && (
+              <Tooltip
+                tooltipsize="small"
+                placement="bottom-start"
+                title={tooltipTexts.previousAsset}
+              >
+                <PreviousPreviewButton>
+                  <StyledArrowButton
+                    data-testid={PreviewTestIds.PREVIEW_PREV_BUTTON}
+                    disabled={isPreviousDisabled}
+                    onClick={handlePreviousAsset}
+                  >
+                    <ChevronLeft />
+                  </StyledArrowButton>
+                </PreviousPreviewButton>
+              </Tooltip>
+            )}
             <>
               {(isCurrentAssetReady === false && reactComponent === undefined) && (
               <CircularProgressContainer
                 data-testid={PreviewTestIds.PREVIEW_CIRCULAR_PROGRESS}
                 container
                 sx={{
-                  height: `calc(100% - ${isVideo ? '55' : '61'}px)`,
+                  height: `calc(100% - ${isVideo ? '55' : `${isVersionComparison ? '0' : '66'}`}px)`,
                 }}
               >
                 <CircularProgress />
@@ -736,28 +751,34 @@ const Preview: React.FC<PreviewProps> = ({
               )}
               {renderOptions()}
             </>
-            <Tooltip
-              tooltipsize="small"
-              placement="bottom-end"
-              title={tooltipTexts.nextAsset}
-            >
-              <NextPreviewButton>
-                <StyledArrowButton
-                  data-testid={PreviewTestIds.PREVIEW_NEXT_BUTTON}
-                  disabled={isNextDisabled}
-                  onClick={handleNextAsset}
-                >
-                  <ChevronRight />
-                </StyledArrowButton>
-              </NextPreviewButton>
-            </Tooltip>
+            { !isVersionComparison && (
+              <Tooltip
+                tooltipsize="small"
+                placement="bottom-end"
+                title={tooltipTexts.nextAsset}
+              >
+                <NextPreviewButton>
+                  <StyledArrowButton
+                    data-testid={PreviewTestIds.PREVIEW_NEXT_BUTTON}
+                    disabled={isNextDisabled}
+                    onClick={handleNextAsset}
+                  >
+                    <ChevronRight />
+                  </StyledArrowButton>
+                </NextPreviewButton>
+              </Tooltip>
+            )}
           </ImageContainer>
           {(!isVideo && isCurrentAssetReady && reactComponent === undefined) && (
           <Grid
             container
             justifyContent="center"
           >
-            <ZoomContainer>
+            <ZoomContainer
+              sx={{
+                position: isVersionComparison ? 'absolute' : 'fixed',
+              }}
+            >
               <Tooltip
                 tooltipsize="small"
                 placement="top"

@@ -14,6 +14,7 @@
 - Added the `ToggleButtonGroup` component.
 - Added the `ProgressBar` component.
 - Added `selected`, `showEndIcon`, `label` properties in `IconButton` component
+- Added the `Preview` component.
 
 ### Fixed
 - corrected the hex value for HCLSOFTWAREBLUE06 to #003CE6
