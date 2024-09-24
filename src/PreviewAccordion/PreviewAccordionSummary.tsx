@@ -13,17 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, {
-  ReactNode, useEffect, useRef, useState,
-} from 'react';
+import React, { ReactNode } from 'react';
 import { styled } from '@mui/material/styles';
 import AccordionSummary, { AccordionSummaryProps } from '../Accordion/AccordionSummary';
 
-interface StyledMiddleSectionProps {
-  sectionWidth: string | number;
-}
-
-const StyledMiddleSection = styled('div')<StyledMiddleSectionProps>(({ theme, sectionWidth }) => {
+const StyledMiddleSection = styled('div')<AccordionSummaryProps>(() => {
   return {
     display: 'flex',
     alignItems: 'left',
@@ -115,36 +109,13 @@ const StyledAccordionSummary = styled(AccordionSummary)(({ theme, hoveractions }
 });
 
 const PreviewAccordionSummary = ({ ...props }: PreviewAccordionSummaryProps) => {
-  const linkSectionRef = useRef<HTMLDivElement>(null);
-  const [sectionWidth, setSectionWidth] = useState<number | string>(0);
-  const [calculateSectionWidth, setCalculateSectionWidth] = useState<boolean>(false);
-
-  useEffect(() => {
-    const updateWidth = () => {
-      if (linkSectionRef.current) {
-        const width = linkSectionRef.current.offsetWidth;
-        setSectionWidth(width);
-      }
-    };
-    updateWidth();
-    window.addEventListener('resize', updateWidth);
-    return () => {
-      window.removeEventListener('resize', updateWidth);
-    };
-  }, [calculateSectionWidth]);
-
-  useEffect(() => {
-    setSectionWidth('auto');
-    setCalculateSectionWidth(true);
-  }, [props.leftsection, props.rightsection]);
-
   return (
     <StyledAccordionSummary {...props}>
       <StyledLeftSection className="accordion-left-section">
         {props.leftsection}
       </StyledLeftSection>
       {props.titlelink && (
-        <StyledMiddleSection sectionWidth={sectionWidth} ref={linkSectionRef} className="accordion-link-section">
+        <StyledMiddleSection className="accordion-link-section">
           {props.titlelink && props.titlelink}
           {props.subtitle && <StyledSubSection className="sub-section">{props.subtitle}</StyledSubSection>}
         </StyledMiddleSection>
