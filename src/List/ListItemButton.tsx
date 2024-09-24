@@ -120,7 +120,7 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
               justifyContent: 'center',
               alignItems: 'center',
               ...secondaryActionStyle,
-              '.MuiButtonBase-root': {
+              '.IconButtonMainContainer': {
                 margin: '0 4px 0 0',
                 '&:last-child': {
                   margin: '0',
