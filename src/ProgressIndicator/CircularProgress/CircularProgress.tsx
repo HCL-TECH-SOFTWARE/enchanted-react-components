@@ -44,6 +44,7 @@ export enum CircularProgressTestIds {
  */
 export type CircularProgressProps = MuiCircularProgressProps & {
   showprogress?: boolean | 0 | 1,
+  withbackdrop?: boolean,
 }
 
 export const getMuiCircularProgressThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -53,11 +54,11 @@ export const getMuiCircularProgressThemeOverrides = (): Components<Omit<Theme, '
         root: ({ ownerState, theme }) => {
           return ({
             ...theme.typography.body2,
-            color: theme.palette.primary.main,
+            color: ownerState.withbackdrop ? theme.palette.info.inverse : theme.palette.primary.main,
             position: 'absolute',
             left: 0,
             ...(ownerState.variant === CircularProgressVariants.DETERMINATE && ownerState.id === CircularProgressTestIds.PROGRESS_TRAIL) && {
-              color: theme.palette.action.hover,
+              color: ownerState.withbackdrop ? theme.palette.action.hoverInverse : theme.palette.action.hover,
             },
             ...ownerState.variant === CircularProgressVariants.DETERMINATE && {
               '+ .MuiBox-root': { // styles the label element right next to a determinate progress circle
@@ -123,6 +124,7 @@ const defaultProps: CircularProgressProps = {
   size: 40,
   variant: CircularProgressVariants.INDETERMINATE,
   showprogress: 0,
+  withbackdrop: false,
   value: 0,
 };
 
