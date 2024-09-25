@@ -94,7 +94,18 @@ return (
 
 The library fully supports a RTL mode. Each new implemented component also needs to support the RTL mode.
 
-A `ltr` and `rtl` theme can be create via the `createEnchantedTheme()` method.
+---
+
+**_NOTE:_**
+
+The library uses `stylis-plugin-rtl` and `stylis` to achieve RTL support. We have locked the dependency requirement of this library for `stylis` at 4.0.13 due to `stylis`'s own maintenance issues. Please ensure that this is the deduped version of the dependency in your project's dependency tree.
+- To make sure your project's `stylis` version is at 4.0.13, first, run `npm ls stylis` to list down dependencies with a sub-dependency on `stylis`.
+- Next, uninstall and reinstall these dependencies one by one so that on reinstall, the package.json override config will tell npm to lock the dependency of `stylis` at 4.0.13. For example, for the dependency `stylis-plugin-rtl` with a subdependency on `stylis`, run `npm uninstall stylis-plugin-rtl`.
+- Then finally, run `npm install stylis-plugin-rtl`, to be safe, you may want to specify the semver here to the one in package.json `npm install stylist-plugin-rtl@{insert-semantic-version-here}`.
+
+---
+
+A `ltr` and `rtl` theme can be created via the `createEnchantedTheme()` method.
 
 For 'rtl' support the `DirectionStyleProvider` is also needed. This component should wrap the `ThemeProvider`. Here is a short example, how this could look like:
 
