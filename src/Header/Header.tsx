@@ -235,6 +235,7 @@ const Header = ({ ...props }: HeaderProps) => {
                 <IconButton
                   onClick={() => { onClickBackButton(); }}
                   data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
+                  showendicon={0}
                 >
                   { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
                 </IconButton>
@@ -246,6 +247,7 @@ const Header = ({ ...props }: HeaderProps) => {
                 <IconButton
                   onClick={() => { onClickBackButton(); }}
                   data-testid={HeaderTestIds.HEADER_BACK_BUTTON}
+                  showendicon={0}
                 >
                   { theme.direction === ThemeDirectionType.RTL ? <ArrowRight /> : <ArrowLeft /> }
                 </IconButton>
@@ -292,6 +294,7 @@ const Header = ({ ...props }: HeaderProps) => {
                 size={IconButtonSizes.SMALL}
                 onClick={() => { onClickFavoritesToggle(); }}
                 data-testid={HeaderTestIds.HEADER_FAVORITES_TOGGLE}
+                showendicon={0}
               >
                 {startSection.favoritesToggleIcon}
               </IconButton>

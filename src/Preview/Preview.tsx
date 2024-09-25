@@ -681,17 +681,20 @@ const Preview: React.FC<PreviewProps> = ({
                 placement="bottom"
                 title={tooltipTexts.download}
               >
-                <IconButton
-                  data-testid={PreviewTestIds.PREVIEW_DOWNLOAD_BUTTON}
-                  variant={IconButtonVariants.WITH_PADDING}
-                  disabled={!isCurrentAssetReady || reactComponent !== undefined}
-                  onClick={(e) => {
-                    const selectRenditionId = currentRendition.id;
-                    if (handleDownload) handleDownload(e, selectRenditionId);
-                  }}
-                >
-                  <IconDownload />
-                </IconButton>
+                <span>
+                  <IconButton
+                    data-testid={PreviewTestIds.PREVIEW_DOWNLOAD_BUTTON}
+                    variant={IconButtonVariants.WITH_PADDING}
+                    disabled={!isCurrentAssetReady || reactComponent !== undefined || isVersionComparison}
+                    onClick={(e) => {
+                      const selectRenditionId = currentRendition.id;
+                      if (handleDownload) handleDownload(e, selectRenditionId);
+                    }}
+                    showendicon={0}
+                  >
+                    <IconDownload />
+                  </IconButton>
+                </span>
               </Tooltip>,
               <Button
                 data-testid={PreviewTestIds.PREVIEW_SELECT_BUTTON}
@@ -727,13 +730,15 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.previousAsset}
               >
                 <PreviousPreviewButton>
-                  <StyledArrowButton
-                    data-testid={PreviewTestIds.PREVIEW_PREV_BUTTON}
-                    disabled={isPreviousDisabled}
-                    onClick={handlePreviousAsset}
-                  >
-                    <ChevronLeft />
-                  </StyledArrowButton>
+                  <span>
+                    <StyledArrowButton
+                      data-testid={PreviewTestIds.PREVIEW_PREV_BUTTON}
+                      disabled={isPreviousDisabled || isVersionComparison}
+                      onClick={handlePreviousAsset}
+                    >
+                      <ChevronLeft />
+                    </StyledArrowButton>
+                  </span>
                 </PreviousPreviewButton>
               </Tooltip>
             )}
@@ -758,13 +763,15 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.nextAsset}
               >
                 <NextPreviewButton>
-                  <StyledArrowButton
-                    data-testid={PreviewTestIds.PREVIEW_NEXT_BUTTON}
-                    disabled={isNextDisabled}
-                    onClick={handleNextAsset}
-                  >
-                    <ChevronRight />
-                  </StyledArrowButton>
+                  <span>
+                    <StyledArrowButton
+                      data-testid={PreviewTestIds.PREVIEW_NEXT_BUTTON}
+                      disabled={isNextDisabled || isVersionComparison}
+                      onClick={handleNextAsset}
+                    >
+                      <ChevronRight />
+                    </StyledArrowButton>
+                  </span>
                 </NextPreviewButton>
               </Tooltip>
             )}
@@ -789,6 +796,7 @@ const Preview: React.FC<PreviewProps> = ({
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   disabled={zoomOutDisable}
                   onClick={handleZoomOut}
+                  showendicon={0}
                 >
                   <IconZoomOut />
                 </StyledIconButton>
@@ -818,6 +826,7 @@ const Preview: React.FC<PreviewProps> = ({
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   disabled={zoomInDisable}
                   onClick={handleZoomIn}
+                  showendicon={0}
                 >
                   <IconZoomIn />
                 </StyledIconButton>

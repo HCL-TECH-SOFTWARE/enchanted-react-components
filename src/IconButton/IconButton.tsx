@@ -162,7 +162,7 @@ export type IconButtonProps = MuiIconButtonProps & {
   color?: 'default',
   selected?: boolean,
   label?: string,
-  showendicon?: boolean,
+  showendicon?: boolean | 0 | 1,
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
