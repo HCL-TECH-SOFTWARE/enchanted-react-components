@@ -610,7 +610,6 @@ const Preview: React.FC<PreviewProps> = ({
             sx={{
               transform: `scale(${zoomPercentage / 100})`,
               opacity: isCurrentAssetReady ? 1 : 0,
-              transformOrigin: (zoomPercentage === zoomDefault || zoomPercentage === zoomToFitPercentage) ? 'center' : 'top left',
             }}
             draggable="true"
             onLoad={handleImageLoad}
