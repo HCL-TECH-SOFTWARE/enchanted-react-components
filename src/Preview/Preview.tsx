@@ -734,6 +734,7 @@ const Preview: React.FC<PreviewProps> = ({
                       data-testid={PreviewTestIds.PREVIEW_PREV_BUTTON}
                       disabled={isPreviousDisabled || isVersionComparison}
                       onClick={handlePreviousAsset}
+                      showendicon={0}
                     >
                       <ChevronLeft />
                     </StyledArrowButton>
@@ -750,7 +751,7 @@ const Preview: React.FC<PreviewProps> = ({
                   height: `calc(100% - ${isVideo ? '55' : `${isVersionComparison ? '0' : '66'}`}px)`,
                 }}
               >
-                <CircularProgress />
+                <CircularProgress withbackdrop={0} />
               </CircularProgressContainer>
               )}
               {renderOptions()}
@@ -767,6 +768,7 @@ const Preview: React.FC<PreviewProps> = ({
                       data-testid={PreviewTestIds.PREVIEW_NEXT_BUTTON}
                       disabled={isNextDisabled || isVersionComparison}
                       onClick={handleNextAsset}
+                      showendicon={0}
                     >
                       <ChevronRight />
                     </StyledArrowButton>

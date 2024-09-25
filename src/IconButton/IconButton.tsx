@@ -181,7 +181,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           className={`${props.selected ? 'selected' : ''} ${props.className}`}
         >
           {props.children}
-          { props.showendicon && (
+          { (props.showendicon === 1 || props.showendicon === true) && (
             <IconChevronDown
               className="endIcon"
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
