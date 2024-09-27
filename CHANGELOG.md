@@ -35,6 +35,7 @@
 - Adjusted `IconButton` component styling
 - Added tooltips to the icons in the pagination, dialog, header, and snackbar components.
 - Added `withbackdrop` props to the circular progress component
+- Added a prop to the `Preview` component for a version comparison.
 
 ### Breaking changes
 

@@ -17,6 +17,7 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 
 import IconAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
+import { Box } from '@mui/material';
 import Preview, { PreviewProps } from './Preview';
 import Avatar, { AvatarColors, AvatarTypes } from '../Avatar';
 import Typography from '../Typography';
@@ -63,6 +64,10 @@ export default {
     isFetchingAssets: {
       description: 'It indicates whether the assets prop is still fetching',
     },
+    isVersionComparison: {
+      description: 'It indicates whether the preview component is used for version comparison',
+      type: 'boolean',
+    },
     isNextButtonDisabled: {
       description: 'Enable/disable next button.',
     },
@@ -99,6 +104,28 @@ const tooltipTexts: PreviewProps['tooltipTexts'] = {
   previousAsset: 'Previous asset',
   nextAsset: 'Next asset',
   download: 'Download asset',
+};
+
+const VisualTestTemplate: StoryFn<typeof Preview> = (args) => {
+  return (
+    <Box>
+      <Box>
+        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+          Visual Test for Version Comparison - Preview
+        </Typography>
+      </Box>
+      <Box>
+        <Box
+          sx={{
+            width: '621.5px',
+            height: '400px',
+          }}
+        >
+          <Preview {...args} />
+        </Box>
+      </Box>
+    </Box>
+  );
 };
 
 const Template: StoryFn<typeof Preview> = (args) => {
@@ -175,6 +202,7 @@ export const ExampleImagePreview = {
     isFetchingAssets: false,
     selectButtonTitle: 'Select',
     tooltipTexts,
+    isVersionComparison: false,
   },
 };
 
@@ -228,4 +256,32 @@ export const ExampleComponentPreview = {
     tooltipTexts,
     reactComponent: sampleComponent(),
   },
+};
+
+export const VisualTest = VisualTestTemplate.bind({});
+VisualTest.parameters = {
+  options: { showPanel: false },
+};
+
+VisualTest.args = {
+  ...Preview.defaultProps,
+  assets: [
+    {
+      title: 'Hanging-chair.png',
+      mediaType: {
+        mimeType: 'image/png',
+        extensions: ['png'],
+      },
+      renditions: [
+        {
+          id: '4',
+          type: 'Source',
+          source: 'Hanging-chair.png',
+          dimension: '4928 x 3264',
+        },
+      ],
+    },
+  ],
+  tooltipTexts,
+  isVersionComparison: true,
 };

@@ -162,7 +162,7 @@ export type IconButtonProps = MuiIconButtonProps & {
   color?: 'default',
   selected?: boolean,
   label?: string,
-  showendicon?: boolean,
+  showendicon?: boolean | 0 | 1,
 }
 
 const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
@@ -181,7 +181,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           className={`${props.selected ? 'selected' : ''} ${props.className}`}
         >
           {props.children}
-          { props.showendicon && (
+          { (props.showendicon === 1 || props.showendicon === true) && (
             <IconChevronDown
               className="endIcon"
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
