@@ -131,7 +131,11 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                       justifyContent="flex-end"
                       alignItems="center"
                     >
-                      <Grid>
+                      <Grid
+                        sx={{
+                          display: 'flex',
+                        }}
+                      >
                         {tab.content.actionHeaderBar}
                       </Grid>
                       {toggleClose && (

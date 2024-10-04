@@ -147,6 +147,7 @@ export const getMuiAvatarThemeOverrides = (): Components<Omit<Theme, 'components
             '&.MuiAvatar-root': {
               height: '24px',
               width: '24px',
+              boxSizing: 'border-box',
               border: `1px solid ${theme.palette.border.secondary}`,
               display: 'flex',
               justifyContent: 'center',
