@@ -165,7 +165,7 @@ export type IconButtonProps = MuiIconButtonProps & {
   showendicon?: boolean | 0 | 1,
 }
 
-const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
+const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps, forwardRef) => {
   return (
     <StyledMainContainer
       className={`IconButtonMainContainer ${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
@@ -181,7 +181,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           className={`${props.selected ? 'selected' : ''} ${props.className}`}
         >
           {props.children}
-          { (props.showendicon === 1 || props.showendicon === true) && (
+          { (showendicon === 1 || showendicon === true) && (
             <IconChevronDown
               className="endIcon"
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
