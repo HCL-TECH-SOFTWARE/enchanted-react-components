@@ -14,7 +14,7 @@
  * ======================================================================== */
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import Tooltip, {
   TooltipPlacement, TooltipSizes, TooltipTypes,
 } from './Tooltip';
