@@ -14,9 +14,9 @@
  * ======================================================================== */
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Grid } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import Tooltip, {
-  TooltipPlacement, TooltipSizes, TooltipTypes, TooltipTitleType,
+  TooltipPlacement, TooltipSizes, TooltipTypes,
 } from './Tooltip';
 import Button from '../Button';
 
@@ -78,13 +78,6 @@ export default {
     title: {
       description: 'Tooltip title. Zero-length titles string, undefined, null and false are never displayed.',
       if: { arg: 'interactive' },
-      options: [TooltipTitleType.STRING, TooltipTitleType.HTMLNODE],
-      control: { type: 'radio' },
-      table: {
-        defaultValue: {
-          summary: 'string',
-        },
-      },
     },
     ref: {
       description: 'https://mui.com/material-ui/api/tooltip/',
