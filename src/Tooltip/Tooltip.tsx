@@ -42,7 +42,7 @@ export enum TooltipPlacement {
 }
 
 export type TooltipProps = MuiTooltipProps & {
-  title?: React.ReactNode, // DXQ-37812-Updated to accept both string and HTML node
+  title?: React.ReactNode, // Updated to accept both string and HTML node
   type?: string,
   maxwidth?: number,
   tooltipsize?: string,
