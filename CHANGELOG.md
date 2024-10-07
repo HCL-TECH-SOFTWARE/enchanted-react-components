@@ -36,6 +36,8 @@
 - Added tooltips to the icons in the pagination, dialog, header, and snackbar components.
 - Added `withbackdrop` props to the circular progress component
 - Added a prop to the `Preview` component for a version comparison.
+- Updated breadcrumb icons to reflect directionality (RTL/LTR)
+- Resolved spacing issues for icon buttons in the panel component.
 
 ### Breaking changes
 
