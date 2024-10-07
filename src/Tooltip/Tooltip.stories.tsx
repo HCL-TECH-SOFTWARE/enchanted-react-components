@@ -14,7 +14,7 @@
  * ======================================================================== */
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Grid } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import Tooltip, {
   TooltipPlacement, TooltipSizes, TooltipTypes,
 } from './Tooltip';
@@ -304,6 +304,30 @@ const VisualTestTemplate: StoryFn<typeof Tooltip> = (args) => {
         tooltipsize="Small"
         placement="bottom-start"
         title="SingleLine tooltip. Small Size. Placement at the bottom-start. This should be set to a fixed width that is easy to quickly scan or read."
+      >
+        <Button sx={{
+          position: 'absolute',
+          left: '0',
+          marginLeft: '8px',
+        }}
+        >
+          Button
+        </Button>
+      </Tooltip>
+      <Tooltip
+        {...args}
+        maxwidth={327}
+        tooltipsize="Small"
+        placement="bottom-start"
+        title={(
+          <Box>
+            List
+            <ul style={{ margin: 0, paddingLeft: 20 }}>
+              <Typography variant="body2" sx={{ display: 'list-item' }}>Line 1</Typography>
+              <Typography variant="body2" sx={{ display: 'list-item' }}>Line 2</Typography>
+            </ul>
+          </Box>
+        )}
       >
         <Button sx={{
           position: 'absolute',
