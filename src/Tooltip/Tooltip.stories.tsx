@@ -333,9 +333,6 @@ const InteractiveExampleTemplate: StoryFn<typeof Tooltip> = (args) => {
       </Tooltip>
       <Tooltip
         {...args}
-        maxwidth={327}
-        tooltipsize="Small"
-        placement="bottom-start"
         title={(
           <Box>
             Rich Tooltip
