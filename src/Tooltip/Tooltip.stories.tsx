@@ -14,7 +14,7 @@
  * ======================================================================== */
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Grid, Box, Typography } from '@mui/material';
+import { Grid, Box, Typography, List } from '@mui/material';
 import Tooltip, {
   TooltipPlacement, TooltipSizes, TooltipTypes,
 } from './Tooltip';
@@ -314,30 +314,6 @@ const VisualTestTemplate: StoryFn<typeof Tooltip> = (args) => {
           Button
         </Button>
       </Tooltip>
-      <Tooltip
-        {...args}
-        maxwidth={327}
-        tooltipsize="Small"
-        placement="bottom-start"
-        title={(
-          <Box>
-            List
-            <ul style={{ margin: 0, paddingLeft: 20 }}>
-              <Typography variant="body2" sx={{ display: 'list-item' }}>Line 1</Typography>
-              <Typography variant="body2" sx={{ display: 'list-item' }}>Line 2</Typography>
-            </ul>
-          </Box>
-        )}
-      >
-        <Button sx={{
-          position: 'absolute',
-          left: '0',
-          marginLeft: '8px',
-        }}
-        >
-          Button
-        </Button>
-      </Tooltip>
     </Grid>
   );
 };
@@ -345,16 +321,41 @@ const VisualTestTemplate: StoryFn<typeof Tooltip> = (args) => {
 const InteractiveExampleTemplate: StoryFn<typeof Tooltip> = (args) => {
   // Placed button in center position of the screen to test all tooltip placements
   return (
-    <Tooltip {...args}>
-      <Button sx={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-      }}
+    <>
+      <Tooltip {...args}>
+        <Button sx={{
+          position: 'absolute',
+          left: '50%'
+        }}
+        >
+          Button
+        </Button>
+      </Tooltip>
+      <Tooltip
+        {...args}
+        maxwidth={327}
+        tooltipsize="Small"
+        placement="bottom-start"
+        title={(
+          <Box>
+            Rich Tooltip
+            <ul style={{ margin: 0, paddingLeft: 20 }}>
+              <Typography variant="body2" sx={{ display: 'list-item' }}>Can add Html/React node like list.</Typography>
+              <Typography variant="body2" sx={{ display: 'list-item' }}>Can add icons/images in tooltip</Typography>
+            </ul>
+          </Box>
+        )}
       >
-        Button
-      </Button>
-    </Tooltip>
+        <Button sx={{
+          position: 'absolute',
+          top: '70%',
+          left: '50%'
+        }}
+        >
+          Rich Tooltip Button
+        </Button>
+      </Tooltip>
+    </>
   );
 };
 
