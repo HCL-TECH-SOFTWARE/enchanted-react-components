@@ -325,7 +325,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Tooltip> = (args) => {
       <Tooltip {...args}>
         <Button sx={{
           position: 'absolute',
-          left: '50%'
+          left: '50%',
         }}
         >
           Button
@@ -346,7 +346,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Tooltip> = (args) => {
         <Button sx={{
           position: 'absolute',
           top: '70%',
-          left: '50%'
+          left: '50%',
         }}
         >
           Rich Tooltip Button
