@@ -24,6 +24,7 @@ import { styled } from '@mui/material/styles';
 import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
+import { TooltipPlacement } from '../Tooltip';
 
 /**
  * @typedef AutocompleteProps
@@ -38,10 +39,11 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   nonEdit?: boolean;
   helperText?: string;
   helperIconTooltip?: string;
+  tooltipPlacement?: TooltipPlacement;
   label?: string;
   required?: boolean;
-  focused?:boolean;
-  hiddenLabel?:boolean;
+  focused?: boolean;
+  hiddenLabel?: boolean;
   size?: 'medium';
   autoFocus?: boolean;
   clearIcon?: React.ReactNode;
@@ -85,6 +87,7 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
     id: inputLabelId,
     label: props.label,
     helperIconTooltip: props.helperIconTooltip,
+    tooltipPlacement: props.tooltipPlacement,
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     isFocus,
