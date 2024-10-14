@@ -42,8 +42,7 @@ export default {
           summary: false,
         },
       },
-      description:
-        'Indicates the combobox value is invalid.',
+      description: 'Indicates the combobox value is invalid.',
     },
     emptyOptions: {
       control: 'boolean',
@@ -56,7 +55,32 @@ export default {
           summary: 'Some information about that component.',
         },
       },
-      description: 'Tooltip text hovering on ? mark for MultiSelectChip component',
+      description:
+        'Tooltip text hovering on ? mark for MultiSelectChip component',
+    },
+    tooltipPlacement: {
+      description:
+        'Tooltip placement for ? mark for MultiSelectChip component.',
+      options: [
+        TooltipPlacement.TOPSTART,
+        TooltipPlacement.TOP,
+        TooltipPlacement.TOPEND,
+        TooltipPlacement.RIGHTSTART,
+        TooltipPlacement.RIGHT,
+        TooltipPlacement.RIGHTEND,
+        TooltipPlacement.BOTTOMEND,
+        TooltipPlacement.BOTTOM,
+        TooltipPlacement.BOTTOMSTART,
+        TooltipPlacement.LEFTEND,
+        TooltipPlacement.LEFT,
+        TooltipPlacement.LEFTSTART,
+      ],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: TooltipPlacement.BOTTOM,
+        },
+      },
     },
     tooltipPlacement: {
       description: 'Tooltip placement.',
@@ -77,7 +101,8 @@ export default {
           summary: true,
         },
       },
-      description: 'Indicates that multiSelectchip is required field if it is true',
+      description:
+        'Indicates that multiSelectchip is required field if it is true',
     },
     label: {
       table: {
@@ -96,10 +121,12 @@ export default {
       description: 'The helper text content.',
     },
     sx: {
-      description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      description:
+        'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
     placeholder: {
-      description: 'The short hint displayed in the input before the user enters a value.',
+      description:
+        'The short hint displayed in the input before the user enters a value.',
       table: {
         defaultValue: {
           summary: 'Placeholder',
@@ -122,8 +149,7 @@ export default {
           summary: false,
         },
       },
-      description:
-        'If `true`, the label is hidden.',
+      description: 'If `true`, the label is hidden.',
     },
     nonEdit: {
       control: 'boolean',
@@ -141,7 +167,8 @@ export default {
       description: 'If true, the component is disabled.',
     },
     fullWidth: {
-      description: 'If true, the input will take up the full width of its container.',
+      description:
+        'If true, the input will take up the full width of its container.',
       table: {
         defaultValue: {
           summary: false,
@@ -169,8 +196,7 @@ export default {
     },
     clearIcon: {
       control: false,
-      description:
-        'The clear Icon used to clear chips.',
+      description: 'The clear Icon used to clear chips.',
     },
     endAdornmentAction: {
       control: false,
