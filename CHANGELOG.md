@@ -14,8 +14,10 @@
 - Added the `ToggleButtonGroup` component.
 - Added the `ProgressBar` component.
 - Added `selected`, `showEndIcon`, `label` properties in `IconButton` component
+- Added `PreviewAccordion` component
 
 ### Fixed
+- corrected the hex value for HCLSOFTWAREBLUE06 to #003CE6
 
 ### Changed
 - Added hasThumbnail and disabled properties to the Tile component. 
@@ -32,6 +34,11 @@
 - Added sync icon for the Tile component.
 - Adjusted `IconButton` component styling
 - Added tooltips to the icons in the pagination, dialog, header, and snackbar components.
+- Added `withbackdrop` props to the circular progress component
+- Added a prop to the `Preview` component for a version comparison.
+- Updated breadcrumb icons to reflect directionality (RTL/LTR)
+- Resolved spacing issues for icon buttons in the panel component.
+- Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
 
 ### Breaking changes
 

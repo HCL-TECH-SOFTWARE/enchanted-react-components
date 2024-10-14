@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { Box, Components, Theme } from '@mui/material';
+import { Components, Theme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MuiIconButton, { IconButtonProps as MuiIconButtonProps } from '@mui/material/IconButton';
 import IconChevronDown from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
@@ -33,7 +33,7 @@ export enum IconButtonTestIds {
   ICONBUTTON_END_ICON = 'iconButtonEndIcon',
 }
 
-const StyledMainContainer = styled(Box)((theme) => {
+const StyledMainContainer = styled('div')((theme) => {
   return {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -55,7 +55,7 @@ const StyledMainContainer = styled(Box)((theme) => {
   };
 });
 
-const StyledSubContainer = styled(Box)((theme) => {
+const StyledSubContainer = styled('div')((theme) => {
   return {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -162,13 +162,13 @@ export type IconButtonProps = MuiIconButtonProps & {
   color?: 'default',
   selected?: boolean,
   label?: string,
-  showendicon?: boolean,
+  showendicon?: boolean | 0 | 1,
 }
 
-const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) => {
+const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps, forwardRef) => {
   return (
     <StyledMainContainer
-      className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
+      className={`IconButtonMainContainer ${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
     >
       <StyledSubContainer
         className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
@@ -181,7 +181,7 @@ const IconButton = React.forwardRef(({ ...props }: IconButtonProps, forwardRef) 
           className={`${props.selected ? 'selected' : ''} ${props.className}`}
         >
           {props.children}
-          { props.showendicon && (
+          { (showendicon === 1 || showendicon === true) && (
             <IconChevronDown
               className="endIcon"
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}

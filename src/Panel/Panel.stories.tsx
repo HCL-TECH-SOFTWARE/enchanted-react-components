@@ -15,12 +15,11 @@
 
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Grid } from '@mui/material';
 import IconTools from '@hcl-software/enchanted-icons/dist/carbon/es/tools';
 import IconDocument from '@hcl-software/enchanted-icons/dist/carbon/es/document';
 import IconOverflowHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';
 
-import IconButton, { IconButtonVariants } from '../IconButton/IconButton';
+import IconButton from '../IconButton/IconButton';
 import Panel from './Panel';
 import PlaceholderArea from '../utils/PlaceholderArea';
 
@@ -109,14 +108,9 @@ const tabList = [{
     title: 'Properties',
     body: samplePropertiesContent(),
     actionHeaderBar: (
-      <Grid>
-        <IconButton
-          size="small"
-          variant={IconButtonVariants.WITH_PADDING}
-        >
-          <IconOverflowHorizontal />
-        </IconButton>
-      </Grid>
+      <IconButton>
+        <IconOverflowHorizontal />
+      </IconButton>
     ),
   },
 }, {

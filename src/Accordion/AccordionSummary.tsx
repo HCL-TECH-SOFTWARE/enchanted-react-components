@@ -17,7 +17,7 @@ import React, { ReactNode } from 'react';
 import MuiAccordionSummary, { AccordionSummaryProps as MuiAccordionSummaryProps } from '@mui/material/AccordionSummary';
 import { styled } from '@mui/material/styles';
 
-interface AccordionSummaryProps extends MuiAccordionSummaryProps {
+export interface AccordionSummaryProps extends MuiAccordionSummaryProps {
   hoveractions?: ReactNode;
 }
 
@@ -84,10 +84,10 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
       opacity: '1',
     },
     '& .hover-actions': {
-      '.MuiButtonBase-root': {
+      '.IconButtonMainContainer': {
         marginLeft: '8px',
       },
-      '.MuiButtonBase-root:first-of-type': {
+      '.IconButtonMainContainer:first-of-type': {
         marginLeft: '0',
       },
     },

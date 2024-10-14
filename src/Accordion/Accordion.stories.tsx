@@ -110,10 +110,24 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
   };
   const hoveractions = (
     <>
-      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} onBlur={() => { return null; }} onClick={() => { return null; }} id="1">
+      <IconButton
+        size="small"
+        variant={IconButtonVariants.WITHOUT_PADDING}
+        onBlur={() => { return null; }}
+        onClick={() => { return null; }}
+        id="1"
+        showendicon={0}
+      >
         <RocketIcon />
       </IconButton>
-      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} onBlur={() => { return null; }} onClick={() => { return null; }} id="2">
+      <IconButton
+        size="small"
+        variant={IconButtonVariants.WITHOUT_PADDING}
+        onBlur={() => { return null; }}
+        onClick={() => { return null; }}
+        id="2"
+        showendicon={0}
+      >
         <RocketIcon />
       </IconButton>
     </>
@@ -126,7 +140,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING}><ChevronDownIcon /></IconButton>)}
+          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}><ChevronDownIcon /></IconButton>)}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
@@ -159,7 +173,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
@@ -192,7 +206,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
@@ -244,7 +258,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
     <>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
@@ -271,7 +285,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
       </Accordion>
       <Accordion disabled={disabled} {...args} hasNested>
         <AccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
@@ -295,7 +309,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
         <AccordionDetails>
           <Accordion type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -307,7 +321,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
           </Accordion>
           <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -319,7 +333,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
           </Accordion>
           <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
@@ -333,7 +347,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
       </Accordion>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
+          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
           aria-controls="panel1-content"
           id="panel1-header"
           disabled={disabled}
