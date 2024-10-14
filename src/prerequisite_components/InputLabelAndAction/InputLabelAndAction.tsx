@@ -17,7 +17,7 @@ import MuiInputLabel, { InputLabelProps as MuiInputLabelProps } from '@mui/mater
 import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
 import { styled, Theme } from '@mui/material';
-import Tooltip from '../../Tooltip';
+import Tooltip, { TooltipPlacement } from '../../Tooltip';
 import Link, { LinkProps } from '../../Link';
 
 export interface ActionProps {
@@ -31,7 +31,7 @@ export interface ActionProps {
 export interface InputLabelAndActionProps extends MuiInputLabelProps {
   actionProps?: ActionProps[];
   helperIconTooltip?: string;
-  tooltipPlacement?: string;
+  tooltipPlacement?: TooltipPlacement;
   hiddenLabel?: boolean;
   label?: ReactNode;
   isFocus?: boolean;
@@ -102,11 +102,18 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
               maxWidth: '120px', // half of default 240px
             },
           };
-        }}
-      >
+        }}>
         {props.label}
       </StyledInputLabel>
-      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip} placement={props.tooltipPlacement}><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
+      {props.helperIconTooltip ? (
+        <Tooltip
+          title={props.helperIconTooltip}
+          placement={ props.tooltipPlacement|| TooltipPlacement.BOTTOM }>
+          <MuiInputHelpIcon color='action' fontSize='small' />
+        </Tooltip>
+      ) : (
+        ''
+      )}
     </>
   );
 };

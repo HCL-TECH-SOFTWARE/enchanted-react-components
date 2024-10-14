@@ -82,18 +82,6 @@ export default {
         },
       },
     },
-    tooltipPlacement: {
-      description: 'Tooltip placement.',
-      options: [TooltipPlacement.TOPSTART, TooltipPlacement.TOP, TooltipPlacement.TOPEND, TooltipPlacement.RIGHTSTART, TooltipPlacement.RIGHT, TooltipPlacement.RIGHTEND,
-        TooltipPlacement.BOTTOMEND, TooltipPlacement.BOTTOM, TooltipPlacement.BOTTOMSTART, TooltipPlacement.LEFTEND, TooltipPlacement.LEFT,
-        TooltipPlacement.LEFTSTART],
-      control: { type: 'radio' },
-      table: {
-        defaultValue: {
-          summary: TooltipPlacement.BOTTOM,
-        },
-      },
-    },
     required: {
       control: 'boolean',
       table: {
