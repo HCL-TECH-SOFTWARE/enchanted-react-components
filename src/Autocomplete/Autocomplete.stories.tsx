@@ -21,6 +21,7 @@ import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
+import { TooltipPlacement } from '../Tooltip';
 
 export default {
   title: 'Inputs/Autocomplete',
@@ -48,7 +49,31 @@ export default {
           summary: 'Some information about that component.',
         },
       },
-      description: 'Tooltip text hovering on  ? mark for autocomplete component',
+      description:
+        'Tooltip text hovering on ? mark for Autocomplete component',
+    },
+    tooltipPlacement: {
+      description: 'Tooltip placement for ? mark for Autocomplete component.',
+      options: [
+        TooltipPlacement.TOPSTART,
+        TooltipPlacement.TOP,
+        TooltipPlacement.TOPEND,
+        TooltipPlacement.RIGHTSTART,
+        TooltipPlacement.RIGHT,
+        TooltipPlacement.RIGHTEND,
+        TooltipPlacement.BOTTOMEND,
+        TooltipPlacement.BOTTOM,
+        TooltipPlacement.BOTTOMSTART,
+        TooltipPlacement.LEFTEND,
+        TooltipPlacement.LEFT,
+        TooltipPlacement.LEFTSTART,
+      ],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: TooltipPlacement.BOTTOM,
+        },
+      },
     },
     placeholder: {
       table: {
@@ -65,7 +90,8 @@ export default {
           summary: true,
         },
       },
-      description: 'Indicates that autocomplete is required field if it is true',
+      description:
+        'Indicates that autocomplete is required field if it is true',
     },
     disabled: {
       control: 'boolean',
@@ -93,7 +119,8 @@ export default {
           summary: false,
         },
       },
-      description: 'If `true`, the input will take up the full width of its container.',
+      description:
+        'If `true`, the input will take up the full width of its container.',
     },
     focused: {
       control: 'boolean',
@@ -124,13 +151,15 @@ export default {
       description: 'If `true` value cannot be editable',
     },
     sx: {
-      description: 'The sx prop lets you work with a superset of CSS that packages all of the style functions exposed in @mui/system .',
+      description:
+        'The sx prop lets you work with a superset of CSS that packages all of the style functions exposed in @mui/system .',
     },
     options: {
       description: 'Array of options.',
     },
     freeSolo: {
-      description: 'If true, the Autocomplete is free solo, meaning that the user input is not bound to provided options.',
+      description:
+        'If true, the Autocomplete is free solo, meaning that the user input is not bound to provided options.',
     },
     actionProps: {
       control: false,
@@ -160,7 +189,8 @@ export default {
           summary: 'medium',
         },
       },
-      description: 'https://mui.com/material-ui/api/autocomplete/#autocomplete-prop-size',
+      description:
+        'https://mui.com/material-ui/api/autocomplete/#autocomplete-prop-size',
     },
     autoFocus: {
       control: false,
@@ -214,6 +244,7 @@ export const ExampleAutocomplete = {
     label: 'Label',
     helperText: 'Helper text',
     helperIconTooltip: 'Some information about that component.',
+    tooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',
     required: true,
     disabled: false,

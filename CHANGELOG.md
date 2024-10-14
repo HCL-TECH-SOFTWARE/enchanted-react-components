@@ -39,6 +39,7 @@
 - Updated breadcrumb icons to reflect directionality (RTL/LTR)
 - Resolved spacing issues for icon buttons in the panel component.
 - Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
+- Added `tooltipPlacement` prop to the `MultipleSelectChip` & `Autocomplete` component. 
 
 ### Breaking changes
 
