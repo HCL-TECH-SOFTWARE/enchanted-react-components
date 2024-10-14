@@ -38,6 +38,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   nonEdit?: boolean;
   helperText?: string;
   helperIconTooltip?: string;
+  tooltipPlacement?: string;
   label?: string;
   required?: boolean;
   focused?:boolean;
@@ -85,6 +86,7 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
     id: inputLabelId,
     label: props.label,
     helperIconTooltip: props.helperIconTooltip,
+    tooltipPlacement: props.tooltipPlacement,
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     isFocus,

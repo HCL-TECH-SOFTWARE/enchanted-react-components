@@ -31,6 +31,7 @@ export interface ActionProps {
 export interface InputLabelAndActionProps extends MuiInputLabelProps {
   actionProps?: ActionProps[];
   helperIconTooltip?: string;
+  tooltipPlacement?: string;
   hiddenLabel?: boolean;
   label?: ReactNode;
   isFocus?: boolean;
@@ -105,7 +106,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
       >
         {props.label}
       </StyledInputLabel>
-      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip} placement="top"><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
+      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip} placement={props.tooltipPlacement}><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
     </>
   );
 };

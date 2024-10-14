@@ -24,6 +24,7 @@ import MenuItem from '../../Menu/MenuItem';
 import ListItemIcon from '../../List/ListItemIcon';
 import ListItemText from '../../List/ListItemText';
 import { IFilm, top100Films } from '../../Autocomplete/data';
+import { TooltipPlacement } from '../../Tooltip';
 
 interface IChip {
   label: string;
@@ -56,6 +57,18 @@ export default {
         },
       },
       description: 'Tooltip text hovering on ? mark for MultiSelectChip component',
+    },
+    tooltipPlacement: {
+      description: 'Tooltip placement.',
+      options: [TooltipPlacement.TOPSTART, TooltipPlacement.TOP, TooltipPlacement.TOPEND, TooltipPlacement.RIGHTSTART, TooltipPlacement.RIGHT, TooltipPlacement.RIGHTEND,
+        TooltipPlacement.BOTTOMEND, TooltipPlacement.BOTTOM, TooltipPlacement.BOTTOMSTART, TooltipPlacement.LEFTEND, TooltipPlacement.LEFT,
+        TooltipPlacement.LEFTSTART],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: TooltipPlacement.BOTTOM,
+        },
+      },
     },
     required: {
       control: 'boolean',
@@ -276,6 +289,7 @@ export const ExampleMultipleSelectChip = {
     label: 'Example label',
     helperText: 'Helper text',
     helperIconTooltip: 'Some information about that component.',
+    tooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',
     required: true,
     disabled: false,

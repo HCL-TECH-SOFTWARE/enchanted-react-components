@@ -21,6 +21,7 @@ import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
+import { TooltipPlacement } from '../Tooltip';
 
 export default {
   title: 'Inputs/Autocomplete',
@@ -49,6 +50,18 @@ export default {
         },
       },
       description: 'Tooltip text hovering on  ? mark for autocomplete component',
+    },
+    tooltipPlacement: {
+      description: 'Tooltip placement.',
+      options: [TooltipPlacement.TOPSTART, TooltipPlacement.TOP, TooltipPlacement.TOPEND, TooltipPlacement.RIGHTSTART, TooltipPlacement.RIGHT, TooltipPlacement.RIGHTEND,
+        TooltipPlacement.BOTTOMEND, TooltipPlacement.BOTTOM, TooltipPlacement.BOTTOMSTART, TooltipPlacement.LEFTEND, TooltipPlacement.LEFT,
+        TooltipPlacement.LEFTSTART],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: TooltipPlacement.BOTTOM,
+        },
+      },
     },
     placeholder: {
       table: {
@@ -214,6 +227,7 @@ export const ExampleAutocomplete = {
     label: 'Label',
     helperText: 'Helper text',
     helperIconTooltip: 'Some information about that component.',
+    TooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',
     required: true,
     disabled: false,
