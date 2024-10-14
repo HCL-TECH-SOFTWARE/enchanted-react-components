@@ -102,14 +102,16 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
               maxWidth: '120px', // half of default 240px
             },
           };
-        }}>
+        }}
+      >
         {props.label}
       </StyledInputLabel>
       {props.helperIconTooltip ? (
         <Tooltip
           title={props.helperIconTooltip}
-          placement={ props.tooltipPlacement|| TooltipPlacement.BOTTOM }>
-          <MuiInputHelpIcon color='action' fontSize='small' />
+          placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
+        >
+          <MuiInputHelpIcon color="action" fontSize="small" />
         </Tooltip>
       ) : (
         ''
