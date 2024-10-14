@@ -105,7 +105,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
       >
         {props.label}
       </StyledInputLabel>
-      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip}><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
+      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip} placement="top"><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
     </>
   );
 };
