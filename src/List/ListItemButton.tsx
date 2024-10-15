@@ -106,6 +106,9 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
             '&:hover .MuiListItemSecondaryAction-root,&:focus-within .MuiListItemSecondaryAction-root, &.open-menu-action .MuiListItemSecondaryAction-root,&:focus .MuiListItemSecondaryAction-root': {
               opacity: '1',
             },
+            '&:hover .MuiListItemText-primary, &:hover .MuiListItemText-secondary': {
+              width: 'calc(100% - 48px)',
+            },
             '& .MuiTouchRipple-root': {
               display: 'none',
             },
