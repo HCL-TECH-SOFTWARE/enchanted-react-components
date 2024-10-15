@@ -355,7 +355,6 @@ InteractiveExample.args = {
   checkboxSelection: true,
   pageSize: 10,
   stickyHeader: false,
-  isRowClickable: false,
   hideFooter: false,
   // if you need to display dynamic field properties, you have to create a util to convert the original data for their rows
   // e.g. data.fullName => row['tooltip-${fullName}']
@@ -363,6 +362,7 @@ InteractiveExample.args = {
   columns: sampleColumns,
   totalCount: sampleRows.length,
   page: 0,
+  isRowClickable: false,
 };
 
 export const VisualTest = VisualTestTemplate.bind({});
