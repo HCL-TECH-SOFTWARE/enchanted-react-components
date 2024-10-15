@@ -129,7 +129,7 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
         {tabs.map((tab, index) => {
           const key = index;
           const iconTooltip = (
-            <Tooltip title={tab.tabIcon.label}>
+            <Tooltip title={tab.tabIcon.label} placement={(tab.tabIcon && tab.tabIcon.tooltipPlacement) ? tab.tabIcon.tooltipPlacement : 'left'}>
               {tab.tabIcon.icon}
             </Tooltip>
           );
