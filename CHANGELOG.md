@@ -41,6 +41,7 @@
 - Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
 - Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
 - Updated icon button spacing in Snackbar
+- Adjusted checkbox alignment in `DataGrid` component
 
 ### Breaking changes
 
