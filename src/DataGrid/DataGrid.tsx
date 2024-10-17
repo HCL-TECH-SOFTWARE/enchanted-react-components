@@ -68,6 +68,7 @@ export type DataGridProps = MuiDataGridProps & {
   onCheckboxClick?: Function,
   focusedRow?: string,
   stickyHeader?: boolean,
+  isRowClickable?: boolean,
   totalCount: number,
   page: number,
   pageSize: number,
@@ -105,6 +106,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     },
     '& .MuiDataGrid-row:hover': {
       backgroundColor: theme.palette.action.hover,
+      ...(props.isRowClickable === true) && {
+        cursor: 'pointer',
+      },
       '.MuiCheckbox-root': {
         display: 'inline-flex',
         padding: '4px',
