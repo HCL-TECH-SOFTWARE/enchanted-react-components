@@ -44,6 +44,9 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
               aria-label={actionList[index].toolTip}
               disabled={disabled}
               id={itemId}
+              sx={{
+                ...actionList[index].color && { color: actionList[index].color },
+              }}
               onClick={(e) => { return actionList[index].handler(e, itemId); }}
               onKeyDown={(event: React.KeyboardEvent<HTMLElement>) => { if (event.key === 'Enter') event.stopPropagation(); }}
             >
