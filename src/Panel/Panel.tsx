@@ -18,6 +18,7 @@ import Drawer, { DrawerProps } from '../hidden_components/Drawer';
 import { neutralGrey } from '../colors';
 import PanelTabs from './PanelTabs';
 import PanelTabContent from './PanelTabContent';
+import { TooltipPlacement } from '../Tooltip/Tooltip';
 
 export enum PanelVariants {
   WITHOUT_PADDING = 'without padding',
@@ -34,6 +35,7 @@ export interface TabContentProps {
 export interface TabIconProps {
   icon: JSX.Element;
   label: string;
+  tooltipPlacement?: TooltipPlacement;
 }
 export interface TabsPanelProps {
   tabIcon: TabIconProps;
