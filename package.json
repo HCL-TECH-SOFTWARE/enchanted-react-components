@@ -72,7 +72,7 @@
     "@types/jest": "^29.5.10",
     "@types/jest-image-snapshot": "^6.4.0",
     "@types/lodash": "^4.14.123",
-    "@types/node": "^16.11.68",
+    "@types/node": "^22.7.6",
     "@types/puppeteer": "^5.4.7",
     "@types/react": "^18.2.0",
     "@types/stylis": "^4.2.0",
