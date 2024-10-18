@@ -38,6 +38,7 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import {
   Card, CardContent, CardHeader, Grid,
+  Icon,
 } from '@mui/material';
 ${imports}
 
