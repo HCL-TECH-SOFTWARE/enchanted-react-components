@@ -68,6 +68,7 @@ export type DataGridProps = MuiDataGridProps & {
   onCheckboxClick?: Function,
   focusedRow?: string,
   stickyHeader?: boolean,
+  isRowClickable?: boolean,
   totalCount: number,
   page: number,
   pageSize: number,
@@ -98,8 +99,16 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     ' .MuiDataGrid-cell': {
       borderBottom: `1px ${theme.palette.border.secondary} solid`,
     },
+    '& .MuiDataGrid-row': {
+      '.MuiCheckbox-root': {
+        marginRight: '0',
+      },
+    },
     '& .MuiDataGrid-row:hover': {
       backgroundColor: theme.palette.action.hover,
+      ...(props.isRowClickable === true) && {
+        cursor: 'pointer',
+      },
       '.MuiCheckbox-root': {
         display: 'inline-flex',
         padding: '4px',
@@ -310,6 +319,8 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     if (event.key === 'Enter' || event.key === ' ') {
       if (rowCheckbox) {
         rowCheckbox.click();
+      } else if (event.key === 'Enter') {
+        target.click();
       }
     }
     // add navigation control if user press arrow right it will focus on action button on a row

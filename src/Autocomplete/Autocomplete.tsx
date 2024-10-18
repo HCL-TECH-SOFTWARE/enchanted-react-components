@@ -112,7 +112,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
 
   return (
-    <AutoCompleteContainer>
+    <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
         <InputLabelAndAction {...inputLabelAndActionProps} />
         <MuiAutocomplete
