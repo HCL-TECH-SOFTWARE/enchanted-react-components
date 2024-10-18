@@ -16,8 +16,171 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import {
   Card, CardContent, CardHeader, Grid,
+  Icon,
 } from '@mui/material';
 
+import CustomIconAppSwitcher from '@hcl-software/enchanted-icons/dist/apps/es/app-switcher';
+import CustomIconArrows from '@hcl-software/enchanted-icons/dist/apps/es/arrows';
+import CustomIconBackToTop from '@hcl-software/enchanted-icons/dist/apps/es/back-to-top';
+import CustomIconCalendarBullhorn from '@hcl-software/enchanted-icons/dist/apps/es/calendar--bullhorn';
+import CustomIconCalendarMeeting from '@hcl-software/enchanted-icons/dist/apps/es/calendar--meeting';
+import CustomIconCaretSortAlt from '@hcl-software/enchanted-icons/dist/apps/es/caret--sort--alt';
+import CustomIconCheckboxIndeterminateAlt from '@hcl-software/enchanted-icons/dist/apps/es/checkbox--indeterminate--alt';
+import CustomIconCheckboxUndeterminate from '@hcl-software/enchanted-icons/dist/apps/es/checkbox--undeterminate';
+import CustomIconCheckboxUndeterminateFilled from '@hcl-software/enchanted-icons/dist/apps/es/checkbox--undeterminate--filled';
+import CustomIconChevronDoubleLeft from '@hcl-software/enchanted-icons/dist/apps/es/chevron--double--left';
+import CustomIconChevronDoubleRight from '@hcl-software/enchanted-icons/dist/apps/es/chevron--double--right';
+import CustomIconCircle from '@hcl-software/enchanted-icons/dist/apps/es/circle';
+import CustomIconCloseAlt from '@hcl-software/enchanted-icons/dist/apps/es/close--alt';
+import CustomIconCloudLightning from '@hcl-software/enchanted-icons/dist/apps/es/cloud--lightning';
+import CustomIconCloudRain from '@hcl-software/enchanted-icons/dist/apps/es/cloud--rain';
+import CustomIconCloudSnow from '@hcl-software/enchanted-icons/dist/apps/es/cloud--snow';
+import CustomIconCloudSatelliteConfigFilled from '@hcl-software/enchanted-icons/dist/apps/es/cloud-satellite--config--filled';
+import CustomIconComponentsNavigation from '@hcl-software/enchanted-icons/dist/apps/es/components/navigation';
+import CustomIconComponentsTabs from '@hcl-software/enchanted-icons/dist/apps/es/components/tabs';
+import CustomIconContentReference from '@hcl-software/enchanted-icons/dist/apps/es/content--reference';
+import CustomIconContentItem from '@hcl-software/enchanted-icons/dist/apps/es/content-item';
+import CustomIconContentItemFilled from '@hcl-software/enchanted-icons/dist/apps/es/content-item--filled';
+import CustomIconContentSites from '@hcl-software/enchanted-icons/dist/apps/es/content-sites';
+import CustomIconContentViewAlt from '@hcl-software/enchanted-icons/dist/apps/es/content-view--alt';
+import CustomIconDataComponent from '@hcl-software/enchanted-icons/dist/apps/es/data-component';
+import CustomIconDataContainer from '@hcl-software/enchanted-icons/dist/apps/es/data-container';
+import CustomIconDataText from '@hcl-software/enchanted-icons/dist/apps/es/data-text';
+import CustomIconDataVariable from '@hcl-software/enchanted-icons/dist/apps/es/data-variable';
+import CustomIconDocumentDraft from '@hcl-software/enchanted-icons/dist/apps/es/document--draft';
+import CustomIconDocumentWarning from '@hcl-software/enchanted-icons/dist/apps/es/document--warning';
+import CustomIconDocumentTime from '@hcl-software/enchanted-icons/dist/apps/es/document-time';
+import CustomIconDoubleLeft from '@hcl-software/enchanted-icons/dist/apps/es/double-left';
+import CustomIconDoubleRight from '@hcl-software/enchanted-icons/dist/apps/es/double-right';
+import CustomIconDragHandle from '@hcl-software/enchanted-icons/dist/apps/es/drag-handle';
+import CustomIconElementAdd from '@hcl-software/enchanted-icons/dist/apps/es/element--add';
+import CustomIconBasicButton from '@hcl-software/enchanted-icons/dist/apps/es/elements/basic/button';
+import CustomIconBasicCopyLink from '@hcl-software/enchanted-icons/dist/apps/es/elements/basic/copy--link';
+import CustomIconBasicList from '@hcl-software/enchanted-icons/dist/apps/es/elements/basic/list';
+import CustomIconBasicListItem from '@hcl-software/enchanted-icons/dist/apps/es/elements/basic/list-item';
+import CustomIconLayoutBody from '@hcl-software/enchanted-icons/dist/apps/es/elements/layout/body';
+import CustomIconLayoutColumnItem from '@hcl-software/enchanted-icons/dist/apps/es/elements/layout/column-item';
+import CustomIconLayoutColumns from '@hcl-software/enchanted-icons/dist/apps/es/elements/layout/columns';
+import CustomIconLayoutContainer from '@hcl-software/enchanted-icons/dist/apps/es/elements/layout/container';
+import CustomIconLayoutSection from '@hcl-software/enchanted-icons/dist/apps/es/elements/layout/section';
+import CustomIconTypographyH1 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h1';
+import CustomIconTypographyH2 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h2';
+import CustomIconTypographyH3 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h3';
+import CustomIconTypographyH4 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h4';
+import CustomIconTypographyH5 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h5';
+import CustomIconTypographyH6 from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/h6';
+import CustomIconTypographyParagraph from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/paragraph';
+import CustomIconTypographyQuote from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/quote';
+import CustomIconTypographyRichText from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/rich-text';
+import CustomIconTypographyShortText from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/short-text';
+import CustomIconTypographyText from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/text';
+import CustomIconTypographyTyped from '@hcl-software/enchanted-icons/dist/apps/es/elements/typography/typed';
+import CustomIconWcmContentContainer from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/content-container';
+import CustomIconWcmContentList from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/content-list';
+import CustomIconWcmContentListContainer from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/content-list-container';
+import CustomIconWcmContentListItem from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/content-list-item';
+import CustomIconFormForm from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/form';
+import CustomIconFormFormButton from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/form-button';
+import CustomIconFormInput from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/input';
+import CustomIconFormLabel from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/label';
+import CustomIconFormTextArea from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/text-area';
+import CustomIconExitAlt from '@hcl-software/enchanted-icons/dist/apps/es/exit--alt';
+import CustomIconFooter from '@hcl-software/enchanted-icons/dist/apps/es/footer';
+import CustomIconFooterContent from '@hcl-software/enchanted-icons/dist/apps/es/footer--content';
+import CustomIconFullScreen from '@hcl-software/enchanted-icons/dist/apps/es/full--screen';
+import CustomIconFullScreenExit from '@hcl-software/enchanted-icons/dist/apps/es/full--screen--exit';
+import CustomIconHandRaise from '@hcl-software/enchanted-icons/dist/apps/es/hand-raise';
+import CustomIconHeader from '@hcl-software/enchanted-icons/dist/apps/es/header';
+import CustomIconHeaderContent from '@hcl-software/enchanted-icons/dist/apps/es/header--content';
+import CustomIconId from '@hcl-software/enchanted-icons/dist/apps/es/id';
+import CustomIconImages from '@hcl-software/enchanted-icons/dist/apps/es/images';
+import CustomIconItemsSearchEmpty from '@hcl-software/enchanted-icons/dist/apps/es/items--search--empty';
+import CustomIconLayersAlt from '@hcl-software/enchanted-icons/dist/apps/es/layers--alt';
+import CustomIconLayersFilled from '@hcl-software/enchanted-icons/dist/apps/es/layers--filled';
+import CustomIconLayersHidden from '@hcl-software/enchanted-icons/dist/apps/es/layers--hidden';
+import CustomIconLayoutOff from '@hcl-software/enchanted-icons/dist/apps/es/layout--off';
+import CustomIconLayoutOn from '@hcl-software/enchanted-icons/dist/apps/es/layout--on';
+import CustomIconLetterAaLarge from '@hcl-software/enchanted-icons/dist/apps/es/letter--Aa--large';
+import CustomIconLibrary from '@hcl-software/enchanted-icons/dist/apps/es/library';
+import CustomIconLineCurved from '@hcl-software/enchanted-icons/dist/apps/es/line-curved';
+import CustomIconLineStraight from '@hcl-software/enchanted-icons/dist/apps/es/line-straight';
+import CustomIconListEdit from '@hcl-software/enchanted-icons/dist/apps/es/list--edit';
+import CustomIconListTime from '@hcl-software/enchanted-icons/dist/apps/es/list--time';
+import CustomIconLogoDelicious from '@hcl-software/enchanted-icons/dist/apps/es/logo--delicious';
+import CustomIconLogoGoogle from '@hcl-software/enchanted-icons/dist/apps/es/logo--google';
+import CustomIconLogoStumbleupon from '@hcl-software/enchanted-icons/dist/apps/es/logo--stumbleupon';
+import CustomIconMammogramStacked from '@hcl-software/enchanted-icons/dist/apps/es/mammogram--stacked';
+import CustomIconMeeting from '@hcl-software/enchanted-icons/dist/apps/es/meeting';
+import CustomIconMeetingchat from '@hcl-software/enchanted-icons/dist/apps/es/meetingchat';
+import CustomIconMisuseAlt from '@hcl-software/enchanted-icons/dist/apps/es/misuse--alt';
+import CustomIconOperationsMeetingchat from '@hcl-software/enchanted-icons/dist/apps/es/operations-meetingchat';
+import CustomIconPage from '@hcl-software/enchanted-icons/dist/apps/es/page';
+import CustomCustomIconPageAdd2 from '@hcl-software/enchanted-icons/dist/apps/es/page--add';
+import CustomIconPageChecked from '@hcl-software/enchanted-icons/dist/apps/es/page--checked';
+import CustomIconPageDraft from '@hcl-software/enchanted-icons/dist/apps/es/page--draft';
+import CustomIconPageElementsContentContainer from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--content-container';
+import CustomIconPageElementsContentList from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--content-list';
+import CustomIconPageElementsContentListNoResult from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--content-list--no-result';
+import CustomIconPageElementsContentListItem from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--content-list-item';
+import CustomIconPageElementsDataContainer from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--data-container';
+import CustomIconPageElementsForm from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--form';
+import CustomIconPageElementsFormButton from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--form--button';
+import CustomIconPageElementsFormInput from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--form--input';
+import CustomIconPageElementsFormLabel from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--form--label';
+import CustomIconPageElementsFormTextArea from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--form--text-area';
+import CustomIconPageElementsH1 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h1';
+import CustomIconPageElementsH2 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h2';
+import CustomIconPageElementsH3 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h3';
+import CustomIconPageElementsH4 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h4';
+import CustomIconPageElementsH5 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h5';
+import CustomIconPageElementsH6 from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--h6';
+import CustomIconPageElementsLayoutBody from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--layout--body';
+import CustomIconPageElementsLayoutColumnItem from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--layout--column--item';
+import CustomIconPageElementsLayoutColumns from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--layout--columns';
+import CustomIconPageElementsLayoutContainer from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--layout--container';
+import CustomIconPageElementsLayoutSection from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--layout--section';
+import CustomIconPageElementsList from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--list';
+import CustomIconPageElementsListItem from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--list--item';
+import CustomIconPageElementsNavigation from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--navigation';
+import CustomIconPageElementsParagraph from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--paragraph';
+import CustomIconPageElementsQuote from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--quote';
+import CustomIconPageElementsTyped from '@hcl-software/enchanted-icons/dist/apps/es/page--elements--typed';
+import CustomIconPageTime from '@hcl-software/enchanted-icons/dist/apps/es/page--time';
+import CustomIconPageAdd from '@hcl-software/enchanted-icons/dist/apps/es/page-add';
+import CustomIconPageElementsRichText from '@hcl-software/enchanted-icons/dist/apps/es/page-elements-rich-text';
+import CustomIconPageElementsShortText from '@hcl-software/enchanted-icons/dist/apps/es/page-elements-short-text';
+import CustomIconPageElementsText from '@hcl-software/enchanted-icons/dist/apps/es/page-elements-text';
+import CustomIconPageScroll from '@hcl-software/enchanted-icons/dist/apps/es/page-scroll';
+import CustomIconPages from '@hcl-software/enchanted-icons/dist/apps/es/pages';
+import CustomIconRaiseHand from '@hcl-software/enchanted-icons/dist/apps/es/raise--hand';
+import CustomIconRectangle from '@hcl-software/enchanted-icons/dist/apps/es/rectangle';
+import CustomIconReplace from '@hcl-software/enchanted-icons/dist/apps/es/replace';
+import CustomIconResearchBlochSphere from '@hcl-software/enchanted-icons/dist/apps/es/research--bloch-sphere';
+import CustomIconResearchHintonPlot from '@hcl-software/enchanted-icons/dist/apps/es/research--hinton-plot';
+import CustomIconResearchMatrix from '@hcl-software/enchanted-icons/dist/apps/es/research--matrix';
+import CustomIconScreenshot from '@hcl-software/enchanted-icons/dist/apps/es/screenshot';
+import CustomIconSecurityAlt from '@hcl-software/enchanted-icons/dist/apps/es/security--alt';
+import CustomIconSite from '@hcl-software/enchanted-icons/dist/apps/es/site';
+import CustomIconSiteAdd from '@hcl-software/enchanted-icons/dist/apps/es/site-add';
+import CustomIconStatusError from '@hcl-software/enchanted-icons/dist/apps/es/status-error';
+import CustomIconStatusSuccess from '@hcl-software/enchanted-icons/dist/apps/es/status-success';
+import CustomIconSunny from '@hcl-software/enchanted-icons/dist/apps/es/sunny';
+import CustomIconText from '@hcl-software/enchanted-icons/dist/apps/es/text';
+import CustomIconTextLink from '@hcl-software/enchanted-icons/dist/apps/es/text-link';
+import CustomIconThumbsUpXs from '@hcl-software/enchanted-icons/dist/apps/es/thumbs-up--XS';
+import CustomIconThumbsUpFilledXs from '@hcl-software/enchanted-icons/dist/apps/es/thumbs-up--filled--XS';
+import CustomIconUserCommunity from '@hcl-software/enchanted-icons/dist/apps/es/user--community';
+import CustomIconUserPassword from '@hcl-software/enchanted-icons/dist/apps/es/user--password';
+import CustomIconUserStatusActive from '@hcl-software/enchanted-icons/dist/apps/es/user-status--active';
+import CustomIconUserStatusAway from '@hcl-software/enchanted-icons/dist/apps/es/user-status--away';
+import CustomIconUserStatusDoNotDisturb from '@hcl-software/enchanted-icons/dist/apps/es/user-status--do-not-disturb';
+import CustomIconUserStatusInAMeeting from '@hcl-software/enchanted-icons/dist/apps/es/user-status--in-a-meeting';
+import CustomIconUserStatusOffline from '@hcl-software/enchanted-icons/dist/apps/es/user-status--offline';
+import CustomIconVideoError from '@hcl-software/enchanted-icons/dist/apps/es/video--error';
+import CustomIconVideoSynced from '@hcl-software/enchanted-icons/dist/apps/es/video--synced';
+import CustomIconVideoSyncing from '@hcl-software/enchanted-icons/dist/apps/es/video--syncing';
+import CustomIconViewActualSize from '@hcl-software/enchanted-icons/dist/apps/es/view--actual--size';
+import CustomIconWorkspaceAlt from '@hcl-software/enchanted-icons/dist/apps/es/workspace--alt';
 import Icon4K from '@hcl-software/enchanted-icons/dist/carbon/es/4K';
 import Icon4KFilled from '@hcl-software/enchanted-icons/dist/carbon/es/4K--filled';
 import IconApi1 from '@hcl-software/enchanted-icons/dist/carbon/es/API--1';
@@ -112,7 +275,6 @@ import IconAperture from '@hcl-software/enchanted-icons/dist/carbon/es/aperture'
 import IconApi from '@hcl-software/enchanted-icons/dist/carbon/es/api';
 import IconApp from '@hcl-software/enchanted-icons/dist/carbon/es/app';
 import IconAppConnectivity from '@hcl-software/enchanted-icons/dist/carbon/es/app-connectivity';
-import IconAppSwitcher from '@hcl-software/enchanted-icons/dist/apps/es/app-switcher';
 import IconApple from '@hcl-software/enchanted-icons/dist/carbon/es/apple';
 import IconApplication from '@hcl-software/enchanted-icons/dist/carbon/es/application';
 import IconApplicationMobile from '@hcl-software/enchanted-icons/dist/carbon/es/application--mobile';
@@ -132,7 +294,6 @@ import IconArrowUp from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--up'
 import IconArrowUpLeft from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--up-left';
 import IconArrowUpRight from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--up-right';
 import IconArrowShiftDown from '@hcl-software/enchanted-icons/dist/carbon/es/arrow-shift-down';
-import IconArrows from '@hcl-software/enchanted-icons/dist/apps/es/arrows';
 import IconArrowsHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/arrows--horizontal';
 import IconArrowsVertical from '@hcl-software/enchanted-icons/dist/carbon/es/arrows--vertical';
 import IconAsleep from '@hcl-software/enchanted-icons/dist/carbon/es/asleep';
@@ -152,7 +313,6 @@ import IconAugmentedReality from '@hcl-software/enchanted-icons/dist/carbon/es/a
 import IconAutomatic from '@hcl-software/enchanted-icons/dist/carbon/es/automatic';
 import IconAutoscaling from '@hcl-software/enchanted-icons/dist/carbon/es/autoscaling';
 import IconAwake from '@hcl-software/enchanted-icons/dist/carbon/es/awake';
-import IconBackToTop from '@hcl-software/enchanted-icons/dist/apps/es/back-to-top';
 import IconBadge from '@hcl-software/enchanted-icons/dist/carbon/es/badge';
 import IconBaggageClaim from '@hcl-software/enchanted-icons/dist/carbon/es/baggage-claim';
 import IconBar from '@hcl-software/enchanted-icons/dist/carbon/es/bar';
@@ -333,8 +493,6 @@ import IconCheckboxChecked from '@hcl-software/enchanted-icons/dist/carbon/es/ch
 import IconCheckboxCheckedFilled from '@hcl-software/enchanted-icons/dist/carbon/es/checkbox--checked--filled';
 import IconCheckboxIndeterminate from '@hcl-software/enchanted-icons/dist/carbon/es/checkbox--indeterminate';
 import IconCheckboxIndeterminateFilled from '@hcl-software/enchanted-icons/dist/carbon/es/checkbox--indeterminate--filled';
-import IconCheckboxUndeterminate from '@hcl-software/enchanted-icons/dist/apps/es/checkbox--undeterminate';
-import IconCheckboxUndeterminateFilled from '@hcl-software/enchanted-icons/dist/apps/es/checkbox--undeterminate--filled';
 import IconCheckmark from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
 import IconCheckmarkFilled from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--filled';
 import IconCheckmarkFilledError from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--filled--error';
@@ -364,7 +522,6 @@ import IconClassification from '@hcl-software/enchanted-icons/dist/carbon/es/cla
 import IconClassifierLanguage from '@hcl-software/enchanted-icons/dist/carbon/es/classifier--language';
 import IconClean from '@hcl-software/enchanted-icons/dist/carbon/es/clean';
 import IconClose from '@hcl-software/enchanted-icons/dist/carbon/es/close';
-import IconCloseAlt from '@hcl-software/enchanted-icons/dist/apps/es/close--alt';
 import IconCloseFilled from '@hcl-software/enchanted-icons/dist/carbon/es/close--filled';
 import IconCloseOutline from '@hcl-software/enchanted-icons/dist/carbon/es/close--outline';
 import IconClosedCaption from '@hcl-software/enchanted-icons/dist/carbon/es/closed-caption';
@@ -374,14 +531,15 @@ import IconCloud from '@hcl-software/enchanted-icons/dist/carbon/es/cloud';
 import IconCloudAlerting from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--alerting';
 import IconCloudAuditing from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--auditing';
 import IconCloudDataOps from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--data-ops';
+import IconCloudDedicatedHost from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--dedicated-host';
 import IconCloudDownload from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--download';
-import IconCloudLightning from '@hcl-software/enchanted-icons/dist/apps/es/cloud--lightning';
+import IconCloudInternetServices from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--internet-services';
 import IconCloudLogging from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--logging';
 import IconCloudMonitoring from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--monitoring';
 import IconCloudOffline from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--offline';
-import IconCloudRain from '@hcl-software/enchanted-icons/dist/apps/es/cloud--rain';
+import IconCloudSecurityComplianceCenter from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--security-compliance-center';
 import IconCloudServiceManagement from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--service-management';
-import IconCloudSnow from '@hcl-software/enchanted-icons/dist/apps/es/cloud--snow';
+import IconCloudSubnets from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--subnets';
 import IconCloudUpload from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--upload';
 import IconCloudApp from '@hcl-software/enchanted-icons/dist/carbon/es/cloud-app';
 import IconCloudCeiling from '@hcl-software/enchanted-icons/dist/carbon/es/cloud-ceiling';
@@ -484,6 +642,7 @@ import IconDataConnected from '@hcl-software/enchanted-icons/dist/carbon/es/data
 import IconDataError from '@hcl-software/enchanted-icons/dist/carbon/es/data--error';
 import IconDataFormat from '@hcl-software/enchanted-icons/dist/carbon/es/data--format';
 import IconDataReference from '@hcl-software/enchanted-icons/dist/carbon/es/data--reference';
+import IconDataRegular from '@hcl-software/enchanted-icons/dist/carbon/es/data--regular';
 import IconDataSet from '@hcl-software/enchanted-icons/dist/carbon/es/data--set';
 import IconDataStructured from '@hcl-software/enchanted-icons/dist/carbon/es/data--structured';
 import IconDataUnstructured from '@hcl-software/enchanted-icons/dist/carbon/es/data--unstructured';
@@ -501,7 +660,6 @@ import IconDataEnrichment from '@hcl-software/enchanted-icons/dist/carbon/es/dat
 import IconDataPlayer from '@hcl-software/enchanted-icons/dist/carbon/es/data-player';
 import IconDataRefinery from '@hcl-software/enchanted-icons/dist/carbon/es/data-refinery';
 import IconDataRefineryReference from '@hcl-software/enchanted-icons/dist/carbon/es/data-refinery--reference';
-import IconDataRegular from '@hcl-software/enchanted-icons/dist/carbon/es/data--regular';
 import IconDataShare from '@hcl-software/enchanted-icons/dist/carbon/es/data-share';
 import IconDataTable from '@hcl-software/enchanted-icons/dist/carbon/es/data-table';
 import IconDataTableReference from '@hcl-software/enchanted-icons/dist/carbon/es/data-table--reference';
@@ -617,7 +775,6 @@ import IconDotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
 import IconDoubleInteger from '@hcl-software/enchanted-icons/dist/carbon/es/double-integer';
 import IconDownToBottom from '@hcl-software/enchanted-icons/dist/carbon/es/down-to-bottom';
 import IconDownload from '@hcl-software/enchanted-icons/dist/carbon/es/download';
-import IconDragHandle from '@hcl-software/enchanted-icons/dist/apps/es/drag-handle';
 import IconDragHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/drag--horizontal';
 import IconDragVertical from '@hcl-software/enchanted-icons/dist/carbon/es/drag--vertical';
 import IconDraggable from '@hcl-software/enchanted-icons/dist/carbon/es/draggable';
@@ -815,13 +972,6 @@ import IconHumidityAlt from '@hcl-software/enchanted-icons/dist/carbon/es/humidi
 import IconHurricane from '@hcl-software/enchanted-icons/dist/carbon/es/hurricane';
 import IconHybridNetworking from '@hcl-software/enchanted-icons/dist/carbon/es/hybrid-networking';
 import IconHybridNetworkingAlt from '@hcl-software/enchanted-icons/dist/carbon/es/hybrid-networking--alt';
-import IconCloudDedicatedHost from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--dedicated-host';
-import IconCloudInternetServices from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--internet-services';
-import IconCloudSecurityComplianceCenter from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--security-compliance-center';
-import IconCloudSubnets from '@hcl-software/enchanted-icons/dist/carbon/es/cloud--subnets';
-import IconSecurityAlt from '@hcl-software/enchanted-icons/dist/carbon/es/security--alt';
-import IconSecurityServicesAlt from '@hcl-software/enchanted-icons/dist/carbon/es/security-services--alt';
-import IconOrders from '@hcl-software/enchanted-icons/dist/carbon/es/orders';
 import IconIceAccretion from '@hcl-software/enchanted-icons/dist/carbon/es/ice--accretion';
 import IconIceVision from '@hcl-software/enchanted-icons/dist/carbon/es/ice--vision';
 import IconIdManagement from '@hcl-software/enchanted-icons/dist/carbon/es/id-management';
@@ -867,7 +1017,6 @@ import IconIntrusionPrevention from '@hcl-software/enchanted-icons/dist/carbon/e
 import IconInventoryManagement from '@hcl-software/enchanted-icons/dist/carbon/es/inventory-management';
 import IconIotConnect from '@hcl-software/enchanted-icons/dist/carbon/es/iot--connect';
 import IconIotPlatform from '@hcl-software/enchanted-icons/dist/carbon/es/iot--platform';
-import IconItemSearchEmpty from '@hcl-software/enchanted-icons/dist/apps/es/items--search--empty';
 import IconJoinFull from '@hcl-software/enchanted-icons/dist/carbon/es/join--full';
 import IconJoinInner from '@hcl-software/enchanted-icons/dist/carbon/es/join--inner';
 import IconJoinLeft from '@hcl-software/enchanted-icons/dist/carbon/es/join--left';
@@ -886,7 +1035,6 @@ import IconLaunch from '@hcl-software/enchanted-icons/dist/carbon/es/launch';
 import IconLayers from '@hcl-software/enchanted-icons/dist/carbon/es/layers';
 import IconLegend from '@hcl-software/enchanted-icons/dist/carbon/es/legend';
 import IconLetterAa from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Aa';
-import IconLetterAaLarge from '@hcl-software/enchanted-icons/dist/apps/es/letter--Aa--large';
 import IconLetterBb from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Bb';
 import IconLetterCc from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Cc';
 import IconLetterDd from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Dd';
@@ -912,7 +1060,6 @@ import IconLetterWw from '@hcl-software/enchanted-icons/dist/carbon/es/letter--W
 import IconLetterXx from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Xx';
 import IconLetterYy from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Yy';
 import IconLetterZz from '@hcl-software/enchanted-icons/dist/carbon/es/letter--Zz';
-import IconLibrary from '@hcl-software/enchanted-icons/dist/apps/es/library';
 import IconLicense from '@hcl-software/enchanted-icons/dist/carbon/es/license';
 import IconLicenseDraft from '@hcl-software/enchanted-icons/dist/carbon/es/license--draft';
 import IconLicenseGlobal from '@hcl-software/enchanted-icons/dist/carbon/es/license--global';
@@ -932,7 +1079,6 @@ import IconListBoxes from '@hcl-software/enchanted-icons/dist/carbon/es/list--bo
 import IconListBulleted from '@hcl-software/enchanted-icons/dist/carbon/es/list--bulleted';
 import IconListChecked from '@hcl-software/enchanted-icons/dist/carbon/es/list--checked';
 import IconListDropdown from '@hcl-software/enchanted-icons/dist/carbon/es/list--dropdown';
-import IconListEdit from '@hcl-software/enchanted-icons/dist/apps/es/list--edit';
 import IconListNumbered from '@hcl-software/enchanted-icons/dist/carbon/es/list--numbered';
 import IconLoadBalancerApplication from '@hcl-software/enchanted-icons/dist/carbon/es/load-balancer--application';
 import IconLoadBalancerClassic from '@hcl-software/enchanted-icons/dist/carbon/es/load-balancer--classic';
@@ -959,14 +1105,12 @@ import IconLocationStarFilled from '@hcl-software/enchanted-icons/dist/carbon/es
 import IconLocked from '@hcl-software/enchanted-icons/dist/carbon/es/locked';
 import IconLogicalPartition from '@hcl-software/enchanted-icons/dist/carbon/es/logical-partition';
 import IconLogin from '@hcl-software/enchanted-icons/dist/carbon/es/login';
-import IconLogoDelicious from '@hcl-software/enchanted-icons/dist/apps/es/logo--delicious';
 import IconLogoDigg from '@hcl-software/enchanted-icons/dist/carbon/es/logo--digg';
 import IconLogoDiscord from '@hcl-software/enchanted-icons/dist/carbon/es/logo--discord';
 import IconLogoFacebook from '@hcl-software/enchanted-icons/dist/carbon/es/logo--facebook';
 import IconLogoFlickr from '@hcl-software/enchanted-icons/dist/carbon/es/logo--flickr';
 import IconLogoGithub from '@hcl-software/enchanted-icons/dist/carbon/es/logo--github';
 import IconLogoGlassdoor from '@hcl-software/enchanted-icons/dist/carbon/es/logo--glassdoor';
-import IconLogoGoogle from '@hcl-software/enchanted-icons/dist/apps/es/logo--google';
 import IconLogoInstagram from '@hcl-software/enchanted-icons/dist/carbon/es/logo--instagram';
 import IconLogoJupyter from '@hcl-software/enchanted-icons/dist/carbon/es/logo--jupyter';
 import IconLogoKeybase from '@hcl-software/enchanted-icons/dist/carbon/es/logo--keybase';
@@ -982,7 +1126,6 @@ import IconLogoRScript from '@hcl-software/enchanted-icons/dist/carbon/es/logo--
 import IconLogoSkype from '@hcl-software/enchanted-icons/dist/carbon/es/logo--skype';
 import IconLogoSlack from '@hcl-software/enchanted-icons/dist/carbon/es/logo--slack';
 import IconLogoSnapchat from '@hcl-software/enchanted-icons/dist/carbon/es/logo--snapchat';
-import IconLogoStumbleupon from '@hcl-software/enchanted-icons/dist/apps/es/logo--stumbleupon';
 import IconLogoTumblr from '@hcl-software/enchanted-icons/dist/carbon/es/logo--tumblr';
 import IconLogoTwitter from '@hcl-software/enchanted-icons/dist/carbon/es/logo--twitter';
 import IconLogoVmware from '@hcl-software/enchanted-icons/dist/carbon/es/logo--vmware';
@@ -1001,7 +1144,6 @@ import IconMagicWand from '@hcl-software/enchanted-icons/dist/carbon/es/magic-wa
 import IconMagicWandFilled from '@hcl-software/enchanted-icons/dist/carbon/es/magic-wand--filled';
 import IconMailAll from '@hcl-software/enchanted-icons/dist/carbon/es/mail--all';
 import IconMailReply from '@hcl-software/enchanted-icons/dist/carbon/es/mail--reply';
-import IconMammogramStacked from '@hcl-software/enchanted-icons/dist/apps/es/mammogram--stacked';
 import IconManageProtection from '@hcl-software/enchanted-icons/dist/carbon/es/manage-protection';
 import IconManagedSolutions from '@hcl-software/enchanted-icons/dist/carbon/es/managed-solutions';
 import IconMap from '@hcl-software/enchanted-icons/dist/carbon/es/map';
@@ -1033,7 +1175,6 @@ import IconMilestone from '@hcl-software/enchanted-icons/dist/carbon/es/mileston
 import IconMilitaryCamp from '@hcl-software/enchanted-icons/dist/carbon/es/military-camp';
 import IconMinimize from '@hcl-software/enchanted-icons/dist/carbon/es/minimize';
 import IconMisuse from '@hcl-software/enchanted-icons/dist/carbon/es/misuse';
-import IconMisuseAlt from '@hcl-software/enchanted-icons/dist/apps/es/misuse--alt';
 import IconMisuseOutline from '@hcl-software/enchanted-icons/dist/carbon/es/misuse--outline';
 import IconMixedRainHail from '@hcl-software/enchanted-icons/dist/carbon/es/mixed-rain-hail';
 import IconMobile from '@hcl-software/enchanted-icons/dist/carbon/es/mobile';
@@ -1129,6 +1270,7 @@ import IconOpenPanelTop from '@hcl-software/enchanted-icons/dist/carbon/es/open-
 import IconOperationsField from '@hcl-software/enchanted-icons/dist/carbon/es/operations--field';
 import IconOperationsRecord from '@hcl-software/enchanted-icons/dist/carbon/es/operations--record';
 import IconOrderDetails from '@hcl-software/enchanted-icons/dist/carbon/es/order-details';
+import IconOrders from '@hcl-software/enchanted-icons/dist/carbon/es/orders';
 import IconOrdinal from '@hcl-software/enchanted-icons/dist/carbon/es/ordinal';
 import IconOutage from '@hcl-software/enchanted-icons/dist/carbon/es/outage';
 import IconOutlookSevere from '@hcl-software/enchanted-icons/dist/carbon/es/outlook-severe';
@@ -1274,9 +1416,6 @@ import IconReplyAll from '@hcl-software/enchanted-icons/dist/carbon/es/reply--al
 import IconReport from '@hcl-software/enchanted-icons/dist/carbon/es/report';
 import IconReportData from '@hcl-software/enchanted-icons/dist/carbon/es/report--data';
 import IconRequestQuote from '@hcl-software/enchanted-icons/dist/carbon/es/request-quote';
-import IconResearchBlochSphere from '@hcl-software/enchanted-icons/dist/apps/es/research--bloch-sphere';
-import IconResearchHintonPlot from '@hcl-software/enchanted-icons/dist/apps/es/research--hinton-plot';
-import IconResearchMatrix from '@hcl-software/enchanted-icons/dist/apps/es/research--matrix';
 import IconReset from '@hcl-software/enchanted-icons/dist/carbon/es/reset';
 import IconResetAlt from '@hcl-software/enchanted-icons/dist/carbon/es/reset--alt';
 import IconRestart from '@hcl-software/enchanted-icons/dist/carbon/es/restart';
@@ -1315,9 +1454,9 @@ import IconRowInsert from '@hcl-software/enchanted-icons/dist/carbon/es/row--ins
 import IconRss from '@hcl-software/enchanted-icons/dist/carbon/es/rss';
 import IconRule from '@hcl-software/enchanted-icons/dist/carbon/es/rule';
 import IconRuleCancelled from '@hcl-software/enchanted-icons/dist/carbon/es/rule--cancelled';
-import IconRuleLocked from '@hcl-software/enchanted-icons/dist/carbon/es/rule--locked';
 import IconRuleDraft from '@hcl-software/enchanted-icons/dist/carbon/es/rule--draft';
 import IconRuleFilled from '@hcl-software/enchanted-icons/dist/carbon/es/rule--filled';
+import IconRuleLocked from '@hcl-software/enchanted-icons/dist/carbon/es/rule--locked';
 import IconRulePartial from '@hcl-software/enchanted-icons/dist/carbon/es/rule--partial';
 import IconRuleTest from '@hcl-software/enchanted-icons/dist/carbon/es/rule--test';
 import IconRuler from '@hcl-software/enchanted-icons/dist/carbon/es/ruler';
@@ -1353,7 +1492,9 @@ import IconSearch from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import IconSearchAdvanced from '@hcl-software/enchanted-icons/dist/carbon/es/search--advanced';
 import IconSearchLocate from '@hcl-software/enchanted-icons/dist/carbon/es/search--locate';
 import IconSecurity from '@hcl-software/enchanted-icons/dist/carbon/es/security';
+import IconSecurityAlt from '@hcl-software/enchanted-icons/dist/carbon/es/security--alt';
 import IconSecurityServices from '@hcl-software/enchanted-icons/dist/carbon/es/security-services';
+import IconSecurityServicesAlt from '@hcl-software/enchanted-icons/dist/carbon/es/security-services--alt';
 import IconSelect01 from '@hcl-software/enchanted-icons/dist/carbon/es/select--01';
 import IconSelect02 from '@hcl-software/enchanted-icons/dist/carbon/es/select--02';
 import IconSelectWindow from '@hcl-software/enchanted-icons/dist/carbon/es/select--window';
@@ -1475,7 +1616,6 @@ import IconSubtract from '@hcl-software/enchanted-icons/dist/carbon/es/subtract'
 import IconSubtractAlt from '@hcl-software/enchanted-icons/dist/carbon/es/subtract--alt';
 import IconSummaryKpi from '@hcl-software/enchanted-icons/dist/carbon/es/summary--KPI';
 import IconSun from '@hcl-software/enchanted-icons/dist/carbon/es/sun';
-import IconSunny from '@hcl-software/enchanted-icons/dist/apps/es/sunny';
 import IconSunrise from '@hcl-software/enchanted-icons/dist/carbon/es/sunrise';
 import IconSunset from '@hcl-software/enchanted-icons/dist/carbon/es/sunset';
 import IconSupportVectorMachine from '@hcl-software/enchanted-icons/dist/carbon/es/support-vector-machine';
@@ -1650,7 +1790,6 @@ import IconUserAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/user--a
 import IconUserAvatarFilled from '@hcl-software/enchanted-icons/dist/carbon/es/user--avatar--filled';
 import IconUserAvatarFilledAlt from '@hcl-software/enchanted-icons/dist/carbon/es/user--avatar--filled--alt';
 import IconUserCertification from '@hcl-software/enchanted-icons/dist/carbon/es/user--certification';
-import IconUserCommunity from '@hcl-software/enchanted-icons/dist/apps/es/user--community';
 import IconUserData from '@hcl-software/enchanted-icons/dist/carbon/es/user--data';
 import IconUserFavorite from '@hcl-software/enchanted-icons/dist/carbon/es/user--favorite';
 import IconUserFavoriteAlt from '@hcl-software/enchanted-icons/dist/carbon/es/user--favorite--alt';
@@ -1781,8 +1920,6 @@ import IconZoomOut from '@hcl-software/enchanted-icons/dist/carbon/es/zoom--out'
 import IconZoomOutArea from '@hcl-software/enchanted-icons/dist/carbon/es/zoom--out-area';
 import IconZoomReset from '@hcl-software/enchanted-icons/dist/carbon/es/zoom--reset';
 
-import Icon from './Icon';
-
 export default {
   title: 'Data display/IconPreview',
   component: Icon,
@@ -1847,1768 +1984,1906 @@ const renderGridItem = (iconFileName: string, icon: JSX.Element) => {
 const Template: StoryFn<typeof Icon> = (args) => {
   return (
     <Grid container spacing={4}>
-      {renderGridItem('../4K', <Icon4K {...args} />)}
-      {renderGridItem('../4K--filled', <Icon4KFilled {...args} />)}
-      {renderGridItem('../API--1', <IconApi1 {...args} />)}
-      {renderGridItem('../CAD', <IconCad {...args} />)}
-      {renderGridItem('../CDA', <IconCda {...args} />)}
-      {renderGridItem('../CSV', <IconCsv {...args} />)}
-      {renderGridItem('../DOC', <IconDoc {...args} />)}
-      {renderGridItem('../DVR', <IconDvr {...args} />)}
-      {renderGridItem('../GIF', <IconGif {...args} />)}
-      {renderGridItem('../HD', <IconHd {...args} />)}
-      {renderGridItem('../HD--filled', <IconHdFilled {...args} />)}
-      {renderGridItem('../HDR', <IconHdr {...args} />)}
-      {renderGridItem('../HTML', <IconHtml {...args} />)}
-      {renderGridItem('../HTML--reference', <IconHtmlReference {...args} />)}
-      {renderGridItem('../HTTP', <IconHttp {...args} />)}
-      {renderGridItem('../ISO', <IconIso {...args} />)}
-      {renderGridItem('../ISO--filled', <IconIsoFilled {...args} />)}
-      {renderGridItem('../ISO--outline', <IconIsoOutline {...args} />)}
-      {renderGridItem('../JPG', <IconJpg {...args} />)}
-      {renderGridItem('../JSON', <IconJson {...args} />)}
-      {renderGridItem('../JSON--reference', <IconJsonReference {...args} />)}
-      {renderGridItem('../MOV', <IconMov {...args} />)}
-      {renderGridItem('../MP3', <IconMp3 {...args} />)}
-      {renderGridItem('../MP4', <IconMp4 {...args} />)}
-      {renderGridItem('../MPEG', <IconMpeg {...args} />)}
-      {renderGridItem('../MPG2', <IconMpg2 {...args} />)}
-      {renderGridItem('../PDF', <IconPdf {...args} />)}
-      {renderGridItem('../PDF--reference', <IconPdfReference {...args} />)}
-      {renderGridItem('../PNG', <IconPng {...args} />)}
-      {renderGridItem('../PPT', <IconPpt {...args} />)}
-      {renderGridItem('../RAW', <IconRaw {...args} />)}
-      {renderGridItem('../SDK', <IconSdk {...args} />)}
-      {renderGridItem('../SQL', <IconSql {...args} />)}
-      {renderGridItem('../SVG', <IconSvg {...args} />)}
-      {renderGridItem('../TIF', <IconTif {...args} />)}
-      {renderGridItem('../TSV', <IconTsv {...args} />)}
-      {renderGridItem('../TXT', <IconTxt {...args} />)}
-      {renderGridItem('../TXT--reference', <IconTxtReference {...args} />)}
-      {renderGridItem('../USB', <IconUsb {...args} />)}
-      {renderGridItem('../VPN', <IconVpn {...args} />)}
-      {renderGridItem('../WMV', <IconWmv {...args} />)}
-      {renderGridItem('../XLS', <IconXls {...args} />)}
-      {renderGridItem('../XML', <IconXml {...args} />)}
-      {renderGridItem('../ZIP', <IconZip {...args} />)}
-      {renderGridItem('../ZIP--reference', <IconZipReference {...args} />)}
-      {renderGridItem('../accessibility', <IconAccessibility {...args} />)}
-      {renderGridItem('../accessibility--alt', <IconAccessibilityAlt {...args} />)}
-      {renderGridItem('../accessibility--color', <IconAccessibilityColor {...args} />)}
-      {renderGridItem('../accessibility--color--filled', <IconAccessibilityColorFilled {...args} />)}
-      {renderGridItem('../account', <IconAccount {...args} />)}
-      {renderGridItem('../accumulation--ice', <IconAccumulationIce {...args} />)}
-      {renderGridItem('../accumulation--precipitation', <IconAccumulationPrecipitation {...args} />)}
-      {renderGridItem('../accumulation--rain', <IconAccumulationRain {...args} />)}
-      {renderGridItem('../accumulation--snow', <IconAccumulationSnow {...args} />)}
-      {renderGridItem('../activity', <IconActivity {...args} />)}
-      {renderGridItem('../add', <IconAdd {...args} />)}
-      {renderGridItem('../add--alt', <IconAddAlt {...args} />)}
-      {renderGridItem('../add--filled', <IconAddFilled {...args} />)}
-      {renderGridItem('../add-comment', <IconAddComment {...args} />)}
-      {renderGridItem('../agriculture-analytics', <IconAgricultureAnalytics {...args} />)}
-      {renderGridItem('../airline--digital-gate', <IconAirlineDigitalGate {...args} />)}
-      {renderGridItem('../airline--manage-gates', <IconAirlineManageGates {...args} />)}
-      {renderGridItem('../airline--passenger-care', <IconAirlinePassengerCare {...args} />)}
-      {renderGridItem('../airline--rapid-board', <IconAirlineRapidBoard {...args} />)}
-      {renderGridItem('../airplay', <IconAirplay {...args} />)}
-      {renderGridItem('../airplay--filled', <IconAirplayFilled {...args} />)}
-      {renderGridItem('../airport--01', <IconAirport01 {...args} />)}
-      {renderGridItem('../airport--02', <IconAirport02 {...args} />)}
-      {renderGridItem('../airport-location', <IconAirportLocation {...args} />)}
-      {renderGridItem('../alarm', <IconAlarm {...args} />)}
-      {renderGridItem('../alarm--add', <IconAlarmAdd {...args} />)}
-      {renderGridItem('../alarm--subtract', <IconAlarmSubtract {...args} />)}
-      {renderGridItem('../align--horizontal-center', <IconAlignHorizontalCenter {...args} />)}
-      {renderGridItem('../align--horizontal-left', <IconAlignHorizontalLeft {...args} />)}
-      {renderGridItem('../align--horizontal-right', <IconAlignHorizontalRight {...args} />)}
-      {renderGridItem('../align--vertical-bottom', <IconAlignVerticalBottom {...args} />)}
-      {renderGridItem('../align--vertical-center', <IconAlignVerticalCenter {...args} />)}
-      {renderGridItem('../align--vertical-top', <IconAlignVerticalTop {...args} />)}
-      {renderGridItem('../align-box--bottom-center', <IconAlignBoxBottomCenter {...args} />)}
-      {renderGridItem('../align-box--bottom-left', <IconAlignBoxBottomLeft {...args} />)}
-      {renderGridItem('../align-box--bottom-right', <IconAlignBoxBottomRight {...args} />)}
-      {renderGridItem('../align-box--middle-center', <IconAlignBoxMiddleCenter {...args} />)}
-      {renderGridItem('../align-box--middle-left', <IconAlignBoxMiddleLeft {...args} />)}
-      {renderGridItem('../align-box--middle-right', <IconAlignBoxMiddleRight {...args} />)}
-      {renderGridItem('../align-box--top-center', <IconAlignBoxTopCenter {...args} />)}
-      {renderGridItem('../align-box--top-left', <IconAlignBoxTopLeft {...args} />)}
-      {renderGridItem('../align-box--top-right', <IconAlignBoxTopRight {...args} />)}
-      {renderGridItem('../analytics', <IconAnalytics {...args} />)}
-      {renderGridItem('../analytics--custom', <IconAnalyticsCustom {...args} />)}
-      {renderGridItem('../analytics--reference', <IconAnalyticsReference {...args} />)}
-      {renderGridItem('../aperture', <IconAperture {...args} />)}
-      {renderGridItem('../api', <IconApi {...args} />)}
-      {renderGridItem('../app', <IconApp {...args} />)}
-      {renderGridItem('../app-connectivity', <IconAppConnectivity {...args} />)}
-      {renderGridItem('../app-switcher', <IconAppSwitcher {...args} />)}
-      {renderGridItem('../apple', <IconApple {...args} />)}
-      {renderGridItem('../application', <IconApplication {...args} />)}
-      {renderGridItem('../application--mobile', <IconApplicationMobile {...args} />)}
-      {renderGridItem('../application--virtual', <IconApplicationVirtual {...args} />)}
-      {renderGridItem('../application--web', <IconApplicationWeb {...args} />)}
-      {renderGridItem('../apps', <IconApps {...args} />)}
-      {renderGridItem('../archive', <IconArchive {...args} />)}
-      {renderGridItem('../area', <IconArea {...args} />)}
-      {renderGridItem('../area--custom', <IconAreaCustom {...args} />)}
-      {renderGridItem('../arrival', <IconArrival {...args} />)}
-      {renderGridItem('../arrow--down', <IconArrowDown {...args} />)}
-      {renderGridItem('../arrow--down-left', <IconArrowDownLeft {...args} />)}
-      {renderGridItem('../arrow--down-right', <IconArrowDownRight {...args} />)}
-      {renderGridItem('../arrow--left', <IconArrowLeft {...args} />)}
-      {renderGridItem('../arrow--right', <IconArrowRight {...args} />)}
-      {renderGridItem('../arrow--up', <IconArrowUp {...args} />)}
-      {renderGridItem('../arrow--up-left', <IconArrowUpLeft {...args} />)}
-      {renderGridItem('../arrow--up-right', <IconArrowUpRight {...args} />)}
-      {renderGridItem('../arrow-shift-down', <IconArrowShiftDown {...args} />)}
-      {renderGridItem('../arrows', <IconArrows {...args} />)}
-      {renderGridItem('../arrows--horizontal', <IconArrowsHorizontal {...args} />)}
-      {renderGridItem('../arrows--vertical', <IconArrowsVertical {...args} />)}
-      {renderGridItem('../asleep', <IconAsleep {...args} />)}
-      {renderGridItem('../asleep--filled', <IconAsleepFilled {...args} />)}
-      {renderGridItem('../assembly', <IconAssembly {...args} />)}
-      {renderGridItem('../assembly--cluster', <IconAssemblyCluster {...args} />)}
-      {renderGridItem('../assembly--reference', <IconAssemblyReference {...args} />)}
-      {renderGridItem('../asset', <IconAsset {...args} />)}
-      {renderGridItem('../asset--confirm', <IconAssetConfirm {...args} />)}
-      {renderGridItem('../asset--digital-twin', <IconAssetDigitalTwin {...args} />)}
-      {renderGridItem('../asset--view', <IconAssetView {...args} />)}
-      {renderGridItem('../asterisk', <IconAsterisk {...args} />)}
-      {renderGridItem('../at', <IconAt {...args} />)}
-      {renderGridItem('../attachment', <IconAttachment {...args} />)}
-      {renderGridItem('../audio-console', <IconAudioConsole {...args} />)}
-      {renderGridItem('../augmented-reality', <IconAugmentedReality {...args} />)}
-      {renderGridItem('../automatic', <IconAutomatic {...args} />)}
-      {renderGridItem('../autoscaling', <IconAutoscaling {...args} />)}
-      {renderGridItem('../awake', <IconAwake {...args} />)}
-      {renderGridItem('../back-to-top', <IconBackToTop {...args} />)}
-      {renderGridItem('../badge', <IconBadge {...args} />)}
-      {renderGridItem('../baggage-claim', <IconBaggageClaim {...args} />)}
-      {renderGridItem('../bar', <IconBar {...args} />)}
-      {renderGridItem('../barcode', <IconBarcode {...args} />)}
-      {renderGridItem('../bare-metal-server', <IconBareMetalServer {...args} />)}
-      {renderGridItem('../bare-metal-server--01', <IconBareMetalServer01 {...args} />)}
-      {renderGridItem('../bare-metal-server--02', <IconBareMetalServer02 {...args} />)}
-      {renderGridItem('../basketball', <IconBasketball {...args} />)}
-      {renderGridItem('../bastion-host', <IconBastionHost {...args} />)}
-      {renderGridItem('../bat', <IconBat {...args} />)}
-      {renderGridItem('../battery--charging', <IconBatteryCharging {...args} />)}
-      {renderGridItem('../battery--empty', <IconBatteryEmpty {...args} />)}
-      {renderGridItem('../battery--full', <IconBatteryFull {...args} />)}
-      {renderGridItem('../battery--half', <IconBatteryHalf {...args} />)}
-      {renderGridItem('../battery--low', <IconBatteryLow {...args} />)}
-      {renderGridItem('../battery--quarter', <IconBatteryQuarter {...args} />)}
-      {renderGridItem('../beta', <IconBeta {...args} />)}
-      {renderGridItem('../bicycle', <IconBicycle {...args} />)}
-      {renderGridItem('../binoculars', <IconBinoculars {...args} />)}
-      {renderGridItem('../block-storage', <IconBlockStorage {...args} />)}
-      {renderGridItem('../block-storage--alt', <IconBlockStorageAlt {...args} />)}
-      {renderGridItem('../blockchain', <IconBlockchain {...args} />)}
-      {renderGridItem('../blog', <IconBlog {...args} />)}
-      {renderGridItem('../bluetooth', <IconBluetooth {...args} />)}
-      {renderGridItem('../bluetooth--off', <IconBluetoothOff {...args} />)}
-      {renderGridItem('../book', <IconBook {...args} />)}
-      {renderGridItem('../bookmark', <IconBookmark {...args} />)}
-      {renderGridItem('../bookmark--add', <IconBookmarkAdd {...args} />)}
-      {renderGridItem('../bookmark--filled', <IconBookmarkFilled {...args} />)}
-      {renderGridItem('../boolean', <IconBoolean {...args} />)}
-      {renderGridItem('../boot', <IconBoot {...args} />)}
-      {renderGridItem('../border--bottom', <IconBorderBottom {...args} />)}
-      {renderGridItem('../border--full', <IconBorderFull {...args} />)}
-      {renderGridItem('../border--left', <IconBorderLeft {...args} />)}
-      {renderGridItem('../border--none', <IconBorderNone {...args} />)}
-      {renderGridItem('../border--right', <IconBorderRight {...args} />)}
-      {renderGridItem('../border--top', <IconBorderTop {...args} />)}
-      {renderGridItem('../bot', <IconBot {...args} />)}
-      {renderGridItem('../box', <IconBox {...args} />)}
-      {renderGridItem('../box--extra-large', <IconBoxExtraLarge {...args} />)}
-      {renderGridItem('../box--large', <IconBoxLarge {...args} />)}
-      {renderGridItem('../box--medium', <IconBoxMedium {...args} />)}
-      {renderGridItem('../box--small', <IconBoxSmall {...args} />)}
-      {renderGridItem('../box-plot', <IconBoxPlot {...args} />)}
-      {renderGridItem('../branch', <IconBranch {...args} />)}
-      {renderGridItem('../breaking-change', <IconBreakingChange {...args} />)}
-      {renderGridItem('../brightness-contrast', <IconBrightnessContrast {...args} />)}
-      {renderGridItem('../bring-forward', <IconBringForward {...args} />)}
-      {renderGridItem('../bring-to-front', <IconBringToFront {...args} />)}
-      {renderGridItem('../building', <IconBuilding {...args} />)}
-      {renderGridItem('../building--insights-1', <IconBuildingInsights1 {...args} />)}
-      {renderGridItem('../building--insights-2', <IconBuildingInsights2 {...args} />)}
-      {renderGridItem('../building--insights-3', <IconBuildingInsights3 {...args} />)}
-      {renderGridItem('../bullhorn', <IconBullhorn {...args} />)}
-      {renderGridItem('../buoy', <IconBuoy {...args} />)}
-      {renderGridItem('../bus', <IconBus {...args} />)}
-      {renderGridItem('../button--centered', <IconButtonCentered {...args} />)}
-      {renderGridItem('../button--flush-left', <IconButtonFlushLeft {...args} />)}
-      {renderGridItem('../cabin-care', <IconCabinCare {...args} />)}
-      {renderGridItem('../cabin-care--alert', <IconCabinCareAlert {...args} />)}
-      {renderGridItem('../cabin-care--alt', <IconCabinCareAlt {...args} />)}
-      {renderGridItem('../cafe', <IconCafe {...args} />)}
-      {renderGridItem('../calculation', <IconCalculation {...args} />)}
-      {renderGridItem('../calculation--alt', <IconCalculationAlt {...args} />)}
-      {renderGridItem('../calculator', <IconCalculator {...args} />)}
-      {renderGridItem('../calculator--check', <IconCalculatorCheck {...args} />)}
-      {renderGridItem('../calendar', <IconCalendar {...args} />)}
-      {renderGridItem('../calendar--heat-map', <IconCalendarHeatMap {...args} />)}
-      {renderGridItem('../calendar--settings', <IconCalendarSettings {...args} />)}
-      {renderGridItem('../calendar--tools', <IconCalendarTools {...args} />)}
-      {renderGridItem('../calibrate', <IconCalibrate {...args} />)}
-      {renderGridItem('../camera', <IconCamera {...args} />)}
-      {renderGridItem('../camera--action', <IconCameraAction {...args} />)}
-      {renderGridItem('../campsite', <IconCampsite {...args} />)}
-      {renderGridItem('../car', <IconCar {...args} />)}
-      {renderGridItem('../car--front', <IconCarFront {...args} />)}
-      {renderGridItem('../carbon', <IconCarbon {...args} />)}
-      {renderGridItem('../carbon-accounting', <IconCarbonAccounting {...args} />)}
-      {renderGridItem('../caret--down', <IconCaretDown {...args} />)}
-      {renderGridItem('../caret--left', <IconCaretLeft {...args} />)}
-      {renderGridItem('../caret--right', <IconCaretRight {...args} />)}
-      {renderGridItem('../caret--sort', <IconCaretSort {...args} />)}
-      {renderGridItem('../caret--sort--down', <IconCaretSortDown {...args} />)}
-      {renderGridItem('../caret--sort--up', <IconCaretSortUp {...args} />)}
-      {renderGridItem('../caret--up', <IconCaretUp {...args} />)}
-      {renderGridItem('../carousel--horizontal', <IconCarouselHorizontal {...args} />)}
-      {renderGridItem('../carousel--vertical', <IconCarouselVertical {...args} />)}
-      {renderGridItem('../catalog', <IconCatalog {...args} />)}
-      {renderGridItem('../categories', <IconCategories {...args} />)}
-      {renderGridItem('../category', <IconCategory {...args} />)}
-      {renderGridItem('../category--add', <IconCategoryAdd {...args} />)}
-      {renderGridItem('../category--and', <IconCategoryAnd {...args} />)}
-      {renderGridItem('../category--new', <IconCategoryNew {...args} />)}
-      {renderGridItem('../category--new-each', <IconCategoryNewEach {...args} />)}
-      {renderGridItem('../cell-tower', <IconCellTower {...args} />)}
-      {renderGridItem('../center--circle', <IconCenterCircle {...args} />)}
-      {renderGridItem('../center--square', <IconCenterSquare {...args} />)}
-      {renderGridItem('../center-to-fit', <IconCenterToFit {...args} />)}
-      {renderGridItem('../certificate', <IconCertificate {...args} />)}
-      {renderGridItem('../certificate--check', <IconCertificateCheck {...args} />)}
-      {renderGridItem('../change-catalog', <IconChangeCatalog {...args} />)}
-      {renderGridItem('../character--decimal', <IconCharacterDecimal {...args} />)}
-      {renderGridItem('../character--fraction', <IconCharacterFraction {...args} />)}
-      {renderGridItem('../character--integer', <IconCharacterInteger {...args} />)}
-      {renderGridItem('../character--lower-case', <IconCharacterLowerCase {...args} />)}
-      {renderGridItem('../character--negative-number', <IconCharacterNegativeNumber {...args} />)}
-      {renderGridItem('../character--sentence-case', <IconCharacterSentenceCase {...args} />)}
-      {renderGridItem('../character--upper-case', <IconCharacterUpperCase {...args} />)}
-      {renderGridItem('../character--whole-number', <IconCharacterWholeNumber {...args} />)}
-      {renderGridItem('../character-patterns', <IconCharacterPatterns {...args} />)}
-      {renderGridItem('../charging-station', <IconChargingStation {...args} />)}
-      {renderGridItem('../charging-station--filled', <IconChargingStationFilled {...args} />)}
-      {renderGridItem('../chart--3D', <IconChart3D {...args} />)}
-      {renderGridItem('../chart--area', <IconChartArea {...args} />)}
-      {renderGridItem('../chart--area-smooth', <IconChartAreaSmooth {...args} />)}
-      {renderGridItem('../chart--area-stepper', <IconChartAreaStepper {...args} />)}
-      {renderGridItem('../chart--average', <IconChartAverage {...args} />)}
-      {renderGridItem('../chart--bar', <IconChartBar {...args} />)}
-      {renderGridItem('../chart--bar-floating', <IconChartBarFloating {...args} />)}
-      {renderGridItem('../chart--bar-overlay', <IconChartBarOverlay {...args} />)}
-      {renderGridItem('../chart--bar-stacked', <IconChartBarStacked {...args} />)}
-      {renderGridItem('../chart--bar-target', <IconChartBarTarget {...args} />)}
-      {renderGridItem('../chart--bubble', <IconChartBubble {...args} />)}
-      {renderGridItem('../chart--bubble-packed', <IconChartBubblePacked {...args} />)}
-      {renderGridItem('../chart--bullet', <IconChartBullet {...args} />)}
-      {renderGridItem('../chart--candlestick', <IconChartCandlestick {...args} />)}
-      {renderGridItem('../chart--cluster-bar', <IconChartClusterBar {...args} />)}
-      {renderGridItem('../chart--column', <IconChartColumn {...args} />)}
-      {renderGridItem('../chart--column-floating', <IconChartColumnFloating {...args} />)}
-      {renderGridItem('../chart--column-target', <IconChartColumnTarget {...args} />)}
-      {renderGridItem('../chart--combo', <IconChartCombo {...args} />)}
-      {renderGridItem('../chart--combo-stacked', <IconChartComboStacked {...args} />)}
-      {renderGridItem('../chart--custom', <IconChartCustom {...args} />)}
-      {renderGridItem('../chart--error-bar', <IconChartErrorBar {...args} />)}
-      {renderGridItem('../chart--error-bar--alt', <IconChartErrorBarAlt {...args} />)}
-      {renderGridItem('../chart--evaluation', <IconChartEvaluation {...args} />)}
-      {renderGridItem('../chart--high-low', <IconChartHighLow {...args} />)}
-      {renderGridItem('../chart--histogram', <IconChartHistogram {...args} />)}
-      {renderGridItem('../chart--line', <IconChartLine {...args} />)}
-      {renderGridItem('../chart--line--data', <IconChartLineData {...args} />)}
-      {renderGridItem('../chart--line-smooth', <IconChartLineSmooth {...args} />)}
-      {renderGridItem('../chart--logistic-regression', <IconChartLogisticRegression {...args} />)}
-      {renderGridItem('../chart--marimekko', <IconChartMarimekko {...args} />)}
-      {renderGridItem('../chart--maximum', <IconChartMaximum {...args} />)}
-      {renderGridItem('../chart--median', <IconChartMedian {...args} />)}
-      {renderGridItem('../chart--minimum', <IconChartMinimum {...args} />)}
-      {renderGridItem('../chart--multi-line', <IconChartMultiLine {...args} />)}
-      {renderGridItem('../chart--multitype', <IconChartMultitype {...args} />)}
-      {renderGridItem('../chart--network', <IconChartNetwork {...args} />)}
-      {renderGridItem('../chart--parallel', <IconChartParallel {...args} />)}
-      {renderGridItem('../chart--pie', <IconChartPie {...args} />)}
-      {renderGridItem('../chart--point', <IconChartPoint {...args} />)}
-      {renderGridItem('../chart--population', <IconChartPopulation {...args} />)}
-      {renderGridItem('../chart--radar', <IconChartRadar {...args} />)}
-      {renderGridItem('../chart--radial', <IconChartRadial {...args} />)}
-      {renderGridItem('../chart--relationship', <IconChartRelationship {...args} />)}
-      {renderGridItem('../chart--ring', <IconChartRing {...args} />)}
-      {renderGridItem('../chart--river', <IconChartRiver {...args} />)}
-      {renderGridItem('../chart--rose', <IconChartRose {...args} />)}
-      {renderGridItem('../chart--scatter', <IconChartScatter {...args} />)}
-      {renderGridItem('../chart--spiral', <IconChartSpiral {...args} />)}
-      {renderGridItem('../chart--stacked', <IconChartStacked {...args} />)}
-      {renderGridItem('../chart--stepper', <IconChartStepper {...args} />)}
-      {renderGridItem('../chart--sunburst', <IconChartSunburst {...args} />)}
-      {renderGridItem('../chart--t-sne', <IconChartTSne {...args} />)}
-      {renderGridItem('../chart--treemap', <IconChartTreemap {...args} />)}
-      {renderGridItem('../chart--venn-diagram', <IconChartVennDiagram {...args} />)}
-      {renderGridItem('../chart--violin-plot', <IconChartViolinPlot {...args} />)}
-      {renderGridItem('../chart--waterfall', <IconChartWaterfall {...args} />)}
-      {renderGridItem('../chart--win-loss', <IconChartWinLoss {...args} />)}
-      {renderGridItem('../chat', <IconChat {...args} />)}
-      {renderGridItem('../chat--launch', <IconChatLaunch {...args} />)}
-      {renderGridItem('../chat--off', <IconChatOff {...args} />)}
-      {renderGridItem('../chat--operational', <IconChatOperational {...args} />)}
-      {renderGridItem('../chat-bot', <IconChatBot {...args} />)}
-      {renderGridItem('../checkbox', <IconCheckbox {...args} />)}
-      {renderGridItem('../checkbox--checked', <IconCheckboxChecked {...args} />)}
-      {renderGridItem('../checkbox--checked--filled', <IconCheckboxCheckedFilled {...args} />)}
-      {renderGridItem('../checkbox--indeterminate', <IconCheckboxIndeterminate {...args} />)}
-      {renderGridItem('../checkbox--indeterminate--filled', <IconCheckboxIndeterminateFilled {...args} />)}
-      {renderGridItem('../checkbox--undeterminate', <IconCheckboxUndeterminate {...args} />)}
-      {renderGridItem('../checkbox--undeterminate--filled', <IconCheckboxUndeterminateFilled {...args} />)}
-      {renderGridItem('../checkmark', <IconCheckmark {...args} />)}
-      {renderGridItem('../checkmark--filled', <IconCheckmarkFilled {...args} />)}
-      {renderGridItem('../checkmark--filled--error', <IconCheckmarkFilledError {...args} />)}
-      {renderGridItem('../checkmark--filled--warning', <IconCheckmarkFilledWarning {...args} />)}
-      {renderGridItem('../checkmark--outline', <IconCheckmarkOutline {...args} />)}
-      {renderGridItem('../checkmark--outline--error', <IconCheckmarkOutlineError {...args} />)}
-      {renderGridItem('../checkmark--outline--warning', <IconCheckmarkOutlineWarning {...args} />)}
-      {renderGridItem('../chemistry', <IconChemistry {...args} />)}
-      {renderGridItem('../chemistry--reference', <IconChemistryReference {...args} />)}
-      {renderGridItem('../chevron--down', <IconChevronDown {...args} />)}
-      {renderGridItem('../chevron--left', <IconChevronLeft {...args} />)}
-      {renderGridItem('../chevron--mini', <IconChevronMini {...args} />)}
-      {renderGridItem('../chevron--right', <IconChevronRight {...args} />)}
-      {renderGridItem('../chevron--sort', <IconChevronSort {...args} />)}
-      {renderGridItem('../chevron--sort--down', <IconChevronSortDown {...args} />)}
-      {renderGridItem('../chevron--sort--up', <IconChevronSortUp {...args} />)}
-      {renderGridItem('../chevron--up', <IconChevronUp {...args} />)}
-      {renderGridItem('../chip', <IconChip {...args} />)}
-      {renderGridItem('../choices', <IconChoices {...args} />)}
-      {renderGridItem('../choose-item', <IconChooseItem {...args} />)}
-      {renderGridItem('../choropleth-map', <IconChoroplethMap {...args} />)}
-      {renderGridItem('../circle--filled', <IconCircleFilled {...args} />)}
-      {renderGridItem('../circle--solid', <IconCircleSolid {...args} />)}
-      {renderGridItem('../circle-dash', <IconCircleDash {...args} />)}
-      {renderGridItem('../circle-packing', <IconCirclePacking {...args} />)}
-      {renderGridItem('../classification', <IconClassification {...args} />)}
-      {renderGridItem('../classifier--language', <IconClassifierLanguage {...args} />)}
-      {renderGridItem('../clean', <IconClean {...args} />)}
-      {renderGridItem('../close', <IconClose {...args} />)}
-      {renderGridItem('../close--alt', <IconCloseAlt {...args} />)}
-      {renderGridItem('../close--filled', <IconCloseFilled {...args} />)}
-      {renderGridItem('../close--outline', <IconCloseOutline {...args} />)}
-      {renderGridItem('../closed-caption', <IconClosedCaption {...args} />)}
-      {renderGridItem('../closed-caption--alt', <IconClosedCaptionAlt {...args} />)}
-      {renderGridItem('../closed-caption--filled', <IconClosedCaptionFilled {...args} />)}
-      {renderGridItem('../cloud', <IconCloud {...args} />)}
-      {renderGridItem('../cloud--alerting', <IconCloudAlerting {...args} />)}
-      {renderGridItem('../cloud--auditing', <IconCloudAuditing {...args} />)}
-      {renderGridItem('../cloud--data-ops', <IconCloudDataOps {...args} />)}
-      {renderGridItem('../cloud--download', <IconCloudDownload {...args} />)}
-      {renderGridItem('../cloud--lightning', <IconCloudLightning {...args} />)}
-      {renderGridItem('../cloud--logging', <IconCloudLogging {...args} />)}
-      {renderGridItem('../cloud--monitoring', <IconCloudMonitoring {...args} />)}
-      {renderGridItem('../cloud--offline', <IconCloudOffline {...args} />)}
-      {renderGridItem('../cloud--rain', <IconCloudRain {...args} />)}
-      {renderGridItem('../cloud--service-management', <IconCloudServiceManagement {...args} />)}
-      {renderGridItem('../cloud--snow', <IconCloudSnow {...args} />)}
-      {renderGridItem('../cloud--upload', <IconCloudUpload {...args} />)}
-      {renderGridItem('../cloud-app', <IconCloudApp {...args} />)}
-      {renderGridItem('../cloud-ceiling', <IconCloudCeiling {...args} />)}
-      {renderGridItem('../cloud-foundry--1', <IconCloudFoundry1 {...args} />)}
-      {renderGridItem('../cloud-foundry--2', <IconCloudFoundry2 {...args} />)}
-      {renderGridItem('../cloud-registry', <IconCloudRegistry {...args} />)}
-      {renderGridItem('../cloud-satellite', <IconCloudSatellite {...args} />)}
-      {renderGridItem('../cloud-satellite--config', <IconCloudSatelliteConfig {...args} />)}
-      {renderGridItem('../cloud-satellite--link', <IconCloudSatelliteLink {...args} />)}
-      {renderGridItem('../cloud-satellite--services', <IconCloudSatelliteServices {...args} />)}
-      {renderGridItem('../cloud-services', <IconCloudServices {...args} />)}
-      {renderGridItem('../cloudy', <IconCloudy {...args} />)}
-      {renderGridItem('../code', <IconCode {...args} />)}
-      {renderGridItem('../code--hide', <IconCodeHide {...args} />)}
-      {renderGridItem('../code--reference', <IconCodeReference {...args} />)}
-      {renderGridItem('../code-signing-service', <IconCodeSigningService {...args} />)}
-      {renderGridItem('../cognitive', <IconCognitive {...args} />)}
-      {renderGridItem('../collaborate', <IconCollaborate {...args} />)}
-      {renderGridItem('../collapse-all', <IconCollapseAll {...args} />)}
-      {renderGridItem('../collapse-categories', <IconCollapseCategories {...args} />)}
-      {renderGridItem('../color-palette', <IconColorPalette {...args} />)}
-      {renderGridItem('../color-switch', <IconColorSwitch {...args} />)}
-      {renderGridItem('../column', <IconColumn {...args} />)}
-      {renderGridItem('../column--delete', <IconColumnDelete {...args} />)}
-      {renderGridItem('../column--insert', <IconColumnInsert {...args} />)}
-      {renderGridItem('../column-dependency', <IconColumnDependency {...args} />)}
-      {renderGridItem('../commit', <IconCommit {...args} />)}
-      {renderGridItem('../communication--unified', <IconCommunicationUnified {...args} />)}
-      {renderGridItem('../compare', <IconCompare {...args} />)}
-      {renderGridItem('../compass', <IconCompass {...args} />)}
-      {renderGridItem('../concept', <IconConcept {...args} />)}
-      {renderGridItem('../condition--point', <IconConditionPoint {...args} />)}
-      {renderGridItem('../condition--wait-point', <IconConditionWaitPoint {...args} />)}
-      {renderGridItem('../connect', <IconConnect {...args} />)}
-      {renderGridItem('../connect--recursive', <IconConnectRecursive {...args} />)}
-      {renderGridItem('../connect--source', <IconConnectSource {...args} />)}
-      {renderGridItem('../connect--target', <IconConnectTarget {...args} />)}
-      {renderGridItem('../connection--receive', <IconConnectionReceive {...args} />)}
-      {renderGridItem('../connection--send', <IconConnectionSend {...args} />)}
-      {renderGridItem('../connection--two-way', <IconConnectionTwoWay {...args} />)}
-      {renderGridItem('../connection-signal', <IconConnectionSignal {...args} />)}
-      {renderGridItem('../connection-signal--off', <IconConnectionSignalOff {...args} />)}
-      {renderGridItem('../construction', <IconConstruction {...args} />)}
-      {renderGridItem('../container-registry', <IconContainerRegistry {...args} />)}
-      {renderGridItem('../container-services', <IconContainerServices {...args} />)}
-      {renderGridItem('../container-software', <IconContainerSoftware {...args} />)}
-      {renderGridItem('../content-delivery-network', <IconContentDeliveryNetwork {...args} />)}
-      {renderGridItem('../content-view', <IconContentView {...args} />)}
-      {renderGridItem('../continue', <IconContinue {...args} />)}
-      {renderGridItem('../continue--filled', <IconContinueFilled {...args} />)}
-      {renderGridItem('../contrast', <IconContrast {...args} />)}
-      {renderGridItem('../convert-to-cloud', <IconConvertToCloud {...args} />)}
-      {renderGridItem('../cookie', <IconCookie {...args} />)}
-      {renderGridItem('../copy', <IconCopy {...args} />)}
-      {renderGridItem('../copy--file', <IconCopyFile {...args} />)}
-      {renderGridItem('../copy--link', <IconCopyLink {...args} />)}
-      {renderGridItem('../corn', <IconCorn {...args} />)}
-      {renderGridItem('../corner', <IconCorner {...args} />)}
-      {renderGridItem('../coronavirus', <IconCoronavirus {...args} />)}
-      {renderGridItem('../cost', <IconCost {...args} />)}
-      {renderGridItem('../cost--total', <IconCostTotal {...args} />)}
-      {renderGridItem('../cough', <IconCough {...args} />)}
-      {renderGridItem('../course', <IconCourse {...args} />)}
-      {renderGridItem('../covariate', <IconCovariate {...args} />)}
-      {renderGridItem('../credentials', <IconCredentials {...args} />)}
-      {renderGridItem('../crop', <IconCrop {...args} />)}
-      {renderGridItem('../crop-growth', <IconCropGrowth {...args} />)}
-      {renderGridItem('../crop-health', <IconCropHealth {...args} />)}
-      {renderGridItem('../cross-tab', <IconCrossTab {...args} />)}
-      {renderGridItem('../crossroads', <IconCrossroads {...args} />)}
-      {renderGridItem('../cube', <IconCube {...args} />)}
-      {renderGridItem('../cube-view', <IconCubeView {...args} />)}
-      {renderGridItem('../currency', <IconCurrency {...args} />)}
-      {renderGridItem('../currency--baht', <IconCurrencyBaht {...args} />)}
-      {renderGridItem('../currency--dollar', <IconCurrencyDollar {...args} />)}
-      {renderGridItem('../currency--euro', <IconCurrencyEuro {...args} />)}
-      {renderGridItem('../currency--lira', <IconCurrencyLira {...args} />)}
-      {renderGridItem('../currency--pound', <IconCurrencyPound {...args} />)}
-      {renderGridItem('../currency--ruble', <IconCurrencyRuble {...args} />)}
-      {renderGridItem('../currency--rupee', <IconCurrencyRupee {...args} />)}
-      {renderGridItem('../currency--shekel', <IconCurrencyShekel {...args} />)}
-      {renderGridItem('../currency--won', <IconCurrencyWon {...args} />)}
-      {renderGridItem('../currency--yen', <IconCurrencyYen {...args} />)}
-      {renderGridItem('../cursor--1', <IconCursor1 {...args} />)}
-      {renderGridItem('../cursor--2', <IconCursor2 {...args} />)}
-      {renderGridItem('../cut', <IconCut {...args} />)}
-      {renderGridItem('../customer-service', <IconCustomerService {...args} />)}
-      {renderGridItem('../cut-out', <IconCutOut {...args} />)}
-      {renderGridItem('../cyclist', <IconCyclist {...args} />)}
-      {renderGridItem('../dashboard', <IconDashboard {...args} />)}
-      {renderGridItem('../dashboard--reference', <IconDashboardReference {...args} />)}
-      {renderGridItem('../data--1', <IconData1 {...args} />)}
-      {renderGridItem('../data--2', <IconData2 {...args} />)}
-      {renderGridItem('../data--base', <IconDataBase {...args} />)}
-      {renderGridItem('../data--base--alt', <IconDataBaseAlt {...args} />)}
-      {renderGridItem('../data--categorical', <IconDataCategorical {...args} />)}
-      {renderGridItem('../data--center', <IconDataCenter {...args} />)}
-      {renderGridItem('../data--check', <IconDataCheck {...args} />)}
-      {renderGridItem('../data--connected', <IconDataConnected {...args} />)}
-      {renderGridItem('../data--error', <IconDataError {...args} />)}
-      {renderGridItem('../data--format', <IconDataFormat {...args} />)}
-      {renderGridItem('../data--reference', <IconDataReference {...args} />)}
-      {renderGridItem('../data--set', <IconDataSet {...args} />)}
-      {renderGridItem('../data--structured', <IconDataStructured {...args} />)}
-      {renderGridItem('../data--unstructured', <IconDataUnstructured {...args} />)}
-      {renderGridItem('../data--view', <IconDataView {...args} />)}
-      {renderGridItem('../data--view--alt', <IconDataViewAlt {...args} />)}
-      {renderGridItem('../data-accessor', <IconDataAccessor {...args} />)}
-      {renderGridItem('../data-backup', <IconDataBackup {...args} />)}
-      {renderGridItem('../data-bin', <IconDataBin {...args} />)}
-      {renderGridItem('../data-blob', <IconDataBlob {...args} />)}
-      {renderGridItem('../data-class', <IconDataClass {...args} />)}
-      {renderGridItem('../data-collection', <IconDataCollection {...args} />)}
-      {renderGridItem('../data-definition', <IconDataDefinition {...args} />)}
-      {renderGridItem('../data-diode', <IconDataDiode {...args} />)}
-      {renderGridItem('../data-enrichment', <IconDataEnrichment {...args} />)}
-      {renderGridItem('../data-player', <IconDataPlayer {...args} />)}
-      {renderGridItem('../data-refinery', <IconDataRefinery {...args} />)}
-      {renderGridItem('../data-refinery--reference', <IconDataRefineryReference {...args} />)}
-      {renderGridItem('../data--regular', <IconDataRegular {...args} />)}
-      {renderGridItem('../data-share', <IconDataShare {...args} />)}
-      {renderGridItem('../data-table', <IconDataTable {...args} />)}
-      {renderGridItem('../data-table--reference', <IconDataTableReference {...args} />)}
-      {renderGridItem('../data-vis--1', <IconDataVis1 {...args} />)}
-      {renderGridItem('../data-vis--2', <IconDataVis2 {...args} />)}
-      {renderGridItem('../data-vis--3', <IconDataVis3 {...args} />)}
-      {renderGridItem('../data-vis--4', <IconDataVis4 {...args} />)}
-      {renderGridItem('../database--datastax', <IconDatabaseDatastax {...args} />)}
-      {renderGridItem('../database--elastic', <IconDatabaseElastic {...args} />)}
-      {renderGridItem('../database--enterprise-db2', <IconDatabaseEnterpriseDb2 {...args} />)}
-      {renderGridItem('../database--etcd', <IconDatabaseEtcd {...args} />)}
-      {renderGridItem('../database--mongodb', <IconDatabaseMongodb {...args} />)}
-      {renderGridItem('../database--postgreSQL', <IconDatabasePostgreSql {...args} />)}
-      {renderGridItem('../database--rabbit', <IconDatabaseRabbit {...args} />)}
-      {renderGridItem('../database--redis', <IconDatabaseRedis {...args} />)}
-      {renderGridItem('../datastore', <IconDatastore {...args} />)}
-      {renderGridItem('../debug', <IconDebug {...args} />)}
-      {renderGridItem('../decision-tree', <IconDecisionTree {...args} />)}
-      {renderGridItem('../delete', <IconDelete {...args} />)}
-      {renderGridItem('../delivery', <IconDelivery {...args} />)}
-      {renderGridItem('../delivery--add', <IconDeliveryAdd {...args} />)}
-      {renderGridItem('../delivery--parcel', <IconDeliveryParcel {...args} />)}
-      {renderGridItem('../delivery-truck', <IconDeliveryTruck {...args} />)}
-      {renderGridItem('../departure', <IconDeparture {...args} />)}
-      {renderGridItem('../deploy', <IconDeploy {...args} />)}
-      {renderGridItem('../deploy-rules', <IconDeployRules {...args} />)}
-      {renderGridItem('../deployment-pattern', <IconDeploymentPattern {...args} />)}
-      {renderGridItem('../deployment-policy', <IconDeploymentPolicy {...args} />)}
-      {renderGridItem('../deployment-unit--data', <IconDeploymentUnitData {...args} />)}
-      {renderGridItem('../deployment-unit--execution', <IconDeploymentUnitExecution {...args} />)}
-      {renderGridItem('../deployment-unit--installation', <IconDeploymentUnitInstallation {...args} />)}
-      {renderGridItem('../deployment-unit--presentation', <IconDeploymentUnitPresentation {...args} />)}
-      {renderGridItem('../deployment-unit--technical--data', <IconDeploymentUnitTechnicalData {...args} />)}
-      {renderGridItem('../deployment-unit--technical--execution', <IconDeploymentUnitTechnicalExecution {...args} />)}
-      {renderGridItem('../deployment-unit--technical--installation', <IconDeploymentUnitTechnicalInstallation {...args} />)}
-      {renderGridItem('../deployment-unit--technical--presentation', <IconDeploymentUnitTechnicalPresentation {...args} />)}
-      {renderGridItem('../desk--adjustable', <IconDeskAdjustable {...args} />)}
-      {renderGridItem('../development', <IconDevelopment {...args} />)}
-      {renderGridItem('../devices', <IconDevices {...args} />)}
-      {renderGridItem('../dew-point', <IconDewPoint {...args} />)}
-      {renderGridItem('../dew-point--filled', <IconDewPointFilled {...args} />)}
-      {renderGridItem('../diagram', <IconDiagram {...args} />)}
-      {renderGridItem('../diagram--reference', <IconDiagramReference {...args} />)}
-      {renderGridItem('../direct-link', <IconDirectLink {...args} />)}
-      {renderGridItem('../direction--bear-right--01', <IconDirectionBearRight01 {...args} />)}
-      {renderGridItem('../direction--bear-right--01--filled', <IconDirectionBearRight01Filled {...args} />)}
-      {renderGridItem('../direction--bear-right--02', <IconDirectionBearRight02 {...args} />)}
-      {renderGridItem('../direction--bear-right--02--filled', <IconDirectionBearRight02Filled {...args} />)}
-      {renderGridItem('../direction--curve', <IconDirectionCurve {...args} />)}
-      {renderGridItem('../direction--curve--filled', <IconDirectionCurveFilled {...args} />)}
-      {renderGridItem('../direction--fork', <IconDirectionFork {...args} />)}
-      {renderGridItem('../direction--fork--filled', <IconDirectionForkFilled {...args} />)}
-      {renderGridItem('../direction--loop-left', <IconDirectionLoopLeft {...args} />)}
-      {renderGridItem('../direction--loop-left--filled', <IconDirectionLoopLeftFilled {...args} />)}
-      {renderGridItem('../direction--loop-right', <IconDirectionLoopRight {...args} />)}
-      {renderGridItem('../direction--loop-right--filled', <IconDirectionLoopRightFilled {...args} />)}
-      {renderGridItem('../direction--merge', <IconDirectionMerge {...args} />)}
-      {renderGridItem('../direction--merge--filled', <IconDirectionMergeFilled {...args} />)}
-      {renderGridItem('../direction--right--01', <IconDirectionRight01 {...args} />)}
-      {renderGridItem('../direction--right--01--filled', <IconDirectionRight01Filled {...args} />)}
-      {renderGridItem('../direction--right--02', <IconDirectionRight02 {...args} />)}
-      {renderGridItem('../direction--right--02--filled', <IconDirectionRight02Filled {...args} />)}
-      {renderGridItem('../direction--rotary--first-right', <IconDirectionRotaryFirstRight {...args} />)}
-      {renderGridItem('../direction--rotary--first-right--filled', <IconDirectionRotaryFirstRightFilled {...args} />)}
-      {renderGridItem('../direction--rotary--right', <IconDirectionRotaryRight {...args} />)}
-      {renderGridItem('../direction--rotary--right--filled', <IconDirectionRotaryRightFilled {...args} />)}
-      {renderGridItem('../direction--rotary--straight', <IconDirectionRotaryStraight {...args} />)}
-      {renderGridItem('../direction--rotary--straight--filled', <IconDirectionRotaryStraightFilled {...args} />)}
-      {renderGridItem('../direction--sharp-turn', <IconDirectionSharpTurn {...args} />)}
-      {renderGridItem('../direction--sharp-turn--filled', <IconDirectionSharpTurnFilled {...args} />)}
-      {renderGridItem('../direction--straight', <IconDirectionStraight {...args} />)}
-      {renderGridItem('../direction--straight--filled', <IconDirectionStraightFilled {...args} />)}
-      {renderGridItem('../direction--straight--right', <IconDirectionStraightRight {...args} />)}
-      {renderGridItem('../direction--straight--right--filled', <IconDirectionStraightRightFilled {...args} />)}
-      {renderGridItem('../direction--u-turn', <IconDirectionUTurn {...args} />)}
-      {renderGridItem('../direction--u-turn--filled', <IconDirectionUTurnFilled {...args} />)}
-      {renderGridItem('../directory-domain', <IconDirectoryDomain {...args} />)}
-      {renderGridItem('../distribute--horizontal-center', <IconDistributeHorizontalCenter {...args} />)}
-      {renderGridItem('../distribute--horizontal-left', <IconDistributeHorizontalLeft {...args} />)}
-      {renderGridItem('../distribute--horizontal-right', <IconDistributeHorizontalRight {...args} />)}
-      {renderGridItem('../distribute--vertical-bottom', <IconDistributeVerticalBottom {...args} />)}
-      {renderGridItem('../distribute--vertical-center', <IconDistributeVerticalCenter {...args} />)}
-      {renderGridItem('../distribute--vertical-top', <IconDistributeVerticalTop {...args} />)}
-      {renderGridItem('../dns-services', <IconDnsServices {...args} />)}
-      {renderGridItem('../document', <IconDocument {...args} />)}
-      {renderGridItem('../document--add', <IconDocumentAdd {...args} />)}
-      {renderGridItem('../document--attachment', <IconDocumentAttachment {...args} />)}
-      {renderGridItem('../document--audio', <IconDocumentAudio {...args} />)}
-      {renderGridItem('../document--blank', <IconDocumentBlank {...args} />)}
-      {renderGridItem('../document--download', <IconDocumentDownload {...args} />)}
-      {renderGridItem('../document--epdf', <IconDocumentEpdf {...args} />)}
-      {renderGridItem('../document--export', <IconDocumentExport {...args} />)}
-      {renderGridItem('../document--horizontal', <IconDocumentHorizontal {...args} />)}
-      {renderGridItem('../document--import', <IconDocumentImport {...args} />)}
-      {renderGridItem('../document--pdf', <IconDocumentPdf {...args} />)}
-      {renderGridItem('../document--preliminary', <IconDocumentPreliminary {...args} />)}
-      {renderGridItem('../document--protected', <IconDocumentProtected {...args} />)}
-      {renderGridItem('../document--security', <IconDocumentSecurity {...args} />)}
-      {renderGridItem('../document--signed', <IconDocumentSigned {...args} />)}
-      {renderGridItem('../document--sketch', <IconDocumentSketch {...args} />)}
-      {renderGridItem('../document--subtract', <IconDocumentSubtract {...args} />)}
-      {renderGridItem('../document--tasks', <IconDocumentTasks {...args} />)}
-      {renderGridItem('../document--unknown', <IconDocumentUnknown {...args} />)}
-      {renderGridItem('../document--unprotected', <IconDocumentUnprotected {...args} />)}
-      {renderGridItem('../document--vertical', <IconDocumentVertical {...args} />)}
-      {renderGridItem('../document--video', <IconDocumentVideo {...args} />)}
-      {renderGridItem('../document--view', <IconDocumentView {...args} />)}
-      {renderGridItem('../document--word-processor', <IconDocumentWordProcessor {...args} />)}
-      {renderGridItem('../document--word-processor--reference', <IconDocumentWordProcessorReference {...args} />)}
-      {renderGridItem('../document-sentiment', <IconDocumentSentiment {...args} />)}
-      {renderGridItem('../dog-walker', <IconDogWalker {...args} />)}
-      {renderGridItem('../dot-mark', <IconDotMark {...args} />)}
-      {renderGridItem('../double-integer', <IconDoubleInteger {...args} />)}
-      {renderGridItem('../down-to-bottom', <IconDownToBottom {...args} />)}
-      {renderGridItem('../download', <IconDownload {...args} />)}
-      {renderGridItem('../drag-handle', <IconDragHandle {...args} />)}
-      {renderGridItem('../drag--horizontal', <IconDragHorizontal {...args} />)}
-      {renderGridItem('../drag--vertical', <IconDragVertical {...args} />)}
-      {renderGridItem('../draggable', <IconDraggable {...args} />)}
-      {renderGridItem('../draw', <IconDraw {...args} />)}
-      {renderGridItem('../drill-back', <IconDrillBack {...args} />)}
-      {renderGridItem('../drill-down', <IconDrillDown {...args} />)}
-      {renderGridItem('../drill-through', <IconDrillThrough {...args} />)}
-      {renderGridItem('../driver-analysis', <IconDriverAnalysis {...args} />)}
-      {renderGridItem('../drone', <IconDrone {...args} />)}
-      {renderGridItem('../drone--delivery', <IconDroneDelivery {...args} />)}
-      {renderGridItem('../drone--front', <IconDroneFront {...args} />)}
-      {renderGridItem('../drone--video', <IconDroneVideo {...args} />)}
-      {renderGridItem('../drop-photo', <IconDropPhoto {...args} />)}
-      {renderGridItem('../drop-photo--filled', <IconDropPhotoFilled {...args} />)}
-      {renderGridItem('../drought', <IconDrought {...args} />)}
-      {renderGridItem('../earth', <IconEarth {...args} />)}
-      {renderGridItem('../earth--americas', <IconEarthAmericas {...args} />)}
-      {renderGridItem('../earth--americas--filled', <IconEarthAmericasFilled {...args} />)}
-      {renderGridItem('../earth--europe-africa', <IconEarthEuropeAfrica {...args} />)}
-      {renderGridItem('../earth--europe-africa--filled', <IconEarthEuropeAfricaFilled {...args} />)}
-      {renderGridItem('../earth--filled', <IconEarthFilled {...args} />)}
-      {renderGridItem('../earth--southeast-asia', <IconEarthSoutheastAsia {...args} />)}
-      {renderGridItem('../earth--southeast-asia--filled', <IconEarthSoutheastAsiaFilled {...args} />)}
-      {renderGridItem('../earthquake', <IconEarthquake {...args} />)}
-      {renderGridItem('../edge-cluster', <IconEdgeCluster {...args} />)}
-      {renderGridItem('../edge-device', <IconEdgeDevice {...args} />)}
-      {renderGridItem('../edge-node', <IconEdgeNode {...args} />)}
-      {renderGridItem('../edge-node--alt', <IconEdgeNodeAlt {...args} />)}
-      {renderGridItem('../edge-service', <IconEdgeService {...args} />)}
-      {renderGridItem('../edit', <IconEdit {...args} />)}
-      {renderGridItem('../edit--off', <IconEditOff {...args} />)}
-      {renderGridItem('../edt-loop', <IconEdtLoop {...args} />)}
-      {renderGridItem('../education', <IconEducation {...args} />)}
-      {renderGridItem('../email', <IconEmail {...args} />)}
-      {renderGridItem('../email--new', <IconEmailNew {...args} />)}
-      {renderGridItem('../encryption', <IconEncryption {...args} />)}
-      {renderGridItem('../energy--renewable', <IconEnergyRenewable {...args} />)}
-      {renderGridItem('../enterprise', <IconEnterprise {...args} />)}
-      {renderGridItem('../equalizer', <IconEqualizer {...args} />)}
-      {renderGridItem('../erase', <IconErase {...args} />)}
-      {renderGridItem('../error', <IconError {...args} />)}
-      {renderGridItem('../error--filled', <IconErrorFilled {...args} />)}
-      {renderGridItem('../error--outline', <IconErrorOutline {...args} />)}
-      {renderGridItem('../event', <IconEvent {...args} />)}
-      {renderGridItem('../event--schedule', <IconEventSchedule {...args} />)}
-      {renderGridItem('../events', <IconEvents {...args} />)}
-      {renderGridItem('../events--alt', <IconEventsAlt {...args} />)}
-      {renderGridItem('../exam-mode', <IconExamMode {...args} />)}
-      {renderGridItem('../exit', <IconExit {...args} />)}
-      {renderGridItem('../expand-all', <IconExpandAll {...args} />)}
-      {renderGridItem('../expand-categories', <IconExpandCategories {...args} />)}
-      {renderGridItem('../explore', <IconExplore {...args} />)}
-      {renderGridItem('../export', <IconExport {...args} />)}
-      {renderGridItem('../eyedropper', <IconEyedropper {...args} />)}
-      {renderGridItem('../face--activated', <IconFaceActivated {...args} />)}
-      {renderGridItem('../face--activated--add', <IconFaceActivatedAdd {...args} />)}
-      {renderGridItem('../face--activated--filled', <IconFaceActivatedFilled {...args} />)}
-      {renderGridItem('../face--add', <IconFaceAdd {...args} />)}
-      {renderGridItem('../face--cool', <IconFaceCool {...args} />)}
-      {renderGridItem('../face--dissatisfied', <IconFaceDissatisfied {...args} />)}
-      {renderGridItem('../face--dissatisfied--filled', <IconFaceDissatisfiedFilled {...args} />)}
-      {renderGridItem('../face--dizzy', <IconFaceDizzy {...args} />)}
-      {renderGridItem('../face--dizzy--filled', <IconFaceDizzyFilled {...args} />)}
-      {renderGridItem('../face--mask', <IconFaceMask {...args} />)}
-      {renderGridItem('../face--neutral', <IconFaceNeutral {...args} />)}
-      {renderGridItem('../face--neutral--filled', <IconFaceNeutralFilled {...args} />)}
-      {renderGridItem('../face--pending', <IconFacePending {...args} />)}
-      {renderGridItem('../face--pending--filled', <IconFacePendingFilled {...args} />)}
-      {renderGridItem('../face--satisfied', <IconFaceSatisfied {...args} />)}
-      {renderGridItem('../face--satisfied--filled', <IconFaceSatisfiedFilled {...args} />)}
-      {renderGridItem('../face--wink', <IconFaceWink {...args} />)}
-      {renderGridItem('../face--wink--filled', <IconFaceWinkFilled {...args} />)}
-      {renderGridItem('../factor', <IconFactor {...args} />)}
-      {renderGridItem('../fade', <IconFade {...args} />)}
-      {renderGridItem('../favorite', <IconFavorite {...args} />)}
-      {renderGridItem('../favorite--filled', <IconFavoriteFilled {...args} />)}
-      {renderGridItem('../favorite--half', <IconFavoriteHalf {...args} />)}
-      {renderGridItem('../fetch-upload', <IconFetchUpload {...args} />)}
-      {renderGridItem('../fetch-upload--cloud', <IconFetchUploadCloud {...args} />)}
-      {renderGridItem('../file-storage', <IconFileStorage {...args} />)}
-      {renderGridItem('../filter', <IconFilter {...args} />)}
-      {renderGridItem('../filter--edit', <IconFilterEdit {...args} />)}
-      {renderGridItem('../filter--remove', <IconFilterRemove {...args} />)}
-      {renderGridItem('../filter--reset', <IconFilterReset {...args} />)}
-      {renderGridItem('../finance', <IconFinance {...args} />)}
-      {renderGridItem('../fingerprint-recognition', <IconFingerprintRecognition {...args} />)}
-      {renderGridItem('../fire', <IconFire {...args} />)}
-      {renderGridItem('../firewall', <IconFirewall {...args} />)}
-      {renderGridItem('../firewall--classic', <IconFirewallClassic {...args} />)}
-      {renderGridItem('../fish', <IconFish {...args} />)}
-      {renderGridItem('../fish--multiple', <IconFishMultiple {...args} />)}
-      {renderGridItem('../fit-to-height', <IconFitToHeight {...args} />)}
-      {renderGridItem('../fit-to-screen', <IconFitToScreen {...args} />)}
-      {renderGridItem('../fit-to-width', <IconFitToWidth {...args} />)}
-      {renderGridItem('../flag', <IconFlag {...args} />)}
-      {renderGridItem('../flag--filled', <IconFlagFilled {...args} />)}
-      {renderGridItem('../flagging-taxi', <IconFlaggingTaxi {...args} />)}
-      {renderGridItem('../flash', <IconFlash {...args} />)}
-      {renderGridItem('../flash--filled', <IconFlashFilled {...args} />)}
-      {renderGridItem('../flash--off', <IconFlashOff {...args} />)}
-      {renderGridItem('../flash--off--filled', <IconFlashOffFilled {...args} />)}
-      {renderGridItem('../flight--international', <IconFlightInternational {...args} />)}
-      {renderGridItem('../flight--roster', <IconFlightRoster {...args} />)}
-      {renderGridItem('../flight--schedule', <IconFlightSchedule {...args} />)}
-      {renderGridItem('../floating-ip', <IconFloatingIp {...args} />)}
-      {renderGridItem('../flood', <IconFlood {...args} />)}
-      {renderGridItem('../flood--warning', <IconFloodWarning {...args} />)}
-      {renderGridItem('../floorplan', <IconFloorplan {...args} />)}
-      {renderGridItem('../flow', <IconFlow {...args} />)}
-      {renderGridItem('../flow--connection', <IconFlowConnection {...args} />)}
-      {renderGridItem('../flow--data', <IconFlowData {...args} />)}
-      {renderGridItem('../fog', <IconFog {...args} />)}
-      {renderGridItem('../folder', <IconFolder {...args} />)}
-      {renderGridItem('../folder--add', <IconFolderAdd {...args} />)}
-      {renderGridItem('../folder--details', <IconFolderDetails {...args} />)}
-      {renderGridItem('../folder--details--reference', <IconFolderDetailsReference {...args} />)}
-      {renderGridItem('../folder--move-to', <IconFolderMoveTo {...args} />)}
-      {renderGridItem('../folder--off', <IconFolderOff {...args} />)}
-      {renderGridItem('../folder--open', <IconFolderOpen {...args} />)}
-      {renderGridItem('../folder--parent', <IconFolderParent {...args} />)}
-      {renderGridItem('../folder--shared', <IconFolderShared {...args} />)}
-      {renderGridItem('../folders', <IconFolders {...args} />)}
-      {renderGridItem('../forecast--hail', <IconForecastHail {...args} />)}
-      {renderGridItem('../forecast--hail-30', <IconForecastHail30 {...args} />)}
-      {renderGridItem('../forecast--lightning', <IconForecastLightning {...args} />)}
-      {renderGridItem('../forecast--lightning-30', <IconForecastLightning30 {...args} />)}
-      {renderGridItem('../fork', <IconFork {...args} />)}
-      {renderGridItem('../forum', <IconForum {...args} />)}
-      {renderGridItem('../forward--10', <IconForward10 {...args} />)}
-      {renderGridItem('../forward--30', <IconForward30 {...args} />)}
-      {renderGridItem('../forward--5', <IconForward5 {...args} />)}
-      {renderGridItem('../fragile', <IconFragile {...args} />)}
-      {renderGridItem('../friendship', <IconFriendship {...args} />)}
-      {renderGridItem('../fruit-bowl', <IconFruitBowl {...args} />)}
-      {renderGridItem('../function', <IconFunction {...args} />)}
-      {renderGridItem('../function-math', <IconFunctionMath {...args} />)}
-      {renderGridItem('../game--console', <IconGameConsole {...args} />)}
-      {renderGridItem('../game--wireless', <IconGameWireless {...args} />)}
-      {renderGridItem('../gamification', <IconGamification {...args} />)}
-      {renderGridItem('../gas-station', <IconGasStation {...args} />)}
-      {renderGridItem('../gas-station--filled', <IconGasStationFilled {...args} />)}
-      {renderGridItem('../gateway', <IconGateway {...args} />)}
-      {renderGridItem('../gateway--api', <IconGatewayApi {...args} />)}
-      {renderGridItem('../gateway--mail', <IconGatewayMail {...args} />)}
-      {renderGridItem('../gateway--public', <IconGatewayPublic {...args} />)}
-      {renderGridItem('../gateway--security', <IconGatewaySecurity {...args} />)}
-      {renderGridItem('../gateway--user-access', <IconGatewayUserAccess {...args} />)}
-      {renderGridItem('../gateway--vpn', <IconGatewayVpn {...args} />)}
-      {renderGridItem('../gender--female', <IconGenderFemale {...args} />)}
-      {renderGridItem('../gender--male', <IconGenderMale {...args} />)}
-      {renderGridItem('../generate-pdf', <IconGeneratePdf {...args} />)}
-      {renderGridItem('../gift', <IconGift {...args} />)}
-      {renderGridItem('../globe', <IconGlobe {...args} />)}
-      {renderGridItem('../gradient', <IconGradient {...args} />)}
-      {renderGridItem('../graphical-data-flow', <IconGraphicalDataFlow {...args} />)}
-      {renderGridItem('../grid', <IconGrid {...args} />)}
-      {renderGridItem('../group', <IconGroup {...args} />)}
-      {renderGridItem('../group--access', <IconGroupAccess {...args} />)}
-      {renderGridItem('../group--account', <IconGroupAccount {...args} />)}
-      {renderGridItem('../group--presentation', <IconGroupPresentation {...args} />)}
-      {renderGridItem('../group--resource', <IconGroupResource {...args} />)}
-      {renderGridItem('../group--security', <IconGroupSecurity {...args} />)}
-      {renderGridItem('../group-objects', <IconGroupObjects {...args} />)}
-      {renderGridItem('../group-objects--new', <IconGroupObjectsNew {...args} />)}
-      {renderGridItem('../group-objects--save', <IconGroupObjectsSave {...args} />)}
-      {renderGridItem('../growth', <IconGrowth {...args} />)}
-      {renderGridItem('../gui', <IconGui {...args} />)}
-      {renderGridItem('../gui--management', <IconGuiManagement {...args} />)}
-      {renderGridItem('../hail', <IconHail {...args} />)}
-      {renderGridItem('../harbor', <IconHarbor {...args} />)}
-      {renderGridItem('../hardware-security-module', <IconHardwareSecurityModule {...args} />)}
-      {renderGridItem('../hashtag', <IconHashtag {...args} />)}
-      {renderGridItem('../haze', <IconHaze {...args} />)}
-      {renderGridItem('../haze--night', <IconHazeNight {...args} />)}
-      {renderGridItem('../headphones', <IconHeadphones {...args} />)}
-      {renderGridItem('../headset', <IconHeadset {...args} />)}
-      {renderGridItem('../health-cross', <IconHealthCross {...args} />)}
-      {renderGridItem('../hearing', <IconHearing {...args} />)}
-      {renderGridItem('../heat-map', <IconHeatMap {...args} />)}
-      {renderGridItem('../heat-map--02', <IconHeatMap02 {...args} />)}
-      {renderGridItem('../heat-map--03', <IconHeatMap03 {...args} />)}
-      {renderGridItem('../heat-map--stocks', <IconHeatMapStocks {...args} />)}
-      {renderGridItem('../helicopter', <IconHelicopter {...args} />)}
-      {renderGridItem('../help', <IconHelp {...args} />)}
-      {renderGridItem('../help--filled', <IconHelpFilled {...args} />)}
-      {renderGridItem('../help-desk', <IconHelpDesk {...args} />)}
-      {renderGridItem('../home', <IconHome {...args} />)}
-      {renderGridItem('../horizontal-view', <IconHorizontalView {...args} />)}
-      {renderGridItem('../hospital', <IconHospital {...args} />)}
-      {renderGridItem('../hospital-bed', <IconHospitalBed {...args} />)}
-      {renderGridItem('../hotel', <IconHotel {...args} />)}
-      {renderGridItem('../hourglass', <IconHourglass {...args} />)}
-      {renderGridItem('../humidity', <IconHumidity {...args} />)}
-      {renderGridItem('../humidity--alt', <IconHumidityAlt {...args} />)}
-      {renderGridItem('../hurricane', <IconHurricane {...args} />)}
-      {renderGridItem('../hybrid-networking', <IconHybridNetworking {...args} />)}
-      {renderGridItem('../hybrid-networking--alt', <IconHybridNetworkingAlt {...args} />)}
-      {renderGridItem('../cloud--dedicated-host', <IconCloudDedicatedHost {...args} />)}
-      {renderGridItem('../cloud--internet-services', <IconCloudInternetServices {...args} />)}
-      {renderGridItem('../cloud--security-compliance-center', <IconCloudSecurityComplianceCenter {...args} />)}
-      {renderGridItem('../cloud--subnets', <IconCloudSubnets {...args} />)}
-      {renderGridItem('../security--alt', <IconSecurityAlt {...args} />)}
-      {renderGridItem('../security-services--alt', <IconSecurityServicesAlt {...args} />)}
-      {renderGridItem('../orders', <IconOrders {...args} />)}
-      {renderGridItem('../ice--accretion', <IconIceAccretion {...args} />)}
-      {renderGridItem('../ice--vision', <IconIceVision {...args} />)}
-      {renderGridItem('../id-management', <IconIdManagement {...args} />)}
-      {renderGridItem('../idea', <IconIdea {...args} />)}
-      {renderGridItem('../identification', <IconIdentification {...args} />)}
-      {renderGridItem('../image', <IconImage {...args} />)}
-      {renderGridItem('../image--copy', <IconImageCopy {...args} />)}
-      {renderGridItem('../image--medical', <IconImageMedical {...args} />)}
-      {renderGridItem('../image--reference', <IconImageReference {...args} />)}
-      {renderGridItem('../image--search', <IconImageSearch {...args} />)}
-      {renderGridItem('../image--search--alt', <IconImageSearchAlt {...args} />)}
-      {renderGridItem('../image-service', <IconImageService {...args} />)}
-      {renderGridItem('../import-export', <IconImportExport {...args} />)}
-      {renderGridItem('../improve-relevance', <IconImproveRelevance {...args} />)}
-      {renderGridItem('../in-progress', <IconInProgress {...args} />)}
-      {renderGridItem('../in-progress--error', <IconInProgressError {...args} />)}
-      {renderGridItem('../in-progress--warning', <IconInProgressWarning {...args} />)}
-      {renderGridItem('../incomplete', <IconIncomplete {...args} />)}
-      {renderGridItem('../incomplete--cancel', <IconIncompleteCancel {...args} />)}
-      {renderGridItem('../incomplete--error', <IconIncompleteError {...args} />)}
-      {renderGridItem('../incomplete--warning', <IconIncompleteWarning {...args} />)}
-      {renderGridItem('../increase-level', <IconIncreaseLevel {...args} />)}
-      {renderGridItem('../industry', <IconIndustry {...args} />)}
-      {renderGridItem('../information', <IconInformation {...args} />)}
-      {renderGridItem('../information--disabled', <IconInformationDisabled {...args} />)}
-      {renderGridItem('../information--filled', <IconInformationFilled {...args} />)}
-      {renderGridItem('../information--square', <IconInformationSquare {...args} />)}
-      {renderGridItem('../information--square--filled', <IconInformationSquareFilled {...args} />)}
-      {renderGridItem('../infrastructure--classic', <IconInfrastructureClassic {...args} />)}
-      {renderGridItem('../insert', <IconInsert {...args} />)}
-      {renderGridItem('../insert--page', <IconInsertPage {...args} />)}
-      {renderGridItem('../insert-syntax', <IconInsertSyntax {...args} />)}
-      {renderGridItem('../inspection', <IconInspection {...args} />)}
-      {renderGridItem('../instance--bx', <IconInstanceBx {...args} />)}
-      {renderGridItem('../instance--classic', <IconInstanceClassic {...args} />)}
-      {renderGridItem('../instance--cx', <IconInstanceCx {...args} />)}
-      {renderGridItem('../instance--mx', <IconInstanceMx {...args} />)}
-      {renderGridItem('../instance--virtual', <IconInstanceVirtual {...args} />)}
-      {renderGridItem('../integration', <IconIntegration {...args} />)}
-      {renderGridItem('../interactions', <IconInteractions {...args} />)}
-      {renderGridItem('../intersect', <IconIntersect {...args} />)}
-      {renderGridItem('../intrusion-prevention', <IconIntrusionPrevention {...args} />)}
-      {renderGridItem('../inventory-management', <IconInventoryManagement {...args} />)}
-      {renderGridItem('../iot--connect', <IconIotConnect {...args} />)}
-      {renderGridItem('../iot--platform', <IconIotPlatform {...args} />)}
-      {renderGridItem('../items--search--empty', <IconItemSearchEmpty {...args} />)}
-      {renderGridItem('../join--full', <IconJoinFull {...args} />)}
-      {renderGridItem('../join--inner', <IconJoinInner {...args} />)}
-      {renderGridItem('../join--left', <IconJoinLeft {...args} />)}
-      {renderGridItem('../join--outer', <IconJoinOuter {...args} />)}
-      {renderGridItem('../join--right', <IconJoinRight {...args} />)}
-      {renderGridItem('../jump-link', <IconJumpLink {...args} />)}
-      {renderGridItem('../keep-dry', <IconKeepDry {...args} />)}
-      {renderGridItem('../keyboard', <IconKeyboard {...args} />)}
-      {renderGridItem('../kubernetes', <IconKubernetes {...args} />)}
-      {renderGridItem('../label', <IconLabel {...args} />)}
-      {renderGridItem('../language', <IconLanguage {...args} />)}
-      {renderGridItem('../laptop', <IconLaptop {...args} />)}
-      {renderGridItem('../lasso', <IconLasso {...args} />)}
-      {renderGridItem('../lasso--polygon', <IconLassoPolygon {...args} />)}
-      {renderGridItem('../launch', <IconLaunch {...args} />)}
-      {renderGridItem('../layers', <IconLayers {...args} />)}
-      {renderGridItem('../legend', <IconLegend {...args} />)}
-      {renderGridItem('../letter--Aa', <IconLetterAa {...args} />)}
-      {renderGridItem('../letter--Aa--large', <IconLetterAaLarge {...args} />)}
-      {renderGridItem('../letter--Bb', <IconLetterBb {...args} />)}
-      {renderGridItem('../letter--Cc', <IconLetterCc {...args} />)}
-      {renderGridItem('../letter--Dd', <IconLetterDd {...args} />)}
-      {renderGridItem('../letter--Ee', <IconLetterEe {...args} />)}
-      {renderGridItem('../letter--Ff', <IconLetterFf {...args} />)}
-      {renderGridItem('../letter--Gg', <IconLetterGg {...args} />)}
-      {renderGridItem('../letter--Hh', <IconLetterHh {...args} />)}
-      {renderGridItem('../letter--Ii', <IconLetterIi {...args} />)}
-      {renderGridItem('../letter--Jj', <IconLetterJj {...args} />)}
-      {renderGridItem('../letter--Kk', <IconLetterKk {...args} />)}
-      {renderGridItem('../letter--Ll', <IconLetterLl {...args} />)}
-      {renderGridItem('../letter--Mm', <IconLetterMm {...args} />)}
-      {renderGridItem('../letter--Nn', <IconLetterNn {...args} />)}
-      {renderGridItem('../letter--Oo', <IconLetterOo {...args} />)}
-      {renderGridItem('../letter--Pp', <IconLetterPp {...args} />)}
-      {renderGridItem('../letter--Qq', <IconLetterQq {...args} />)}
-      {renderGridItem('../letter--Rr', <IconLetterRr {...args} />)}
-      {renderGridItem('../letter--Ss', <IconLetterSs {...args} />)}
-      {renderGridItem('../letter--Tt', <IconLetterTt {...args} />)}
-      {renderGridItem('../letter--Uu', <IconLetterUu {...args} />)}
-      {renderGridItem('../letter--Vv', <IconLetterVv {...args} />)}
-      {renderGridItem('../letter--Ww', <IconLetterWw {...args} />)}
-      {renderGridItem('../letter--Xx', <IconLetterXx {...args} />)}
-      {renderGridItem('../letter--Yy', <IconLetterYy {...args} />)}
-      {renderGridItem('../letter--Zz', <IconLetterZz {...args} />)}
-      {renderGridItem('../library', <IconLibrary {...args} />)}
-      {renderGridItem('../license', <IconLicense {...args} />)}
-      {renderGridItem('../license--draft', <IconLicenseDraft {...args} />)}
-      {renderGridItem('../license--global', <IconLicenseGlobal {...args} />)}
-      {renderGridItem('../license--maintenance', <IconLicenseMaintenance {...args} />)}
-      {renderGridItem('../license--maintenance-draft', <IconLicenseMaintenanceDraft {...args} />)}
-      {renderGridItem('../license--third-party', <IconLicenseThirdParty {...args} />)}
-      {renderGridItem('../license--third-party-draft', <IconLicenseThirdPartyDraft {...args} />)}
-      {renderGridItem('../lifesaver', <IconLifesaver {...args} />)}
-      {renderGridItem('../light', <IconLight {...args} />)}
-      {renderGridItem('../light--filled', <IconLightFilled {...args} />)}
-      {renderGridItem('../lightning', <IconLightning {...args} />)}
-      {renderGridItem('../link', <IconLink {...args} />)}
-      {renderGridItem('../linux', <IconLinux {...args} />)}
-      {renderGridItem('../linux--alt', <IconLinuxAlt {...args} />)}
-      {renderGridItem('../list', <IconList {...args} />)}
-      {renderGridItem('../list--boxes', <IconListBoxes {...args} />)}
-      {renderGridItem('../list--bulleted', <IconListBulleted {...args} />)}
-      {renderGridItem('../list--checked', <IconListChecked {...args} />)}
-      {renderGridItem('../list--dropdown', <IconListDropdown {...args} />)}
-      {renderGridItem('../list--edit', <IconListEdit {...args} />)}
-      {renderGridItem('../list--numbered', <IconListNumbered {...args} />)}
-      {renderGridItem('../load-balancer--application', <IconLoadBalancerApplication {...args} />)}
-      {renderGridItem('../load-balancer--classic', <IconLoadBalancerClassic {...args} />)}
-      {renderGridItem('../load-balancer--global', <IconLoadBalancerGlobal {...args} />)}
-      {renderGridItem('../load-balancer--listener', <IconLoadBalancerListener {...args} />)}
-      {renderGridItem('../load-balancer--local', <IconLoadBalancerLocal {...args} />)}
-      {renderGridItem('../load-balancer--network', <IconLoadBalancerNetwork {...args} />)}
-      {renderGridItem('../load-balancer--pool', <IconLoadBalancerPool {...args} />)}
-      {renderGridItem('../load-balancer--vpc', <IconLoadBalancerVpc {...args} />)}
-      {renderGridItem('../location', <IconLocation {...args} />)}
-      {renderGridItem('../location--company', <IconLocationCompany {...args} />)}
-      {renderGridItem('../location--company--filled', <IconLocationCompanyFilled {...args} />)}
-      {renderGridItem('../location--current', <IconLocationCurrent {...args} />)}
-      {renderGridItem('../location--filled', <IconLocationFilled {...args} />)}
-      {renderGridItem('../location--hazard', <IconLocationHazard {...args} />)}
-      {renderGridItem('../location--hazard--filled', <IconLocationHazardFilled {...args} />)}
-      {renderGridItem('../location--heart', <IconLocationHeart {...args} />)}
-      {renderGridItem('../location--heart--filled', <IconLocationHeartFilled {...args} />)}
-      {renderGridItem('../location--person', <IconLocationPerson {...args} />)}
-      {renderGridItem('../location--person--filled', <IconLocationPersonFilled {...args} />)}
-      {renderGridItem('../location--save', <IconLocationSave {...args} />)}
-      {renderGridItem('../location--star', <IconLocationStar {...args} />)}
-      {renderGridItem('../location--star--filled', <IconLocationStarFilled {...args} />)}
-      {renderGridItem('../locked', <IconLocked {...args} />)}
-      {renderGridItem('../logical-partition', <IconLogicalPartition {...args} />)}
-      {renderGridItem('../login', <IconLogin {...args} />)}
-      {renderGridItem('../logo--delicious', <IconLogoDelicious {...args} />)}
-      {renderGridItem('../logo--digg', <IconLogoDigg {...args} />)}
-      {renderGridItem('../logo--discord', <IconLogoDiscord {...args} />)}
-      {renderGridItem('../logo--facebook', <IconLogoFacebook {...args} />)}
-      {renderGridItem('../logo--flickr', <IconLogoFlickr {...args} />)}
-      {renderGridItem('../logo--github', <IconLogoGithub {...args} />)}
-      {renderGridItem('../logo--glassdoor', <IconLogoGlassdoor {...args} />)}
-      {renderGridItem('../logo--google', <IconLogoGoogle {...args} />)}
-      {renderGridItem('../logo--instagram', <IconLogoInstagram {...args} />)}
-      {renderGridItem('../logo--jupyter', <IconLogoJupyter {...args} />)}
-      {renderGridItem('../logo--keybase', <IconLogoKeybase {...args} />)}
-      {renderGridItem('../logo--linkedin', <IconLogoLinkedin {...args} />)}
-      {renderGridItem('../logo--livestream', <IconLogoLivestream {...args} />)}
-      {renderGridItem('../logo--mastodon', <IconLogoMastodon {...args} />)}
-      {renderGridItem('../logo--medium', <IconLogoMedium {...args} />)}
-      {renderGridItem('../logo--openshift', <IconLogoOpenshift {...args} />)}
-      {renderGridItem('../logo--pinterest', <IconLogoPinterest {...args} />)}
-      {renderGridItem('../logo--python', <IconLogoPython {...args} />)}
-      {renderGridItem('../logo--quora', <IconLogoQuora {...args} />)}
-      {renderGridItem('../logo--r-script', <IconLogoRScript {...args} />)}
-      {renderGridItem('../logo--skype', <IconLogoSkype {...args} />)}
-      {renderGridItem('../logo--slack', <IconLogoSlack {...args} />)}
-      {renderGridItem('../logo--snapchat', <IconLogoSnapchat {...args} />)}
-      {renderGridItem('../logo--stumbleupon', <IconLogoStumbleupon {...args} />)}
-      {renderGridItem('../logo--tumblr', <IconLogoTumblr {...args} />)}
-      {renderGridItem('../logo--twitter', <IconLogoTwitter {...args} />)}
-      {renderGridItem('../logo--vmware', <IconLogoVmware {...args} />)}
-      {renderGridItem('../logo--wechat', <IconLogoWechat {...args} />)}
-      {renderGridItem('../logo--xing', <IconLogoXing {...args} />)}
-      {renderGridItem('../logo--yelp', <IconLogoYelp {...args} />)}
-      {renderGridItem('../logo--youtube', <IconLogoYoutube {...args} />)}
-      {renderGridItem('../logout', <IconLogout {...args} />)}
-      {renderGridItem('../loop', <IconLoop {...args} />)}
-      {renderGridItem('../mac--command', <IconMacCommand {...args} />)}
-      {renderGridItem('../mac--option', <IconMacOption {...args} />)}
-      {renderGridItem('../mac--shift', <IconMacShift {...args} />)}
-      {renderGridItem('../machine-learning', <IconMachineLearning {...args} />)}
-      {renderGridItem('../machine-learning-model', <IconMachineLearningModel {...args} />)}
-      {renderGridItem('../magic-wand', <IconMagicWand {...args} />)}
-      {renderGridItem('../magic-wand--filled', <IconMagicWandFilled {...args} />)}
-      {renderGridItem('../mail--all', <IconMailAll {...args} />)}
-      {renderGridItem('../mail--reply', <IconMailReply {...args} />)}
-      {renderGridItem('../mammogram--stacked', <IconMammogramStacked {...args} />)}
-      {renderGridItem('../manage-protection', <IconManageProtection {...args} />)}
-      {renderGridItem('../managed-solutions', <IconManagedSolutions {...args} />)}
-      {renderGridItem('../map', <IconMap {...args} />)}
-      {renderGridItem('../map--center', <IconMapCenter {...args} />)}
-      {renderGridItem('../map--identify', <IconMapIdentify {...args} />)}
-      {renderGridItem('../map-boundary', <IconMapBoundary {...args} />)}
-      {renderGridItem('../map-boundary--vegetation', <IconMapBoundaryVegetation {...args} />)}
-      {renderGridItem('../marine-warning', <IconMarineWarning {...args} />)}
-      {renderGridItem('../math-curve', <IconMathCurve {...args} />)}
-      {renderGridItem('../maximize', <IconMaximize {...args} />)}
-      {renderGridItem('../media--library', <IconMediaLibrary {...args} />)}
-      {renderGridItem('../media--library--filled', <IconMediaLibraryFilled {...args} />)}
-      {renderGridItem('../media-cast', <IconMediaCast {...args} />)}
-      {renderGridItem('../medication', <IconMedication {...args} />)}
-      {renderGridItem('../medication--alert', <IconMedicationAlert {...args} />)}
-      {renderGridItem('../medication--reminder', <IconMedicationReminder {...args} />)}
-      {renderGridItem('../menu', <IconMenu {...args} />)}
-      {renderGridItem('../message-queue', <IconMessageQueue {...args} />)}
-      {renderGridItem('../meter', <IconMeter {...args} />)}
-      {renderGridItem('../meter--alt', <IconMeterAlt {...args} />)}
-      {renderGridItem('../microphone', <IconMicrophone {...args} />)}
-      {renderGridItem('../microphone--filled', <IconMicrophoneFilled {...args} />)}
-      {renderGridItem('../microphone--off', <IconMicrophoneOff {...args} />)}
-      {renderGridItem('../microphone--off--filled', <IconMicrophoneOffFilled {...args} />)}
-      {renderGridItem('../microscope', <IconMicroscope {...args} />)}
-      {renderGridItem('../migrate', <IconMigrate {...args} />)}
-      {renderGridItem('../migrate--alt', <IconMigrateAlt {...args} />)}
-      {renderGridItem('../milestone', <IconMilestone {...args} />)}
-      {renderGridItem('../military-camp', <IconMilitaryCamp {...args} />)}
-      {renderGridItem('../minimize', <IconMinimize {...args} />)}
-      {renderGridItem('../misuse', <IconMisuse {...args} />)}
-      {renderGridItem('../misuse--alt', <IconMisuseAlt {...args} />)}
-      {renderGridItem('../misuse--outline', <IconMisuseOutline {...args} />)}
-      {renderGridItem('../mixed-rain-hail', <IconMixedRainHail {...args} />)}
-      {renderGridItem('../mobile', <IconMobile {...args} />)}
-      {renderGridItem('../mobile--add', <IconMobileAdd {...args} />)}
-      {renderGridItem('../mobile--audio', <IconMobileAudio {...args} />)}
-      {renderGridItem('../mobile--check', <IconMobileCheck {...args} />)}
-      {renderGridItem('../mobile--download', <IconMobileDownload {...args} />)}
-      {renderGridItem('../mobile--landscape', <IconMobileLandscape {...args} />)}
-      {renderGridItem('../mobility--services', <IconMobilityServices {...args} />)}
-      {renderGridItem('../model', <IconModel {...args} />)}
-      {renderGridItem('../model--alt', <IconModelAlt {...args} />)}
-      {renderGridItem('../model--reference', <IconModelReference {...args} />)}
-      {renderGridItem('../model-builder', <IconModelBuilder {...args} />)}
-      {renderGridItem('../model-builder--reference', <IconModelBuilderReference {...args} />)}
-      {renderGridItem('../money', <IconMoney {...args} />)}
-      {renderGridItem('../monster', <IconMonster {...args} />)}
-      {renderGridItem('../monument', <IconMonument {...args} />)}
-      {renderGridItem('../moon', <IconMoon {...args} />)}
-      {renderGridItem('../moonrise', <IconMoonrise {...args} />)}
-      {renderGridItem('../moonset', <IconMoonset {...args} />)}
-      {renderGridItem('../mostly-cloudy', <IconMostlyCloudy {...args} />)}
-      {renderGridItem('../mostly-cloudy--night', <IconMostlyCloudyNight {...args} />)}
-      {renderGridItem('../mountain', <IconMountain {...args} />)}
-      {renderGridItem('../move', <IconMove {...args} />)}
-      {renderGridItem('../movement', <IconMovement {...args} />)}
-      {renderGridItem('../music', <IconMusic {...args} />)}
-      {renderGridItem('../music--add', <IconMusicAdd {...args} />)}
-      {renderGridItem('../music--remove', <IconMusicRemove {...args} />)}
-      {renderGridItem('../name-space', <IconNameSpace {...args} />)}
-      {renderGridItem('../need', <IconNeed {...args} />)}
-      {renderGridItem('../network--1', <IconNetwork1 {...args} />)}
-      {renderGridItem('../network--2', <IconNetwork2 {...args} />)}
-      {renderGridItem('../network--3', <IconNetwork3 {...args} />)}
-      {renderGridItem('../network--3--reference', <IconNetwork3Reference {...args} />)}
-      {renderGridItem('../network--4', <IconNetwork4 {...args} />)}
-      {renderGridItem('../network--4--reference', <IconNetwork4Reference {...args} />)}
-      {renderGridItem('../network--admin-control', <IconNetworkAdminControl {...args} />)}
-      {renderGridItem('../network--enterprise', <IconNetworkEnterprise {...args} />)}
-      {renderGridItem('../network--overlay', <IconNetworkOverlay {...args} />)}
-      {renderGridItem('../network--public', <IconNetworkPublic {...args} />)}
-      {renderGridItem('../new-tab', <IconNewTab {...args} />)}
-      {renderGridItem('../next--filled', <IconNextFilled {...args} />)}
-      {renderGridItem('../next--outline', <IconNextOutline {...args} />)}
-      {renderGridItem('../no-image', <IconNoImage {...args} />)}
-      {renderGridItem('../no-ticket', <IconNoTicket {...args} />)}
-      {renderGridItem('../nominal', <IconNominal {...args} />)}
-      {renderGridItem('../non-certified', <IconNonCertified {...args} />)}
-      {renderGridItem('../noodle-bowl', <IconNoodleBowl {...args} />)}
-      {renderGridItem('../not-available', <IconNotAvailable {...args} />)}
-      {renderGridItem('../not-sent', <IconNotSent {...args} />)}
-      {renderGridItem('../not-sent--filled', <IconNotSentFilled {...args} />)}
-      {renderGridItem('../notebook', <IconNotebook {...args} />)}
-      {renderGridItem('../notebook--reference', <IconNotebookReference {...args} />)}
-      {renderGridItem('../notification', <IconNotification {...args} />)}
-      {renderGridItem('../notification--filled', <IconNotificationFilled {...args} />)}
-      {renderGridItem('../notification--new', <IconNotificationNew {...args} />)}
-      {renderGridItem('../notification--off', <IconNotificationOff {...args} />)}
-      {renderGridItem('../notification--off--filled', <IconNotificationOffFilled {...args} />)}
-      {renderGridItem('../number--0', <IconNumber0 {...args} />)}
-      {renderGridItem('../number--1', <IconNumber1 {...args} />)}
-      {renderGridItem('../number--2', <IconNumber2 {...args} />)}
-      {renderGridItem('../number--3', <IconNumber3 {...args} />)}
-      {renderGridItem('../number--4', <IconNumber4 {...args} />)}
-      {renderGridItem('../number--5', <IconNumber5 {...args} />)}
-      {renderGridItem('../number--6', <IconNumber6 {...args} />)}
-      {renderGridItem('../number--7', <IconNumber7 {...args} />)}
-      {renderGridItem('../number--8', <IconNumber8 {...args} />)}
-      {renderGridItem('../number--9', <IconNumber9 {...args} />)}
-      {renderGridItem('../number--small--0', <IconNumberSmall0 {...args} />)}
-      {renderGridItem('../number--small--1', <IconNumberSmall1 {...args} />)}
-      {renderGridItem('../number--small--2', <IconNumberSmall2 {...args} />)}
-      {renderGridItem('../number--small--3', <IconNumberSmall3 {...args} />)}
-      {renderGridItem('../number--small--4', <IconNumberSmall4 {...args} />)}
-      {renderGridItem('../number--small--5', <IconNumberSmall5 {...args} />)}
-      {renderGridItem('../number--small--6', <IconNumberSmall6 {...args} />)}
-      {renderGridItem('../number--small--7', <IconNumberSmall7 {...args} />)}
-      {renderGridItem('../number--small--8', <IconNumberSmall8 {...args} />)}
-      {renderGridItem('../number--small--9', <IconNumberSmall9 {...args} />)}
-      {renderGridItem('../object-storage', <IconObjectStorage {...args} />)}
-      {renderGridItem('../object-storage--alt', <IconObjectStorageAlt {...args} />)}
-      {renderGridItem('../observed--hail', <IconObservedHail {...args} />)}
-      {renderGridItem('../observed--lightning', <IconObservedLightning {...args} />)}
-      {renderGridItem('../omega', <IconOmega {...args} />)}
-      {renderGridItem('../opacity', <IconOpacity {...args} />)}
-      {renderGridItem('../open-panel--bottom', <IconOpenPanelBottom {...args} />)}
-      {renderGridItem('../open-panel--filled--bottom', <IconOpenPanelFilledBottom {...args} />)}
-      {renderGridItem('../open-panel--filled--left', <IconOpenPanelFilledLeft {...args} />)}
-      {renderGridItem('../open-panel--filled--right', <IconOpenPanelFilledRight {...args} />)}
-      {renderGridItem('../open-panel--filled--top', <IconOpenPanelFilledTop {...args} />)}
-      {renderGridItem('../open-panel--left', <IconOpenPanelLeft {...args} />)}
-      {renderGridItem('../open-panel--right', <IconOpenPanelRight {...args} />)}
-      {renderGridItem('../open-panel--top', <IconOpenPanelTop {...args} />)}
-      {renderGridItem('../operations--field', <IconOperationsField {...args} />)}
-      {renderGridItem('../operations--record', <IconOperationsRecord {...args} />)}
-      {renderGridItem('../order-details', <IconOrderDetails {...args} />)}
-      {renderGridItem('../ordinal', <IconOrdinal {...args} />)}
-      {renderGridItem('../outage', <IconOutage {...args} />)}
-      {renderGridItem('../outlook-severe', <IconOutlookSevere {...args} />)}
-      {renderGridItem('../overflow-menu--horizontal', <IconOverflowMenuHorizontal {...args} />)}
-      {renderGridItem('../overflow-menu--vertical', <IconOverflowMenuVertical {...args} />)}
-      {renderGridItem('../overlay', <IconOverlay {...args} />)}
-      {renderGridItem('../package', <IconPackage {...args} />)}
-      {renderGridItem('../package--text-analysis', <IconPackageTextAnalysis {...args} />)}
-      {renderGridItem('../page--first', <IconPageFirst {...args} />)}
-      {renderGridItem('../page--last', <IconPageLast {...args} />)}
-      {renderGridItem('../page-break', <IconPageBreak {...args} />)}
-      {renderGridItem('../page-number', <IconPageNumber {...args} />)}
-      {renderGridItem('../paint-brush', <IconPaintBrush {...args} />)}
-      {renderGridItem('../paint-brush--alt', <IconPaintBrushAlt {...args} />)}
-      {renderGridItem('../palm-tree', <IconPalmTree {...args} />)}
-      {renderGridItem('../pan--horizontal', <IconPanHorizontal {...args} />)}
-      {renderGridItem('../pan--vertical', <IconPanVertical {...args} />)}
-      {renderGridItem('../panel-expansion', <IconPanelExpansion {...args} />)}
-      {renderGridItem('../paragraph', <IconParagraph {...args} />)}
-      {renderGridItem('../parameter', <IconParameter {...args} />)}
-      {renderGridItem('../parent-child', <IconParentChild {...args} />)}
-      {renderGridItem('../partition--auto', <IconPartitionAuto {...args} />)}
-      {renderGridItem('../partition--collection', <IconPartitionCollection {...args} />)}
-      {renderGridItem('../partition--repartition', <IconPartitionRepartition {...args} />)}
-      {renderGridItem('../partition--same', <IconPartitionSame {...args} />)}
-      {renderGridItem('../partition--specific', <IconPartitionSpecific {...args} />)}
-      {renderGridItem('../partly-cloudy', <IconPartlyCloudy {...args} />)}
-      {renderGridItem('../partly-cloudy--night', <IconPartlyCloudyNight {...args} />)}
-      {renderGridItem('../partnership', <IconPartnership {...args} />)}
-      {renderGridItem('../passenger--drinks', <IconPassengerDrinks {...args} />)}
-      {renderGridItem('../passenger--plus', <IconPassengerPlus {...args} />)}
-      {renderGridItem('../password', <IconPassword {...args} />)}
-      {renderGridItem('../paste', <IconPaste {...args} />)}
-      {renderGridItem('../pause', <IconPause {...args} />)}
-      {renderGridItem('../pause--filled', <IconPauseFilled {...args} />)}
-      {renderGridItem('../pause--outline', <IconPauseOutline {...args} />)}
-      {renderGridItem('../pause--outline--filled', <IconPauseOutlineFilled {...args} />)}
-      {renderGridItem('../pause-future', <IconPauseFuture {...args} />)}
-      {renderGridItem('../pause-past', <IconPausePast {...args} />)}
-      {renderGridItem('../pedestrian', <IconPedestrian {...args} />)}
-      {renderGridItem('../pedestrian--family', <IconPedestrianFamily {...args} />)}
-      {renderGridItem('../pedestrian-child', <IconPedestrianChild {...args} />)}
-      {renderGridItem('../pen', <IconPen {...args} />)}
-      {renderGridItem('../pen--fountain', <IconPenFountain {...args} />)}
-      {renderGridItem('../pending', <IconPending {...args} />)}
-      {renderGridItem('../pending--filled', <IconPendingFilled {...args} />)}
-      {renderGridItem('../percentage', <IconPercentage {...args} />)}
-      {renderGridItem('../percentage--filled', <IconPercentageFilled {...args} />)}
-      {renderGridItem('../person', <IconPerson {...args} />)}
-      {renderGridItem('../person--favorite', <IconPersonFavorite {...args} />)}
-      {renderGridItem('../pest', <IconPest {...args} />)}
-      {renderGridItem('../phone', <IconPhone {...args} />)}
-      {renderGridItem('../phone--application', <IconPhoneApplication {...args} />)}
-      {renderGridItem('../phone--block', <IconPhoneBlock {...args} />)}
-      {renderGridItem('../phone--block--filled', <IconPhoneBlockFilled {...args} />)}
-      {renderGridItem('../phone--filled', <IconPhoneFilled {...args} />)}
-      {renderGridItem('../phone--incoming', <IconPhoneIncoming {...args} />)}
-      {renderGridItem('../phone--incoming--filled', <IconPhoneIncomingFilled {...args} />)}
-      {renderGridItem('../phone--ip', <IconPhoneIp {...args} />)}
-      {renderGridItem('../phone--off', <IconPhoneOff {...args} />)}
-      {renderGridItem('../phone--off--filled', <IconPhoneOffFilled {...args} />)}
-      {renderGridItem('../phone--outgoing', <IconPhoneOutgoing {...args} />)}
-      {renderGridItem('../phone--outgoing--filled', <IconPhoneOutgoingFilled {...args} />)}
-      {renderGridItem('../phone--settings', <IconPhoneSettings {...args} />)}
-      {renderGridItem('../phone--voice', <IconPhoneVoice {...args} />)}
-      {renderGridItem('../phone--voice--filled', <IconPhoneVoiceFilled {...args} />)}
-      {renderGridItem('../phrase-sentiment', <IconPhraseSentiment {...args} />)}
-      {renderGridItem('../picnic-area', <IconPicnicArea {...args} />)}
-      {renderGridItem('../piggy-bank', <IconPiggyBank {...args} />)}
-      {renderGridItem('../piggy-bank--slot', <IconPiggyBankSlot {...args} />)}
-      {renderGridItem('../pills', <IconPills {...args} />)}
-      {renderGridItem('../pills--add', <IconPillsAdd {...args} />)}
-      {renderGridItem('../pills--subtract', <IconPillsSubtract {...args} />)}
-      {renderGridItem('../pin', <IconPin {...args} />)}
-      {renderGridItem('../pin--filled', <IconPinFilled {...args} />)}
-      {renderGridItem('../plane', <IconPlane {...args} />)}
-      {renderGridItem('../plane--private', <IconPlanePrivate {...args} />)}
-      {renderGridItem('../plane--sea', <IconPlaneSea {...args} />)}
-      {renderGridItem('../play', <IconPlay {...args} />)}
-      {renderGridItem('../play--filled', <IconPlayFilled {...args} />)}
-      {renderGridItem('../play--filled--alt', <IconPlayFilledAlt {...args} />)}
-      {renderGridItem('../play--outline', <IconPlayOutline {...args} />)}
-      {renderGridItem('../play--outline--filled', <IconPlayOutlineFilled {...args} />)}
-      {renderGridItem('../playlist', <IconPlaylist {...args} />)}
-      {renderGridItem('../plug', <IconPlug {...args} />)}
-      {renderGridItem('../plug--filled', <IconPlugFilled {...args} />)}
-      {renderGridItem('../point-of-presence', <IconPointOfPresence {...args} />)}
-      {renderGridItem('../police', <IconPolice {...args} />)}
-      {renderGridItem('../policy', <IconPolicy {...args} />)}
-      {renderGridItem('../popup', <IconPopup {...args} />)}
-      {renderGridItem('../portfolio', <IconPortfolio {...args} />)}
-      {renderGridItem('../power', <IconPower {...args} />)}
-      {renderGridItem('../presentation-file', <IconPresentationFile {...args} />)}
-      {renderGridItem('../pressure', <IconPressure {...args} />)}
-      {renderGridItem('../pressure--filled', <IconPressureFilled {...args} />)}
-      {renderGridItem('../previous--filled', <IconPreviousFilled {...args} />)}
-      {renderGridItem('../previous--outline', <IconPreviousOutline {...args} />)}
-      {renderGridItem('../printer', <IconPrinter {...args} />)}
-      {renderGridItem('../product', <IconProduct {...args} />)}
-      {renderGridItem('../progress-bar', <IconProgressBar {...args} />)}
-      {renderGridItem('../progress-bar--round', <IconProgressBarRound {...args} />)}
-      {renderGridItem('../property-relationship', <IconPropertyRelationship {...args} />)}
-      {renderGridItem('../purchase', <IconPurchase {...args} />)}
-      {renderGridItem('../qq-plot', <IconQqPlot {...args} />)}
-      {renderGridItem('../qr-code', <IconQrCode {...args} />)}
-      {renderGridItem('../quadrant-plot', <IconQuadrantPlot {...args} />)}
-      {renderGridItem('../query', <IconQuery {...args} />)}
-      {renderGridItem('../query-queue', <IconQueryQueue {...args} />)}
-      {renderGridItem('../queued', <IconQueued {...args} />)}
-      {renderGridItem('../quotes', <IconQuotes {...args} />)}
-      {renderGridItem('../radar', <IconRadar {...args} />)}
-      {renderGridItem('../radar--enhanced', <IconRadarEnhanced {...args} />)}
-      {renderGridItem('../radar--weather', <IconRadarWeather {...args} />)}
-      {renderGridItem('../radio', <IconRadio {...args} />)}
-      {renderGridItem('../radio--combat', <IconRadioCombat {...args} />)}
-      {renderGridItem('../radio--push-to-talk', <IconRadioPushToTalk {...args} />)}
-      {renderGridItem('../radio-button', <IconRadioButton {...args} />)}
-      {renderGridItem('../radio-button--checked', <IconRadioButtonChecked {...args} />)}
-      {renderGridItem('../rain', <IconRain {...args} />)}
-      {renderGridItem('../rain--drizzle', <IconRainDrizzle {...args} />)}
-      {renderGridItem('../rain--heavy', <IconRainHeavy {...args} />)}
-      {renderGridItem('../rain--scattered', <IconRainScattered {...args} />)}
-      {renderGridItem('../rain--scattered--night', <IconRainScatteredNight {...args} />)}
-      {renderGridItem('../rain-drop', <IconRainDrop {...args} />)}
-      {renderGridItem('../receipt', <IconReceipt {...args} />)}
-      {renderGridItem('../recently-viewed', <IconRecentlyViewed {...args} />)}
-      {renderGridItem('../recommend', <IconRecommend {...args} />)}
-      {renderGridItem('../recording', <IconRecording {...args} />)}
-      {renderGridItem('../recording--filled', <IconRecordingFilled {...args} />)}
-      {renderGridItem('../recording--filled--alt', <IconRecordingFilledAlt {...args} />)}
-      {renderGridItem('../redo', <IconRedo {...args} />)}
-      {renderGridItem('../ref-evapotranspiration', <IconRefEvapotranspiration {...args} />)}
-      {renderGridItem('../reflect--horizontal', <IconReflectHorizontal {...args} />)}
-      {renderGridItem('../reflect--vertical', <IconReflectVertical {...args} />)}
-      {renderGridItem('../reminder', <IconReminder {...args} />)}
-      {renderGridItem('../reminder--medical', <IconReminderMedical {...args} />)}
-      {renderGridItem('../renew', <IconRenew {...args} />)}
-      {renderGridItem('../repeat', <IconRepeat {...args} />)}
-      {renderGridItem('../repeat--one', <IconRepeatOne {...args} />)}
-      {renderGridItem('../replicate', <IconReplicate {...args} />)}
-      {renderGridItem('../reply', <IconReply {...args} />)}
-      {renderGridItem('../reply--all', <IconReplyAll {...args} />)}
-      {renderGridItem('../report', <IconReport {...args} />)}
-      {renderGridItem('../report--data', <IconReportData {...args} />)}
-      {renderGridItem('../request-quote', <IconRequestQuote {...args} />)}
-      {renderGridItem('../research--bloch-sphere', <IconResearchBlochSphere {...args} />)}
-      {renderGridItem('../research--hinton-plot', <IconResearchHintonPlot {...args} />)}
-      {renderGridItem('../research--matrix', <IconResearchMatrix {...args} />)}
-      {renderGridItem('../reset', <IconReset {...args} />)}
-      {renderGridItem('../reset--alt', <IconResetAlt {...args} />)}
-      {renderGridItem('../restart', <IconRestart {...args} />)}
-      {renderGridItem('../restaurant', <IconRestaurant {...args} />)}
-      {renderGridItem('../restaurant--fine', <IconRestaurantFine {...args} />)}
-      {renderGridItem('../result', <IconResult {...args} />)}
-      {renderGridItem('../result--draft', <IconResultDraft {...args} />)}
-      {renderGridItem('../result--new', <IconResultNew {...args} />)}
-      {renderGridItem('../result--old', <IconResultOld {...args} />)}
-      {renderGridItem('../retry--failed', <IconRetryFailed {...args} />)}
-      {renderGridItem('../review', <IconReview {...args} />)}
-      {renderGridItem('../rewind--10', <IconRewind10 {...args} />)}
-      {renderGridItem('../rewind--30', <IconRewind30 {...args} />)}
-      {renderGridItem('../rewind--5', <IconRewind5 {...args} />)}
-      {renderGridItem('../road', <IconRoad {...args} />)}
-      {renderGridItem('../road--weather', <IconRoadWeather {...args} />)}
-      {renderGridItem('../roadmap', <IconRoadmap {...args} />)}
-      {renderGridItem('../rocket', <IconRocket {...args} />)}
-      {renderGridItem('../rotate', <IconRotate {...args} />)}
-      {renderGridItem('../rotate--clockwise', <IconRotateClockwise {...args} />)}
-      {renderGridItem('../rotate--clockwise--alt', <IconRotateClockwiseAlt {...args} />)}
-      {renderGridItem('../rotate--clockwise--alt--filled', <IconRotateClockwiseAltFilled {...args} />)}
-      {renderGridItem('../rotate--clockwise--filled', <IconRotateClockwiseFilled {...args} />)}
-      {renderGridItem('../rotate--counterclockwise', <IconRotateCounterclockwise {...args} />)}
-      {renderGridItem('../rotate--counterclockwise--alt', <IconRotateCounterclockwiseAlt {...args} />)}
-      {renderGridItem('../rotate--counterclockwise--alt--filled', <IconRotateCounterclockwiseAltFilled {...args} />)}
-      {renderGridItem('../rotate--counterclockwise--filled', <IconRotateCounterclockwiseFilled {...args} />)}
-      {renderGridItem('../router', <IconRouter {...args} />)}
-      {renderGridItem('../router--voice', <IconRouterVoice {...args} />)}
-      {renderGridItem('../router--wifi', <IconRouterWifi {...args} />)}
-      {renderGridItem('../row', <IconRow {...args} />)}
-      {renderGridItem('../row--collapse', <IconRowCollapse {...args} />)}
-      {renderGridItem('../row--delete', <IconRowDelete {...args} />)}
-      {renderGridItem('../row--expand', <IconRowExpand {...args} />)}
-      {renderGridItem('../row--insert', <IconRowInsert {...args} />)}
-      {renderGridItem('../rss', <IconRss {...args} />)}
-      {renderGridItem('../rule', <IconRule {...args} />)}
-      {renderGridItem('../rule--cancelled', <IconRuleCancelled {...args} />)}
-      {renderGridItem('../rule--locked', <IconRuleLocked {...args} />)}
-      {renderGridItem('../rule--draft', <IconRuleDraft {...args} />)}
-      {renderGridItem('../rule--filled', <IconRuleFilled {...args} />)}
-      {renderGridItem('../rule--partial', <IconRulePartial {...args} />)}
-      {renderGridItem('../rule--test', <IconRuleTest {...args} />)}
-      {renderGridItem('../ruler', <IconRuler {...args} />)}
-      {renderGridItem('../ruler--alt', <IconRulerAlt {...args} />)}
-      {renderGridItem('../run', <IconRun {...args} />)}
-      {renderGridItem('../sailboat--coastal', <IconSailboatCoastal {...args} />)}
-      {renderGridItem('../sailboat--offshore', <IconSailboatOffshore {...args} />)}
-      {renderGridItem('../sankey-diagram', <IconSankeyDiagram {...args} />)}
-      {renderGridItem('../sankey-diagram--alt', <IconSankeyDiagramAlt {...args} />)}
-      {renderGridItem('../satellite', <IconSatellite {...args} />)}
-      {renderGridItem('../satellite--radar', <IconSatelliteRadar {...args} />)}
-      {renderGridItem('../satellite--weather', <IconSatelliteWeather {...args} />)}
-      {renderGridItem('../save', <IconSave {...args} />)}
-      {renderGridItem('../save--model', <IconSaveModel {...args} />)}
-      {renderGridItem('../scale', <IconScale {...args} />)}
-      {renderGridItem('../scales', <IconScales {...args} />)}
-      {renderGridItem('../scales--tipped', <IconScalesTipped {...args} />)}
-      {renderGridItem('../scalpel', <IconScalpel {...args} />)}
-      {renderGridItem('../scan', <IconScan {...args} />)}
-      {renderGridItem('../scan--alt', <IconScanAlt {...args} />)}
-      {renderGridItem('../scan--disabled', <IconScanDisabled {...args} />)}
-      {renderGridItem('../scatter-matrix', <IconScatterMatrix {...args} />)}
-      {renderGridItem('../schematics', <IconSchematics {...args} />)}
-      {renderGridItem('../scis--control-tower', <IconScisControlTower {...args} />)}
-      {renderGridItem('../scis--transparent-supply', <IconScisTransparentSupply {...args} />)}
-      {renderGridItem('../scooter', <IconScooter {...args} />)}
-      {renderGridItem('../scooter--front', <IconScooterFront {...args} />)}
-      {renderGridItem('../screen', <IconScreen {...args} />)}
-      {renderGridItem('../screen--off', <IconScreenOff {...args} />)}
-      {renderGridItem('../script', <IconScript {...args} />)}
-      {renderGridItem('../script--reference', <IconScriptReference {...args} />)}
-      {renderGridItem('../search', <IconSearch {...args} />)}
-      {renderGridItem('../search--advanced', <IconSearchAdvanced {...args} />)}
-      {renderGridItem('../search--locate', <IconSearchLocate {...args} />)}
-      {renderGridItem('../security', <IconSecurity {...args} />)}
-      {renderGridItem('../security-services', <IconSecurityServices {...args} />)}
-      {renderGridItem('../select--01', <IconSelect01 {...args} />)}
-      {renderGridItem('../select--02', <IconSelect02 {...args} />)}
-      {renderGridItem('../select--window', <IconSelectWindow {...args} />)}
-      {renderGridItem('../send', <IconSend {...args} />)}
-      {renderGridItem('../send--alt', <IconSendAlt {...args} />)}
-      {renderGridItem('../send--alt--filled', <IconSendAltFilled {...args} />)}
-      {renderGridItem('../send--filled', <IconSendFilled {...args} />)}
-      {renderGridItem('../send-backward', <IconSendBackward {...args} />)}
-      {renderGridItem('../send-to-back', <IconSendToBack {...args} />)}
-      {renderGridItem('../server--dns', <IconServerDns {...args} />)}
-      {renderGridItem('../server--proxy', <IconServerProxy {...args} />)}
-      {renderGridItem('../server--time', <IconServerTime {...args} />)}
-      {renderGridItem('../service-desk', <IconServiceDesk {...args} />)}
-      {renderGridItem('../session-border-control', <IconSessionBorderControl {...args} />)}
-      {renderGridItem('../settings', <IconSettings {...args} />)}
-      {renderGridItem('../settings--adjust', <IconSettingsAdjust {...args} />)}
-      {renderGridItem('../settings--check', <IconSettingsCheck {...args} />)}
-      {renderGridItem('../settings--services', <IconSettingsServices {...args} />)}
-      {renderGridItem('../settings--view', <IconSettingsView {...args} />)}
-      {renderGridItem('../shape--except', <IconShapeExcept {...args} />)}
-      {renderGridItem('../shape--exclude', <IconShapeExclude {...args} />)}
-      {renderGridItem('../shape--intersect', <IconShapeIntersect {...args} />)}
-      {renderGridItem('../shape--join', <IconShapeJoin {...args} />)}
-      {renderGridItem('../shape--unite', <IconShapeUnite {...args} />)}
-      {renderGridItem('../share', <IconShare {...args} />)}
-      {renderGridItem('../share-knowledge', <IconShareKnowledge {...args} />)}
-      {renderGridItem('../shopping--bag', <IconShoppingBag {...args} />)}
-      {renderGridItem('../shopping--cart', <IconShoppingCart {...args} />)}
-      {renderGridItem('../shopping--cart--arrow-down', <IconShoppingCartArrowDown {...args} />)}
-      {renderGridItem('../shopping--cart--arrow-up', <IconShoppingCartArrowUp {...args} />)}
-      {renderGridItem('../shopping--cart--clear', <IconShoppingCartClear {...args} />)}
-      {renderGridItem('../shopping--cart--error', <IconShoppingCartError {...args} />)}
-      {renderGridItem('../shopping--cart--minus', <IconShoppingCartMinus {...args} />)}
-      {renderGridItem('../shopping--cart--plus', <IconShoppingCartPlus {...args} />)}
-      {renderGridItem('../shopping--catalog', <IconShoppingCatalog {...args} />)}
-      {renderGridItem('../show-data--cards', <IconShowDataCards {...args} />)}
-      {renderGridItem('../shrink-screen', <IconShrinkScreen {...args} />)}
-      {renderGridItem('../shrink-screen--filled', <IconShrinkScreenFilled {...args} />)}
-      {renderGridItem('../shuffle', <IconShuffle {...args} />)}
-      {renderGridItem('../shuttle', <IconShuttle {...args} />)}
-      {renderGridItem('../sight', <IconSight {...args} />)}
-      {renderGridItem('../sigma', <IconSigma {...args} />)}
-      {renderGridItem('../signal-strength', <IconSignalStrength {...args} />)}
-      {renderGridItem('../sim-card', <IconSimCard {...args} />)}
-      {renderGridItem('../skill-level', <IconSkillLevel {...args} />)}
-      {renderGridItem('../skill-level--advanced', <IconSkillLevelAdvanced {...args} />)}
-      {renderGridItem('../skill-level--basic', <IconSkillLevelBasic {...args} />)}
-      {renderGridItem('../skill-level--intermediate', <IconSkillLevelIntermediate {...args} />)}
-      {renderGridItem('../skip--back', <IconSkipBack {...args} />)}
-      {renderGridItem('../skip--back--filled', <IconSkipBackFilled {...args} />)}
-      {renderGridItem('../skip--back--outline', <IconSkipBackOutline {...args} />)}
-      {renderGridItem('../skip--back--outline--filled', <IconSkipBackOutlineFilled {...args} />)}
-      {renderGridItem('../skip--back--outline--solid', <IconSkipBackOutlineSolid {...args} />)}
-      {renderGridItem('../skip--back--solid--filled', <IconSkipBackSolidFilled {...args} />)}
-      {renderGridItem('../skip--forward', <IconSkipForward {...args} />)}
-      {renderGridItem('../skip--forward--filled', <IconSkipForwardFilled {...args} />)}
-      {renderGridItem('../skip--forward--outline', <IconSkipForwardOutline {...args} />)}
-      {renderGridItem('../skip--forward--outline--filled', <IconSkipForwardOutlineFilled {...args} />)}
-      {renderGridItem('../skip--forward--outline--solid', <IconSkipForwardOutlineSolid {...args} />)}
-      {renderGridItem('../skip--forward--solid--filled', <IconSkipForwardSolidFilled {...args} />)}
-      {renderGridItem('../sleet', <IconSleet {...args} />)}
-      {renderGridItem('../slisor', <IconSlisor {...args} />)}
-      {renderGridItem('../smell', <IconSmell {...args} />)}
-      {renderGridItem('../smoke', <IconSmoke {...args} />)}
-      {renderGridItem('../snooze', <IconSnooze {...args} />)}
-      {renderGridItem('../snow', <IconSnow {...args} />)}
-      {renderGridItem('../snow--blizzard', <IconSnowBlizzard {...args} />)}
-      {renderGridItem('../snow--heavy', <IconSnowHeavy {...args} />)}
-      {renderGridItem('../snow--scattered', <IconSnowScattered {...args} />)}
-      {renderGridItem('../snow--scattered--night', <IconSnowScatteredNight {...args} />)}
-      {renderGridItem('../snow-density', <IconSnowDensity {...args} />)}
-      {renderGridItem('../snowflake', <IconSnowflake {...args} />)}
-      {renderGridItem('../soccer', <IconSoccer {...args} />)}
-      {renderGridItem('../software-resource', <IconSoftwareResource {...args} />)}
-      {renderGridItem('../software-resource--cluster', <IconSoftwareResourceCluster {...args} />)}
-      {renderGridItem('../software-resource--resource', <IconSoftwareResourceResource {...args} />)}
-      {renderGridItem('../soil-moisture', <IconSoilMoisture {...args} />)}
-      {renderGridItem('../soil-moisture--field', <IconSoilMoistureField {...args} />)}
-      {renderGridItem('../soil-moisture--global', <IconSoilMoistureGlobal {...args} />)}
-      {renderGridItem('../soil-temperature', <IconSoilTemperature {...args} />)}
-      {renderGridItem('../soil-temperature--field', <IconSoilTemperatureField {...args} />)}
-      {renderGridItem('../soil-temperature--global', <IconSoilTemperatureGlobal {...args} />)}
-      {renderGridItem('../solar-panel', <IconSolarPanel {...args} />)}
-      {renderGridItem('../sort--ascending', <IconSortAscending {...args} />)}
-      {renderGridItem('../sort--descending', <IconSortDescending {...args} />)}
-      {renderGridItem('../sort--remove', <IconSortRemove {...args} />)}
-      {renderGridItem('../spell-check', <IconSpellCheck {...args} />)}
-      {renderGridItem('../split', <IconSplit {...args} />)}
-      {renderGridItem('../split-screen', <IconSplitScreen {...args} />)}
-      {renderGridItem('../spray-paint', <IconSprayPaint {...args} />)}
-      {renderGridItem('../sprout', <IconSprout {...args} />)}
-      {renderGridItem('../stack-limitation', <IconStackLimitation {...args} />)}
-      {renderGridItem('../stamp', <IconStamp {...args} />)}
-      {renderGridItem('../star', <IconStar {...args} />)}
-      {renderGridItem('../star--filled', <IconStarFilled {...args} />)}
-      {renderGridItem('../star--half', <IconStarHalf {...args} />)}
-      {renderGridItem('../star--review', <IconStarReview {...args} />)}
-      {renderGridItem('../stay-inside', <IconStayInside {...args} />)}
-      {renderGridItem('../stem-leaf-plot', <IconStemLeafPlot {...args} />)}
-      {renderGridItem('../stethoscope', <IconStethoscope {...args} />)}
-      {renderGridItem('../stop', <IconStop {...args} />)}
-      {renderGridItem('../stop--filled', <IconStopFilled {...args} />)}
-      {renderGridItem('../stop--filled--alt', <IconStopFilledAlt {...args} />)}
-      {renderGridItem('../stop--outline', <IconStopOutline {...args} />)}
-      {renderGridItem('../stop--outline--filled', <IconStopOutlineFilled {...args} />)}
-      {renderGridItem('../stop-sign', <IconStopSign {...args} />)}
-      {renderGridItem('../stop-sign--filled', <IconStopSignFilled {...args} />)}
-      {renderGridItem('../storage-pool', <IconStoragePool {...args} />)}
-      {renderGridItem('../storage-request', <IconStorageRequest {...args} />)}
-      {renderGridItem('../store', <IconStore {...args} />)}
-      {renderGridItem('../storm-tracker', <IconStormTracker {...args} />)}
-      {renderGridItem('../strawberry', <IconStrawberry {...args} />)}
-      {renderGridItem('../string-integer', <IconStringInteger {...args} />)}
-      {renderGridItem('../string-text', <IconStringText {...args} />)}
-      {renderGridItem('../subflow', <IconSubflow {...args} />)}
-      {renderGridItem('../subflow--local', <IconSubflowLocal {...args} />)}
-      {renderGridItem('../subnet-acl-rules', <IconSubnetAclRules {...args} />)}
-      {renderGridItem('../subtract', <IconSubtract {...args} />)}
-      {renderGridItem('../subtract--alt', <IconSubtractAlt {...args} />)}
-      {renderGridItem('../summary--KPI', <IconSummaryKpi {...args} />)}
-      {renderGridItem('../sun', <IconSun {...args} />)}
-      {renderGridItem('../sunny', <IconSunny {...args} />)}
-      {renderGridItem('../sunrise', <IconSunrise {...args} />)}
-      {renderGridItem('../sunset', <IconSunset {...args} />)}
-      {renderGridItem('../support-vector-machine', <IconSupportVectorMachine {...args} />)}
-      {renderGridItem('../swim', <IconSwim {...args} />)}
-      {renderGridItem('../switch-layer-2', <IconSwitchLayer2 {...args} />)}
-      {renderGridItem('../switch-layer-3', <IconSwitchLayer3 {...args} />)}
-      {renderGridItem('../switcher', <IconSwitcher {...args} />)}
-      {renderGridItem('../sys-provision', <IconSysProvision {...args} />)}
-      {renderGridItem('../table', <IconTable {...args} />)}
-      {renderGridItem('../table--alias', <IconTableAlias {...args} />)}
-      {renderGridItem('../table--built', <IconTableBuilt {...args} />)}
-      {renderGridItem('../table--shortcut', <IconTableShortcut {...args} />)}
-      {renderGridItem('../table--split', <IconTableSplit {...args} />)}
-      {renderGridItem('../table-of-contents', <IconTableOfContents {...args} />)}
-      {renderGridItem('../tablet', <IconTablet {...args} />)}
-      {renderGridItem('../tablet--landscape', <IconTabletLandscape {...args} />)}
-      {renderGridItem('../tag', <IconTag {...args} />)}
-      {renderGridItem('../tag--edit', <IconTagEdit {...args} />)}
-      {renderGridItem('../tag--export', <IconTagExport {...args} />)}
-      {renderGridItem('../tag--group', <IconTagGroup {...args} />)}
-      {renderGridItem('../tag--import', <IconTagImport {...args} />)}
-      {renderGridItem('../tag--none', <IconTagNone {...args} />)}
-      {renderGridItem('../task', <IconTask {...args} />)}
-      {renderGridItem('../task--add', <IconTaskAdd {...args} />)}
-      {renderGridItem('../task--approved', <IconTaskApproved {...args} />)}
-      {renderGridItem('../task--asset-view', <IconTaskAssetView {...args} />)}
-      {renderGridItem('../task--complete', <IconTaskComplete {...args} />)}
-      {renderGridItem('../task--location', <IconTaskLocation {...args} />)}
-      {renderGridItem('../task--remove', <IconTaskRemove {...args} />)}
-      {renderGridItem('../task--settings', <IconTaskSettings {...args} />)}
-      {renderGridItem('../task--star', <IconTaskStar {...args} />)}
-      {renderGridItem('../task--tools', <IconTaskTools {...args} />)}
-      {renderGridItem('../task--view', <IconTaskView {...args} />)}
-      {renderGridItem('../taste', <IconTaste {...args} />)}
-      {renderGridItem('../taxi', <IconTaxi {...args} />)}
-      {renderGridItem('../temperature', <IconTemperature {...args} />)}
-      {renderGridItem('../temperature--celsius', <IconTemperatureCelsius {...args} />)}
-      {renderGridItem('../temperature--celsius--alt', <IconTemperatureCelsiusAlt {...args} />)}
-      {renderGridItem('../temperature--fahrenheit', <IconTemperatureFahrenheit {...args} />)}
-      {renderGridItem('../temperature--fahrenheit--alt', <IconTemperatureFahrenheitAlt {...args} />)}
-      {renderGridItem('../temperature--feels-like', <IconTemperatureFeelsLike {...args} />)}
-      {renderGridItem('../temperature--frigid', <IconTemperatureFrigid {...args} />)}
-      {renderGridItem('../temperature--hot', <IconTemperatureHot {...args} />)}
-      {renderGridItem('../temperature--inversion', <IconTemperatureInversion {...args} />)}
-      {renderGridItem('../temperature--max', <IconTemperatureMax {...args} />)}
-      {renderGridItem('../temperature--min', <IconTemperatureMin {...args} />)}
-      {renderGridItem('../temperature--water', <IconTemperatureWater {...args} />)}
-      {renderGridItem('../template', <IconTemplate {...args} />)}
-      {renderGridItem('../tennis', <IconTennis {...args} />)}
-      {renderGridItem('../tennis-ball', <IconTennisBall {...args} />)}
-      {renderGridItem('../term', <IconTerm {...args} />)}
-      {renderGridItem('../terminal', <IconTerminal {...args} />)}
-      {renderGridItem('../terminal--3270', <IconTerminal3270 {...args} />)}
-      {renderGridItem('../text--align--center', <IconTextAlignCenter {...args} />)}
-      {renderGridItem('../text--align--justify', <IconTextAlignJustify {...args} />)}
-      {renderGridItem('../text--align--left', <IconTextAlignLeft {...args} />)}
-      {renderGridItem('../text--align--mixed', <IconTextAlignMixed {...args} />)}
-      {renderGridItem('../text--align--right', <IconTextAlignRight {...args} />)}
-      {renderGridItem('../text--all-caps', <IconTextAllCaps {...args} />)}
-      {renderGridItem('../text--bold', <IconTextBold {...args} />)}
-      {renderGridItem('../text--clear-format', <IconTextClearFormat {...args} />)}
-      {renderGridItem('../text--color', <IconTextColor {...args} />)}
-      {renderGridItem('../text--creation', <IconTextCreation {...args} />)}
-      {renderGridItem('../text--fill', <IconTextFill {...args} />)}
-      {renderGridItem('../text--font', <IconTextFont {...args} />)}
-      {renderGridItem('../text--footnote', <IconTextFootnote {...args} />)}
-      {renderGridItem('../text--highlight', <IconTextHighlight {...args} />)}
-      {renderGridItem('../text--indent', <IconTextIndent {...args} />)}
-      {renderGridItem('../text--indent--less', <IconTextIndentLess {...args} />)}
-      {renderGridItem('../text--indent--more', <IconTextIndentMore {...args} />)}
-      {renderGridItem('../text--italic', <IconTextItalic {...args} />)}
-      {renderGridItem('../text--kerning', <IconTextKerning {...args} />)}
-      {renderGridItem('../text--leading', <IconTextLeading {...args} />)}
-      {renderGridItem('../text--line-spacing', <IconTextLineSpacing {...args} />)}
-      {renderGridItem('../text--new-line', <IconTextNewLine {...args} />)}
-      {renderGridItem('../text--scale', <IconTextScale {...args} />)}
-      {renderGridItem('../text--selection', <IconTextSelection {...args} />)}
-      {renderGridItem('../text--small-caps', <IconTextSmallCaps {...args} />)}
-      {renderGridItem('../text--strikethrough', <IconTextStrikethrough {...args} />)}
-      {renderGridItem('../text--subscript', <IconTextSubscript {...args} />)}
-      {renderGridItem('../text--superscript', <IconTextSuperscript {...args} />)}
-      {renderGridItem('../text--tracking', <IconTextTracking {...args} />)}
-      {renderGridItem('../text--underline', <IconTextUnderline {...args} />)}
-      {renderGridItem('../text--vertical-alignment', <IconTextVerticalAlignment {...args} />)}
-      {renderGridItem('../text--wrap', <IconTextWrap {...args} />)}
-      {renderGridItem('../text-link', <IconTextLink {...args} />)}
-      {renderGridItem('../text-link--analysis', <IconTextLinkAnalysis {...args} />)}
-      {renderGridItem('../text-mining', <IconTextMining {...args} />)}
-      {renderGridItem('../text-mining--applier', <IconTextMiningApplier {...args} />)}
-      {renderGridItem('../theater', <IconTheater {...args} />)}
-      {renderGridItem('../this-side-up', <IconThisSideUp {...args} />)}
-      {renderGridItem('../thumbnail--1', <IconThumbnail1 {...args} />)}
-      {renderGridItem('../thumbnail--2', <IconThumbnail2 {...args} />)}
-      {renderGridItem('../thumbs-down', <IconThumbsDown {...args} />)}
-      {renderGridItem('../thumbs-down--filled', <IconThumbsDownFilled {...args} />)}
-      {renderGridItem('../thumbs-up', <IconThumbsUp {...args} />)}
-      {renderGridItem('../thumbs-up--filled', <IconThumbsUpFilled {...args} />)}
-      {renderGridItem('../thunderstorm', <IconThunderstorm {...args} />)}
-      {renderGridItem('../thunderstorm--scattered', <IconThunderstormScattered {...args} />)}
-      {renderGridItem('../thunderstorm--scattered--night', <IconThunderstormScatteredNight {...args} />)}
-      {renderGridItem('../thunderstorm--severe', <IconThunderstormSevere {...args} />)}
-      {renderGridItem('../thunderstorm--strong', <IconThunderstormStrong {...args} />)}
-      {renderGridItem('../ticket', <IconTicket {...args} />)}
-      {renderGridItem('../tides', <IconTides {...args} />)}
-      {renderGridItem('../time', <IconTime {...args} />)}
-      {renderGridItem('../time-plot', <IconTimePlot {...args} />)}
-      {renderGridItem('../timer', <IconTimer {...args} />)}
-      {renderGridItem('../tool-box', <IconToolBox {...args} />)}
-      {renderGridItem('../tool-kit', <IconToolKit {...args} />)}
-      {renderGridItem('../tools', <IconTools {...args} />)}
-      {renderGridItem('../tools--alt', <IconToolsAlt {...args} />)}
-      {renderGridItem('../tornado', <IconTornado {...args} />)}
-      {renderGridItem('../tornado-warning', <IconTornadoWarning {...args} />)}
-      {renderGridItem('../touch--1', <IconTouch1 {...args} />)}
-      {renderGridItem('../touch--1--filled', <IconTouch1Filled {...args} />)}
-      {renderGridItem('../touch--1-down', <IconTouch1Down {...args} />)}
-      {renderGridItem('../touch--1-down--filled', <IconTouch1DownFilled {...args} />)}
-      {renderGridItem('../touch--2', <IconTouch2 {...args} />)}
-      {renderGridItem('../touch--2--filled', <IconTouch2Filled {...args} />)}
-      {renderGridItem('../touch--interaction', <IconTouchInteraction {...args} />)}
-      {renderGridItem('../traffic--event', <IconTrafficEvent {...args} />)}
-      {renderGridItem('../traffic--flow', <IconTrafficFlow {...args} />)}
-      {renderGridItem('../traffic--flow-incident', <IconTrafficFlowIncident {...args} />)}
-      {renderGridItem('../traffic--incident', <IconTrafficIncident {...args} />)}
-      {renderGridItem('../traffic--weather-incident', <IconTrafficWeatherIncident {...args} />)}
-      {renderGridItem('../traffic-cone', <IconTrafficCone {...args} />)}
-      {renderGridItem('../train', <IconTrain {...args} />)}
-      {renderGridItem('../train--heart', <IconTrainHeart {...args} />)}
-      {renderGridItem('../train--profile', <IconTrainProfile {...args} />)}
-      {renderGridItem('../train--speed', <IconTrainSpeed {...args} />)}
-      {renderGridItem('../train--ticket', <IconTrainTicket {...args} />)}
-      {renderGridItem('../train--time', <IconTrainTime {...args} />)}
-      {renderGridItem('../tram', <IconTram {...args} />)}
-      {renderGridItem('../transgender', <IconTransgender {...args} />)}
-      {renderGridItem('../translate', <IconTranslate {...args} />)}
-      {renderGridItem('../transmission-lte', <IconTransmissionLte {...args} />)}
-      {renderGridItem('../transpose', <IconTranspose {...args} />)}
-      {renderGridItem('../trash-can', <IconTrashCan {...args} />)}
-      {renderGridItem('../tree', <IconTree {...args} />)}
-      {renderGridItem('../tree--fall-risk', <IconTreeFallRisk {...args} />)}
-      {renderGridItem('../tree-view', <IconTreeView {...args} />)}
-      {renderGridItem('../tree-view--alt', <IconTreeViewAlt {...args} />)}
-      {renderGridItem('../trophy', <IconTrophy {...args} />)}
-      {renderGridItem('../trophy--filled', <IconTrophyFilled {...args} />)}
-      {renderGridItem('../tropical-storm', <IconTropicalStorm {...args} />)}
-      {renderGridItem('../tropical-storm--model-tracks', <IconTropicalStormModelTracks {...args} />)}
-      {renderGridItem('../tropical-storm--tracks', <IconTropicalStormTracks {...args} />)}
-      {renderGridItem('../tropical-warning', <IconTropicalWarning {...args} />)}
-      {renderGridItem('../tsunami', <IconTsunami {...args} />)}
-      {renderGridItem('../two-factor-authentication', <IconTwoFactorAuthentication {...args} />)}
-      {renderGridItem('../two-person-lift', <IconTwoPersonLift {...args} />)}
-      {renderGridItem('../type-pattern', <IconTypePattern {...args} />)}
-      {renderGridItem('../types', <IconTypes {...args} />)}
-      {renderGridItem('../umbrella', <IconUmbrella {...args} />)}
-      {renderGridItem('../undefined', <IconUndefined {...args} />)}
-      {renderGridItem('../undefined--filled', <IconUndefinedFilled {...args} />)}
-      {renderGridItem('../undo', <IconUndo {...args} />)}
-      {renderGridItem('../ungroup-objects', <IconUngroupObjects {...args} />)}
-      {renderGridItem('../unknown', <IconUnknown {...args} />)}
-      {renderGridItem('../unknown--filled', <IconUnknownFilled {...args} />)}
-      {renderGridItem('../unlink', <IconUnlink {...args} />)}
-      {renderGridItem('../unlocked', <IconUnlocked {...args} />)}
-      {renderGridItem('../up-to-top', <IconUpToTop {...args} />)}
-      {renderGridItem('../update-now', <IconUpdateNow {...args} />)}
-      {renderGridItem('../upgrade', <IconUpgrade {...args} />)}
-      {renderGridItem('../upload', <IconUpload {...args} />)}
-      {renderGridItem('../user', <IconUser {...args} />)}
-      {renderGridItem('../user--access', <IconUserAccess {...args} />)}
-      {renderGridItem('../user--activity', <IconUserActivity {...args} />)}
-      {renderGridItem('../user--admin', <IconUserAdmin {...args} />)}
-      {renderGridItem('../user--avatar', <IconUserAvatar {...args} />)}
-      {renderGridItem('../user--avatar--filled', <IconUserAvatarFilled {...args} />)}
-      {renderGridItem('../user--avatar--filled--alt', <IconUserAvatarFilledAlt {...args} />)}
-      {renderGridItem('../user--community', <IconUserCommunity {...args} />)}
-      {renderGridItem('../user--certification', <IconUserCertification {...args} />)}
-      {renderGridItem('../user--data', <IconUserData {...args} />)}
-      {renderGridItem('../user--favorite', <IconUserFavorite {...args} />)}
-      {renderGridItem('../user--favorite--alt', <IconUserFavoriteAlt {...args} />)}
-      {renderGridItem('../user--favorite--alt--filled', <IconUserFavoriteAltFilled {...args} />)}
-      {renderGridItem('../user--filled', <IconUserFilled {...args} />)}
-      {renderGridItem('../user--follow', <IconUserFollow {...args} />)}
-      {renderGridItem('../user--identification', <IconUserIdentification {...args} />)}
-      {renderGridItem('../user--multiple', <IconUserMultiple {...args} />)}
-      {renderGridItem('../user--online', <IconUserOnline {...args} />)}
-      {renderGridItem('../user--profile', <IconUserProfile {...args} />)}
-      {renderGridItem('../user--role', <IconUserRole {...args} />)}
-      {renderGridItem('../user--service-desk', <IconUserServiceDesk {...args} />)}
-      {renderGridItem('../user--settings', <IconUserSettings {...args} />)}
-      {renderGridItem('../user--simulation', <IconUserSimulation {...args} />)}
-      {renderGridItem('../user--speaker', <IconUserSpeaker {...args} />)}
-      {renderGridItem('../user--x-ray', <IconUserXRay {...args} />)}
-      {renderGridItem('../user-profile--alt', <IconUserProfileAlt {...args} />)}
-      {renderGridItem('../uv-index', <IconUvIndex {...args} />)}
-      {renderGridItem('../uv-index--alt', <IconUvIndexAlt {...args} />)}
-      {renderGridItem('../uv-index--filled', <IconUvIndexFilled {...args} />)}
-      {renderGridItem('../value--variable', <IconValueVariable {...args} />)}
-      {renderGridItem('../van', <IconVan {...args} />)}
-      {renderGridItem('../vegetation--asset', <IconVegetationAsset {...args} />)}
-      {renderGridItem('../vehicle--api', <IconVehicleApi {...args} />)}
-      {renderGridItem('../vehicle--connected', <IconVehicleConnected {...args} />)}
-      {renderGridItem('../vehicle--insights', <IconVehicleInsights {...args} />)}
-      {renderGridItem('../vehicle--services', <IconVehicleServices {...args} />)}
-      {renderGridItem('../version', <IconVersion {...args} />)}
-      {renderGridItem('../version--major', <IconVersionMajor {...args} />)}
-      {renderGridItem('../version--minor', <IconVersionMinor {...args} />)}
-      {renderGridItem('../version--patch', <IconVersionPatch {...args} />)}
-      {renderGridItem('../vertical-view', <IconVerticalView {...args} />)}
-      {renderGridItem('../video', <IconVideo {...args} />)}
-      {renderGridItem('../video--add', <IconVideoAdd {...args} />)}
-      {renderGridItem('../video--chat', <IconVideoChat {...args} />)}
-      {renderGridItem('../video--filled', <IconVideoFilled {...args} />)}
-      {renderGridItem('../video--off', <IconVideoOff {...args} />)}
-      {renderGridItem('../video--off--filled', <IconVideoOffFilled {...args} />)}
-      {renderGridItem('../view', <IconView {...args} />)}
-      {renderGridItem('../view--filled', <IconViewFilled {...args} />)}
-      {renderGridItem('../view--mode-1', <IconViewMode1 {...args} />)}
-      {renderGridItem('../view--mode-2', <IconViewMode2 {...args} />)}
-      {renderGridItem('../view--off', <IconViewOff {...args} />)}
-      {renderGridItem('../view--off--filled', <IconViewOffFilled {...args} />)}
-      {renderGridItem('../view-next', <IconViewNext {...args} />)}
-      {renderGridItem('../virtual-column', <IconVirtualColumn {...args} />)}
-      {renderGridItem('../virtual-column--key', <IconVirtualColumnKey {...args} />)}
-      {renderGridItem('../virtual-desktop', <IconVirtualDesktop {...args} />)}
-      {renderGridItem('../virtual-machine', <IconVirtualMachine {...args} />)}
-      {renderGridItem('../virtual-private-cloud', <IconVirtualPrivateCloud {...args} />)}
-      {renderGridItem('../virtual-private-cloud--alt', <IconVirtualPrivateCloudAlt {...args} />)}
-      {renderGridItem('../visual-recognition', <IconVisualRecognition {...args} />)}
-      {renderGridItem('../vlan', <IconVlan {...args} />)}
-      {renderGridItem('../vmdk-disk', <IconVmdkDisk {...args} />)}
-      {renderGridItem('../voice-activate', <IconVoiceActivate {...args} />)}
-      {renderGridItem('../voicemail', <IconVoicemail {...args} />)}
-      {renderGridItem('../volume--block-storage', <IconVolumeBlockStorage {...args} />)}
-      {renderGridItem('../volume--down', <IconVolumeDown {...args} />)}
-      {renderGridItem('../volume--down--alt', <IconVolumeDownAlt {...args} />)}
-      {renderGridItem('../volume--down--filled', <IconVolumeDownFilled {...args} />)}
-      {renderGridItem('../volume--down--filled--alt', <IconVolumeDownFilledAlt {...args} />)}
-      {renderGridItem('../volume--file-storage', <IconVolumeFileStorage {...args} />)}
-      {renderGridItem('../volume--mute', <IconVolumeMute {...args} />)}
-      {renderGridItem('../volume--mute--filled', <IconVolumeMuteFilled {...args} />)}
-      {renderGridItem('../volume--object-storage', <IconVolumeObjectStorage {...args} />)}
-      {renderGridItem('../volume--up', <IconVolumeUp {...args} />)}
-      {renderGridItem('../volume--up--alt', <IconVolumeUpAlt {...args} />)}
-      {renderGridItem('../volume--up--filled', <IconVolumeUpFilled {...args} />)}
-      {renderGridItem('../volume--up--filled--alt', <IconVolumeUpFilledAlt {...args} />)}
-      {renderGridItem('../vpn--connection', <IconVpnConnection {...args} />)}
-      {renderGridItem('../vpn--policy', <IconVpnPolicy {...args} />)}
-      {renderGridItem('../wallet', <IconWallet {...args} />)}
-      {renderGridItem('../warning', <IconWarning {...args} />)}
-      {renderGridItem('../warning--alt', <IconWarningAlt {...args} />)}
-      {renderGridItem('../warning--alt--filled', <IconWarningAltFilled {...args} />)}
-      {renderGridItem('../warning--alt-inverted', <IconWarningAltInverted {...args} />)}
-      {renderGridItem('../warning--alt-inverted--filled', <IconWarningAltInvertedFilled {...args} />)}
-      {renderGridItem('../warning--filled', <IconWarningFilled {...args} />)}
-      {renderGridItem('../warning--hex', <IconWarningHex {...args} />)}
-      {renderGridItem('../warning--hex--filled', <IconWarningHexFilled {...args} />)}
-      {renderGridItem('../warning--other', <IconWarningOther {...args} />)}
-      {renderGridItem('../warning-square', <IconWarningSquare {...args} />)}
-      {renderGridItem('../warning-square--filled', <IconWarningSquareFilled {...args} />)}
-      {renderGridItem('../watch', <IconWatch {...args} />)}
-      {renderGridItem('../wave-direction', <IconWaveDirection {...args} />)}
-      {renderGridItem('../wave-height', <IconWaveHeight {...args} />)}
-      {renderGridItem('../wave-period', <IconWavePeriod {...args} />)}
-      {renderGridItem('../weather-front--cold', <IconWeatherFrontCold {...args} />)}
-      {renderGridItem('../weather-front--stationary', <IconWeatherFrontStationary {...args} />)}
-      {renderGridItem('../weather-front--warm', <IconWeatherFrontWarm {...args} />)}
-      {renderGridItem('../weather-station', <IconWeatherStation {...args} />)}
-      {renderGridItem('../webhook', <IconWebhook {...args} />)}
-      {renderGridItem('../websheet', <IconWebsheet {...args} />)}
-      {renderGridItem('../wheat', <IconWheat {...args} />)}
-      {renderGridItem('../wifi', <IconWifi {...args} />)}
-      {renderGridItem('../wifi--controller', <IconWifiController {...args} />)}
-      {renderGridItem('../wifi--not-secure', <IconWifiNotSecure {...args} />)}
-      {renderGridItem('../wifi--off', <IconWifiOff {...args} />)}
-      {renderGridItem('../wifi--secure', <IconWifiSecure {...args} />)}
-      {renderGridItem('../wifi-bridge', <IconWifiBridge {...args} />)}
-      {renderGridItem('../wifi-bridge--alt', <IconWifiBridgeAlt {...args} />)}
-      {renderGridItem('../wikis', <IconWikis {...args} />)}
-      {renderGridItem('../wind-gusts', <IconWindGusts {...args} />)}
-      {renderGridItem('../wind-power', <IconWindPower {...args} />)}
-      {renderGridItem('../wind-stream', <IconWindStream {...args} />)}
-      {renderGridItem('../windy', <IconWindy {...args} />)}
-      {renderGridItem('../windy--dust', <IconWindyDust {...args} />)}
-      {renderGridItem('../windy--snow', <IconWindySnow {...args} />)}
-      {renderGridItem('../windy--strong', <IconWindyStrong {...args} />)}
-      {renderGridItem('../winter-warning', <IconWinterWarning {...args} />)}
-      {renderGridItem('../wintry-mix', <IconWintryMix {...args} />)}
-      {renderGridItem('../wireless-checkout', <IconWirelessCheckout {...args} />)}
-      {renderGridItem('../word-cloud', <IconWordCloud {...args} />)}
-      {renderGridItem('../workspace', <IconWorkspace {...args} />)}
-      {renderGridItem('../workspace--import', <IconWorkspaceImport {...args} />)}
-      {renderGridItem('../worship', <IconWorship {...args} />)}
-      {renderGridItem('../worship--christian', <IconWorshipChristian {...args} />)}
-      {renderGridItem('../worship--jewish', <IconWorshipJewish {...args} />)}
-      {renderGridItem('../worship--muslim', <IconWorshipMuslim {...args} />)}
-      {renderGridItem('../x-axis', <IconXAxis {...args} />)}
-      {renderGridItem('../y-axis', <IconYAxis {...args} />)}
-      {renderGridItem('../z-axis', <IconZAxis {...args} />)}
-      {renderGridItem('../zoom--area', <IconZoomArea {...args} />)}
-      {renderGridItem('../zoom--fit', <IconZoomFit {...args} />)}
-      {renderGridItem('../zoom--in', <IconZoomIn {...args} />)}
-      {renderGridItem('../zoom--in-area', <IconZoomInArea {...args} />)}
-      {renderGridItem('../zoom--out', <IconZoomOut {...args} />)}
-      {renderGridItem('../zoom--out-area', <IconZoomOutArea {...args} />)}
-      {renderGridItem('../zoom--reset', <IconZoomReset {...args} />)}
+      {renderGridItem('../apps/es/app-switcher', <CustomIconAppSwitcher {...args} />)}
+      {renderGridItem('../apps/es/arrows', <CustomIconArrows {...args} />)}
+      {renderGridItem('../apps/es/back-to-top', <CustomIconBackToTop {...args} />)}
+      {renderGridItem('../apps/es/calendar--bullhorn', <CustomIconCalendarBullhorn {...args} />)}
+      {renderGridItem('../apps/es/calendar--meeting', <CustomIconCalendarMeeting {...args} />)}
+      {renderGridItem('../apps/es/caret--sort--alt', <CustomIconCaretSortAlt {...args} />)}
+      {renderGridItem('../apps/es/checkbox--indeterminate--alt', <CustomIconCheckboxIndeterminateAlt {...args} />)}
+      {renderGridItem('../apps/es/checkbox--undeterminate', <CustomIconCheckboxUndeterminate {...args} />)}
+      {renderGridItem('../apps/es/checkbox--undeterminate--filled', <CustomIconCheckboxUndeterminateFilled {...args} />)}
+      {renderGridItem('../apps/es/chevron--double--left', <CustomIconChevronDoubleLeft {...args} />)}
+      {renderGridItem('../apps/es/chevron--double--right', <CustomIconChevronDoubleRight {...args} />)}
+      {renderGridItem('../apps/es/circle', <CustomIconCircle {...args} />)}
+      {renderGridItem('../apps/es/close--alt', <CustomIconCloseAlt {...args} />)}
+      {renderGridItem('../apps/es/cloud--lightning', <CustomIconCloudLightning {...args} />)}
+      {renderGridItem('../apps/es/cloud--rain', <CustomIconCloudRain {...args} />)}
+      {renderGridItem('../apps/es/cloud--snow', <CustomIconCloudSnow {...args} />)}
+      {renderGridItem('../apps/es/cloud-satellite--config--filled', <CustomIconCloudSatelliteConfigFilled {...args} />)}
+      {renderGridItem('../apps/es/components/navigation', <CustomIconComponentsNavigation {...args} />)}
+      {renderGridItem('../apps/es/components/tabs', <CustomIconComponentsTabs {...args} />)}
+      {renderGridItem('../apps/es/content--reference', <CustomIconContentReference {...args} />)}
+      {renderGridItem('../apps/es/content-item', <CustomIconContentItem {...args} />)}
+      {renderGridItem('../apps/es/content-item--filled', <CustomIconContentItemFilled {...args} />)}
+      {renderGridItem('../apps/es/content-sites', <CustomIconContentSites {...args} />)}
+      {renderGridItem('../apps/es/content-view--alt', <CustomIconContentViewAlt {...args} />)}
+      {renderGridItem('../apps/es/data-component', <CustomIconDataComponent {...args} />)}
+      {renderGridItem('../apps/es/data-container', <CustomIconDataContainer {...args} />)}
+      {renderGridItem('../apps/es/data-text', <CustomIconDataText {...args} />)}
+      {renderGridItem('../apps/es/data-variable', <CustomIconDataVariable {...args} />)}
+      {renderGridItem('../apps/es/document--draft', <CustomIconDocumentDraft {...args} />)}
+      {renderGridItem('../apps/es/document--warning', <CustomIconDocumentWarning {...args} />)}
+      {renderGridItem('../apps/es/document-time', <CustomIconDocumentTime {...args} />)}
+      {renderGridItem('../apps/es/double-left', <CustomIconDoubleLeft {...args} />)}
+      {renderGridItem('../apps/es/double-right', <CustomIconDoubleRight {...args} />)}
+      {renderGridItem('../apps/es/drag-handle', <CustomIconDragHandle {...args} />)}
+      {renderGridItem('../apps/es/element--add', <CustomIconElementAdd {...args} />)}
+      {renderGridItem('../apps/es/elements/basic/button', <CustomIconBasicButton {...args} />)}
+      {renderGridItem('../apps/es/elements/basic/copy--link', <CustomIconBasicCopyLink {...args} />)}
+      {renderGridItem('../apps/es/elements/basic/list', <CustomIconBasicList {...args} />)}
+      {renderGridItem('../apps/es/elements/basic/list-item', <CustomIconBasicListItem {...args} />)}
+      {renderGridItem('../apps/es/elements/layout/body', <CustomIconLayoutBody {...args} />)}
+      {renderGridItem('../apps/es/elements/layout/column-item', <CustomIconLayoutColumnItem {...args} />)}
+      {renderGridItem('../apps/es/elements/layout/columns', <CustomIconLayoutColumns {...args} />)}
+      {renderGridItem('../apps/es/elements/layout/container', <CustomIconLayoutContainer {...args} />)}
+      {renderGridItem('../apps/es/elements/layout/section', <CustomIconLayoutSection {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h1', <CustomIconTypographyH1 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h2', <CustomIconTypographyH2 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h3', <CustomIconTypographyH3 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h4', <CustomIconTypographyH4 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h5', <CustomIconTypographyH5 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/h6', <CustomIconTypographyH6 {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/paragraph', <CustomIconTypographyParagraph {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/quote', <CustomIconTypographyQuote {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/rich-text', <CustomIconTypographyRichText {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/short-text', <CustomIconTypographyShortText {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/text', <CustomIconTypographyText {...args} />)}
+      {renderGridItem('../apps/es/elements/typography/typed', <CustomIconTypographyTyped {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/content-container', <CustomIconWcmContentContainer {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/content-list', <CustomIconWcmContentList {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/content-list-container', <CustomIconWcmContentListContainer {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/content-list-item', <CustomIconWcmContentListItem {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/form/form', <CustomIconFormForm {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/form/form-button', <CustomIconFormFormButton {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/form/input', <CustomIconFormInput {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/form/label', <CustomIconFormLabel {...args} />)}
+      {renderGridItem('../apps/es/elements/wcm/form/text-area', <CustomIconFormTextArea {...args} />)}
+      {renderGridItem('../apps/es/exit--alt', <CustomIconExitAlt {...args} />)}
+      {renderGridItem('../apps/es/footer', <CustomIconFooter {...args} />)}
+      {renderGridItem('../apps/es/footer--content', <CustomIconFooterContent {...args} />)}
+      {renderGridItem('../apps/es/full--screen', <CustomIconFullScreen {...args} />)}
+      {renderGridItem('../apps/es/full--screen--exit', <CustomIconFullScreenExit {...args} />)}
+      {renderGridItem('../apps/es/hand-raise', <CustomIconHandRaise {...args} />)}
+      {renderGridItem('../apps/es/header', <CustomIconHeader {...args} />)}
+      {renderGridItem('../apps/es/header--content', <CustomIconHeaderContent {...args} />)}
+      {renderGridItem('../apps/es/id', <CustomIconId {...args} />)}
+      {renderGridItem('../apps/es/images', <CustomIconImages {...args} />)}
+      {renderGridItem('../apps/es/items--search--empty', <CustomIconItemsSearchEmpty {...args} />)}
+      {renderGridItem('../apps/es/layers--alt', <CustomIconLayersAlt {...args} />)}
+      {renderGridItem('../apps/es/layers--filled', <CustomIconLayersFilled {...args} />)}
+      {renderGridItem('../apps/es/layers--hidden', <CustomIconLayersHidden {...args} />)}
+      {renderGridItem('../apps/es/layout--off', <CustomIconLayoutOff {...args} />)}
+      {renderGridItem('../apps/es/layout--on', <CustomIconLayoutOn {...args} />)}
+      {renderGridItem('../apps/es/letter--Aa--large', <CustomIconLetterAaLarge {...args} />)}
+      {renderGridItem('../apps/es/library', <CustomIconLibrary {...args} />)}
+      {renderGridItem('../apps/es/line-curved', <CustomIconLineCurved {...args} />)}
+      {renderGridItem('../apps/es/line-straight', <CustomIconLineStraight {...args} />)}
+      {renderGridItem('../apps/es/list--edit', <CustomIconListEdit {...args} />)}
+      {renderGridItem('../apps/es/list--time', <CustomIconListTime {...args} />)}
+      {renderGridItem('../apps/es/logo--delicious', <CustomIconLogoDelicious {...args} />)}
+      {renderGridItem('../apps/es/logo--google', <CustomIconLogoGoogle {...args} />)}
+      {renderGridItem('../apps/es/logo--stumbleupon', <CustomIconLogoStumbleupon {...args} />)}
+      {renderGridItem('../apps/es/mammogram--stacked', <CustomIconMammogramStacked {...args} />)}
+      {renderGridItem('../apps/es/meeting', <CustomIconMeeting {...args} />)}
+      {renderGridItem('../apps/es/meetingchat', <CustomIconMeetingchat {...args} />)}
+      {renderGridItem('../apps/es/misuse--alt', <CustomIconMisuseAlt {...args} />)}
+      {renderGridItem('../apps/es/operations-meetingchat', <CustomIconOperationsMeetingchat {...args} />)}
+      {renderGridItem('../apps/es/page', <CustomIconPage {...args} />)}
+      {renderGridItem('../apps/es/page--add', <CustomCustomIconPageAdd2 {...args} />)}
+      {renderGridItem('../apps/es/page--checked', <CustomIconPageChecked {...args} />)}
+      {renderGridItem('../apps/es/page--draft', <CustomIconPageDraft {...args} />)}
+      {renderGridItem('../apps/es/page--elements--content-container', <CustomIconPageElementsContentContainer {...args} />)}
+      {renderGridItem('../apps/es/page--elements--content-list', <CustomIconPageElementsContentList {...args} />)}
+      {renderGridItem('../apps/es/page--elements--content-list--no-result', <CustomIconPageElementsContentListNoResult {...args} />)}
+      {renderGridItem('../apps/es/page--elements--content-list-item', <CustomIconPageElementsContentListItem {...args} />)}
+      {renderGridItem('../apps/es/page--elements--data-container', <CustomIconPageElementsDataContainer {...args} />)}
+      {renderGridItem('../apps/es/page--elements--form', <CustomIconPageElementsForm {...args} />)}
+      {renderGridItem('../apps/es/page--elements--form--button', <CustomIconPageElementsFormButton {...args} />)}
+      {renderGridItem('../apps/es/page--elements--form--input', <CustomIconPageElementsFormInput {...args} />)}
+      {renderGridItem('../apps/es/page--elements--form--label', <CustomIconPageElementsFormLabel {...args} />)}
+      {renderGridItem('../apps/es/page--elements--form--text-area', <CustomIconPageElementsFormTextArea {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h1', <CustomIconPageElementsH1 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h2', <CustomIconPageElementsH2 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h3', <CustomIconPageElementsH3 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h4', <CustomIconPageElementsH4 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h5', <CustomIconPageElementsH5 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--h6', <CustomIconPageElementsH6 {...args} />)}
+      {renderGridItem('../apps/es/page--elements--layout--body', <CustomIconPageElementsLayoutBody {...args} />)}
+      {renderGridItem('../apps/es/page--elements--layout--column--item', <CustomIconPageElementsLayoutColumnItem {...args} />)}
+      {renderGridItem('../apps/es/page--elements--layout--columns', <CustomIconPageElementsLayoutColumns {...args} />)}
+      {renderGridItem('../apps/es/page--elements--layout--container', <CustomIconPageElementsLayoutContainer {...args} />)}
+      {renderGridItem('../apps/es/page--elements--layout--section', <CustomIconPageElementsLayoutSection {...args} />)}
+      {renderGridItem('../apps/es/page--elements--list', <CustomIconPageElementsList {...args} />)}
+      {renderGridItem('../apps/es/page--elements--list--item', <CustomIconPageElementsListItem {...args} />)}
+      {renderGridItem('../apps/es/page--elements--navigation', <CustomIconPageElementsNavigation {...args} />)}
+      {renderGridItem('../apps/es/page--elements--paragraph', <CustomIconPageElementsParagraph {...args} />)}
+      {renderGridItem('../apps/es/page--elements--quote', <CustomIconPageElementsQuote {...args} />)}
+      {renderGridItem('../apps/es/page--elements--typed', <CustomIconPageElementsTyped {...args} />)}
+      {renderGridItem('../apps/es/page--time', <CustomIconPageTime {...args} />)}
+      {renderGridItem('../apps/es/page-add', <CustomIconPageAdd {...args} />)}
+      {renderGridItem('../apps/es/page-elements-rich-text', <CustomIconPageElementsRichText {...args} />)}
+      {renderGridItem('../apps/es/page-elements-short-text', <CustomIconPageElementsShortText {...args} />)}
+      {renderGridItem('../apps/es/page-elements-text', <CustomIconPageElementsText {...args} />)}
+      {renderGridItem('../apps/es/page-scroll', <CustomIconPageScroll {...args} />)}
+      {renderGridItem('../apps/es/pages', <CustomIconPages {...args} />)}
+      {renderGridItem('../apps/es/raise--hand', <CustomIconRaiseHand {...args} />)}
+      {renderGridItem('../apps/es/rectangle', <CustomIconRectangle {...args} />)}
+      {renderGridItem('../apps/es/replace', <CustomIconReplace {...args} />)}
+      {renderGridItem('../apps/es/research--bloch-sphere', <CustomIconResearchBlochSphere {...args} />)}
+      {renderGridItem('../apps/es/research--hinton-plot', <CustomIconResearchHintonPlot {...args} />)}
+      {renderGridItem('../apps/es/research--matrix', <CustomIconResearchMatrix {...args} />)}
+      {renderGridItem('../apps/es/screenshot', <CustomIconScreenshot {...args} />)}
+      {renderGridItem('../apps/es/security--alt', <CustomIconSecurityAlt {...args} />)}
+      {renderGridItem('../apps/es/site', <CustomIconSite {...args} />)}
+      {renderGridItem('../apps/es/site-add', <CustomIconSiteAdd {...args} />)}
+      {renderGridItem('../apps/es/status-error', <CustomIconStatusError {...args} />)}
+      {renderGridItem('../apps/es/status-success', <CustomIconStatusSuccess {...args} />)}
+      {renderGridItem('../apps/es/sunny', <CustomIconSunny {...args} />)}
+      {renderGridItem('../apps/es/text', <CustomIconText {...args} />)}
+      {renderGridItem('../apps/es/text-link', <CustomIconTextLink {...args} />)}
+      {renderGridItem('../apps/es/thumbs-up--XS', <CustomIconThumbsUpXs {...args} />)}
+      {renderGridItem('../apps/es/thumbs-up--filled--XS', <CustomIconThumbsUpFilledXs {...args} />)}
+      {renderGridItem('../apps/es/user--community', <CustomIconUserCommunity {...args} />)}
+      {renderGridItem('../apps/es/user--password', <CustomIconUserPassword {...args} />)}
+      {renderGridItem('../apps/es/user-status--active', <CustomIconUserStatusActive {...args} />)}
+      {renderGridItem('../apps/es/user-status--away', <CustomIconUserStatusAway {...args} />)}
+      {renderGridItem('../apps/es/user-status--do-not-disturb', <CustomIconUserStatusDoNotDisturb {...args} />)}
+      {renderGridItem('../apps/es/user-status--in-a-meeting', <CustomIconUserStatusInAMeeting {...args} />)}
+      {renderGridItem('../apps/es/user-status--offline', <CustomIconUserStatusOffline {...args} />)}
+      {renderGridItem('../apps/es/video--error', <CustomIconVideoError {...args} />)}
+      {renderGridItem('../apps/es/video--synced', <CustomIconVideoSynced {...args} />)}
+      {renderGridItem('../apps/es/video--syncing', <CustomIconVideoSyncing {...args} />)}
+      {renderGridItem('../apps/es/view--actual--size', <CustomIconViewActualSize {...args} />)}
+      {renderGridItem('../apps/es/workspace--alt', <CustomIconWorkspaceAlt {...args} />)}
+      {renderGridItem('../carbon/es/4K', <Icon4K {...args} />)}
+      {renderGridItem('../carbon/es/4K--filled', <Icon4KFilled {...args} />)}
+      {renderGridItem('../carbon/es/API--1', <IconApi1 {...args} />)}
+      {renderGridItem('../carbon/es/CAD', <IconCad {...args} />)}
+      {renderGridItem('../carbon/es/CDA', <IconCda {...args} />)}
+      {renderGridItem('../carbon/es/CSV', <IconCsv {...args} />)}
+      {renderGridItem('../carbon/es/DOC', <IconDoc {...args} />)}
+      {renderGridItem('../carbon/es/DVR', <IconDvr {...args} />)}
+      {renderGridItem('../carbon/es/GIF', <IconGif {...args} />)}
+      {renderGridItem('../carbon/es/HD', <IconHd {...args} />)}
+      {renderGridItem('../carbon/es/HD--filled', <IconHdFilled {...args} />)}
+      {renderGridItem('../carbon/es/HDR', <IconHdr {...args} />)}
+      {renderGridItem('../carbon/es/HTML', <IconHtml {...args} />)}
+      {renderGridItem('../carbon/es/HTML--reference', <IconHtmlReference {...args} />)}
+      {renderGridItem('../carbon/es/HTTP', <IconHttp {...args} />)}
+      {renderGridItem('../carbon/es/ISO', <IconIso {...args} />)}
+      {renderGridItem('../carbon/es/ISO--filled', <IconIsoFilled {...args} />)}
+      {renderGridItem('../carbon/es/ISO--outline', <IconIsoOutline {...args} />)}
+      {renderGridItem('../carbon/es/JPG', <IconJpg {...args} />)}
+      {renderGridItem('../carbon/es/JSON', <IconJson {...args} />)}
+      {renderGridItem('../carbon/es/JSON--reference', <IconJsonReference {...args} />)}
+      {renderGridItem('../carbon/es/MOV', <IconMov {...args} />)}
+      {renderGridItem('../carbon/es/MP3', <IconMp3 {...args} />)}
+      {renderGridItem('../carbon/es/MP4', <IconMp4 {...args} />)}
+      {renderGridItem('../carbon/es/MPEG', <IconMpeg {...args} />)}
+      {renderGridItem('../carbon/es/MPG2', <IconMpg2 {...args} />)}
+      {renderGridItem('../carbon/es/PDF', <IconPdf {...args} />)}
+      {renderGridItem('../carbon/es/PDF--reference', <IconPdfReference {...args} />)}
+      {renderGridItem('../carbon/es/PNG', <IconPng {...args} />)}
+      {renderGridItem('../carbon/es/PPT', <IconPpt {...args} />)}
+      {renderGridItem('../carbon/es/RAW', <IconRaw {...args} />)}
+      {renderGridItem('../carbon/es/SDK', <IconSdk {...args} />)}
+      {renderGridItem('../carbon/es/SQL', <IconSql {...args} />)}
+      {renderGridItem('../carbon/es/SVG', <IconSvg {...args} />)}
+      {renderGridItem('../carbon/es/TIF', <IconTif {...args} />)}
+      {renderGridItem('../carbon/es/TSV', <IconTsv {...args} />)}
+      {renderGridItem('../carbon/es/TXT', <IconTxt {...args} />)}
+      {renderGridItem('../carbon/es/TXT--reference', <IconTxtReference {...args} />)}
+      {renderGridItem('../carbon/es/USB', <IconUsb {...args} />)}
+      {renderGridItem('../carbon/es/VPN', <IconVpn {...args} />)}
+      {renderGridItem('../carbon/es/WMV', <IconWmv {...args} />)}
+      {renderGridItem('../carbon/es/XLS', <IconXls {...args} />)}
+      {renderGridItem('../carbon/es/XML', <IconXml {...args} />)}
+      {renderGridItem('../carbon/es/ZIP', <IconZip {...args} />)}
+      {renderGridItem('../carbon/es/ZIP--reference', <IconZipReference {...args} />)}
+      {renderGridItem('../carbon/es/accessibility', <IconAccessibility {...args} />)}
+      {renderGridItem('../carbon/es/accessibility--alt', <IconAccessibilityAlt {...args} />)}
+      {renderGridItem('../carbon/es/accessibility--color', <IconAccessibilityColor {...args} />)}
+      {renderGridItem('../carbon/es/accessibility--color--filled', <IconAccessibilityColorFilled {...args} />)}
+      {renderGridItem('../carbon/es/account', <IconAccount {...args} />)}
+      {renderGridItem('../carbon/es/accumulation--ice', <IconAccumulationIce {...args} />)}
+      {renderGridItem('../carbon/es/accumulation--precipitation', <IconAccumulationPrecipitation {...args} />)}
+      {renderGridItem('../carbon/es/accumulation--rain', <IconAccumulationRain {...args} />)}
+      {renderGridItem('../carbon/es/accumulation--snow', <IconAccumulationSnow {...args} />)}
+      {renderGridItem('../carbon/es/activity', <IconActivity {...args} />)}
+      {renderGridItem('../carbon/es/add', <IconAdd {...args} />)}
+      {renderGridItem('../carbon/es/add--alt', <IconAddAlt {...args} />)}
+      {renderGridItem('../carbon/es/add--filled', <IconAddFilled {...args} />)}
+      {renderGridItem('../carbon/es/add-comment', <IconAddComment {...args} />)}
+      {renderGridItem('../carbon/es/agriculture-analytics', <IconAgricultureAnalytics {...args} />)}
+      {renderGridItem('../carbon/es/airline--digital-gate', <IconAirlineDigitalGate {...args} />)}
+      {renderGridItem('../carbon/es/airline--manage-gates', <IconAirlineManageGates {...args} />)}
+      {renderGridItem('../carbon/es/airline--passenger-care', <IconAirlinePassengerCare {...args} />)}
+      {renderGridItem('../carbon/es/airline--rapid-board', <IconAirlineRapidBoard {...args} />)}
+      {renderGridItem('../carbon/es/airplay', <IconAirplay {...args} />)}
+      {renderGridItem('../carbon/es/airplay--filled', <IconAirplayFilled {...args} />)}
+      {renderGridItem('../carbon/es/airport--01', <IconAirport01 {...args} />)}
+      {renderGridItem('../carbon/es/airport--02', <IconAirport02 {...args} />)}
+      {renderGridItem('../carbon/es/airport-location', <IconAirportLocation {...args} />)}
+      {renderGridItem('../carbon/es/alarm', <IconAlarm {...args} />)}
+      {renderGridItem('../carbon/es/alarm--add', <IconAlarmAdd {...args} />)}
+      {renderGridItem('../carbon/es/alarm--subtract', <IconAlarmSubtract {...args} />)}
+      {renderGridItem('../carbon/es/align--horizontal-center', <IconAlignHorizontalCenter {...args} />)}
+      {renderGridItem('../carbon/es/align--horizontal-left', <IconAlignHorizontalLeft {...args} />)}
+      {renderGridItem('../carbon/es/align--horizontal-right', <IconAlignHorizontalRight {...args} />)}
+      {renderGridItem('../carbon/es/align--vertical-bottom', <IconAlignVerticalBottom {...args} />)}
+      {renderGridItem('../carbon/es/align--vertical-center', <IconAlignVerticalCenter {...args} />)}
+      {renderGridItem('../carbon/es/align--vertical-top', <IconAlignVerticalTop {...args} />)}
+      {renderGridItem('../carbon/es/align-box--bottom-center', <IconAlignBoxBottomCenter {...args} />)}
+      {renderGridItem('../carbon/es/align-box--bottom-left', <IconAlignBoxBottomLeft {...args} />)}
+      {renderGridItem('../carbon/es/align-box--bottom-right', <IconAlignBoxBottomRight {...args} />)}
+      {renderGridItem('../carbon/es/align-box--middle-center', <IconAlignBoxMiddleCenter {...args} />)}
+      {renderGridItem('../carbon/es/align-box--middle-left', <IconAlignBoxMiddleLeft {...args} />)}
+      {renderGridItem('../carbon/es/align-box--middle-right', <IconAlignBoxMiddleRight {...args} />)}
+      {renderGridItem('../carbon/es/align-box--top-center', <IconAlignBoxTopCenter {...args} />)}
+      {renderGridItem('../carbon/es/align-box--top-left', <IconAlignBoxTopLeft {...args} />)}
+      {renderGridItem('../carbon/es/align-box--top-right', <IconAlignBoxTopRight {...args} />)}
+      {renderGridItem('../carbon/es/analytics', <IconAnalytics {...args} />)}
+      {renderGridItem('../carbon/es/analytics--custom', <IconAnalyticsCustom {...args} />)}
+      {renderGridItem('../carbon/es/analytics--reference', <IconAnalyticsReference {...args} />)}
+      {renderGridItem('../carbon/es/aperture', <IconAperture {...args} />)}
+      {renderGridItem('../carbon/es/api', <IconApi {...args} />)}
+      {renderGridItem('../carbon/es/app', <IconApp {...args} />)}
+      {renderGridItem('../carbon/es/app-connectivity', <IconAppConnectivity {...args} />)}
+      {renderGridItem('../carbon/es/apple', <IconApple {...args} />)}
+      {renderGridItem('../carbon/es/application', <IconApplication {...args} />)}
+      {renderGridItem('../carbon/es/application--mobile', <IconApplicationMobile {...args} />)}
+      {renderGridItem('../carbon/es/application--virtual', <IconApplicationVirtual {...args} />)}
+      {renderGridItem('../carbon/es/application--web', <IconApplicationWeb {...args} />)}
+      {renderGridItem('../carbon/es/apps', <IconApps {...args} />)}
+      {renderGridItem('../carbon/es/archive', <IconArchive {...args} />)}
+      {renderGridItem('../carbon/es/area', <IconArea {...args} />)}
+      {renderGridItem('../carbon/es/area--custom', <IconAreaCustom {...args} />)}
+      {renderGridItem('../carbon/es/arrival', <IconArrival {...args} />)}
+      {renderGridItem('../carbon/es/arrow--down', <IconArrowDown {...args} />)}
+      {renderGridItem('../carbon/es/arrow--down-left', <IconArrowDownLeft {...args} />)}
+      {renderGridItem('../carbon/es/arrow--down-right', <IconArrowDownRight {...args} />)}
+      {renderGridItem('../carbon/es/arrow--left', <IconArrowLeft {...args} />)}
+      {renderGridItem('../carbon/es/arrow--right', <IconArrowRight {...args} />)}
+      {renderGridItem('../carbon/es/arrow--up', <IconArrowUp {...args} />)}
+      {renderGridItem('../carbon/es/arrow--up-left', <IconArrowUpLeft {...args} />)}
+      {renderGridItem('../carbon/es/arrow--up-right', <IconArrowUpRight {...args} />)}
+      {renderGridItem('../carbon/es/arrow-shift-down', <IconArrowShiftDown {...args} />)}
+      {renderGridItem('../carbon/es/arrows--horizontal', <IconArrowsHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/arrows--vertical', <IconArrowsVertical {...args} />)}
+      {renderGridItem('../carbon/es/asleep', <IconAsleep {...args} />)}
+      {renderGridItem('../carbon/es/asleep--filled', <IconAsleepFilled {...args} />)}
+      {renderGridItem('../carbon/es/assembly', <IconAssembly {...args} />)}
+      {renderGridItem('../carbon/es/assembly--cluster', <IconAssemblyCluster {...args} />)}
+      {renderGridItem('../carbon/es/assembly--reference', <IconAssemblyReference {...args} />)}
+      {renderGridItem('../carbon/es/asset', <IconAsset {...args} />)}
+      {renderGridItem('../carbon/es/asset--confirm', <IconAssetConfirm {...args} />)}
+      {renderGridItem('../carbon/es/asset--digital-twin', <IconAssetDigitalTwin {...args} />)}
+      {renderGridItem('../carbon/es/asset--view', <IconAssetView {...args} />)}
+      {renderGridItem('../carbon/es/asterisk', <IconAsterisk {...args} />)}
+      {renderGridItem('../carbon/es/at', <IconAt {...args} />)}
+      {renderGridItem('../carbon/es/attachment', <IconAttachment {...args} />)}
+      {renderGridItem('../carbon/es/audio-console', <IconAudioConsole {...args} />)}
+      {renderGridItem('../carbon/es/augmented-reality', <IconAugmentedReality {...args} />)}
+      {renderGridItem('../carbon/es/automatic', <IconAutomatic {...args} />)}
+      {renderGridItem('../carbon/es/autoscaling', <IconAutoscaling {...args} />)}
+      {renderGridItem('../carbon/es/awake', <IconAwake {...args} />)}
+      {renderGridItem('../carbon/es/badge', <IconBadge {...args} />)}
+      {renderGridItem('../carbon/es/baggage-claim', <IconBaggageClaim {...args} />)}
+      {renderGridItem('../carbon/es/bar', <IconBar {...args} />)}
+      {renderGridItem('../carbon/es/barcode', <IconBarcode {...args} />)}
+      {renderGridItem('../carbon/es/bare-metal-server', <IconBareMetalServer {...args} />)}
+      {renderGridItem('../carbon/es/bare-metal-server--01', <IconBareMetalServer01 {...args} />)}
+      {renderGridItem('../carbon/es/bare-metal-server--02', <IconBareMetalServer02 {...args} />)}
+      {renderGridItem('../carbon/es/basketball', <IconBasketball {...args} />)}
+      {renderGridItem('../carbon/es/bastion-host', <IconBastionHost {...args} />)}
+      {renderGridItem('../carbon/es/bat', <IconBat {...args} />)}
+      {renderGridItem('../carbon/es/battery--charging', <IconBatteryCharging {...args} />)}
+      {renderGridItem('../carbon/es/battery--empty', <IconBatteryEmpty {...args} />)}
+      {renderGridItem('../carbon/es/battery--full', <IconBatteryFull {...args} />)}
+      {renderGridItem('../carbon/es/battery--half', <IconBatteryHalf {...args} />)}
+      {renderGridItem('../carbon/es/battery--low', <IconBatteryLow {...args} />)}
+      {renderGridItem('../carbon/es/battery--quarter', <IconBatteryQuarter {...args} />)}
+      {renderGridItem('../carbon/es/beta', <IconBeta {...args} />)}
+      {renderGridItem('../carbon/es/bicycle', <IconBicycle {...args} />)}
+      {renderGridItem('../carbon/es/binoculars', <IconBinoculars {...args} />)}
+      {renderGridItem('../carbon/es/block-storage', <IconBlockStorage {...args} />)}
+      {renderGridItem('../carbon/es/block-storage--alt', <IconBlockStorageAlt {...args} />)}
+      {renderGridItem('../carbon/es/blockchain', <IconBlockchain {...args} />)}
+      {renderGridItem('../carbon/es/blog', <IconBlog {...args} />)}
+      {renderGridItem('../carbon/es/bluetooth', <IconBluetooth {...args} />)}
+      {renderGridItem('../carbon/es/bluetooth--off', <IconBluetoothOff {...args} />)}
+      {renderGridItem('../carbon/es/book', <IconBook {...args} />)}
+      {renderGridItem('../carbon/es/bookmark', <IconBookmark {...args} />)}
+      {renderGridItem('../carbon/es/bookmark--add', <IconBookmarkAdd {...args} />)}
+      {renderGridItem('../carbon/es/bookmark--filled', <IconBookmarkFilled {...args} />)}
+      {renderGridItem('../carbon/es/boolean', <IconBoolean {...args} />)}
+      {renderGridItem('../carbon/es/boot', <IconBoot {...args} />)}
+      {renderGridItem('../carbon/es/border--bottom', <IconBorderBottom {...args} />)}
+      {renderGridItem('../carbon/es/border--full', <IconBorderFull {...args} />)}
+      {renderGridItem('../carbon/es/border--left', <IconBorderLeft {...args} />)}
+      {renderGridItem('../carbon/es/border--none', <IconBorderNone {...args} />)}
+      {renderGridItem('../carbon/es/border--right', <IconBorderRight {...args} />)}
+      {renderGridItem('../carbon/es/border--top', <IconBorderTop {...args} />)}
+      {renderGridItem('../carbon/es/bot', <IconBot {...args} />)}
+      {renderGridItem('../carbon/es/box', <IconBox {...args} />)}
+      {renderGridItem('../carbon/es/box--extra-large', <IconBoxExtraLarge {...args} />)}
+      {renderGridItem('../carbon/es/box--large', <IconBoxLarge {...args} />)}
+      {renderGridItem('../carbon/es/box--medium', <IconBoxMedium {...args} />)}
+      {renderGridItem('../carbon/es/box--small', <IconBoxSmall {...args} />)}
+      {renderGridItem('../carbon/es/box-plot', <IconBoxPlot {...args} />)}
+      {renderGridItem('../carbon/es/branch', <IconBranch {...args} />)}
+      {renderGridItem('../carbon/es/breaking-change', <IconBreakingChange {...args} />)}
+      {renderGridItem('../carbon/es/brightness-contrast', <IconBrightnessContrast {...args} />)}
+      {renderGridItem('../carbon/es/bring-forward', <IconBringForward {...args} />)}
+      {renderGridItem('../carbon/es/bring-to-front', <IconBringToFront {...args} />)}
+      {renderGridItem('../carbon/es/building', <IconBuilding {...args} />)}
+      {renderGridItem('../carbon/es/building--insights-1', <IconBuildingInsights1 {...args} />)}
+      {renderGridItem('../carbon/es/building--insights-2', <IconBuildingInsights2 {...args} />)}
+      {renderGridItem('../carbon/es/building--insights-3', <IconBuildingInsights3 {...args} />)}
+      {renderGridItem('../carbon/es/bullhorn', <IconBullhorn {...args} />)}
+      {renderGridItem('../carbon/es/buoy', <IconBuoy {...args} />)}
+      {renderGridItem('../carbon/es/bus', <IconBus {...args} />)}
+      {renderGridItem('../carbon/es/button--centered', <IconButtonCentered {...args} />)}
+      {renderGridItem('../carbon/es/button--flush-left', <IconButtonFlushLeft {...args} />)}
+      {renderGridItem('../carbon/es/cabin-care', <IconCabinCare {...args} />)}
+      {renderGridItem('../carbon/es/cabin-care--alert', <IconCabinCareAlert {...args} />)}
+      {renderGridItem('../carbon/es/cabin-care--alt', <IconCabinCareAlt {...args} />)}
+      {renderGridItem('../carbon/es/cafe', <IconCafe {...args} />)}
+      {renderGridItem('../carbon/es/calculation', <IconCalculation {...args} />)}
+      {renderGridItem('../carbon/es/calculation--alt', <IconCalculationAlt {...args} />)}
+      {renderGridItem('../carbon/es/calculator', <IconCalculator {...args} />)}
+      {renderGridItem('../carbon/es/calculator--check', <IconCalculatorCheck {...args} />)}
+      {renderGridItem('../carbon/es/calendar', <IconCalendar {...args} />)}
+      {renderGridItem('../carbon/es/calendar--heat-map', <IconCalendarHeatMap {...args} />)}
+      {renderGridItem('../carbon/es/calendar--settings', <IconCalendarSettings {...args} />)}
+      {renderGridItem('../carbon/es/calendar--tools', <IconCalendarTools {...args} />)}
+      {renderGridItem('../carbon/es/calibrate', <IconCalibrate {...args} />)}
+      {renderGridItem('../carbon/es/camera', <IconCamera {...args} />)}
+      {renderGridItem('../carbon/es/camera--action', <IconCameraAction {...args} />)}
+      {renderGridItem('../carbon/es/campsite', <IconCampsite {...args} />)}
+      {renderGridItem('../carbon/es/car', <IconCar {...args} />)}
+      {renderGridItem('../carbon/es/car--front', <IconCarFront {...args} />)}
+      {renderGridItem('../carbon/es/carbon', <IconCarbon {...args} />)}
+      {renderGridItem('../carbon/es/carbon-accounting', <IconCarbonAccounting {...args} />)}
+      {renderGridItem('../carbon/es/caret--down', <IconCaretDown {...args} />)}
+      {renderGridItem('../carbon/es/caret--left', <IconCaretLeft {...args} />)}
+      {renderGridItem('../carbon/es/caret--right', <IconCaretRight {...args} />)}
+      {renderGridItem('../carbon/es/caret--sort', <IconCaretSort {...args} />)}
+      {renderGridItem('../carbon/es/caret--sort--down', <IconCaretSortDown {...args} />)}
+      {renderGridItem('../carbon/es/caret--sort--up', <IconCaretSortUp {...args} />)}
+      {renderGridItem('../carbon/es/caret--up', <IconCaretUp {...args} />)}
+      {renderGridItem('../carbon/es/carousel--horizontal', <IconCarouselHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/carousel--vertical', <IconCarouselVertical {...args} />)}
+      {renderGridItem('../carbon/es/catalog', <IconCatalog {...args} />)}
+      {renderGridItem('../carbon/es/categories', <IconCategories {...args} />)}
+      {renderGridItem('../carbon/es/category', <IconCategory {...args} />)}
+      {renderGridItem('../carbon/es/category--add', <IconCategoryAdd {...args} />)}
+      {renderGridItem('../carbon/es/category--and', <IconCategoryAnd {...args} />)}
+      {renderGridItem('../carbon/es/category--new', <IconCategoryNew {...args} />)}
+      {renderGridItem('../carbon/es/category--new-each', <IconCategoryNewEach {...args} />)}
+      {renderGridItem('../carbon/es/cell-tower', <IconCellTower {...args} />)}
+      {renderGridItem('../carbon/es/center--circle', <IconCenterCircle {...args} />)}
+      {renderGridItem('../carbon/es/center--square', <IconCenterSquare {...args} />)}
+      {renderGridItem('../carbon/es/center-to-fit', <IconCenterToFit {...args} />)}
+      {renderGridItem('../carbon/es/certificate', <IconCertificate {...args} />)}
+      {renderGridItem('../carbon/es/certificate--check', <IconCertificateCheck {...args} />)}
+      {renderGridItem('../carbon/es/change-catalog', <IconChangeCatalog {...args} />)}
+      {renderGridItem('../carbon/es/character--decimal', <IconCharacterDecimal {...args} />)}
+      {renderGridItem('../carbon/es/character--fraction', <IconCharacterFraction {...args} />)}
+      {renderGridItem('../carbon/es/character--integer', <IconCharacterInteger {...args} />)}
+      {renderGridItem('../carbon/es/character--lower-case', <IconCharacterLowerCase {...args} />)}
+      {renderGridItem('../carbon/es/character--negative-number', <IconCharacterNegativeNumber {...args} />)}
+      {renderGridItem('../carbon/es/character--sentence-case', <IconCharacterSentenceCase {...args} />)}
+      {renderGridItem('../carbon/es/character--upper-case', <IconCharacterUpperCase {...args} />)}
+      {renderGridItem('../carbon/es/character--whole-number', <IconCharacterWholeNumber {...args} />)}
+      {renderGridItem('../carbon/es/character-patterns', <IconCharacterPatterns {...args} />)}
+      {renderGridItem('../carbon/es/charging-station', <IconChargingStation {...args} />)}
+      {renderGridItem('../carbon/es/charging-station--filled', <IconChargingStationFilled {...args} />)}
+      {renderGridItem('../carbon/es/chart--3D', <IconChart3D {...args} />)}
+      {renderGridItem('../carbon/es/chart--area', <IconChartArea {...args} />)}
+      {renderGridItem('../carbon/es/chart--area-smooth', <IconChartAreaSmooth {...args} />)}
+      {renderGridItem('../carbon/es/chart--area-stepper', <IconChartAreaStepper {...args} />)}
+      {renderGridItem('../carbon/es/chart--average', <IconChartAverage {...args} />)}
+      {renderGridItem('../carbon/es/chart--bar', <IconChartBar {...args} />)}
+      {renderGridItem('../carbon/es/chart--bar-floating', <IconChartBarFloating {...args} />)}
+      {renderGridItem('../carbon/es/chart--bar-overlay', <IconChartBarOverlay {...args} />)}
+      {renderGridItem('../carbon/es/chart--bar-stacked', <IconChartBarStacked {...args} />)}
+      {renderGridItem('../carbon/es/chart--bar-target', <IconChartBarTarget {...args} />)}
+      {renderGridItem('../carbon/es/chart--bubble', <IconChartBubble {...args} />)}
+      {renderGridItem('../carbon/es/chart--bubble-packed', <IconChartBubblePacked {...args} />)}
+      {renderGridItem('../carbon/es/chart--bullet', <IconChartBullet {...args} />)}
+      {renderGridItem('../carbon/es/chart--candlestick', <IconChartCandlestick {...args} />)}
+      {renderGridItem('../carbon/es/chart--cluster-bar', <IconChartClusterBar {...args} />)}
+      {renderGridItem('../carbon/es/chart--column', <IconChartColumn {...args} />)}
+      {renderGridItem('../carbon/es/chart--column-floating', <IconChartColumnFloating {...args} />)}
+      {renderGridItem('../carbon/es/chart--column-target', <IconChartColumnTarget {...args} />)}
+      {renderGridItem('../carbon/es/chart--combo', <IconChartCombo {...args} />)}
+      {renderGridItem('../carbon/es/chart--combo-stacked', <IconChartComboStacked {...args} />)}
+      {renderGridItem('../carbon/es/chart--custom', <IconChartCustom {...args} />)}
+      {renderGridItem('../carbon/es/chart--error-bar', <IconChartErrorBar {...args} />)}
+      {renderGridItem('../carbon/es/chart--error-bar--alt', <IconChartErrorBarAlt {...args} />)}
+      {renderGridItem('../carbon/es/chart--evaluation', <IconChartEvaluation {...args} />)}
+      {renderGridItem('../carbon/es/chart--high-low', <IconChartHighLow {...args} />)}
+      {renderGridItem('../carbon/es/chart--histogram', <IconChartHistogram {...args} />)}
+      {renderGridItem('../carbon/es/chart--line', <IconChartLine {...args} />)}
+      {renderGridItem('../carbon/es/chart--line--data', <IconChartLineData {...args} />)}
+      {renderGridItem('../carbon/es/chart--line-smooth', <IconChartLineSmooth {...args} />)}
+      {renderGridItem('../carbon/es/chart--logistic-regression', <IconChartLogisticRegression {...args} />)}
+      {renderGridItem('../carbon/es/chart--marimekko', <IconChartMarimekko {...args} />)}
+      {renderGridItem('../carbon/es/chart--maximum', <IconChartMaximum {...args} />)}
+      {renderGridItem('../carbon/es/chart--median', <IconChartMedian {...args} />)}
+      {renderGridItem('../carbon/es/chart--minimum', <IconChartMinimum {...args} />)}
+      {renderGridItem('../carbon/es/chart--multi-line', <IconChartMultiLine {...args} />)}
+      {renderGridItem('../carbon/es/chart--multitype', <IconChartMultitype {...args} />)}
+      {renderGridItem('../carbon/es/chart--network', <IconChartNetwork {...args} />)}
+      {renderGridItem('../carbon/es/chart--parallel', <IconChartParallel {...args} />)}
+      {renderGridItem('../carbon/es/chart--pie', <IconChartPie {...args} />)}
+      {renderGridItem('../carbon/es/chart--point', <IconChartPoint {...args} />)}
+      {renderGridItem('../carbon/es/chart--population', <IconChartPopulation {...args} />)}
+      {renderGridItem('../carbon/es/chart--radar', <IconChartRadar {...args} />)}
+      {renderGridItem('../carbon/es/chart--radial', <IconChartRadial {...args} />)}
+      {renderGridItem('../carbon/es/chart--relationship', <IconChartRelationship {...args} />)}
+      {renderGridItem('../carbon/es/chart--ring', <IconChartRing {...args} />)}
+      {renderGridItem('../carbon/es/chart--river', <IconChartRiver {...args} />)}
+      {renderGridItem('../carbon/es/chart--rose', <IconChartRose {...args} />)}
+      {renderGridItem('../carbon/es/chart--scatter', <IconChartScatter {...args} />)}
+      {renderGridItem('../carbon/es/chart--spiral', <IconChartSpiral {...args} />)}
+      {renderGridItem('../carbon/es/chart--stacked', <IconChartStacked {...args} />)}
+      {renderGridItem('../carbon/es/chart--stepper', <IconChartStepper {...args} />)}
+      {renderGridItem('../carbon/es/chart--sunburst', <IconChartSunburst {...args} />)}
+      {renderGridItem('../carbon/es/chart--t-sne', <IconChartTSne {...args} />)}
+      {renderGridItem('../carbon/es/chart--treemap', <IconChartTreemap {...args} />)}
+      {renderGridItem('../carbon/es/chart--venn-diagram', <IconChartVennDiagram {...args} />)}
+      {renderGridItem('../carbon/es/chart--violin-plot', <IconChartViolinPlot {...args} />)}
+      {renderGridItem('../carbon/es/chart--waterfall', <IconChartWaterfall {...args} />)}
+      {renderGridItem('../carbon/es/chart--win-loss', <IconChartWinLoss {...args} />)}
+      {renderGridItem('../carbon/es/chat', <IconChat {...args} />)}
+      {renderGridItem('../carbon/es/chat--launch', <IconChatLaunch {...args} />)}
+      {renderGridItem('../carbon/es/chat--off', <IconChatOff {...args} />)}
+      {renderGridItem('../carbon/es/chat--operational', <IconChatOperational {...args} />)}
+      {renderGridItem('../carbon/es/chat-bot', <IconChatBot {...args} />)}
+      {renderGridItem('../carbon/es/checkbox', <IconCheckbox {...args} />)}
+      {renderGridItem('../carbon/es/checkbox--checked', <IconCheckboxChecked {...args} />)}
+      {renderGridItem('../carbon/es/checkbox--checked--filled', <IconCheckboxCheckedFilled {...args} />)}
+      {renderGridItem('../carbon/es/checkbox--indeterminate', <IconCheckboxIndeterminate {...args} />)}
+      {renderGridItem('../carbon/es/checkbox--indeterminate--filled', <IconCheckboxIndeterminateFilled {...args} />)}
+      {renderGridItem('../carbon/es/checkmark', <IconCheckmark {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--filled', <IconCheckmarkFilled {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--filled--error', <IconCheckmarkFilledError {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--filled--warning', <IconCheckmarkFilledWarning {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--outline', <IconCheckmarkOutline {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--outline--error', <IconCheckmarkOutlineError {...args} />)}
+      {renderGridItem('../carbon/es/checkmark--outline--warning', <IconCheckmarkOutlineWarning {...args} />)}
+      {renderGridItem('../carbon/es/chemistry', <IconChemistry {...args} />)}
+      {renderGridItem('../carbon/es/chemistry--reference', <IconChemistryReference {...args} />)}
+      {renderGridItem('../carbon/es/chevron--down', <IconChevronDown {...args} />)}
+      {renderGridItem('../carbon/es/chevron--left', <IconChevronLeft {...args} />)}
+      {renderGridItem('../carbon/es/chevron--mini', <IconChevronMini {...args} />)}
+      {renderGridItem('../carbon/es/chevron--right', <IconChevronRight {...args} />)}
+      {renderGridItem('../carbon/es/chevron--sort', <IconChevronSort {...args} />)}
+      {renderGridItem('../carbon/es/chevron--sort--down', <IconChevronSortDown {...args} />)}
+      {renderGridItem('../carbon/es/chevron--sort--up', <IconChevronSortUp {...args} />)}
+      {renderGridItem('../carbon/es/chevron--up', <IconChevronUp {...args} />)}
+      {renderGridItem('../carbon/es/chip', <IconChip {...args} />)}
+      {renderGridItem('../carbon/es/choices', <IconChoices {...args} />)}
+      {renderGridItem('../carbon/es/choose-item', <IconChooseItem {...args} />)}
+      {renderGridItem('../carbon/es/choropleth-map', <IconChoroplethMap {...args} />)}
+      {renderGridItem('../carbon/es/circle--filled', <IconCircleFilled {...args} />)}
+      {renderGridItem('../carbon/es/circle--solid', <IconCircleSolid {...args} />)}
+      {renderGridItem('../carbon/es/circle-dash', <IconCircleDash {...args} />)}
+      {renderGridItem('../carbon/es/circle-packing', <IconCirclePacking {...args} />)}
+      {renderGridItem('../carbon/es/classification', <IconClassification {...args} />)}
+      {renderGridItem('../carbon/es/classifier--language', <IconClassifierLanguage {...args} />)}
+      {renderGridItem('../carbon/es/clean', <IconClean {...args} />)}
+      {renderGridItem('../carbon/es/close', <IconClose {...args} />)}
+      {renderGridItem('../carbon/es/close--filled', <IconCloseFilled {...args} />)}
+      {renderGridItem('../carbon/es/close--outline', <IconCloseOutline {...args} />)}
+      {renderGridItem('../carbon/es/closed-caption', <IconClosedCaption {...args} />)}
+      {renderGridItem('../carbon/es/closed-caption--alt', <IconClosedCaptionAlt {...args} />)}
+      {renderGridItem('../carbon/es/closed-caption--filled', <IconClosedCaptionFilled {...args} />)}
+      {renderGridItem('../carbon/es/cloud', <IconCloud {...args} />)}
+      {renderGridItem('../carbon/es/cloud--alerting', <IconCloudAlerting {...args} />)}
+      {renderGridItem('../carbon/es/cloud--auditing', <IconCloudAuditing {...args} />)}
+      {renderGridItem('../carbon/es/cloud--data-ops', <IconCloudDataOps {...args} />)}
+      {renderGridItem('../carbon/es/cloud--dedicated-host', <IconCloudDedicatedHost {...args} />)}
+      {renderGridItem('../carbon/es/cloud--download', <IconCloudDownload {...args} />)}
+      {renderGridItem('../carbon/es/cloud--internet-services', <IconCloudInternetServices {...args} />)}
+      {renderGridItem('../carbon/es/cloud--logging', <IconCloudLogging {...args} />)}
+      {renderGridItem('../carbon/es/cloud--monitoring', <IconCloudMonitoring {...args} />)}
+      {renderGridItem('../carbon/es/cloud--offline', <IconCloudOffline {...args} />)}
+      {renderGridItem('../carbon/es/cloud--security-compliance-center', <IconCloudSecurityComplianceCenter {...args} />)}
+      {renderGridItem('../carbon/es/cloud--service-management', <IconCloudServiceManagement {...args} />)}
+      {renderGridItem('../carbon/es/cloud--subnets', <IconCloudSubnets {...args} />)}
+      {renderGridItem('../carbon/es/cloud--upload', <IconCloudUpload {...args} />)}
+      {renderGridItem('../carbon/es/cloud-app', <IconCloudApp {...args} />)}
+      {renderGridItem('../carbon/es/cloud-ceiling', <IconCloudCeiling {...args} />)}
+      {renderGridItem('../carbon/es/cloud-foundry--1', <IconCloudFoundry1 {...args} />)}
+      {renderGridItem('../carbon/es/cloud-foundry--2', <IconCloudFoundry2 {...args} />)}
+      {renderGridItem('../carbon/es/cloud-registry', <IconCloudRegistry {...args} />)}
+      {renderGridItem('../carbon/es/cloud-satellite', <IconCloudSatellite {...args} />)}
+      {renderGridItem('../carbon/es/cloud-satellite--config', <IconCloudSatelliteConfig {...args} />)}
+      {renderGridItem('../carbon/es/cloud-satellite--link', <IconCloudSatelliteLink {...args} />)}
+      {renderGridItem('../carbon/es/cloud-satellite--services', <IconCloudSatelliteServices {...args} />)}
+      {renderGridItem('../carbon/es/cloud-services', <IconCloudServices {...args} />)}
+      {renderGridItem('../carbon/es/cloudy', <IconCloudy {...args} />)}
+      {renderGridItem('../carbon/es/code', <IconCode {...args} />)}
+      {renderGridItem('../carbon/es/code--hide', <IconCodeHide {...args} />)}
+      {renderGridItem('../carbon/es/code--reference', <IconCodeReference {...args} />)}
+      {renderGridItem('../carbon/es/code-signing-service', <IconCodeSigningService {...args} />)}
+      {renderGridItem('../carbon/es/cognitive', <IconCognitive {...args} />)}
+      {renderGridItem('../carbon/es/collaborate', <IconCollaborate {...args} />)}
+      {renderGridItem('../carbon/es/collapse-all', <IconCollapseAll {...args} />)}
+      {renderGridItem('../carbon/es/collapse-categories', <IconCollapseCategories {...args} />)}
+      {renderGridItem('../carbon/es/color-palette', <IconColorPalette {...args} />)}
+      {renderGridItem('../carbon/es/color-switch', <IconColorSwitch {...args} />)}
+      {renderGridItem('../carbon/es/column', <IconColumn {...args} />)}
+      {renderGridItem('../carbon/es/column--delete', <IconColumnDelete {...args} />)}
+      {renderGridItem('../carbon/es/column--insert', <IconColumnInsert {...args} />)}
+      {renderGridItem('../carbon/es/column-dependency', <IconColumnDependency {...args} />)}
+      {renderGridItem('../carbon/es/commit', <IconCommit {...args} />)}
+      {renderGridItem('../carbon/es/communication--unified', <IconCommunicationUnified {...args} />)}
+      {renderGridItem('../carbon/es/compare', <IconCompare {...args} />)}
+      {renderGridItem('../carbon/es/compass', <IconCompass {...args} />)}
+      {renderGridItem('../carbon/es/concept', <IconConcept {...args} />)}
+      {renderGridItem('../carbon/es/condition--point', <IconConditionPoint {...args} />)}
+      {renderGridItem('../carbon/es/condition--wait-point', <IconConditionWaitPoint {...args} />)}
+      {renderGridItem('../carbon/es/connect', <IconConnect {...args} />)}
+      {renderGridItem('../carbon/es/connect--recursive', <IconConnectRecursive {...args} />)}
+      {renderGridItem('../carbon/es/connect--source', <IconConnectSource {...args} />)}
+      {renderGridItem('../carbon/es/connect--target', <IconConnectTarget {...args} />)}
+      {renderGridItem('../carbon/es/connection--receive', <IconConnectionReceive {...args} />)}
+      {renderGridItem('../carbon/es/connection--send', <IconConnectionSend {...args} />)}
+      {renderGridItem('../carbon/es/connection--two-way', <IconConnectionTwoWay {...args} />)}
+      {renderGridItem('../carbon/es/connection-signal', <IconConnectionSignal {...args} />)}
+      {renderGridItem('../carbon/es/connection-signal--off', <IconConnectionSignalOff {...args} />)}
+      {renderGridItem('../carbon/es/construction', <IconConstruction {...args} />)}
+      {renderGridItem('../carbon/es/container-registry', <IconContainerRegistry {...args} />)}
+      {renderGridItem('../carbon/es/container-services', <IconContainerServices {...args} />)}
+      {renderGridItem('../carbon/es/container-software', <IconContainerSoftware {...args} />)}
+      {renderGridItem('../carbon/es/content-delivery-network', <IconContentDeliveryNetwork {...args} />)}
+      {renderGridItem('../carbon/es/content-view', <IconContentView {...args} />)}
+      {renderGridItem('../carbon/es/continue', <IconContinue {...args} />)}
+      {renderGridItem('../carbon/es/continue--filled', <IconContinueFilled {...args} />)}
+      {renderGridItem('../carbon/es/contrast', <IconContrast {...args} />)}
+      {renderGridItem('../carbon/es/convert-to-cloud', <IconConvertToCloud {...args} />)}
+      {renderGridItem('../carbon/es/cookie', <IconCookie {...args} />)}
+      {renderGridItem('../carbon/es/copy', <IconCopy {...args} />)}
+      {renderGridItem('../carbon/es/copy--file', <IconCopyFile {...args} />)}
+      {renderGridItem('../carbon/es/copy--link', <IconCopyLink {...args} />)}
+      {renderGridItem('../carbon/es/corn', <IconCorn {...args} />)}
+      {renderGridItem('../carbon/es/corner', <IconCorner {...args} />)}
+      {renderGridItem('../carbon/es/coronavirus', <IconCoronavirus {...args} />)}
+      {renderGridItem('../carbon/es/cost', <IconCost {...args} />)}
+      {renderGridItem('../carbon/es/cost--total', <IconCostTotal {...args} />)}
+      {renderGridItem('../carbon/es/cough', <IconCough {...args} />)}
+      {renderGridItem('../carbon/es/course', <IconCourse {...args} />)}
+      {renderGridItem('../carbon/es/covariate', <IconCovariate {...args} />)}
+      {renderGridItem('../carbon/es/credentials', <IconCredentials {...args} />)}
+      {renderGridItem('../carbon/es/crop', <IconCrop {...args} />)}
+      {renderGridItem('../carbon/es/crop-growth', <IconCropGrowth {...args} />)}
+      {renderGridItem('../carbon/es/crop-health', <IconCropHealth {...args} />)}
+      {renderGridItem('../carbon/es/cross-tab', <IconCrossTab {...args} />)}
+      {renderGridItem('../carbon/es/crossroads', <IconCrossroads {...args} />)}
+      {renderGridItem('../carbon/es/cube', <IconCube {...args} />)}
+      {renderGridItem('../carbon/es/cube-view', <IconCubeView {...args} />)}
+      {renderGridItem('../carbon/es/currency', <IconCurrency {...args} />)}
+      {renderGridItem('../carbon/es/currency--baht', <IconCurrencyBaht {...args} />)}
+      {renderGridItem('../carbon/es/currency--dollar', <IconCurrencyDollar {...args} />)}
+      {renderGridItem('../carbon/es/currency--euro', <IconCurrencyEuro {...args} />)}
+      {renderGridItem('../carbon/es/currency--lira', <IconCurrencyLira {...args} />)}
+      {renderGridItem('../carbon/es/currency--pound', <IconCurrencyPound {...args} />)}
+      {renderGridItem('../carbon/es/currency--ruble', <IconCurrencyRuble {...args} />)}
+      {renderGridItem('../carbon/es/currency--rupee', <IconCurrencyRupee {...args} />)}
+      {renderGridItem('../carbon/es/currency--shekel', <IconCurrencyShekel {...args} />)}
+      {renderGridItem('../carbon/es/currency--won', <IconCurrencyWon {...args} />)}
+      {renderGridItem('../carbon/es/currency--yen', <IconCurrencyYen {...args} />)}
+      {renderGridItem('../carbon/es/cursor--1', <IconCursor1 {...args} />)}
+      {renderGridItem('../carbon/es/cursor--2', <IconCursor2 {...args} />)}
+      {renderGridItem('../carbon/es/customer-service', <IconCustomerService {...args} />)}
+      {renderGridItem('../carbon/es/cut', <IconCut {...args} />)}
+      {renderGridItem('../carbon/es/cut-out', <IconCutOut {...args} />)}
+      {renderGridItem('../carbon/es/cyclist', <IconCyclist {...args} />)}
+      {renderGridItem('../carbon/es/dashboard', <IconDashboard {...args} />)}
+      {renderGridItem('../carbon/es/dashboard--reference', <IconDashboardReference {...args} />)}
+      {renderGridItem('../carbon/es/data--1', <IconData1 {...args} />)}
+      {renderGridItem('../carbon/es/data--2', <IconData2 {...args} />)}
+      {renderGridItem('../carbon/es/data--base', <IconDataBase {...args} />)}
+      {renderGridItem('../carbon/es/data--base--alt', <IconDataBaseAlt {...args} />)}
+      {renderGridItem('../carbon/es/data--categorical', <IconDataCategorical {...args} />)}
+      {renderGridItem('../carbon/es/data--center', <IconDataCenter {...args} />)}
+      {renderGridItem('../carbon/es/data--check', <IconDataCheck {...args} />)}
+      {renderGridItem('../carbon/es/data--connected', <IconDataConnected {...args} />)}
+      {renderGridItem('../carbon/es/data--error', <IconDataError {...args} />)}
+      {renderGridItem('../carbon/es/data--format', <IconDataFormat {...args} />)}
+      {renderGridItem('../carbon/es/data--reference', <IconDataReference {...args} />)}
+      {renderGridItem('../carbon/es/data--regular', <IconDataRegular {...args} />)}
+      {renderGridItem('../carbon/es/data--set', <IconDataSet {...args} />)}
+      {renderGridItem('../carbon/es/data--structured', <IconDataStructured {...args} />)}
+      {renderGridItem('../carbon/es/data--unstructured', <IconDataUnstructured {...args} />)}
+      {renderGridItem('../carbon/es/data--view', <IconDataView {...args} />)}
+      {renderGridItem('../carbon/es/data--view--alt', <IconDataViewAlt {...args} />)}
+      {renderGridItem('../carbon/es/data-accessor', <IconDataAccessor {...args} />)}
+      {renderGridItem('../carbon/es/data-backup', <IconDataBackup {...args} />)}
+      {renderGridItem('../carbon/es/data-bin', <IconDataBin {...args} />)}
+      {renderGridItem('../carbon/es/data-blob', <IconDataBlob {...args} />)}
+      {renderGridItem('../carbon/es/data-class', <IconDataClass {...args} />)}
+      {renderGridItem('../carbon/es/data-collection', <IconDataCollection {...args} />)}
+      {renderGridItem('../carbon/es/data-definition', <IconDataDefinition {...args} />)}
+      {renderGridItem('../carbon/es/data-diode', <IconDataDiode {...args} />)}
+      {renderGridItem('../carbon/es/data-enrichment', <IconDataEnrichment {...args} />)}
+      {renderGridItem('../carbon/es/data-player', <IconDataPlayer {...args} />)}
+      {renderGridItem('../carbon/es/data-refinery', <IconDataRefinery {...args} />)}
+      {renderGridItem('../carbon/es/data-refinery--reference', <IconDataRefineryReference {...args} />)}
+      {renderGridItem('../carbon/es/data-share', <IconDataShare {...args} />)}
+      {renderGridItem('../carbon/es/data-table', <IconDataTable {...args} />)}
+      {renderGridItem('../carbon/es/data-table--reference', <IconDataTableReference {...args} />)}
+      {renderGridItem('../carbon/es/data-vis--1', <IconDataVis1 {...args} />)}
+      {renderGridItem('../carbon/es/data-vis--2', <IconDataVis2 {...args} />)}
+      {renderGridItem('../carbon/es/data-vis--3', <IconDataVis3 {...args} />)}
+      {renderGridItem('../carbon/es/data-vis--4', <IconDataVis4 {...args} />)}
+      {renderGridItem('../carbon/es/database--datastax', <IconDatabaseDatastax {...args} />)}
+      {renderGridItem('../carbon/es/database--elastic', <IconDatabaseElastic {...args} />)}
+      {renderGridItem('../carbon/es/database--enterprise-db2', <IconDatabaseEnterpriseDb2 {...args} />)}
+      {renderGridItem('../carbon/es/database--etcd', <IconDatabaseEtcd {...args} />)}
+      {renderGridItem('../carbon/es/database--mongodb', <IconDatabaseMongodb {...args} />)}
+      {renderGridItem('../carbon/es/database--postgreSQL', <IconDatabasePostgreSql {...args} />)}
+      {renderGridItem('../carbon/es/database--rabbit', <IconDatabaseRabbit {...args} />)}
+      {renderGridItem('../carbon/es/database--redis', <IconDatabaseRedis {...args} />)}
+      {renderGridItem('../carbon/es/datastore', <IconDatastore {...args} />)}
+      {renderGridItem('../carbon/es/debug', <IconDebug {...args} />)}
+      {renderGridItem('../carbon/es/decision-tree', <IconDecisionTree {...args} />)}
+      {renderGridItem('../carbon/es/delete', <IconDelete {...args} />)}
+      {renderGridItem('../carbon/es/delivery', <IconDelivery {...args} />)}
+      {renderGridItem('../carbon/es/delivery--add', <IconDeliveryAdd {...args} />)}
+      {renderGridItem('../carbon/es/delivery--parcel', <IconDeliveryParcel {...args} />)}
+      {renderGridItem('../carbon/es/delivery-truck', <IconDeliveryTruck {...args} />)}
+      {renderGridItem('../carbon/es/departure', <IconDeparture {...args} />)}
+      {renderGridItem('../carbon/es/deploy', <IconDeploy {...args} />)}
+      {renderGridItem('../carbon/es/deploy-rules', <IconDeployRules {...args} />)}
+      {renderGridItem('../carbon/es/deployment-pattern', <IconDeploymentPattern {...args} />)}
+      {renderGridItem('../carbon/es/deployment-policy', <IconDeploymentPolicy {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--data', <IconDeploymentUnitData {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--execution', <IconDeploymentUnitExecution {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--installation', <IconDeploymentUnitInstallation {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--presentation', <IconDeploymentUnitPresentation {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--technical--data', <IconDeploymentUnitTechnicalData {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--technical--execution', <IconDeploymentUnitTechnicalExecution {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--technical--installation', <IconDeploymentUnitTechnicalInstallation {...args} />)}
+      {renderGridItem('../carbon/es/deployment-unit--technical--presentation', <IconDeploymentUnitTechnicalPresentation {...args} />)}
+      {renderGridItem('../carbon/es/desk--adjustable', <IconDeskAdjustable {...args} />)}
+      {renderGridItem('../carbon/es/development', <IconDevelopment {...args} />)}
+      {renderGridItem('../carbon/es/devices', <IconDevices {...args} />)}
+      {renderGridItem('../carbon/es/dew-point', <IconDewPoint {...args} />)}
+      {renderGridItem('../carbon/es/dew-point--filled', <IconDewPointFilled {...args} />)}
+      {renderGridItem('../carbon/es/diagram', <IconDiagram {...args} />)}
+      {renderGridItem('../carbon/es/diagram--reference', <IconDiagramReference {...args} />)}
+      {renderGridItem('../carbon/es/direct-link', <IconDirectLink {...args} />)}
+      {renderGridItem('../carbon/es/direction--bear-right--01', <IconDirectionBearRight01 {...args} />)}
+      {renderGridItem('../carbon/es/direction--bear-right--01--filled', <IconDirectionBearRight01Filled {...args} />)}
+      {renderGridItem('../carbon/es/direction--bear-right--02', <IconDirectionBearRight02 {...args} />)}
+      {renderGridItem('../carbon/es/direction--bear-right--02--filled', <IconDirectionBearRight02Filled {...args} />)}
+      {renderGridItem('../carbon/es/direction--curve', <IconDirectionCurve {...args} />)}
+      {renderGridItem('../carbon/es/direction--curve--filled', <IconDirectionCurveFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--fork', <IconDirectionFork {...args} />)}
+      {renderGridItem('../carbon/es/direction--fork--filled', <IconDirectionForkFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--loop-left', <IconDirectionLoopLeft {...args} />)}
+      {renderGridItem('../carbon/es/direction--loop-left--filled', <IconDirectionLoopLeftFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--loop-right', <IconDirectionLoopRight {...args} />)}
+      {renderGridItem('../carbon/es/direction--loop-right--filled', <IconDirectionLoopRightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--merge', <IconDirectionMerge {...args} />)}
+      {renderGridItem('../carbon/es/direction--merge--filled', <IconDirectionMergeFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--right--01', <IconDirectionRight01 {...args} />)}
+      {renderGridItem('../carbon/es/direction--right--01--filled', <IconDirectionRight01Filled {...args} />)}
+      {renderGridItem('../carbon/es/direction--right--02', <IconDirectionRight02 {...args} />)}
+      {renderGridItem('../carbon/es/direction--right--02--filled', <IconDirectionRight02Filled {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--first-right', <IconDirectionRotaryFirstRight {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--first-right--filled', <IconDirectionRotaryFirstRightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--right', <IconDirectionRotaryRight {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--right--filled', <IconDirectionRotaryRightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--straight', <IconDirectionRotaryStraight {...args} />)}
+      {renderGridItem('../carbon/es/direction--rotary--straight--filled', <IconDirectionRotaryStraightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--sharp-turn', <IconDirectionSharpTurn {...args} />)}
+      {renderGridItem('../carbon/es/direction--sharp-turn--filled', <IconDirectionSharpTurnFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--straight', <IconDirectionStraight {...args} />)}
+      {renderGridItem('../carbon/es/direction--straight--filled', <IconDirectionStraightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--straight--right', <IconDirectionStraightRight {...args} />)}
+      {renderGridItem('../carbon/es/direction--straight--right--filled', <IconDirectionStraightRightFilled {...args} />)}
+      {renderGridItem('../carbon/es/direction--u-turn', <IconDirectionUTurn {...args} />)}
+      {renderGridItem('../carbon/es/direction--u-turn--filled', <IconDirectionUTurnFilled {...args} />)}
+      {renderGridItem('../carbon/es/directory-domain', <IconDirectoryDomain {...args} />)}
+      {renderGridItem('../carbon/es/distribute--horizontal-center', <IconDistributeHorizontalCenter {...args} />)}
+      {renderGridItem('../carbon/es/distribute--horizontal-left', <IconDistributeHorizontalLeft {...args} />)}
+      {renderGridItem('../carbon/es/distribute--horizontal-right', <IconDistributeHorizontalRight {...args} />)}
+      {renderGridItem('../carbon/es/distribute--vertical-bottom', <IconDistributeVerticalBottom {...args} />)}
+      {renderGridItem('../carbon/es/distribute--vertical-center', <IconDistributeVerticalCenter {...args} />)}
+      {renderGridItem('../carbon/es/distribute--vertical-top', <IconDistributeVerticalTop {...args} />)}
+      {renderGridItem('../carbon/es/dns-services', <IconDnsServices {...args} />)}
+      {renderGridItem('../carbon/es/document', <IconDocument {...args} />)}
+      {renderGridItem('../carbon/es/document--add', <IconDocumentAdd {...args} />)}
+      {renderGridItem('../carbon/es/document--attachment', <IconDocumentAttachment {...args} />)}
+      {renderGridItem('../carbon/es/document--audio', <IconDocumentAudio {...args} />)}
+      {renderGridItem('../carbon/es/document--blank', <IconDocumentBlank {...args} />)}
+      {renderGridItem('../carbon/es/document--download', <IconDocumentDownload {...args} />)}
+      {renderGridItem('../carbon/es/document--epdf', <IconDocumentEpdf {...args} />)}
+      {renderGridItem('../carbon/es/document--export', <IconDocumentExport {...args} />)}
+      {renderGridItem('../carbon/es/document--horizontal', <IconDocumentHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/document--import', <IconDocumentImport {...args} />)}
+      {renderGridItem('../carbon/es/document--pdf', <IconDocumentPdf {...args} />)}
+      {renderGridItem('../carbon/es/document--preliminary', <IconDocumentPreliminary {...args} />)}
+      {renderGridItem('../carbon/es/document--protected', <IconDocumentProtected {...args} />)}
+      {renderGridItem('../carbon/es/document--security', <IconDocumentSecurity {...args} />)}
+      {renderGridItem('../carbon/es/document--signed', <IconDocumentSigned {...args} />)}
+      {renderGridItem('../carbon/es/document--sketch', <IconDocumentSketch {...args} />)}
+      {renderGridItem('../carbon/es/document--subtract', <IconDocumentSubtract {...args} />)}
+      {renderGridItem('../carbon/es/document--tasks', <IconDocumentTasks {...args} />)}
+      {renderGridItem('../carbon/es/document--unknown', <IconDocumentUnknown {...args} />)}
+      {renderGridItem('../carbon/es/document--unprotected', <IconDocumentUnprotected {...args} />)}
+      {renderGridItem('../carbon/es/document--vertical', <IconDocumentVertical {...args} />)}
+      {renderGridItem('../carbon/es/document--video', <IconDocumentVideo {...args} />)}
+      {renderGridItem('../carbon/es/document--view', <IconDocumentView {...args} />)}
+      {renderGridItem('../carbon/es/document--word-processor', <IconDocumentWordProcessor {...args} />)}
+      {renderGridItem('../carbon/es/document--word-processor--reference', <IconDocumentWordProcessorReference {...args} />)}
+      {renderGridItem('../carbon/es/document-sentiment', <IconDocumentSentiment {...args} />)}
+      {renderGridItem('../carbon/es/dog-walker', <IconDogWalker {...args} />)}
+      {renderGridItem('../carbon/es/dot-mark', <IconDotMark {...args} />)}
+      {renderGridItem('../carbon/es/double-integer', <IconDoubleInteger {...args} />)}
+      {renderGridItem('../carbon/es/down-to-bottom', <IconDownToBottom {...args} />)}
+      {renderGridItem('../carbon/es/download', <IconDownload {...args} />)}
+      {renderGridItem('../carbon/es/drag--horizontal', <IconDragHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/drag--vertical', <IconDragVertical {...args} />)}
+      {renderGridItem('../carbon/es/draggable', <IconDraggable {...args} />)}
+      {renderGridItem('../carbon/es/draw', <IconDraw {...args} />)}
+      {renderGridItem('../carbon/es/drill-back', <IconDrillBack {...args} />)}
+      {renderGridItem('../carbon/es/drill-down', <IconDrillDown {...args} />)}
+      {renderGridItem('../carbon/es/drill-through', <IconDrillThrough {...args} />)}
+      {renderGridItem('../carbon/es/driver-analysis', <IconDriverAnalysis {...args} />)}
+      {renderGridItem('../carbon/es/drone', <IconDrone {...args} />)}
+      {renderGridItem('../carbon/es/drone--delivery', <IconDroneDelivery {...args} />)}
+      {renderGridItem('../carbon/es/drone--front', <IconDroneFront {...args} />)}
+      {renderGridItem('../carbon/es/drone--video', <IconDroneVideo {...args} />)}
+      {renderGridItem('../carbon/es/drop-photo', <IconDropPhoto {...args} />)}
+      {renderGridItem('../carbon/es/drop-photo--filled', <IconDropPhotoFilled {...args} />)}
+      {renderGridItem('../carbon/es/drought', <IconDrought {...args} />)}
+      {renderGridItem('../carbon/es/earth', <IconEarth {...args} />)}
+      {renderGridItem('../carbon/es/earth--americas', <IconEarthAmericas {...args} />)}
+      {renderGridItem('../carbon/es/earth--americas--filled', <IconEarthAmericasFilled {...args} />)}
+      {renderGridItem('../carbon/es/earth--europe-africa', <IconEarthEuropeAfrica {...args} />)}
+      {renderGridItem('../carbon/es/earth--europe-africa--filled', <IconEarthEuropeAfricaFilled {...args} />)}
+      {renderGridItem('../carbon/es/earth--filled', <IconEarthFilled {...args} />)}
+      {renderGridItem('../carbon/es/earth--southeast-asia', <IconEarthSoutheastAsia {...args} />)}
+      {renderGridItem('../carbon/es/earth--southeast-asia--filled', <IconEarthSoutheastAsiaFilled {...args} />)}
+      {renderGridItem('../carbon/es/earthquake', <IconEarthquake {...args} />)}
+      {renderGridItem('../carbon/es/edge-cluster', <IconEdgeCluster {...args} />)}
+      {renderGridItem('../carbon/es/edge-device', <IconEdgeDevice {...args} />)}
+      {renderGridItem('../carbon/es/edge-node', <IconEdgeNode {...args} />)}
+      {renderGridItem('../carbon/es/edge-node--alt', <IconEdgeNodeAlt {...args} />)}
+      {renderGridItem('../carbon/es/edge-service', <IconEdgeService {...args} />)}
+      {renderGridItem('../carbon/es/edit', <IconEdit {...args} />)}
+      {renderGridItem('../carbon/es/edit--off', <IconEditOff {...args} />)}
+      {renderGridItem('../carbon/es/edt-loop', <IconEdtLoop {...args} />)}
+      {renderGridItem('../carbon/es/education', <IconEducation {...args} />)}
+      {renderGridItem('../carbon/es/email', <IconEmail {...args} />)}
+      {renderGridItem('../carbon/es/email--new', <IconEmailNew {...args} />)}
+      {renderGridItem('../carbon/es/encryption', <IconEncryption {...args} />)}
+      {renderGridItem('../carbon/es/energy--renewable', <IconEnergyRenewable {...args} />)}
+      {renderGridItem('../carbon/es/enterprise', <IconEnterprise {...args} />)}
+      {renderGridItem('../carbon/es/equalizer', <IconEqualizer {...args} />)}
+      {renderGridItem('../carbon/es/erase', <IconErase {...args} />)}
+      {renderGridItem('../carbon/es/error', <IconError {...args} />)}
+      {renderGridItem('../carbon/es/error--filled', <IconErrorFilled {...args} />)}
+      {renderGridItem('../carbon/es/error--outline', <IconErrorOutline {...args} />)}
+      {renderGridItem('../carbon/es/event', <IconEvent {...args} />)}
+      {renderGridItem('../carbon/es/event--schedule', <IconEventSchedule {...args} />)}
+      {renderGridItem('../carbon/es/events', <IconEvents {...args} />)}
+      {renderGridItem('../carbon/es/events--alt', <IconEventsAlt {...args} />)}
+      {renderGridItem('../carbon/es/exam-mode', <IconExamMode {...args} />)}
+      {renderGridItem('../carbon/es/exit', <IconExit {...args} />)}
+      {renderGridItem('../carbon/es/expand-all', <IconExpandAll {...args} />)}
+      {renderGridItem('../carbon/es/expand-categories', <IconExpandCategories {...args} />)}
+      {renderGridItem('../carbon/es/explore', <IconExplore {...args} />)}
+      {renderGridItem('../carbon/es/export', <IconExport {...args} />)}
+      {renderGridItem('../carbon/es/eyedropper', <IconEyedropper {...args} />)}
+      {renderGridItem('../carbon/es/face--activated', <IconFaceActivated {...args} />)}
+      {renderGridItem('../carbon/es/face--activated--add', <IconFaceActivatedAdd {...args} />)}
+      {renderGridItem('../carbon/es/face--activated--filled', <IconFaceActivatedFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--add', <IconFaceAdd {...args} />)}
+      {renderGridItem('../carbon/es/face--cool', <IconFaceCool {...args} />)}
+      {renderGridItem('../carbon/es/face--dissatisfied', <IconFaceDissatisfied {...args} />)}
+      {renderGridItem('../carbon/es/face--dissatisfied--filled', <IconFaceDissatisfiedFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--dizzy', <IconFaceDizzy {...args} />)}
+      {renderGridItem('../carbon/es/face--dizzy--filled', <IconFaceDizzyFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--mask', <IconFaceMask {...args} />)}
+      {renderGridItem('../carbon/es/face--neutral', <IconFaceNeutral {...args} />)}
+      {renderGridItem('../carbon/es/face--neutral--filled', <IconFaceNeutralFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--pending', <IconFacePending {...args} />)}
+      {renderGridItem('../carbon/es/face--pending--filled', <IconFacePendingFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--satisfied', <IconFaceSatisfied {...args} />)}
+      {renderGridItem('../carbon/es/face--satisfied--filled', <IconFaceSatisfiedFilled {...args} />)}
+      {renderGridItem('../carbon/es/face--wink', <IconFaceWink {...args} />)}
+      {renderGridItem('../carbon/es/face--wink--filled', <IconFaceWinkFilled {...args} />)}
+      {renderGridItem('../carbon/es/factor', <IconFactor {...args} />)}
+      {renderGridItem('../carbon/es/fade', <IconFade {...args} />)}
+      {renderGridItem('../carbon/es/favorite', <IconFavorite {...args} />)}
+      {renderGridItem('../carbon/es/favorite--filled', <IconFavoriteFilled {...args} />)}
+      {renderGridItem('../carbon/es/favorite--half', <IconFavoriteHalf {...args} />)}
+      {renderGridItem('../carbon/es/fetch-upload', <IconFetchUpload {...args} />)}
+      {renderGridItem('../carbon/es/fetch-upload--cloud', <IconFetchUploadCloud {...args} />)}
+      {renderGridItem('../carbon/es/file-storage', <IconFileStorage {...args} />)}
+      {renderGridItem('../carbon/es/filter', <IconFilter {...args} />)}
+      {renderGridItem('../carbon/es/filter--edit', <IconFilterEdit {...args} />)}
+      {renderGridItem('../carbon/es/filter--remove', <IconFilterRemove {...args} />)}
+      {renderGridItem('../carbon/es/filter--reset', <IconFilterReset {...args} />)}
+      {renderGridItem('../carbon/es/finance', <IconFinance {...args} />)}
+      {renderGridItem('../carbon/es/fingerprint-recognition', <IconFingerprintRecognition {...args} />)}
+      {renderGridItem('../carbon/es/fire', <IconFire {...args} />)}
+      {renderGridItem('../carbon/es/firewall', <IconFirewall {...args} />)}
+      {renderGridItem('../carbon/es/firewall--classic', <IconFirewallClassic {...args} />)}
+      {renderGridItem('../carbon/es/fish', <IconFish {...args} />)}
+      {renderGridItem('../carbon/es/fish--multiple', <IconFishMultiple {...args} />)}
+      {renderGridItem('../carbon/es/fit-to-height', <IconFitToHeight {...args} />)}
+      {renderGridItem('../carbon/es/fit-to-screen', <IconFitToScreen {...args} />)}
+      {renderGridItem('../carbon/es/fit-to-width', <IconFitToWidth {...args} />)}
+      {renderGridItem('../carbon/es/flag', <IconFlag {...args} />)}
+      {renderGridItem('../carbon/es/flag--filled', <IconFlagFilled {...args} />)}
+      {renderGridItem('../carbon/es/flagging-taxi', <IconFlaggingTaxi {...args} />)}
+      {renderGridItem('../carbon/es/flash', <IconFlash {...args} />)}
+      {renderGridItem('../carbon/es/flash--filled', <IconFlashFilled {...args} />)}
+      {renderGridItem('../carbon/es/flash--off', <IconFlashOff {...args} />)}
+      {renderGridItem('../carbon/es/flash--off--filled', <IconFlashOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/flight--international', <IconFlightInternational {...args} />)}
+      {renderGridItem('../carbon/es/flight--roster', <IconFlightRoster {...args} />)}
+      {renderGridItem('../carbon/es/flight--schedule', <IconFlightSchedule {...args} />)}
+      {renderGridItem('../carbon/es/floating-ip', <IconFloatingIp {...args} />)}
+      {renderGridItem('../carbon/es/flood', <IconFlood {...args} />)}
+      {renderGridItem('../carbon/es/flood--warning', <IconFloodWarning {...args} />)}
+      {renderGridItem('../carbon/es/floorplan', <IconFloorplan {...args} />)}
+      {renderGridItem('../carbon/es/flow', <IconFlow {...args} />)}
+      {renderGridItem('../carbon/es/flow--connection', <IconFlowConnection {...args} />)}
+      {renderGridItem('../carbon/es/flow--data', <IconFlowData {...args} />)}
+      {renderGridItem('../carbon/es/fog', <IconFog {...args} />)}
+      {renderGridItem('../carbon/es/folder', <IconFolder {...args} />)}
+      {renderGridItem('../carbon/es/folder--add', <IconFolderAdd {...args} />)}
+      {renderGridItem('../carbon/es/folder--details', <IconFolderDetails {...args} />)}
+      {renderGridItem('../carbon/es/folder--details--reference', <IconFolderDetailsReference {...args} />)}
+      {renderGridItem('../carbon/es/folder--move-to', <IconFolderMoveTo {...args} />)}
+      {renderGridItem('../carbon/es/folder--off', <IconFolderOff {...args} />)}
+      {renderGridItem('../carbon/es/folder--open', <IconFolderOpen {...args} />)}
+      {renderGridItem('../carbon/es/folder--parent', <IconFolderParent {...args} />)}
+      {renderGridItem('../carbon/es/folder--shared', <IconFolderShared {...args} />)}
+      {renderGridItem('../carbon/es/folders', <IconFolders {...args} />)}
+      {renderGridItem('../carbon/es/forecast--hail', <IconForecastHail {...args} />)}
+      {renderGridItem('../carbon/es/forecast--hail-30', <IconForecastHail30 {...args} />)}
+      {renderGridItem('../carbon/es/forecast--lightning', <IconForecastLightning {...args} />)}
+      {renderGridItem('../carbon/es/forecast--lightning-30', <IconForecastLightning30 {...args} />)}
+      {renderGridItem('../carbon/es/fork', <IconFork {...args} />)}
+      {renderGridItem('../carbon/es/forum', <IconForum {...args} />)}
+      {renderGridItem('../carbon/es/forward--10', <IconForward10 {...args} />)}
+      {renderGridItem('../carbon/es/forward--30', <IconForward30 {...args} />)}
+      {renderGridItem('../carbon/es/forward--5', <IconForward5 {...args} />)}
+      {renderGridItem('../carbon/es/fragile', <IconFragile {...args} />)}
+      {renderGridItem('../carbon/es/friendship', <IconFriendship {...args} />)}
+      {renderGridItem('../carbon/es/fruit-bowl', <IconFruitBowl {...args} />)}
+      {renderGridItem('../carbon/es/function', <IconFunction {...args} />)}
+      {renderGridItem('../carbon/es/function-math', <IconFunctionMath {...args} />)}
+      {renderGridItem('../carbon/es/game--console', <IconGameConsole {...args} />)}
+      {renderGridItem('../carbon/es/game--wireless', <IconGameWireless {...args} />)}
+      {renderGridItem('../carbon/es/gamification', <IconGamification {...args} />)}
+      {renderGridItem('../carbon/es/gas-station', <IconGasStation {...args} />)}
+      {renderGridItem('../carbon/es/gas-station--filled', <IconGasStationFilled {...args} />)}
+      {renderGridItem('../carbon/es/gateway', <IconGateway {...args} />)}
+      {renderGridItem('../carbon/es/gateway--api', <IconGatewayApi {...args} />)}
+      {renderGridItem('../carbon/es/gateway--mail', <IconGatewayMail {...args} />)}
+      {renderGridItem('../carbon/es/gateway--public', <IconGatewayPublic {...args} />)}
+      {renderGridItem('../carbon/es/gateway--security', <IconGatewaySecurity {...args} />)}
+      {renderGridItem('../carbon/es/gateway--user-access', <IconGatewayUserAccess {...args} />)}
+      {renderGridItem('../carbon/es/gateway--vpn', <IconGatewayVpn {...args} />)}
+      {renderGridItem('../carbon/es/gender--female', <IconGenderFemale {...args} />)}
+      {renderGridItem('../carbon/es/gender--male', <IconGenderMale {...args} />)}
+      {renderGridItem('../carbon/es/generate-pdf', <IconGeneratePdf {...args} />)}
+      {renderGridItem('../carbon/es/gift', <IconGift {...args} />)}
+      {renderGridItem('../carbon/es/globe', <IconGlobe {...args} />)}
+      {renderGridItem('../carbon/es/gradient', <IconGradient {...args} />)}
+      {renderGridItem('../carbon/es/graphical-data-flow', <IconGraphicalDataFlow {...args} />)}
+      {renderGridItem('../carbon/es/grid', <IconGrid {...args} />)}
+      {renderGridItem('../carbon/es/group', <IconGroup {...args} />)}
+      {renderGridItem('../carbon/es/group--access', <IconGroupAccess {...args} />)}
+      {renderGridItem('../carbon/es/group--account', <IconGroupAccount {...args} />)}
+      {renderGridItem('../carbon/es/group--presentation', <IconGroupPresentation {...args} />)}
+      {renderGridItem('../carbon/es/group--resource', <IconGroupResource {...args} />)}
+      {renderGridItem('../carbon/es/group--security', <IconGroupSecurity {...args} />)}
+      {renderGridItem('../carbon/es/group-objects', <IconGroupObjects {...args} />)}
+      {renderGridItem('../carbon/es/group-objects--new', <IconGroupObjectsNew {...args} />)}
+      {renderGridItem('../carbon/es/group-objects--save', <IconGroupObjectsSave {...args} />)}
+      {renderGridItem('../carbon/es/growth', <IconGrowth {...args} />)}
+      {renderGridItem('../carbon/es/gui', <IconGui {...args} />)}
+      {renderGridItem('../carbon/es/gui--management', <IconGuiManagement {...args} />)}
+      {renderGridItem('../carbon/es/hail', <IconHail {...args} />)}
+      {renderGridItem('../carbon/es/harbor', <IconHarbor {...args} />)}
+      {renderGridItem('../carbon/es/hardware-security-module', <IconHardwareSecurityModule {...args} />)}
+      {renderGridItem('../carbon/es/hashtag', <IconHashtag {...args} />)}
+      {renderGridItem('../carbon/es/haze', <IconHaze {...args} />)}
+      {renderGridItem('../carbon/es/haze--night', <IconHazeNight {...args} />)}
+      {renderGridItem('../carbon/es/headphones', <IconHeadphones {...args} />)}
+      {renderGridItem('../carbon/es/headset', <IconHeadset {...args} />)}
+      {renderGridItem('../carbon/es/health-cross', <IconHealthCross {...args} />)}
+      {renderGridItem('../carbon/es/hearing', <IconHearing {...args} />)}
+      {renderGridItem('../carbon/es/heat-map', <IconHeatMap {...args} />)}
+      {renderGridItem('../carbon/es/heat-map--02', <IconHeatMap02 {...args} />)}
+      {renderGridItem('../carbon/es/heat-map--03', <IconHeatMap03 {...args} />)}
+      {renderGridItem('../carbon/es/heat-map--stocks', <IconHeatMapStocks {...args} />)}
+      {renderGridItem('../carbon/es/helicopter', <IconHelicopter {...args} />)}
+      {renderGridItem('../carbon/es/help', <IconHelp {...args} />)}
+      {renderGridItem('../carbon/es/help--filled', <IconHelpFilled {...args} />)}
+      {renderGridItem('../carbon/es/help-desk', <IconHelpDesk {...args} />)}
+      {renderGridItem('../carbon/es/home', <IconHome {...args} />)}
+      {renderGridItem('../carbon/es/horizontal-view', <IconHorizontalView {...args} />)}
+      {renderGridItem('../carbon/es/hospital', <IconHospital {...args} />)}
+      {renderGridItem('../carbon/es/hospital-bed', <IconHospitalBed {...args} />)}
+      {renderGridItem('../carbon/es/hotel', <IconHotel {...args} />)}
+      {renderGridItem('../carbon/es/hourglass', <IconHourglass {...args} />)}
+      {renderGridItem('../carbon/es/humidity', <IconHumidity {...args} />)}
+      {renderGridItem('../carbon/es/humidity--alt', <IconHumidityAlt {...args} />)}
+      {renderGridItem('../carbon/es/hurricane', <IconHurricane {...args} />)}
+      {renderGridItem('../carbon/es/hybrid-networking', <IconHybridNetworking {...args} />)}
+      {renderGridItem('../carbon/es/hybrid-networking--alt', <IconHybridNetworkingAlt {...args} />)}
+      {renderGridItem('../carbon/es/ice--accretion', <IconIceAccretion {...args} />)}
+      {renderGridItem('../carbon/es/ice--vision', <IconIceVision {...args} />)}
+      {renderGridItem('../carbon/es/id-management', <IconIdManagement {...args} />)}
+      {renderGridItem('../carbon/es/idea', <IconIdea {...args} />)}
+      {renderGridItem('../carbon/es/identification', <IconIdentification {...args} />)}
+      {renderGridItem('../carbon/es/image', <IconImage {...args} />)}
+      {renderGridItem('../carbon/es/image--copy', <IconImageCopy {...args} />)}
+      {renderGridItem('../carbon/es/image--medical', <IconImageMedical {...args} />)}
+      {renderGridItem('../carbon/es/image--reference', <IconImageReference {...args} />)}
+      {renderGridItem('../carbon/es/image--search', <IconImageSearch {...args} />)}
+      {renderGridItem('../carbon/es/image--search--alt', <IconImageSearchAlt {...args} />)}
+      {renderGridItem('../carbon/es/image-service', <IconImageService {...args} />)}
+      {renderGridItem('../carbon/es/import-export', <IconImportExport {...args} />)}
+      {renderGridItem('../carbon/es/improve-relevance', <IconImproveRelevance {...args} />)}
+      {renderGridItem('../carbon/es/in-progress', <IconInProgress {...args} />)}
+      {renderGridItem('../carbon/es/in-progress--error', <IconInProgressError {...args} />)}
+      {renderGridItem('../carbon/es/in-progress--warning', <IconInProgressWarning {...args} />)}
+      {renderGridItem('../carbon/es/incomplete', <IconIncomplete {...args} />)}
+      {renderGridItem('../carbon/es/incomplete--cancel', <IconIncompleteCancel {...args} />)}
+      {renderGridItem('../carbon/es/incomplete--error', <IconIncompleteError {...args} />)}
+      {renderGridItem('../carbon/es/incomplete--warning', <IconIncompleteWarning {...args} />)}
+      {renderGridItem('../carbon/es/increase-level', <IconIncreaseLevel {...args} />)}
+      {renderGridItem('../carbon/es/industry', <IconIndustry {...args} />)}
+      {renderGridItem('../carbon/es/information', <IconInformation {...args} />)}
+      {renderGridItem('../carbon/es/information--disabled', <IconInformationDisabled {...args} />)}
+      {renderGridItem('../carbon/es/information--filled', <IconInformationFilled {...args} />)}
+      {renderGridItem('../carbon/es/information--square', <IconInformationSquare {...args} />)}
+      {renderGridItem('../carbon/es/information--square--filled', <IconInformationSquareFilled {...args} />)}
+      {renderGridItem('../carbon/es/infrastructure--classic', <IconInfrastructureClassic {...args} />)}
+      {renderGridItem('../carbon/es/insert', <IconInsert {...args} />)}
+      {renderGridItem('../carbon/es/insert--page', <IconInsertPage {...args} />)}
+      {renderGridItem('../carbon/es/insert-syntax', <IconInsertSyntax {...args} />)}
+      {renderGridItem('../carbon/es/inspection', <IconInspection {...args} />)}
+      {renderGridItem('../carbon/es/instance--bx', <IconInstanceBx {...args} />)}
+      {renderGridItem('../carbon/es/instance--classic', <IconInstanceClassic {...args} />)}
+      {renderGridItem('../carbon/es/instance--cx', <IconInstanceCx {...args} />)}
+      {renderGridItem('../carbon/es/instance--mx', <IconInstanceMx {...args} />)}
+      {renderGridItem('../carbon/es/instance--virtual', <IconInstanceVirtual {...args} />)}
+      {renderGridItem('../carbon/es/integration', <IconIntegration {...args} />)}
+      {renderGridItem('../carbon/es/interactions', <IconInteractions {...args} />)}
+      {renderGridItem('../carbon/es/intersect', <IconIntersect {...args} />)}
+      {renderGridItem('../carbon/es/intrusion-prevention', <IconIntrusionPrevention {...args} />)}
+      {renderGridItem('../carbon/es/inventory-management', <IconInventoryManagement {...args} />)}
+      {renderGridItem('../carbon/es/iot--connect', <IconIotConnect {...args} />)}
+      {renderGridItem('../carbon/es/iot--platform', <IconIotPlatform {...args} />)}
+      {renderGridItem('../carbon/es/join--full', <IconJoinFull {...args} />)}
+      {renderGridItem('../carbon/es/join--inner', <IconJoinInner {...args} />)}
+      {renderGridItem('../carbon/es/join--left', <IconJoinLeft {...args} />)}
+      {renderGridItem('../carbon/es/join--outer', <IconJoinOuter {...args} />)}
+      {renderGridItem('../carbon/es/join--right', <IconJoinRight {...args} />)}
+      {renderGridItem('../carbon/es/jump-link', <IconJumpLink {...args} />)}
+      {renderGridItem('../carbon/es/keep-dry', <IconKeepDry {...args} />)}
+      {renderGridItem('../carbon/es/keyboard', <IconKeyboard {...args} />)}
+      {renderGridItem('../carbon/es/kubernetes', <IconKubernetes {...args} />)}
+      {renderGridItem('../carbon/es/label', <IconLabel {...args} />)}
+      {renderGridItem('../carbon/es/language', <IconLanguage {...args} />)}
+      {renderGridItem('../carbon/es/laptop', <IconLaptop {...args} />)}
+      {renderGridItem('../carbon/es/lasso', <IconLasso {...args} />)}
+      {renderGridItem('../carbon/es/lasso--polygon', <IconLassoPolygon {...args} />)}
+      {renderGridItem('../carbon/es/launch', <IconLaunch {...args} />)}
+      {renderGridItem('../carbon/es/layers', <IconLayers {...args} />)}
+      {renderGridItem('../carbon/es/legend', <IconLegend {...args} />)}
+      {renderGridItem('../carbon/es/letter--Aa', <IconLetterAa {...args} />)}
+      {renderGridItem('../carbon/es/letter--Bb', <IconLetterBb {...args} />)}
+      {renderGridItem('../carbon/es/letter--Cc', <IconLetterCc {...args} />)}
+      {renderGridItem('../carbon/es/letter--Dd', <IconLetterDd {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ee', <IconLetterEe {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ff', <IconLetterFf {...args} />)}
+      {renderGridItem('../carbon/es/letter--Gg', <IconLetterGg {...args} />)}
+      {renderGridItem('../carbon/es/letter--Hh', <IconLetterHh {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ii', <IconLetterIi {...args} />)}
+      {renderGridItem('../carbon/es/letter--Jj', <IconLetterJj {...args} />)}
+      {renderGridItem('../carbon/es/letter--Kk', <IconLetterKk {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ll', <IconLetterLl {...args} />)}
+      {renderGridItem('../carbon/es/letter--Mm', <IconLetterMm {...args} />)}
+      {renderGridItem('../carbon/es/letter--Nn', <IconLetterNn {...args} />)}
+      {renderGridItem('../carbon/es/letter--Oo', <IconLetterOo {...args} />)}
+      {renderGridItem('../carbon/es/letter--Pp', <IconLetterPp {...args} />)}
+      {renderGridItem('../carbon/es/letter--Qq', <IconLetterQq {...args} />)}
+      {renderGridItem('../carbon/es/letter--Rr', <IconLetterRr {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ss', <IconLetterSs {...args} />)}
+      {renderGridItem('../carbon/es/letter--Tt', <IconLetterTt {...args} />)}
+      {renderGridItem('../carbon/es/letter--Uu', <IconLetterUu {...args} />)}
+      {renderGridItem('../carbon/es/letter--Vv', <IconLetterVv {...args} />)}
+      {renderGridItem('../carbon/es/letter--Ww', <IconLetterWw {...args} />)}
+      {renderGridItem('../carbon/es/letter--Xx', <IconLetterXx {...args} />)}
+      {renderGridItem('../carbon/es/letter--Yy', <IconLetterYy {...args} />)}
+      {renderGridItem('../carbon/es/letter--Zz', <IconLetterZz {...args} />)}
+      {renderGridItem('../carbon/es/license', <IconLicense {...args} />)}
+      {renderGridItem('../carbon/es/license--draft', <IconLicenseDraft {...args} />)}
+      {renderGridItem('../carbon/es/license--global', <IconLicenseGlobal {...args} />)}
+      {renderGridItem('../carbon/es/license--maintenance', <IconLicenseMaintenance {...args} />)}
+      {renderGridItem('../carbon/es/license--maintenance-draft', <IconLicenseMaintenanceDraft {...args} />)}
+      {renderGridItem('../carbon/es/license--third-party', <IconLicenseThirdParty {...args} />)}
+      {renderGridItem('../carbon/es/license--third-party-draft', <IconLicenseThirdPartyDraft {...args} />)}
+      {renderGridItem('../carbon/es/lifesaver', <IconLifesaver {...args} />)}
+      {renderGridItem('../carbon/es/light', <IconLight {...args} />)}
+      {renderGridItem('../carbon/es/light--filled', <IconLightFilled {...args} />)}
+      {renderGridItem('../carbon/es/lightning', <IconLightning {...args} />)}
+      {renderGridItem('../carbon/es/link', <IconLink {...args} />)}
+      {renderGridItem('../carbon/es/linux', <IconLinux {...args} />)}
+      {renderGridItem('../carbon/es/linux--alt', <IconLinuxAlt {...args} />)}
+      {renderGridItem('../carbon/es/list', <IconList {...args} />)}
+      {renderGridItem('../carbon/es/list--boxes', <IconListBoxes {...args} />)}
+      {renderGridItem('../carbon/es/list--bulleted', <IconListBulleted {...args} />)}
+      {renderGridItem('../carbon/es/list--checked', <IconListChecked {...args} />)}
+      {renderGridItem('../carbon/es/list--dropdown', <IconListDropdown {...args} />)}
+      {renderGridItem('../carbon/es/list--numbered', <IconListNumbered {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--application', <IconLoadBalancerApplication {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--classic', <IconLoadBalancerClassic {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--global', <IconLoadBalancerGlobal {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--listener', <IconLoadBalancerListener {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--local', <IconLoadBalancerLocal {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--network', <IconLoadBalancerNetwork {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--pool', <IconLoadBalancerPool {...args} />)}
+      {renderGridItem('../carbon/es/load-balancer--vpc', <IconLoadBalancerVpc {...args} />)}
+      {renderGridItem('../carbon/es/location', <IconLocation {...args} />)}
+      {renderGridItem('../carbon/es/location--company', <IconLocationCompany {...args} />)}
+      {renderGridItem('../carbon/es/location--company--filled', <IconLocationCompanyFilled {...args} />)}
+      {renderGridItem('../carbon/es/location--current', <IconLocationCurrent {...args} />)}
+      {renderGridItem('../carbon/es/location--filled', <IconLocationFilled {...args} />)}
+      {renderGridItem('../carbon/es/location--hazard', <IconLocationHazard {...args} />)}
+      {renderGridItem('../carbon/es/location--hazard--filled', <IconLocationHazardFilled {...args} />)}
+      {renderGridItem('../carbon/es/location--heart', <IconLocationHeart {...args} />)}
+      {renderGridItem('../carbon/es/location--heart--filled', <IconLocationHeartFilled {...args} />)}
+      {renderGridItem('../carbon/es/location--person', <IconLocationPerson {...args} />)}
+      {renderGridItem('../carbon/es/location--person--filled', <IconLocationPersonFilled {...args} />)}
+      {renderGridItem('../carbon/es/location--save', <IconLocationSave {...args} />)}
+      {renderGridItem('../carbon/es/location--star', <IconLocationStar {...args} />)}
+      {renderGridItem('../carbon/es/location--star--filled', <IconLocationStarFilled {...args} />)}
+      {renderGridItem('../carbon/es/locked', <IconLocked {...args} />)}
+      {renderGridItem('../carbon/es/logical-partition', <IconLogicalPartition {...args} />)}
+      {renderGridItem('../carbon/es/login', <IconLogin {...args} />)}
+      {renderGridItem('../carbon/es/logo--digg', <IconLogoDigg {...args} />)}
+      {renderGridItem('../carbon/es/logo--discord', <IconLogoDiscord {...args} />)}
+      {renderGridItem('../carbon/es/logo--facebook', <IconLogoFacebook {...args} />)}
+      {renderGridItem('../carbon/es/logo--flickr', <IconLogoFlickr {...args} />)}
+      {renderGridItem('../carbon/es/logo--github', <IconLogoGithub {...args} />)}
+      {renderGridItem('../carbon/es/logo--glassdoor', <IconLogoGlassdoor {...args} />)}
+      {renderGridItem('../carbon/es/logo--instagram', <IconLogoInstagram {...args} />)}
+      {renderGridItem('../carbon/es/logo--jupyter', <IconLogoJupyter {...args} />)}
+      {renderGridItem('../carbon/es/logo--keybase', <IconLogoKeybase {...args} />)}
+      {renderGridItem('../carbon/es/logo--linkedin', <IconLogoLinkedin {...args} />)}
+      {renderGridItem('../carbon/es/logo--livestream', <IconLogoLivestream {...args} />)}
+      {renderGridItem('../carbon/es/logo--mastodon', <IconLogoMastodon {...args} />)}
+      {renderGridItem('../carbon/es/logo--medium', <IconLogoMedium {...args} />)}
+      {renderGridItem('../carbon/es/logo--openshift', <IconLogoOpenshift {...args} />)}
+      {renderGridItem('../carbon/es/logo--pinterest', <IconLogoPinterest {...args} />)}
+      {renderGridItem('../carbon/es/logo--python', <IconLogoPython {...args} />)}
+      {renderGridItem('../carbon/es/logo--quora', <IconLogoQuora {...args} />)}
+      {renderGridItem('../carbon/es/logo--r-script', <IconLogoRScript {...args} />)}
+      {renderGridItem('../carbon/es/logo--skype', <IconLogoSkype {...args} />)}
+      {renderGridItem('../carbon/es/logo--slack', <IconLogoSlack {...args} />)}
+      {renderGridItem('../carbon/es/logo--snapchat', <IconLogoSnapchat {...args} />)}
+      {renderGridItem('../carbon/es/logo--tumblr', <IconLogoTumblr {...args} />)}
+      {renderGridItem('../carbon/es/logo--twitter', <IconLogoTwitter {...args} />)}
+      {renderGridItem('../carbon/es/logo--vmware', <IconLogoVmware {...args} />)}
+      {renderGridItem('../carbon/es/logo--wechat', <IconLogoWechat {...args} />)}
+      {renderGridItem('../carbon/es/logo--xing', <IconLogoXing {...args} />)}
+      {renderGridItem('../carbon/es/logo--yelp', <IconLogoYelp {...args} />)}
+      {renderGridItem('../carbon/es/logo--youtube', <IconLogoYoutube {...args} />)}
+      {renderGridItem('../carbon/es/logout', <IconLogout {...args} />)}
+      {renderGridItem('../carbon/es/loop', <IconLoop {...args} />)}
+      {renderGridItem('../carbon/es/mac--command', <IconMacCommand {...args} />)}
+      {renderGridItem('../carbon/es/mac--option', <IconMacOption {...args} />)}
+      {renderGridItem('../carbon/es/mac--shift', <IconMacShift {...args} />)}
+      {renderGridItem('../carbon/es/machine-learning', <IconMachineLearning {...args} />)}
+      {renderGridItem('../carbon/es/machine-learning-model', <IconMachineLearningModel {...args} />)}
+      {renderGridItem('../carbon/es/magic-wand', <IconMagicWand {...args} />)}
+      {renderGridItem('../carbon/es/magic-wand--filled', <IconMagicWandFilled {...args} />)}
+      {renderGridItem('../carbon/es/mail--all', <IconMailAll {...args} />)}
+      {renderGridItem('../carbon/es/mail--reply', <IconMailReply {...args} />)}
+      {renderGridItem('../carbon/es/manage-protection', <IconManageProtection {...args} />)}
+      {renderGridItem('../carbon/es/managed-solutions', <IconManagedSolutions {...args} />)}
+      {renderGridItem('../carbon/es/map', <IconMap {...args} />)}
+      {renderGridItem('../carbon/es/map--center', <IconMapCenter {...args} />)}
+      {renderGridItem('../carbon/es/map--identify', <IconMapIdentify {...args} />)}
+      {renderGridItem('../carbon/es/map-boundary', <IconMapBoundary {...args} />)}
+      {renderGridItem('../carbon/es/map-boundary--vegetation', <IconMapBoundaryVegetation {...args} />)}
+      {renderGridItem('../carbon/es/marine-warning', <IconMarineWarning {...args} />)}
+      {renderGridItem('../carbon/es/math-curve', <IconMathCurve {...args} />)}
+      {renderGridItem('../carbon/es/maximize', <IconMaximize {...args} />)}
+      {renderGridItem('../carbon/es/media--library', <IconMediaLibrary {...args} />)}
+      {renderGridItem('../carbon/es/media--library--filled', <IconMediaLibraryFilled {...args} />)}
+      {renderGridItem('../carbon/es/media-cast', <IconMediaCast {...args} />)}
+      {renderGridItem('../carbon/es/medication', <IconMedication {...args} />)}
+      {renderGridItem('../carbon/es/medication--alert', <IconMedicationAlert {...args} />)}
+      {renderGridItem('../carbon/es/medication--reminder', <IconMedicationReminder {...args} />)}
+      {renderGridItem('../carbon/es/menu', <IconMenu {...args} />)}
+      {renderGridItem('../carbon/es/message-queue', <IconMessageQueue {...args} />)}
+      {renderGridItem('../carbon/es/meter', <IconMeter {...args} />)}
+      {renderGridItem('../carbon/es/meter--alt', <IconMeterAlt {...args} />)}
+      {renderGridItem('../carbon/es/microphone', <IconMicrophone {...args} />)}
+      {renderGridItem('../carbon/es/microphone--filled', <IconMicrophoneFilled {...args} />)}
+      {renderGridItem('../carbon/es/microphone--off', <IconMicrophoneOff {...args} />)}
+      {renderGridItem('../carbon/es/microphone--off--filled', <IconMicrophoneOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/microscope', <IconMicroscope {...args} />)}
+      {renderGridItem('../carbon/es/migrate', <IconMigrate {...args} />)}
+      {renderGridItem('../carbon/es/migrate--alt', <IconMigrateAlt {...args} />)}
+      {renderGridItem('../carbon/es/milestone', <IconMilestone {...args} />)}
+      {renderGridItem('../carbon/es/military-camp', <IconMilitaryCamp {...args} />)}
+      {renderGridItem('../carbon/es/minimize', <IconMinimize {...args} />)}
+      {renderGridItem('../carbon/es/misuse', <IconMisuse {...args} />)}
+      {renderGridItem('../carbon/es/misuse--outline', <IconMisuseOutline {...args} />)}
+      {renderGridItem('../carbon/es/mixed-rain-hail', <IconMixedRainHail {...args} />)}
+      {renderGridItem('../carbon/es/mobile', <IconMobile {...args} />)}
+      {renderGridItem('../carbon/es/mobile--add', <IconMobileAdd {...args} />)}
+      {renderGridItem('../carbon/es/mobile--audio', <IconMobileAudio {...args} />)}
+      {renderGridItem('../carbon/es/mobile--check', <IconMobileCheck {...args} />)}
+      {renderGridItem('../carbon/es/mobile--download', <IconMobileDownload {...args} />)}
+      {renderGridItem('../carbon/es/mobile--landscape', <IconMobileLandscape {...args} />)}
+      {renderGridItem('../carbon/es/mobility--services', <IconMobilityServices {...args} />)}
+      {renderGridItem('../carbon/es/model', <IconModel {...args} />)}
+      {renderGridItem('../carbon/es/model--alt', <IconModelAlt {...args} />)}
+      {renderGridItem('../carbon/es/model--reference', <IconModelReference {...args} />)}
+      {renderGridItem('../carbon/es/model-builder', <IconModelBuilder {...args} />)}
+      {renderGridItem('../carbon/es/model-builder--reference', <IconModelBuilderReference {...args} />)}
+      {renderGridItem('../carbon/es/money', <IconMoney {...args} />)}
+      {renderGridItem('../carbon/es/monster', <IconMonster {...args} />)}
+      {renderGridItem('../carbon/es/monument', <IconMonument {...args} />)}
+      {renderGridItem('../carbon/es/moon', <IconMoon {...args} />)}
+      {renderGridItem('../carbon/es/moonrise', <IconMoonrise {...args} />)}
+      {renderGridItem('../carbon/es/moonset', <IconMoonset {...args} />)}
+      {renderGridItem('../carbon/es/mostly-cloudy', <IconMostlyCloudy {...args} />)}
+      {renderGridItem('../carbon/es/mostly-cloudy--night', <IconMostlyCloudyNight {...args} />)}
+      {renderGridItem('../carbon/es/mountain', <IconMountain {...args} />)}
+      {renderGridItem('../carbon/es/move', <IconMove {...args} />)}
+      {renderGridItem('../carbon/es/movement', <IconMovement {...args} />)}
+      {renderGridItem('../carbon/es/music', <IconMusic {...args} />)}
+      {renderGridItem('../carbon/es/music--add', <IconMusicAdd {...args} />)}
+      {renderGridItem('../carbon/es/music--remove', <IconMusicRemove {...args} />)}
+      {renderGridItem('../carbon/es/name-space', <IconNameSpace {...args} />)}
+      {renderGridItem('../carbon/es/need', <IconNeed {...args} />)}
+      {renderGridItem('../carbon/es/network--1', <IconNetwork1 {...args} />)}
+      {renderGridItem('../carbon/es/network--2', <IconNetwork2 {...args} />)}
+      {renderGridItem('../carbon/es/network--3', <IconNetwork3 {...args} />)}
+      {renderGridItem('../carbon/es/network--3--reference', <IconNetwork3Reference {...args} />)}
+      {renderGridItem('../carbon/es/network--4', <IconNetwork4 {...args} />)}
+      {renderGridItem('../carbon/es/network--4--reference', <IconNetwork4Reference {...args} />)}
+      {renderGridItem('../carbon/es/network--admin-control', <IconNetworkAdminControl {...args} />)}
+      {renderGridItem('../carbon/es/network--enterprise', <IconNetworkEnterprise {...args} />)}
+      {renderGridItem('../carbon/es/network--overlay', <IconNetworkOverlay {...args} />)}
+      {renderGridItem('../carbon/es/network--public', <IconNetworkPublic {...args} />)}
+      {renderGridItem('../carbon/es/new-tab', <IconNewTab {...args} />)}
+      {renderGridItem('../carbon/es/next--filled', <IconNextFilled {...args} />)}
+      {renderGridItem('../carbon/es/next--outline', <IconNextOutline {...args} />)}
+      {renderGridItem('../carbon/es/no-image', <IconNoImage {...args} />)}
+      {renderGridItem('../carbon/es/no-ticket', <IconNoTicket {...args} />)}
+      {renderGridItem('../carbon/es/nominal', <IconNominal {...args} />)}
+      {renderGridItem('../carbon/es/non-certified', <IconNonCertified {...args} />)}
+      {renderGridItem('../carbon/es/noodle-bowl', <IconNoodleBowl {...args} />)}
+      {renderGridItem('../carbon/es/not-available', <IconNotAvailable {...args} />)}
+      {renderGridItem('../carbon/es/not-sent', <IconNotSent {...args} />)}
+      {renderGridItem('../carbon/es/not-sent--filled', <IconNotSentFilled {...args} />)}
+      {renderGridItem('../carbon/es/notebook', <IconNotebook {...args} />)}
+      {renderGridItem('../carbon/es/notebook--reference', <IconNotebookReference {...args} />)}
+      {renderGridItem('../carbon/es/notification', <IconNotification {...args} />)}
+      {renderGridItem('../carbon/es/notification--filled', <IconNotificationFilled {...args} />)}
+      {renderGridItem('../carbon/es/notification--new', <IconNotificationNew {...args} />)}
+      {renderGridItem('../carbon/es/notification--off', <IconNotificationOff {...args} />)}
+      {renderGridItem('../carbon/es/notification--off--filled', <IconNotificationOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/number--0', <IconNumber0 {...args} />)}
+      {renderGridItem('../carbon/es/number--1', <IconNumber1 {...args} />)}
+      {renderGridItem('../carbon/es/number--2', <IconNumber2 {...args} />)}
+      {renderGridItem('../carbon/es/number--3', <IconNumber3 {...args} />)}
+      {renderGridItem('../carbon/es/number--4', <IconNumber4 {...args} />)}
+      {renderGridItem('../carbon/es/number--5', <IconNumber5 {...args} />)}
+      {renderGridItem('../carbon/es/number--6', <IconNumber6 {...args} />)}
+      {renderGridItem('../carbon/es/number--7', <IconNumber7 {...args} />)}
+      {renderGridItem('../carbon/es/number--8', <IconNumber8 {...args} />)}
+      {renderGridItem('../carbon/es/number--9', <IconNumber9 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--0', <IconNumberSmall0 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--1', <IconNumberSmall1 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--2', <IconNumberSmall2 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--3', <IconNumberSmall3 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--4', <IconNumberSmall4 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--5', <IconNumberSmall5 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--6', <IconNumberSmall6 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--7', <IconNumberSmall7 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--8', <IconNumberSmall8 {...args} />)}
+      {renderGridItem('../carbon/es/number--small--9', <IconNumberSmall9 {...args} />)}
+      {renderGridItem('../carbon/es/object-storage', <IconObjectStorage {...args} />)}
+      {renderGridItem('../carbon/es/object-storage--alt', <IconObjectStorageAlt {...args} />)}
+      {renderGridItem('../carbon/es/observed--hail', <IconObservedHail {...args} />)}
+      {renderGridItem('../carbon/es/observed--lightning', <IconObservedLightning {...args} />)}
+      {renderGridItem('../carbon/es/omega', <IconOmega {...args} />)}
+      {renderGridItem('../carbon/es/opacity', <IconOpacity {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--bottom', <IconOpenPanelBottom {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--filled--bottom', <IconOpenPanelFilledBottom {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--filled--left', <IconOpenPanelFilledLeft {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--filled--right', <IconOpenPanelFilledRight {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--filled--top', <IconOpenPanelFilledTop {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--left', <IconOpenPanelLeft {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--right', <IconOpenPanelRight {...args} />)}
+      {renderGridItem('../carbon/es/open-panel--top', <IconOpenPanelTop {...args} />)}
+      {renderGridItem('../carbon/es/operations--field', <IconOperationsField {...args} />)}
+      {renderGridItem('../carbon/es/operations--record', <IconOperationsRecord {...args} />)}
+      {renderGridItem('../carbon/es/order-details', <IconOrderDetails {...args} />)}
+      {renderGridItem('../carbon/es/orders', <IconOrders {...args} />)}
+      {renderGridItem('../carbon/es/ordinal', <IconOrdinal {...args} />)}
+      {renderGridItem('../carbon/es/outage', <IconOutage {...args} />)}
+      {renderGridItem('../carbon/es/outlook-severe', <IconOutlookSevere {...args} />)}
+      {renderGridItem('../carbon/es/overflow-menu--horizontal', <IconOverflowMenuHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/overflow-menu--vertical', <IconOverflowMenuVertical {...args} />)}
+      {renderGridItem('../carbon/es/overlay', <IconOverlay {...args} />)}
+      {renderGridItem('../carbon/es/package', <IconPackage {...args} />)}
+      {renderGridItem('../carbon/es/package--text-analysis', <IconPackageTextAnalysis {...args} />)}
+      {renderGridItem('../carbon/es/page--first', <IconPageFirst {...args} />)}
+      {renderGridItem('../carbon/es/page--last', <IconPageLast {...args} />)}
+      {renderGridItem('../carbon/es/page-break', <IconPageBreak {...args} />)}
+      {renderGridItem('../carbon/es/page-number', <IconPageNumber {...args} />)}
+      {renderGridItem('../carbon/es/paint-brush', <IconPaintBrush {...args} />)}
+      {renderGridItem('../carbon/es/paint-brush--alt', <IconPaintBrushAlt {...args} />)}
+      {renderGridItem('../carbon/es/palm-tree', <IconPalmTree {...args} />)}
+      {renderGridItem('../carbon/es/pan--horizontal', <IconPanHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/pan--vertical', <IconPanVertical {...args} />)}
+      {renderGridItem('../carbon/es/panel-expansion', <IconPanelExpansion {...args} />)}
+      {renderGridItem('../carbon/es/paragraph', <IconParagraph {...args} />)}
+      {renderGridItem('../carbon/es/parameter', <IconParameter {...args} />)}
+      {renderGridItem('../carbon/es/parent-child', <IconParentChild {...args} />)}
+      {renderGridItem('../carbon/es/partition--auto', <IconPartitionAuto {...args} />)}
+      {renderGridItem('../carbon/es/partition--collection', <IconPartitionCollection {...args} />)}
+      {renderGridItem('../carbon/es/partition--repartition', <IconPartitionRepartition {...args} />)}
+      {renderGridItem('../carbon/es/partition--same', <IconPartitionSame {...args} />)}
+      {renderGridItem('../carbon/es/partition--specific', <IconPartitionSpecific {...args} />)}
+      {renderGridItem('../carbon/es/partly-cloudy', <IconPartlyCloudy {...args} />)}
+      {renderGridItem('../carbon/es/partly-cloudy--night', <IconPartlyCloudyNight {...args} />)}
+      {renderGridItem('../carbon/es/partnership', <IconPartnership {...args} />)}
+      {renderGridItem('../carbon/es/passenger--drinks', <IconPassengerDrinks {...args} />)}
+      {renderGridItem('../carbon/es/passenger--plus', <IconPassengerPlus {...args} />)}
+      {renderGridItem('../carbon/es/password', <IconPassword {...args} />)}
+      {renderGridItem('../carbon/es/paste', <IconPaste {...args} />)}
+      {renderGridItem('../carbon/es/pause', <IconPause {...args} />)}
+      {renderGridItem('../carbon/es/pause--filled', <IconPauseFilled {...args} />)}
+      {renderGridItem('../carbon/es/pause--outline', <IconPauseOutline {...args} />)}
+      {renderGridItem('../carbon/es/pause--outline--filled', <IconPauseOutlineFilled {...args} />)}
+      {renderGridItem('../carbon/es/pause-future', <IconPauseFuture {...args} />)}
+      {renderGridItem('../carbon/es/pause-past', <IconPausePast {...args} />)}
+      {renderGridItem('../carbon/es/pedestrian', <IconPedestrian {...args} />)}
+      {renderGridItem('../carbon/es/pedestrian--family', <IconPedestrianFamily {...args} />)}
+      {renderGridItem('../carbon/es/pedestrian-child', <IconPedestrianChild {...args} />)}
+      {renderGridItem('../carbon/es/pen', <IconPen {...args} />)}
+      {renderGridItem('../carbon/es/pen--fountain', <IconPenFountain {...args} />)}
+      {renderGridItem('../carbon/es/pending', <IconPending {...args} />)}
+      {renderGridItem('../carbon/es/pending--filled', <IconPendingFilled {...args} />)}
+      {renderGridItem('../carbon/es/percentage', <IconPercentage {...args} />)}
+      {renderGridItem('../carbon/es/percentage--filled', <IconPercentageFilled {...args} />)}
+      {renderGridItem('../carbon/es/person', <IconPerson {...args} />)}
+      {renderGridItem('../carbon/es/person--favorite', <IconPersonFavorite {...args} />)}
+      {renderGridItem('../carbon/es/pest', <IconPest {...args} />)}
+      {renderGridItem('../carbon/es/phone', <IconPhone {...args} />)}
+      {renderGridItem('../carbon/es/phone--application', <IconPhoneApplication {...args} />)}
+      {renderGridItem('../carbon/es/phone--block', <IconPhoneBlock {...args} />)}
+      {renderGridItem('../carbon/es/phone--block--filled', <IconPhoneBlockFilled {...args} />)}
+      {renderGridItem('../carbon/es/phone--filled', <IconPhoneFilled {...args} />)}
+      {renderGridItem('../carbon/es/phone--incoming', <IconPhoneIncoming {...args} />)}
+      {renderGridItem('../carbon/es/phone--incoming--filled', <IconPhoneIncomingFilled {...args} />)}
+      {renderGridItem('../carbon/es/phone--ip', <IconPhoneIp {...args} />)}
+      {renderGridItem('../carbon/es/phone--off', <IconPhoneOff {...args} />)}
+      {renderGridItem('../carbon/es/phone--off--filled', <IconPhoneOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/phone--outgoing', <IconPhoneOutgoing {...args} />)}
+      {renderGridItem('../carbon/es/phone--outgoing--filled', <IconPhoneOutgoingFilled {...args} />)}
+      {renderGridItem('../carbon/es/phone--settings', <IconPhoneSettings {...args} />)}
+      {renderGridItem('../carbon/es/phone--voice', <IconPhoneVoice {...args} />)}
+      {renderGridItem('../carbon/es/phone--voice--filled', <IconPhoneVoiceFilled {...args} />)}
+      {renderGridItem('../carbon/es/phrase-sentiment', <IconPhraseSentiment {...args} />)}
+      {renderGridItem('../carbon/es/picnic-area', <IconPicnicArea {...args} />)}
+      {renderGridItem('../carbon/es/piggy-bank', <IconPiggyBank {...args} />)}
+      {renderGridItem('../carbon/es/piggy-bank--slot', <IconPiggyBankSlot {...args} />)}
+      {renderGridItem('../carbon/es/pills', <IconPills {...args} />)}
+      {renderGridItem('../carbon/es/pills--add', <IconPillsAdd {...args} />)}
+      {renderGridItem('../carbon/es/pills--subtract', <IconPillsSubtract {...args} />)}
+      {renderGridItem('../carbon/es/pin', <IconPin {...args} />)}
+      {renderGridItem('../carbon/es/pin--filled', <IconPinFilled {...args} />)}
+      {renderGridItem('../carbon/es/plane', <IconPlane {...args} />)}
+      {renderGridItem('../carbon/es/plane--private', <IconPlanePrivate {...args} />)}
+      {renderGridItem('../carbon/es/plane--sea', <IconPlaneSea {...args} />)}
+      {renderGridItem('../carbon/es/play', <IconPlay {...args} />)}
+      {renderGridItem('../carbon/es/play--filled', <IconPlayFilled {...args} />)}
+      {renderGridItem('../carbon/es/play--filled--alt', <IconPlayFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/play--outline', <IconPlayOutline {...args} />)}
+      {renderGridItem('../carbon/es/play--outline--filled', <IconPlayOutlineFilled {...args} />)}
+      {renderGridItem('../carbon/es/playlist', <IconPlaylist {...args} />)}
+      {renderGridItem('../carbon/es/plug', <IconPlug {...args} />)}
+      {renderGridItem('../carbon/es/plug--filled', <IconPlugFilled {...args} />)}
+      {renderGridItem('../carbon/es/point-of-presence', <IconPointOfPresence {...args} />)}
+      {renderGridItem('../carbon/es/police', <IconPolice {...args} />)}
+      {renderGridItem('../carbon/es/policy', <IconPolicy {...args} />)}
+      {renderGridItem('../carbon/es/popup', <IconPopup {...args} />)}
+      {renderGridItem('../carbon/es/portfolio', <IconPortfolio {...args} />)}
+      {renderGridItem('../carbon/es/power', <IconPower {...args} />)}
+      {renderGridItem('../carbon/es/presentation-file', <IconPresentationFile {...args} />)}
+      {renderGridItem('../carbon/es/pressure', <IconPressure {...args} />)}
+      {renderGridItem('../carbon/es/pressure--filled', <IconPressureFilled {...args} />)}
+      {renderGridItem('../carbon/es/previous--filled', <IconPreviousFilled {...args} />)}
+      {renderGridItem('../carbon/es/previous--outline', <IconPreviousOutline {...args} />)}
+      {renderGridItem('../carbon/es/printer', <IconPrinter {...args} />)}
+      {renderGridItem('../carbon/es/product', <IconProduct {...args} />)}
+      {renderGridItem('../carbon/es/progress-bar', <IconProgressBar {...args} />)}
+      {renderGridItem('../carbon/es/progress-bar--round', <IconProgressBarRound {...args} />)}
+      {renderGridItem('../carbon/es/property-relationship', <IconPropertyRelationship {...args} />)}
+      {renderGridItem('../carbon/es/purchase', <IconPurchase {...args} />)}
+      {renderGridItem('../carbon/es/qq-plot', <IconQqPlot {...args} />)}
+      {renderGridItem('../carbon/es/qr-code', <IconQrCode {...args} />)}
+      {renderGridItem('../carbon/es/quadrant-plot', <IconQuadrantPlot {...args} />)}
+      {renderGridItem('../carbon/es/query', <IconQuery {...args} />)}
+      {renderGridItem('../carbon/es/query-queue', <IconQueryQueue {...args} />)}
+      {renderGridItem('../carbon/es/queued', <IconQueued {...args} />)}
+      {renderGridItem('../carbon/es/quotes', <IconQuotes {...args} />)}
+      {renderGridItem('../carbon/es/radar', <IconRadar {...args} />)}
+      {renderGridItem('../carbon/es/radar--enhanced', <IconRadarEnhanced {...args} />)}
+      {renderGridItem('../carbon/es/radar--weather', <IconRadarWeather {...args} />)}
+      {renderGridItem('../carbon/es/radio', <IconRadio {...args} />)}
+      {renderGridItem('../carbon/es/radio--combat', <IconRadioCombat {...args} />)}
+      {renderGridItem('../carbon/es/radio--push-to-talk', <IconRadioPushToTalk {...args} />)}
+      {renderGridItem('../carbon/es/radio-button', <IconRadioButton {...args} />)}
+      {renderGridItem('../carbon/es/radio-button--checked', <IconRadioButtonChecked {...args} />)}
+      {renderGridItem('../carbon/es/rain', <IconRain {...args} />)}
+      {renderGridItem('../carbon/es/rain--drizzle', <IconRainDrizzle {...args} />)}
+      {renderGridItem('../carbon/es/rain--heavy', <IconRainHeavy {...args} />)}
+      {renderGridItem('../carbon/es/rain--scattered', <IconRainScattered {...args} />)}
+      {renderGridItem('../carbon/es/rain--scattered--night', <IconRainScatteredNight {...args} />)}
+      {renderGridItem('../carbon/es/rain-drop', <IconRainDrop {...args} />)}
+      {renderGridItem('../carbon/es/receipt', <IconReceipt {...args} />)}
+      {renderGridItem('../carbon/es/recently-viewed', <IconRecentlyViewed {...args} />)}
+      {renderGridItem('../carbon/es/recommend', <IconRecommend {...args} />)}
+      {renderGridItem('../carbon/es/recording', <IconRecording {...args} />)}
+      {renderGridItem('../carbon/es/recording--filled', <IconRecordingFilled {...args} />)}
+      {renderGridItem('../carbon/es/recording--filled--alt', <IconRecordingFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/redo', <IconRedo {...args} />)}
+      {renderGridItem('../carbon/es/ref-evapotranspiration', <IconRefEvapotranspiration {...args} />)}
+      {renderGridItem('../carbon/es/reflect--horizontal', <IconReflectHorizontal {...args} />)}
+      {renderGridItem('../carbon/es/reflect--vertical', <IconReflectVertical {...args} />)}
+      {renderGridItem('../carbon/es/reminder', <IconReminder {...args} />)}
+      {renderGridItem('../carbon/es/reminder--medical', <IconReminderMedical {...args} />)}
+      {renderGridItem('../carbon/es/renew', <IconRenew {...args} />)}
+      {renderGridItem('../carbon/es/repeat', <IconRepeat {...args} />)}
+      {renderGridItem('../carbon/es/repeat--one', <IconRepeatOne {...args} />)}
+      {renderGridItem('../carbon/es/replicate', <IconReplicate {...args} />)}
+      {renderGridItem('../carbon/es/reply', <IconReply {...args} />)}
+      {renderGridItem('../carbon/es/reply--all', <IconReplyAll {...args} />)}
+      {renderGridItem('../carbon/es/report', <IconReport {...args} />)}
+      {renderGridItem('../carbon/es/report--data', <IconReportData {...args} />)}
+      {renderGridItem('../carbon/es/request-quote', <IconRequestQuote {...args} />)}
+      {renderGridItem('../carbon/es/reset', <IconReset {...args} />)}
+      {renderGridItem('../carbon/es/reset--alt', <IconResetAlt {...args} />)}
+      {renderGridItem('../carbon/es/restart', <IconRestart {...args} />)}
+      {renderGridItem('../carbon/es/restaurant', <IconRestaurant {...args} />)}
+      {renderGridItem('../carbon/es/restaurant--fine', <IconRestaurantFine {...args} />)}
+      {renderGridItem('../carbon/es/result', <IconResult {...args} />)}
+      {renderGridItem('../carbon/es/result--draft', <IconResultDraft {...args} />)}
+      {renderGridItem('../carbon/es/result--new', <IconResultNew {...args} />)}
+      {renderGridItem('../carbon/es/result--old', <IconResultOld {...args} />)}
+      {renderGridItem('../carbon/es/retry--failed', <IconRetryFailed {...args} />)}
+      {renderGridItem('../carbon/es/review', <IconReview {...args} />)}
+      {renderGridItem('../carbon/es/rewind--10', <IconRewind10 {...args} />)}
+      {renderGridItem('../carbon/es/rewind--30', <IconRewind30 {...args} />)}
+      {renderGridItem('../carbon/es/rewind--5', <IconRewind5 {...args} />)}
+      {renderGridItem('../carbon/es/road', <IconRoad {...args} />)}
+      {renderGridItem('../carbon/es/road--weather', <IconRoadWeather {...args} />)}
+      {renderGridItem('../carbon/es/roadmap', <IconRoadmap {...args} />)}
+      {renderGridItem('../carbon/es/rocket', <IconRocket {...args} />)}
+      {renderGridItem('../carbon/es/rotate', <IconRotate {...args} />)}
+      {renderGridItem('../carbon/es/rotate--clockwise', <IconRotateClockwise {...args} />)}
+      {renderGridItem('../carbon/es/rotate--clockwise--alt', <IconRotateClockwiseAlt {...args} />)}
+      {renderGridItem('../carbon/es/rotate--clockwise--alt--filled', <IconRotateClockwiseAltFilled {...args} />)}
+      {renderGridItem('../carbon/es/rotate--clockwise--filled', <IconRotateClockwiseFilled {...args} />)}
+      {renderGridItem('../carbon/es/rotate--counterclockwise', <IconRotateCounterclockwise {...args} />)}
+      {renderGridItem('../carbon/es/rotate--counterclockwise--alt', <IconRotateCounterclockwiseAlt {...args} />)}
+      {renderGridItem('../carbon/es/rotate--counterclockwise--alt--filled', <IconRotateCounterclockwiseAltFilled {...args} />)}
+      {renderGridItem('../carbon/es/rotate--counterclockwise--filled', <IconRotateCounterclockwiseFilled {...args} />)}
+      {renderGridItem('../carbon/es/router', <IconRouter {...args} />)}
+      {renderGridItem('../carbon/es/router--voice', <IconRouterVoice {...args} />)}
+      {renderGridItem('../carbon/es/router--wifi', <IconRouterWifi {...args} />)}
+      {renderGridItem('../carbon/es/row', <IconRow {...args} />)}
+      {renderGridItem('../carbon/es/row--collapse', <IconRowCollapse {...args} />)}
+      {renderGridItem('../carbon/es/row--delete', <IconRowDelete {...args} />)}
+      {renderGridItem('../carbon/es/row--expand', <IconRowExpand {...args} />)}
+      {renderGridItem('../carbon/es/row--insert', <IconRowInsert {...args} />)}
+      {renderGridItem('../carbon/es/rss', <IconRss {...args} />)}
+      {renderGridItem('../carbon/es/rule', <IconRule {...args} />)}
+      {renderGridItem('../carbon/es/rule--cancelled', <IconRuleCancelled {...args} />)}
+      {renderGridItem('../carbon/es/rule--draft', <IconRuleDraft {...args} />)}
+      {renderGridItem('../carbon/es/rule--filled', <IconRuleFilled {...args} />)}
+      {renderGridItem('../carbon/es/rule--locked', <IconRuleLocked {...args} />)}
+      {renderGridItem('../carbon/es/rule--partial', <IconRulePartial {...args} />)}
+      {renderGridItem('../carbon/es/rule--test', <IconRuleTest {...args} />)}
+      {renderGridItem('../carbon/es/ruler', <IconRuler {...args} />)}
+      {renderGridItem('../carbon/es/ruler--alt', <IconRulerAlt {...args} />)}
+      {renderGridItem('../carbon/es/run', <IconRun {...args} />)}
+      {renderGridItem('../carbon/es/sailboat--coastal', <IconSailboatCoastal {...args} />)}
+      {renderGridItem('../carbon/es/sailboat--offshore', <IconSailboatOffshore {...args} />)}
+      {renderGridItem('../carbon/es/sankey-diagram', <IconSankeyDiagram {...args} />)}
+      {renderGridItem('../carbon/es/sankey-diagram--alt', <IconSankeyDiagramAlt {...args} />)}
+      {renderGridItem('../carbon/es/satellite', <IconSatellite {...args} />)}
+      {renderGridItem('../carbon/es/satellite--radar', <IconSatelliteRadar {...args} />)}
+      {renderGridItem('../carbon/es/satellite--weather', <IconSatelliteWeather {...args} />)}
+      {renderGridItem('../carbon/es/save', <IconSave {...args} />)}
+      {renderGridItem('../carbon/es/save--model', <IconSaveModel {...args} />)}
+      {renderGridItem('../carbon/es/scale', <IconScale {...args} />)}
+      {renderGridItem('../carbon/es/scales', <IconScales {...args} />)}
+      {renderGridItem('../carbon/es/scales--tipped', <IconScalesTipped {...args} />)}
+      {renderGridItem('../carbon/es/scalpel', <IconScalpel {...args} />)}
+      {renderGridItem('../carbon/es/scan', <IconScan {...args} />)}
+      {renderGridItem('../carbon/es/scan--alt', <IconScanAlt {...args} />)}
+      {renderGridItem('../carbon/es/scan--disabled', <IconScanDisabled {...args} />)}
+      {renderGridItem('../carbon/es/scatter-matrix', <IconScatterMatrix {...args} />)}
+      {renderGridItem('../carbon/es/schematics', <IconSchematics {...args} />)}
+      {renderGridItem('../carbon/es/scis--control-tower', <IconScisControlTower {...args} />)}
+      {renderGridItem('../carbon/es/scis--transparent-supply', <IconScisTransparentSupply {...args} />)}
+      {renderGridItem('../carbon/es/scooter', <IconScooter {...args} />)}
+      {renderGridItem('../carbon/es/scooter--front', <IconScooterFront {...args} />)}
+      {renderGridItem('../carbon/es/screen', <IconScreen {...args} />)}
+      {renderGridItem('../carbon/es/screen--off', <IconScreenOff {...args} />)}
+      {renderGridItem('../carbon/es/script', <IconScript {...args} />)}
+      {renderGridItem('../carbon/es/script--reference', <IconScriptReference {...args} />)}
+      {renderGridItem('../carbon/es/search', <IconSearch {...args} />)}
+      {renderGridItem('../carbon/es/search--advanced', <IconSearchAdvanced {...args} />)}
+      {renderGridItem('../carbon/es/search--locate', <IconSearchLocate {...args} />)}
+      {renderGridItem('../carbon/es/security', <IconSecurity {...args} />)}
+      {renderGridItem('../carbon/es/security--alt', <IconSecurityAlt {...args} />)}
+      {renderGridItem('../carbon/es/security-services', <IconSecurityServices {...args} />)}
+      {renderGridItem('../carbon/es/security-services--alt', <IconSecurityServicesAlt {...args} />)}
+      {renderGridItem('../carbon/es/select--01', <IconSelect01 {...args} />)}
+      {renderGridItem('../carbon/es/select--02', <IconSelect02 {...args} />)}
+      {renderGridItem('../carbon/es/select--window', <IconSelectWindow {...args} />)}
+      {renderGridItem('../carbon/es/send', <IconSend {...args} />)}
+      {renderGridItem('../carbon/es/send--alt', <IconSendAlt {...args} />)}
+      {renderGridItem('../carbon/es/send--alt--filled', <IconSendAltFilled {...args} />)}
+      {renderGridItem('../carbon/es/send--filled', <IconSendFilled {...args} />)}
+      {renderGridItem('../carbon/es/send-backward', <IconSendBackward {...args} />)}
+      {renderGridItem('../carbon/es/send-to-back', <IconSendToBack {...args} />)}
+      {renderGridItem('../carbon/es/server--dns', <IconServerDns {...args} />)}
+      {renderGridItem('../carbon/es/server--proxy', <IconServerProxy {...args} />)}
+      {renderGridItem('../carbon/es/server--time', <IconServerTime {...args} />)}
+      {renderGridItem('../carbon/es/service-desk', <IconServiceDesk {...args} />)}
+      {renderGridItem('../carbon/es/session-border-control', <IconSessionBorderControl {...args} />)}
+      {renderGridItem('../carbon/es/settings', <IconSettings {...args} />)}
+      {renderGridItem('../carbon/es/settings--adjust', <IconSettingsAdjust {...args} />)}
+      {renderGridItem('../carbon/es/settings--check', <IconSettingsCheck {...args} />)}
+      {renderGridItem('../carbon/es/settings--services', <IconSettingsServices {...args} />)}
+      {renderGridItem('../carbon/es/settings--view', <IconSettingsView {...args} />)}
+      {renderGridItem('../carbon/es/shape--except', <IconShapeExcept {...args} />)}
+      {renderGridItem('../carbon/es/shape--exclude', <IconShapeExclude {...args} />)}
+      {renderGridItem('../carbon/es/shape--intersect', <IconShapeIntersect {...args} />)}
+      {renderGridItem('../carbon/es/shape--join', <IconShapeJoin {...args} />)}
+      {renderGridItem('../carbon/es/shape--unite', <IconShapeUnite {...args} />)}
+      {renderGridItem('../carbon/es/share', <IconShare {...args} />)}
+      {renderGridItem('../carbon/es/share-knowledge', <IconShareKnowledge {...args} />)}
+      {renderGridItem('../carbon/es/shopping--bag', <IconShoppingBag {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart', <IconShoppingCart {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--arrow-down', <IconShoppingCartArrowDown {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--arrow-up', <IconShoppingCartArrowUp {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--clear', <IconShoppingCartClear {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--error', <IconShoppingCartError {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--minus', <IconShoppingCartMinus {...args} />)}
+      {renderGridItem('../carbon/es/shopping--cart--plus', <IconShoppingCartPlus {...args} />)}
+      {renderGridItem('../carbon/es/shopping--catalog', <IconShoppingCatalog {...args} />)}
+      {renderGridItem('../carbon/es/show-data--cards', <IconShowDataCards {...args} />)}
+      {renderGridItem('../carbon/es/shrink-screen', <IconShrinkScreen {...args} />)}
+      {renderGridItem('../carbon/es/shrink-screen--filled', <IconShrinkScreenFilled {...args} />)}
+      {renderGridItem('../carbon/es/shuffle', <IconShuffle {...args} />)}
+      {renderGridItem('../carbon/es/shuttle', <IconShuttle {...args} />)}
+      {renderGridItem('../carbon/es/sight', <IconSight {...args} />)}
+      {renderGridItem('../carbon/es/sigma', <IconSigma {...args} />)}
+      {renderGridItem('../carbon/es/signal-strength', <IconSignalStrength {...args} />)}
+      {renderGridItem('../carbon/es/sim-card', <IconSimCard {...args} />)}
+      {renderGridItem('../carbon/es/skill-level', <IconSkillLevel {...args} />)}
+      {renderGridItem('../carbon/es/skill-level--advanced', <IconSkillLevelAdvanced {...args} />)}
+      {renderGridItem('../carbon/es/skill-level--basic', <IconSkillLevelBasic {...args} />)}
+      {renderGridItem('../carbon/es/skill-level--intermediate', <IconSkillLevelIntermediate {...args} />)}
+      {renderGridItem('../carbon/es/skip--back', <IconSkipBack {...args} />)}
+      {renderGridItem('../carbon/es/skip--back--filled', <IconSkipBackFilled {...args} />)}
+      {renderGridItem('../carbon/es/skip--back--outline', <IconSkipBackOutline {...args} />)}
+      {renderGridItem('../carbon/es/skip--back--outline--filled', <IconSkipBackOutlineFilled {...args} />)}
+      {renderGridItem('../carbon/es/skip--back--outline--solid', <IconSkipBackOutlineSolid {...args} />)}
+      {renderGridItem('../carbon/es/skip--back--solid--filled', <IconSkipBackSolidFilled {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward', <IconSkipForward {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward--filled', <IconSkipForwardFilled {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward--outline', <IconSkipForwardOutline {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward--outline--filled', <IconSkipForwardOutlineFilled {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward--outline--solid', <IconSkipForwardOutlineSolid {...args} />)}
+      {renderGridItem('../carbon/es/skip--forward--solid--filled', <IconSkipForwardSolidFilled {...args} />)}
+      {renderGridItem('../carbon/es/sleet', <IconSleet {...args} />)}
+      {renderGridItem('../carbon/es/slisor', <IconSlisor {...args} />)}
+      {renderGridItem('../carbon/es/smell', <IconSmell {...args} />)}
+      {renderGridItem('../carbon/es/smoke', <IconSmoke {...args} />)}
+      {renderGridItem('../carbon/es/snooze', <IconSnooze {...args} />)}
+      {renderGridItem('../carbon/es/snow', <IconSnow {...args} />)}
+      {renderGridItem('../carbon/es/snow--blizzard', <IconSnowBlizzard {...args} />)}
+      {renderGridItem('../carbon/es/snow--heavy', <IconSnowHeavy {...args} />)}
+      {renderGridItem('../carbon/es/snow--scattered', <IconSnowScattered {...args} />)}
+      {renderGridItem('../carbon/es/snow--scattered--night', <IconSnowScatteredNight {...args} />)}
+      {renderGridItem('../carbon/es/snow-density', <IconSnowDensity {...args} />)}
+      {renderGridItem('../carbon/es/snowflake', <IconSnowflake {...args} />)}
+      {renderGridItem('../carbon/es/soccer', <IconSoccer {...args} />)}
+      {renderGridItem('../carbon/es/software-resource', <IconSoftwareResource {...args} />)}
+      {renderGridItem('../carbon/es/software-resource--cluster', <IconSoftwareResourceCluster {...args} />)}
+      {renderGridItem('../carbon/es/software-resource--resource', <IconSoftwareResourceResource {...args} />)}
+      {renderGridItem('../carbon/es/soil-moisture', <IconSoilMoisture {...args} />)}
+      {renderGridItem('../carbon/es/soil-moisture--field', <IconSoilMoistureField {...args} />)}
+      {renderGridItem('../carbon/es/soil-moisture--global', <IconSoilMoistureGlobal {...args} />)}
+      {renderGridItem('../carbon/es/soil-temperature', <IconSoilTemperature {...args} />)}
+      {renderGridItem('../carbon/es/soil-temperature--field', <IconSoilTemperatureField {...args} />)}
+      {renderGridItem('../carbon/es/soil-temperature--global', <IconSoilTemperatureGlobal {...args} />)}
+      {renderGridItem('../carbon/es/solar-panel', <IconSolarPanel {...args} />)}
+      {renderGridItem('../carbon/es/sort--ascending', <IconSortAscending {...args} />)}
+      {renderGridItem('../carbon/es/sort--descending', <IconSortDescending {...args} />)}
+      {renderGridItem('../carbon/es/sort--remove', <IconSortRemove {...args} />)}
+      {renderGridItem('../carbon/es/spell-check', <IconSpellCheck {...args} />)}
+      {renderGridItem('../carbon/es/split', <IconSplit {...args} />)}
+      {renderGridItem('../carbon/es/split-screen', <IconSplitScreen {...args} />)}
+      {renderGridItem('../carbon/es/spray-paint', <IconSprayPaint {...args} />)}
+      {renderGridItem('../carbon/es/sprout', <IconSprout {...args} />)}
+      {renderGridItem('../carbon/es/stack-limitation', <IconStackLimitation {...args} />)}
+      {renderGridItem('../carbon/es/stamp', <IconStamp {...args} />)}
+      {renderGridItem('../carbon/es/star', <IconStar {...args} />)}
+      {renderGridItem('../carbon/es/star--filled', <IconStarFilled {...args} />)}
+      {renderGridItem('../carbon/es/star--half', <IconStarHalf {...args} />)}
+      {renderGridItem('../carbon/es/star--review', <IconStarReview {...args} />)}
+      {renderGridItem('../carbon/es/stay-inside', <IconStayInside {...args} />)}
+      {renderGridItem('../carbon/es/stem-leaf-plot', <IconStemLeafPlot {...args} />)}
+      {renderGridItem('../carbon/es/stethoscope', <IconStethoscope {...args} />)}
+      {renderGridItem('../carbon/es/stop', <IconStop {...args} />)}
+      {renderGridItem('../carbon/es/stop--filled', <IconStopFilled {...args} />)}
+      {renderGridItem('../carbon/es/stop--filled--alt', <IconStopFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/stop--outline', <IconStopOutline {...args} />)}
+      {renderGridItem('../carbon/es/stop--outline--filled', <IconStopOutlineFilled {...args} />)}
+      {renderGridItem('../carbon/es/stop-sign', <IconStopSign {...args} />)}
+      {renderGridItem('../carbon/es/stop-sign--filled', <IconStopSignFilled {...args} />)}
+      {renderGridItem('../carbon/es/storage-pool', <IconStoragePool {...args} />)}
+      {renderGridItem('../carbon/es/storage-request', <IconStorageRequest {...args} />)}
+      {renderGridItem('../carbon/es/store', <IconStore {...args} />)}
+      {renderGridItem('../carbon/es/storm-tracker', <IconStormTracker {...args} />)}
+      {renderGridItem('../carbon/es/strawberry', <IconStrawberry {...args} />)}
+      {renderGridItem('../carbon/es/string-integer', <IconStringInteger {...args} />)}
+      {renderGridItem('../carbon/es/string-text', <IconStringText {...args} />)}
+      {renderGridItem('../carbon/es/subflow', <IconSubflow {...args} />)}
+      {renderGridItem('../carbon/es/subflow--local', <IconSubflowLocal {...args} />)}
+      {renderGridItem('../carbon/es/subnet-acl-rules', <IconSubnetAclRules {...args} />)}
+      {renderGridItem('../carbon/es/subtract', <IconSubtract {...args} />)}
+      {renderGridItem('../carbon/es/subtract--alt', <IconSubtractAlt {...args} />)}
+      {renderGridItem('../carbon/es/summary--KPI', <IconSummaryKpi {...args} />)}
+      {renderGridItem('../carbon/es/sun', <IconSun {...args} />)}
+      {renderGridItem('../carbon/es/sunrise', <IconSunrise {...args} />)}
+      {renderGridItem('../carbon/es/sunset', <IconSunset {...args} />)}
+      {renderGridItem('../carbon/es/support-vector-machine', <IconSupportVectorMachine {...args} />)}
+      {renderGridItem('../carbon/es/swim', <IconSwim {...args} />)}
+      {renderGridItem('../carbon/es/switch-layer-2', <IconSwitchLayer2 {...args} />)}
+      {renderGridItem('../carbon/es/switch-layer-3', <IconSwitchLayer3 {...args} />)}
+      {renderGridItem('../carbon/es/switcher', <IconSwitcher {...args} />)}
+      {renderGridItem('../carbon/es/sys-provision', <IconSysProvision {...args} />)}
+      {renderGridItem('../carbon/es/table', <IconTable {...args} />)}
+      {renderGridItem('../carbon/es/table--alias', <IconTableAlias {...args} />)}
+      {renderGridItem('../carbon/es/table--built', <IconTableBuilt {...args} />)}
+      {renderGridItem('../carbon/es/table--shortcut', <IconTableShortcut {...args} />)}
+      {renderGridItem('../carbon/es/table--split', <IconTableSplit {...args} />)}
+      {renderGridItem('../carbon/es/table-of-contents', <IconTableOfContents {...args} />)}
+      {renderGridItem('../carbon/es/tablet', <IconTablet {...args} />)}
+      {renderGridItem('../carbon/es/tablet--landscape', <IconTabletLandscape {...args} />)}
+      {renderGridItem('../carbon/es/tag', <IconTag {...args} />)}
+      {renderGridItem('../carbon/es/tag--edit', <IconTagEdit {...args} />)}
+      {renderGridItem('../carbon/es/tag--export', <IconTagExport {...args} />)}
+      {renderGridItem('../carbon/es/tag--group', <IconTagGroup {...args} />)}
+      {renderGridItem('../carbon/es/tag--import', <IconTagImport {...args} />)}
+      {renderGridItem('../carbon/es/tag--none', <IconTagNone {...args} />)}
+      {renderGridItem('../carbon/es/task', <IconTask {...args} />)}
+      {renderGridItem('../carbon/es/task--add', <IconTaskAdd {...args} />)}
+      {renderGridItem('../carbon/es/task--approved', <IconTaskApproved {...args} />)}
+      {renderGridItem('../carbon/es/task--asset-view', <IconTaskAssetView {...args} />)}
+      {renderGridItem('../carbon/es/task--complete', <IconTaskComplete {...args} />)}
+      {renderGridItem('../carbon/es/task--location', <IconTaskLocation {...args} />)}
+      {renderGridItem('../carbon/es/task--remove', <IconTaskRemove {...args} />)}
+      {renderGridItem('../carbon/es/task--settings', <IconTaskSettings {...args} />)}
+      {renderGridItem('../carbon/es/task--star', <IconTaskStar {...args} />)}
+      {renderGridItem('../carbon/es/task--tools', <IconTaskTools {...args} />)}
+      {renderGridItem('../carbon/es/task--view', <IconTaskView {...args} />)}
+      {renderGridItem('../carbon/es/taste', <IconTaste {...args} />)}
+      {renderGridItem('../carbon/es/taxi', <IconTaxi {...args} />)}
+      {renderGridItem('../carbon/es/temperature', <IconTemperature {...args} />)}
+      {renderGridItem('../carbon/es/temperature--celsius', <IconTemperatureCelsius {...args} />)}
+      {renderGridItem('../carbon/es/temperature--celsius--alt', <IconTemperatureCelsiusAlt {...args} />)}
+      {renderGridItem('../carbon/es/temperature--fahrenheit', <IconTemperatureFahrenheit {...args} />)}
+      {renderGridItem('../carbon/es/temperature--fahrenheit--alt', <IconTemperatureFahrenheitAlt {...args} />)}
+      {renderGridItem('../carbon/es/temperature--feels-like', <IconTemperatureFeelsLike {...args} />)}
+      {renderGridItem('../carbon/es/temperature--frigid', <IconTemperatureFrigid {...args} />)}
+      {renderGridItem('../carbon/es/temperature--hot', <IconTemperatureHot {...args} />)}
+      {renderGridItem('../carbon/es/temperature--inversion', <IconTemperatureInversion {...args} />)}
+      {renderGridItem('../carbon/es/temperature--max', <IconTemperatureMax {...args} />)}
+      {renderGridItem('../carbon/es/temperature--min', <IconTemperatureMin {...args} />)}
+      {renderGridItem('../carbon/es/temperature--water', <IconTemperatureWater {...args} />)}
+      {renderGridItem('../carbon/es/template', <IconTemplate {...args} />)}
+      {renderGridItem('../carbon/es/tennis', <IconTennis {...args} />)}
+      {renderGridItem('../carbon/es/tennis-ball', <IconTennisBall {...args} />)}
+      {renderGridItem('../carbon/es/term', <IconTerm {...args} />)}
+      {renderGridItem('../carbon/es/terminal', <IconTerminal {...args} />)}
+      {renderGridItem('../carbon/es/terminal--3270', <IconTerminal3270 {...args} />)}
+      {renderGridItem('../carbon/es/text--align--center', <IconTextAlignCenter {...args} />)}
+      {renderGridItem('../carbon/es/text--align--justify', <IconTextAlignJustify {...args} />)}
+      {renderGridItem('../carbon/es/text--align--left', <IconTextAlignLeft {...args} />)}
+      {renderGridItem('../carbon/es/text--align--mixed', <IconTextAlignMixed {...args} />)}
+      {renderGridItem('../carbon/es/text--align--right', <IconTextAlignRight {...args} />)}
+      {renderGridItem('../carbon/es/text--all-caps', <IconTextAllCaps {...args} />)}
+      {renderGridItem('../carbon/es/text--bold', <IconTextBold {...args} />)}
+      {renderGridItem('../carbon/es/text--clear-format', <IconTextClearFormat {...args} />)}
+      {renderGridItem('../carbon/es/text--color', <IconTextColor {...args} />)}
+      {renderGridItem('../carbon/es/text--creation', <IconTextCreation {...args} />)}
+      {renderGridItem('../carbon/es/text--fill', <IconTextFill {...args} />)}
+      {renderGridItem('../carbon/es/text--font', <IconTextFont {...args} />)}
+      {renderGridItem('../carbon/es/text--footnote', <IconTextFootnote {...args} />)}
+      {renderGridItem('../carbon/es/text--highlight', <IconTextHighlight {...args} />)}
+      {renderGridItem('../carbon/es/text--indent', <IconTextIndent {...args} />)}
+      {renderGridItem('../carbon/es/text--indent--less', <IconTextIndentLess {...args} />)}
+      {renderGridItem('../carbon/es/text--indent--more', <IconTextIndentMore {...args} />)}
+      {renderGridItem('../carbon/es/text--italic', <IconTextItalic {...args} />)}
+      {renderGridItem('../carbon/es/text--kerning', <IconTextKerning {...args} />)}
+      {renderGridItem('../carbon/es/text--leading', <IconTextLeading {...args} />)}
+      {renderGridItem('../carbon/es/text--line-spacing', <IconTextLineSpacing {...args} />)}
+      {renderGridItem('../carbon/es/text--new-line', <IconTextNewLine {...args} />)}
+      {renderGridItem('../carbon/es/text--scale', <IconTextScale {...args} />)}
+      {renderGridItem('../carbon/es/text--selection', <IconTextSelection {...args} />)}
+      {renderGridItem('../carbon/es/text--small-caps', <IconTextSmallCaps {...args} />)}
+      {renderGridItem('../carbon/es/text--strikethrough', <IconTextStrikethrough {...args} />)}
+      {renderGridItem('../carbon/es/text--subscript', <IconTextSubscript {...args} />)}
+      {renderGridItem('../carbon/es/text--superscript', <IconTextSuperscript {...args} />)}
+      {renderGridItem('../carbon/es/text--tracking', <IconTextTracking {...args} />)}
+      {renderGridItem('../carbon/es/text--underline', <IconTextUnderline {...args} />)}
+      {renderGridItem('../carbon/es/text--vertical-alignment', <IconTextVerticalAlignment {...args} />)}
+      {renderGridItem('../carbon/es/text--wrap', <IconTextWrap {...args} />)}
+      {renderGridItem('../carbon/es/text-link', <IconTextLink {...args} />)}
+      {renderGridItem('../carbon/es/text-link--analysis', <IconTextLinkAnalysis {...args} />)}
+      {renderGridItem('../carbon/es/text-mining', <IconTextMining {...args} />)}
+      {renderGridItem('../carbon/es/text-mining--applier', <IconTextMiningApplier {...args} />)}
+      {renderGridItem('../carbon/es/theater', <IconTheater {...args} />)}
+      {renderGridItem('../carbon/es/this-side-up', <IconThisSideUp {...args} />)}
+      {renderGridItem('../carbon/es/thumbnail--1', <IconThumbnail1 {...args} />)}
+      {renderGridItem('../carbon/es/thumbnail--2', <IconThumbnail2 {...args} />)}
+      {renderGridItem('../carbon/es/thumbs-down', <IconThumbsDown {...args} />)}
+      {renderGridItem('../carbon/es/thumbs-down--filled', <IconThumbsDownFilled {...args} />)}
+      {renderGridItem('../carbon/es/thumbs-up', <IconThumbsUp {...args} />)}
+      {renderGridItem('../carbon/es/thumbs-up--filled', <IconThumbsUpFilled {...args} />)}
+      {renderGridItem('../carbon/es/thunderstorm', <IconThunderstorm {...args} />)}
+      {renderGridItem('../carbon/es/thunderstorm--scattered', <IconThunderstormScattered {...args} />)}
+      {renderGridItem('../carbon/es/thunderstorm--scattered--night', <IconThunderstormScatteredNight {...args} />)}
+      {renderGridItem('../carbon/es/thunderstorm--severe', <IconThunderstormSevere {...args} />)}
+      {renderGridItem('../carbon/es/thunderstorm--strong', <IconThunderstormStrong {...args} />)}
+      {renderGridItem('../carbon/es/ticket', <IconTicket {...args} />)}
+      {renderGridItem('../carbon/es/tides', <IconTides {...args} />)}
+      {renderGridItem('../carbon/es/time', <IconTime {...args} />)}
+      {renderGridItem('../carbon/es/time-plot', <IconTimePlot {...args} />)}
+      {renderGridItem('../carbon/es/timer', <IconTimer {...args} />)}
+      {renderGridItem('../carbon/es/tool-box', <IconToolBox {...args} />)}
+      {renderGridItem('../carbon/es/tool-kit', <IconToolKit {...args} />)}
+      {renderGridItem('../carbon/es/tools', <IconTools {...args} />)}
+      {renderGridItem('../carbon/es/tools--alt', <IconToolsAlt {...args} />)}
+      {renderGridItem('../carbon/es/tornado', <IconTornado {...args} />)}
+      {renderGridItem('../carbon/es/tornado-warning', <IconTornadoWarning {...args} />)}
+      {renderGridItem('../carbon/es/touch--1', <IconTouch1 {...args} />)}
+      {renderGridItem('../carbon/es/touch--1--filled', <IconTouch1Filled {...args} />)}
+      {renderGridItem('../carbon/es/touch--1-down', <IconTouch1Down {...args} />)}
+      {renderGridItem('../carbon/es/touch--1-down--filled', <IconTouch1DownFilled {...args} />)}
+      {renderGridItem('../carbon/es/touch--2', <IconTouch2 {...args} />)}
+      {renderGridItem('../carbon/es/touch--2--filled', <IconTouch2Filled {...args} />)}
+      {renderGridItem('../carbon/es/touch--interaction', <IconTouchInteraction {...args} />)}
+      {renderGridItem('../carbon/es/traffic--event', <IconTrafficEvent {...args} />)}
+      {renderGridItem('../carbon/es/traffic--flow', <IconTrafficFlow {...args} />)}
+      {renderGridItem('../carbon/es/traffic--flow-incident', <IconTrafficFlowIncident {...args} />)}
+      {renderGridItem('../carbon/es/traffic--incident', <IconTrafficIncident {...args} />)}
+      {renderGridItem('../carbon/es/traffic--weather-incident', <IconTrafficWeatherIncident {...args} />)}
+      {renderGridItem('../carbon/es/traffic-cone', <IconTrafficCone {...args} />)}
+      {renderGridItem('../carbon/es/train', <IconTrain {...args} />)}
+      {renderGridItem('../carbon/es/train--heart', <IconTrainHeart {...args} />)}
+      {renderGridItem('../carbon/es/train--profile', <IconTrainProfile {...args} />)}
+      {renderGridItem('../carbon/es/train--speed', <IconTrainSpeed {...args} />)}
+      {renderGridItem('../carbon/es/train--ticket', <IconTrainTicket {...args} />)}
+      {renderGridItem('../carbon/es/train--time', <IconTrainTime {...args} />)}
+      {renderGridItem('../carbon/es/tram', <IconTram {...args} />)}
+      {renderGridItem('../carbon/es/transgender', <IconTransgender {...args} />)}
+      {renderGridItem('../carbon/es/translate', <IconTranslate {...args} />)}
+      {renderGridItem('../carbon/es/transmission-lte', <IconTransmissionLte {...args} />)}
+      {renderGridItem('../carbon/es/transpose', <IconTranspose {...args} />)}
+      {renderGridItem('../carbon/es/trash-can', <IconTrashCan {...args} />)}
+      {renderGridItem('../carbon/es/tree', <IconTree {...args} />)}
+      {renderGridItem('../carbon/es/tree--fall-risk', <IconTreeFallRisk {...args} />)}
+      {renderGridItem('../carbon/es/tree-view', <IconTreeView {...args} />)}
+      {renderGridItem('../carbon/es/tree-view--alt', <IconTreeViewAlt {...args} />)}
+      {renderGridItem('../carbon/es/trophy', <IconTrophy {...args} />)}
+      {renderGridItem('../carbon/es/trophy--filled', <IconTrophyFilled {...args} />)}
+      {renderGridItem('../carbon/es/tropical-storm', <IconTropicalStorm {...args} />)}
+      {renderGridItem('../carbon/es/tropical-storm--model-tracks', <IconTropicalStormModelTracks {...args} />)}
+      {renderGridItem('../carbon/es/tropical-storm--tracks', <IconTropicalStormTracks {...args} />)}
+      {renderGridItem('../carbon/es/tropical-warning', <IconTropicalWarning {...args} />)}
+      {renderGridItem('../carbon/es/tsunami', <IconTsunami {...args} />)}
+      {renderGridItem('../carbon/es/two-factor-authentication', <IconTwoFactorAuthentication {...args} />)}
+      {renderGridItem('../carbon/es/two-person-lift', <IconTwoPersonLift {...args} />)}
+      {renderGridItem('../carbon/es/type-pattern', <IconTypePattern {...args} />)}
+      {renderGridItem('../carbon/es/types', <IconTypes {...args} />)}
+      {renderGridItem('../carbon/es/umbrella', <IconUmbrella {...args} />)}
+      {renderGridItem('../carbon/es/undefined', <IconUndefined {...args} />)}
+      {renderGridItem('../carbon/es/undefined--filled', <IconUndefinedFilled {...args} />)}
+      {renderGridItem('../carbon/es/undo', <IconUndo {...args} />)}
+      {renderGridItem('../carbon/es/ungroup-objects', <IconUngroupObjects {...args} />)}
+      {renderGridItem('../carbon/es/unknown', <IconUnknown {...args} />)}
+      {renderGridItem('../carbon/es/unknown--filled', <IconUnknownFilled {...args} />)}
+      {renderGridItem('../carbon/es/unlink', <IconUnlink {...args} />)}
+      {renderGridItem('../carbon/es/unlocked', <IconUnlocked {...args} />)}
+      {renderGridItem('../carbon/es/up-to-top', <IconUpToTop {...args} />)}
+      {renderGridItem('../carbon/es/update-now', <IconUpdateNow {...args} />)}
+      {renderGridItem('../carbon/es/upgrade', <IconUpgrade {...args} />)}
+      {renderGridItem('../carbon/es/upload', <IconUpload {...args} />)}
+      {renderGridItem('../carbon/es/user', <IconUser {...args} />)}
+      {renderGridItem('../carbon/es/user--access', <IconUserAccess {...args} />)}
+      {renderGridItem('../carbon/es/user--activity', <IconUserActivity {...args} />)}
+      {renderGridItem('../carbon/es/user--admin', <IconUserAdmin {...args} />)}
+      {renderGridItem('../carbon/es/user--avatar', <IconUserAvatar {...args} />)}
+      {renderGridItem('../carbon/es/user--avatar--filled', <IconUserAvatarFilled {...args} />)}
+      {renderGridItem('../carbon/es/user--avatar--filled--alt', <IconUserAvatarFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/user--certification', <IconUserCertification {...args} />)}
+      {renderGridItem('../carbon/es/user--data', <IconUserData {...args} />)}
+      {renderGridItem('../carbon/es/user--favorite', <IconUserFavorite {...args} />)}
+      {renderGridItem('../carbon/es/user--favorite--alt', <IconUserFavoriteAlt {...args} />)}
+      {renderGridItem('../carbon/es/user--favorite--alt--filled', <IconUserFavoriteAltFilled {...args} />)}
+      {renderGridItem('../carbon/es/user--filled', <IconUserFilled {...args} />)}
+      {renderGridItem('../carbon/es/user--follow', <IconUserFollow {...args} />)}
+      {renderGridItem('../carbon/es/user--identification', <IconUserIdentification {...args} />)}
+      {renderGridItem('../carbon/es/user--multiple', <IconUserMultiple {...args} />)}
+      {renderGridItem('../carbon/es/user--online', <IconUserOnline {...args} />)}
+      {renderGridItem('../carbon/es/user--profile', <IconUserProfile {...args} />)}
+      {renderGridItem('../carbon/es/user--role', <IconUserRole {...args} />)}
+      {renderGridItem('../carbon/es/user--service-desk', <IconUserServiceDesk {...args} />)}
+      {renderGridItem('../carbon/es/user--settings', <IconUserSettings {...args} />)}
+      {renderGridItem('../carbon/es/user--simulation', <IconUserSimulation {...args} />)}
+      {renderGridItem('../carbon/es/user--speaker', <IconUserSpeaker {...args} />)}
+      {renderGridItem('../carbon/es/user--x-ray', <IconUserXRay {...args} />)}
+      {renderGridItem('../carbon/es/user-profile--alt', <IconUserProfileAlt {...args} />)}
+      {renderGridItem('../carbon/es/uv-index', <IconUvIndex {...args} />)}
+      {renderGridItem('../carbon/es/uv-index--alt', <IconUvIndexAlt {...args} />)}
+      {renderGridItem('../carbon/es/uv-index--filled', <IconUvIndexFilled {...args} />)}
+      {renderGridItem('../carbon/es/value--variable', <IconValueVariable {...args} />)}
+      {renderGridItem('../carbon/es/van', <IconVan {...args} />)}
+      {renderGridItem('../carbon/es/vegetation--asset', <IconVegetationAsset {...args} />)}
+      {renderGridItem('../carbon/es/vehicle--api', <IconVehicleApi {...args} />)}
+      {renderGridItem('../carbon/es/vehicle--connected', <IconVehicleConnected {...args} />)}
+      {renderGridItem('../carbon/es/vehicle--insights', <IconVehicleInsights {...args} />)}
+      {renderGridItem('../carbon/es/vehicle--services', <IconVehicleServices {...args} />)}
+      {renderGridItem('../carbon/es/version', <IconVersion {...args} />)}
+      {renderGridItem('../carbon/es/version--major', <IconVersionMajor {...args} />)}
+      {renderGridItem('../carbon/es/version--minor', <IconVersionMinor {...args} />)}
+      {renderGridItem('../carbon/es/version--patch', <IconVersionPatch {...args} />)}
+      {renderGridItem('../carbon/es/vertical-view', <IconVerticalView {...args} />)}
+      {renderGridItem('../carbon/es/video', <IconVideo {...args} />)}
+      {renderGridItem('../carbon/es/video--add', <IconVideoAdd {...args} />)}
+      {renderGridItem('../carbon/es/video--chat', <IconVideoChat {...args} />)}
+      {renderGridItem('../carbon/es/video--filled', <IconVideoFilled {...args} />)}
+      {renderGridItem('../carbon/es/video--off', <IconVideoOff {...args} />)}
+      {renderGridItem('../carbon/es/video--off--filled', <IconVideoOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/view', <IconView {...args} />)}
+      {renderGridItem('../carbon/es/view--filled', <IconViewFilled {...args} />)}
+      {renderGridItem('../carbon/es/view--mode-1', <IconViewMode1 {...args} />)}
+      {renderGridItem('../carbon/es/view--mode-2', <IconViewMode2 {...args} />)}
+      {renderGridItem('../carbon/es/view--off', <IconViewOff {...args} />)}
+      {renderGridItem('../carbon/es/view--off--filled', <IconViewOffFilled {...args} />)}
+      {renderGridItem('../carbon/es/view-next', <IconViewNext {...args} />)}
+      {renderGridItem('../carbon/es/virtual-column', <IconVirtualColumn {...args} />)}
+      {renderGridItem('../carbon/es/virtual-column--key', <IconVirtualColumnKey {...args} />)}
+      {renderGridItem('../carbon/es/virtual-desktop', <IconVirtualDesktop {...args} />)}
+      {renderGridItem('../carbon/es/virtual-machine', <IconVirtualMachine {...args} />)}
+      {renderGridItem('../carbon/es/virtual-private-cloud', <IconVirtualPrivateCloud {...args} />)}
+      {renderGridItem('../carbon/es/virtual-private-cloud--alt', <IconVirtualPrivateCloudAlt {...args} />)}
+      {renderGridItem('../carbon/es/visual-recognition', <IconVisualRecognition {...args} />)}
+      {renderGridItem('../carbon/es/vlan', <IconVlan {...args} />)}
+      {renderGridItem('../carbon/es/vmdk-disk', <IconVmdkDisk {...args} />)}
+      {renderGridItem('../carbon/es/voice-activate', <IconVoiceActivate {...args} />)}
+      {renderGridItem('../carbon/es/voicemail', <IconVoicemail {...args} />)}
+      {renderGridItem('../carbon/es/volume--block-storage', <IconVolumeBlockStorage {...args} />)}
+      {renderGridItem('../carbon/es/volume--down', <IconVolumeDown {...args} />)}
+      {renderGridItem('../carbon/es/volume--down--alt', <IconVolumeDownAlt {...args} />)}
+      {renderGridItem('../carbon/es/volume--down--filled', <IconVolumeDownFilled {...args} />)}
+      {renderGridItem('../carbon/es/volume--down--filled--alt', <IconVolumeDownFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/volume--file-storage', <IconVolumeFileStorage {...args} />)}
+      {renderGridItem('../carbon/es/volume--mute', <IconVolumeMute {...args} />)}
+      {renderGridItem('../carbon/es/volume--mute--filled', <IconVolumeMuteFilled {...args} />)}
+      {renderGridItem('../carbon/es/volume--object-storage', <IconVolumeObjectStorage {...args} />)}
+      {renderGridItem('../carbon/es/volume--up', <IconVolumeUp {...args} />)}
+      {renderGridItem('../carbon/es/volume--up--alt', <IconVolumeUpAlt {...args} />)}
+      {renderGridItem('../carbon/es/volume--up--filled', <IconVolumeUpFilled {...args} />)}
+      {renderGridItem('../carbon/es/volume--up--filled--alt', <IconVolumeUpFilledAlt {...args} />)}
+      {renderGridItem('../carbon/es/vpn--connection', <IconVpnConnection {...args} />)}
+      {renderGridItem('../carbon/es/vpn--policy', <IconVpnPolicy {...args} />)}
+      {renderGridItem('../carbon/es/wallet', <IconWallet {...args} />)}
+      {renderGridItem('../carbon/es/warning', <IconWarning {...args} />)}
+      {renderGridItem('../carbon/es/warning--alt', <IconWarningAlt {...args} />)}
+      {renderGridItem('../carbon/es/warning--alt--filled', <IconWarningAltFilled {...args} />)}
+      {renderGridItem('../carbon/es/warning--alt-inverted', <IconWarningAltInverted {...args} />)}
+      {renderGridItem('../carbon/es/warning--alt-inverted--filled', <IconWarningAltInvertedFilled {...args} />)}
+      {renderGridItem('../carbon/es/warning--filled', <IconWarningFilled {...args} />)}
+      {renderGridItem('../carbon/es/warning--hex', <IconWarningHex {...args} />)}
+      {renderGridItem('../carbon/es/warning--hex--filled', <IconWarningHexFilled {...args} />)}
+      {renderGridItem('../carbon/es/warning--other', <IconWarningOther {...args} />)}
+      {renderGridItem('../carbon/es/warning-square', <IconWarningSquare {...args} />)}
+      {renderGridItem('../carbon/es/warning-square--filled', <IconWarningSquareFilled {...args} />)}
+      {renderGridItem('../carbon/es/watch', <IconWatch {...args} />)}
+      {renderGridItem('../carbon/es/wave-direction', <IconWaveDirection {...args} />)}
+      {renderGridItem('../carbon/es/wave-height', <IconWaveHeight {...args} />)}
+      {renderGridItem('../carbon/es/wave-period', <IconWavePeriod {...args} />)}
+      {renderGridItem('../carbon/es/weather-front--cold', <IconWeatherFrontCold {...args} />)}
+      {renderGridItem('../carbon/es/weather-front--stationary', <IconWeatherFrontStationary {...args} />)}
+      {renderGridItem('../carbon/es/weather-front--warm', <IconWeatherFrontWarm {...args} />)}
+      {renderGridItem('../carbon/es/weather-station', <IconWeatherStation {...args} />)}
+      {renderGridItem('../carbon/es/webhook', <IconWebhook {...args} />)}
+      {renderGridItem('../carbon/es/websheet', <IconWebsheet {...args} />)}
+      {renderGridItem('../carbon/es/wheat', <IconWheat {...args} />)}
+      {renderGridItem('../carbon/es/wifi', <IconWifi {...args} />)}
+      {renderGridItem('../carbon/es/wifi--controller', <IconWifiController {...args} />)}
+      {renderGridItem('../carbon/es/wifi--not-secure', <IconWifiNotSecure {...args} />)}
+      {renderGridItem('../carbon/es/wifi--off', <IconWifiOff {...args} />)}
+      {renderGridItem('../carbon/es/wifi--secure', <IconWifiSecure {...args} />)}
+      {renderGridItem('../carbon/es/wifi-bridge', <IconWifiBridge {...args} />)}
+      {renderGridItem('../carbon/es/wifi-bridge--alt', <IconWifiBridgeAlt {...args} />)}
+      {renderGridItem('../carbon/es/wikis', <IconWikis {...args} />)}
+      {renderGridItem('../carbon/es/wind-gusts', <IconWindGusts {...args} />)}
+      {renderGridItem('../carbon/es/wind-power', <IconWindPower {...args} />)}
+      {renderGridItem('../carbon/es/wind-stream', <IconWindStream {...args} />)}
+      {renderGridItem('../carbon/es/windy', <IconWindy {...args} />)}
+      {renderGridItem('../carbon/es/windy--dust', <IconWindyDust {...args} />)}
+      {renderGridItem('../carbon/es/windy--snow', <IconWindySnow {...args} />)}
+      {renderGridItem('../carbon/es/windy--strong', <IconWindyStrong {...args} />)}
+      {renderGridItem('../carbon/es/winter-warning', <IconWinterWarning {...args} />)}
+      {renderGridItem('../carbon/es/wintry-mix', <IconWintryMix {...args} />)}
+      {renderGridItem('../carbon/es/wireless-checkout', <IconWirelessCheckout {...args} />)}
+      {renderGridItem('../carbon/es/word-cloud', <IconWordCloud {...args} />)}
+      {renderGridItem('../carbon/es/workspace', <IconWorkspace {...args} />)}
+      {renderGridItem('../carbon/es/workspace--import', <IconWorkspaceImport {...args} />)}
+      {renderGridItem('../carbon/es/worship', <IconWorship {...args} />)}
+      {renderGridItem('../carbon/es/worship--christian', <IconWorshipChristian {...args} />)}
+      {renderGridItem('../carbon/es/worship--jewish', <IconWorshipJewish {...args} />)}
+      {renderGridItem('../carbon/es/worship--muslim', <IconWorshipMuslim {...args} />)}
+      {renderGridItem('../carbon/es/x-axis', <IconXAxis {...args} />)}
+      {renderGridItem('../carbon/es/y-axis', <IconYAxis {...args} />)}
+      {renderGridItem('../carbon/es/z-axis', <IconZAxis {...args} />)}
+      {renderGridItem('../carbon/es/zoom--area', <IconZoomArea {...args} />)}
+      {renderGridItem('../carbon/es/zoom--fit', <IconZoomFit {...args} />)}
+      {renderGridItem('../carbon/es/zoom--in', <IconZoomIn {...args} />)}
+      {renderGridItem('../carbon/es/zoom--in-area', <IconZoomInArea {...args} />)}
+      {renderGridItem('../carbon/es/zoom--out', <IconZoomOut {...args} />)}
+      {renderGridItem('../carbon/es/zoom--out-area', <IconZoomOutArea {...args} />)}
+      {renderGridItem('../carbon/es/zoom--reset', <IconZoomReset {...args} />)}
     </Grid>
   );
 };
