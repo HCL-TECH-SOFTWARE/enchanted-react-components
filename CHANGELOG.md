@@ -3,7 +3,17 @@
 ## Unreleased
 
 ### Added
-- Added the `list--edit` icon to the icons preview
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 1.2.0
+
+### Added
+- Added all new icons including icons package v1.3.0 to the icon preview
 - Added the `ToggleButton` component
 - Added the `HCLSoftwareBlue 07 (20P)` color
 - Added the `selectedOpacityHover` in theme.palette.action
