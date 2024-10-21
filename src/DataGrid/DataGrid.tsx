@@ -285,6 +285,11 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         marginTop: '0!important',
       },
     },
+    ...(props.hideFooter) && {
+      '& .MuiDataGrid-virtualScroller': {
+        borderBottom: `1px ${theme.palette.border.secondary} solid`,
+      },
+    },
     ...(props.totalCount <= 0) && {
       '& .MuiDataGrid-footerContainer': {
         borderTop: 'none',
@@ -430,6 +435,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     const rowCheckbox: HTMLElement | undefined = findTargetElement(target, 'PrivateSwitchBase-input', false);
     // find column header title element that contains column title and sorting icon as we are supporting click for whole space of title and icon in header title
     const columnHeaderTitle: HTMLElement | undefined = findTargetElement(target, 'MuiDataGrid-columnHeaderTitle', false);
+    const columnHeader: HTMLElement | undefined = findTargetElement(target, 'MuiDataGrid-columnHeader', false);
     // this is for us to navigate to the first row of the table body
     if (target && (event.key === 'Tab' || event.key === 'ArrowDown')) {
       // to find the first row in order to focus
@@ -454,26 +460,37 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       if (rowCheckbox) {
         rowCheckbox.focus();
       }
+      if (!rowCheckbox && columnHeader) {
+        columnHeader.focus();
+      }
     }
   };
 
-  // this function handles when user use keydown on datagrid it will change focus from select all checkbox to column header row
-  const handleOnBaseCheckFocus = (event: React.FocusEvent) => {
+  /**
+   * Handles the focus event on the header of the DataGrid.
+   * @param event - The keyboard event triggered when the header is focused.
+   * This function prevents the default focus behavior, finds the column header row,
+   * and sets it to be focusable by adding a `tabindex` attribute. It then focuses
+   * on the column header row and adds a keydown event listener for keyboard navigation.
+   * Additionally, it removes the focus from the row when the header is focused.
+   */
+  const handleOnHeaderFocus = (event: KeyboardEvent) => {
     event.preventDefault();
     // need to get coloumn header row to so that we can focus on it.
-    const parentElem = findTargetElement(event.target, 'MuiDataGrid-columnHeaders', true);
-    if (parentElem && !parentElem.hasAttribute('tabindex')) {
+    const parentElem = findTargetElement(event.target, 'MuiDataGrid-root', true);
+    const columnHeaderRow = parentElem?.querySelector('.MuiDataGrid-columnHeaders') as HTMLDivElement;
+    if (columnHeaderRow && !columnHeaderRow.hasAttribute('tabindex')) {
       // add tabindex so that we can are able to focus on it.
-      parentElem.setAttribute('tabindex', '0');
+      columnHeaderRow.setAttribute('tabindex', '0');
       // need some wait to set attribute to take effect
       window.setTimeout(() => {
-        parentElem.focus();
+        columnHeaderRow.focus();
       }, 0);
       // add keydown event to coloumn header row for some keyboard navigation
-      parentElem.addEventListener('keydown', (e) => {
+      columnHeaderRow.addEventListener('keydown', (e) => {
         return handleOnColumnHeaderRowKeyDown(e);
       });
-      parentElem.addEventListener('focus', () => {
+      columnHeaderRow.addEventListener('focus', () => {
         setFocusRow(''); // remove focus on the row when we focus on the header
       }, { once: true });
     }
@@ -639,9 +656,12 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
           baseCheckbox: {
             'data-testid': DataGridTestIds.DATAGRID_CHECKBOX,
             onClick: onCheckboxClick,
-            onFocus: handleOnBaseCheckFocus,
             onKeyDown: handleOnCheckboxKeydown,
           },
+        },
+        header: {
+          tabIndex: 0,
+          onFocus: handleOnHeaderFocus,
         },
         row: {
           tabIndex: 0,
