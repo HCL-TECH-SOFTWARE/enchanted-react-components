@@ -8,6 +8,7 @@
 
 ### Changed
 - Added keyboard accessibility to the header in `DataGrid` component
+- Added focus to the input label in `TextField` and `SelectMultiple` components
 
 ### Breaking changes
 

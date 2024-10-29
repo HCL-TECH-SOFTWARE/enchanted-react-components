@@ -15,7 +15,6 @@
 
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
 import { userEvent, within } from '@storybook/testing-library';
 
 import Select, { SelectChangeEvent } from './Select';
@@ -128,7 +127,6 @@ const Template: StoryFn<typeof Select> = (args) => {
       {...args}
       value={values}
       onChange={handleChange}
-      input={<OutlinedInput />}
       renderValue={(selected) => {
         if ((selected as string[]).length === 0) {
           return <em>{args.placeholder}</em>;

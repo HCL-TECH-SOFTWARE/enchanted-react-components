@@ -23,6 +23,7 @@ import {
 } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
 
+import { styled } from '@mui/material/styles';
 import Typography from '../Typography';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import { ThemeDirectionType } from '../theme';
@@ -264,6 +265,14 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
   };
 };
 
+const TextFieldContainer = styled('div')((theme) => {
+  return {
+    '.MuiAutocomplete--label--focused': {
+      color: theme.theme.palette.primary.main,
+    },
+  };
+});
+
 const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   // This is workaround until proper Search component has already been implemented
   // This hides the endAdornment when startAdornment is present and it's a simple Textfield (NOT affecting Autocomplete / Multiselect)
@@ -282,7 +291,7 @@ const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   );
 };
 
-const getInputLabelAndActionProps = (props: TextFieldProps): InputLabelAndActionProps => {
+const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): InputLabelAndActionProps => {
   const inputLabelId = props.label && props.id ? `${props.id}-label` : undefined;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
@@ -297,6 +306,7 @@ const getInputLabelAndActionProps = (props: TextFieldProps): InputLabelAndAction
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
+    isFocus,
   };
   return inputLabelProps;
 };
@@ -348,7 +358,7 @@ const renderNonEditInput = (props: TextFieldProps, muiTextFieldProps: OutlinedTe
   return <Typography variant="body2">{muiTextFieldProps.value ? muiTextFieldProps.value : null}</Typography>;
 };
 
-const renderInput = (props: TextFieldProps) => {
+const renderInput = (props: TextFieldProps, setIsFocus: React.Dispatch<React.SetStateAction<boolean>>) => {
   const muiTextFieldProps = getMuiTextFieldProps(props);
   const helperTextId = props.helperText && props.id ? `${props.id}-helper-text` : undefined;
   if (props.nonEdit) {
@@ -359,21 +369,34 @@ const renderInput = (props: TextFieldProps) => {
       </>
     );
   }
-  return <MuiTextField {...muiTextFieldProps} />;
+  return (
+    <MuiTextField
+      {...muiTextFieldProps}
+      onFocus={() => {
+        setIsFocus(true);
+      }}
+      onBlur={() => {
+        setIsFocus(false);
+      }}
+    />
+  );
 };
 
 const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: React.ForwardedRef<unknown>) => {
-  const muiInputLabelProps = getInputLabelAndActionProps(props);
+  const [isFocus, setIsFocus] = React.useState(false);
+  const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   if (!props.id) {
     const id = useId();
     props.id = id;
   }
   const muiFormControlProps = getMuiFormControlProps(props, forwardRef);
   return (
-    <MuiFormControl {...muiFormControlProps}>
-      <InputLabelAndAction {...muiInputLabelProps} />
-      {renderInput(props)}
-    </MuiFormControl>
+    <TextFieldContainer>
+      <MuiFormControl {...muiFormControlProps}>
+        <InputLabelAndAction {...muiInputLabelProps} />
+        {renderInput(props, setIsFocus)}
+      </MuiFormControl>
+    </TextFieldContainer>
   );
 }) as React.FC<TextFieldProps>;
 
