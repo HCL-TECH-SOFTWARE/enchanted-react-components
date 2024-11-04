@@ -96,7 +96,7 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
         </IconButton>
       </Tooltip>
       <Menu
-        PaperProps={{ sx: { width: '240px', padding: '0px' } }}
+        PaperProps={{ sx: { padding: '0px' } }}
         id="basic-menu"
         data-testid={TileActionTestIds.TILE_ACTION_MENU}
         anchorEl={anchorEl}

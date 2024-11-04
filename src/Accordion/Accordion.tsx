@@ -41,7 +41,6 @@ const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
       ...(hasNested ? { padding: '8px 0px 8px 8px' } : { padding: '8px 8px 8px 8px' }),
     },
     '&.MuiAccordion-root': {
-      overflow: 'hidden',
       '&:focus': {
         boxShadow: `0 0 0 2px ${theme.palette.primary.main}`,
         zIndex: 1,
