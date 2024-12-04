@@ -10,6 +10,7 @@
 - Added keyboard accessibility to the header in `DataGrid` component
 - Added focus to the input label in `TextField` and `SelectMultiple` components
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
+- Added a configurable optional property for `Snackbar` position
 
 ### Breaking changes
 
