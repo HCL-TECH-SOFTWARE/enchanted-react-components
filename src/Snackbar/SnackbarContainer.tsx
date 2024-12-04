@@ -14,11 +14,21 @@
  * ======================================================================== */
 import { styled } from '@mui/material/styles';
 
-const SnackbarContainer = styled('div')((theme) => {
+export enum SnackbarContainerPosition {
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+
+export interface SnackbarContainerProps {
+  position?: SnackbarContainerPosition;
+}
+
+const SnackbarContainer = styled('div')<SnackbarContainerProps>(({ position = SnackbarContainerPosition.RIGHT }) => {
   return {
     position: 'fixed',
-    bottom: '64px',
-    right: '24px',
+    bottom: '12px',
+    right: position === SnackbarContainerPosition.RIGHT ? '12px' : 'unset',
+    left: position === SnackbarContainerPosition.LEFT ? '12px' : 'unset',
     zIndex: 2,
   };
 });
