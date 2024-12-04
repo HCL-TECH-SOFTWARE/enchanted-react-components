@@ -57,6 +57,7 @@
 - Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
+- Resolved tooltip issue of options in `Autocomplete` component
 
 ### Breaking changes
 
