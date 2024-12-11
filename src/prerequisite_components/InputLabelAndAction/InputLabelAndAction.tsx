@@ -17,7 +17,7 @@ import MuiInputLabel, { InputLabelProps as MuiInputLabelProps } from '@mui/mater
 import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
 import { styled, Theme } from '@mui/material';
-import Tooltip from '../../Tooltip';
+import Tooltip, { TooltipPlacement } from '../../Tooltip';
 import Link, { LinkProps } from '../../Link';
 
 export interface ActionProps {
@@ -31,6 +31,7 @@ export interface ActionProps {
 export interface InputLabelAndActionProps extends MuiInputLabelProps {
   actionProps?: ActionProps[];
   helperIconTooltip?: string;
+  tooltipPlacement?: TooltipPlacement;
   hiddenLabel?: boolean;
   label?: ReactNode;
   isFocus?: boolean;
@@ -105,7 +106,16 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
       >
         {props.label}
       </StyledInputLabel>
-      {props.helperIconTooltip ? <Tooltip title={props.helperIconTooltip}><MuiInputHelpIcon color="action" fontSize="small" /></Tooltip> : ''}
+      {props.helperIconTooltip ? (
+        <Tooltip
+          title={props.helperIconTooltip}
+          placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
+        >
+          <MuiInputHelpIcon color="action" fontSize="small" />
+        </Tooltip>
+      ) : (
+        ''
+      )}
     </>
   );
 };
@@ -204,7 +214,9 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
         >
           { limitedActionProps && limitedActionProps.map((actionProp, index) => {
             return (
-              <Tooltip title={actionProp.tooltip} placement="bottom">
+              // eslint-why index is not the sole key definition, it is prefixed by other identifiers
+              // eslint-disable-next-line react/no-array-index-key
+              <Tooltip title={actionProp.tooltip} placement="bottom" key={`${actionProp.label}-${index}`}>
                 <StyledSpan>
                   <MuiInputActionLink
                     disabled={actionProp.disabled || props.disabled}
@@ -212,9 +224,6 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
                     onClick={actionProp.handleClick}
                     underline="none"
                     sx={{ display: 'inline' }}
-                  // eslint-why index is not the sole key definition, it is prefixed by other identifiers
-                  // eslint-disable-next-line react/no-array-index-key
-                    key={`${actionProp.label}-${index}`}
                   >
                     {actionProp.label}
                   </MuiInputActionLink>

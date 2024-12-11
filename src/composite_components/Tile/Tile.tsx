@@ -66,8 +66,10 @@ const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ them
     cursor: disabled ? 'not-allowed' : 'pointer',
     overflow: 'hidden',
     '&:focus': {
-      border: `1px solid ${theme.palette.action.focus}`,
-      boxShadow: `0 0 0 1px ${theme.palette.action.focus}`,
+      border: `2px solid ${theme.palette.action.focus}`,
+      '.MuiImageListItemBar-root': {
+        paddingBottom: '5px',
+      },
     },
     '&:hover': {
       '.overlay': {
@@ -195,7 +197,7 @@ export interface TilePropsType {
   itemClickedAction?(event: React.MouseEvent<HTMLElement>, tileItemId: string): void,
   handlePreviewAction?(event: React.MouseEvent<HTMLElement>, tileItemId: string): void,
   handleCheckboxChange?(event: React.ChangeEvent<HTMLInputElement>, tileItemId: string, isChecked: boolean): void,
-  tileActions: IActions[],
+  tileActions?: IActions[],
   ariaLabel?: string;
   ariaLabelledBy?: string;
   overflowTooltip?: string;

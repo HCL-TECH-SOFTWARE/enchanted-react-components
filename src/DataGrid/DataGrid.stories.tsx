@@ -362,6 +362,7 @@ InteractiveExample.args = {
   columns: sampleColumns,
   totalCount: sampleRows.length,
   page: 0,
+  isRowClickable: false,
 };
 
 export const VisualTest = VisualTestTemplate.bind({});

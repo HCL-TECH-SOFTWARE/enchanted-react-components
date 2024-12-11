@@ -83,8 +83,8 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                   '.MuiFormLabel-root': {
                     display: 'none', // hides the form action label space from Autocomplete
                   },
-                  '> div:first-of-type': {
-                    margin: '0 12px 0 4px',
+                  '> .autocomplete-container': {
+                    margin: '0 4px',
                   },
                 },
                 'div[data-testid=tablePaginationActionsPageDiv]': {
@@ -92,7 +92,7 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                   '.MuiFormLabel-root': {
                     display: 'none', // hides the form action label space from Autocomplete
                   },
-                  '> div:first-of-type': {
+                  '> .autocomplete-container': {
                     margin: '0 4px',
                   },
                 },

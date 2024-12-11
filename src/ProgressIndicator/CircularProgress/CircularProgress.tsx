@@ -60,6 +60,12 @@ export const getMuiCircularProgressThemeOverrides = (): Components<Omit<Theme, '
             ...(ownerState.variant === CircularProgressVariants.DETERMINATE && ownerState.id === CircularProgressTestIds.PROGRESS_TRAIL) && {
               color: (ownerState.withbackdrop === 1 || ownerState.withbackdrop === true) ? theme.palette.action.hoverInverse : theme.palette.action.hover,
             },
+            '&.backdrop': {
+              color: theme.palette.info.inverse,
+              ...(ownerState.variant === CircularProgressVariants.DETERMINATE && ownerState.id === CircularProgressTestIds.PROGRESS_TRAIL) && {
+                color: theme.palette.action.hoverInverse,
+              },
+            },
             ...ownerState.variant === CircularProgressVariants.DETERMINATE && {
               '+ .MuiBox-root': { // styles the label element right next to a determinate progress circle
                 top: '50%',
@@ -81,7 +87,7 @@ export const getMuiCircularProgressThemeOverrides = (): Components<Omit<Theme, '
   };
 };
 
-const CircularProgress = ({ ...props }: CircularProgressProps) => {
+const CircularProgress = ({ withbackdrop, ...props }: CircularProgressProps) => {
   return (
     <Box
       sx={{
@@ -93,6 +99,7 @@ const CircularProgress = ({ ...props }: CircularProgressProps) => {
       data-testid={CircularProgressTestIds.PROGRESS_ROOT}
     >
       <MuiCircularProgress
+        className={withbackdrop ? 'backdrop' : ''}
         {...props}
         id={CircularProgressTestIds.PROGRESS_TRAIL}
         data-testid={CircularProgressTestIds.PROGRESS_TRAIL}
@@ -100,6 +107,7 @@ const CircularProgress = ({ ...props }: CircularProgressProps) => {
         value={100} // for the full gray trail
       />
       <MuiCircularProgress
+        className={withbackdrop ? 'backdrop' : ''}
         {...props}
         data-testid={CircularProgressTestIds.PROGRESS_CIRCLE}
       />

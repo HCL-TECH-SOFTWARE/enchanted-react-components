@@ -29,6 +29,7 @@ export interface IActions {
   title: string,
   iconObject: React.ReactNode,
   toolTip: string,
+  color?: string,
   handler(event: React.MouseEvent<HTMLElement>, itemId: string, optionalValue?: string, optionalFlag?: boolean): void,
   showDivider?: boolean,
 }
@@ -47,6 +48,7 @@ const itemAddedToFavoritesAction = (event: React.MouseEvent<HTMLElement>, tileIt
 const itemLinkCopiedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
   event.stopPropagation();
 };
+
 const itemCopiedAction = (event: React.MouseEvent<HTMLElement>, tileItemId: string) => {
   event.stopPropagation();
 };

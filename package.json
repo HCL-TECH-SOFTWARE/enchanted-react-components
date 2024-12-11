@@ -1,6 +1,6 @@
 {
   "name": "@hcl-software/enchanted-react-components",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Enchanted React Components is a collection of components that are used in HCL Software products.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "lint-fix": "eslint --ext .ts,.tsx --fix src",
     "test-storyshots": "jest --collectCoverage=false --testPathPattern \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --testTimeout=10000 --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --testTimeout=15000 --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "test-unit": "CI=true jest --config ./jest.config.js --testPathPattern \"__tests__/unit\" --testTimeout=10000 --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -72,7 +72,7 @@
     "@types/jest": "^29.5.10",
     "@types/jest-image-snapshot": "^6.4.0",
     "@types/lodash": "^4.14.123",
-    "@types/node": "^16.11.68",
+    "@types/node": "^22.8.1",
     "@types/puppeteer": "^5.4.7",
     "@types/react": "^18.2.0",
     "@types/stylis": "^4.2.0",

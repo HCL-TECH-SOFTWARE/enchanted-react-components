@@ -3,7 +3,21 @@
 ## Unreleased
 
 ### Added
-- Added the `list--edit` icon to the icons preview
+
+### Fixed
+
+### Changed
+- Added keyboard accessibility to the header in `DataGrid` component
+- Added focus to the input label in `TextField` and `SelectMultiple` components
+- Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
+- Added a configurable optional property for `Snackbar` position
+
+### Breaking changes
+
+## 1.2.0
+
+### Added
+- Added all new icons including icons package v1.3.0 to the icon preview
 - Added the `ToggleButton` component
 - Added the `HCLSoftwareBlue 07 (20P)` color
 - Added the `selectedOpacityHover` in theme.palette.action
@@ -36,6 +50,14 @@
 - Added tooltips to the icons in the pagination, dialog, header, and snackbar components.
 - Added `withbackdrop` props to the circular progress component
 - Added a prop to the `Preview` component for a version comparison.
+- Updated breadcrumb icons to reflect directionality (RTL/LTR)
+- Resolved spacing issues for icon buttons in the panel component.
+- Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
+- Added `isRowClickable` prop to the `DataGrid` component. 
+- Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
+- Updated icon button spacing in Snackbar
+- Adjusted checkbox alignment in `DataGrid` component
+- Resolved tooltip issue of options in `Autocomplete` component
 
 ### Breaking changes
 

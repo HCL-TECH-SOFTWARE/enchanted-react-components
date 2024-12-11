@@ -16,7 +16,10 @@
 import React from 'react';
 import MuiBreadcrumbs, { BreadcrumbsProps as MuiBreadcrumbsProps } from '@mui/material/Breadcrumbs';
 import { Components, Theme } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import IconChevronRight from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--right';
+import IconChevronLeft from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--left';
+import { ThemeDirectionType } from '../theme';
 
 /**
  * @typedef BreadcrumbsProps
@@ -119,7 +122,9 @@ export const getMuiBreadcrumbsThemeOverrides = (): Components<Omit<Theme, 'compo
 };
 
 const Breadcrumbs = ({ ...props }: BreadcrumbsProps) => {
-  return <MuiBreadcrumbs {...props} />;
+  const theme = useTheme();
+  const separator = theme.direction === ThemeDirectionType.RTL ? <IconChevronLeft /> : <IconChevronRight />;
+  return <MuiBreadcrumbs separator={separator} {...props} />;
 };
 
 Breadcrumbs.defaultProps = {
