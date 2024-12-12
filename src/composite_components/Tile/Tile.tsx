@@ -132,12 +132,6 @@ const CustomCheckbox = styled(Checkbox)(({ theme }) => {
   };
 });
 
-const CustomIconView = styled(IconView)(({ theme }) => {
-  return {
-    color: `${theme.palette.action.inverse}`,
-  };
-});
-
 const StyledImageListItembar = styled(ImageListItemBar)<ImageListContextProps>(({ theme }) => {
   const { hasThumbnail } = React.useContext(ImageListContext);
   return {
@@ -302,11 +296,12 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
+                  darkMode
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
                 >
-                  <CustomIconView />
+                  <IconView />
                 </IconButton>
                 <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
@@ -329,11 +324,12 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
+                  darkMode
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
                 >
-                  <CustomIconView />
+                  <IconView />
                 </IconButton>
                 <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
@@ -349,11 +345,12 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
+                  darkMode
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
                 >
-                  <CustomIconView />
+                  <IconView />
                 </IconButton>
                 <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>
@@ -369,11 +366,12 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
+                  darkMode
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
                 >
-                  <CustomIconView />
+                  <IconView />
                 </IconButton>
                 <PreviewTitle variant="body2">{hoverPreviewMenu || 'Preview'}</PreviewTitle>
               </Overlay>

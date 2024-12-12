@@ -249,6 +249,7 @@ export enum ColorNames {
   // theme colors
   PRIMARY_MAIN = 'PrimaryMain',
   PRIMARY_DARK = 'PrimaryDark',
+  PRIMARY_DARK_INVERSE = 'PrimaryDarkInverse',
   PRIMARY_HOVER = 'PrimaryHover',
   PRIMARY_INVERSE = 'PrimaryInverse',
   PRIMARY_INVERSE_HOVER = 'PrimaryInverseHover',
@@ -525,6 +526,7 @@ export const Colors = new Map<ColorNames, string | undefined>([
   // theme colors
   [ColorNames.PRIMARY_MAIN, blue.BLUE800],
   [ColorNames.PRIMARY_DARK, '#0029A9'], // This color is not present in the color primitives but being used in the theme, need to add this color in the color primitives
+  [ColorNames.PRIMARY_DARK_INVERSE, '#E6FFFF'],
   [ColorNames.PRIMARY_HOVER, '#002B6C'],
   [ColorNames.PRIMARY_INVERSE, blue.BLUE300],
   [ColorNames.PRIMARY_INVERSE_HOVER, '#A7FFFF'],
