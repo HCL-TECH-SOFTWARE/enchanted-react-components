@@ -67,7 +67,7 @@
     "@storybook/react": "^7.6.3",
     "@storybook/react-webpack5": "^7.6.3",
     "@storybook/testing-library": "0.2.2",
-    "@testing-library/react": "^14.2.1",
+    "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/jest": "^29.5.10",
     "@types/jest-image-snapshot": "^6.4.0",
