@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added the `favoritesToggleComponent` props to the `Header` component
 
 ### Fixed
 

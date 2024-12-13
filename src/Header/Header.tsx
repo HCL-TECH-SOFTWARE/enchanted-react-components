@@ -58,6 +58,7 @@ export interface IHeaderStartSection {
   avatar?: React.ReactNode,
   subtitle?: string,
   favoritesToggleIcon?: React.ReactNode,
+  favoritesToggleComponent?: React.ReactNode, // renders a favorite toggle component instead of icon.
   backIconToolTip?: string,
 }
 
@@ -288,7 +289,8 @@ const Header = ({ ...props }: HeaderProps) => {
                 {startSection.subtitle}
               </Typography>
             )}
-          {(startSection?.favoritesToggleIcon && React.isValidElement(startSection.favoritesToggleIcon))
+          {/* added a condition that if a favoritesToggleIcon and favoritesToggleComponent are both props of the header, the component will be rendered only */}
+          {(startSection?.favoritesToggleIcon && React.isValidElement(startSection.favoritesToggleIcon) && !startSection?.favoritesToggleComponent)
             && (
               <IconButton
                 size={IconButtonSizes.SMALL}
@@ -298,6 +300,10 @@ const Header = ({ ...props }: HeaderProps) => {
               >
                 {startSection.favoritesToggleIcon}
               </IconButton>
+            )}
+          {(startSection?.favoritesToggleComponent && React.isValidElement(startSection.favoritesToggleComponent))
+            && (
+              startSection.favoritesToggleComponent
             )}
         </StartSectionGridStyled>
         {
