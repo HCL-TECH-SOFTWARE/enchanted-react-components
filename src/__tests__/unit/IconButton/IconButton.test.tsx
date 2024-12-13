@@ -96,4 +96,18 @@ describe('Icon Button', () => {
     expect(screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).not.toBeNull();
     expect((screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).dataset.muiTest).toEqual('chevron--downIcon');
   });
+
+  it('should render the icon button in dark mode', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <IconButton darkMode>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole('button');
+    expect(button).not.toBeNull();
+    expect((button.firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect(getComputedStyle(button).color).toBe('rgba(255, 255, 255, 0.8)');
+  });
 });
