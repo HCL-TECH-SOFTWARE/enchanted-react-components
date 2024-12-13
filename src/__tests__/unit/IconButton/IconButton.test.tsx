@@ -105,9 +105,8 @@ describe('Icon Button', () => {
         </IconButton>
       </ThemeProvider>,
     );
-    const button = screen.getByRole('button');
-    expect(button).not.toBeNull();
-    expect((button.firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
-    expect(getComputedStyle(button).color).toBe('rgba(255, 255, 255, 0.8)');
+    expect(screen.getByRole('button')).not.toBeNull();
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect(getComputedStyle(screen.getByRole('button')).color).toBe('rgba(255, 255, 255, 0.8)');
   });
 });
