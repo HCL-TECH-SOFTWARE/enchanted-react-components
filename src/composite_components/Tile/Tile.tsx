@@ -296,7 +296,7 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
-                  darkMode
+                  inversecolors
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
@@ -324,7 +324,7 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
-                  darkMode
+                  inversecolors
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
@@ -345,7 +345,7 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
-                  darkMode
+                  inversecolors
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
@@ -366,7 +366,7 @@ const Tile = (props: TilePropsType) => {
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
                   data-testid={TileTestIds.TILE_PREVIEW}
-                  darkMode
+                  inversecolors
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}

@@ -4,7 +4,7 @@
 
 ### Added
 - Added the `favoritesToggleComponent` props to the `Header` component
-- Added an inverse color variant to the `IconButton` component for dark mode
+- Added an inverse color variant to the `IconButton` component when `inversecolors` is enabled
 - Added the `darkInverse`, `focusInverse`, and `selectedInverse` colors to the palette
 
 ### Fixed

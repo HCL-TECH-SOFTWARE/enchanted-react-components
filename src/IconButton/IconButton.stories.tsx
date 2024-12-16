@@ -70,8 +70,8 @@ export default {
       description: 'The disabled of the IconButton.',
       if: { arg: 'interactive' },
     },
-    darkMode: {
-      description: 'The colors of the IconButton are updated to the inverse color variant when dark mode is enabled.',
+    inversecolors: {
+      description: 'The colors of the IconButton are updated to the inverse color variant when inversecolors is enabled.',
       if: { arg: 'interactive' },
     },
     centerRipple: {
@@ -2123,7 +2123,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               size={IconButtonSizes.MEDIUM}
               variant={IconButtonVariants.WITH_PADDING}
               label="default"
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2132,7 +2132,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               variant={IconButtonVariants.WITH_PADDING}
               label="focus"
               className="force-to-focus"
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2141,7 +2141,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               variant={IconButtonVariants.WITH_PADDING}
               label="hover & focus"
               className="force-to-focusHover"
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2150,7 +2150,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               variant={IconButtonVariants.WITH_PADDING}
               label="disabled"
               disabled
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2169,7 +2169,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               variant={IconButtonVariants.WITH_PADDING}
               label="default"
               selected
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2179,7 +2179,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               label="focus"
               selected
               className="force-to-focus"
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2189,7 +2189,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               label="hover & focus"
               selected
               className="force-to-focusHover"
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>
@@ -2199,7 +2199,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               label="disabled"
               selected
               disabled
-              darkMode
+              inversecolors
             >
               <IconAdd />
             </IconButton>

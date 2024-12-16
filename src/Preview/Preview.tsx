@@ -786,7 +786,7 @@ const Preview: React.FC<PreviewProps> = ({
                 <IconButton
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_OUT_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
-                  darkMode
+                  inversecolors
                   disabled={zoomOutDisable}
                   onClick={handleZoomOut}
                   showendicon={0}
@@ -817,7 +817,7 @@ const Preview: React.FC<PreviewProps> = ({
                 <IconButton
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_IN_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
-                  darkMode
+                  inversecolors
                   disabled={zoomInDisable}
                   onClick={handleZoomIn}
                   showendicon={0}

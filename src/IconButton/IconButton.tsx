@@ -33,31 +33,31 @@ export enum IconButtonTestIds {
   ICONBUTTON_END_ICON = 'iconButtonEndIcon',
 }
 
-const StyledMainContainer = styled('div')<{ darkMode?: boolean }>((props) => {
-  const { theme, darkMode } = props;
+const StyledMainContainer = styled('div')<{ inversecolors: Boolean }>((props) => {
+  const { theme, inversecolors } = props;
   return {
     flexDirection: 'column',
     justifyContent: 'center',
     display: 'inline-flex',
     alignItems: 'center',
     '&.selected': {
-      color: darkMode ? theme.palette.action.selectedInverse : theme.palette.action.selected,
+      color: inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
       '.MuiSvgIcon-root, .MuiTypography-root': {
-        color: darkMode ? theme.palette.action.selectedInverse : theme.palette.action.selected,
+        color: inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
       },
     },
     '&.disabled': {
-      color: darkMode ? theme.palette.action.disabledInverse : theme.palette.action.disabled,
+      color: inversecolors ? theme.palette.action.disabledInverse : theme.palette.action.disabled,
       '.MuiSvgIcon-root, .MuiTypography-root': {
-        color: darkMode ? theme.palette.action.disabledInverse : theme.palette.action.disabled,
+        color: inversecolors ? theme.palette.action.disabledInverse : theme.palette.action.disabled,
       },
       pointerEvents: 'none',
     },
   };
 });
 
-const StyledSubContainer = styled('div')<{ darkMode?: boolean }>((props) => {
-  const { theme, darkMode } = props;
+const StyledSubContainer = styled('div')<{ inversecolors: Boolean }>((props) => {
+  const { theme, inversecolors } = props;
   return {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -66,35 +66,35 @@ const StyledSubContainer = styled('div')<{ darkMode?: boolean }>((props) => {
     width: 'fit-content',
     '&:hover': {
       borderRadius: '2px',
-      backgroundColor: darkMode ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+      backgroundColor: inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
     },
     '&.force-to-focusHover': {
       borderRadius: '2px',
-      backgroundColor: darkMode ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+      backgroundColor: inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
     },
     '&.selected': {
-      outline: `1px solid ${darkMode ? theme.palette.action.focusInverse : theme.palette.action.focus}`,
+      outline: `1px solid ${inversecolors ? theme.palette.action.focusInverse : theme.palette.action.focus}`,
       borderRadius: '1px',
       backgroundColor: theme.palette.action.selectedOpacityModified,
       '&:hover': {
         backgroundColor: theme.palette.action.selectedOpacityModified,
-        color: darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
-        outline: `1px solid ${darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark}`,
+        color: inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
+        outline: `1px solid ${inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark}`,
         '.MuiSvgIcon-root, + .MuiTypography-root': {
-          color: darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
+          color: inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
         },
       },
       '&.force-to-focusHover': {
         backgroundColor: theme.palette.action.selectedOpacityModified,
-        color: darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
-        outline: `1px solid ${darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark}`,
+        color: inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
+        outline: `1px solid ${inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark}`,
         '.MuiSvgIcon-root, + .MuiTypography-root': {
-          color: darkMode ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
+          color: inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
         },
       },
       '&.disabled': {
         backgroundColor: theme.palette.action.disabledOpacityModified,
-        outline: `1px solid ${darkMode ? theme.palette.border.inverseSecondary : theme.palette.border.secondary}`,
+        outline: `1px solid ${inversecolors ? theme.palette.border.inverseSecondary : theme.palette.border.secondary}`,
         borderRadius: '1px',
       },
     },
@@ -107,22 +107,22 @@ export const getMuiIconButtonThemeOverrides = (): Components<Omit<Theme, 'compon
       styleOverrides: {
         root: ({ ownerState, theme }) => {
           return ({
-            color: ownerState.darkMode ? theme.palette.action.inverse : theme.palette.action.active,
+            color: ownerState.inversecolors ? theme.palette.action.inverse : theme.palette.action.active,
             backgroundColor: 'transparent',
             borderRadius: '2px',
             padding: 0,
             '&.Mui-focusVisible, &:focus, &.force-to-focus, &.force-to-focusHover': {
-              outline: `1px solid ${ownerState.darkMode ? theme.palette.action.focusInverse : theme.palette.action.focus}`,
+              outline: `1px solid ${ownerState.inversecolors ? theme.palette.action.focusInverse : theme.palette.action.focus}`,
               borderRadius: '3px',
               outlineOffset: '-2px',
             },
             '&:hover': {
               borderRadius: '2px',
-              backgroundColor: ownerState.darkMode ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+              backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
             },
             '&.force-to-focusHover': {
               borderRadius: '2px',
-              backgroundColor: ownerState.darkMode ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+              backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
             },
             '.MuiSvgIcon-root:not(.endIcon)': {
               margin: '0',
@@ -165,18 +165,19 @@ export type IconButtonProps = MuiIconButtonProps & {
   selected?: boolean,
   label?: string,
   showendicon?: boolean | 0 | 1,
-  darkMode?: boolean,
+  inversecolors?: boolean | 0 | 1,
 }
 
 const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps, forwardRef) => {
+  props.inversecolors = props.inversecolors ? 1 : 0;
   return (
     <StyledMainContainer
       className={`IconButtonMainContainer ${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
-      darkMode={props.darkMode}
+      inversecolors={Boolean(props.inversecolors)}
     >
       <StyledSubContainer
         className={`${props.selected ? 'selected' : ''} ${props.disabled ? 'disabled' : ''} ${props.className}`}
-        darkMode={props.darkMode}
+        inversecolors={Boolean(props.inversecolors)}
       >
         <MuiIconButton
           {...props}
@@ -192,7 +193,7 @@ const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps,
               data-testid={IconButtonTestIds.ICONBUTTON_END_ICON}
               sx={(theme) => {
                 return {
-                  color: props.darkMode ? theme.palette.action.inverse : theme.palette.action.active,
+                  color: (props.inversecolors) ? theme.palette.action.inverse : theme.palette.action.active,
                   width: '12px',
                   height: '12px',
                   margin: '0',
@@ -226,7 +227,7 @@ const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps,
         textAlign="center"
         sx={(theme) => {
           return {
-            color: props.darkMode ? theme.palette.action.inverse : theme.palette.action.active,
+            color: (props.inversecolors) ? theme.palette.action.inverse : theme.palette.action.active,
             paddingLeft: '4px',
             paddingRight: '4px',
             marginTop: '2px',
@@ -248,7 +249,7 @@ IconButton.defaultProps = {
   showendicon: false,
   label: undefined,
   disabled: false,
-  darkMode: false,
+  inversecolors: false,
   disableFocusRipple: true,
   edge: false,
   centerRipple: true,

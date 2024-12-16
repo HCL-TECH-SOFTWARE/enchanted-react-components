@@ -97,10 +97,10 @@ describe('Icon Button', () => {
     expect((screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).dataset.muiTest).toEqual('chevron--downIcon');
   });
 
-  it('should render the icon button in dark mode', () => {
+  it('should render the inverse colors for the IconButton when inversecolors is enabled', () => {
     render(
       <ThemeProvider theme={theme}>
-        <IconButton darkMode>
+        <IconButton inversecolors>
           <IconDelete />
         </IconButton>
       </ThemeProvider>,
