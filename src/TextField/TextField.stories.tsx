@@ -56,6 +56,12 @@ export default {
         defaultValue: { summary: TextField.defaultProps?.label },
       },
     },
+    id: {
+      description: 'Attribute to set the id.',
+      table: {
+        defaultValue: { summary: TextField.defaultProps?.id },
+      },
+    },
     helperText: {
       description: 'Attribute to set the helper text.',
       table: {
@@ -162,6 +168,7 @@ export const ExampleTextField = {
     color: 'primary',
     size: 'medium',
     label: 'Label',
+    id: 'input-id',
     helperText: 'Some important text',
     helperIconTooltip: 'Some information about that component.',
     placeholder: 'Placeholder',

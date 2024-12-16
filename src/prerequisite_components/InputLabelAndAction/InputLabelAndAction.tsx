@@ -70,15 +70,14 @@ export const StyledInputLabel = styled(MuiInputLabel)((theme) => {
 });
 
 const getMuiInputLabelProps = (props: InputLabelAndActionProps): MuiInputLabelProps => {
-  const inputLabelId = props.label && props.id ? `${props.id}-label` : undefined;
   const inputLabelProps: MuiInputLabelProps = {
     color: props.color,
     disabled: props.disabled,
     error: props.error,
     required: props.required,
     sx: props.sx,
-    htmlFor: props.id,
-    id: inputLabelId,
+    htmlFor: props.htmlFor,
+    id: props.id,
   };
   return inputLabelProps;
 };
