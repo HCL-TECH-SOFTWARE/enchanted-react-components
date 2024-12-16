@@ -292,7 +292,7 @@ const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
 };
 
 const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): InputLabelAndActionProps => {
-  const inputLabelId = props.label && props.id ? `${props.id}-label` : undefined;
+  const inputLabelId = props.id ? `${props.id}-label` : undefined;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
     disabled: props.disabled,
@@ -384,11 +384,13 @@ const renderInput = (props: TextFieldProps, setIsFocus: React.Dispatch<React.Set
 
 const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: React.ForwardedRef<unknown>) => {
   const [isFocus, setIsFocus] = React.useState(false);
-  const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   if (!props.id) {
     const id = useId();
     props.id = id;
+  } else {
+    props.id = `${useId()}${props.id}`;
   }
+  const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   const muiFormControlProps = getMuiFormControlProps(props, forwardRef);
   return (
     <TextFieldContainer>

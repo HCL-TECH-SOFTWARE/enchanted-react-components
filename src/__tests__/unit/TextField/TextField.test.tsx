@@ -136,4 +136,45 @@ describe('TextField', () => {
     expect(container.querySelector('input')).toBeNull();
     expect(container.querySelector('textarea')).not.toBeNull();
   });
+
+  it('Render with a11y attributes', () => {
+    const { container } = render(<TextField helperText="Some important text" />);
+    const label = container.querySelector('label');
+    const input = container.querySelector('input');
+    const helperText = container.querySelector('p');
+
+    if (!label) {
+      throw new Error('Label is not found');
+    }
+    if (!input) {
+      throw new Error('Input is not found');
+    }
+    if (!helperText) {
+      throw new Error('Helper text is not found');
+    }
+
+    expect(label.getAttribute('for')).toBe(input.id);
+    expect(input.getAttribute('aria-describedby')).toBe(helperText.id);
+  });
+
+  it('Renders with a11y attributes and the provided id', () => {
+    const id = 'input-id';
+    const { container } = render(<TextField id={id} helperText="Some important text" />);
+    const label = container.querySelector('label');
+    const input = container.querySelector('input');
+    const helperText = container.querySelector('p');
+
+    if (!label) {
+      throw new Error('Label is not found');
+    }
+    if (!input) {
+      throw new Error('Input is not found');
+    }
+    if (!helperText) {
+      throw new Error('Helper text is not found');
+    }
+
+    expect(label.getAttribute('for')).toBe(input.id);
+    expect(input.getAttribute('aria-describedby')).toBe(helperText.id);
+  });
 });
