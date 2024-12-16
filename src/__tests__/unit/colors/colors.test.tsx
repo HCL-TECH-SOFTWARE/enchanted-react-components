@@ -22,6 +22,7 @@ describe('Colors', () => {
     // theme colors
     expect(ColorNames.PRIMARY_MAIN).toEqual('PrimaryMain');
     expect(ColorNames.PRIMARY_HOVER).toEqual('PrimaryHover');
+    expect(ColorNames.PRIMARY_DARK_INVERSE).toEqual('PrimaryDarkInverse');
     expect(ColorNames.PRIMARY_INVERSE).toEqual('PrimaryInverse');
     expect(ColorNames.PRIMARY_INVERSE_HOVER).toEqual('PrimaryInverseHover');
     expect(ColorNames.ERROR_MAIN).toEqual('ErrorMain');
@@ -293,6 +294,7 @@ describe('Colors', () => {
     // theme colors
     expect(Colors.get(ColorNames.PRIMARY_MAIN)).toEqual(blue.BLUE800);
     expect(Colors.get(ColorNames.PRIMARY_HOVER)).toEqual('#002B6C');
+    expect(Colors.get(ColorNames.PRIMARY_DARK_INVERSE)).toEqual('#E6FFFF');
     expect(Colors.get(ColorNames.PRIMARY_INVERSE)).toEqual(blue.BLUE300);
     expect(Colors.get(ColorNames.PRIMARY_INVERSE_HOVER)).toEqual('#A7FFFF');
     expect(Colors.get(ColorNames.ERROR_MAIN)).toEqual(red.RED800);

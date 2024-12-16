@@ -96,4 +96,17 @@ describe('Icon Button', () => {
     expect(screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).not.toBeNull();
     expect((screen.getByTestId(IconButtonTestIds.ICONBUTTON_END_ICON)).dataset.muiTest).toEqual('chevron--downIcon');
   });
+
+  it('should render the inverse colors for the IconButton when inversecolors is enabled', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <IconButton inversecolors>
+          <IconDelete />
+        </IconButton>
+      </ThemeProvider>,
+    );
+    expect(screen.getByRole('button')).not.toBeNull();
+    expect((screen.getByRole('button').firstElementChild as HTMLElement).dataset.muiTest).toEqual('deleteIcon');
+    expect(getComputedStyle(screen.getByRole('button')).color).toBe('rgba(255, 255, 255, 0.8)');
+  });
 });
