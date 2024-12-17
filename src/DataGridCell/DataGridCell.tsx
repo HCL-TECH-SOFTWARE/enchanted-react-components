@@ -44,7 +44,12 @@ const DataGridCell = (props: GridRenderCellParams) => {
   const handleOnCellKeydown = React.useCallback((event: React.KeyboardEvent) => {
     const target = event.target as HTMLDivElement;
     // if cell has action button and if user press tab we should not hide action button
-    if (event.key === 'Tab' && row[`endActions-${colDef.field}`] && row[`endActions-${colDef.field}`].length > 0 && target.parentElement?.nextElementSibling) {
+    if ((event.key === 'Tab' || event.key === 'ArrowDown' || event.key === 'ArrowUp')
+      && row[`endActions-${colDef.field}`] && row[`endActions-${colDef.field}`].length > 0) {
+      if (target.getAttribute('role') === 'button' && !target.parentElement?.parentElement?.parentElement?.nextSibling) {
+        setIsActive(false);
+        return;
+      }
       setIsActive(true);
     } else {
       setIsActive(false);
