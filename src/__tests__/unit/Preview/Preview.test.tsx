@@ -128,6 +128,7 @@ const tooltipTexts = {
   previousAsset: 'Previous asset',
   nextAsset: 'Next asset',
   download: 'Download asset',
+  backButton: 'Go back to previous page',
 };
 
 // function for expecting asset to be fully rendered inside <Preview /> and finished loading/fetching assets
