@@ -16,7 +16,7 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import Snackbar, { SnackbarVariants } from './Snackbar';
-import SnackbarContainer from './SnackbarContainer';
+import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 
 export default {
@@ -114,7 +114,7 @@ const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args) => {
   // @ts-ignore for test only, its purpose is to show snackbar when its stack
   if (args.showStackSnackbar) {
     return (
-      <SnackbarContainer>
+      <SnackbarContainer position={SnackbarContainerPosition.LEFT}>
         <Snackbar {...args} />
         <Snackbar {...args} message={messageTwo} />
         <Snackbar {...args} message={messageThree} />

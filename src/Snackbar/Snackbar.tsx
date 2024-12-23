@@ -242,6 +242,7 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
       <Box>
         { getStatusIcon(rest.variant) }
         <Typography
+          role="alert" // for screen readers to announce the message
           variant="body2"
           data-testid={SnackbarTestIds.SNACKBAR_MESSAGE}
           {...buttonText && { 'data-buttontext': buttonText }}

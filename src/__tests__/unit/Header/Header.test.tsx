@@ -17,6 +17,7 @@ import {
   render, screen, fireEvent, waitFor, cleanup,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
+import IconStar from '@hcl-software/enchanted-icons/dist/carbon/es/star';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Header, { HeaderTestIds } from '../../../Header';
 import { sampleDigitalAssetManagerItemPage, sampleDigitalAssetManagerOverview } from '../../../Header/sampleHeaderConfig';
@@ -147,5 +148,20 @@ describe('Header', () => {
     const headerContainer = screen.getByTestId('header');
     fireEvent.mouseOver(headerContainer); // To hover element and show tooltip
     expect(screen.findByRole('tooltip')).not.toBeNull();
+  });
+
+  it('renders favoritesToggleComponent instead of favoritesToggleIcon', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <Header
+          startSection={{
+            favoritesToggleIcon: <IconStar />,
+            favoritesToggleComponent: <IconStar />,
+          }}
+        />
+      </ThemeProvider>,
+    );
+    const favoritesToggleIcon = screen.queryByTestId(HeaderTestIds.HEADER_FAVORITES_TOGGLE);
+    expect(favoritesToggleIcon).toBeNull();
   });
 });

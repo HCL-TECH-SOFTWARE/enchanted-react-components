@@ -37,7 +37,7 @@ export const getMuiListItemTextThemeOverrides = (): Components<Omit<Theme, 'comp
         root: ({ ownerState, theme }) => {
           return {
             margin: '0',
-            '& .MuiTypography-root': {
+            '&.list-item-text-truncate .MuiTypography-root': {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
@@ -103,6 +103,7 @@ const ListItemText = ({
 
   return (
     <MuiListItemText
+      className={`${tooltip ? '' : 'list-item-text-truncate'}`}
       ref={listRef}
       {...props}
       primary={primaryReactNode}

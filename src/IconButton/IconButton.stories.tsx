@@ -70,6 +70,10 @@ export default {
       description: 'The disabled of the IconButton.',
       if: { arg: 'interactive' },
     },
+    inversecolors: {
+      description: 'The colors of the IconButton are updated to the inverse color variant when inversecolors is enabled.',
+      if: { arg: 'interactive' },
+    },
     centerRipple: {
       description: 'The centerRipple of the IconButton.',
       if: { arg: 'interactive' },
@@ -147,7 +151,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
   return (
-    <Grid container spacing={30}>
+    <Grid container spacing={15}>
       <Grid item>
         <Grid container direction="column">
           <Grid item paddingBottom={0}>
@@ -2089,6 +2093,116 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
                 </IconButton>
               </Grid>
             </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid
+          container
+          direction="column"
+          rowSpacing={1}
+          sx={(theme) => {
+            return {
+              color: theme.palette.action.inverse,
+              backgroundColor: theme.palette.background.dark,
+              padding: '12px',
+            };
+          }}
+        >
+          <Typography>IconButton on dark background</Typography>
+          <Grid
+            item
+            sx={{
+              '.IconButtonMainContainer': {
+                marginRight: '16px',
+              },
+            }}
+          >
+            <Typography sx={{ marginBottom: '8px' }}>Default:</Typography>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="default"
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="focus"
+              className="force-to-focus"
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="hover & focus"
+              className="force-to-focusHover"
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="disabled"
+              disabled
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+          </Grid>
+          <Grid
+            item
+            sx={{
+              '.IconButtonMainContainer': {
+                marginRight: '16px',
+              },
+            }}
+          >
+            <Typography sx={{ marginBottom: '8px' }}>Selected:</Typography>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="default"
+              selected
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="focus"
+              selected
+              className="force-to-focus"
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="hover & focus"
+              selected
+              className="force-to-focusHover"
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
+            <IconButton
+              size={IconButtonSizes.MEDIUM}
+              variant={IconButtonVariants.WITH_PADDING}
+              label="disabled"
+              selected
+              disabled
+              inversecolors
+            >
+              <IconAdd />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

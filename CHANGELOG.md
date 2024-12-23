@@ -3,13 +3,22 @@
 ## Unreleased
 
 ### Added
+- Added the `favoritesToggleComponent` props to the `Header` component
+- Added an inverse color variant to the `IconButton` component when `inversecolors` is enabled
+- Added the `darkInverse`, `focusInverse`, and `selectedInverse` colors to the palette
 
 ### Fixed
+- Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
+- Corrected the focus styling of endActionButtons in `DataGrid` component.
+- Added `role="alert"` to the snackbar message text for improved screen reader accessibility.
 
 ### Changed
 - Added keyboard accessibility to the header in `DataGrid` component
 - Added focus to the input label in `TextField` and `SelectMultiple` components
+- Fixed `TextField` accessibility attributes to read label
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
+- Added a configurable optional property for `Snackbar` position
+- Fixed accessibility issue with `Autocomplete` required state
 
 ### Breaking changes
 
@@ -56,6 +65,7 @@
 - Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
+- Resolved tooltip issue of options in `Autocomplete` component
 
 ### Breaking changes
 

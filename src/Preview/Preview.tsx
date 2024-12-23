@@ -185,16 +185,6 @@ const ZoomContainer = styled(Grid)((props) => {
   };
 });
 
-const StyledIconButton = styled(IconButton)((props) => {
-  const { theme } = props;
-  return {
-    color: `1px solid ${theme.palette.common.white}`,
-    '&:hover': {
-      backgroundColor: theme.palette.action.hoverInverse,
-    },
-  };
-});
-
 const PreviousPreviewButton = styled(Grid)((props) => {
   const { theme } = props;
   return {
@@ -795,15 +785,16 @@ const Preview: React.FC<PreviewProps> = ({
                 placement="top"
                 title={tooltipTexts.zoomOut}
               >
-                <StyledIconButton
+                <IconButton
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_OUT_BUTTON}
-                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  inversecolors
                   disabled={zoomOutDisable}
                   onClick={handleZoomOut}
                   showendicon={0}
                 >
                   <IconZoomOut />
-                </StyledIconButton>
+                </IconButton>
               </Tooltip>
               <Tooltip
                 data-testid={PreviewTestIds.PREVIEW_ZOOM_TOOLTIP_TEXT}
@@ -825,15 +816,16 @@ const Preview: React.FC<PreviewProps> = ({
                 placement="top"
                 title={tooltipTexts.zoomIn}
               >
-                <StyledIconButton
+                <IconButton
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_IN_BUTTON}
-                  variant={IconButtonVariants.WITHOUT_PADDING}
+                  variant={IconButtonVariants.WITH_PADDING}
+                  inversecolors
                   disabled={zoomInDisable}
                   onClick={handleZoomIn}
                   showendicon={0}
                 >
                   <IconZoomIn />
-                </StyledIconButton>
+                </IconButton>
               </Tooltip>
             </ZoomContainer>
           </Grid>

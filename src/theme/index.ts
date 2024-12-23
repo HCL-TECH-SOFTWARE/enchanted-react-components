@@ -108,6 +108,8 @@ declare module '@mui/material/styles' {
     disabledOpacityModified?: string, // modified because TypeAction has another disabledOpacity property that accepts number only
     focusOpacityModified?: string, // modified because TypeAction has another focusOpacity property that accepts number only
     disableOpacityHover?: string;
+    focusInverse?: string;
+    selectedInverse?: string;
   }
 
   interface PaletteOptions {
@@ -116,10 +118,12 @@ declare module '@mui/material/styles' {
 
   interface PaletteColor {
     inverse?: string,
+    darkInverse?: string,
   }
 
   interface SimplePaletteColorOptions {
     inverse?: string,
+    darkInverse?: string,
   }
 
   interface Palette {
@@ -276,6 +280,7 @@ const PALETTE_LIGHT: PaletteOptions = {
   primary: {
     main: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07)),
     dark: ensureToGetColor(Colors.get(ColorNames.PRIMARY_DARK)),
+    darkInverse: ensureToGetColor(Colors.get(ColorNames.PRIMARY_DARK_INVERSE)),
     inverse: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE09)),
   },
   error: {
@@ -334,6 +339,7 @@ const PALETTE_LIGHT: PaletteOptions = {
     hover: ensureToGetColor(Colors.get(ColorNames.BLACK7P)),
     hoverOpacityModified: ensureToGetColor(Colors.get(ColorNames.BLACK7P)),
     selected: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07)),
+    selectedInverse: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE09)),
     selectedOpacityModified: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_8P)),
     selectedOpacityHover: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_20P)),
     disabled: ensureToGetColor(Colors.get(ColorNames.BLACK38P)),
@@ -341,6 +347,7 @@ const PALETTE_LIGHT: PaletteOptions = {
     disabledOpacityModified: ensureToGetColor(Colors.get(ColorNames.BLACK8P)),
     disableOpacityHover: ensureToGetColor(Colors.get(ColorNames.BLACK15P)),
     focus: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07)),
+    focusInverse: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE09)),
     focusOpacityModified: ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07_12P)),
     inverse: ensureToGetColor(Colors.get(ColorNames.WHITE80P)),
     disabledInverse: ensureToGetColor(Colors.get(ColorNames.WHITE38P)),
