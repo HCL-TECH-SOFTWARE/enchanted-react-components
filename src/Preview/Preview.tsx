@@ -91,6 +91,7 @@ export interface PreviewProps {
     nextAsset: string;
     previousAsset: string;
     download: string;
+    backButton: string;
   }
   isNextButtonDisabled?: boolean;
   isPreviousButtonDisabled?: boolean;
@@ -648,6 +649,7 @@ const Preview: React.FC<PreviewProps> = ({
               hamburgerSpace: false,
               withBackButton: true,
               title: customHeaderTitle ?? currentAsset.title,
+              backIconToolTip: tooltipTexts.backButton,
             }}
             middleSection={[
               <Typography color="textSecondary" variant="subtitle2" marginRight={-1}>{renditionLabel}</Typography>,
