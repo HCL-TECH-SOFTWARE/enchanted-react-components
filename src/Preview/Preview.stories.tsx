@@ -104,6 +104,7 @@ const tooltipTexts: PreviewProps['tooltipTexts'] = {
   previousAsset: 'Previous asset',
   nextAsset: 'Next asset',
   download: 'Download asset',
+  backButton: 'Go back to previous page',
 };
 
 const VisualTestTemplate: StoryFn<typeof Preview> = (args) => {

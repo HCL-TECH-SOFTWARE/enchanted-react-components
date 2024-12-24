@@ -439,18 +439,20 @@ const ProgressItems = (props: ProgressItemsProps) => {
                             </Tooltip>
                           )}
                           {showLearnMoreButton && (
-                            <Button
-                              style={{ marginLeft: '4px', padding: '0px 3px 3px 3px' }}
-                              onClick={learnMoreOnFailure}
-                              onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                  learnMoreOnFailure(event);
-                                }
-                              }}
-                              data-testid="learn-more-button"
-                            >
-                              <Typography variant="caption">{literals.learnMoreLabel}</Typography>
-                            </Button>
+                            <Tooltip title={literals.learnMoreLabel} tooltipsize="small">
+                              <Button
+                                style={{ marginLeft: '4px', padding: '0px 3px 3px 3px' }}
+                                onClick={learnMoreOnFailure}
+                                onKeyDown={(event) => {
+                                  if (event.key === 'Enter') {
+                                    learnMoreOnFailure(event);
+                                  }
+                                }}
+                                data-testid="learn-more-button"
+                              >
+                                <Typography variant="caption">{literals.learnMoreLabel}</Typography>
+                              </Button>
+                            </Tooltip>
                           )}
                         </>
                       )}
