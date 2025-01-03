@@ -265,7 +265,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
   };
 };
 
-const TextFieldContainer = styled('div')((theme) => {
+const StyledMuiFormControl = styled(MuiFormControl)((theme) => {
   return {
     '.MuiAutocomplete--label--focused': {
       color: theme.theme.palette.primary.main,
@@ -393,12 +393,10 @@ const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: Re
   const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   const muiFormControlProps = getMuiFormControlProps(props, forwardRef);
   return (
-    <TextFieldContainer>
-      <MuiFormControl {...muiFormControlProps}>
-        <InputLabelAndAction {...muiInputLabelProps} />
-        {renderInput(props, setIsFocus)}
-      </MuiFormControl>
-    </TextFieldContainer>
+    <StyledMuiFormControl {...muiFormControlProps}>
+      <InputLabelAndAction {...muiInputLabelProps} />
+      {renderInput(props, setIsFocus)}
+    </StyledMuiFormControl>
   );
 }) as React.FC<TextFieldProps>;
 
