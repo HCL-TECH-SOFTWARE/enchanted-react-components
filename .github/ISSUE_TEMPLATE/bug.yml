@@ -1,0 +1,35 @@
+name: Bug report 🐛
+description: Create a bug report.
+labels: ['bug', 'pending assessment']
+body:
+  - type: checkboxes
+    attributes:
+      label: Latest version
+      description: Bug reports shall always happen on the latest version. This could either be the latest npm package or by checking the latest storybook.
+      options:
+        - label: I have tested the latest version
+          required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: |
+        **⚠️ Issues that we can't reproduce can't be fixed.**
+
+        Please provide detailed information on how to reproduce the issue.
+      value: |
+        Steps:
+        1. 
+        2.
+        3.
+  - type: textarea
+    attributes:
+      label: Current behavior
+      description: Describe what happens instead of the expected behavior.
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: Describe what should happen.
+  - type: textarea
+    attributes:
+      label: Context
+      description: What are you trying to accomplish? Providing context helps us come up with a solution that is more useful in the real world.
