@@ -21,7 +21,7 @@
 - Fixed accessibility issue with `Autocomplete` required state
 
 ### Breaking changes
-- Added `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
+- Added required `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
 
 ## 1.2.0
 
