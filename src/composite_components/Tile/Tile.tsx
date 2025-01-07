@@ -300,6 +300,7 @@ const Tile = (props: TilePropsType) => {
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
+                  aria-label="Preview"
                 >
                   <IconView />
                 </IconButton>
@@ -328,6 +329,7 @@ const Tile = (props: TilePropsType) => {
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
+                  aria-label="Preview"
                 >
                   <IconView />
                 </IconButton>
@@ -349,6 +351,7 @@ const Tile = (props: TilePropsType) => {
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
+                  aria-label="Preview"
                 >
                   <IconView />
                 </IconButton>
@@ -370,6 +373,7 @@ const Tile = (props: TilePropsType) => {
                   onClick={(event) => { return handlePreviewAction?.(event, itemId); }}
                   onFocus={() => { return setIsOverlayVisible(true); }}
                   onBlur={() => { return setIsOverlayVisible(false); }}
+                  aria-label="Preview"
                 >
                   <IconView />
                 </IconButton>
