@@ -19,9 +19,9 @@
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
 - Added a configurable optional property for `Snackbar` position
 - Fixed accessibility issue with `Autocomplete` required state
-- Changed `Preview` component to take back button tooltip from TooltipTexts.
 
 ### Breaking changes
+- Added `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
 
 ## 1.2.0
 
