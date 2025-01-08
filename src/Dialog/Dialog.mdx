@@ -1,0 +1,19 @@
+import { Meta, Primary, Canvas, Controls, Stories } from '@storybook/blocks';
+
+import * as DialogStories from './Dialog.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+<Primary />
+
+<Controls />
+
+<Stories />
+
+### Developer Notes
+
+#### Accessibility
+- When a Dialog is opened, it adds an `aria-hidden="true"` attribute to the root element and its siblings. This prevents screen readers from reading the content behind the Dialog.
+If the screen reader needs to read these contents (e.g., for alerts/snackbars), the `aria-hidden` attribute should be removed first.
