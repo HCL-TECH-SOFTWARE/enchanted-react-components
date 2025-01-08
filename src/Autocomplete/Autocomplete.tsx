@@ -53,10 +53,6 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   placeholder?: string;
 }
 
-interface Movie {
-  label: string;
-  year: number;
-}
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
