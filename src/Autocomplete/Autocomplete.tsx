@@ -16,6 +16,7 @@
 import React from 'react';
 import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
 import { Components, Theme } from '@mui/material';
+import Tooltip from '../Tooltip/Tooltip';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -50,6 +51,11 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
+}
+
+interface Movie {
+  label: string;
+  year: number;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -110,6 +116,17 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const helperTextId = props.helperText && props.id ? `${props.id}-helper-text` : undefined;
   const muiFormControlProps = getMuiFormControlProps(props);
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
+  const textfieldRef = React.useRef<HTMLInputElement>(null);
+  const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
+
+  React.useEffect(() => {
+    const textFieldElement = textfieldRef.current;
+    if (textFieldElement && textFieldElement.scrollWidth > textFieldElement.clientWidth) {
+      setIsValueOverFlowing(true);
+    } else {
+      setIsValueOverFlowing(false);
+    }
+  }, [props.value]);
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -144,7 +161,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
             };
-            return <TextField {...textFieldArgs} />;
+            const tooltipTitle = isValueOverFlowing? textfieldRef.current?.value || '' : '';
+            return (
+              <Tooltip title={tooltipTitle}>
+                <TextField {...textFieldArgs} inputRef={textfieldRef} />
+              </Tooltip>
+            );
           }}
         />
         <MuiFormHelperText id={helperTextId} sx={{ marginTop: nonEdit ? '0px' : '4px' }}>{helperText}</MuiFormHelperText>
