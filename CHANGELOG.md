@@ -6,6 +6,7 @@
 - Added the `favoritesToggleComponent` props to the `Header` component
 - Added an inverse color variant to the `IconButton` component when `inversecolors` is enabled
 - Added the `darkInverse`, `focusInverse`, and `selectedInverse` colors to the palette
+- Added `Developer Notes` section in `Dialog` component's Storybook Docs
 
 ### Fixed
 - Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
