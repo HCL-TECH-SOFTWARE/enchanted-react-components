@@ -130,6 +130,22 @@ return (
   </DirectionStyleProvider>
 )
 ```
+**Note**: `<CssBaseline />` will inject some global styles into the page. If this is not desired, wrap your app in `<ScopedCssBaseline>` instead.  
+For example:
+```
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+...
+  <DirectionStyleProvider direction={themeDirection}>
+    <ThemeProvider theme={enchantedTheme}>
+      <div dir={themeDirection}>
+        <ScopedCssBaseline>
+          <App />
+        </ScopedCssBaseline>
+      </div>
+    </ThemeProvider>
+  </DirectionStyleProvider>
+```
+
 
 ### Tokenizing - Typographies and Colors
 
