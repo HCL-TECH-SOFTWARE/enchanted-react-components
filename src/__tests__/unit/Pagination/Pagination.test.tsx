@@ -166,4 +166,26 @@ describe('TablePagination', () => {
     expect(screen.queryByTestId(TablePaginationTestIds.TABLE_PAGINATION_ROWS_DIV)).toBeNull();
     expect(screen.queryByTestId(TablePaginationTestIds.TABLE_PAGINATION_PAGE_DIV)).toBeNull();
   });
+
+  it('should have correct aria-label for rows per page in pagination', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} />
+      </ThemeProvider>,
+    );
+    const rowsPerPage = screen.getByLabelText('Show rows:');
+    expect(rowsPerPage).not.toBeNull();
+    expect(rowsPerPage.getAttribute('aria-label')).toBe('Show rows:');
+  });
+
+  it('should have correct aria-label for page number in pagination', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Pagination page={0} rowsPerPage={10} count={100} />
+      </ThemeProvider>,
+    );
+    const pageNumber = screen.getByLabelText('Page:');
+    expect(pageNumber).not.toBeNull();
+    expect(pageNumber.getAttribute('aria-label')).toBe('Page:');
+  });
 });

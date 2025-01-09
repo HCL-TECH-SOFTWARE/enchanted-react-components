@@ -12,6 +12,7 @@
 - Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
 - Corrected the focus styling of endActionButtons in `DataGrid` component.
 - Added `role="alert"` to the snackbar message text for improved screen reader accessibility.
+- Added `aria-label` to the input fields for the pagination row label and page label to enhance screen reader accessibility.
 
 ### Changed
 - Added keyboard accessibility to the header in `DataGrid` component
