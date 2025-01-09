@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -106,8 +106,11 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   // prevents DOM warning for error=boolean
   rest.error = rest.error ? 1 : 0;
 
+  if (!props.id) {
+    props.id = props.id || `autocomplete-${(React.createRef().current as HTMLElement)?.id || Math.random().toString(36).substring(7)}`;
+  }
   const [isFocus, setIsFocus] = React.useState(false);
-  const helperTextId = props.helperText && props.id ? `${props.id}-helper-text` : undefined;
+  const helperTextId = props.helperText ? `${props.id}-helper-text` : undefined;
   const muiFormControlProps = getMuiFormControlProps(props);
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
   const textfieldRef = React.useRef<HTMLInputElement>(null);
@@ -156,9 +159,13 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               value: props.value,
             };
             const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
+            const inputProps = {
+              'aria-errormessage': props.error ? helperTextId : undefined,
+              'aria-describedby': props.error ? undefined : helperTextId,
+            };
             return (
               <Tooltip title={tooltipTitle} tooltipsize="small">
-                <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                <TextField {...textFieldArgs} inputRef={textfieldRef} inputProps={inputProps} />
               </Tooltip>
             );
           }}
