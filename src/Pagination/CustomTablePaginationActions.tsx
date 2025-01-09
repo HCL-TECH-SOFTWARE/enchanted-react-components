@@ -78,6 +78,8 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
         { atLeast480px
           && <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_ROWS_LABEL}>{translation.rowsPerPageLabel}</Typography>}
         <Autocomplete
+          aria-label={translation.rowsPerPageLabel}
+          tabIndex={0}
           noOptionsText=""
           options={rowsPerPageOptions}
           getOptionLabel={(option) => { return (Number(option)).toString(); }}
@@ -174,6 +176,8 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
         { atLeast480px
           && <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL}>{translation.pageLabel}</Typography>}
         <Autocomplete
+          aria-label={translation.pageLabel}
+          tabIndex={0}
           noOptionsText=""
           options={Array.from(Array(Math.ceil(count / rowsPerPage)).keys())}
           getOptionLabel={(option) => { return (Number(option) + 1).toString(); }}
