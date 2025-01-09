@@ -16,7 +16,6 @@
 import React from 'react';
 import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
 import { Components, Theme } from '@mui/material';
-import Tooltip from '../Tooltip/Tooltip';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -25,7 +24,7 @@ import { styled } from '@mui/material/styles';
 import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
-import { TooltipPlacement } from '../Tooltip';
+import Tooltip, { TooltipPlacement } from '../Tooltip';
 
 /**
  * @typedef AutocompleteProps
@@ -156,9 +155,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
             };
-            const tooltipTitle = isValueOverFlowing? textfieldRef.current?.value || '' : '';
+            const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
             return (
-              <Tooltip title={tooltipTitle}>
+              <Tooltip title={tooltipTitle} tooltipsize="small">
                 <TextField {...textFieldArgs} inputRef={textfieldRef} />
               </Tooltip>
             );

@@ -107,15 +107,16 @@ describe('Autocomplete', () => {
   });
 
   it('Render with non edit state', () => {
-    jest.spyOn(console, 'error').mockImplementation((message) => {
+    // eslint-why we only suppress the expected error
+    // eslint-disable-next-line no-console
+    const originalConsoleError = console.error;
+    jest.spyOn(console, 'error').mockImplementation((...args) => {
       // since the autocomplete is not editable, the input element is not found
       // this is expected and we suppress the error to avoid further confusion
-      if (message.includes('MUI: Unable to find the input element.')) {
+      if (typeof args[0] === 'string' && args[0].includes('MUI: Unable to find the input element.')) {
         return;
       }
-      // eslint-why we only suppress the expected error
-      // eslint-disable-next-line no-console
-      console.error(message);
+      originalConsoleError(...args);
     });
     const exampleMessage = 'Example message';
     render(
