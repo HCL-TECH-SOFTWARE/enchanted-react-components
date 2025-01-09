@@ -24,7 +24,7 @@ import { styled } from '@mui/material/styles';
 import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
-import { TooltipPlacement } from '../Tooltip';
+import Tooltip, { TooltipPlacement } from '../Tooltip';
 
 /**
  * @typedef AutocompleteProps
@@ -110,6 +110,17 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const helperTextId = props.helperText && props.id ? `${props.id}-helper-text` : undefined;
   const muiFormControlProps = getMuiFormControlProps(props);
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
+  const textfieldRef = React.useRef<HTMLInputElement>(null);
+  const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
+
+  React.useEffect(() => {
+    const textFieldElement = textfieldRef.current;
+    if (textFieldElement && textFieldElement.scrollWidth > textFieldElement.clientWidth) {
+      setIsValueOverFlowing(true);
+    } else {
+      setIsValueOverFlowing(false);
+    }
+  }, [props.value]);
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -144,7 +155,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
             };
-            return <TextField {...textFieldArgs} />;
+            const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
+            return (
+              <Tooltip title={tooltipTitle} tooltipsize="small">
+                <TextField {...textFieldArgs} inputRef={textfieldRef} />
+              </Tooltip>
+            );
           }}
         />
         <MuiFormHelperText id={helperTextId} sx={{ marginTop: nonEdit ? '0px' : '4px' }}>{helperText}</MuiFormHelperText>
