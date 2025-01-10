@@ -159,13 +159,14 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               value: props.value,
             };
             const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
-            const inputProps = {
-              'aria-errormessage': props.error ? helperTextId : undefined,
+            textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
+              'aria-errormessage': props.error ? helperTextId : undefined,
+              ...textFieldArgs.inputProps,
             };
             return (
               <Tooltip title={tooltipTitle} tooltipsize="small">
-                <TextField {...textFieldArgs} inputRef={textfieldRef} inputProps={inputProps} />
+                <TextField {...textFieldArgs} inputRef={textfieldRef} />
               </Tooltip>
             );
           }}
