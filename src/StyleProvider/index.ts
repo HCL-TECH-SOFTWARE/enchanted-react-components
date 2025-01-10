@@ -12,23 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+import StyleProvider from './StyleProvider';
 
-import React from 'react';
-
-import StyleProvider from '../../src/StyleProvider';
-import { ThemeDirectionType, ThemeModeType } from '../../src/theme';
-
-
-export const withThemeProvider = (Story, context) => {
-  const themeDirection = context.globals.themeDirection || ThemeDirectionType.RTL;
-  const themeMode = context.globals.theme || ThemeModeType.LIGHT_NEUTRAL_GREY;
-  document.documentElement.removeAttribute("dir");
-  if (themeDirection === ThemeDirectionType.RTL) {
-    document.documentElement.setAttribute("dir", "rtl");
-  }
-  return (
-    <StyleProvider direction={themeDirection} mode={themeMode}>
-      <Story {...context} />
-    </StyleProvider>
-  )
-}
+export default StyleProvider;
+export * from './StyleProvider';
