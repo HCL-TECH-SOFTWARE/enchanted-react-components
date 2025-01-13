@@ -31,6 +31,7 @@
 - Fixed `TextField` accessibility attributes to read label
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
 - Fixed accessibility issue with `Autocomplete` required state
+- Fixed accessibility issue with `DataGrid` component
 
 ### Changed
 
