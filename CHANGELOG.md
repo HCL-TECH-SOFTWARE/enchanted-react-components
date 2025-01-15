@@ -3,14 +3,21 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.0.0
+
+### Added
+- Added keyboard accessibility to the header in `DataGrid` component
 - Added the `favoritesToggleComponent` props to the `Header` component
 - Added an inverse color variant to the `IconButton` component when `inversecolors` is enabled
 - Added the `darkInverse`, `focusInverse`, and `selectedInverse` colors to the palette
 - Added `Developer Notes` section in `Dialog` component's Storybook Docs
-
-### Fixed
-- Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
-- Corrected the focus styling of endActionButtons in `DataGrid` component.
 - Added `role="alert"` to the snackbar message text for improved screen reader accessibility.
 - Added tooltip to the `Autocomplete` textfield for the truncated values.
 - Added `aria-label` to the input fields for the pagination row label and page label to enhance screen reader accessibility.
@@ -20,10 +27,17 @@
 ### Changed
 - Added keyboard accessibility to the header in `DataGrid` component
 - Added focus to the input label in `TextField` and `SelectMultiple` components
+- Added a configurable optional property for `Snackbar` position
+
+
+### Fixed
+- Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
+- Corrected the focus styling of endActionButtons in `DataGrid` component.
 - Fixed `TextField` accessibility attributes to read label
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
-- Added a configurable optional property for `Snackbar` position
 - Fixed accessibility issue with `Autocomplete` required state
+
+### Changed
 
 ### Breaking changes
 - Added required `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
