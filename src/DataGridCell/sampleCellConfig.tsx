@@ -132,6 +132,33 @@ export const sampleColumnsModifiedRight: ExtendedGridColDef[] = [
   },
 ];
 
+export const sampleColumnsWithSubTitle: ExtendedGridColDef[] = [
+  {
+    ...baseColumnConfig,
+    subTitle: true,
+  },
+  {
+    ...iconEndColumnConfig,
+    subTitle: true,
+  },
+  {
+    ...avatarColumnConfig,
+    subTitle: true,
+  },
+  {
+    ...iconColumnConfig,
+    subTitle: true,
+  },
+  {
+    ...endActionColumnConfig,
+    subTitle: true,
+  },
+  {
+    ...allColumnConfig,
+    subTitle: true,
+  },
+];
+
 export const sampleRowContainsAll = [
   {
     id: '1',
@@ -155,6 +182,18 @@ export const sampleRowContainsAll = [
       <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
     ],
     all: 'Table row',
+  },
+];
+
+export const sampleRowContainsSubTitle = [
+  {
+    ...sampleRowContainsAll[0],
+    'subTitle-baseColumn': 'Subtitle text-1',
+    'subTitle-iconEndColumn': 'Subtitle text-2',
+    'subTitle-avatarColumn': 'Subtitle text-3',
+    'subTitle-iconStartColumn': 'Subtitle text-4',
+    'subTitle-endActionColumn': 'Subtitle text-5',
+    'subTitle-all': 'Subtitle text-6',
   },
 ];
 

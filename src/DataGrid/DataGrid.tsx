@@ -37,6 +37,7 @@ import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
  * @member {boolean} endActions If true, the cell will display the endActions in row data
  * @member {boolean} showSortingIcon If true, the column header cell will permanently display the sortIcon
  * @member {string} tooltip If we have tooltip, the cell will display tooltip on hover on the cell
+ * @member {boolean} subTitle If true, the cell will display the subTitle in row data
  */
 export interface ExtendedGridColDef extends GridColDef {
   iconEnd?: boolean,
@@ -45,6 +46,7 @@ export interface ExtendedGridColDef extends GridColDef {
   endActions?: boolean, // always use tabIndex inside your button so i can be focused inside the cell
   showSortingIcon?: boolean,
   tooltip?: string,
+  subTitle?: boolean,
 }
 
 // Style modifier for the column header that ensures always visibility of sorting icon, NOT just on hover which was default behavior

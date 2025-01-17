@@ -30,6 +30,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
   const apiContext = useGridApiContext();
   const valueRef = React.useRef<HTMLDivElement>(null); // add ref to truncate text
   const [tooltip, setTooltip] = React.useState('');
+  const [subTitleTooltip, setSubTitleTooltip] = React.useState('');
   const [innerWidth, setInnerWidth] = React.useState<number>(window.innerWidth);
 
   const handleOnActive = React.useCallback(() => {
@@ -74,11 +75,13 @@ const DataGridCell = (props: GridRenderCellParams) => {
       const isOver = isOverflown(valueRef.current);
       if (isOver) {
         setTooltip(props.value);
+        setSubTitleTooltip(row[`subTitle-${colDef.field}`]);
       } else {
         setTooltip('');
+        setSubTitleTooltip('');
       }
     }
-  }, [valueRef, props.value, innerWidth]);
+  }, [valueRef, props.value, innerWidth, row[`subTitle-${colDef.field}`]]);
 
   const hideEndActions = apiContext.current.getSelectedRows().size > 1 && apiContext.current.isRowSelected(row.id); // hide action button when there is a seleted row/s
   const isAlignRight = colDef.align === 'right';
@@ -148,8 +151,9 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid
         ref={valueRef}
         sx={{ // this grid is for the container of the value of the cell define in col def
-          alignItems: 'center',
+          alignItems: 'flex-start',
           display: 'flex',
+          flexDirection: 'column',
           marginRight: '8px',
           minWidth: '0',
           overflow: 'hidden',
@@ -181,6 +185,30 @@ const DataGridCell = (props: GridRenderCellParams) => {
             {props.value}
           </Typography>
         </Tooltip>
+        {colDef.subTitle && row[`subTitle-${colDef.field}`] && (
+          <Tooltip
+            title={subTitleTooltip}
+            tooltipsize="small"
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  unicodeBidi: (row[`override-bidi-tooltip-${colDef.field}`]) ? 'plaintext' : 'initial',
+                },
+              },
+            }}
+          >
+            <Typography
+              className="MuiDataGrid-cell--subTitle"
+              {...subTitleTooltip && {
+                noWrap: true,
+              }}
+              variant="caption"
+              color="text.secondary"
+            >
+              {row[`subTitle-${colDef.field}`]}
+            </Typography>
+          </Tooltip>
+        )}
       </Grid>
       )}
       {colDef.iconEnd && row[`iconEnd-${colDef.field}`] && (

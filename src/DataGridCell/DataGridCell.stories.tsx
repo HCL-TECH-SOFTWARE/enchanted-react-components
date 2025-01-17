@@ -21,7 +21,9 @@ import {
   sampleColumnsByDefaultLeft,
   sampleColumnsModifiedRight,
   sampleColumnsMultiStartIconAndTooltip,
+  sampleColumnsWithSubTitle,
   sampleRowContainsAll,
+  sampleRowContainsSubTitle,
   sampleRowMultiStartIconAndTooltip,
   sampleRowsDisabled,
 } from './sampleCellConfig';
@@ -88,6 +90,23 @@ export const AlignRight = {
     hideFooter: true,
     disableColumnMenu: true,
   },
+};
+
+export const Subtitle: StoryFn<typeof DataGridCell> = (args) => {
+  return (
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        {...args}
+        rows={sampleRowContainsSubTitle}
+        columns={sampleColumnsWithSubTitle}
+        totalCount={1}
+        pageSize={1}
+        checkboxSelection
+        hideFooter
+        disableColumnMenu
+      />
+    </div>
+  );
 };
 
 const DisabledTemplate: StoryFn<typeof DataGridCell> = (args) => {
