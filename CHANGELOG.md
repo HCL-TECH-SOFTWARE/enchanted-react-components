@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed accessibility issue with `DataGrid` component
 
 ### Changed
 

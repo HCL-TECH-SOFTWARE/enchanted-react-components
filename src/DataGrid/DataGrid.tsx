@@ -337,6 +337,8 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
         if (parentCell?.firstElementChild) {
           (parentCell.firstElementChild as HTMLDivElement).focus();
         }
+      } else if (target.firstElementChild) {
+        (target.firstElementChild as HTMLDivElement).focus();
       }
     }
     if (event.key === 'ArrowLeft') {
