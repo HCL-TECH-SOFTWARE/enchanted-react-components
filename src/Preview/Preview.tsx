@@ -15,6 +15,7 @@
 import * as React from 'react';
 import {
   Theme, Grid, SelectChangeEvent,
+  Box,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconDownload from '@hcl-software/enchanted-icons/dist/carbon/es/download';
@@ -99,6 +100,7 @@ export interface PreviewProps {
   overrideHandleNext?: () => void;
   isFetchingAssets?: boolean;
   customHeaderTitle?: string;
+  zoomMessage?: string;
   handleError?: (event: React.SyntheticEvent<HTMLVideoElement | HTMLImageElement, Event>) => void;
   isVersionComparison?: boolean;
 }
@@ -286,6 +288,7 @@ const Preview: React.FC<PreviewProps> = ({
   overrideHandlePrevious,
   isFetchingAssets = false,
   customHeaderTitle,
+  zoomMessage,
   handleError,
   isVersionComparison = false,
 }: PreviewProps) => {
@@ -322,6 +325,7 @@ const Preview: React.FC<PreviewProps> = ({
   const imageRef = React.useRef<HTMLImageElement>(null);
 
   const [isAssetFinishedRendering, setIsAssetFinishedRendering] = React.useState(false);
+  const [showMessage, setshowMessage] = React.useState(false);
 
   const handleResize = () => {
     if (videoRef.current && imageContainerRef.current) {
@@ -359,6 +363,10 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Function to handle zooming in on the image
   const handleZoomIn = () => {
+    setshowMessage(true);
+    setTimeout(() => {
+      setshowMessage(false);
+    }, 1000); // Hide the message after 1 second
     // Finds the next highest zoom percentage
     const zoomInNumber = zoomOptions.find((element) => {
       return element > zoomPercentage;
@@ -373,6 +381,10 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Function to handle zooming out on the image
   const handleZoomOut = () => {
+    setshowMessage(true);
+    setTimeout(() => {
+      setshowMessage(false);
+    }, 1000); // Hide the message after 1 second
     // We need to reverse the zoom options array to get the next lowest available
     const reversed = [...zoomOptions].reverse();
     // Finds the next lowest zoom percentage
@@ -796,6 +808,19 @@ const Preview: React.FC<PreviewProps> = ({
                   <IconZoomOut />
                 </IconButton>
               </Tooltip>
+              {showMessage && (
+              <Box
+                component="div"
+                sx={{
+                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
+                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
+                }}
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                {`${zoomMessage} ${zoomPercentage}%`}
+              </Box>
+              )}
               <Tooltip
                 data-testid={PreviewTestIds.PREVIEW_ZOOM_TOOLTIP_TEXT}
                 tooltipsize="small"
@@ -839,6 +864,7 @@ const Preview: React.FC<PreviewProps> = ({
 Preview.defaultProps = {
   open: true,
   index: 0,
+  zoomMessage: 'Zoomed',
 };
 
 export default Preview;

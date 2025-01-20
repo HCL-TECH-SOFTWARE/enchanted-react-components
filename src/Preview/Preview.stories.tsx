@@ -203,6 +203,7 @@ export const ExampleImagePreview = {
     isFetchingAssets: false,
     selectButtonTitle: 'Select',
     tooltipTexts,
+    zoomMessage: 'Zoomed',
     isVersionComparison: false,
   },
 };

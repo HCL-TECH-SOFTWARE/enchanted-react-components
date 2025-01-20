@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added annoucing status message for `zoom in` and `zoom out` button in `Preview` component.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
@@ -24,7 +25,6 @@
 - Added `aria-label` to the input fields for the pagination row label and page label to enhance screen reader accessibility.
 - Added focus to the input label in `TextField` and `SelectMultiple` components
 - Added a configurable optional property for `Snackbar` position
-
 
 ### Fixed
 - Corrected the focus styling of `preview icon` in the `Tile` component and `zoom buttons` in the `Preview` component to meet the required contrast ratio
