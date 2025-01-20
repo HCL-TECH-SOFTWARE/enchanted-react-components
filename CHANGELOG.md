@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
