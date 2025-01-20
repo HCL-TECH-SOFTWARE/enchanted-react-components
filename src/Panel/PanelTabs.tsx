@@ -109,6 +109,16 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
   togglePanel,
   translation,
 }: PanelTabsProps) => {
+  const [activeTab, setActiveTab] = React.useState<number | null>(null);
+
+  const handleFocus = (key: number) => {
+    setActiveTab(key);
+  };
+
+  const handleBlur = () => {
+    setActiveTab(null);
+  };
+
   return (
     <PanelTabContainerStyled>
       <PanelTabsStyled
@@ -129,7 +139,11 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
         {tabs.map((tab, index) => {
           const key = index;
           const iconTooltip = (
-            <Tooltip title={tab.tabIcon.label} placement={(tab.tabIcon && tab.tabIcon.tooltipPlacement) ? tab.tabIcon.tooltipPlacement : 'left'}>
+            <Tooltip
+              title={tab.tabIcon.label}
+              open={activeTab === key}
+              placement={(tab.tabIcon && tab.tabIcon.tooltipPlacement) ? tab.tabIcon.tooltipPlacement : 'left'}
+            >
               {tab.tabIcon.icon}
             </Tooltip>
           );
@@ -141,6 +155,14 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
               icon={iconTooltip}
               aria-label={tab.tabIcon.label}
               disableFocusRipple
+              onFocus={() => {
+                return handleFocus(key);
+              }}
+              onBlur={handleBlur}
+              onMouseEnter={() => {
+                return handleFocus(key);
+              }}
+              onMouseLeave={handleBlur}
             />
           );
         })}
