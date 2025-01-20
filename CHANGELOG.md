@@ -6,6 +6,8 @@
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
 
 ### Fixed
+- Fixed accessibility issue with `DataGrid` component
+- Fixed the tooltip visibility for the `Panel` component to support keyboard access.
 
 ### Changed
 
