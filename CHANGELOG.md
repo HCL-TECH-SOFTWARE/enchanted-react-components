@@ -6,6 +6,7 @@
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
+- Fixed screen reader accessibility issue with `Select` component
 
 ### Changed
 
