@@ -106,9 +106,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   // prevents DOM warning for error=boolean
   rest.error = rest.error ? 1 : 0;
 
-  if (!props.id) {
-    props.id = props.id || `autocomplete-${(React.createRef().current as HTMLElement)?.id || Math.random().toString(36).substring(7)}`;
-  }
+  // create a unique id for the autocomplete component if not provided
+  props.id ||= `autocomplete-${(React.createRef().current as HTMLElement)?.id || Math.random().toString(36).substring(7)}`;
+
   const [isFocus, setIsFocus] = React.useState(false);
   const helperTextId = props.helperText ? `${props.id}-helper-text` : undefined;
   const muiFormControlProps = getMuiFormControlProps(props);

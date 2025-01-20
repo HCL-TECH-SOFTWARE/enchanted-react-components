@@ -7,6 +7,8 @@
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
 - Fixed the tooltip visibility for the `Panel` component to support keyboard access.
+- Added `aria-erromessage` and `aria-describedby` to the `Autocomplete` component for improved screen reader accessibility.
+- Added a default `id` value to the `Autocomplete` component for making helper text accessible.
 
 ### Changed
 
@@ -23,8 +25,6 @@
 - Added `role="alert"` to the snackbar message text for improved screen reader accessibility.
 - Added tooltip to the `Autocomplete` textfield for the truncated values.
 - Added `aria-label` to the input fields for the pagination row label and page label to enhance screen reader accessibility.
-- Added `aria-erromessage` and `aria-describedby` to the `Autocomplete` component for improved screen reader accessibility.
-- Added a default `id` value to the `Autocomplete` component for making helper text accessible.
 
 ### Changed
 - Added keyboard accessibility to the header in `DataGrid` component
