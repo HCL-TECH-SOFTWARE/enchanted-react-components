@@ -365,6 +365,7 @@ const Preview: React.FC<PreviewProps> = ({
   React.useEffect(() => {
     if (!zoomTrigger) {
       setshowMessage(false);
+      setZoomTrigger(true);
     }
   }, [zoomTrigger]);
 
