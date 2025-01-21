@@ -319,6 +319,7 @@ const Preview: React.FC<PreviewProps> = ({
   const [zoomOutDisable, setZoomOutDisable] = React.useState<boolean>(false);
   const [zoomButtonTooltip, setZoomButtonTooltip] = React.useState<string>('');
   const [zoomToFitPercentage, setZoomToFitPercentage] = React.useState<number>(zoomDefault);
+  const [zoomTrigger, setZoomTrigger] = React.useState(true);
 
   const imageContainerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -361,12 +362,15 @@ const Preview: React.FC<PreviewProps> = ({
     setZoomButtonTooltip(zoomText);
   }, [zoomPercentage]);
 
+  React.useEffect(() => {
+    if (!zoomTrigger) {
+      setshowMessage(false);
+    }
+  }, [zoomTrigger]);
+
   // Function to handle zooming in on the image
   const handleZoomIn = () => {
     setshowMessage(true);
-    setTimeout(() => {
-      setshowMessage(false);
-    }, 1000); // Hide the message after 1 second
     // Finds the next highest zoom percentage
     const zoomInNumber = zoomOptions.find((element) => {
       return element > zoomPercentage;
@@ -377,14 +381,12 @@ const Preview: React.FC<PreviewProps> = ({
       setZoomPercentage(zoomInNumber);
     }
     setZoomOutDisable(false);
+    setZoomTrigger(false);
   };
 
   // Function to handle zooming out on the image
   const handleZoomOut = () => {
     setshowMessage(true);
-    setTimeout(() => {
-      setshowMessage(false);
-    }, 1000); // Hide the message after 1 second
     // We need to reverse the zoom options array to get the next lowest available
     const reversed = [...zoomOptions].reverse();
     // Finds the next lowest zoom percentage
@@ -397,6 +399,7 @@ const Preview: React.FC<PreviewProps> = ({
       setZoomPercentage(zoomOutNumber);
     }
     setZoomInDisable(false);
+    setZoomTrigger(false);
   };
 
   // Sets the zooming of the image based on 'view actual size' or 'fit to size' into AssetContainer
