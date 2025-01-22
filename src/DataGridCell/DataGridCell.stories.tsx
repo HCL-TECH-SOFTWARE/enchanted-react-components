@@ -19,13 +19,13 @@ import DataGridCell from './DataGridCell';
 import DataGrid, { ExtendedGridColDef } from '../DataGrid/DataGrid';
 import Typography from '../Typography';
 import {
-  sampleColumns,
+  sampleColumns, sampleColumnsForSubTitle,
   sampleColumnsByDefaultLeft,
   sampleColumnsModifiedRight,
   sampleColumnsMultiStartIconAndTooltip,
   sampleRowContainsAll,
   sampleRowMultiStartIconAndTooltip,
-  sampleRows,
+  sampleRows, sampleRowsForSubTitle,
   sampleRowsDisabled,
 } from './sampleCellConfig';
 
@@ -114,7 +114,7 @@ const InteractiveExampleTemplate: StoryFn<typeof DataGridCell> = (args) => {
     return updatedRow;
   });
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 150, width: '100%' }}>
       <DataGrid
         {...args}
         columns={updatedColumns}
@@ -152,6 +152,18 @@ InteractiveExample.args = {
 const VisualTestTemplate: StoryFn<typeof DataGridCell> = (args) => {
   return (
     <>
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell SubTitle
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowsForSubTitle}
+          columns={sampleColumnsForSubTitle}
+        />
+      </div>
+
+      &nbsp;
       <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
         DataGridCell Align Left
       </Typography>

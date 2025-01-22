@@ -302,3 +302,27 @@ export const sampleRows = [
     'subTitle-tableHead': 'Fictional character',
   },
 ];
+
+export const sampleColumnsForSubTitle: ExtendedGridColDef[] = [
+  sampleColumns[0],
+  {
+    ...sampleColumns[0],
+    field: 'withTooltip',
+    headerName: 'With Tooltip',
+  },
+];
+
+export const sampleRowsForSubTitle = [
+  {
+    ...sampleRows[0],
+    withTooltip: 'Jon Snow',
+    'iconEnd-withTooltip': <IconStar />,
+    'avatar-withTooltip': <Avatar variant="rounded" iconImage={<IconUser />} />,
+    'iconStart-withTooltip': <IconDocument />,
+    'endActions-withTooltip': [
+      <IconButton tabIndex={0}><IconEdit /></IconButton>,
+      <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
+    ],
+    'subTitle-withTooltip': 'Jon Snow was the son of Rhaegar Targaryen and Lyanna Stark',
+  },
+];
