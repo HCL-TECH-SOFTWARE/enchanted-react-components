@@ -203,7 +203,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     <MuiSelect
       {...selectProps}
       MenuProps={{
-        disablePortal: true,
+        ...selectProps.MenuProps,
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         anchorOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         PaperProps: {
