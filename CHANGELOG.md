@@ -9,6 +9,7 @@
 - Fixed the tooltip visibility for the `Panel` component to support keyboard access.
 - Added `aria-erromessage` and `aria-describedby` to the `Autocomplete` component for improved screen reader accessibility.
 - Added a default `id` value to the `Autocomplete` component for making helper text accessible.
+- Fixed screen reader accessibility issue with the pagination `label` in the `Pagination` component.
 
 ### Changed
 
