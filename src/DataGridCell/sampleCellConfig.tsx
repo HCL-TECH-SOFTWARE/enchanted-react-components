@@ -24,10 +24,12 @@ import IconRainScatteredNight from '@hcl-software/enchanted-icons/dist/carbon/es
 import IconRoadWeather from '@hcl-software/enchanted-icons/dist/carbon/es/road--weather';
 import IconRoadmap from '@hcl-software/enchanted-icons/dist/carbon/es/roadmap';
 import IconRocket from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
+import IconUser from '@hcl-software/enchanted-icons/dist/carbon/es/user';
+import { GridColumnHeaderParams } from '@mui/x-data-grid';
 import Avatar, { AvatarColors, AvatarTypes } from '../Avatar';
 import IconButton from '../IconButton';
 import DataGridCell from './DataGridCell';
-import { ExtendedGridColDef } from '../DataGrid';
+import { alwaysVisibleColHeadIconModifier, ExtendedGridColDef } from '../DataGrid';
 
 export const baseColumnConfig: ExtendedGridColDef = {
   field: 'baseColumn',
@@ -132,33 +134,6 @@ export const sampleColumnsModifiedRight: ExtendedGridColDef[] = [
   },
 ];
 
-export const sampleColumnsWithSubTitle: ExtendedGridColDef[] = [
-  {
-    ...baseColumnConfig,
-    subTitle: true,
-  },
-  {
-    ...iconEndColumnConfig,
-    subTitle: true,
-  },
-  {
-    ...avatarColumnConfig,
-    subTitle: true,
-  },
-  {
-    ...iconColumnConfig,
-    subTitle: true,
-  },
-  {
-    ...endActionColumnConfig,
-    subTitle: true,
-  },
-  {
-    ...allColumnConfig,
-    subTitle: true,
-  },
-];
-
 export const sampleRowContainsAll = [
   {
     id: '1',
@@ -182,18 +157,6 @@ export const sampleRowContainsAll = [
       <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
     ],
     all: 'Table row',
-  },
-];
-
-export const sampleRowContainsSubTitle = [
-  {
-    ...sampleRowContainsAll[0],
-    'subTitle-baseColumn': 'Subtitle text-1',
-    'subTitle-iconEndColumn': 'Subtitle text-2',
-    'subTitle-avatarColumn': 'Subtitle text-3',
-    'subTitle-iconStartColumn': 'Subtitle text-4',
-    'subTitle-endActionColumn': 'Subtitle text-5',
-    'subTitle-all': 'Subtitle text-6',
   },
 ];
 
@@ -303,5 +266,39 @@ export const sampleColumnsMultiStartIconAndTooltip: ExtendedGridColDef[] = [
   },
   {
     ...columnTest5,
+  },
+];
+
+export const sampleColumns: ExtendedGridColDef[] = [
+  {
+    field: 'tableHead',
+    headerName: 'Table Head',
+    width: 280,
+    iconEnd: true,
+    avatar: true,
+    iconStart: true,
+    endActions: true,
+    subTitle: true,
+    renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
+    headerClassName: (params: GridColumnHeaderParams) => {
+      return (params.colDef as ExtendedGridColDef).showSortingIcon
+        ? alwaysVisibleColHeadIconModifier
+        : '';
+    },
+  },
+];
+
+export const sampleRows = [
+  {
+    id: '1',
+    tableHead: 'Jon Snow',
+    'iconEnd-tableHead': <IconStar />,
+    'avatar-tableHead': <Avatar variant="rounded" iconImage={<IconUser />} />,
+    'iconStart-tableHead': <IconDocument />,
+    'endActions-tableHead': [
+      <IconButton tabIndex={0}><IconEdit /></IconButton>,
+      <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
+    ],
+    'subTitle-tableHead': 'Fictional character',
   },
 ];

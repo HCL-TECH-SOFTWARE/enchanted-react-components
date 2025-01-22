@@ -167,6 +167,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       >
         <Tooltip
           title={row[`tooltip-${colDef.field}`] || tooltip}
+          tooltipsize="small"
           componentsProps={{
             tooltip: {
               sx: {

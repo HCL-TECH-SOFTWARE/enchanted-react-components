@@ -24,8 +24,7 @@ import DataGrid from '../../../DataGrid';
 import {
   sampleColumnsByDefaultLeft, sampleColumnsModifiedRight, sampleRowContainsAll,
   baseColumnConfig, iconEndColumnConfig, avatarColumnConfig, iconColumnConfig, endActionColumnConfig, allColumnConfig, sampleRowMultiStartIconAndTooltip, sampleColumnsMultiStartIconAndTooltip,
-  sampleRowContainsSubTitle,
-  sampleColumnsWithSubTitle,
+  sampleRows, sampleColumns,
 } from '../../../DataGridCell/sampleCellConfig';
 
 const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
@@ -175,14 +174,14 @@ describe('DataGridCell', () => {
     render(
       <ThemeProvider theme={theme}>
         <DataGrid
-          rows={sampleRowContainsSubTitle}
-          columns={sampleColumnsWithSubTitle}
-          totalCount={sampleRowContainsSubTitle.length}
+          rows={sampleRows}
+          columns={sampleColumns}
+          totalCount={sampleRows.length}
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${avatarColumnConfig.headerName}`)).not.toBeNull();
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[0].lastChild as HTMLElement).classList).toContain('MuiDataGrid-cell--subTitle');
-    expect(screen.getByText('Subtitle text-1')).not.toBeNull();
+    expect(screen.getByLabelText(`${sampleColumns[0].headerName}`)).not.toBeNull();
+    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[2].lastChild as HTMLElement).classList).toContain('MuiDataGrid-cell--subTitle');
+    expect(screen.getByText('Fictional character')).not.toBeNull();
   });
 });
