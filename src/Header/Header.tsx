@@ -265,10 +265,10 @@ const Header = ({ ...props }: HeaderProps) => {
               >
                 <Typography
                   ref={headerTitleRef}
+                  variant="subtitle1"
                   sx={{
                     paddingLeft: (startSection?.withBackButton || startSection?.avatar) ? '0px' : '4px',
                     margin: '-4px',
-                    ...TYPOGRAPHY.subtitle1,
                   }}
                   data-testid={HeaderTestIds.HEADER_START_TITLE}
                 >
