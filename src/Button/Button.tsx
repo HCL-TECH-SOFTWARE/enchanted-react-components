@@ -35,6 +35,7 @@ export enum ButtonTestIds {
  */
 export type ButtonProps = MuiButtonProps & {
   hover?: boolean,
+  inversecolors?: boolean,
 }
 
 const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
@@ -58,6 +59,7 @@ Button.defaultProps = {
   disableTouchRipple: false,
   focusRipple: false,
   tabIndex: 0,
+  inversecolors: false,
 };
 
 export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -71,7 +73,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             ...theme.typography.subtitle2,
             textTransform: 'none',
             '&.Mui-focusVisible, &.force-to-focus': {
-              outline: `${theme.palette.primary.main} 1px solid`,
+              outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
               outlineOffset: '2px',
             },
             '& .MuiButtonBase-root:disabled': {
@@ -95,25 +97,25 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             },
             ...(ownerState.variant === 'contained'
              && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.primary.main,
+              backgroundColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
             }),
             ...(ownerState.variant === 'outlined'
             && ownerState.color === 'primary' && {
               backgroundColor: theme.palette.background.paper,
-              borderColor: theme.palette.primary.main,
+              borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
                 backgroundColor: theme.palette.action.hover,
               },
@@ -122,12 +124,12 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             && ownerState.color === 'primary' && {
               backgroundColor: theme.palette.background.paper,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
             }),
           });
