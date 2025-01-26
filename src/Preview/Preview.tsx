@@ -815,7 +815,7 @@ const Preview: React.FC<PreviewProps> = ({
               {showMessage && (
               <Box
                 component="div"
-                role='alert'
+                role="alert"
                 sx={{
                   // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
                   position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
