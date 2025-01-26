@@ -203,6 +203,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     <MuiSelect
       {...selectProps}
       MenuProps={{
+        ...selectProps.MenuProps,
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         anchorOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         PaperProps: {
@@ -260,7 +261,7 @@ const Select = React.forwardRef(({ ...props }: SelectProps, forwardRef: React.Fo
     <MuiFormControl {...muiFormControlProps}>
       <InputLabelAndAction {...inputLabelAndActionProps} />
       {renderInput(props, props.id)}
-      <MuiFormHelperText id={helperTextId}>{props.helperText}</MuiFormHelperText>
+      {props.helperText && (<MuiFormHelperText id={helperTextId}>{props.helperText}</MuiFormHelperText>)}
     </MuiFormControl>
   );
 }) as React.FC<SelectProps>;
