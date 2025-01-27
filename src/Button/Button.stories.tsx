@@ -1100,11 +1100,6 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
           }}
         >
           <Typography>Button on dark background</Typography>
-          <Grid item paddingTop={3}>
-            {/* <Typography sx={{ marginBottom: '8px' }}>
-              Button medium Outlined
-            </Typography> */}
-          </Grid>
           <Grid item paddingTop={1}>
             <Typography sx={{ marginBottom: '8px' }}>
               Active
@@ -1142,8 +1137,6 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
                 </Button>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item paddingTop={3}>
           </Grid>
           <Grid item paddingTop={1}>
             <Typography sx={{ marginBottom: '8px' }}>
