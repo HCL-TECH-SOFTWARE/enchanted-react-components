@@ -807,6 +807,7 @@ const Preview: React.FC<PreviewProps> = ({
                   variant="text"
                   size="small"
                   onClick={zoomPercentageFit}
+                  inversecolors
                 >
                   {`${zoomPercentage}%`}
                 </Button>

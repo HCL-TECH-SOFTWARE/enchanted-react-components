@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added an inverse color variant to the `Button` component when `inversecolors` is enabled.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
