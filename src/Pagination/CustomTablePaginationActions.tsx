@@ -75,10 +75,12 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
   return (
     <Box data-testid={TablePaginationTestIds.TABLE_PAGINATION_ACTIONS_ROOT} sx={{ flexShrink: 0, ml: 2.5 }}>
       <div data-testid={TablePaginationTestIds.TABLE_PAGINATION_ROWS_DIV}>
-        { atLeast480px
-          && <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_ROWS_LABEL}>{translation.rowsPerPageLabel}</Typography>}
         <Autocomplete
           aria-label={translation.rowsPerPageLabel}
+          label={translation.rowsPerPageLabel}
+          id={TablePaginationTestIds.TABLE_PAGINATION_ROWS_LABEL}
+          data-testid={TablePaginationTestIds.TABLE_PAGINATION_ROWS_LABEL}
+          role="listbox"
           tabIndex={0}
           noOptionsText=""
           options={rowsPerPageOptions}
@@ -173,10 +175,12 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
             {theme.direction === ThemeDirectionType.RTL ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
           </IconButton>
         </Tooltip>
-        { atLeast480px
-          && <Typography variant="body2" data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL}>{translation.pageLabel}</Typography>}
         <Autocomplete
           aria-label={translation.pageLabel}
+          label={translation.pageLabel}
+          id={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL}
+          data-testid={TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL}
+          role="listbox"
           tabIndex={0}
           noOptionsText=""
           options={Array.from(Array(Math.ceil(count / rowsPerPage)).keys())}

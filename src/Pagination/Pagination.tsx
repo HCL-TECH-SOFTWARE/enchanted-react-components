@@ -25,7 +25,7 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
   return {
     MuiTablePagination: {
       styleOverrides: {
-        root: ({ ownerState }) => {
+        root: ({ ownerState, theme }) => {
           return ({
             borderBottom: 'none',
             '[data-testid=tablePaginationActionsRoot]': {
@@ -59,6 +59,8 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                 },
                 '.MuiFormControl-root': {
                   height: '28px',
+                  display: 'flex',
+                  flexDirection: 'row',
                 },
                 // styles for Change Page Buttons inside TablePagination
                 'button[data-testid=tablePaginationActionsPageFirst]': {
@@ -81,19 +83,25 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                 'div[data-testid=tablePaginationActionsRowsDiv]': {
                   display: 'inline-flex',
                   '.MuiFormLabel-root': {
-                    display: 'none', // hides the form action label space from Autocomplete
+                    maxWidth: 'none',
+                    margin: '6px 4px 6px 0px',
+                    fontWeight: '400',
+                    color: theme.palette.text.primary,
                   },
                   '> .autocomplete-container': {
-                    margin: '0 4px',
+                    marginRight: '4px',
                   },
                 },
                 'div[data-testid=tablePaginationActionsPageDiv]': {
                   display: 'inline-flex',
                   '.MuiFormLabel-root': {
-                    display: 'none', // hides the form action label space from Autocomplete
+                    maxWidth: 'none',
+                    margin: '6px 4px 6px 0px',
+                    fontWeight: '400',
+                    color: theme.palette.text.primary,
                   },
                   '> .autocomplete-container': {
-                    margin: '0 4px',
+                    marginRight: '4px',
                   },
                 },
                 '.MuiTypography-root[data-testid=tablePaginationActionsPageTotal]': {
@@ -150,7 +158,7 @@ const Pagination = ({ ...props }: TablePaginationProps) => {
   return (
     <>
       {props.count > 0 && (
-      <Table>
+      <Table role="presentation">
         <TableFooter>
           <TableRow>
             <MuiTablePagination

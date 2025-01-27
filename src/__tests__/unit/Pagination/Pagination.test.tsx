@@ -89,7 +89,7 @@ describe('TablePagination', () => {
 
     const element = screen.getAllByRole('combobox')[0];
     fireEvent.mouseDown(element);
-    const listbox = within(screen.getByRole('listbox'));
+    const listbox = within(screen.getAllByRole('listbox')[2]);
     expect(listbox.getByText('25')).not.toBeNull();
     fireEvent.click(listbox.getByText('25'));
     await waitFor(() => { expect(mockFn).toHaveBeenCalled(); });
@@ -106,7 +106,7 @@ describe('TablePagination', () => {
 
     const element = screen.getAllByRole('combobox')[1];
     fireEvent.mouseDown(element);
-    const listbox = within(screen.getByRole('listbox'));
+    const listbox = within(screen.getAllByRole('listbox')[2]);
     expect(listbox.getByText('5')).not.toBeNull();
     fireEvent.click(listbox.getByText('5'));
     await waitFor(() => { expect(mockFn).toHaveBeenCalled(); });
@@ -173,7 +173,7 @@ describe('TablePagination', () => {
         <Pagination page={0} rowsPerPage={10} count={100} />
       </ThemeProvider>,
     );
-    const rowsPerPage = screen.getByLabelText('Show rows:');
+    const rowsPerPage = screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_ROWS_LABEL);
     expect(rowsPerPage).not.toBeNull();
     expect(rowsPerPage.getAttribute('aria-label')).toBe('Show rows:');
   });
@@ -184,7 +184,7 @@ describe('TablePagination', () => {
         <Pagination page={0} rowsPerPage={10} count={100} />
       </ThemeProvider>,
     );
-    const pageNumber = screen.getByLabelText('Page:');
+    const pageNumber = screen.getByTestId(TablePaginationTestIds.TABLE_PAGINATION_PAGE_LABEL);
     expect(pageNumber).not.toBeNull();
     expect(pageNumber.getAttribute('aria-label')).toBe('Page:');
   });

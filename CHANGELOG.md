@@ -12,6 +12,8 @@
 - Added `aria-erromessage` and `aria-describedby` to the `Autocomplete` component for improved screen reader accessibility.
 - Added a default `id` value to the `Autocomplete` component for making helper text accessible.
 - Fixed helper text rendering based on condition in `Select` component
+- Fixed screen reader accessibility issue with the pagination `label` in the `Pagination` component.
+- Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
 
 ### Changed
 
