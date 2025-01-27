@@ -117,7 +117,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
               '&.force-to-focusHover': {
                 outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
             }),
             ...(ownerState.variant === 'text'
