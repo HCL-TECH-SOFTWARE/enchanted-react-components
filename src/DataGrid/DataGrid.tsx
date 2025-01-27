@@ -305,11 +305,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
 });
 
 /**
-* Renders a data grid, its replaces table component
-* We have used plain javascripts code since some of the components are not exposed and there are need of keyboard navigation.
-* We are navigating thru html tag using event.
-* Demo:
-* https://pages.git.cwp.pnp-hcl.com/websphere-portal-incubator/enchanted-material-ui-core/?path=/story/data-display-datagrid--example-data-grid
+* Renders a data grid, it replaces the table component.
 */
 const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   const {

@@ -17,7 +17,10 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { GridSortModel, GridColumnVisibilityModel } from '@mui/x-data-grid';
 import DataGrid from './DataGrid';
-import { processRow, sampleColumns, sampleRows } from './sampleData';
+import {
+  processRow, sampleColumns, sampleColumnsWithSubTitle, sampleRows,
+  sampleRowsWithSubTitle,
+} from './sampleData';
 import Typography from '../Typography';
 
 export default {
@@ -236,6 +239,39 @@ const VisualTestTemplate: StoryFn<typeof DataGrid> = (args) => {
             setPage(newPage);
           }}
           totalCount={sampleRows.length}
+          columnVisibilityModel={columnVisibilityState}
+          onColumnVisibilityModelChange={handleColumnVisibilityModelChange}
+          initialState={{
+            sorting: {
+              sortModel: [{ field: 'title', sort: 'asc' }],
+            },
+          }}
+          sortModel={sortState}
+          onSortModelChange={handleSortModelChange}
+        />
+      </div>
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGrid with SubTitle
+      </Typography>
+      <div style={{ width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowsWithSubTitle}
+          columns={sampleColumnsWithSubTitle}
+          checkboxSelection
+          pageSize={pageSize}
+          page={page}
+          onPageSizeChange={(value) => {
+            if (!Number.isNaN(value) && DataGrid.defaultProps.rowsPerPageOptions.includes(value)) {
+              setPage(0);
+              setPageSize(value);
+            }
+          }}
+          onPageChange={(newPage) => {
+            setPage(newPage);
+          }}
+          totalCount={sampleRowsWithSubTitle.length}
           columnVisibilityModel={columnVisibilityState}
           onColumnVisibilityModelChange={handleColumnVisibilityModelChange}
           initialState={{
