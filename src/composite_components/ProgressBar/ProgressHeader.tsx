@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box, styled } from '@mui/material';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import ChevronUpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--up';
@@ -152,6 +152,24 @@ const ProgressHeader = (props: progressHeaderProps) => {
     cancelAll, pauseButton, translation, expanded, toggleButtonClick,
   } = props;
 
+  const collapseButtonRef = useRef<HTMLButtonElement>(null);
+  const expandButtonRef = useRef<HTMLButtonElement>(null);
+  const isFirstRender = useRef(true);
+
+  // Sets focus on the collapseIconButton or expandIconButton when `expanded` state changes.
+  // Skips focus on initial render to avoid auto-focusing on page refresh.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (expanded && collapseButtonRef.current) {
+      collapseButtonRef.current.focus();
+    } else if (!expanded && expandButtonRef.current) {
+      expandButtonRef.current.focus();
+    }
+  }, [expanded]);
+
   /**
    * Renders an icon based on the total percentage value.
    * @returns The icon component based on the total percentage value.
@@ -219,9 +237,11 @@ const ProgressHeader = (props: progressHeaderProps) => {
                 onClick={toggleButtonClick}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
+                    e.preventDefault();
                     toggleButtonClick();
                   }
                 }}
+                ref={collapseButtonRef}
               >
                 <ChevronUpIcon />
               </IconButton>
@@ -234,9 +254,11 @@ const ProgressHeader = (props: progressHeaderProps) => {
                 onClick={toggleButtonClick}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
+                    e.preventDefault();
                     toggleButtonClick();
                   }
                 }}
+                ref={expandButtonRef}
               >
                 <ChevronDownIcon />
               </IconButton>

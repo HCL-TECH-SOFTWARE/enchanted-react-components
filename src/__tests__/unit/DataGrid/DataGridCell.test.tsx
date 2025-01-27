@@ -24,6 +24,7 @@ import DataGrid from '../../../DataGrid';
 import {
   sampleColumnsByDefaultLeft, sampleColumnsModifiedRight, sampleRowContainsAll,
   baseColumnConfig, iconEndColumnConfig, avatarColumnConfig, iconColumnConfig, endActionColumnConfig, allColumnConfig, sampleRowMultiStartIconAndTooltip, sampleColumnsMultiStartIconAndTooltip,
+  sampleRows, sampleColumns,
 } from '../../../DataGridCell/sampleCellConfig';
 
 const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
@@ -167,5 +168,20 @@ describe('DataGridCell', () => {
     expect((screen.getAllByRole('cell')[0]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('document--tasksIcon');
     expect((screen.getAllByRole('cell')[1]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('starIcon');
     expect((screen.getAllByRole('cell')[2]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('radioIcon');
+  });
+
+  it('should render DataGridCell with subTitle when subTitle is present in the data', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <DataGrid
+          rows={sampleRows}
+          columns={sampleColumns}
+          totalCount={sampleRows.length}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.getByLabelText(`${sampleColumns[0].headerName}`)).not.toBeNull();
+    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[2].lastChild as HTMLElement).classList).toContain('MuiDataGrid-cell--subTitle');
+    expect(screen.getByText('Fictional character')).not.toBeNull();
   });
 });

@@ -24,10 +24,12 @@ import IconRainScatteredNight from '@hcl-software/enchanted-icons/dist/carbon/es
 import IconRoadWeather from '@hcl-software/enchanted-icons/dist/carbon/es/road--weather';
 import IconRoadmap from '@hcl-software/enchanted-icons/dist/carbon/es/roadmap';
 import IconRocket from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
+import IconUser from '@hcl-software/enchanted-icons/dist/carbon/es/user';
+import { GridColumnHeaderParams } from '@mui/x-data-grid';
 import Avatar, { AvatarColors, AvatarTypes } from '../Avatar';
 import IconButton from '../IconButton';
 import DataGridCell from './DataGridCell';
-import { ExtendedGridColDef } from '../DataGrid';
+import { alwaysVisibleColHeadIconModifier, ExtendedGridColDef } from '../DataGrid';
 
 export const baseColumnConfig: ExtendedGridColDef = {
   field: 'baseColumn',
@@ -264,5 +266,63 @@ export const sampleColumnsMultiStartIconAndTooltip: ExtendedGridColDef[] = [
   },
   {
     ...columnTest5,
+  },
+];
+
+export const sampleColumns: ExtendedGridColDef[] = [
+  {
+    field: 'tableHead',
+    headerName: 'Table Head',
+    width: 280,
+    iconEnd: true,
+    avatar: true,
+    iconStart: true,
+    endActions: true,
+    subTitle: true,
+    renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
+    headerClassName: (params: GridColumnHeaderParams) => {
+      return (params.colDef as ExtendedGridColDef).showSortingIcon
+        ? alwaysVisibleColHeadIconModifier
+        : '';
+    },
+  },
+];
+
+export const sampleRows = [
+  {
+    id: '1',
+    tableHead: 'Jon Snow',
+    'iconEnd-tableHead': <IconStar />,
+    'avatar-tableHead': <Avatar variant="rounded" iconImage={<IconUser />} />,
+    'iconStart-tableHead': <IconDocument />,
+    'endActions-tableHead': [
+      <IconButton tabIndex={0}><IconEdit /></IconButton>,
+      <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
+    ],
+    'subTitle-tableHead': 'Fictional character',
+  },
+];
+
+export const sampleColumnsForSubTitle: ExtendedGridColDef[] = [
+  sampleColumns[0],
+  {
+    ...sampleColumns[0],
+    field: 'withTooltip',
+    headerName: 'With Tooltip',
+  },
+];
+
+export const sampleRowsForSubTitle = [
+  {
+    ...sampleRows[0],
+    withTooltip: 'Jon Snow',
+    'iconEnd-withTooltip': <IconStar />,
+    'avatar-withTooltip': <Avatar variant="rounded" iconImage={<IconUser />} />,
+    'iconStart-withTooltip': <IconDocument />,
+    'endActions-withTooltip': [
+      <IconButton tabIndex={0}><IconEdit /></IconButton>,
+      <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
+    ],
+    'subTitle-withTooltip': 'Jon Snow was the son of Rhaegar Targaryen and Lyanna Stark',
   },
 ];
