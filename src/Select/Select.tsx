@@ -202,6 +202,8 @@ const renderInput = (props: SelectProps, id?: string) => {
   return (
     <MuiSelect
       {...selectProps}
+      aria-label={typeof props.label === 'string' ? props.label : props.placeholder}
+      inputProps={{ id: props.id }}
       MenuProps={{
         ...selectProps.MenuProps,
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
