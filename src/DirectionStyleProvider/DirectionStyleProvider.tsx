@@ -24,7 +24,7 @@ export interface DirectionStyleProviderProps {
   children: React.ReactNode;
   direction: ThemeDirectionType;
 }
-
+/** @deprecated use StyleProvider instead */
 const DirectionStyleProvider: React.FC<DirectionStyleProviderProps> = (props: DirectionStyleProviderProps) => {
   const isRtlDirection = props.direction === ThemeDirectionType.RTL;
   // Create rtl cache

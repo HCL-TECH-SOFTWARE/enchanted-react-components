@@ -76,6 +76,8 @@ export { default as Select } from './Select';
 export * from './Select';
 export { default as Snackbar } from './Snackbar';
 export * from './Snackbar';
+export { default as StyleProvider } from './StyleProvider';
+export * from './StyleProvider';
 export { default as Switch } from './Switch';
 export * from './Switch';
 export { default as Table } from './Table';

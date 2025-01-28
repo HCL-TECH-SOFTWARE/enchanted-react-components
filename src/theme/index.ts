@@ -415,6 +415,23 @@ export enum ThemeDirectionType {
   RTL = 'rtl',
 }
 
+/**
+ * See "CSS Baseline" in MUI docs for more information.
+ */
+export enum ThemeCssBaselineType {
+  /**
+   * Applies baseline "reset" styles globally.
+  */
+  GLOBAL = 'global',
+  /**
+   * Applies baseline "reset" styles scoped to the children of <StyleProvider>. */
+  SCOPED = 'scoped',
+  /**
+   * No CSS baseline. The consuming project is responsible for "reset" styles.
+   */
+  NONE = 'none'
+}
+
 // Shadow Tokens used in various components are defined as elevation levels below.
 const shadows: Shadows = Array(25).fill('none') as Shadows;
 shadows[0] = 'none';
@@ -470,9 +487,9 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
   return themeOptions;
 };
 
-export const createEnchantedTheme = (direction: ThemeDirectionType, mode: ThemeModeType): Theme => {
+export const createEnchantedTheme = (direction: ThemeDirectionType, mode: ThemeModeType, styleOverrides?: object): Theme => {
   const themeOptions: ThemeOptions = getThemeOptions(direction, mode);
-  const enchantedTheme = createTheme(themeOptions);
+  const enchantedTheme = createTheme(themeOptions, styleOverrides || {});
   return enchantedTheme;
 };
 
