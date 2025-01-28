@@ -35,7 +35,7 @@ export default {
     spacing: {
       description: 'Determines if the link has padding or not.',
     },
-    hoverbackground: {
+    hoverBackground: {
       description: 'Determines if the link has hover background or not.',
     },
     underline: {

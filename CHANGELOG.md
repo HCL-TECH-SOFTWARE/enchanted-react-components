@@ -14,7 +14,7 @@
 - Fixed helper text rendering based on condition in `Select` component
 - Fixed screen reader accessibility issue with the pagination `label` in the `Pagination` component.
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
-- Fixed screen reader accessibility issue with the `label` in `Select` component and eliminated browser console warns or errors for `Select`.
+- Fixed screen reader accessibility issue with the `label` in `Select` component
 
 ### Changed
 

@@ -135,8 +135,8 @@ const Link = ({ ...props }: LinkProps) => {
 Link.defaultProps = {
   disabled: false,
   type: LinkType.PRIMARY,
-  spacing: 'false',
-  hoverbackground: 'true',
+  spacing: false,
+  hoverBackground: true,
   underline: 'hover',
 };
 
