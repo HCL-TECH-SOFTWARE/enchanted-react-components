@@ -100,7 +100,6 @@ export interface PreviewProps {
   overrideHandleNext?: () => void;
   isFetchingAssets?: boolean;
   customHeaderTitle?: string;
-  zoomMessage?: string;
   handleError?: (event: React.SyntheticEvent<HTMLVideoElement | HTMLImageElement, Event>) => void;
   isVersionComparison?: boolean;
 }
@@ -288,7 +287,6 @@ const Preview: React.FC<PreviewProps> = ({
   overrideHandlePrevious,
   isFetchingAssets = false,
   customHeaderTitle,
-  zoomMessage,
   handleError,
   isVersionComparison = false,
 }: PreviewProps) => {
@@ -823,7 +821,7 @@ const Preview: React.FC<PreviewProps> = ({
                 aria-live="assertive"
                 aria-atomic="true"
               >
-                {`${zoomMessage} ${zoomPercentage}%`}
+                {`${zoomPercentage}%`}
               </Box>
               )}
               <Tooltip
@@ -869,7 +867,6 @@ const Preview: React.FC<PreviewProps> = ({
 Preview.defaultProps = {
   open: true,
   index: 0,
-  zoomMessage: 'Zoomed',
 };
 
 export default Preview;
