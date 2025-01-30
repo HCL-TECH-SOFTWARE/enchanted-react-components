@@ -1,0 +1,11 @@
+{
+  "logValidations": [
+    {
+      "patterns": [""],
+      "max": 457
+    }
+  ],
+  "exemptLogs": [],
+  "failIfUnknownLogsFound": false,
+  "failIfLogValidationsOutdated": true
+}

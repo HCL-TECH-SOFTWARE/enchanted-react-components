@@ -33,7 +33,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "lint-fix": "eslint --ext .ts,.tsx --fix src",
     "test-storyshots": "jest --collectCoverage=false --testPathPattern \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --testTimeout=15000 --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --testTimeout=15000 --reporters=jest-reporter-log-validator --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "test-unit": "CI=true jest --config ./jest.config.js --testPathPattern \"__tests__/unit\" --testTimeout=10000 --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -51,6 +51,7 @@
     "@mui/x-data-grid": "5.17.8",
     "@mui/x-date-pickers": "5.0.4",
     "dayjs": "^1.11.10",
+    "jest-reporter-log-validator": "^0.1.6",
     "lodash": "^4.17.15",
     "stylis-plugin-rtl": "^2.1.1",
     "uuid": "^8.3.0"
