@@ -51,6 +51,7 @@
     "@mui/x-data-grid": "5.17.8",
     "@mui/x-date-pickers": "5.0.4",
     "dayjs": "^1.11.10",
+    "jest-reporter-log-validator": "^0.1.6",
     "lodash": "^4.17.15",
     "stylis-plugin-rtl": "^2.1.1",
     "uuid": "^8.3.0"
