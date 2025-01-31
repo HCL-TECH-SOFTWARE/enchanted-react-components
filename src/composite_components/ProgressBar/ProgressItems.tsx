@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { styled } from '@mui/material';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
@@ -139,6 +139,7 @@ const StyledList = styled(List)((props) => {
           },
         },
         '.MuiListItemIcon-root': {
+          marginRight: '0px',
           '.MuiSvgIcon-root': {
             '&[data-mui-test=warningIcon]': {
               color: theme.palette.error.main,
@@ -169,6 +170,8 @@ const ProgressItems = (props: ProgressItemsProps) => {
   } = props;
   const [hover, setHover] = useState<string | null>(null);
   const [focus, setFocus] = useState<string | null>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
   let folderId = '';
 
   /**
@@ -198,57 +201,60 @@ const ProgressItems = (props: ProgressItemsProps) => {
    * @returns {React.ReactNode} - The rendered hover icon.
    */
   const renderHoverIcon = (queueItem: IProgressState): React.ReactNode => {
-    if (queueItem.status === EnumUploadStatus.SUCCESS && navigateFolder) {
-      return (
-        <Tooltip title={translation?.navigateButtonTooltip} tooltipsize="small">
-          <IconButton
-            // sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
-            data-testid="navigate-folder"
-            onClick={() => { return navigateFolder(queueItem); }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                navigateFolder(queueItem);
-              }
-            }}
-          >
-            <FoldersIcon />
-          </IconButton>
-        </Tooltip>
-      );
-    } if ((queueItem.status === EnumUploadStatus.PROGRESS || queueItem.status === EnumUploadStatus.PENDING) && cancelItem) {
-      return (
-        <Tooltip title={translation?.errorButtonTooltip} tooltipsize="small">
-          <IconButton
-            // sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
-            data-testid="cancel-upload"
-            onClick={() => { return cancelItem(queueItem); }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                cancelItem(queueItem);
-              }
-            }}
-          >
-            <ErrorIcon />
-          </IconButton>
-        </Tooltip>
-      );
-    } if (queueItem.status === EnumUploadStatus.FAILURE && retryUploadItem) {
-      return (
-        <Tooltip title={translation?.retryButtonTooltip} tooltipsize="small">
-          <IconButton
-            // sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
-            data-testid="retry-upload"
-            onClick={() => { retryUploadItem(queueItem); }}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                retryUploadItem(queueItem);
-              }
-            }}
-          >
-            <RetryFailedIcon />
-          </IconButton>
-        </Tooltip>
-      );
+    const key = `${queueItem.name}_${queueItem.timestamp}`;
+    if (hover === key || focus === key) {
+      if (queueItem.status === EnumUploadStatus.SUCCESS && navigateFolder) {
+        return (
+          <Tooltip title={translation?.navigateButtonTooltip} tooltipsize="small">
+            <IconButton
+              sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
+              data-testid="navigate-folder"
+              onClick={() => { return navigateFolder(queueItem); }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  navigateFolder(queueItem);
+                }
+              }}
+            >
+              <FoldersIcon />
+            </IconButton>
+          </Tooltip>
+        );
+      } if ((queueItem.status === EnumUploadStatus.PROGRESS || queueItem.status === EnumUploadStatus.PENDING) && cancelItem) {
+        return (
+          <Tooltip title={translation?.errorButtonTooltip} tooltipsize="small">
+            <IconButton
+              sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
+              data-testid="cancel-upload"
+              onClick={() => { return cancelItem(queueItem); }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  cancelItem(queueItem);
+                }
+              }}
+            >
+              <ErrorIcon />
+            </IconButton>
+          </Tooltip>
+        );
+      } if (queueItem.status === EnumUploadStatus.FAILURE && retryUploadItem) {
+        return (
+          <Tooltip title={translation?.retryButtonTooltip} tooltipsize="small">
+            <IconButton
+              sx={{ height: '20px', width: '20px', marginLeft: '8px' }}
+              data-testid="retry-upload"
+              onClick={() => { retryUploadItem(queueItem); }}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  retryUploadItem(queueItem);
+                }
+              }}
+            >
+              <RetryFailedIcon />
+            </IconButton>
+          </Tooltip>
+        );
+      }
     }
     return '';
   };
@@ -350,8 +356,14 @@ const ProgressItems = (props: ProgressItemsProps) => {
     };
   };
 
+  const handleBlur = (event: React.FocusEvent<HTMLLIElement>) => {
+    if (listRef.current && !listRef.current.contains(event.relatedTarget as Node)) {
+      setFocus(null);
+    }
+  };
+
   return (
-    <StyledList>
+    <StyledList ref={listRef}>
       {Array.from(file).map((queueItem: IProgressState) => {
         const showLearnMoreButton = queueItem && queueItem.showLearnMore !== undefined ? queueItem.showLearnMore : false;
         if (queueItem.type === ProgressItemType.Folder) {
@@ -364,14 +376,13 @@ const ProgressItems = (props: ProgressItemsProps) => {
               onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
               onMouseLeave={() => { return setHover(null); }}
               onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
-              onBlur={() => { return setFocus(null); }}
+              onBlur={handleBlur}
               disablePadding
               sx={{ paddingLeft: (queueItem.type !== ProgressItemType.Folder && folderId === queueItem.collectionId) ? '8px' : '0px' }}
               hasBorder
             >
               <ListItemButton
                 size={ListSizes.SMALL}
-                secondaryActionButton={renderHoverIcon(queueItem)}
               >
                 {queueItem.status === EnumUploadStatus.SUCCESS
                   ? (
@@ -483,14 +494,10 @@ const ProgressItems = (props: ProgressItemsProps) => {
                       )}
                     />
                   )}
-                <ListItemIcon
-                  data-testid="progress-indicator"
-                  style={
-                    (hover === `${queueItem.name}_${queueItem.timestamp}` || focus === `${queueItem.name}_${queueItem.timestamp}`) ? { marginRight: '28px' } : { marginRight: '0px' }
-                  }
-                >
+                <ListItemIcon data-testid="progress-indicator">
                   {renderProgressIndicator(queueItem.status, queueItem.progress)}
                 </ListItemIcon>
+                {renderHoverIcon(queueItem)}
               </ListItemButton>
             </ListItem>
           </React.Fragment>

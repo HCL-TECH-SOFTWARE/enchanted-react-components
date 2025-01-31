@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import MuiList, { ListProps } from '@mui/material/List';
 import { Components, Theme } from '@mui/material';
 
@@ -30,9 +30,9 @@ export const getMuiListThemeOverrides = (): Components<Omit<Theme, 'components'>
   };
 };
 
-const List = ({ ...props }: ListProps) => {
-  return <MuiList {...props} />;
-};
+const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
+  return <MuiList {...props} ref={ref} />;
+});
 
 List.defaultProps = {
   dense: true,
