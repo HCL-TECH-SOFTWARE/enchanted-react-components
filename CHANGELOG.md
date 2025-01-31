@@ -5,6 +5,7 @@
 ### Added
 - Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
+- Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
@@ -15,6 +16,7 @@
 - Fixed helper text rendering based on condition in `Select` component
 - Fixed screen reader accessibility issue with the pagination `label` in the `Pagination` component.
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
+- Fixed screen reader accessibility issue with the `label` in `Select` component
 
 ### Changed
 

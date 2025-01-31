@@ -33,7 +33,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   helperIconTooltip?: string;
   tooltipPlacement?: TooltipPlacement;
   hiddenLabel?: boolean;
-  label?: ReactNode;
+  label?: ReactNode | string;
   isFocus?: boolean;
   fullWidth?: boolean;
 }
