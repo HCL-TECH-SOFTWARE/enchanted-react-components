@@ -16,13 +16,16 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import DataGridCell from './DataGridCell';
-import DataGrid from '../DataGrid/DataGrid';
+import DataGrid, { ExtendedGridColDef } from '../DataGrid/DataGrid';
+import Typography from '../Typography';
 import {
+  sampleColumns, sampleColumnsForSubTitle,
   sampleColumnsByDefaultLeft,
   sampleColumnsModifiedRight,
   sampleColumnsMultiStartIconAndTooltip,
   sampleRowContainsAll,
   sampleRowMultiStartIconAndTooltip,
+  sampleRows, sampleRowsForSubTitle,
   sampleRowsDisabled,
 } from './sampleCellConfig';
 
@@ -46,106 +49,181 @@ export default {
     hideFooter: {
       description: 'If true, the footer will be hidden.',
     },
+    colDef: {
+      control: 'object',
+      description: `Defines the configuration for each column in the DataGridCell. This object allows customization 
+        of the appearance and behavior of each column, having options like iconEnd, iconStart, avatar, endActions, 
+        showSortingIcon, and subTitle, etc.`,
+      table: {
+        type: {
+          summary: 'ExtendedGridColDef',
+          detail: `{
+            iconEnd?: boolean; // If true, an icon will be displayed at the end of the cell.
+            iconStart?: boolean; // If true, an icon will be displayed at the start of the cell.
+            avatar?: boolean; // If true, an avatar will be displayed in the cell.
+            endActions?: boolean; // If true, action buttons will be displayed at the end of the cell.
+            showSortingIcon?: boolean; // If true, a sorting icon will be displayed in the column header.
+            subTitle?: boolean; // If true, a subtitle will be displayed below the main cell content.
+          }`,
+        },
+      },
+    },
+    subTitle: {
+      description: 'Subtitle text to be displayed below the main cell content.',
+      control: 'text',
+    },
+    align: {
+      control: 'select',
+      options: ['left', 'right'],
+      description: 'It allows to align the column values in cells.',
+    },
+    headerAlign: {
+      control: 'select',
+      options: ['left', 'right'],
+      description: 'It allows to align the column header values.',
+    },
+    totalCount: {
+      description: 'Total number of rows for all pages set by the sample data so it cannot be controlled',
+      control: false,
+    },
   },
 } as Meta<typeof DataGridCell>;
 
-const Template: StoryFn<typeof DataGridCell> = (args) => {
+const InteractiveExampleTemplate: StoryFn<typeof DataGridCell> = (args) => {
+  const updatedColumns = sampleColumns.map((col: ExtendedGridColDef) => {
+    const updatedCol = {
+      ...col,
+      iconEnd: (args.colDef as ExtendedGridColDef).iconEnd,
+      iconStart: (args.colDef as ExtendedGridColDef).iconStart,
+      avatar: (args.colDef as ExtendedGridColDef).avatar,
+      endActions: (args.colDef as ExtendedGridColDef).endActions,
+      subTitle: (args.colDef as ExtendedGridColDef).subTitle,
+      showSortingIcon: (args.colDef as ExtendedGridColDef).showSortingIcon,
+      align: (args as ExtendedGridColDef).align,
+      headerAlign: (args as ExtendedGridColDef).headerAlign,
+    };
+    return updatedCol;
+  });
+  const updatedRows = sampleRows.map((row) => {
+    const updatedRow = {
+      ...row,
+      // eslint-why The 'any' type is used here to allow flexibility in assigning the subtitle value, as it is dynamically generated based on the 'colDef.subTitle' value.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      'subTitle-tableHead': (args.colDef as ExtendedGridColDef).subTitle ? (args as any).subTitle : null,
+    };
+    return updatedRow;
+  });
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={sampleRowContainsAll} columns={sampleColumnsByDefaultLeft} {...args} totalCount={1} />
-    </div>
-  );
-};
-
-export const AlignLeft = {
-  render: Template,
-
-  args: {
-    rows: sampleRowContainsAll,
-    columns: sampleColumnsByDefaultLeft,
-    pageSize: 1,
-    checkboxSelection: true,
-    hideFooter: true,
-  },
-};
-
-const AlignRightTemplate: StoryFn<typeof DataGridCell> = (args) => {
-  return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={sampleRowContainsAll} columns={sampleColumnsModifiedRight} {...args} totalCount={1} />
-    </div>
-  );
-};
-
-export const AlignRight = {
-  render: AlignRightTemplate,
-
-  args: {
-    rows: sampleRowContainsAll,
-    columns: sampleColumnsModifiedRight,
-    pageSize: 1,
-    checkboxSelection: true,
-    hideFooter: true,
-    disableColumnMenu: true,
-  },
-};
-
-const DisabledTemplate: StoryFn<typeof DataGridCell> = (args) => {
-  return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 150, width: '100%' }}>
       <DataGrid
-        rows={sampleRowsDisabled}
-        columns={sampleColumnsByDefaultLeft}
-        // add condition to tell if row is disabled
-        isRowSelectable={() => {
-          return false;
-        }}
         {...args}
-        totalCount={1}
+        columns={updatedColumns}
+        rows={updatedRows}
       />
     </div>
   );
 };
 
-export const Disabled = {
-  render: DisabledTemplate,
-
-  args: {
-    rows: sampleRowsDisabled,
-    columns: sampleColumnsByDefaultLeft,
-    pageSize: 1,
-    checkboxSelection: true,
-    hideFooter: true,
-    disableColumnMenu: true,
+export const InteractiveExample = InteractiveExampleTemplate.bind({});
+InteractiveExample.parameters = {
+  options: { showPanel: true },
+};
+InteractiveExample.args = {
+  interactive: true,
+  colDef: {
+    iconEnd: true,
+    iconStart: true,
+    avatar: true,
+    endActions: true,
+    subTitle: true,
+    showSortingIcon: false,
   },
+  subTitle: 'Fictional character',
+  align: 'left',
+  headerAlign: 'left',
+  rows: sampleRows,
+  columns: sampleColumns,
+  checkboxSelection: true,
+  hideFooter: true,
+  pageSize: 10,
+  totalCount: sampleRows.length,
 };
 
-const MultipleStartIconAndTooltipTemplate: StoryFn<typeof DataGridCell> = (args) => {
+const VisualTestTemplate: StoryFn<typeof DataGridCell> = (args) => {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={sampleRowMultiStartIconAndTooltip}
-        columns={sampleColumnsMultiStartIconAndTooltip}
-        // add condition to tell if row is disabled
-        isRowSelectable={() => {
-          return false;
-        }}
-        totalCount={1}
-        {...args}
-      />
-    </div>
+    <>
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell SubTitle
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowsForSubTitle}
+          columns={sampleColumnsForSubTitle}
+        />
+      </div>
+
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell Align Left
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowContainsAll}
+          columns={sampleColumnsByDefaultLeft}
+        />
+      </div>
+
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell Align Right
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowContainsAll}
+          columns={sampleColumnsModifiedRight}
+        />
+      </div>
+
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell Disabled
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowsDisabled}
+          columns={sampleColumnsByDefaultLeft}
+          isRowSelectable={() => { return false; }}
+        />
+      </div>
+
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGridCell MultipleStartIconAndTooltip
+      </Typography>
+      <div style={{ height: 150, width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowMultiStartIconAndTooltip}
+          columns={sampleColumnsMultiStartIconAndTooltip}
+          isRowSelectable={() => { return false; }}
+        />
+      </div>
+    </>
   );
 };
 
-export const MultipleStartIconAndTooltip = {
-  render: MultipleStartIconAndTooltipTemplate,
-
-  args: {
-    rows: sampleRowMultiStartIconAndTooltip,
-    columns: sampleColumnsMultiStartIconAndTooltip,
-    pageSize: 1,
-    checkboxSelection: true,
-    hideFooter: true,
-    disableColumnMenu: true,
-  },
+export const VisualTest = VisualTestTemplate.bind({});
+VisualTest.parameters = {
+  options: { showPanel: false },
+};
+VisualTest.args = {
+  pageSize: 1,
+  checkboxSelection: true,
+  hideFooter: true,
+  disableColumnMenu: true,
+  totalCount: 1,
 };

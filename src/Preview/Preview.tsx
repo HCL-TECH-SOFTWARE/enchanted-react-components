@@ -15,6 +15,7 @@
 import * as React from 'react';
 import {
   Theme, Grid, SelectChangeEvent,
+  Box,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconDownload from '@hcl-software/enchanted-icons/dist/carbon/es/download';
@@ -316,12 +317,14 @@ const Preview: React.FC<PreviewProps> = ({
   const [zoomOutDisable, setZoomOutDisable] = React.useState<boolean>(false);
   const [zoomButtonTooltip, setZoomButtonTooltip] = React.useState<string>('');
   const [zoomToFitPercentage, setZoomToFitPercentage] = React.useState<number>(zoomDefault);
+  const [zoomTrigger, setZoomTrigger] = React.useState(true);
 
   const imageContainerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const imageRef = React.useRef<HTMLImageElement>(null);
 
   const [isAssetFinishedRendering, setIsAssetFinishedRendering] = React.useState(false);
+  const [showMessage, setshowMessage] = React.useState(false);
 
   const handleResize = () => {
     if (videoRef.current && imageContainerRef.current) {
@@ -357,8 +360,16 @@ const Preview: React.FC<PreviewProps> = ({
     setZoomButtonTooltip(zoomText);
   }, [zoomPercentage]);
 
+  React.useEffect(() => {
+    if (!zoomTrigger) {
+      setshowMessage(false);
+      setZoomTrigger(true);
+    }
+  }, [zoomTrigger]);
+
   // Function to handle zooming in on the image
   const handleZoomIn = () => {
+    setshowMessage(true);
     // Finds the next highest zoom percentage
     const zoomInNumber = zoomOptions.find((element) => {
       return element > zoomPercentage;
@@ -369,10 +380,12 @@ const Preview: React.FC<PreviewProps> = ({
       setZoomPercentage(zoomInNumber);
     }
     setZoomOutDisable(false);
+    setZoomTrigger(false);
   };
 
   // Function to handle zooming out on the image
   const handleZoomOut = () => {
+    setshowMessage(true);
     // We need to reverse the zoom options array to get the next lowest available
     const reversed = [...zoomOptions].reverse();
     // Finds the next lowest zoom percentage
@@ -385,6 +398,7 @@ const Preview: React.FC<PreviewProps> = ({
       setZoomPercentage(zoomOutNumber);
     }
     setZoomInDisable(false);
+    setZoomTrigger(false);
   };
 
   // Sets the zooming of the image based on 'view actual size' or 'fit to size' into AssetContainer
@@ -796,6 +810,20 @@ const Preview: React.FC<PreviewProps> = ({
                   <IconZoomOut />
                 </IconButton>
               </Tooltip>
+              {showMessage && (
+              <Box
+                component="div"
+                role="alert"
+                sx={{
+                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
+                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
+                }}
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                {`${zoomPercentage}%`}
+              </Box>
+              )}
               <Tooltip
                 data-testid={PreviewTestIds.PREVIEW_ZOOM_TOOLTIP_TEXT}
                 tooltipsize="small"

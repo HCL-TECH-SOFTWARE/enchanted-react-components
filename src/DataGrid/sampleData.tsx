@@ -34,6 +34,7 @@ interface Person {
   'avatar-fullName'?: React.ReactNode,
   'endActions-fullName'?: React.ReactNode,
   'iconEnd-lastName'?: React.ReactNode,
+  'subTitle-fullName'?: string,
 }
 
 export const sampleColumns: ExtendedGridColDef[] = [
@@ -229,7 +230,7 @@ export const sampleMinimalRows: Person[] = [
   },
 ];
 
-export const processRow = (rows: Person[], isMinimal: boolean) => {
+export const processRow = (rows: Person[], isMinimal: boolean, subTitle?: boolean) => {
   const rowsHolder: Person[] = rows.map((item) => {
     if (item.id) {
       item['iconStart-id'] = <IconDocument />;
@@ -246,6 +247,9 @@ export const processRow = (rows: Person[], isMinimal: boolean) => {
           <IconButton tabIndex={0}><IconOverflowMenuHorizontal /></IconButton>,
         ];
       }
+      if (subTitle) {
+        item['subTitle-fullName'] = 'Fictional character';
+      }
     }
     if (item.lastName) {
       item['iconEnd-lastName'] = <IconDocument />;
@@ -254,3 +258,14 @@ export const processRow = (rows: Person[], isMinimal: boolean) => {
   });
   return rowsHolder;
 };
+
+export const sampleRowsWithSubTitle = processRow(sampleRows, false, true);
+export const sampleColumnsWithSubTitle = sampleColumns.map((col) => {
+  if (col.field === 'fullName') {
+    return {
+      ...col,
+      subTitle: true,
+    };
+  }
+  return col;
+});
