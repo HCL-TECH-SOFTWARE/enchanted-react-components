@@ -41,8 +41,12 @@ export default {
       description: 'The noWrap of the Typography component.',
       if: { arg: 'interactive' },
     },
+    component: {
+      description: 'The component used for the root node. Either a string to use a HTML element or a component.',
+      control: false,
+    },
     paragraph: {
-      description: 'The paragraph of the Typography component.',
+      description: 'Deprecated－Use the component prop instead. The paragraph of the Typography component.',
       if: { arg: 'interactive' },
     },
     ref: {

@@ -28,7 +28,7 @@ declare module '@mui/material/Typography' {
 
 const Typography = React.forwardRef((props: TypographyProps, ref: React.Ref<HTMLElement>) => {
   return <MuiTypography ref={ref} {...props} />;
-}) as React.FC<TypographyProps>;
+}) as React.FC<TypographyProps & { component?: React.ElementType }>;
 
 Typography.defaultProps = {
   align: 'inherit',

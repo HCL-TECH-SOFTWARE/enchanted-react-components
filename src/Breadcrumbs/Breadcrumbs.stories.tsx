@@ -83,7 +83,7 @@ const Template: StoryFn<typeof Breadcrumbs> = (args) => {
         <IconInformation sx={{ mr: '4px' }} />
         Content
       </Link>
-      <Typography color="text.primary">Elements</Typography>
+      <Typography color="text.primary" variant="body2" component="span">Elements</Typography>
     </Breadcrumbs>
   );
 };
