@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2025 HCL America Inc.                                          *
+ * Copyright 2024 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { forwardRef } from 'react';
+import React from 'react';
 import MuiList, { ListProps } from '@mui/material/List';
 import { Components, Theme } from '@mui/material';
 
@@ -30,9 +30,9 @@ export const getMuiListThemeOverrides = (): Components<Omit<Theme, 'components'>
   };
 };
 
-const List = forwardRef<HTMLUListElement, ListProps>((props, ref) => {
-  return <MuiList {...props} ref={ref} />;
-});
+const List = ({ ...props }: ListProps) => {
+  return <MuiList {...props} />;
+};
 
 List.defaultProps = {
   dense: true,
