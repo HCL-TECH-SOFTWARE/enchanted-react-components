@@ -18,6 +18,7 @@
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
 - Fixed screen reader accessibility issue with the `label` in `Select` component
 - Added `component` props in `Typography`. 
+- Fixed focus issue for different status icon buttons in the `ProgressBar` component
 
 ### Changed
 
