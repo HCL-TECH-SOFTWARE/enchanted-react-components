@@ -68,6 +68,8 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
           return ({
             borderRadius: '2px',
             padding: '6px 12px',
+            height: '28px',
+            boxSizing: 'border-box',
             ...theme.typography.subtitle2,
             textTransform: 'none',
             '&.Mui-focusVisible, &.force-to-focus': {
