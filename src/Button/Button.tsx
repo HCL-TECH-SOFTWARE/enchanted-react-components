@@ -15,6 +15,7 @@
 import React from 'react';
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import { Components, Theme } from '@mui/material';
+import { ColorNames, Colors } from '../colors';
 
 export enum ButtonVariants {
   CONTAINED = 'contained',
@@ -43,6 +44,11 @@ const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
     <MuiButton
       id={props.variant}
       variant={props.variant}
+      sx={(theme) => {
+        return {
+          color: (props.inversecolors) ? (props.variant === 'contained' ? Colors.get(ColorNames.BLACK87P) : theme.palette.action.selectedInverse) : '',
+        };
+      }}
       {...props}
       ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
     />
@@ -109,10 +115,11 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             }),
             ...(ownerState.variant === 'outlined'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
               borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
                 backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+                borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               },
               '&.force-to-focusHover': {
                 outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
@@ -122,7 +129,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             }),
             ...(ownerState.variant === 'text'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
               '&:hover': {
                 backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },

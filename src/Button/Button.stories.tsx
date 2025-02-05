@@ -62,7 +62,7 @@ export default {
       if: { arg: 'interactive' },
     },
     inversecolors: {
-      description: 'The colors of the IconButton are updated to the inverse color variant when inversecolors is enabled.',
+      description: 'The colors of the Button are updated to the inverse color variant when inversecolors is enabled.',
       if: { arg: 'interactive' },
     },
     sx: {
@@ -1107,9 +1107,9 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
           </Grid>
           <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid item xs={3.5} paddingBottom={2}>
                 <Button
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   inversecolors
                 >
@@ -1119,7 +1119,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Button
                   startIcon={<IconStart />}
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   inversecolors
                 >
@@ -1129,7 +1129,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Button
                   endIcon={<IconEnd />}
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   inversecolors
                 >
@@ -1145,9 +1145,9 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
           </Grid>
           <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid item xs={3.5} paddingBottom={2}>
                 <Button
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   className="force-to-focus"
                   inversecolors
@@ -1158,7 +1158,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Button
                   startIcon={<IconStart />}
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   className="force-to-focus"
                   inversecolors
@@ -1169,9 +1169,50 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               <Grid item xs={4} paddingBottom={2}>
                 <Button
                   endIcon={<IconEnd />}
-                  variant={ButtonVariants.OUTLINED}
+                  variant={ButtonVariants.TEXT}
                   size="medium"
                   className="force-to-focus"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={1}>
+            <Typography sx={{ marginBottom: '8px' }}>
+              Focus & Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3.5} paddingBottom={2}>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
                   inversecolors
                 >
                   Button
@@ -1186,7 +1227,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
           </Grid>
           <Grid item>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid item xs={3.5} paddingBottom={2}>
                 <Button
                   variant={ButtonVariants.TEXT}
                   size="medium"
