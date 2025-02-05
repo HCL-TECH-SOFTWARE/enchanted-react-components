@@ -16,6 +16,7 @@ import React from 'react';
 import {
   Theme, createTheme, PaletteOptions, Shadows,
 } from '@mui/material/styles';
+import { deepmerge } from '@mui/utils';
 import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { Colors, ColorNames, UNKNOWN_COLOR_CODE } from '../colors';
@@ -487,8 +488,17 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
   return themeOptions;
 };
 
-export const createEnchantedTheme = (direction: ThemeDirectionType, mode: ThemeModeType, styleOverrides?: object): Theme => {
-  const themeOptions: ThemeOptions = getThemeOptions(direction, mode);
+/**
+ * Create an Enchanted theme with the given options.
+ * @param {ThemeDirectionType} direction - Theme direction.
+ * @param {ThemeModeType} mode - Theme mode.
+ * @param {object} [themeOptionsOverrides] If provided, these overrides will be deep merged with the default theme options, before creating the theme.
+ * @param {object} [styleOverrides] If provided, these overrides will be applied to the theme, after creation.
+ * @returns {Theme} a theme
+ */
+export const createEnchantedTheme = (direction: ThemeDirectionType, mode: ThemeModeType, themeOptionsOverrides?: object, styleOverrides?: object): Theme => {
+  const defaultThemeOptions: ThemeOptions = getThemeOptions(direction, mode);
+  const themeOptions = themeOptionsOverrides ? deepmerge(defaultThemeOptions, themeOptionsOverrides) : defaultThemeOptions;
   const enchantedTheme = createTheme(themeOptions, styleOverrides || {});
   return enchantedTheme;
 };
