@@ -68,10 +68,11 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
           return ({
             borderRadius: '2px',
             padding: '6px 12px',
-            height: '28px',
-            boxSizing: 'border-box',
             ...theme.typography.subtitle2,
             textTransform: 'none',
+            maxHeight: '28px',
+            boxSizing: 'border-box',
+            lineHeight: '17px',
             '&.Mui-focusVisible, &.force-to-focus': {
               outline: `${theme.palette.primary.main} 1px solid`,
               outlineOffset: '2px',
