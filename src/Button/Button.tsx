@@ -36,10 +36,11 @@ export enum ButtonTestIds {
  */
 export type ButtonProps = MuiButtonProps & {
   hover?: boolean,
-  inversecolors?: boolean,
+  inversecolors?: boolean | 0 | 1,
 }
 
 const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
+  props.inversecolors = props.inversecolors ? 1 : 0;
   return (
     <MuiButton
       id={props.variant}
