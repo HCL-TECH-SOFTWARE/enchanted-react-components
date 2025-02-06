@@ -46,8 +46,9 @@ const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
       id={props.variant}
       variant={props.variant}
       sx={(theme) => {
+        const inverseColor = props.inversecolors && props.variant === 'contained' ? Colors.get(ColorNames.BLACK87P) : theme.palette.action.selectedInverse;
         return {
-          color: (props.inversecolors) ? (props.variant === 'contained' ? Colors.get(ColorNames.BLACK87P) : theme.palette.action.selectedInverse) : '',
+          color: props.inversecolors ? inverseColor : '',
         };
       }}
       {...props}
