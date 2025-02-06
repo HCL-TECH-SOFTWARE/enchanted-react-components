@@ -15,7 +15,6 @@
 import React from 'react';
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import { Components, Theme } from '@mui/material';
-import { ColorNames, Colors } from '../colors';
 
 export enum ButtonVariants {
   CONTAINED = 'contained',
