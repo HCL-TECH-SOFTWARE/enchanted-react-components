@@ -34,7 +34,8 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
             '& .MuiTablePagination-toolbar': {
               margin: '4px 12px',
               padding: 0,
-              position: 'relative',
+              display: 'flex',
+              justifyContent: 'flex-end',
               minHeight: '28px', // overrides MUI min height set for this
               '& .MuiTablePagination-spacer': {
                 display: 'none',
@@ -49,8 +50,6 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                 display: 'none',
               },
               '& [data-testid=tablePaginationActionsRoot]': {
-                position: 'absolute',
-                right: '0',
                 display: 'inline-flex',
                 justifyContent: 'space-between',
                 width: '100%',
