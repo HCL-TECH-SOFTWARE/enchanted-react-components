@@ -658,7 +658,10 @@ const Preview: React.FC<PreviewProps> = ({
             middleSection={[
               <Typography color="textSecondary" variant="subtitle2" marginRight={-1}>{renditionLabel}</Typography>,
               <Select
+                label={renditionLabel}
+                id={PreviewTestIds.PREVIEW_RENDITION_DROPDOWN}
                 data-testid={PreviewTestIds.PREVIEW_RENDITION_DROPDOWN}
+                role="listbox"
                 hiddenLabel
                 required
                 value={currentRendition.type ?? ''}
@@ -835,6 +838,7 @@ const Preview: React.FC<PreviewProps> = ({
                   variant="text"
                   size="small"
                   onClick={zoomPercentageFit}
+                  inversecolors
                 >
                   {`${zoomPercentage}%`}
                 </Button>

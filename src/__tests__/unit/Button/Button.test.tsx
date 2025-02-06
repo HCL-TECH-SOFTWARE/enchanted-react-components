@@ -41,4 +41,9 @@ describe('Button', () => {
     render(<Button variant="text" />);
     expect(screen.findByLabelText('Button')).toBeTruthy();
   });
+
+  it('Render inversecolors variant', () => {
+    render(<Button inversecolors />);
+    expect(screen.findByLabelText('Button')).toBeTruthy();
+  });
 });

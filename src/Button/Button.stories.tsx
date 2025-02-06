@@ -61,6 +61,10 @@ export default {
       control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
+    inversecolors: {
+      description: 'The colors of the Button are updated to the inverse color variant when inversecolors is enabled.',
+      if: { arg: 'interactive' },
+    },
     sx: {
       description: 'https://mui.com/material-ui/api/button/#button-prop-sx',
       control: false,
@@ -1074,6 +1078,180 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
                   variant={ButtonVariants.TEXT}
                   size="medium"
                   className="force-to-focusHover"
+                >
+                  Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid
+          container
+          direction="column"
+          rowSpacing={1}
+          sx={(theme) => {
+            return {
+              color: theme.palette.action.inverse,
+              backgroundColor: theme.palette.background.dark,
+              padding: '12px',
+            };
+          }}
+        >
+          <Typography>Button on dark background</Typography>
+          <Grid item paddingTop={1}>
+            <Typography sx={{ marginBottom: '8px' }}>
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3.5} paddingBottom={2}>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={1}>
+            <Typography sx={{ marginBottom: '8px' }}>
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3.5} paddingBottom={2}>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focus"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focus"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focus"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={1}>
+            <Typography sx={{ marginBottom: '8px' }}>
+              Focus & Hover
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3.5} paddingBottom={2}>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  className="force-to-focusHover"
+                  inversecolors
+                >
+                  Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={1}>
+            <Typography sx={{ marginBottom: '8px' }}>
+              disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3.5} paddingBottom={2}>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  disabled
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  disabled
+                >
+                  Button
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.TEXT}
+                  size="medium"
+                  disabled
                 >
                   Button
                 </Button>

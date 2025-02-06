@@ -35,13 +35,21 @@ export enum ButtonTestIds {
  */
 export type ButtonProps = MuiButtonProps & {
   hover?: boolean,
+  inversecolors?: boolean | 0 | 1,
 }
 
 const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
+  props.inversecolors = props.inversecolors ? 1 : 0;
   return (
     <MuiButton
       id={props.variant}
       variant={props.variant}
+      sx={(theme) => {
+        const inverseColor = props.inversecolors && props.variant === 'contained' ? theme.palette.text.primary : theme.palette.action.selectedInverse;
+        return {
+          color: props.inversecolors ? inverseColor : '',
+        };
+      }}
       {...props}
       ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
     />
@@ -58,6 +66,7 @@ Button.defaultProps = {
   disableTouchRipple: false,
   focusRipple: false,
   tabIndex: 0,
+  inversecolors: false,
 };
 
 export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -74,7 +83,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             boxSizing: 'border-box',
             lineHeight: '17px',
             '&.Mui-focusVisible, &.force-to-focus': {
-              outline: `${theme.palette.primary.main} 1px solid`,
+              outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
               outlineOffset: '2px',
             },
             '& .MuiButtonBase-root:disabled': {
@@ -98,39 +107,40 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             },
             ...(ownerState.variant === 'contained'
              && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.primary.main,
+              backgroundColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
             }),
             ...(ownerState.variant === 'outlined'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
-              borderColor: theme.palette.primary.main,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
+              borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+                borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
             }),
             ...(ownerState.variant === 'text'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
             }),
           });
