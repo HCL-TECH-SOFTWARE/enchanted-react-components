@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Added
-- Added an inverse color variant to the `Button` component when `inversecolors` is enabled.
+- Added an inverse color property to the `Button` component when `inversecolors` is enabled.
 - Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
