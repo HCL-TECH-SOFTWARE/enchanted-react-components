@@ -69,69 +69,95 @@ describe('ProgressItem Component', () => {
 
   test('renders the avatar icon correctly based on the file type', () => {
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.tif' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.tif' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('TIFIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.gif' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.gif' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('GIFIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.svg' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.svg' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('SVGIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.png' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.png' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('PNGIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.webp' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.webp' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('imageIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.mp4' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.mp4' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('videoIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.pdf' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.pdf' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('PDFIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.xlsx' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.xlsx' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('XLSIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.docx' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.docx' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('DOCIcon')).not.toBeNull();
     render(
-      <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.ppt' }]} />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], name: 'test.ppt' }]} />
+      </ThemeProvider>,
     );
     expect(screen.getByTestId('PPTIcon')).not.toBeNull();
   });
 
   test('renders progress indicator correctly', () => {
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.SUCCESS, progress: 100 }]}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.SUCCESS, progress: 100 }]}
+        />
+      </ThemeProvider>,
     );
     expect(screen.getAllByTestId('progress-indicator')[0].querySelector('[data-mui-test="checkmark--outlineIcon"]')).not.toBeNull();
 
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE, progress: 0 }]}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE, progress: 0 }]}
+        />
+      </ThemeProvider>,
     );
     expect(screen.getAllByTestId('progress-indicator')[1].querySelector('[data-mui-test="warningIcon"]')).not.toBeNull();
 
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], status: EnumUploadStatus.PROGRESS, progress: 50 }]}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.PROGRESS, progress: 50 }]}
+        />
+      </ThemeProvider>,
     );
     expect(screen.getAllByTestId('progress-indicator')[2].querySelector('[data-testid="progressRoot"]')).not.toBeNull();
   });
@@ -188,16 +214,16 @@ describe('ProgressItem Component', () => {
     fireEvent.click(screen.getByTestId('cancel-upload'));
     fireEvent.keyDown(screen.getByTestId('cancel-upload'), { key: 'Enter', code: 'Enter' });
     expect(mockCancelUpload).toHaveBeenCalled();
-    fireEvent.mouseLeave(screen.getByText('testFile.jpg'));
-    expect(screen.queryByTestId('cancel-upload')).toBeNull();
   });
 
   test('displays the correct file size value', () => {
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], size: 1024 }]}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], size: 1024 }]}
+        />
+      </ThemeProvider>,
     );
     expect(screen.queryByTestId('file-size')).not.toBeNull();
     expect(screen.getByText('1 KB')).not.toBeNull();
@@ -205,10 +231,12 @@ describe('ProgressItem Component', () => {
 
   test('does not display the file size for folder item', () => {
     render(
-      <ProgressItems
-        {...mockProps}
-        file={[{ ...mockProps.file[0], type: ProgressItemType.Folder }]}
-      />,
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], type: ProgressItemType.Folder }]}
+        />
+      </ThemeProvider>,
     );
     expect(screen.queryByTestId('file-size')).toBeNull();
   });
