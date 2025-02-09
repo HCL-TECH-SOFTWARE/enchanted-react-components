@@ -322,9 +322,11 @@ const Preview: React.FC<PreviewProps> = ({
   const imageContainerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const imageRef = React.useRef<HTMLImageElement>(null);
+  const statusRef = React.useRef(null);
 
   const [isAssetFinishedRendering, setIsAssetFinishedRendering] = React.useState(false);
   const [showMessage, setshowMessage] = React.useState(false);
+  window.console.log('showMessage', showMessage);
 
   const handleResize = () => {
     if (videoRef.current && imageContainerRef.current) {
@@ -356,13 +358,18 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Switching label from 'Zoom to fit' or 'View actual size'
   React.useEffect(() => {
+    if (statusRef.current) {
+      window.console.log(statusRef.current);
+    }
     const zoomText = zoomPercentage === zoomDefault ? tooltipTexts.zoomToFit : tooltipTexts.viewActualSize;
     setZoomButtonTooltip(zoomText);
   }, [zoomPercentage]);
 
   React.useEffect(() => {
     if (!zoomTrigger) {
-      setshowMessage(false);
+      setTimeout(() => {
+        setshowMessage(false);
+      }, 3000); // Set the timeout duration in milliseconds (e.g., 3000ms = 3 seconds)
       setZoomTrigger(true);
     }
   }, [zoomTrigger]);
@@ -385,6 +392,7 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Function to handle zooming out on the image
   const handleZoomOut = () => {
+    window.console.log('zoom out called');
     setshowMessage(true);
     // We need to reverse the zoom options array to get the next lowest available
     const reversed = [...zoomOptions].reverse();
@@ -403,6 +411,7 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Sets the zooming of the image based on 'view actual size' or 'fit to size' into AssetContainer
   const zoomPercentageFit = () => {
+    setshowMessage(true);
     if (zoomButtonTooltip === tooltipTexts.viewActualSize) {
       // View actual size
       setZoomPercentage(zoomDefault);
@@ -414,6 +423,7 @@ const Preview: React.FC<PreviewProps> = ({
     // Sets Zoom in and Zoom out button to be clickable
     setZoomInDisable(false);
     setZoomOutDisable(false);
+    setZoomTrigger(false);
   };
 
   // Calculates image zoom to fit percentage
@@ -792,6 +802,21 @@ const Preview: React.FC<PreviewProps> = ({
             container
             justifyContent="center"
           >
+             { (
+              <Box
+                component="div"
+                role="status"
+                sx={{
+                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
+                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
+                }}
+                aria-live="assertive"
+                aria-atomic="true"
+                ref={statusRef}
+              >
+                {showMessage &&  `Zoomed percentage ${zoomPercentage}%` }
+              </Box>
+              )}
             <ZoomContainer
               sx={{
                 position: isVersionComparison ? 'absolute' : 'fixed',
@@ -803,6 +828,7 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.zoomOut}
               >
                 <IconButton
+                  // aria-label={`Zoom out ${zoomPercentage}%`}
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_OUT_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
                   inversecolors
@@ -813,20 +839,6 @@ const Preview: React.FC<PreviewProps> = ({
                   <IconZoomOut />
                 </IconButton>
               </Tooltip>
-              {showMessage && (
-              <Box
-                component="div"
-                role="alert"
-                sx={{
-                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
-                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
-                }}
-                aria-live="assertive"
-                aria-atomic="true"
-              >
-                {`${zoomPercentage}%`}
-              </Box>
-              )}
               <Tooltip
                 data-testid={PreviewTestIds.PREVIEW_ZOOM_TOOLTIP_TEXT}
                 tooltipsize="small"
@@ -849,6 +861,7 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.zoomIn}
               >
                 <IconButton
+                  // aria-label={`Zoom out ${zoomPercentage}%`}
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_IN_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
                   inversecolors
