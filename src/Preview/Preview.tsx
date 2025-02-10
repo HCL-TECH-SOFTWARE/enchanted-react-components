@@ -364,7 +364,7 @@ const Preview: React.FC<PreviewProps> = ({
     if (!zoomTrigger) {
       setTimeout(() => {
         setshowMessage(false);
-      }, 3000); // Set the timeout duration in milliseconds (e.g., 3000ms = 3 seconds)
+      }, 3000); // Set the timeout duration for 3 second so that screen reader can read the message
       setZoomTrigger(true);
     }
   }, [zoomTrigger]);
@@ -821,7 +821,6 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.zoomOut}
               >
                 <IconButton
-                  // aria-label={`Zoom out ${zoomPercentage}%`}
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_OUT_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
                   inversecolors
@@ -854,7 +853,6 @@ const Preview: React.FC<PreviewProps> = ({
                 title={tooltipTexts.zoomIn}
               >
                 <IconButton
-                  // aria-label={`Zoom out ${zoomPercentage}%`}
                   data-testid={PreviewTestIds.PREVIEW_ZOOM_IN_BUTTON}
                   variant={IconButtonVariants.WITH_PADDING}
                   inversecolors

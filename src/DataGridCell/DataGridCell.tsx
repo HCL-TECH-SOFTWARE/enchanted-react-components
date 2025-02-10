@@ -95,6 +95,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       sx={(theme) => {
         return {
           ...theme.typography.body2,
+          minHeight: '36px',
           fontColor: theme.palette.text.primary,
           outline: 'none',
           width: '100%',
