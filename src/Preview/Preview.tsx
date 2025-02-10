@@ -322,11 +322,9 @@ const Preview: React.FC<PreviewProps> = ({
   const imageContainerRef = React.useRef<HTMLDivElement>(null);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const imageRef = React.useRef<HTMLImageElement>(null);
-  const statusRef = React.useRef(null);
 
   const [isAssetFinishedRendering, setIsAssetFinishedRendering] = React.useState(false);
   const [showMessage, setshowMessage] = React.useState(false);
-  window.console.log('showMessage', showMessage);
 
   const handleResize = () => {
     if (videoRef.current && imageContainerRef.current) {
@@ -358,9 +356,6 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Switching label from 'Zoom to fit' or 'View actual size'
   React.useEffect(() => {
-    if (statusRef.current) {
-      window.console.log(statusRef.current);
-    }
     const zoomText = zoomPercentage === zoomDefault ? tooltipTexts.zoomToFit : tooltipTexts.viewActualSize;
     setZoomButtonTooltip(zoomText);
   }, [zoomPercentage]);
@@ -392,7 +387,6 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Function to handle zooming out on the image
   const handleZoomOut = () => {
-    window.console.log('zoom out called');
     setshowMessage(true);
     // We need to reverse the zoom options array to get the next lowest available
     const reversed = [...zoomOptions].reverse();
@@ -802,7 +796,7 @@ const Preview: React.FC<PreviewProps> = ({
             container
             justifyContent="center"
           >
-             { (
+            {(
               <Box
                 component="div"
                 role="status"
@@ -812,9 +806,8 @@ const Preview: React.FC<PreviewProps> = ({
                 }}
                 aria-live="assertive"
                 aria-atomic="true"
-                ref={statusRef}
               >
-                {showMessage &&  `Zoomed percentage ${zoomPercentage}%` }
+                {showMessage && `Zoomed percentage ${zoomPercentage}%` }
               </Box>
               )}
             <ZoomContainer
