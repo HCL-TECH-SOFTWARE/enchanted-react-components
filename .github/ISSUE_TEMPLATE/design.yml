@@ -1,5 +1,5 @@
-name: Feature request 💄
-description: Suggest a new feature or enhancement.
+name: Design request 🎨
+description: Suggest a new design or enhancement.
 labels: ['design todo', 'pending assessment']
 body:
   - type: textarea
