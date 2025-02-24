@@ -18,12 +18,13 @@ import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
 import { styled, Theme } from '@mui/material';
 import Tooltip, { TooltipPlacement } from '../../Tooltip';
-import Link, { LinkProps } from '../../Link';
+import ActionButton from '../../ActionButton';
 
 export interface ActionProps {
-  href: string,
+  href?: string,
   label: string,
-  handleClick?: React.MouseEventHandler<HTMLAnchorElement>,
+  endIcon?: boolean,
+  handleClick?(event: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>): void,
   disabled?: boolean,
   tooltip?: string,
 }
@@ -133,33 +134,7 @@ export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
   };
 });
 
-export const MuiInputActionLink = styled(Link)<LinkProps>((theme) => {
-  return {
-    ...theme.theme.typography.caption,
-    textAlign: 'right',
-    display: 'block',
-    padding: 0,
-    border: 'none',
-    lineHeight: '11px',
-    '&[disabled]': {
-      border: 'none',
-    },
-    ':focus': {
-      border: 0,
-      fontWeight: 600,
-    },
-    ':hover': {
-      cursor: 'pointer',
-    },
-    float: 'right',
-    ':not(:first-of-type)': {
-      borderLeft: `1px solid ${theme.theme.palette.border.secondary}`,
-      padding: '0 4px', // 4px padding between action link and border divider for multiple action links
-    },
-  };
-});
-
-export const StyledSpan = styled('span')<LinkProps>((theme) => {
+export const StyledSpan = styled('span')((theme) => {
   return {
     display: 'inline-block',
     marginTop: '6px',
@@ -215,17 +190,15 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
             return (
               // eslint-why index is not the sole key definition, it is prefixed by other identifiers
               // eslint-disable-next-line react/no-array-index-key
-              <Tooltip title={actionProp.tooltip} placement="bottom" key={`${actionProp.label}-${index}`}>
+              <Tooltip title={actionProp.tooltip} tooltipsize="small" placement="bottom" key={`${actionProp.label}-${index}`}>
                 <StyledSpan>
-                  <MuiInputActionLink
+                  <ActionButton
+                    label={actionProp.label}
+                    endIcon={actionProp.endIcon}
                     disabled={actionProp.disabled || props.disabled}
                     href={actionProp.href}
-                    onClick={actionProp.handleClick}
-                    underline="none"
-                    sx={{ display: 'inline' }}
-                  >
-                    {actionProp.label}
-                  </MuiInputActionLink>
+                    handleClick={actionProp.handleClick}
+                  />
                 </StyledSpan>
               </Tooltip>
             );

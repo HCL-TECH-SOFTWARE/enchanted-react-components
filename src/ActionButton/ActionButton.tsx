@@ -17,16 +17,7 @@ import IconCaretDown from '@hcl-software/enchanted-icons/dist/carbon/es/caret--d
 import { Box } from '@mui/system';
 import { styled } from '@mui/material';
 import Typography from '../Typography';
-
-/**
- * Props for the ActionButton component.
- */
-export interface ActionButtonProps {
-  label: string,
-  endIcon?: boolean,
-  disabled?: boolean,
-  handleClick?(event: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>): void,
-}
+import { ActionProps } from '../prerequisite_components/InputLabelAndAction';
 
 /**
  * `StyledBox` is a styled component based on the `Box` component. It applies various styles to the `Box` component.
@@ -65,20 +56,22 @@ const StyledBox = styled(Box)(({ theme }) => {
   };
 });
 
-/**
- * ActionButton component renders a button with optional end icon and handles click and keydown events.
- * @component
- * @param {ActionButtonProps} props - The properties passed to the ActionButton component.
- * @returns {JSX.Element} The rendered ActionButton component.
- */
-const ActionButton: React.FC <ActionButtonProps> = ({ ...props }: ActionButtonProps) => {
+const ActionButton: React.FC <ActionProps> = ({ ...props }: ActionProps) => {
   return (
     <StyledBox
       className={props.disabled ? 'disabled' : ''}
       tabIndex={props.disabled ? -1 : 0}
-      onClick={props.handleClick}
+      onClick={(event) => {
+        if (props.href) {
+          window.open(props.href, '_blank');
+        } else if (props.handleClick) {
+          props.handleClick(event);
+        }
+      }}
       onKeyDown={(event) => {
-        if (event.key === 'Enter' && props.handleClick) {
+        if (event.key === 'Enter' && props.href) {
+          window.open(props.href, '_blank');
+        } else if (event.key === 'Enter' && props.handleClick) {
           props.handleClick(event);
         }
       }}
