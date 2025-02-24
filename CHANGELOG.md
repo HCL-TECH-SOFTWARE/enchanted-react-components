@@ -7,6 +7,7 @@
 - Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
+- Added `ActionButton` component designed to perform a specific action or task when clicked or tapped.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
