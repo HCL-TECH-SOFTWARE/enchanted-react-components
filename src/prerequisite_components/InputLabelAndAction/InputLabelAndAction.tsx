@@ -61,7 +61,7 @@ export const StyledInputLabel = styled(MuiInputLabel)((theme) => {
   return {
     ...theme.theme.typography.subtitle2,
     color: theme.theme.palette.text.secondary,
-    margin: '0px 0px 4px 0px',
+    margin: '0px',
     pointerEvents: 'inherit',
     position: 'relative',
     display: 'inline-flex',
@@ -123,7 +123,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
 export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
   return {
     '&.MuiGrid-container': {
-      margin: '0px',
+      margin: '0px 0px 4px 0px',
       width: '100%',
       display: 'flex',
       justifyContent: 'space-between',
@@ -137,8 +137,6 @@ export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
 export const StyledSpan = styled('span')((theme) => {
   return {
     display: 'inline-block',
-    marginTop: '6px',
-    marginBottom: '4px',
     paddingRight: '4px', // 4px padding between action link and border divider for multiple action links
     ':not(:first-of-type)': {
       borderLeft: `1px solid ${theme.theme.palette.border.secondary}`,

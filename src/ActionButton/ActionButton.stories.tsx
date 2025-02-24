@@ -40,6 +40,11 @@ export default {
       action: 'clicked',
       description: 'The function to be called when the action button is clicked.',
     },
+    href: {
+      if: { arg: 'interactive' },
+      control: 'text',
+      description: 'The URL to navigate to when the action button is clicked.',
+    },
   },
 } as Meta<typeof ActionButton>;
 

@@ -41,6 +41,7 @@ const StyledBox = styled(Box)(({ theme }) => {
     '&:focus': {
       outline: `1px solid ${theme.palette.action.focus}`,
       borderRadius: '2px',
+      outlineOffset: '1px',
     },
     '& .MuiTypography-root': {
       padding: '1px 0px',
