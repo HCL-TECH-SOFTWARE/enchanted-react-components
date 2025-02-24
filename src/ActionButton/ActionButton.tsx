@@ -59,6 +59,7 @@ const StyledBox = styled(Box)(({ theme }) => {
 const ActionButton: React.FC <ActionProps> = ({ ...props }: ActionProps) => {
   return (
     <StyledBox
+      data-testid="action-button"
       className={props.disabled ? 'disabled' : ''}
       tabIndex={props.disabled ? -1 : 0}
       onClick={(event) => {
