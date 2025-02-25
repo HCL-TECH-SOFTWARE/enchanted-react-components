@@ -39,7 +39,7 @@ const StyledBox = styled(Box)(({ theme }) => {
       color: theme.palette.primary.dark,
     },
     '&:focus': {
-      outline: `1px solid ${theme.palette.action.focus}`,
+      outline: `2px solid ${theme.palette.action.focus}`,
       borderRadius: '2px',
       outlineOffset: '1px',
     },
