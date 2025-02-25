@@ -16,6 +16,7 @@
 import React from 'react';
 import {
   configure, cleanup, render, screen,
+  fireEvent,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
@@ -86,6 +87,7 @@ describe('Select', () => {
   it('Render with action link', () => {
     const actionLabel = 'Action';
     const actionHref = 'https://www.hcltech.com/';
+    window.open = jest.fn();
 
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
@@ -99,7 +101,8 @@ describe('Select', () => {
     );
 
     expect(screen.getByText(actionLabel)).not.toBeNull();
-    expect(screen.getByText(actionLabel).getAttribute('href')).toBe(actionHref);
+    fireEvent.click(screen.getByText(actionLabel));
+    expect(window.open).toHaveBeenCalledWith(actionHref, '_blank');
   });
 
   it('Render with a unit label', () => {
