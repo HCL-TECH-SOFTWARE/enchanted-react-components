@@ -140,6 +140,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
+            const { InputProps, inputProps } = params;
+            const inputPropsValue = props.renderOption ? {} : { value: props.value };
             const textFieldArgs: TextFieldProps = {
               ...params,
               placeholder: props.placeholder,
@@ -157,13 +159,15 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               renderNonEditInput,
               endAdornmentAction,
               value: props.value,
+              InputProps: {
+                ...InputProps,
+                inputProps: {
+                  ...inputProps,
+                  ...inputPropsValue,
+                },
+              },
             };
             const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
-            textFieldArgs.inputProps = {
-              'aria-describedby': props.error ? undefined : helperTextId,
-              'aria-errormessage': props.error ? helperTextId : undefined,
-              ...textFieldArgs.inputProps,
-            };
             return (
               <Tooltip title={tooltipTitle} tooltipsize="small">
                 <TextField {...textFieldArgs} inputRef={textfieldRef} />
