@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination 
 
 ### Changed
 
