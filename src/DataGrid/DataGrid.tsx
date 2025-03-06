@@ -479,6 +479,15 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
         const nextFocusableRow = findNextFocusableRow(firstRow);
         if (nextFocusableRow) {
           nextFocusableRow.focus();
+        } else {
+          // If no focusable row is found, move focus to the footer
+          const footer = document.querySelector('.MuiDataGrid-footerContainer') as HTMLDivElement;
+          if (footer) {
+            const focusableFooterElement = footer.querySelector('.MuiAutocomplete-root') as HTMLElement;
+            if (focusableFooterElement) {
+              focusableFooterElement.focus();
+            }
+          }
         }
       } else {
         firstRow?.focus();
