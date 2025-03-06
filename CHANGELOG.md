@@ -3,6 +3,16 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.1.0
+
+### Added
 - Added an inverse color property to the `Button` component when `inversecolors` is enabled.
 - Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
@@ -25,10 +35,6 @@
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
 - Fixed Text spacing accessibility issue on `Pagination` component
-
-### Changed
-
-### Breaking changes
 
 ## 2.0.0
 
@@ -54,8 +60,6 @@
 - Fixed `TextField` accessibility attributes to read label
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
 - Fixed accessibility issue with `Autocomplete` required state
-
-### Changed
 
 ### Breaking changes
 - Added required `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
@@ -104,8 +108,6 @@
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
 - Resolved tooltip issue of options in `Autocomplete` component
-
-### Breaking changes
 
 ## 1.1.0
 
