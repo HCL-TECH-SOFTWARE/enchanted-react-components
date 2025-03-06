@@ -256,7 +256,18 @@ export const processRow = (rows: Person[], isMinimal: boolean, subTitle?: boolea
     }
     return item;
   });
-  return rowsHolder;
+  const row = [
+    ...rowsHolder,
+    {
+      ...rowsHolder[0],
+      disabled: true,
+    },
+    {
+      ...rowsHolder[10],
+      disabled: true,
+    },
+  ];
+  return row;
 };
 
 export const sampleRowsWithSubTitle = processRow(sampleRows, false, true);

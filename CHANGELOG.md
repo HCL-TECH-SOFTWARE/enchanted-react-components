@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed accessibility issue with disabled row on `DataGrid` component.
 
 ### Changed
 
