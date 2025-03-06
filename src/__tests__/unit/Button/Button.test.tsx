@@ -46,4 +46,9 @@ describe('Button', () => {
     render(<Button inversecolors />);
     expect(screen.findByLabelText('Button')).toBeTruthy();
   });
+
+  it('Render neutral size', () => {
+    render(<Button size="neutral" />);
+    expect(screen.findByLabelText('Button')).toBeTruthy();
+  });
 });
