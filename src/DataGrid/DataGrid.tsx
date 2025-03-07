@@ -459,6 +459,14 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     // check if the row is the last available row and the user press tab
     if (event.key === 'Tab') {
       setFocusRow(''); // to hide border on current row
+      // check if the row is the first focusable row then we need to focus on the column header row
+      const previousElementSibling = findPreviousFocusableRow(target);
+      if (event.shiftKey && !previousElementSibling) {
+        const dataGridMain = findTargetElement(target, 'MuiDataGrid-main', true) as HTMLDivElement;
+        if (dataGridMain.firstElementChild && dataGridMain.firstElementChild.className.includes('MuiDataGrid-columnHeaders ')) {
+          (dataGridMain.firstElementChild as HTMLDivElement).focus();
+        }
+      }
     }
   };
 
@@ -528,7 +536,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     // need to get coloumn header row to so that we can focus on it.
     const parentElem = findTargetElement(event.target, 'MuiDataGrid-root', true);
     const columnHeaderRow = parentElem?.querySelector('.MuiDataGrid-columnHeaders') as HTMLDivElement;
-    if (columnHeaderRow && !columnHeaderRow.hasAttribute('tabindex')) {
+    if (columnHeaderRow) {
       // add tabindex so that we can are able to focus on it.
       columnHeaderRow.setAttribute('tabindex', '0');
       // need some wait to set attribute to take effect
