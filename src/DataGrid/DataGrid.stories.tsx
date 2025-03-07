@@ -19,6 +19,7 @@ import { GridSortModel, GridColumnVisibilityModel } from '@mui/x-data-grid';
 import DataGrid from './DataGrid';
 import {
   processRow, sampleColumns, sampleColumnsWithSubTitle, sampleRows,
+  sampleRowsWithDisabledRow,
   sampleRowsWithSubTitle,
 } from './sampleData';
 import Typography from '../Typography';
@@ -321,6 +322,38 @@ const VisualTestTemplate: StoryFn<typeof DataGrid> = (args) => {
       <div style={{ width: '100%' }}>
         <DataGrid
           {...args}
+          pageSize={pageSize}
+          page={page}
+          checkboxSelection={false}
+          onPageSizeChange={(value) => {
+            if (!Number.isNaN(value) && DataGrid.defaultProps.rowsPerPageOptions.includes(value)) {
+              setPage(0);
+              setPageSize(value);
+            }
+          }}
+          onPageChange={(newPage) => {
+            setPage(newPage);
+          }}
+          totalCount={sampleRows.length}
+          columnVisibilityModel={columnVisibilityState}
+          onColumnVisibilityModelChange={handleColumnVisibilityModelChange}
+          initialState={{
+            sorting: {
+              sortModel: [{ field: 'title', sort: 'asc' }],
+            },
+          }}
+          sortModel={sortState}
+          onSortModelChange={handleSortModelChange}
+        />
+      </div>
+      &nbsp;
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+        DataGrid with Disabled rows
+      </Typography>
+      <div style={{ width: '100%' }}>
+        <DataGrid
+          {...args}
+          rows={sampleRowsWithDisabledRow}
           pageSize={pageSize}
           page={page}
           checkboxSelection={false}

@@ -5,7 +5,8 @@
 ### Added
 
 ### Fixed
-- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination 
+- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
+- Fixed accessibility issue with disabled row on `DataGrid` component.
 
 ### Changed
 
