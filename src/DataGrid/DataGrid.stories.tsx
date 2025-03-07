@@ -356,7 +356,7 @@ const VisualTestTemplate: StoryFn<typeof DataGrid> = (args) => {
           rows={sampleRowsWithDisabledRow}
           pageSize={pageSize}
           page={page}
-          checkboxSelection
+          checkboxSelection={false}
           onPageSizeChange={(value) => {
             if (!Number.isNaN(value) && DataGrid.defaultProps.rowsPerPageOptions.includes(value)) {
               setPage(0);
