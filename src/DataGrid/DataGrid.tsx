@@ -148,6 +148,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '& .MuiDataGrid-hide-checkbox .MuiCheckbox-root': {
       display: 'none',
     },
+    '& .withEndActions .MuiDataGrid-cell--withEndActions': {
+      display: 'flex',
+    },
     '& .MuiDataGrid-cell': {
       paddingLeft: '12px',
       paddingRight: '12px',
@@ -312,6 +315,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     onCheckboxClick, translation, totalCount, page, pageSize, rowsPerPageOptions,
   } = props;
   const [focusRow, setFocusRow] = React.useState<string>('');
+  const [key, setKey] = React.useState<string>('');
 
   /**
    * Finds the next available/focusable row which doesn't have tabindex="-1".
@@ -347,6 +351,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
 
   // this function handles different key bindings for each row on the table
   const handleOnRowKeyDown = (event: React.KeyboardEvent) => {
+    setKey(event.key);
     const target = event.target as HTMLDivElement;
     // get row check box for table row
     const rowCheckbox: HTMLElement | undefined = findTargetElement(target, 'PrivateSwitchBase-input', false);
@@ -498,6 +503,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
           }
         }
       } else {
+        setKey(event.key);
         firstRow?.focus();
       }
     }
@@ -562,10 +568,54 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   // we need this function to show checkbox on that row when a cell is focused
   const handleOnCellFocus = (event: React.FocusEvent) => {
     const target = event.target as HTMLDivElement;
-    const parentRow = findTargetElement(target, 'MuiDataGrid-row', true);
+    const parentRow = findTargetElement(target, 'MuiDataGrid-row', true) as HTMLDivElement;
     if (parentRow) {
       parentRow.classList.remove('MuiDataGrid-hide-checkbox');
     }
+
+    const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
+    if (parentRow?.classList.contains('disabled-row')) {
+      // Find the next focusable row
+      let nextFocusableRow;
+      if (key === 'ArrowDown') {
+        nextFocusableRow = findNextFocusableRow(parentRow);
+      } else {
+        nextFocusableRow = findPreviousFocusableRow(parentRow);
+        if (!nextFocusableRow) {
+          const dataGridMain = findTargetElement(target, 'MuiDataGrid-main', true) as HTMLDivElement;
+          if (dataGridMain.firstElementChild && dataGridMain.firstElementChild.className.includes('MuiDataGrid-columnHeaders ')) {
+            parentRow.classList.add('MuiDataGrid-hide-checkbox');// to hide checkbox from disabled current row
+            (dataGridMain.firstElementChild as HTMLDivElement).focus();
+          }
+        }
+      }
+
+      if (nextFocusableRow) {
+        // find same cell of next focusable row using the data-colindex
+        const nextFocusableCell = nextFocusableRow.querySelector(`.MuiDataGrid-cell[data-colindex="${parentCell?.getAttribute('data-colindex')}"]`) as HTMLDivElement;
+        // focus on the next cells end Actions
+        const cellWithEndAction = nextFocusableCell.querySelector('.MuiDataGrid-cell--withEndActions');
+        if (cellWithEndAction) {
+          nextFocusableCell.classList.add('withEndActions');
+          // check if the current cell is beside the checkbox so that we dont hide it.
+          const isPreviousSiblingCheckbox = parentCell?.previousElementSibling?.className.includes('MuiDataGrid-cellCheckbox');
+          // we dont want to hide checkbox when are the last row on arrow down
+          if (isPreviousSiblingCheckbox && parentRow && !(parentRow.classList.contains('MuiDataGrid-row--lastVisible') && key === 'ArrowDown')) {
+            parentRow.classList.add('MuiDataGrid-hide-checkbox');
+          }
+          const actionButton = findTargetElement(cellWithEndAction, 'MuiButtonBase-root', false);
+          if (actionButton) {
+            // this is needed to let the button to be focused instead of the cell
+            window.setTimeout(() => {
+              actionButton.focus();
+            }, 0);
+          }
+          return;
+        }
+        nextFocusableCell?.focus();
+      }
+    }
+
     // need to refocus the from parent cell to action button
     const cellWithEndAction = target.querySelectorAll('.MuiDataGrid-cell--withEndActions');
     if (cellWithEndAction.length > 0) {
@@ -595,6 +645,8 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   const handleOnCellKeydown = (event: React.KeyboardEvent) => {
     const target = event.target as HTMLDivElement;
     const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
+    // need to hide the end actions when we navigate to other cell
+    parentCell?.classList.remove('withEndActions');
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       // check if the current cell is beside the checkbox so that we dont hide it.
       const isPreviousSiblingCheckbox = parentCell?.previousElementSibling?.className.includes('MuiDataGrid-cellCheckbox');
@@ -668,6 +720,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       }
       setFocusRow(target.getAttribute('data-id') as string);
     }
+    setKey('');
   };
 
   const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {

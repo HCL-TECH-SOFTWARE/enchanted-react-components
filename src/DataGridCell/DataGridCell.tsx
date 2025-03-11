@@ -55,6 +55,13 @@ const DataGridCell = (props: GridRenderCellParams) => {
     } else {
       setIsActive(false);
     }
+
+    // Check if the focus is moving to the next row, the endActions should be hidden
+    const parentRow = target.closest('.MuiDataGrid-row');
+    const nextRow = parentRow?.nextSibling as HTMLElement;
+    if (nextRow && target.parentElement?.parentElement?.parentElement?.nextSibling && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      setIsActive(false);
+    }
   }, []);
 
   // handle resize event
@@ -229,7 +236,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       {colDef.endActions && row[`endActions-${colDef.field}`] && (
         <Grid // this grid is for the container of end action button at the end of the cell
           className={colDef.endActions ? 'MuiDataGrid-cell--withEndActions' : ''}
-          aria-hidden={!(isActive && colDef.endActions && !hideEndActions && row[`endActions-${colDef.field}`].length > 0)}
+          aria-hidden={!(isActive && !row.disabled && colDef.endActions && !hideEndActions && row[`endActions-${colDef.field}`].length > 0)}
           sx={(theme) => {
             return {
               display: 'none',
@@ -242,7 +249,8 @@ const DataGridCell = (props: GridRenderCellParams) => {
                 marginLeft: 'auto',
                 marginRight: '0',
               }),
-              ...(isActive && colDef.endActions && !hideEndActions && row[`endActions-${colDef.field}`].length > 0 && { // button are shown on mouse hover, cell/row focus, no selected row
+              ...(isActive && !row.disabled
+                && colDef.endActions && !hideEndActions && row[`endActions-${colDef.field}`].length > 0 && { // button are shown on mouse hover, cell/row focus, no selected row
                 display: 'flex',
               }),
             };
