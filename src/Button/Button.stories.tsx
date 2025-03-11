@@ -32,7 +32,7 @@ export default {
     },
     size: {
       description: 'Sizes of Button component.',
-      options: ['small', 'medium', 'large'],
+      options: ['neutral', 'small', 'medium', 'large'],
       control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
@@ -1080,6 +1080,320 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
                   className="force-to-focusHover"
                 >
                   Button
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid container direction="column">
+          <Grid item paddingBottom={0}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Button neutral Contained
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.CONTAINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item paddingTop={3}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Button neutral Outlined
+            </Typography>
+          </Grid>
+          <Divider />
+          <Grid item paddingTop={1}>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Active
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focus"
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Disabled
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  disabled
+                >
+                  px
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
+              Hover & Focus
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container spacing={3}>
+              <Grid item xs={3} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  startIcon={<IconStart />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
+                </Button>
+              </Grid>
+              <Grid item xs={4} paddingBottom={2} sx={{ py: 2.7 }}>
+                <Button
+                  endIcon={<IconEnd />}
+                  variant={ButtonVariants.OUTLINED}
+                  size="neutral"
+                  className="force-to-focusHover"
+                >
+                  px
                 </Button>
               </Grid>
             </Grid>
