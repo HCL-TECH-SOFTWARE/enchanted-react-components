@@ -107,14 +107,14 @@ const StyledList = styled(List)((props) => {
       '.MuiListItemButton-root': {
         '.MuiListItemText-root': {
           '& .MuiListItemText-primary': {
-            // maxWidth: '250px',
+            maxWidth: '252px',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
           },
           '& .MuiListItemText-secondary': {
+            maxWidth: '252px',
             '& span:not(.file-size)': {
-              // maxWidth: '200px',
               display: 'inline',
               overflow: 'hidden',
               whiteSpace: 'nowrap',
@@ -430,7 +430,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                               <span
                                 data-testid="failed-status-label"
                                 style={{
-                                  maxWidth: showLearnMoreButton ? '150px' : '288px',
+                                  maxWidth: showLearnMoreButton ? '134px' : '252px',
                                 }}
                               >
                                 {!queueItem.message ? translation?.failureLabel : queueItem.message}
