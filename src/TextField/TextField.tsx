@@ -133,9 +133,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             cursor: 'default',
             marginLeft: '0px',
             marginRight: '0px',
-            ...theme.direction === ThemeDirectionType.RTL && {
-              textAlign: 'end',
-            },
+            textAlign: 'left',
           };
         },
       },
