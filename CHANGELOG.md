@@ -5,6 +5,10 @@
 ### Added
 
 ### Fixed
+- Fixed the Autocomplete component helpertext position when text direction is RTL
+- Fixed the Textfield component helpertext position when text direction is RTL
+
+### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination 
 
 ### Changed
