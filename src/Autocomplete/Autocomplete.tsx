@@ -270,7 +270,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
             },
             '& + .MuiFormHelperText-root': { // styles a form helper text right next to an autocomplete
               marginTop: '4px',
-              textAlign: 'left',
             },
           });
         },
