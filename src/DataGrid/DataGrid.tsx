@@ -20,7 +20,7 @@ import {
 import { styled } from '@mui/material';
 import Checkbox from '../Checkbox';
 import Pagination, { TablePaginationLocalization, TablePaginationLocalizationPlaceholders } from '../Pagination';
-import { findTargetElement } from '../utils/eventUtils';
+import { findNextFocusableRow, findPreviousFocusableRow, findTargetElement } from '../utils/eventUtils';
 import DataGridDivider from './DataGridDivider';
 import ColumnSortedAscendingIcon from './ColumnSortedAscendingIcon';
 import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
@@ -315,43 +315,10 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     onCheckboxClick, translation, totalCount, page, pageSize, rowsPerPageOptions,
   } = props;
   const [focusRow, setFocusRow] = React.useState<string>('');
-  const [key, setKey] = React.useState<string>('');
-
-  /**
-   * Finds the next available/focusable row which doesn't have tabindex="-1".
-   * @param currentRow - The current row element.
-   * @returns The next focusable row element or null if none found.
-   */
-  const findNextFocusableRow = (currentRow: HTMLDivElement| HTMLElement): HTMLDivElement | null => {
-    let nextRow = currentRow.nextElementSibling as HTMLDivElement | null;
-    while (nextRow) {
-      if (nextRow.getAttribute('tabindex') !== '-1') {
-        return nextRow;
-      }
-      nextRow = nextRow.nextElementSibling as HTMLDivElement | null;
-    }
-    return null;
-  };
-
-  /**
-   * Finds the previous available/focusable row which doesn't have tabindex="-1".
-   * @param currentRow - The current row element.
-   * @returns The previous focusable row element or null if none found.
-   */
-  const findPreviousFocusableRow = (currentRow: HTMLDivElement): HTMLDivElement | null => {
-    let previousRow = currentRow.previousElementSibling as HTMLDivElement | null;
-    while (previousRow) {
-      if (previousRow.getAttribute('tabindex') !== '-1') {
-        return previousRow;
-      }
-      previousRow = previousRow.previousElementSibling as HTMLDivElement | null;
-    }
-    return null;
-  };
+  const arrowKey = React.useRef<string>('');
 
   // this function handles different key bindings for each row on the table
   const handleOnRowKeyDown = (event: React.KeyboardEvent) => {
-    setKey(event.key);
     const target = event.target as HTMLDivElement;
     // get row check box for table row
     const rowCheckbox: HTMLElement | undefined = findTargetElement(target, 'PrivateSwitchBase-input', false);
@@ -426,23 +393,41 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     }
     // this allow user to navigate via keyboard table row by pressing arrow down
     if (!event.shiftKey && event.key === 'ArrowDown') {
+      const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
+      const parentRow = parentCell?.parentElement as HTMLDivElement;
       if (target.nextElementSibling) {
         // hide the checkbox to current select row
         target.classList.add('MuiDataGrid-hide-checkbox');
         // focus to next row
         const nextFocusableRow = findNextFocusableRow(target);
         (nextFocusableRow as HTMLDivElement).focus();
+      } else if (parentCell && parentRow?.nextElementSibling?.classList.contains('disabled-row')) {
+        // find next focusable row
+        const nextFocusableRow = findNextFocusableRow(parentRow as HTMLDivElement);
+        if (!nextFocusableRow) {
+          return;
+        }
+        const nextRow = parentRow?.nextElementSibling as HTMLDivElement;
+        const nextRowCell = nextRow.querySelector(`.MuiDataGrid-cell[data-colindex="${parentCell?.getAttribute('data-colindex')}"]`) as HTMLDivElement;
+        (nextRowCell.firstChild as HTMLDivElement).focus();
       }
     }
     // this allow user to navigate via keyboard table row by pressing arrow up
     if (!event.shiftKey && event.key === 'ArrowUp') {
       const previousFocusableRow = findPreviousFocusableRow(target);
+      const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
+      const parentRow = parentCell?.parentElement as HTMLDivElement;
       // check if we have previous row
-      if (previousFocusableRow) {
+      if (previousFocusableRow && target.classList.contains('MuiDataGrid-row')) {
         // hide the checkbox to current select row
         target.classList.add('MuiDataGrid-hide-checkbox');
         // focus to previous row
         (previousFocusableRow as HTMLDivElement).focus();
+      } else if (parentCell && parentRow?.previousElementSibling?.classList.contains('disabled-row')) {
+        // find previous row
+        const previousRow = parentRow?.previousElementSibling as HTMLDivElement;
+        const previousRowCell = previousRow.querySelector(`.MuiDataGrid-cell[data-colindex="${parentCell?.getAttribute('data-colindex')}"]`) as HTMLDivElement;
+        previousRowCell.focus();
       } else {
         // to focus the columnHeaders since we dont have previousElementSibling
         target.classList.add('MuiDataGrid-hide-checkbox');
@@ -466,7 +451,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       setFocusRow(''); // to hide border on current row
       // check if the row is the first focusable row then we need to focus on the column header row
       const previousElementSibling = findPreviousFocusableRow(target);
-      if (event.shiftKey && !previousElementSibling) {
+      if (event.shiftKey && !previousElementSibling && target.classList.contains('MuiDataGrid-row')) {
         const dataGridMain = findTargetElement(target, 'MuiDataGrid-main', true) as HTMLDivElement;
         if (dataGridMain.firstElementChild && dataGridMain.firstElementChild.className.includes('MuiDataGrid-columnHeaders ')) {
           (dataGridMain.firstElementChild as HTMLDivElement).focus();
@@ -503,7 +488,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
           }
         }
       } else {
-        setKey(event.key);
+        arrowKey.current = event.key;
         firstRow?.focus();
       }
     }
@@ -569,16 +554,26 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   const handleOnCellFocus = (event: React.FocusEvent) => {
     const target = event.target as HTMLDivElement;
     const parentRow = findTargetElement(target, 'MuiDataGrid-row', true) as HTMLDivElement;
-    if (parentRow) {
+    if (!parentRow?.classList.contains('disabled-row')) {
       parentRow.classList.remove('MuiDataGrid-hide-checkbox');
+    }
+
+    // we need to focus on next focusable row when we are pressing tab from a cell
+    if (parentRow.nextElementSibling && parentRow.nextElementSibling.classList.contains('disabled-row')) {
+      parentRow.nextElementSibling.setAttribute('tabindex', '-1');
+      parentRow.nextElementSibling.setAttribute('aria-disabled', 'true');
     }
 
     const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
     if (parentRow?.classList.contains('disabled-row')) {
-      // Find the next focusable row
+      const relatedTargetCell = findTargetElement(event.relatedTarget as HTMLElement, 'MuiDataGrid-cell', true);
+      const relatedTargetRow = relatedTargetCell?.parentElement as HTMLDivElement;
+      //  Find the next focusable row
       let nextFocusableRow;
-      if (key === 'ArrowDown') {
+      if (arrowKey.current === 'ArrowDown' || (relatedTargetRow === parentRow.nextElementSibling && arrowKey.current === '')) {
         nextFocusableRow = findNextFocusableRow(parentRow);
+        // if we are at the last focusable row and if we press arrow down we need to hide focus from the disabled cell(last row is disabled cell)
+        if (!nextFocusableRow) target.blur();
       } else {
         nextFocusableRow = findPreviousFocusableRow(parentRow);
         if (!nextFocusableRow) {
@@ -591,28 +586,8 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       }
 
       if (nextFocusableRow) {
-        // find same cell of next focusable row using the data-colindex
-        const nextFocusableCell = nextFocusableRow.querySelector(`.MuiDataGrid-cell[data-colindex="${parentCell?.getAttribute('data-colindex')}"]`) as HTMLDivElement;
-        // focus on the next cells end Actions
-        const cellWithEndAction = nextFocusableCell.querySelector('.MuiDataGrid-cell--withEndActions');
-        if (cellWithEndAction) {
-          nextFocusableCell.classList.add('withEndActions');
-          // check if the current cell is beside the checkbox so that we dont hide it.
-          const isPreviousSiblingCheckbox = parentCell?.previousElementSibling?.className.includes('MuiDataGrid-cellCheckbox');
-          // we dont want to hide checkbox when are the last row on arrow down
-          if (isPreviousSiblingCheckbox && parentRow && !(parentRow.classList.contains('MuiDataGrid-row--lastVisible') && key === 'ArrowDown')) {
-            parentRow.classList.add('MuiDataGrid-hide-checkbox');
-          }
-          const actionButton = findTargetElement(cellWithEndAction, 'MuiButtonBase-root', false);
-          if (actionButton) {
-            // this is needed to let the button to be focused instead of the cell
-            window.setTimeout(() => {
-              actionButton.focus();
-            }, 0);
-          }
-          return;
-        }
-        nextFocusableCell?.focus();
+        const nextRowCell = nextFocusableRow.querySelector(`.MuiDataGrid-cell[data-colindex="${parentCell?.getAttribute('data-colindex')}"]`)?.firstChild as HTMLDivElement;
+        nextRowCell?.focus();
       }
     }
 
@@ -644,13 +619,14 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   // we need to check if previous cell is the checkbox cell so we can hide checkbox when we change row focus
   const handleOnCellKeydown = (event: React.KeyboardEvent) => {
     const target = event.target as HTMLDivElement;
+    arrowKey.current = event.key;
     const parentCell = findTargetElement(target, 'MuiDataGrid-cell', true);
     // need to hide the end actions when we navigate to other cell
     parentCell?.classList.remove('withEndActions');
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
       // check if the current cell is beside the checkbox so that we dont hide it.
       const isPreviousSiblingCheckbox = parentCell?.previousElementSibling?.className.includes('MuiDataGrid-cellCheckbox');
-      const parentRow = findTargetElement(target, 'MuiDataGrid-row', true);
+      const parentRow = findTargetElement(target, 'MuiDataGrid-row', true) as HTMLDivElement;
       // !(parentRow.classList.contains('MuiDataGrid-row--lastVisible') && event.key === 'ArrowDown') we dont want to hide checkbox when are the last row on arrow down
       if (isPreviousSiblingCheckbox && parentRow && !(parentRow.classList.contains('MuiDataGrid-row--lastVisible') && event.key === 'ArrowDown')) {
         parentRow.classList.add('MuiDataGrid-hide-checkbox');
@@ -717,10 +693,18 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       if (nextRows && nextRows.classList.contains('disabled-row')) {
         nextRows.setAttribute('tabindex', '-1');
         nextRows.setAttribute('aria-disabled', 'true');
+        // find all cells inside that cell and set tabindex to -1
+        const nextRowCells = nextRows.querySelectorAll('.MuiDataGrid-cell');
+        nextRowCells.forEach((cell) => {
+          cell.setAttribute('tabindex', '-1');
+          const cellChild = cell.firstChild as HTMLElement;
+          cellChild.setAttribute('tabindex', '-1');
+          cell.setAttribute('aria-disabled', 'true');
+        });
       }
       setFocusRow(target.getAttribute('data-id') as string);
     }
-    setKey('');
+    arrowKey.current = '';
   };
 
   const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
