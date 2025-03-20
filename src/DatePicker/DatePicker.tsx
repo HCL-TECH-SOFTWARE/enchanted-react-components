@@ -222,7 +222,6 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       }
     });
   };
-
   const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
     let error = false;
     if (props.value !== null) {
