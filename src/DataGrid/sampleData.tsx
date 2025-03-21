@@ -78,6 +78,7 @@ export const sampleColumns: ExtendedGridColDef[] = [
     field: 'age',
     headerName: 'Age',
     flex: 0.5,
+    renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
   },
 ];
 
@@ -269,3 +270,11 @@ export const sampleColumnsWithSubTitle = sampleColumns.map((col) => {
   }
   return col;
 });
+const disabledRow = [
+  ...sampleRows,
+  {
+    ...sampleRows[10],
+    disabled: true,
+  },
+];
+export const sampleRowsWithDisabledRow = processRow(disabledRow, false, true);
