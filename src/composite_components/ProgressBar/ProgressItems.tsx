@@ -368,10 +368,6 @@ const ProgressItems = (props: ProgressItemsProps) => {
         return (
           <React.Fragment key={`${queueItem.name}_${queueItem.timestamp}`}>
             <ListItem
-              onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
-              onMouseLeave={() => { return setHover(null); }}
-              onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
-              onBlur={() => { return setFocus(null); }}
               disablePadding
               sx={{ paddingLeft: (queueItem.type !== ProgressItemType.Folder && folderId === queueItem.collectionId) ? '8px' : '0px' }}
               hasBorder
@@ -379,6 +375,10 @@ const ProgressItems = (props: ProgressItemsProps) => {
               <ListItemButton
                 size={ListSizes.SMALL}
                 secondaryActionButton={renderHoverIcon(queueItem)}
+                onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
+                onMouseLeave={() => { return setHover(null); }}
+                onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
+                onBlur={() => { return setFocus(null); }}
               >
                 {queueItem.status === EnumUploadStatus.SUCCESS
                   ? (
