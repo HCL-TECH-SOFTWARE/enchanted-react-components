@@ -209,6 +209,19 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   const formatValue = (value: Dayjs, format: string): string => {
     return value.format(format);
   };
+  const focusDialog = () => {
+    window.requestAnimationFrame(() => {
+      const dialog = document.querySelector('.MuiDialog-root') || document.querySelector('.MuiPickersPopper-root');
+      if (dialog) {
+        const focusableElement = dialog.querySelector('button, [tabindex]:not([tabindex="-1"])');
+        if (focusableElement instanceof window.HTMLElement) {
+          focusableElement.focus();
+        } else if (dialog instanceof window.HTMLElement) {
+          dialog.focus();
+        }
+      }
+    });
+  };
 
   const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
     let error = false;
@@ -254,6 +267,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       {...props}
       reduceAnimations
       autoFocus={false}
+      onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
