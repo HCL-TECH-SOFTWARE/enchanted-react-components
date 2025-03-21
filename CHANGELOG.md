@@ -5,6 +5,9 @@
 ### Added
 
 ### Fixed
+- Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
+
+### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination 
 - Fixed the issue where the 'Learn more' button shifted when hovering over the list of progress items in the `ProgressBar` component.
 
