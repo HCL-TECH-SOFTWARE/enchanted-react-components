@@ -133,3 +133,6 @@
 
 ### Added
 Initial release.
+
+### Fixed
+- Fixing The focus issue when there are more than one date picker are used side by side.
