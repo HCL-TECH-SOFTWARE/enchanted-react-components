@@ -2,15 +2,13 @@
 
 ## Unreleased
 
-### Fixed
-- Fixing the focus issue when there are more than one date picker that are used side by side.
-
 ### Added
 
 ### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
 - Fixed accessibility issue with disabled row on `DataGrid` component.
 - Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
+- Fixing the focus issue when there are more than one date picker that are used side by side.
 
 ### Changed
 
