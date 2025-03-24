@@ -134,4 +134,4 @@
 Initial release.
 
 ### Fixed
-- Fixing The focus issue when there are more than one date picker are used side by side.
+- Fixing the focus issue when there are more than one date picker that are used side by side.
