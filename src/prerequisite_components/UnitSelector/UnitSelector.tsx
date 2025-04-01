@@ -15,6 +15,8 @@
 import { PopperPlacementType, Theme, SxProps } from '@mui/material';
 import React from 'react';
 import Button from '../../Button';
+import Menu from '../../Menu';
+import MenuItem from '../../Menu/MenuItem';
 
 export interface UnitSelectorProps {
   units: string[];
@@ -73,9 +75,11 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         onClick={handleToggle}
         sx={{
           ...sx,
-          minWidth: 'auto',
-          cursor: 'pointer',
+          minWidth: '80px',
+          cursor: disabled ? 'default' : 'pointer',
           margin: 0,
+          textAlign: 'center',
+          padding: '0px',
         }}
         {...buttonProps}
         aria-controls={open ? 'unit-selector-menu' : undefined}
@@ -84,6 +88,64 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
       >
         {selectedUnit}
       </Button>
+
+      <Menu
+        id="unit-selector-menu"
+        anchorEl={anchorRef.current}
+        open={open}
+        onClose={handleClose}
+        size="small"
+        MenuListProps={{
+          'aria-labelledby': 'unit-selector-button',
+          dense: true,
+          autoFocusItem: open,
+        }}
+        anchorOrigin={{
+          vertical: placement.startsWith('bottom') ? 'bottom' : 'top',
+          // eslint-why-allow-ntesting
+          // eslint-disable-next-line no-nested-ternary
+          horizontal: placement.startsWith('start') ? 'left' : placement.endsWith('end') ? 'right' : 'center',
+        }}
+        transformOrigin={{
+          vertical: placement.startsWith('top') ? 'bottom' : 'top',
+          // eslint-why-allow-ntesting
+          // eslint-disable-next-line no-nested-ternary
+          horizontal: placement.endsWith('start') ? 'left' : placement.endsWith('end') ? 'right' : 'center',
+        }}
+        sx={{
+          '& .MuiMenu-paper': {
+            minWidth: '80px',
+            maxHeight: '136px',
+            marginTop: '2px',
+            padding: '0px',
+            boxShadow: (theme) => { return theme.shadows[2]; },
+          },
+          '& .MuiMenuItem-root': {
+            minHeight: '28px',
+            padding: '2px 10px',
+            justifyContent: 'end',
+          },
+        }}
+      >
+        {units.length > 0 ? (
+          units.map((unit) => {
+            return (
+              <MenuItem
+                key={unit}
+                size="small"
+                onClick={() => { return handleUnitSelect(unit); }}
+                selected={unit === selectedUnit}
+              >
+                {unit}
+              </MenuItem>
+            );
+          })
+        ) : (
+          <MenuItem size="small" disabled>
+            No units available
+          </MenuItem>
+        )}
+      </Menu>
     </div>
   );
 };
