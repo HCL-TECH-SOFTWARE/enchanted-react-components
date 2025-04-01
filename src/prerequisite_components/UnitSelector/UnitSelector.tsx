@@ -64,6 +64,20 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     setOpen(false);
   };
 
+  const validatedUnit = React.useMemo(() => {
+    // If units array is empty, display the selectedUnit
+    if (units.length === 0) return selectedUnit;
+
+    const isValidUnit = units.includes(selectedUnit);
+
+    // Return first unit in the array as fallback if selectedUnit is not in the units array
+    if (!isValidUnit) {
+      return units[0];
+    }
+
+    return selectedUnit;
+  }, [units, selectedUnit]);
+
   return (
     <div className={className} style={{ display: 'inline-flex' }}>
       <Button
@@ -86,7 +100,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
       >
-        {selectedUnit}
+        {validatedUnit}
       </Button>
 
       <Menu
