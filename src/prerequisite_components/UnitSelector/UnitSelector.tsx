@@ -41,6 +41,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const [menuStyle, setMenuStyle] = React.useState<React.CSSProperties>({});
 
   const handleToggle = () => {
     if (!disabled) {
@@ -78,6 +79,26 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     return selectedUnit;
   }, [units, selectedUnit]);
 
+  React.useEffect(() => {
+    if (open && anchorRef.current) {
+      // Find the closest TextField container
+      const textFieldEl = anchorRef.current.closest('.MuiOutlinedInput-root');
+
+      if (textFieldEl) {
+        // Get the right edge position of the TextField
+        const textFieldRect = textFieldEl.getBoundingClientRect();
+        const buttonRect = anchorRef.current.getBoundingClientRect();
+
+        // Calculate the offset
+        const offsetX = textFieldRect.right - buttonRect.right;
+
+        setMenuStyle({
+          marginLeft: `${offsetX}px`,
+        });
+      }
+    }
+  }, [open]);
+
   return (
     <div className={className} style={{ display: 'inline-flex' }}>
       <Button
@@ -93,7 +114,9 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           cursor: disabled ? 'default' : 'pointer',
           margin: 0,
           textAlign: 'center',
-          padding: '0px',
+          '&.MuiButtonBase-root': {
+            padding: '1px 4px !important',
+          },
         }}
         {...buttonProps}
         aria-controls={open ? 'unit-selector-menu' : undefined}
@@ -115,22 +138,19 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           autoFocusItem: open,
         }}
         anchorOrigin={{
-          vertical: placement.startsWith('bottom') ? 'bottom' : 'top',
-          // eslint-why-allow-ntesting
-          // eslint-disable-next-line no-nested-ternary
-          horizontal: placement.startsWith('start') ? 'left' : placement.endsWith('end') ? 'right' : 'center',
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: placement.startsWith('top') ? 'bottom' : 'top',
-          // eslint-why-allow-ntesting
-          // eslint-disable-next-line no-nested-ternary
-          horizontal: placement.endsWith('start') ? 'left' : placement.endsWith('end') ? 'right' : 'center',
+          vertical: 'top',
+          horizontal: 'right',
         }}
         sx={{
+          ...menuStyle,
           '& .MuiMenu-paper': {
             minWidth: '80px',
             maxHeight: '136px',
-            marginTop: '2px',
+            marginTop: '4px',
             padding: '0px',
             boxShadow: (theme) => { return theme.shadows[2]; },
           },
@@ -148,7 +168,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
                 key={unit}
                 size="small"
                 onClick={() => { return handleUnitSelect(unit); }}
-                selected={unit === selectedUnit}
+                selected={unit === validatedUnit}
               >
                 {unit}
               </MenuItem>
