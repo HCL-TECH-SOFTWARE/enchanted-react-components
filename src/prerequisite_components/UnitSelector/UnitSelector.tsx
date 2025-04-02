@@ -124,6 +124,10 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           '&.MuiButtonBase-root': {
             padding: '1px 4px !important',
           },
+          '.MuiInputBase-root:hover &': {
+            backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
+            color: (theme) => { return theme.palette.action.selected; },
+          },
         }}
         {...buttonProps}
         aria-controls={open ? 'unit-selector-menu' : undefined}
