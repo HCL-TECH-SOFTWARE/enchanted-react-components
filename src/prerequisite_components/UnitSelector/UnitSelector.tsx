@@ -50,10 +50,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-      return;
-    }
-
     setOpen(false);
   };
 
@@ -61,7 +57,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     if (unit !== selectedUnit) {
       onUnitChange(unit);
     }
-
     setOpen(false);
   };
 
@@ -78,6 +73,14 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
 
     return selectedUnit;
   }, [units, selectedUnit]);
+
+  const getDisplayValue = (unit: string): string => {
+    if (unit === 'Freeform') {
+      return 'ff';
+    }
+
+    return unit;
+  };
 
   React.useEffect(() => {
     if (open && anchorRef.current) {
@@ -123,7 +126,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
       >
-        {validatedUnit}
+        {getDisplayValue(validatedUnit)}
       </Button>
 
       <Menu
