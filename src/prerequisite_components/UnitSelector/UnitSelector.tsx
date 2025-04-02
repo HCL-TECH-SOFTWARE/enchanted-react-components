@@ -23,6 +23,7 @@ export interface UnitSelectorProps {
   selectedUnit: string;
   onUnitChange: (unit: string) => void;
   disabled?: boolean;
+  active?: boolean;
   className?: string;
   sx?: SxProps<Theme>;
   buttonProps?: React.ComponentProps<typeof Button>;
@@ -34,6 +35,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   selectedUnit,
   onUnitChange,
   disabled = false,
+  active = false,
   className,
   sx,
   buttonProps,
@@ -82,6 +84,8 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     return unit;
   };
 
+  const buttonActive = active || open;
+
   React.useEffect(() => {
     if (open && anchorRef.current) {
       // Find the closest TextField container
@@ -107,7 +111,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
       <Button
         size="neutral"
         variant="contained"
-        color="secondary"
+        color={buttonActive ? 'secondary' : 'primary'}
         disabled={disabled}
         ref={anchorRef}
         onClick={handleToggle}
@@ -153,7 +157,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           '& .MuiMenu-paper': {
             minWidth: '80px',
             maxHeight: '136px',
-            marginTop: '4px',
+            marginTop: '6px',
             padding: '0px',
             boxShadow: (theme) => { return theme.shadows[2]; },
           },
