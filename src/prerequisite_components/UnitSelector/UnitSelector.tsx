@@ -62,8 +62,8 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   };
 
   const validatedUnit = React.useMemo(() => {
-    // If units array is empty, display the selectedUnit
-    if (units.length === 0) return selectedUnit;
+    // If units array is empty, display 'px'
+    if (units.length === 0) return 'px';
 
     const isValidUnit = units.includes(selectedUnit);
 
@@ -138,7 +138,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
             aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
           >
-            {units.length === 0 ? 'px' : getDisplayValue(validatedUnit)}
+            {getDisplayValue(validatedUnit)}
           </Button>
         </span>
       </Tooltip>
