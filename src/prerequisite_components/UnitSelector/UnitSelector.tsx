@@ -14,7 +14,7 @@
  * ======================================================================== */
 import { Theme, SxProps } from '@mui/material';
 import React from 'react';
-import Button from '../../Button';
+import Button, { ButtonVariants } from '../../Button';
 import Menu from '../../Menu';
 import MenuItem from '../../Menu/MenuItem';
 import Tooltip, { TooltipPlacement } from '../../Tooltip/Tooltip';
@@ -43,6 +43,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuStyle, setMenuStyle] = React.useState<React.CSSProperties>({});
+  const unitsIsEmpty = units.length === 0;
 
   const handleToggle = () => {
     if (!disabled) {
@@ -63,7 +64,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
 
   const validatedUnit = React.useMemo(() => {
     // If units array is empty, display 'px'
-    if (units.length === 0) return 'px';
+    if (unitsIsEmpty) return 'px';
 
     const isValidUnit = units.includes(selectedUnit);
 
@@ -109,15 +110,15 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     <div className={className} style={{ display: 'inline-flex' }}>
       <Tooltip
         title="No units available"
-        disableHoverListener={units.length > 0}
+        disableHoverListener={!unitsIsEmpty}
         placement={TooltipPlacement.TOP}
       >
         <span>
           <Button
             size="neutral"
-            variant="contained"
+            variant={ButtonVariants.CONTAINED}
             color={buttonActive ? 'secondary' : 'primary'}
-            disabled={disabled || units.length === 0}
+            disabled={disabled || unitsIsEmpty}
             ref={anchorRef}
             onClick={handleToggle}
             sx={{
