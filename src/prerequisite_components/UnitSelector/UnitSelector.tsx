@@ -15,7 +15,7 @@
 import { Theme, SxProps } from '@mui/material';
 import React from 'react';
 import Button, { ButtonVariants } from '../../Button';
-import Menu from '../../Menu';
+import Menu, { MenuSizes } from '../../Menu';
 import MenuItem from '../../Menu/MenuItem';
 import Tooltip, { TooltipPlacement } from '../../Tooltip/Tooltip';
 
@@ -149,7 +149,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         anchorEl={anchorRef.current}
         open={open}
         onClose={handleClose}
-        size="small"
+        size={MenuSizes.SMALL}
         MenuListProps={{
           dense: true,
           autoFocusItem: open,
@@ -182,7 +182,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           return (
             <MenuItem
               key={unit}
-              size="small"
+              size={MenuSizes.SMALL}
               onClick={() => { return handleUnitSelect(unit); }}
               selected={unit === validatedUnit}
             >
