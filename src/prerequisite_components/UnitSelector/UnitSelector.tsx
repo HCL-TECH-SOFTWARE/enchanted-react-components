@@ -17,6 +17,7 @@ import React from 'react';
 import Button from '../../Button';
 import Menu from '../../Menu';
 import MenuItem from '../../Menu/MenuItem';
+import Tooltip, { TooltipPlacement } from '../../Tooltip/Tooltip';
 
 export interface UnitSelectorProps {
   units: string[];
@@ -49,7 +50,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
     }
   };
 
-  const handleClose = (event: Event | React.SyntheticEvent) => {
+  const handleClose = (_event: Event | React.SyntheticEvent) => {
     setOpen(false);
   };
 
@@ -106,41 +107,49 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
 
   return (
     <div className={className} style={{ display: 'inline-flex' }}>
-      <Button
-        size="neutral"
-        variant="contained"
-        color={buttonActive ? 'secondary' : 'primary'}
-        disabled={disabled}
-        ref={anchorRef}
-        onClick={handleToggle}
-        sx={{
-          ...sx,
-          cursor: disabled ? 'default' : 'pointer',
-          margin: 0,
-          textAlign: 'center',
-          '&.MuiButtonBase-root': {
-            padding: '1px 4px !important',
-          },
-          '.MuiInputBase-root:hover &': {
-            backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
-            color: (theme) => { return theme.palette.action.selected; },
-          },
-        }}
-        {...buttonProps}
-        aria-controls={open ? 'unit-selector-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
+      <Tooltip
+        title="No units available"
+        disableHoverListener={units.length > 0}
+        placement={TooltipPlacement.TOP}
       >
-        {getDisplayValue(validatedUnit)}
-      </Button>
+        <span>
+          <Button
+            size="neutral"
+            variant="contained"
+            color={buttonActive ? 'secondary' : 'primary'}
+            disabled={disabled || units.length === 0}
+            ref={anchorRef}
+            onClick={handleToggle}
+            sx={{
+              ...sx,
+              cursor: disabled ? 'default' : 'pointer',
+              margin: 0,
+              textAlign: 'center',
+              '&.MuiButtonBase-root': {
+                padding: '1px 4px !important',
+              },
+              '.MuiInputBase-root:hover &:not(.Mui-disabled)': {
+                backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
+                color: (theme) => { return theme.palette.action.selected; },
+              },
+            }}
+            {...buttonProps}
+            aria-controls={open ? 'unit-selector-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup="true"
+          >
+            {units.length === 0 ? 'px' : getDisplayValue(validatedUnit)}
+          </Button>
+        </span>
+      </Tooltip>
 
       <Menu
+        id="unit-selector-menu"
         anchorEl={anchorRef.current}
         open={open}
         onClose={handleClose}
         size="small"
         MenuListProps={{
-          'aria-labelledby': 'unit-selector-button',
           dense: true,
           autoFocusItem: open,
         }}
@@ -168,24 +177,18 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           },
         }}
       >
-        {units.length > 0 ? (
-          units.map((unit) => {
-            return (
-              <MenuItem
-                key={unit}
-                size="small"
-                onClick={() => { return handleUnitSelect(unit); }}
-                selected={unit === validatedUnit}
-              >
-                {unit}
-              </MenuItem>
-            );
-          })
-        ) : (
-          <MenuItem size="small" disabled>
-            No units available
-          </MenuItem>
-        )}
+        {units.map((unit) => {
+          return (
+            <MenuItem
+              key={unit}
+              size="small"
+              onClick={() => { return handleUnitSelect(unit); }}
+              selected={unit === validatedUnit}
+            >
+              {unit}
+            </MenuItem>
+          );
+        })}
       </Menu>
     </div>
   );
