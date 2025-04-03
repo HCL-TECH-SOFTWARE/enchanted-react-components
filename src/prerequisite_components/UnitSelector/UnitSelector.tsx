@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import { PopperPlacementType, Theme, SxProps } from '@mui/material';
+import { Theme, SxProps } from '@mui/material';
 import React from 'react';
 import Button from '../../Button';
 import Menu from '../../Menu';
@@ -27,7 +27,6 @@ export interface UnitSelectorProps {
   className?: string;
   sx?: SxProps<Theme>;
   buttonProps?: React.ComponentProps<typeof Button>;
-  placement?: PopperPlacementType;
 }
 
 const UnitSelector: React.FC<UnitSelectorProps> = ({
@@ -39,7 +38,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   className,
   sx,
   buttonProps,
-  placement = 'bottom-start',
 }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
@@ -117,7 +115,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         onClick={handleToggle}
         sx={{
           ...sx,
-          minWidth: '80px',
           cursor: disabled ? 'default' : 'pointer',
           margin: 0,
           textAlign: 'center',
@@ -138,7 +135,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
       </Button>
 
       <Menu
-        id="unit-selector-menu"
         anchorEl={anchorRef.current}
         open={open}
         onClose={handleClose}
@@ -159,7 +155,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         sx={{
           ...menuStyle,
           '& .MuiMenu-paper': {
-            minWidth: '80px',
+            minWidth: '72px',
             maxHeight: '136px',
             marginTop: '6px',
             padding: '0px',
