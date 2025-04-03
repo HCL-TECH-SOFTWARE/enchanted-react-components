@@ -155,6 +155,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
               width: 'auto',
               minWidth: 'auto',
               padding: '0 4px',
+              fontWeight: 'normal',
             }),
 
             // neutral + Contained variant styling for primary color
