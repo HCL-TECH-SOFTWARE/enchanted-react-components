@@ -12,6 +12,7 @@
 - Fixing the focus issue when there are more than one date picker that are used side by side.
 
 ### Changed
+- Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
 
 ### Breaking changes
 
@@ -24,6 +25,8 @@
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
 - Added `ActionButton` component designed to perform a specific action or task when clicked or tapped.
 - Added `neutral` size control in the `Button` component.
+- Added `UnitSelector` component in `prerequisite_components` to provide unit selection capabilities for the `TextField` component.
+- Added examples of `UnitSelector` integration with `TextField` in storybook.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
