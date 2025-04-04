@@ -17,8 +17,12 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 
+import InputAdornment from '@mui/material/InputAdornment';
+import { Box } from '@mui/material';
 import TextField from './TextField';
 import Button from '../Button';
+
+import UnitSelector from '../prerequisite_components/UnitSelector/UnitSelector';
 
 export default {
   title: 'Inputs/TextField',
@@ -231,5 +235,85 @@ export const ExampleTextFieldFullWidth = {
   args: {
     ...ExampleTextField.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleTextFieldWithUnitSelector = {
+  render: () => {
+    const [widthValue, setWidthValue] = React.useState('');
+    const [widthUnit, setWidthUnit] = React.useState('px');
+    const [widthFocused, setWidthFocused] = React.useState(false);
+
+    const [heightValue, setHeightValue] = React.useState('');
+    const [heightUnit, setHeightUnit] = React.useState('px');
+    const [heightFocused, setHeightFocused] = React.useState(false);
+
+    const units = ['px', '%', 'em', 'rem', 'vw', 'Freeform'];
+
+    const handleWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setWidthValue(event.target.value);
+    };
+
+    const handleWidthUnitChange = (newUnit: string) => {
+      setWidthUnit(newUnit);
+    };
+
+    const handleHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setHeightValue(event.target.value);
+    };
+
+    const handleHeightUnitChange = (newUnit: string) => {
+      setHeightUnit(newUnit);
+    };
+
+    return (
+      <Box sx={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        <TextField
+          label="Width"
+          value={widthValue}
+          onChange={handleWidthChange}
+          type={widthUnit === 'Freeform' ? 'text' : 'number'}
+          placeholder="Placeholder"
+          sx={{ width: '200px' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <UnitSelector
+                  units={units}
+                  selectedUnit={widthUnit}
+                  onUnitChange={handleWidthUnitChange}
+                  active={widthFocused}
+                />
+              </InputAdornment>
+            ),
+            onFocus: () => { return setWidthFocused(true); },
+            onBlur: () => { return setWidthFocused(false); },
+          }}
+        />
+
+        <TextField
+          label="Height"
+          value={heightValue}
+          onChange={handleHeightChange}
+          type={heightUnit === 'Freeform' ? 'text' : 'number'}
+          placeholder="Placeholder"
+          sx={{ width: '200px' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <UnitSelector
+                  units={units}
+                  selectedUnit={heightUnit}
+                  onUnitChange={handleHeightUnitChange}
+                  active={heightFocused}
+                />
+              </InputAdornment>
+            ),
+            onFocus: () => { return setHeightFocused(true); },
+            onBlur: () => { return setHeightFocused(false); },
+          }}
+        />
+      </Box>
+    );
   },
 };
