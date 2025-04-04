@@ -261,6 +261,12 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     };
     return textFieldProps;
   };
+  const handleClose = () => {
+    setTimeout(() => {
+      const activeElement = document.activeElement as HTMLButtonElement;
+      activeElement.blur();
+    }, 100);
+  };
 
   return (
     <MuiDatePicker
@@ -269,6 +275,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       autoFocus={false}
       onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
+      onClose={handleClose}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
