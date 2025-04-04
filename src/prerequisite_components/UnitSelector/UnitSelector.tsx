@@ -46,7 +46,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuStyle, setMenuStyle] = React.useState<React.CSSProperties>({});
-  const unitsIsEmpty = units.length === 0;
 
   const handleToggle = () => {
     if (!disabled) {
@@ -112,7 +111,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         size="neutral"
         variant={ButtonVariants.CONTAINED}
         color={buttonActive ? 'secondary' : 'primary'}
-        disabled={disabled || unitsIsEmpty}
+        disabled={disabled}
         ref={anchorRef}
         onClick={handleToggle}
         sx={{
