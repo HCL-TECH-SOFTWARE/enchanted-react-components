@@ -17,7 +17,6 @@ import React from 'react';
 import Button, { ButtonVariants } from '../../Button';
 import Menu, { MenuSizes } from '../../Menu';
 import MenuItem from '../../Menu/MenuItem';
-import Tooltip, { TooltipPlacement } from '../../Tooltip/Tooltip';
 
 export interface UnitSelectorProps {
   units: string[];
@@ -40,6 +39,10 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   sx,
   buttonProps,
 }) => {
+  if (units.length === 0) {
+    return null;
+  }
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuStyle, setMenuStyle] = React.useState<React.CSSProperties>({});
@@ -63,9 +66,6 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   };
 
   const validatedUnit = React.useMemo(() => {
-    // If units array is empty, display 'px'
-    if (unitsIsEmpty) return 'px';
-
     const isValidUnit = units.includes(selectedUnit);
 
     // Return first unit in the array as fallback if selectedUnit is not in the units array
@@ -108,41 +108,33 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
 
   return (
     <div className={className} style={{ display: 'inline-flex' }}>
-      <Tooltip
-        title="No units available"
-        disableHoverListener={!unitsIsEmpty}
-        placement={TooltipPlacement.TOP}
+      <Button
+        size="neutral"
+        variant={ButtonVariants.CONTAINED}
+        color={buttonActive ? 'secondary' : 'primary'}
+        disabled={disabled || unitsIsEmpty}
+        ref={anchorRef}
+        onClick={handleToggle}
+        sx={{
+          ...sx,
+          cursor: disabled ? 'default' : 'pointer',
+          margin: 0,
+          textAlign: 'center',
+          '&.MuiButtonBase-root': {
+            padding: '1px 4px !important',
+          },
+          '.MuiInputBase-root:hover &:not(.Mui-disabled)': {
+            backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
+            color: (theme) => { return theme.palette.action.selected; },
+          },
+        }}
+        {...buttonProps}
+        aria-controls={open ? 'unit-selector-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup="true"
       >
-        <span>
-          <Button
-            size="neutral"
-            variant={ButtonVariants.CONTAINED}
-            color={buttonActive ? 'secondary' : 'primary'}
-            disabled={disabled || unitsIsEmpty}
-            ref={anchorRef}
-            onClick={handleToggle}
-            sx={{
-              ...sx,
-              cursor: disabled ? 'default' : 'pointer',
-              margin: 0,
-              textAlign: 'center',
-              '&.MuiButtonBase-root': {
-                padding: '1px 4px !important',
-              },
-              '.MuiInputBase-root:hover &:not(.Mui-disabled)': {
-                backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
-                color: (theme) => { return theme.palette.action.selected; },
-              },
-            }}
-            {...buttonProps}
-            aria-controls={open ? 'unit-selector-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}
-            aria-haspopup="true"
-          >
-            {getDisplayValue(validatedUnit)}
-          </Button>
-        </span>
-      </Tooltip>
+        {getDisplayValue(validatedUnit)}
+      </Button>
 
       <Menu
         id="unit-selector-menu"
