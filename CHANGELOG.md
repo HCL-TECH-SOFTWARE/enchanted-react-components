@@ -10,6 +10,7 @@
 - Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
 - Fixed the issue where the 'Learn more' button shifted when hovering over the list of progress items in the `ProgressBar` component.
 - Fixing the focus issue when there are more than one date picker that are used side by side.
+- Fixing the focus issue when after selecting a date the focus remains there on the input field and date picker icon.
 
 ### Changed
 
