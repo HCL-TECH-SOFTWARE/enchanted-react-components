@@ -5,6 +5,15 @@
 ### Added
 
 ### Fixed
+
+### Changed
+
+### Breaking changes
+
+
+## 2.1.1
+
+### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
 - Fixed accessibility issue with disabled row on `DataGrid` component.
 - Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
@@ -13,8 +22,6 @@
 
 ### Changed
 - Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
-
-### Breaking changes
 
 ## 2.1.0
 
