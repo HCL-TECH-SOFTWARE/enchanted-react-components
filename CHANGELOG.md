@@ -5,12 +5,15 @@
 ### Added
 
 ### Fixed
-- Fixed console error by making sure the element exists before using classList
 
 ### Changed
 
 ### Breaking changes
 
+## 2.1.2
+
+### Fixed
+- Fixed console error by making sure the element exists before using classList
 
 ## 2.1.1
 
