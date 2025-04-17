@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed console error by making sure the element exists before using classList
 
 ### Changed
 
