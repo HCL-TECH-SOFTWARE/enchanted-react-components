@@ -552,14 +552,15 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
 
   // we need this function to show checkbox on that row when a cell is focused
   const handleOnCellFocus = (event: React.FocusEvent) => {
+    console.log('nidhinraj new');
     const target = event.target as HTMLDivElement;
     const parentRow = findTargetElement(target, 'MuiDataGrid-row', true) as HTMLDivElement;
-    if (!parentRow?.classList.contains('disabled-row')) {
+    if (parentRow && !parentRow.classList.contains('disabled-row') && parentRow.classList.contains('MuiDataGrid-hide-checkbox')) {
       parentRow.classList.remove('MuiDataGrid-hide-checkbox');
     }
 
     // we need to focus on next focusable row when we are pressing tab from a cell
-    if (parentRow.nextElementSibling && parentRow.nextElementSibling.classList.contains('disabled-row')) {
+    if (parentRow && parentRow.nextElementSibling && parentRow.nextElementSibling.classList.contains('disabled-row')) {
       parentRow.nextElementSibling.setAttribute('tabindex', '-1');
       parentRow.nextElementSibling.setAttribute('aria-disabled', 'true');
     }
