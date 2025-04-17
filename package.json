@@ -1,6 +1,6 @@
 {
   "name": "@hcl-software/enchanted-react-components",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Enchanted React Components is a collection of components that are used in HCL Software products.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
