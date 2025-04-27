@@ -16,6 +16,12 @@ import React from 'react';
 import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import { Components, Theme } from '@mui/material';
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsSizeOverrides {
+    neutral: true;
+  }
+}
+
 export enum ButtonVariants {
   CONTAINED = 'contained',
   OUTLINED = 'outlined',
@@ -35,13 +41,21 @@ export enum ButtonTestIds {
  */
 export type ButtonProps = MuiButtonProps & {
   hover?: boolean,
+  inversecolors?: boolean | 0 | 1,
 }
 
 const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
+  props.inversecolors = props.inversecolors ? 1 : 0;
   return (
     <MuiButton
       id={props.variant}
       variant={props.variant}
+      sx={(theme) => {
+        const inverseColor = props.inversecolors && props.variant === 'contained' ? theme.palette.text.primary : theme.palette.action.selectedInverse;
+        return {
+          color: props.inversecolors ? inverseColor : '',
+        };
+      }}
       {...props}
       ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
     />
@@ -58,6 +72,7 @@ Button.defaultProps = {
   disableTouchRipple: false,
   focusRipple: false,
   tabIndex: 0,
+  inversecolors: false,
 };
 
 export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -74,7 +89,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             boxSizing: 'border-box',
             lineHeight: '17px',
             '&.Mui-focusVisible, &.force-to-focus': {
-              outline: `${theme.palette.primary.main} 1px solid`,
+              outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
               outlineOffset: '2px',
             },
             '& .MuiButtonBase-root:disabled': {
@@ -98,39 +113,165 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             },
             ...(ownerState.variant === 'contained'
              && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.primary.main,
+              backgroundColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.primary.dark,
+                backgroundColor: ownerState.inversecolors ? theme.palette.primary.darkInverse : theme.palette.primary.dark,
               },
             }),
             ...(ownerState.variant === 'outlined'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
-              borderColor: theme.palette.primary.main,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
+              borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+                borderColor: ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
             }),
             ...(ownerState.variant === 'text'
             && ownerState.color === 'primary' && {
-              backgroundColor: theme.palette.background.paper,
+              backgroundColor: ownerState.inversecolors ? 'inherit' : theme.palette.background.paper,
               '&:hover': {
-                backgroundColor: theme.palette.action.hover,
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
               },
               '&.force-to-focusHover': {
-                outline: `${theme.palette.primary.main} 1px solid`,
+                outline: `${ownerState.inversecolors ? theme.palette.action.selectedInverse : theme.palette.action.selected} 1px solid`,
                 outlineOffset: '2px',
+                backgroundColor: ownerState.inversecolors ? theme.palette.action.hoverInverse : theme.palette.action.hover,
+              },
+            }),
+            // Apply dimension styles for all neutral buttons
+            ...(ownerState.size === 'neutral' && {
+              height: '20px',
+              width: 'auto',
+              minWidth: 'auto',
+              padding: '0 4px',
+              fontWeight: 'normal',
+            }),
+
+            // neutral + Contained variant styling for primary color
+            ...(ownerState.size === 'neutral' && ownerState.variant === 'contained' && (!ownerState.color || ownerState.color === 'primary') && {
+              color: theme.palette.text.secondary,
+              backgroundColor: theme.palette.action.disabledOpacityModified,
+              border: 'none',
+
+              '&:hover': {
+                backgroundColor: theme.palette.action.disableOpacityHover,
+                color: theme.palette.text.primary,
+              },
+
+              '&.Mui-focusVisible, &.force-to-focus': {
+                backgroundColor: theme.palette.action.disabledOpacityModified,
+                color: theme.palette.text.secondary,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.force-to-focusHover': {
+                backgroundColor: theme.palette.action.disableOpacityHover,
+                color: theme.palette.text.primary,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.Mui-disabled': {
+                backgroundColor: theme.palette.action.disabledBackground,
+                color: theme.palette.text.disabled,
+              },
+            }),
+
+            // neutral + Outlined variant styling for primary color
+            ...(ownerState.size === 'neutral' && ownerState.variant === 'outlined' && (!ownerState.color || ownerState.color === 'primary') && {
+              color: theme.palette.text.secondary,
+              backgroundColor: 'transparent',
+              borderColor: theme.palette.text.secondary,
+
+              '&:hover': {
                 backgroundColor: theme.palette.action.hover,
+                color: theme.palette.text.primary,
+                borderColor: theme.palette.text.primary,
+              },
+
+              '&.Mui-focusVisible, &.force-to-focus': {
+                backgroundColor: 'transparent',
+                color: theme.palette.text.secondary,
+                borderColor: theme.palette.text.secondary,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.force-to-focusHover': {
+                backgroundColor: theme.palette.action.hover,
+                color: theme.palette.text.primary,
+                borderColor: theme.palette.text.primary,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.Mui-disabled': {
+                backgroundColor: 'transparent',
+                color: theme.palette.action.disabledBackground,
+                borderColor: theme.palette.action.disabledBackground,
+              },
+            }),
+
+            // non-primary colors for neutral size Contained buttons
+            ...(ownerState.size === 'neutral' && ownerState.variant === 'contained' && ownerState.color && ownerState.color !== 'primary' && {
+              color: theme.palette.action.selected,
+              backgroundColor: theme.palette.action.selectedOpacityModified,
+              border: 'none',
+
+              '&:hover': {
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+              },
+
+              '&.Mui-focusVisible, &.force-to-focus': {
+                backgroundColor: theme.palette.action.selectedOpacityModified,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.force-to-focusHover': {
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+            }),
+
+            // non-primary colors for neutral size Outlined buttons
+            ...(ownerState.size === 'neutral' && ownerState.variant === 'outlined' && ownerState.color && ownerState.color !== 'primary' && {
+              color: theme.palette.action.selected,
+              backgroundColor: theme.palette.action.selectedOpacityModified,
+              borderColor: theme.palette.action.selected,
+
+              '&:hover': {
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+                borderColor: theme.palette.action.selected,
+              },
+
+              '&.Mui-focusVisible, &.force-to-focus': {
+                backgroundColor: theme.palette.action.selectedOpacityModified,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.force-to-focusHover': {
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+                outline: `${theme.palette.action.selected} 1px solid`,
+                outlineOffset: '2px',
+              },
+
+              '&.Mui-disabled': {
+                backgroundColor: theme.palette.action.disabledBackground,
               },
             }),
           });

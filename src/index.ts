@@ -84,6 +84,8 @@ export { default as ToggleButton } from './ToggleButton';
 export * from './ToggleButton';
 export { default as ToggleButtonGroup } from './ToggleButtonGroup';
 export * from './ToggleButtonGroup';
+export { default as ActionButton } from './ActionButton';
+export * from './ActionButton';
 export { default as Tooltip } from './Tooltip';
 export * from './Tooltip';
 export { default as Typography } from './Typography';

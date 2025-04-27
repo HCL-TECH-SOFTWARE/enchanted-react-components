@@ -1,0 +1,16 @@
+name: Design request 🎨
+description: Suggest a new design or enhancement.
+labels: ['design todo', 'pending assessment']
+body:
+  - type: textarea
+    attributes:
+      label: Summary
+      description: What is expected to be achieved with this design work? A general overview of 2-3 sentences is expected.
+  - type: textarea
+    attributes:
+      label: Examples
+      description: Are there any exampled of such a component/usecase
+  - type: textarea
+    attributes:
+      label: Motivation
+      description: Why is this needed? (Accessibility, customer, ...)

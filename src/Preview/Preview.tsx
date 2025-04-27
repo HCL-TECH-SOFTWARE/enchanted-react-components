@@ -362,7 +362,9 @@ const Preview: React.FC<PreviewProps> = ({
 
   React.useEffect(() => {
     if (!zoomTrigger) {
-      setshowMessage(false);
+      setTimeout(() => {
+        setshowMessage(false);
+      }, 3000); // Set the timeout duration for 3 second so that screen reader can read the message
       setZoomTrigger(true);
     }
   }, [zoomTrigger]);
@@ -403,6 +405,7 @@ const Preview: React.FC<PreviewProps> = ({
 
   // Sets the zooming of the image based on 'view actual size' or 'fit to size' into AssetContainer
   const zoomPercentageFit = () => {
+    setshowMessage(true);
     if (zoomButtonTooltip === tooltipTexts.viewActualSize) {
       // View actual size
       setZoomPercentage(zoomDefault);
@@ -414,6 +417,7 @@ const Preview: React.FC<PreviewProps> = ({
     // Sets Zoom in and Zoom out button to be clickable
     setZoomInDisable(false);
     setZoomOutDisable(false);
+    setZoomTrigger(false);
   };
 
   // Calculates image zoom to fit percentage
@@ -658,7 +662,10 @@ const Preview: React.FC<PreviewProps> = ({
             middleSection={[
               <Typography color="textSecondary" variant="subtitle2" marginRight={-1}>{renditionLabel}</Typography>,
               <Select
+                label={renditionLabel}
+                id={PreviewTestIds.PREVIEW_RENDITION_DROPDOWN}
                 data-testid={PreviewTestIds.PREVIEW_RENDITION_DROPDOWN}
+                role="listbox"
                 hiddenLabel
                 required
                 value={currentRendition.type ?? ''}
@@ -789,6 +796,20 @@ const Preview: React.FC<PreviewProps> = ({
             container
             justifyContent="center"
           >
+            {(
+              <Box
+                component="div"
+                role="status"
+                sx={{
+                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
+                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
+                }}
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                {showMessage && `Zoomed percentage ${zoomPercentage}%` }
+              </Box>
+              )}
             <ZoomContainer
               sx={{
                 position: isVersionComparison ? 'absolute' : 'fixed',
@@ -810,20 +831,6 @@ const Preview: React.FC<PreviewProps> = ({
                   <IconZoomOut />
                 </IconButton>
               </Tooltip>
-              {showMessage && (
-              <Box
-                component="div"
-                role="alert"
-                sx={{
-                  // The followine css is used to hide the status message from the DOM but still make it accessible to screen readers
-                  position: 'absolute', top: '-1000px', height: '1px', overflow: 'hidden',
-                }}
-                aria-live="assertive"
-                aria-atomic="true"
-              >
-                {`${zoomPercentage}%`}
-              </Box>
-              )}
               <Tooltip
                 data-testid={PreviewTestIds.PREVIEW_ZOOM_TOOLTIP_TEXT}
                 tooltipsize="small"
@@ -835,6 +842,7 @@ const Preview: React.FC<PreviewProps> = ({
                   variant="text"
                   size="small"
                   onClick={zoomPercentageFit}
+                  inversecolors
                 >
                   {`${zoomPercentage}%`}
                 </Button>
