@@ -213,20 +213,6 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   };
   const focusDialog = () => {
     window.requestAnimationFrame(() => {
-      const dialog = document.querySelector('.MuiDialog-root') || document.querySelector('.MuiPickersPopper-root');
-      if (dialog) {
-        const focusableElement = dialog.querySelector('button, [tabindex]:not([tabindex="-1"])');
-        if (focusableElement instanceof window.HTMLElement) {
-          focusableElement.focus();
-        } else if (dialog instanceof window.HTMLElement) {
-          dialog.focus();
-        }
-      }
-    });
-  };
-
-  const focusDialog = () => {
-    window.requestAnimationFrame(() => {
       const dialog = document.querySelector(`#datepickerPopper-${popperId}`) ?? document.querySelector('.MuiPickersPopper-root');
       if (dialog) {
         const focusableElement = dialog.querySelector('button, [tabindex]:not([tabindex="-1"])');
