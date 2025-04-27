@@ -270,6 +270,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       {...props}
       reduceAnimations
       autoFocus={false}
+      onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
