@@ -20,6 +20,7 @@
 - Added `component` props in `Typography`. 
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
 
 ### Changed
 
