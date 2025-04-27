@@ -3,9 +3,42 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
+
+### Changed
+
+### Breaking changes
+
+## 2.1.2
+
+### Fixed
+- Fixed console error by making sure the element exists before using classList
+
+## 2.1.1
+
+### Fixed
+- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
+- Fixed accessibility issue with disabled row on `DataGrid` component.
+- Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
+- Fixed the issue where the 'Learn more' button shifted when hovering over the list of progress items in the `ProgressBar` component.
+- Fixing the focus issue when there are more than one date picker that are used side by side.
+
+### Changed
+- Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
+
+## 2.1.0
+
+### Added
+- Added an inverse color property to the `Button` component when `inversecolors` is enabled.
 - Added announcing status message for `zoom in` and `zoom out` button in `Preview` component.
 - Added `subTitle` to the `DataGridCell` component to display additional subtitle text in the row data.
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
+- Added `ActionButton` component designed to perform a specific action or task when clicked or tapped.
+- Added `neutral` size control in the `Button` component.
+- Added `UnitSelector` component in `prerequisite_components` to provide unit selection capabilities for the `TextField` component.
+- Added examples of `UnitSelector` integration with `TextField` in storybook.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
@@ -15,16 +48,13 @@
 - Added a default `id` value to the `Autocomplete` component for making helper text accessible.
 - Fixed helper text rendering based on condition in `Select` component
 - Fixed screen reader accessibility issue with the pagination `label` in the `Pagination` component.
+- Fixed screen reader accessibility issue with the zoom in & zoom out `button` in the `Preview` component.
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
 - Fixed screen reader accessibility issue with the `label` in `Select` component
 - Added `component` props in `Typography`. 
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
-- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
-
-### Changed
-
-### Breaking changes
+- Fixed Text spacing accessibility issue on `Pagination` component
 
 ## 2.0.0
 
@@ -50,8 +80,6 @@
 - Fixed `TextField` accessibility attributes to read label
 - Fixed the width of the `Tile` action menu and corrected the focus of nested-level `Accordion` component
 - Fixed accessibility issue with `Autocomplete` required state
-
-### Changed
 
 ### Breaking changes
 - Added required `backButton` property in `tooltipTexts` to display tooltip for the back button in the `Preview` component.
@@ -100,8 +128,6 @@
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
 - Resolved tooltip issue of options in `Autocomplete` component
-
-### Breaking changes
 
 ## 1.1.0
 

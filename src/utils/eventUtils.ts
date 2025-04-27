@@ -41,3 +41,36 @@ export const findTargetElement = (target: EventTarget | HTMLElement | null | und
   }
   return findTargetElement(divElement.firstChild, className, lookForParent, useInclude);
 };
+
+/**
+   * Finds the next available/focusable row which doesn't have tabindex="-1".
+   * @param currentRow - The current row element.
+   * @returns The next focusable row element or null if none found.
+   */
+export const findNextFocusableRow = (currentRow: HTMLDivElement| HTMLElement): HTMLDivElement | null => {
+  let nextRow = currentRow.nextElementSibling as HTMLDivElement | null;
+  while (nextRow) {
+    // instead of attribute check it have disabled row class or not
+    if (!nextRow.classList.contains('disabled-row')) {
+      return nextRow;
+    }
+    nextRow = nextRow.nextElementSibling as HTMLDivElement | null;
+  }
+  return null;
+};
+
+/**
+   * Finds the previous available/focusable row which doesn't have tabindex="-1".
+   * @param currentRow - The current row element.
+   * @returns The previous focusable row element or null if none found.
+   */
+export const findPreviousFocusableRow = (currentRow: HTMLDivElement): HTMLDivElement | null => {
+  let previousRow = currentRow.previousElementSibling as HTMLDivElement | null;
+  while (previousRow) {
+    if (!previousRow.classList.contains('disabled-row')) {
+      return previousRow;
+    }
+    previousRow = previousRow.previousElementSibling as HTMLDivElement | null;
+  }
+  return null;
+};

@@ -52,6 +52,7 @@ describe('Autocomplete', () => {
   it('Should render with action link', () => {
     const actionLabel = 'Action';
     const actionHref = 'https://www.hcltech.com/';
+    window.open = jest.fn();
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
         <Autocomplete
@@ -65,7 +66,8 @@ describe('Autocomplete', () => {
     );
 
     expect(screen.getAllByText(actionLabel)).not.toBeNull();
-    expect(screen.getAllByText(actionLabel)[0].getAttribute('href')).toBe(actionHref);
+    fireEvent.click(screen.getAllByText(actionLabel)[0]);
+    expect(window.open).toHaveBeenCalledWith(actionHref, '_blank');
   });
 
   it('should filter options based on user input', () => {
