@@ -5,9 +5,9 @@
 ### Added
 
 ### Fixed
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
 
 ### Changed
-- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
 
 ### Breaking changes
 
@@ -54,10 +54,6 @@
 - Added `component` props in `Typography`. 
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
-
-### Changed
-
-### Breaking changes
 - Fixed Text spacing accessibility issue on `Pagination` component
 
 ## 2.0.0
