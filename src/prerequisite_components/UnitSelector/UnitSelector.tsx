@@ -12,11 +12,12 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import { Theme, SxProps } from '@mui/material';
+import { Theme, SxProps, useTheme } from '@mui/material';
 import React from 'react';
 import Button, { ButtonVariants } from '../../Button';
 import Menu, { MenuSizes } from '../../Menu';
 import MenuItem from '../../Menu/MenuItem';
+import { ThemeDirectionType } from '../../theme';
 
 export interface UnitSelectorProps {
   units: string[];
@@ -44,6 +45,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
   }
 
   const [open, setOpen] = React.useState(false);
+  const { direction } = useTheme();
   const anchorRef = React.useRef<HTMLButtonElement>(null);
   const [menuStyle, setMenuStyle] = React.useState<React.CSSProperties>({});
 
@@ -91,19 +93,25 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
       const textFieldEl = anchorRef.current.closest('.MuiOutlinedInput-root');
 
       if (textFieldEl) {
-        // Get the right edge position of the TextField
+        // Get button and textfield positions
         const textFieldRect = textFieldEl.getBoundingClientRect();
         const buttonRect = anchorRef.current.getBoundingClientRect();
 
-        // Calculate the offset
-        const offsetX = textFieldRect.right - buttonRect.right;
+        // Calculate the offset based on text direction
+        let offsetX = 0;
+
+        if (direction === ThemeDirectionType.RTL) {
+          offsetX = textFieldRect.left - buttonRect.left;
+        } else {
+          offsetX = textFieldRect.right - buttonRect.right;
+        }
 
         setMenuStyle({
           marginLeft: `${offsetX}px`,
         });
       }
     }
-  }, [open]);
+  }, [open, direction]);
 
   return (
     <div className={className} style={{ display: 'inline-flex' }}>
@@ -126,6 +134,9 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
             backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
             color: (theme) => { return theme.palette.action.selected; },
           },
+          '& .MuiInputAdornment-positionEnd button': {
+            margin: direction === 'rtl' ? '0px 8px 0px 0px' : '0px 0px 0px 8px',
+          },
         }}
         {...buttonProps}
         aria-controls={open ? 'unit-selector-menu' : undefined}
@@ -147,11 +158,11 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
         }}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'right',
+          horizontal: direction === ThemeDirectionType.RTL ? 'left' : 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: direction === ThemeDirectionType.RTL ? 'left' : 'right',
         }}
         sx={{
           ...menuStyle,
@@ -165,7 +176,7 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
           '& .MuiMenuItem-root': {
             minHeight: '28px',
             padding: '2px 10px',
-            justifyContent: 'end',
+            justifyContent: direction === ThemeDirectionType.RTL ? 'start' : 'end',
           },
         }}
       >
