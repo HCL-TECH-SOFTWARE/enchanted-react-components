@@ -233,7 +233,7 @@ const renderInput = (props: SelectProps, id?: string) => {
 };
 
 const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionProps => {
-  const inputLabelId = props.label && props.id ? `${props.id}-label` : undefined;
+  const inputLabelId = props.label && props.id ? `${props.id}` : undefined;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
     disabled: props.disabled,

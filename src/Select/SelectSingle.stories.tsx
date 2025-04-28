@@ -141,6 +141,7 @@ export const ExampleSingleSelect = {
   render: Template,
   args: {
     ...Select.defaultProps,
+    id: 'example-single-select',
     label: 'Label',
     helperText: 'Some important text',
     helperIconTooltip: 'Some information about that component.',
@@ -167,6 +168,7 @@ export const ExampleSingleSelectOpen = {
   render: Template,
   args: {
     ...ExampleSingleSelect.args,
+    id: 'example-single-select-open',
   },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
@@ -178,6 +180,7 @@ export const ExampleSingleSelectError = {
   render: Template,
   args: {
     ...ExampleSingleSelect.args,
+    id: 'example-single-select-error',
     error: true,
   },
 };
@@ -186,6 +189,7 @@ export const ExampleSingleSelectDisabled = {
   render: Template,
   args: {
     ...ExampleSingleSelect.args,
+    id: 'example-single-select-disabled',
     disabled: true,
   },
 };
@@ -194,6 +198,7 @@ export const ExampleSingleSelectNonEdit = {
   render: Template,
   args: {
     ...ExampleSingleSelect.args,
+    id: 'example-single-select-nonedit',
     nonEdit: true,
     value: 'Thirty',
   },
@@ -203,6 +208,7 @@ export const ExampleSingleSelectFullWidth = {
   render: Template,
   args: {
     ...ExampleSingleSelect.args,
+    id: 'example-single-select-fullwidth',
     fullWidth: true,
   },
 };
