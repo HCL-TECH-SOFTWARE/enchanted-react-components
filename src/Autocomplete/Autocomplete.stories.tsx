@@ -213,6 +213,7 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
   const [value, setValue] = React.useState(args.value ? args.value : null);
   return (
     <Autocomplete
+      id="test"
       value={value}
       autoHighlight
       onChange={(event, newValue) => {
