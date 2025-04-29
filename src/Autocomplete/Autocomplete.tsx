@@ -163,6 +163,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
               'aria-errormessage': props.error ? helperTextId : undefined,
+              'aria-labelledby': props.id ? `${props.id}-label` : undefined,
               ...textFieldArgs.inputProps,
               ...inputPropsValue,
             };
