@@ -14,6 +14,7 @@
 
 ### Fixed
 - Fixed console error by making sure the element exists before using classList
+- Fixed position of UnitSelector button and menu when theme direction is RTL.
 
 ## 2.1.1
 
