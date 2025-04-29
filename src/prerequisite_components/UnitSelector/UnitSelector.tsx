@@ -134,9 +134,9 @@ const UnitSelector: React.FC<UnitSelectorProps> = ({
             backgroundColor: (theme) => { return theme.palette.action.selectedOpacityModified; },
             color: (theme) => { return theme.palette.action.selected; },
           },
-          '& .MuiInputAdornment-positionEnd button': {
-            margin: direction === 'rtl' ? '0px 8px 0px 0px' : '0px 0px 0px 8px',
-          },
+        }}
+        style={{
+          margin: direction === ThemeDirectionType.RTL ? '0px 8px 0px 0px' : '0px 0px 0px 8px',
         }}
         {...buttonProps}
         aria-controls={open ? 'unit-selector-menu' : undefined}
