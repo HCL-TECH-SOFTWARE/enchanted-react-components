@@ -233,7 +233,6 @@ const renderInput = (props: SelectProps, id?: string) => {
 };
 
 const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionProps => {
-  const inputLabelId = props.label && props.id ? `${props.id}-label` : undefined;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
     disabled: props.disabled,
@@ -241,7 +240,7 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     required: props.required,
     sx: props.sx,
     htmlFor: props.id,
-    id: inputLabelId,
+    id: props.id,
     label: props.label,
     helperIconTooltip: props.helperIconTooltip,
     actionProps: props.actionProps,
