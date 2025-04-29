@@ -6,6 +6,7 @@
 
 ### Fixed
 - Fixed focus handling on open of `DatePicker` popper to address accessibility issues
+- Fixed screen reader accessibility issue with the `label` in `Autocomplete` component
 
 ### Changed
 
