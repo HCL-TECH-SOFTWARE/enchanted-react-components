@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
 
 ### Changed
 
