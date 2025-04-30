@@ -7,6 +7,7 @@
 ### Fixed
 - Fixed focus handling on open of `DatePicker` popper to address accessibility issues
 - Fixed screen reader accessibility issue with the `label` in `Autocomplete` component
+- Fixed position of UnitSelector button and menu when theme direction is RTL
 
 ### Changed
 
