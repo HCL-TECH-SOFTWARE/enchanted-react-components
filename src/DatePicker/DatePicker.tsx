@@ -277,9 +277,9 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       });
     }, 0);
   };
-  const handleDateChange = (value: TDate | null, context: any) => {
+  const handleDateChange = (value: TDate | null, keyboardInputValue?: string) => {
     if (onChange) {
-      onChange(value, context);
+      onChange(value, keyboardInputValue);
     }
     if (inputRef.current) {
       inputRef.current.blur();
