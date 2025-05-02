@@ -186,7 +186,8 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
 };
 
 const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
-  const { customStyles = {} } = props;
+  const { customStyles = {}, onChange } = props;
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
@@ -263,9 +264,28 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   };
   const handleClose = () => {
     setTimeout(() => {
-      const activeElement = document.activeElement as HTMLButtonElement;
+      window.requestAnimationFrame(() => {
+        if (inputRef.current) {
+          inputRef.current.blur();
+        }
+        const activeElement = document.activeElement as HTMLElement;
+        if (activeElement?.closest('.MuiInputBase-root')) {
+          activeElement.blur();
+        }
+      });
+    }, 0);
+  };
+  const handleDateChange = (value: TDate | null, context: any) => {
+    if (onChange) {
+      onChange(value, context);
+    }
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement?.closest('.MuiInputBase-root')) {
       activeElement.blur();
-    }, 100);
+    }
   };
 
   return (
@@ -276,6 +296,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
       onClose={handleClose}
+      onChange={handleDateChange}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
