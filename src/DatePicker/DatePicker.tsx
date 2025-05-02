@@ -16,6 +16,7 @@ import React, { KeyboardEvent } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { Theme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
+import { v4 as uuid } from 'uuid';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
@@ -188,6 +189,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
 const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
   const { customStyles = {}, onChange } = props;
   const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
@@ -212,7 +214,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   };
   const focusDialog = () => {
     window.requestAnimationFrame(() => {
-      const dialog = document.querySelector('.MuiDialog-root') || document.querySelector('.MuiPickersPopper-root');
+      const dialog = document.querySelector(`#datepickerPopper-${popperId}`) ?? document.querySelector('.MuiPickersPopper-root');
       if (dialog) {
         const focusableElement = dialog.querySelector('button, [tabindex]:not([tabindex="-1"])');
         if (focusableElement instanceof window.HTMLElement) {
@@ -302,6 +304,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       }}
       PopperProps={{
         placement: 'bottom-start',
+        id: `datepickerPopper-${popperId}`,
       }}
       componentsProps={{
         actionBar: { actions: ['today'] },

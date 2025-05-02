@@ -5,6 +5,23 @@
 ### Added
 
 ### Fixed
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
+- Fixed screen reader accessibility issue with the `label` in `Autocomplete` component
+- Fixed position of UnitSelector button and menu when theme direction is RTL
+- Fixed wrong rendered page number issue in pagination by removing conflict in value and inputPropsValue in `Autocomplete`
+
+### Changed
+
+### Breaking changes
+
+## 2.1.2
+
+### Fixed
+- Fixed console error by making sure the element exists before using classList
+
+## 2.1.1
+
+### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
 - Fixed accessibility issue with disabled row on `DataGrid` component.
 - Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
@@ -13,8 +30,7 @@
 - Fixing the focus issue when after selecting a date the focus remains there on the input field and date picker icon.
 
 ### Changed
-
-### Breaking changes
+- Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
 
 ## 2.1.0
 
@@ -25,6 +41,8 @@
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
 - Added `ActionButton` component designed to perform a specific action or task when clicked or tapped.
 - Added `neutral` size control in the `Button` component.
+- Added `UnitSelector` component in `prerequisite_components` to provide unit selection capabilities for the `TextField` component.
+- Added examples of `UnitSelector` integration with `TextField` in storybook.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component
