@@ -281,13 +281,6 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     if (onChange) {
       onChange(value, keyboardInputValue);
     }
-    if (inputRef.current) {
-      inputRef.current.blur();
-    }
-    const activeElement = document.activeElement as HTMLElement;
-    if (activeElement?.closest('.MuiInputBase-root')) {
-      activeElement.blur();
-    }
   };
 
   return (
