@@ -265,7 +265,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     return textFieldProps;
   };
   const handleClose = () => {
-    setTimeout(() => {
+    setTimeout(() => { // Added the set timeout so that blur can be allied at the last to override anyother styels
       window.requestAnimationFrame(() => {
         if (inputRef.current) {
           inputRef.current.blur();
@@ -277,11 +277,6 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       });
     }, 0);
   };
-  const handleDateChange = (value: TDate | null, keyboardInputValue?: string) => {
-    if (onChange) {
-      onChange(value, keyboardInputValue);
-    }
-  };
 
   return (
     <MuiDatePicker
@@ -291,7 +286,8 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
       onClose={handleClose}
-      onChange={handleDateChange}
+      onChange={(value: TDate | null, keyboardInputValue?: string) => (
+        onChange(value, keyboardInputValue))}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
