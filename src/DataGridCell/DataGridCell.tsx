@@ -159,7 +159,6 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid
         ref={valueRef}
         sx={{ // this grid is for the container of the value of the cell define in col def
-          alignItems: 'flex-start',
           display: 'flex',
           flexDirection: 'column',
           marginRight: '8px',
