@@ -10,8 +10,10 @@
 - Fixed position of UnitSelector button and menu when theme direction is RTL
 - Fixed wrong rendered page number issue in Pagination by removing use of inputPropsValue in `Autocomplete`
 - Fixed cannot type freesolo in MultiSelectChip by removing use of inputPropsValue in `Autocomplete`
+- Fixed extra space below the `Popper` title
 
 ### Changed
+- Added tooltip to the close button in `Popper` component
 
 ### Breaking changes
 
