@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added tooltip to the close button in `Popper` component
 
 ### Fixed
 - Fixed focus handling on open of `DatePicker` popper to address accessibility issues
@@ -10,10 +11,11 @@
 - Fixed position of UnitSelector button and menu when theme direction is RTL
 - Fixed wrong rendered page number issue in Pagination by removing use of inputPropsValue in `Autocomplete`
 - Fixed cannot type freesolo in MultiSelectChip by removing use of inputPropsValue in `Autocomplete`
+- Fixed missing ellipsis in `DataGridCell` when text in cell is too long by making align-items normal with text-align left
+- Fixed `Button` height to adjust again dynamically to content by removing static max-height value
 - Fixed extra space below the `Popper` title
 
 ### Changed
-- Added tooltip to the close button in `Popper` component
 
 ### Breaking changes
 
@@ -27,9 +29,9 @@
 ### Fixed
 - Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
 - Fixed accessibility issue with disabled row on `DataGrid` component.
-- Fixing all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
+- Fixed all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
 - Fixed the issue where the 'Learn more' button shifted when hovering over the list of progress items in the `ProgressBar` component.
-- Fixing the focus issue when there are more than one date picker that are used side by side.
+- Fixed the focus issue when there are more than one date picker that are used side by side.
 
 ### Changed
 - Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
