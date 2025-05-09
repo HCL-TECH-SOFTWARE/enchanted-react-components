@@ -82,20 +82,16 @@ const Popper = ({ ...props }: PopperProps) => {
       {(headerChildren)
         && (
         <PopperTitle data-testid={PopperTestIds.POPPER_TITLE}>
-          <Grid container>
-            <Grid item>
-              <Grid>{headerChildren}</Grid>
-              <Tooltip title={props.closeIconTooltip || ''}>
-                <IconButton
-                  aria-label={props.closeIconTooltip ? props. closeIconTooltip : PopperTestIds.POPPER_TITLE}
-                  onClick={(e) => { onClose(e, 'backdropClick'); }}
-                  data-testid={PopperTestIds.POPPER_CLOSE_ICON}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
+          <Grid>{headerChildren}</Grid>
+          <Tooltip title={props.closeIconTooltip || ''}>
+            <IconButton
+              aria-label={props.closeIconTooltip ? props. closeIconTooltip : PopperTestIds.POPPER_TITLE}
+              onClick={(e) => { onClose(e, 'backdropClick'); }}
+              data-testid={PopperTestIds.POPPER_CLOSE_ICON}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
         </PopperTitle>
         )}
       {(!hideSubHeader)
