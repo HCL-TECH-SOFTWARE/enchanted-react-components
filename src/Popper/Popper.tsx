@@ -85,7 +85,7 @@ const Popper = ({ ...props }: PopperProps) => {
           <Grid>{headerChildren}</Grid>
           <Tooltip title={props.closeIconTooltip || ''}>
             <IconButton
-              aria-label={props.closeIconTooltip ? props. closeIconTooltip : PopperTestIds.POPPER_TITLE}
+              aria-label={props.closeIconTooltip ? props.closeIconTooltip : PopperTestIds.POPPER_TITLE}
               onClick={(e) => { onClose(e, 'backdropClick'); }}
               data-testid={PopperTestIds.POPPER_CLOSE_ICON}
             >
