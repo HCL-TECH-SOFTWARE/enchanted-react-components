@@ -24,6 +24,7 @@ import PopperTitle from './PopperTitle';
 import PopperContent from './PopperContent';
 import { TYPOGRAPHY } from '../theme';
 import Divider, { DividerTypes } from '../Divider';
+import Tooltip from '../Tooltip';
 
 export enum PopperTestIds {
   POPPER_TITLE = 'popperTitle',
@@ -37,6 +38,7 @@ export type PopperProps = MuiPopperProps & {
   subHeaderChildren?: React.ReactNode,
   onClose: Function,
   hideSubHeader?: boolean,
+  closeIconTooltip?: string,
 };
 
 const Popper = ({ ...props }: PopperProps) => {
@@ -83,13 +85,15 @@ const Popper = ({ ...props }: PopperProps) => {
           <Grid container>
             <Grid item>
               <Grid>{headerChildren}</Grid>
-              <IconButton
-                aria-label={PopperTestIds.POPPER_TITLE}
-                onClick={(e) => { onClose(e, 'backdropClick'); }}
-                data-testid={PopperTestIds.POPPER_CLOSE_ICON}
-              >
-                <CloseIcon />
-              </IconButton>
+              <Tooltip title={props.closeIconTooltip || ''}>
+                <IconButton
+                  aria-label={props.closeIconTooltip ? props. closeIconTooltip : PopperTestIds.POPPER_TITLE}
+                  onClick={(e) => { onClose(e, 'backdropClick'); }}
+                  data-testid={PopperTestIds.POPPER_CLOSE_ICON}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </Tooltip>
             </Grid>
           </Grid>
         </PopperTitle>
