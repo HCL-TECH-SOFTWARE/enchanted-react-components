@@ -160,6 +160,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
         ref={valueRef}
         sx={{ // this grid is for the container of the value of the cell define in col def
           alignItems: 'normal',
+          textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
           marginRight: '8px',
