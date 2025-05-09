@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added tooltip to the close button in `Popper` component
 
 ### Fixed
 - Fixed focus handling on open of `DatePicker` popper to address accessibility issues
@@ -12,6 +13,7 @@
 - Fixed cannot type freesolo in MultiSelectChip by removing use of inputPropsValue in `Autocomplete`
 - Fixed missing ellipsis in `DataGridCell` when text in cell is too long by making align-items normal with text-align left
 - Fixed `Button` height to adjust again dynamically to content by removing static max-height value
+- Fixed extra space below the `Popper` title
 
 ### Changed
 
