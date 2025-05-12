@@ -100,6 +100,7 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     failureLabel: 'Upload Failed.',
     pendingLabel: 'Waiting...',
     progressLabel: 'Uploading...',
+    cancelledLabel: 'Cancelled.',
   };
   return (
     <div style={{ height: '40vh' }}>
@@ -203,6 +204,15 @@ InteractiveExample.args = {
       status: 'PROGRESS',
       timestamp: 1588996092650,
     },
+    {
+      progress: 0,
+      size: 50276287,
+      name: 'testPPT.ppt',
+      collectionId: '1',
+      status: 'CANCELLED',
+      message: 'Cancelled.',
+      timestamp: 1588996092650,
+    },
   ],
   stringLiterals: {
     learnMoreLabel: 'Learn more',
@@ -220,5 +230,8 @@ InteractiveExample.args = {
   },
   cancelItem: () => {
     // cancel item action
+  },
+  cancelAll: () => {
+    // cancel all action
   },
 };

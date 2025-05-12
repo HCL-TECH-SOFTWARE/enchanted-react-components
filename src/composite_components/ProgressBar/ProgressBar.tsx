@@ -24,6 +24,7 @@ export enum EnumUploadStatus {
   PROGRESS = 'PROGRESS',
   PENDING = 'PENDING',
   FAILURE = 'FAILURE',
+  CANCELLED = 'CANCELLED',
 }
 
 export enum ProgressItemType {
@@ -62,6 +63,7 @@ export interface ProgressBarLocalization {
   progressLabel: string;
   pendingLabel: string;
   failureLabel: string;
+  cancelledLabel: string;
 }
 
 interface progressBarProps {
@@ -94,12 +96,23 @@ const ProgressBar = (props: progressBarProps) => {
   } = props;
 
   const [expanded, setExpanded] = useState(false);
+  const [isCancelAllDisabled, setIsCancelAllDisabled] = useState(false);
 
   /**
    * Toggles the state of the progress bar.
    */
   const toggleButtonClick = () => {
     setExpanded(!expanded);
+  };
+
+  /**
+   * Handles the cancelAll button click.
+   */
+  const handleCancelAllClick = () => {
+    if (cancelAll) {
+      cancelAll();
+      setIsCancelAllDisabled(true);
+    }
   };
 
   return (
@@ -115,18 +128,20 @@ const ProgressBar = (props: progressBarProps) => {
         uploadStatus={uploadStatus}
         closeModal={closeModal}
         stringLiterals={stringLiterals}
-        cancelAll={cancelAll}
+        cancelAll={handleCancelAllClick}
         pauseButton={pauseButton}
         translation={translation}
         expanded={expanded}
         toggleButtonClick={toggleButtonClick}
+        isCancelAllDisabled={isCancelAllDisabled}
       />
       {expanded && (
         <ProgressSubHeader
           totalSize={totalSize}
           totalTime={totalTime}
           literals={stringLiterals}
-          cancelAll={cancelAll}
+          cancelAll={handleCancelAllClick}
+          isCancelAllDisabled={isCancelAllDisabled}
         />
       )}
       {expanded && (

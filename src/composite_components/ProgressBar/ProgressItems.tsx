@@ -425,6 +425,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           {queueItem.status === EnumUploadStatus.PROGRESS && (
                             <span>{translation?.progressLabel}</span>
                           )}
+                          {queueItem.status === EnumUploadStatus.CANCELLED && (
+                            <span>{translation?.cancelledLabel}</span>
+                          )}
                           {queueItem.status === EnumUploadStatus.FAILURE && (
                             <Tooltip title={queueItem.message} tooltipsize="small">
                               <span
