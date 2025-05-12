@@ -81,6 +81,7 @@ interface progressBarProps {
   learnMoreOnFailure(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>): void;
   pauseButton?: Function;
   translation?: ProgressBarLocalization | undefined;
+  cancelAllDisabled?: boolean;
 }
 
 /**
@@ -92,11 +93,10 @@ const ProgressBar = (props: progressBarProps) => {
   const {
     uploadStatus, totalPercentage, totalSize, totalTime, stringLiterals, uploadedFile,
     retryUploadItem, cancelItem, navigateFolder, cancelAll, learnMoreOnFailure, closeModal,
-    pauseButton, translation,
+    pauseButton, translation, cancelAllDisabled = false,
   } = props;
 
   const [expanded, setExpanded] = useState(false);
-  const [isCancelAllDisabled, setIsCancelAllDisabled] = useState(false);
 
   /**
    * Toggles the state of the progress bar.
@@ -109,9 +109,8 @@ const ProgressBar = (props: progressBarProps) => {
    * Handles the cancelAll button click.
    */
   const handleCancelAllClick = () => {
-    if (cancelAll) {
+    if (cancelAll && !cancelAllDisabled) { // Respect the cancelAllDisabled prop
       cancelAll();
-      setIsCancelAllDisabled(true);
     }
   };
 
@@ -133,7 +132,7 @@ const ProgressBar = (props: progressBarProps) => {
         translation={translation}
         expanded={expanded}
         toggleButtonClick={toggleButtonClick}
-        isCancelAllDisabled={isCancelAllDisabled}
+        isCancelAllDisabled={cancelAllDisabled}
       />
       {expanded && (
         <ProgressSubHeader
@@ -141,7 +140,7 @@ const ProgressBar = (props: progressBarProps) => {
           totalTime={totalTime}
           literals={stringLiterals}
           cancelAll={handleCancelAllClick}
-          isCancelAllDisabled={isCancelAllDisabled}
+          isCancelAllDisabled={cancelAllDisabled}
         />
       )}
       {expanded && (

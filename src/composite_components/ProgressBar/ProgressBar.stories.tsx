@@ -89,6 +89,10 @@ export default {
 } as Meta<typeof ProgressBar>;
 
 const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
+  const [cancelAllDisabled, setCancelAllDisabled] = React.useState(false);
+  const handleCancelAll = () => {
+    setCancelAllDisabled(true); // Disable the button on click
+  };
   const translation = {
     closeButtonTooltip: 'Close',
     expandTooltip: 'View upload details',
@@ -106,6 +110,8 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     <div style={{ height: '40vh' }}>
       <ProgressBar
         {...args}
+        cancelAll={handleCancelAll} // Pass the handler
+        cancelAllDisabled={cancelAllDisabled} // Pass the state
         translation={translation}
       />
     </div>
