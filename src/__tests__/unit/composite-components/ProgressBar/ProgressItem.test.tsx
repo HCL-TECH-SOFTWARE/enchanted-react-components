@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
@@ -251,5 +252,58 @@ describe('ProgressItem Component', () => {
     fireEvent.click(learnMoreButton);
     fireEvent.keyDown(learnMoreButton, { key: 'Enter', code: 'Enter' });
     expect(mockProps.learnMoreOnFailure).toHaveBeenCalled();
+  });
+
+  test('displays cancelled label when item status is CANCELLED', () => {
+    const cancelledTranslation = {
+      cancelledLabel: 'Cancelled.',
+      successLabel: 'Success',
+      progressLabel: 'In Progress',
+      pendingLabel: 'Pending',
+      failureLabel: 'Failed',
+    };
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
+          translation={cancelledTranslation}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Upload Cancelled')).toBeInTheDocument();
+  });
+
+  test('renders nothing when translation is undefined', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
+          translation={undefined}
+        />
+      </ThemeProvider>,
+    );
+
+    // Find the parent element that would contain the cancelledLabel span
+    const statusContainer = screen.getByTestId('failed-status-label').parentElement;
+    expect(statusContainer).not.toHaveTextContent('Cancelled.');
+    expect(statusContainer).not.toHaveTextContent('undefined');
+    expect(statusContainer).not.toHaveTextContent('null');
+  });
+
+  it('renders cancelledLabel when both translation and cancelledLabel are defined', () => {
+    const testLabel = 'Cancelled.';
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
+          translation={{ ...mockProps.translation, cancelledLabel: testLabel }}
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(testLabel)).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
+import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
@@ -42,6 +43,7 @@ const mockProps = {
   } as ProgressBarLocalization,
   expanded: false,
   toggleButtonClick: jest.fn(),
+  isCancelAllDisabled: false,
 };
 
 describe('ProgressHeader', () => {
@@ -98,8 +100,34 @@ describe('ProgressHeader', () => {
         <ProgressHeader {...mockProps} cancelAll={cancelAllMock} />
       </ThemeProvider>,
     );
-    fireEvent.click(screen.getByTestId('cancelAllButton'));
-    expect(cancelAllMock).toHaveBeenCalled();
+
+    const cancelAllButton = screen.getByTestId('cancelAllButton');
+    fireEvent.click(cancelAllButton);
+    expect(cancelAllMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not call cancelAll when button is disabled', () => {
+    const cancelAllMock = jest.fn();
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} isCancelAllDisabled />
+      </ThemeProvider>,
+    );
+
+    const cancelAllButton = screen.getByTestId('cancelAllButton');
+    expect(cancelAllButton).toBeDisabled();
+    fireEvent.click(cancelAllButton);
+    expect(cancelAllMock).not.toHaveBeenCalled();
+  });
+
+  it('shows the correct cancelAll label from stringLiterals', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(mockProps.stringLiterals.cancelAllLabel!)).toBeInTheDocument();
   });
 
   it('checks the toggle button clicked', () => {

@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import ProgressHeader from './ProgressHeader';
 import ProgressItems from './ProgressItems';
@@ -97,6 +97,18 @@ const ProgressBar = (props: progressBarProps) => {
   } = props;
 
   const [expanded, setExpanded] = useState(false);
+  const [isCancelDisabled, setIsCancelDisabled] = useState(false);
+
+  // Disable cancelAll when all uploads are completed or failed
+  useEffect(() => {
+    if (uploadedFile.every((file) => {
+      return file.status === EnumUploadStatus.SUCCESS
+      || file.status === EnumUploadStatus.FAILURE
+      || file.status === EnumUploadStatus.CANCELLED;
+    })) {
+      setIsCancelDisabled(true);
+    }
+  }, [uploadedFile]);
 
   /**
    * Toggles the state of the progress bar.
@@ -109,8 +121,9 @@ const ProgressBar = (props: progressBarProps) => {
    * Handles the cancelAll button click.
    */
   const handleCancelAllClick = () => {
-    if (cancelAll && !cancelAllDisabled) { // Respect the cancelAllDisabled prop
+    if (cancelAll && !isCancelDisabled && !cancelAllDisabled) {
       cancelAll();
+      setIsCancelDisabled(true);
     }
   };
 
@@ -132,7 +145,7 @@ const ProgressBar = (props: progressBarProps) => {
         translation={translation}
         expanded={expanded}
         toggleButtonClick={toggleButtonClick}
-        isCancelAllDisabled={cancelAllDisabled}
+        isCancelAllDisabled={isCancelDisabled || cancelAllDisabled}
       />
       {expanded && (
         <ProgressSubHeader
@@ -140,7 +153,7 @@ const ProgressBar = (props: progressBarProps) => {
           totalTime={totalTime}
           literals={stringLiterals}
           cancelAll={handleCancelAllClick}
-          isCancelAllDisabled={cancelAllDisabled}
+          isCancelAllDisabled={isCancelDisabled || cancelAllDisabled}
         />
       )}
       {expanded && (

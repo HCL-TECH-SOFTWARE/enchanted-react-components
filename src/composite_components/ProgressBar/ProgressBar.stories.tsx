@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -15,7 +15,7 @@
 
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import ProgressBar from './ProgressBar';
+import ProgressBar, { EnumUploadStatus } from './ProgressBar';
 
 export default {
   title: 'Data display/ProgressBar',
@@ -90,8 +90,19 @@ export default {
 
 const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
   const [cancelAllDisabled, setCancelAllDisabled] = React.useState(false);
+  const [uploadedFiles, setUploadedFiles] = React.useState(args.uploadedFile);
+
   const handleCancelAll = () => {
-    setCancelAllDisabled(true); // Disable the button on click
+    setCancelAllDisabled(true);
+    // eslint-why The 'any' type is used here to allow flexibility in assigning the subtitle value, as it is dynamically generated based on the 'colDef.subTitle' value.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setUploadedFiles((prevFiles: any[]) => {
+      return prevFiles.map((file) => {
+        return ((file.status === EnumUploadStatus.PROGRESS || file.status === EnumUploadStatus.PENDING)
+          ? { ...file, status: EnumUploadStatus.CANCELLED, message: 'Cancelled.' }
+          : file);
+      });
+    });
   };
   const translation = {
     closeButtonTooltip: 'Close',
@@ -110,8 +121,9 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     <div style={{ height: '40vh' }}>
       <ProgressBar
         {...args}
-        cancelAll={handleCancelAll} // Pass the handler
-        cancelAllDisabled={cancelAllDisabled} // Pass the state
+        uploadedFile={uploadedFiles}
+        cancelAll={handleCancelAll}
+        cancelAllDisabled={cancelAllDisabled}
         translation={translation}
       />
     </div>
@@ -217,7 +229,7 @@ InteractiveExample.args = {
       collectionId: '1',
       status: 'CANCELLED',
       message: 'Cancelled.',
-      timestamp: 1588996092650,
+      timestamp: 1588996092651,
     },
   ],
   stringLiterals: {
