@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import ProgressHeader from './ProgressHeader';
 import ProgressItems from './ProgressItems';
@@ -81,7 +81,7 @@ interface progressBarProps {
   learnMoreOnFailure(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>): void;
   pauseButton?: Function;
   translation?: ProgressBarLocalization | undefined;
-  cancelAllDisabled?: boolean;
+  isCancelAllDisabled: boolean;
 }
 
 /**
@@ -93,38 +93,16 @@ const ProgressBar = (props: progressBarProps) => {
   const {
     uploadStatus, totalPercentage, totalSize, totalTime, stringLiterals, uploadedFile,
     retryUploadItem, cancelItem, navigateFolder, cancelAll, learnMoreOnFailure, closeModal,
-    pauseButton, translation, cancelAllDisabled = false,
+    pauseButton, translation, isCancelAllDisabled,
   } = props;
 
   const [expanded, setExpanded] = useState(false);
-  const [isCancelDisabled, setIsCancelDisabled] = useState(false);
-
-  // Disable cancelAll when all uploads are completed or failed
-  useEffect(() => {
-    if (uploadedFile.every((file) => {
-      return file.status === EnumUploadStatus.SUCCESS
-      || file.status === EnumUploadStatus.FAILURE
-      || file.status === EnumUploadStatus.CANCELLED;
-    })) {
-      setIsCancelDisabled(true);
-    }
-  }, [uploadedFile]);
 
   /**
    * Toggles the state of the progress bar.
    */
   const toggleButtonClick = () => {
     setExpanded(!expanded);
-  };
-
-  /**
-   * Handles the cancelAll button click.
-   */
-  const handleCancelAllClick = () => {
-    if (cancelAll && !isCancelDisabled && !cancelAllDisabled) {
-      cancelAll();
-      setIsCancelDisabled(true);
-    }
   };
 
   return (
@@ -140,20 +118,20 @@ const ProgressBar = (props: progressBarProps) => {
         uploadStatus={uploadStatus}
         closeModal={closeModal}
         stringLiterals={stringLiterals}
-        cancelAll={handleCancelAllClick}
+        cancelAll={cancelAll}
+        isCancelAllDisabled={isCancelAllDisabled}
         pauseButton={pauseButton}
         translation={translation}
         expanded={expanded}
         toggleButtonClick={toggleButtonClick}
-        isCancelAllDisabled={isCancelDisabled || cancelAllDisabled}
       />
       {expanded && (
         <ProgressSubHeader
           totalSize={totalSize}
           totalTime={totalTime}
           literals={stringLiterals}
-          cancelAll={handleCancelAllClick}
-          isCancelAllDisabled={isCancelDisabled || cancelAllDisabled}
+          cancelAll={cancelAll}
+          isCancelAllDisabled={isCancelAllDisabled}
         />
       )}
       {expanded && (

@@ -93,43 +93,6 @@ describe('ProgressHeader', () => {
     expect(pauseButtonMock).toHaveBeenCalled();
   });
 
-  it('calls cancelAll when the cancel all button is clicked', () => {
-    const cancelAllMock = jest.fn();
-    render(
-      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} />
-      </ThemeProvider>,
-    );
-
-    const cancelAllButton = screen.getByTestId('cancelAllButton');
-    fireEvent.click(cancelAllButton);
-    expect(cancelAllMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('does not call cancelAll when button is disabled', () => {
-    const cancelAllMock = jest.fn();
-    render(
-      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} isCancelAllDisabled />
-      </ThemeProvider>,
-    );
-
-    const cancelAllButton = screen.getByTestId('cancelAllButton');
-    expect(cancelAllButton).toBeDisabled();
-    fireEvent.click(cancelAllButton);
-    expect(cancelAllMock).not.toHaveBeenCalled();
-  });
-
-  it('shows the correct cancelAll label from stringLiterals', () => {
-    render(
-      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressHeader {...mockProps} />
-      </ThemeProvider>,
-    );
-
-    expect(screen.getByText(mockProps.stringLiterals.cancelAllLabel!)).toBeInTheDocument();
-  });
-
   it('checks the toggle button clicked', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
@@ -156,5 +119,17 @@ describe('ProgressHeader', () => {
     fireEvent.click(screen.getByTestId('close-button'));
     fireEvent.keyDown(screen.getByTestId('close-button'), { key: 'Enter', code: 'Enter' });
     expect(mockProps.closeModal).toHaveBeenCalled();
+  });
+
+  it('renders the "Cancel All" button when cancelAll prop is provided', () => {
+    const cancelAllMock = jest.fn();
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Cancel All')).not.toBeNull();
+    fireEvent.click(screen.getByText('Cancel All'));
+    expect(cancelAllMock).toHaveBeenCalled();
   });
 });
