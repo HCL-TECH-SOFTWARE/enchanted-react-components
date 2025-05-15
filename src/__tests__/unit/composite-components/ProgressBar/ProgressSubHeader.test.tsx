@@ -14,7 +14,6 @@
  * ======================================================================== */
 
 import React from 'react';
-import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Literals } from '../../../../composite_components/ProgressBar/ProgressBar';

@@ -55,6 +55,7 @@ const mockProps = {
     navigateButtonTooltip: 'Navigate',
     retryButtonTooltip: 'Retry',
     errorButtonTooltip: 'Error',
+    cancelledLabel: 'Cancelled.',
   } as ProgressBarLocalization,
 };
 
@@ -255,23 +256,16 @@ describe('ProgressItem Component', () => {
   });
 
   test('displays cancelled label when item status is CANCELLED', () => {
-    const cancelledTranslation = {
-      cancelledLabel: 'Cancelled.',
-      successLabel: 'Success',
-      progressLabel: 'In Progress',
-      pendingLabel: 'Pending',
-      failureLabel: 'Failed',
-    };
     render(
       <ThemeProvider theme={theme}>
         <ProgressItems
           {...mockProps}
           file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
-          translation={cancelledTranslation}
+          translation={mockProps.translation}
         />
       </ThemeProvider>,
     );
-    expect(screen.getByText('Upload Cancelled')).toBeInTheDocument();
+    expect(screen.getByText('Cancelled.')).toBeInTheDocument();
   });
 
   test('renders nothing when translation is undefined', () => {
@@ -285,25 +279,9 @@ describe('ProgressItem Component', () => {
       </ThemeProvider>,
     );
 
-    // Find the parent element that would contain the cancelledLabel span
     const statusContainer = screen.getByTestId('failed-status-label').parentElement;
     expect(statusContainer).not.toHaveTextContent('Cancelled.');
     expect(statusContainer).not.toHaveTextContent('undefined');
     expect(statusContainer).not.toHaveTextContent('null');
-  });
-
-  it('renders cancelledLabel when both translation and cancelledLabel are defined', () => {
-    const testLabel = 'Cancelled.';
-    render(
-      <ThemeProvider theme={theme}>
-        <ProgressItems
-          {...mockProps}
-          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
-          translation={{ ...mockProps.translation, cancelledLabel: testLabel }}
-        />
-      </ThemeProvider>,
-    );
-
-    expect(screen.getByText(testLabel)).toBeInTheDocument();
   });
 });

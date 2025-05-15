@@ -14,7 +14,6 @@
  * ======================================================================== */
 
 import React from 'react';
-import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
@@ -91,6 +90,17 @@ describe('ProgressHeader', () => {
     );
     fireEvent.click(screen.getByTestId('pauseButton'));
     expect(pauseButtonMock).toHaveBeenCalled();
+  });
+
+  it('calls cancelAll when the cancel all button is clicked', () => {
+    const cancelAllMock = jest.fn();
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} />
+      </ThemeProvider>,
+    );
+    fireEvent.click(screen.getByTestId('cancelAllButton'));
+    expect(cancelAllMock).toHaveBeenCalled();
   });
 
   it('checks the toggle button clicked', () => {

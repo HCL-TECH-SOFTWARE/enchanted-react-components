@@ -17,8 +17,6 @@ import React from 'react';
 import {
   render, screen, cleanup,
 } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@emotion/react';
 import ProgressBar, {
   EnumUploadStatus, IProgressState, Literals, ProgressBarLocalization, ProgressItemType,
@@ -72,7 +70,7 @@ describe('ProgressBar Component', () => {
   it('renders without crashing', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressBar {...mockProps} />
+        <ProgressBar {...mockProps} isCancelAllDisabled />
       </ThemeProvider>,
     );
     expect(screen.getByTestId('upload-progress-container')).not.toBeNull();
@@ -81,7 +79,7 @@ describe('ProgressBar Component', () => {
   it('displays the correct upload status', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressBar {...mockProps} />
+        <ProgressBar {...mockProps} isCancelAllDisabled />
       </ThemeProvider>,
     );
     expect(screen.getByText('Uploading 1 of 5 items...')).not.toBeNull();
