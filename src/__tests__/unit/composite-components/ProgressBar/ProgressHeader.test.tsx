@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -42,6 +42,7 @@ const mockProps = {
   } as ProgressBarLocalization,
   expanded: false,
   toggleButtonClick: jest.fn(),
+  isCancelAllDisabled: false,
 };
 
 describe('ProgressHeader', () => {
@@ -128,5 +129,17 @@ describe('ProgressHeader', () => {
     fireEvent.click(screen.getByTestId('close-button'));
     fireEvent.keyDown(screen.getByTestId('close-button'), { key: 'Enter', code: 'Enter' });
     expect(mockProps.closeModal).toHaveBeenCalled();
+  });
+
+  it('renders the "Cancel All" button when cancelAll prop is provided', () => {
+    const cancelAllMock = jest.fn();
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} cancelAll={cancelAllMock} />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Cancel All')).not.toBeNull();
+    fireEvent.click(screen.getByText('Cancel All'));
+    expect(cancelAllMock).toHaveBeenCalled();
   });
 });

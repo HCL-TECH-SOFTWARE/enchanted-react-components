@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -424,6 +424,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           )}
                           {queueItem.status === EnumUploadStatus.PROGRESS && (
                             <span>{translation?.progressLabel}</span>
+                          )}
+                          {queueItem.status === EnumUploadStatus.CANCELLED && (
+                            <span>{translation?.cancelledLabel}</span>
                           )}
                           {queueItem.status === EnumUploadStatus.FAILURE && (
                             <Tooltip title={queueItem.message} tooltipsize="small">

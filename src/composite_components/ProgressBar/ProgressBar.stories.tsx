@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -100,6 +100,7 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     failureLabel: 'Upload Failed.',
     pendingLabel: 'Waiting...',
     progressLabel: 'Uploading...',
+    cancelledLabel: 'Cancelled.',
   };
   return (
     <div style={{ height: '40vh' }}>
@@ -202,6 +203,15 @@ InteractiveExample.args = {
       collectionId: '1',
       status: 'PROGRESS',
       timestamp: 1588996092650,
+    },
+    {
+      progress: 0,
+      size: 50276287,
+      name: 'testItem.jpeg',
+      collectionId: '1',
+      status: 'CANCELLED',
+      message: 'Cancelled.',
+      timestamp: 1588996092651,
     },
   ],
   stringLiterals: {

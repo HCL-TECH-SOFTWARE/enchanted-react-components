@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -108,6 +108,14 @@ const StyledHeader = styled(Box)((props) => {
               outline: `1px solid ${theme.palette.primary.inverse}`,
               borderRadius: '2px',
             },
+            // Added disabled styles here
+            '&.Mui-disabled': {
+              color: theme.palette.action.inverse,
+              opacity: 0.7,
+              '&:hover': {
+                backgroundColor: 'inherit',
+              },
+            },
           },
         },
         // styles the chevron icon and close icon
@@ -139,6 +147,7 @@ interface progressHeaderProps {
   translation?: ProgressBarLocalization | undefined;
   expanded: boolean;
   toggleButtonClick(): void;
+  isCancelAllDisabled: boolean;
 }
 
 /**
@@ -149,7 +158,7 @@ interface progressHeaderProps {
 const ProgressHeader = (props: progressHeaderProps) => {
   const {
     totalPercentage, uploadStatus, closeModal, stringLiterals,
-    cancelAll, pauseButton, translation, expanded, toggleButtonClick,
+    cancelAll, pauseButton, translation, expanded, toggleButtonClick, isCancelAllDisabled,
   } = props;
 
   const collapseButtonRef = useRef<HTMLButtonElement>(null);
@@ -225,6 +234,7 @@ const ProgressHeader = (props: progressHeaderProps) => {
                 event.stopPropagation();
                 if (cancelAll) cancelAll();
               }}
+              disabled={isCancelAllDisabled}
             >
               {stringLiterals.cancelAllLabel}
             </Button>

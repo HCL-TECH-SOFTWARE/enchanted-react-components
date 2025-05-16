@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -24,6 +24,7 @@ interface ProgressSubHeaderProps {
   totalTime?: string;
   literals: Literals;
   cancelAll?: Function;
+  isCancelAllDisabled: boolean;
 }
 
 /**
@@ -33,7 +34,7 @@ interface ProgressSubHeaderProps {
  */
 const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
   const {
-    totalSize, totalTime, literals, cancelAll,
+    totalSize, totalTime, literals, cancelAll, isCancelAllDisabled,
   } = props;
   return (
     <Box
@@ -67,6 +68,7 @@ const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
         <Button
           variant={ButtonVariants.TEXT}
           onClick={() => { if (cancelAll) cancelAll(); }}
+          disabled={isCancelAllDisabled}
           sx={(theme) => {
             return ({
               background: theme.palette.background.secondary,
@@ -75,7 +77,7 @@ const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
             });
           }}
         >
-          <Typography variant="caption" color="primary.main">{literals.cancelAllLabel}</Typography>
+          <Typography variant="caption">{literals.cancelAllLabel}</Typography>
         </Button>
       )}
     </Box>

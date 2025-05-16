@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -70,7 +70,7 @@ describe('ProgressBar Component', () => {
   it('renders without crashing', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressBar {...mockProps} />
+        <ProgressBar {...mockProps} isCancelAllDisabled />
       </ThemeProvider>,
     );
     expect(screen.getByTestId('upload-progress-container')).not.toBeNull();
@@ -79,7 +79,7 @@ describe('ProgressBar Component', () => {
   it('displays the correct upload status', () => {
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressBar {...mockProps} />
+        <ProgressBar {...mockProps} isCancelAllDisabled />
       </ThemeProvider>,
     );
     expect(screen.getByText('Uploading 1 of 5 items...')).not.toBeNull();
