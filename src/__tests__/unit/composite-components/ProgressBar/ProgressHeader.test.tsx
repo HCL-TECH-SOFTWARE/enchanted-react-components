@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
+import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
@@ -141,5 +142,33 @@ describe('ProgressHeader', () => {
     expect(screen.getByText('Cancel All')).not.toBeNull();
     fireEvent.click(screen.getByText('Cancel All'));
     expect(cancelAllMock).toHaveBeenCalled();
+  });
+
+  it('focuses collapse and expand buttons when expanded state changes', () => {
+    const { rerender } = render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} expanded={false} />
+      </ThemeProvider>,
+    );
+
+    const expandBtn = screen.getByTestId('expandIconButton');
+    expect(expandBtn).toBeInTheDocument();
+
+    rerender(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} expanded />
+      </ThemeProvider>,
+    );
+
+    const collapseBtn = screen.getByTestId('collapseIconButton');
+    expect(collapseBtn).toBeInTheDocument();
+
+    rerender(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressHeader {...mockProps} expanded={false} />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByTestId('expandIconButton')).toBeInTheDocument();
   });
 });
