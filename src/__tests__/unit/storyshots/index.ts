@@ -14,7 +14,7 @@
  * ======================================================================== */
 import { MatchImageSnapshotOptions } from 'jest-image-snapshot';
 import fs from 'fs';
-import puppeteer from 'puppeteer';
+import * as puppeteer from 'puppeteer';
 import { readCsf, CsfFile, CsfOptions } from '@storybook/csf-tools';
 
 import { toMatchImageSnapshotExtended } from './jestMatcherExtended';
@@ -80,9 +80,9 @@ const getCustomSnapshotIdentifier = (variant: string, storieId: string) => {
 
 const getLaunchOptions = () => {
   const chromeExecutablePath = process.env.CHROME_EXECUTABLE_PATH;
-  const options: puppeteer.LaunchOptions & puppeteer.BrowserLaunchArgumentOptions & puppeteer.BrowserConnectOptions = {
+  const options: puppeteer.LaunchOptions = {
     headless: true,
-    args: ['--no-sandbox ', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
   };
   if (chromeExecutablePath !== undefined) {
     options.executablePath = chromeExecutablePath;
@@ -93,7 +93,6 @@ const getLaunchOptions = () => {
 const getDefaultScreenshotOptions = (): puppeteer.ScreenshotOptions => {
   const defaultScreenshotOptions: puppeteer.ScreenshotOptions = {
     fullPage: true,
-    encoding: 'base64',
   };
   return defaultScreenshotOptions;
 };
@@ -151,7 +150,7 @@ export const puppeteerImageSnapshotTest = (direction: string, variant: string) =
           await new Promise((resolve) => {
             // eslint-why - need for current impl
             // eslint-disable-next-line no-promise-executor-return
-            return setTimeout(resolve, [storieId.matchAll(/${STORIES_NEEDING_LONGER_TIMEOUTS_REGEX_STR}/g)].length > 0
+            return setTimeout(resolve, storieId.match(new RegExp(STORIES_NEEDING_LONGER_TIMEOUTS_REGEX_STR)) !== null
               ? SNAPSHOT_TIMEOUT_BEFORE * 4
               : SNAPSHOT_TIMEOUT_BEFORE);
           });
@@ -159,7 +158,7 @@ export const puppeteerImageSnapshotTest = (direction: string, variant: string) =
           await new Promise((resolve) => {
             // eslint-why - need for current impl
             // eslint-disable-next-line no-promise-executor-return
-            return setTimeout(resolve, [storieId.matchAll(/${STORIES_NEEDING_LONGER_TIMEOUTS_REGEX_STR}/g)].length > 0
+            return setTimeout(resolve, storieId.match(new RegExp(STORIES_NEEDING_LONGER_TIMEOUTS_REGEX_STR)) !== null
               ? SNAPSHOT_TIMEOUT_AFTER * 2
               : SNAPSHOT_TIMEOUT_AFTER);
           });
