@@ -106,7 +106,21 @@ const StyledList = styled(List)((props) => {
     '.MuiListItem-root': {
       '.MuiListItemButton-root': {
         '.MuiListItemText-root': {
-          marginRight: '8px',
+          '& .MuiListItemText-primary': {
+            maxWidth: '252px',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+          },
+          '& .MuiListItemText-secondary': {
+            maxWidth: '252px',
+            '& span:not(.file-size)': {
+              display: 'inline',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+            },
+          },
           '[data-testid=pending-item-text-primary]': {
             color: theme.palette.text.disabled,
           },
@@ -114,17 +128,9 @@ const StyledList = styled(List)((props) => {
             ...theme.typography.caption,
             '[data-testid=upload-status-label]': {
               color: theme.palette.success.main,
-              display: 'inline',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-              textOverflow: 'ellipsis',
             },
             '[data-testid=failed-status-label]': {
               color: theme.palette.error.main,
-              display: 'inline',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-              textOverflow: 'ellipsis',
             },
             '[data-testid=pending-item-text-secondary]': {
               color: theme.palette.text.disabled,
@@ -137,6 +143,9 @@ const StyledList = styled(List)((props) => {
               },
             },
           },
+        },
+        '&:hover .MuiListItemText-primary, &:hover .MuiListItemText-secondary': {
+          width: 'unset',
         },
         '.MuiListItemIcon-root': {
           '.MuiSvgIcon-root': {
@@ -359,10 +368,6 @@ const ProgressItems = (props: ProgressItemsProps) => {
         return (
           <React.Fragment key={`${queueItem.name}_${queueItem.timestamp}`}>
             <ListItem
-              onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
-              onMouseLeave={() => { return setHover(null); }}
-              onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
-              onBlur={() => { return setFocus(null); }}
               disablePadding
               sx={{ paddingLeft: (queueItem.type !== ProgressItemType.Folder && folderId === queueItem.collectionId) ? '8px' : '0px' }}
               hasBorder
@@ -370,6 +375,10 @@ const ProgressItems = (props: ProgressItemsProps) => {
               <ListItemButton
                 size={ListSizes.SMALL}
                 secondaryActionButton={renderHoverIcon(queueItem)}
+                onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
+                onMouseLeave={() => { return setHover(null); }}
+                onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
+                onBlur={() => { return setFocus(null); }}
               >
                 {queueItem.status === EnumUploadStatus.SUCCESS
                   ? (
@@ -396,14 +405,6 @@ const ProgressItems = (props: ProgressItemsProps) => {
                 {queueItem.status !== EnumUploadStatus.PENDING
                   ? (
                     <ListItemText
-                      sx={{
-                        '& .MuiListItemText-primary': {
-                          maxWidth: '240px',
-                          overflow: 'hidden',
-                          whiteSpace: 'nowrap',
-                          textOverflow: 'ellipsis',
-                        },
-                      }}
                       primary={(
                         <Tooltip title={queueItem.name} tooltipsize="small">
                           <span>{queueItem.name}</span>
@@ -412,12 +413,12 @@ const ProgressItems = (props: ProgressItemsProps) => {
                       secondary={(
                         <>
                           {queueItem.type !== 'folder' && (
-                            <span style={{ marginRight: '8px' }} data-testid="file-size">
+                            <span style={{ marginRight: '8px' }} data-testid="file-size" className="file-size">
                               {`${fileSizeValueConverter(queueItem.size)}`}
                             </span>
                           )}
                           {queueItem.status === EnumUploadStatus.SUCCESS && (
-                            <span data-testid="upload-status-label" style={{ maxWidth: '225px' }}>
+                            <span data-testid="upload-status-label">
                               {!queueItem.message ? translation?.successLabel : queueItem.message}
                             </span>
                           )}
@@ -429,7 +430,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                               <span
                                 data-testid="failed-status-label"
                                 style={{
-                                  maxWidth: showLearnMoreButton ? '165px' : '225px',
+                                  maxWidth: showLearnMoreButton ? '134px' : '252px',
                                 }}
                               >
                                 {!queueItem.message ? translation?.failureLabel : queueItem.message}
@@ -459,12 +460,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                     <ListItemText
                       primary={(
                         <Tooltip title={queueItem.name} tooltipsize="small">
-                          <span
-                            style={{
-                              maxWidth: '285px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis',
-                            }}
-                            data-testid="pending-item-text-primary"
-                          >
+                          <span data-testid="pending-item-text-primary">
                             {queueItem.name}
                           </span>
                         </Tooltip>
@@ -472,7 +468,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                       secondary={(
                         <>
                           {queueItem.type !== 'folder' && (
-                            <span style={{ marginRight: '8px' }} data-testid="pending-item-text-secondary">
+                            <span style={{ marginRight: '8px' }} className="file-size" data-testid="pending-item-text-secondary">
                               {`${fileSizeValueConverter(queueItem.size)}`}
                             </span>
                           )}

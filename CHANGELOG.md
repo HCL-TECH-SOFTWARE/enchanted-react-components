@@ -3,13 +3,38 @@
 ## Unreleased
 
 ### Added
+- Added tooltip to the close button in `Popper` component
 
 ### Fixed
-- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination 
+- Fixed focus handling on open of `DatePicker` popper to address accessibility issues
+- Fixed screen reader accessibility issue with the `label` in `Autocomplete` component
+- Fixed position of UnitSelector button and menu when theme direction is RTL
+- Fixed wrong rendered page number issue in Pagination by removing use of inputPropsValue in `Autocomplete`
+- Fixed cannot type freesolo in MultiSelectChip by removing use of inputPropsValue in `Autocomplete`
+- Fixed missing ellipsis in `DataGridCell` when text in cell is too long by making align-items normal with text-align left
+- Fixed `Button` height to adjust again dynamically to content by removing static max-height value
+- Fixed extra space below the `Popper` title
 
 ### Changed
 
 ### Breaking changes
+
+## 2.1.2
+
+### Fixed
+- Fixed console error by making sure the element exists before using classList
+
+## 2.1.1
+
+### Fixed
+- Fixed flickering issue in the autocomplete component when going to the next or previous page using pagination
+- Fixed accessibility issue with disabled row on `DataGrid` component.
+- Fixed all Textfield based components helpertext position when text direction is RTL. (Textfield based components are DatePicker, Autocomplete, SelectSingle, SelectMultiple)
+- Fixed the issue where the 'Learn more' button shifted when hovering over the list of progress items in the `ProgressBar` component.
+- Fixed the focus issue when there are more than one date picker that are used side by side.
+
+### Changed
+- Changed `fontWeight` to `normal` for `neutral` size in the `Button` component.
 
 ## 2.1.0
 
@@ -20,6 +45,8 @@
 - Added jest-reporter-log-validator to report on max allowed log counts from component rendering during pull request test check
 - Added `ActionButton` component designed to perform a specific action or task when clicked or tapped.
 - Added `neutral` size control in the `Button` component.
+- Added `UnitSelector` component in `prerequisite_components` to provide unit selection capabilities for the `TextField` component.
+- Added examples of `UnitSelector` integration with `TextField` in storybook.
 
 ### Fixed
 - Fixed accessibility issue with `DataGrid` component

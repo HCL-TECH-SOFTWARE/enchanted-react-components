@@ -134,3 +134,5 @@ export { default as FormControlLabel } from './prerequisite_components/FormContr
 export * from './prerequisite_components/FormControlLabel';
 export { default as InputLabelAndAction } from './prerequisite_components/InputLabelAndAction';
 export * from './prerequisite_components/InputLabelAndAction';
+export { default as UnitSelector } from './prerequisite_components/UnitSelector';
+export * from './prerequisite_components/UnitSelector';

@@ -16,6 +16,7 @@ import React, { KeyboardEvent } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { Theme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
+import { v4 as uuid } from 'uuid';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
@@ -187,6 +188,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
 
 const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
   const { customStyles = {} } = props;
+  const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
@@ -208,6 +210,19 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
 
   const formatValue = (value: Dayjs, format: string): string => {
     return value.format(format);
+  };
+  const focusDialog = () => {
+    window.requestAnimationFrame(() => {
+      const dialog = document.querySelector(`#datepickerPopper-${popperId}`) ?? document.querySelector('.MuiPickersPopper-root');
+      if (dialog) {
+        const focusableElement = dialog.querySelector('button, [tabindex]:not([tabindex="-1"])');
+        if (focusableElement instanceof window.HTMLElement) {
+          focusableElement.focus();
+        } else if (dialog instanceof window.HTMLElement) {
+          dialog.focus();
+        }
+      }
+    });
   };
 
   const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
@@ -254,12 +269,14 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       {...props}
       reduceAnimations
       autoFocus={false}
+      onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
       PopperProps={{
         placement: 'bottom-start',
+        id: `datepickerPopper-${popperId}`,
       }}
       componentsProps={{
         actionBar: { actions: ['today'] },

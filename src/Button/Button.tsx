@@ -85,7 +85,6 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
             padding: '6px 12px',
             ...theme.typography.subtitle2,
             textTransform: 'none',
-            maxHeight: '28px',
             boxSizing: 'border-box',
             lineHeight: '17px',
             '&.Mui-focusVisible, &.force-to-focus': {
@@ -155,6 +154,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
               width: 'auto',
               minWidth: 'auto',
               padding: '0 4px',
+              fontWeight: 'normal',
             }),
 
             // neutral + Contained variant styling for primary color
