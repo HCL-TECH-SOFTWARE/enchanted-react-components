@@ -19,6 +19,8 @@ import {
   Icon,
 } from '@mui/material';
 
+import CustomIconSortDescendingAlt from '@hcl-software/enchanted-icons/dist/apps/es/Sort--descending--alt';
+import CustomIconSortAscendingAlt from '@hcl-software/enchanted-icons/dist/apps/es/Sort-ascending--alt';
 import CustomIconAppSwitcher from '@hcl-software/enchanted-icons/dist/apps/es/app-switcher';
 import CustomIconArrows from '@hcl-software/enchanted-icons/dist/apps/es/arrows';
 import CustomIconBackToTop from '@hcl-software/enchanted-icons/dist/apps/es/back-to-top';
@@ -1984,6 +1986,8 @@ const renderGridItem = (iconFileName: string, icon: JSX.Element) => {
 const Template: StoryFn<typeof Icon> = (args) => {
   return (
     <Grid container spacing={4}>
+      {renderGridItem('../apps/es/Sort--descending--alt', <CustomIconSortDescendingAlt {...args} />)}
+      {renderGridItem('../apps/es/Sort-ascending--alt', <CustomIconSortAscendingAlt {...args} />)}
       {renderGridItem('../apps/es/app-switcher', <CustomIconAppSwitcher {...args} />)}
       {renderGridItem('../apps/es/arrows', <CustomIconArrows {...args} />)}
       {renderGridItem('../apps/es/back-to-top', <CustomIconBackToTop {...args} />)}

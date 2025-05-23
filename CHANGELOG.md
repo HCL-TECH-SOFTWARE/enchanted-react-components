@@ -3,6 +3,16 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.2.0
+
+### Added
 - Added tooltip to the close button in `Popper` component
 - Added cancel all button to cancel all ongoing uploads in progress bar
 
@@ -17,8 +27,8 @@
 - Fixed extra space below the `Popper` title
 
 ### Changed
-
-### Breaking changes
+- updated enchanted Icons to 1.4.0
+- updated several npm dependencies
 
 ## 2.1.2
 
