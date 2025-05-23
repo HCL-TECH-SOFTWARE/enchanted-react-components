@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -24,6 +24,7 @@ export enum EnumUploadStatus {
   PROGRESS = 'PROGRESS',
   PENDING = 'PENDING',
   FAILURE = 'FAILURE',
+  CANCELLED = 'CANCELLED',
 }
 
 export enum ProgressItemType {
@@ -62,6 +63,7 @@ export interface ProgressBarLocalization {
   progressLabel: string;
   pendingLabel: string;
   failureLabel: string;
+  cancelledLabel: string;
 }
 
 interface progressBarProps {
@@ -79,6 +81,7 @@ interface progressBarProps {
   learnMoreOnFailure(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>): void;
   pauseButton?: Function;
   translation?: ProgressBarLocalization | undefined;
+  isCancelAllDisabled: boolean;
 }
 
 /**
@@ -90,7 +93,7 @@ const ProgressBar = (props: progressBarProps) => {
   const {
     uploadStatus, totalPercentage, totalSize, totalTime, stringLiterals, uploadedFile,
     retryUploadItem, cancelItem, navigateFolder, cancelAll, learnMoreOnFailure, closeModal,
-    pauseButton, translation,
+    pauseButton, translation, isCancelAllDisabled,
   } = props;
 
   const [expanded, setExpanded] = useState(false);
@@ -116,6 +119,7 @@ const ProgressBar = (props: progressBarProps) => {
         closeModal={closeModal}
         stringLiterals={stringLiterals}
         cancelAll={cancelAll}
+        isCancelAllDisabled={isCancelAllDisabled}
         pauseButton={pauseButton}
         translation={translation}
         expanded={expanded}
@@ -127,6 +131,7 @@ const ProgressBar = (props: progressBarProps) => {
           totalTime={totalTime}
           literals={stringLiterals}
           cancelAll={cancelAll}
+          isCancelAllDisabled={isCancelAllDisabled}
         />
       )}
       {expanded && (

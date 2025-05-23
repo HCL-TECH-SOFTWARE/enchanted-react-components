@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
+import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
@@ -54,6 +55,7 @@ const mockProps = {
     navigateButtonTooltip: 'Navigate',
     retryButtonTooltip: 'Retry',
     errorButtonTooltip: 'Error',
+    cancelledLabel: 'Cancelled.',
   } as ProgressBarLocalization,
 };
 
@@ -251,5 +253,18 @@ describe('ProgressItem Component', () => {
     fireEvent.click(learnMoreButton);
     fireEvent.keyDown(learnMoreButton, { key: 'Enter', code: 'Enter' });
     expect(mockProps.learnMoreOnFailure).toHaveBeenCalled();
+  });
+
+  test('displays cancelled label when item status is CANCELLED', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
+          translation={mockProps.translation}
+        />
+      </ThemeProvider>,
+    );
+    expect(screen.getByText('Cancelled.')).toBeInTheDocument();
   });
 });

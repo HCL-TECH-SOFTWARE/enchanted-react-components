@@ -4,6 +4,7 @@
 
 ### Added
 - Added tooltip to the close button in `Popper` component
+- Added cancel all button to cancel all ongoing uploads in progress bar
 
 ### Fixed
 - Fixed focus handling on open of `DatePicker` popper to address accessibility issues
