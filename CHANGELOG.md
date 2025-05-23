@@ -17,6 +17,8 @@
 - Fixed extra space below the `Popper` title
 
 ### Changed
+- updated enchanted Icons to 1.4.0
+- updated several npm dependencies
 
 ### Breaking changes
 
