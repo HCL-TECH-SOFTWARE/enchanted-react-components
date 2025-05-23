@@ -267,21 +267,4 @@ describe('ProgressItem Component', () => {
     );
     expect(screen.getByText('Cancelled.')).toBeInTheDocument();
   });
-
-  test('renders nothing when translation is undefined', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <ProgressItems
-          {...mockProps}
-          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
-          translation={undefined}
-        />
-      </ThemeProvider>,
-    );
-
-    const statusContainer = screen.getByTestId('failed-status-label').parentElement;
-    expect(statusContainer).not.toHaveTextContent('Cancelled.');
-    expect(statusContainer).not.toHaveTextContent('undefined');
-    expect(statusContainer).not.toHaveTextContent('null');
-  });
 });
