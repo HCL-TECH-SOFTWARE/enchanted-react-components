@@ -108,13 +108,13 @@ const StyledHeader = styled(Box)((props) => {
               outline: `1px solid ${theme.palette.primary.inverse}`,
               borderRadius: '2px',
             },
-            // Added disabled styles here
+            // disabled styles for cancel all button
             '&.Mui-disabled': {
-              color: theme.palette.action.inverse,
-              opacity: 0.7,
-              '&:hover': {
-                backgroundColor: 'inherit',
-              },
+              color: theme.palette.action.disabledInverse,
+              backgroundColor: 'inherit',
+              opacity: 1,
+              pointerEvents: 'none',
+              '&:hover': { backgroundColor: 'inherit' },
             },
           },
         },

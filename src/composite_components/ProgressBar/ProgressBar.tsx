@@ -130,8 +130,6 @@ const ProgressBar = (props: progressBarProps) => {
           totalSize={totalSize}
           totalTime={totalTime}
           literals={stringLiterals}
-          cancelAll={cancelAll}
-          isCancelAllDisabled={isCancelAllDisabled}
         />
       )}
       {expanded && (
