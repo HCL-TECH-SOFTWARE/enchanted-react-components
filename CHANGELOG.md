@@ -25,6 +25,7 @@
 - Fixed missing ellipsis in `DataGridCell` when text in cell is too long by making align-items normal with text-align left
 - Fixed `Button` height to adjust again dynamically to content by removing static max-height value
 - Fixed extra space below the `Popper` title
+- Fixed tab indicator not updating when tabValue changes in `Tabs` component
 
 ### Changed
 - updated enchanted Icons to 1.4.0
