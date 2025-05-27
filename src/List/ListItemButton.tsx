@@ -34,6 +34,7 @@ interface ListItemButtonProps extends MuiListItemButtonProps {
   secondaryActionButton?: ReactNode;
   cascading?: boolean;
   size?: ListSizes;
+  disabledHover?: boolean;
 }
 
 export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -66,6 +67,17 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
           };
 
           return {
+            '&.MuiListItemButton-root.disabled-hover': {
+              pointerEvents: 'none',
+              backgroundColor: 'transparent',
+              '&:hover': {
+                backgroundColor: 'transparent',
+              },
+              '&.Mui-focusVisible': {
+                boxShadow: 'none',
+                backgroundColor: 'transparent',
+              },
+            },
             '&.MuiListItemButton-root': {
               ...listItemStyle,
               '.MuiListItemIcon-root': {
@@ -157,13 +169,15 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
   };
 };
 
-const ListItemButton = ({ ...props }: ListItemButtonProps) => {
+const ListItemButton = ({ disabledHover, ...props }: ListItemButtonProps) => {
   const theme = useTheme();
   const { secondaryActionButton, ...restProps } = props;
 
   return (
     <MuiListItemButton
       {...restProps}
+      className={`${disabledHover ? 'disabled-hover' : ''} ${props.className || ''}`}
+      tabIndex={disabledHover ? -1 : props.tabIndex}
     >
       {props.children}
       {secondaryActionButton
