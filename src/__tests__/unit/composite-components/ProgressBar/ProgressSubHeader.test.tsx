@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Literals } from '../../../../composite_components/ProgressBar/ProgressBar';
 import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../../theme';
@@ -44,17 +44,5 @@ describe('ProgressSubHeader', () => {
     expect(screen.getByText('Total Size:')).not.toBeNull();
     expect(screen.getByText('500MB')).not.toBeNull();
     expect(screen.getByText('5 minutes')).not.toBeNull();
-  });
-
-  it('renders the cancel all button when cancelAll prop is provided', () => {
-    const cancelAllMock = jest.fn();
-    render(
-      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <ProgressSubHeader {...mockProps} cancelAll={cancelAllMock} />
-      </ThemeProvider>,
-    );
-    expect(screen.getByText('Cancel All')).not.toBeNull();
-    fireEvent.click(screen.getByText('Cancel All'));
-    expect(cancelAllMock).toHaveBeenCalled();
   });
 });

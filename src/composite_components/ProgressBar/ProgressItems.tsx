@@ -379,6 +379,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                 onMouseLeave={() => { return setHover(null); }}
                 onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
                 onBlur={() => { return setFocus(null); }}
+                disabledHover={queueItem.status === EnumUploadStatus.CANCELLED}
               >
                 {queueItem.status === EnumUploadStatus.SUCCESS
                   ? (

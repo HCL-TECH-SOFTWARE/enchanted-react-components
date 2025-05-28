@@ -17,14 +17,11 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { Literals } from './ProgressBar';
 import Typography from '../../Typography';
-import Button, { ButtonVariants } from '../../Button';
 
 interface ProgressSubHeaderProps {
   totalSize: string;
   totalTime?: string;
   literals: Literals;
-  cancelAll?: Function;
-  isCancelAllDisabled: boolean;
 }
 
 /**
@@ -34,7 +31,7 @@ interface ProgressSubHeaderProps {
  */
 const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
   const {
-    totalSize, totalTime, literals, cancelAll, isCancelAllDisabled,
+    totalSize, totalTime, literals,
   } = props;
   return (
     <Box
@@ -64,22 +61,6 @@ const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
           </Typography>
         )}
       </Box>
-      {cancelAll && (
-        <Button
-          variant={ButtonVariants.TEXT}
-          onClick={() => { if (cancelAll) cancelAll(); }}
-          disabled={isCancelAllDisabled}
-          sx={(theme) => {
-            return ({
-              background: theme.palette.background.secondary,
-              height: '14px',
-              padding: '0px 3px',
-            });
-          }}
-        >
-          <Typography variant="caption">{literals.cancelAllLabel}</Typography>
-        </Button>
-      )}
     </Box>
   );
 };
