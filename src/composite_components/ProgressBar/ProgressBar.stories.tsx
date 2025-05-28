@@ -231,7 +231,4 @@ InteractiveExample.args = {
   cancelItem: () => {
     // cancel item action
   },
-  cancelAll: () => {
-    // cancel all action
-  },
 };
