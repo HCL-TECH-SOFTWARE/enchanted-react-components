@@ -94,7 +94,7 @@ const Tabs = ({ ...props }: TabsProps) => {
         updateIndicatorStyle(selectedTab);
       }
     }
-  }, [props.orientation]);
+  }, [props.orientation, value]);
 
   useEffect(() => {
     if (props.value !== undefined) {
@@ -105,10 +105,10 @@ const Tabs = ({ ...props }: TabsProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     if (props.onChange) {
       props.onChange(event, newValue);
+      updateIndicatorStyle(event.currentTarget as HTMLElement);
     } else {
       setValue(newValue);
     }
-    updateIndicatorStyle(event.currentTarget as HTMLElement);
   };
 
   return (

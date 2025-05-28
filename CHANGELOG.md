@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed tab indicator not updating when tabValue changes in `Tabs` component
 
 ### Changed
 
