@@ -267,4 +267,20 @@ describe('ProgressItem Component', () => {
     );
     expect(screen.getByText('Cancelled.')).toBeInTheDocument();
   });
+
+  test('cancelled item disables hover and focus', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.CANCELLED }]}
+        />
+      </ThemeProvider>,
+    );
+    const listItemButton = screen.getByText('testFile.jpg').closest('.MuiListItemButton-root');
+    expect(listItemButton).toHaveClass('disabled-hover');
+    expect(listItemButton).toHaveAttribute('tabindex', '-1');
+    fireEvent.mouseOver(listItemButton!);
+    expect(screen.queryByTestId('cancel-upload')).toBeNull();
+  });
 });
