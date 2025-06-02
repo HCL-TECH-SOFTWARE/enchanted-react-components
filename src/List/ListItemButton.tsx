@@ -67,17 +67,6 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
           };
 
           return {
-            '&.MuiListItemButton-root.disabled-hover': {
-              pointerEvents: 'none',
-              backgroundColor: 'transparent',
-              '&:hover': {
-                backgroundColor: 'transparent',
-              },
-              '&.Mui-focusVisible': {
-                boxShadow: 'none',
-                backgroundColor: 'transparent',
-              },
-            },
             '&.MuiListItemButton-root': {
               ...listItemStyle,
               '.MuiListItemIcon-root': {
@@ -107,6 +96,10 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
             },
             '&:hover': {
               backgroundColor: theme.palette.action.hover,
+            },
+            '&.MuiListItemButton-root.disabled-hover': {
+              pointerEvents: 'none',
+              backgroundColor: 'transparent',
             },
             '&.Mui-focusVisible': {
               backgroundColor: 'transparent',
@@ -172,12 +165,13 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
 const ListItemButton = ({ disabledHover, ...props }: ListItemButtonProps) => {
   const theme = useTheme();
   const { secondaryActionButton, ...restProps } = props;
-
+  const composedClassName = [props.className, disabledHover ? 'disabled-hover' : ''].filter(Boolean).join(' ');
   return (
     <MuiListItemButton
       {...restProps}
-      className={`${disabledHover ? 'disabled-hover' : ''} ${props.className || ''}`}
+      className={composedClassName}
       tabIndex={disabledHover ? -1 : props.tabIndex}
+      aria-disabled={disabledHover ? 'true' : undefined}
     >
       {props.children}
       {secondaryActionButton
