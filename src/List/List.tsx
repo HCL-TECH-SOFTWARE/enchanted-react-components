@@ -30,9 +30,11 @@ export const getMuiListThemeOverrides = (): Components<Omit<Theme, 'components'>
   };
 };
 
-const List = ({ ...props }: ListProps) => {
-  return <MuiList {...props} />;
-};
+const List = React.forwardRef<HTMLUListElement, ListProps>(
+  (props: ListProps, ref: React.Ref<HTMLButtonElement>) => {
+    return <MuiList ref={ref} {...props} />;
+  }
+);
 
 List.defaultProps = {
   dense: true,
