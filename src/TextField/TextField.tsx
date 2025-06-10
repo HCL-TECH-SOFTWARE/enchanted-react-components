@@ -164,6 +164,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               '&::placeholder': {
                 fontStyle: 'italic',
                 color: theme.palette.text.secondary,
+                opacity: 9,
               },
             },
             '&.MuiInputBase-fullWidth': {
