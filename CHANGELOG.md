@@ -9,6 +9,7 @@
 - Fixed tab indicator not updating when tabValue changes in `Tabs` component
 - Fixed the CSS for cancelled items in progress bar item list on hover.
 - Fixed ref forwarding support for the List component to allow parent components to access the underlying DOM element.
+- Fixed placeholder color for TextField component when multiline prop is passed.
 
 ### Changed
 
