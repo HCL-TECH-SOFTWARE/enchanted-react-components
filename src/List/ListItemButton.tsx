@@ -98,8 +98,11 @@ export const getMuiListItemButtonThemeOverrides = (): Components<Omit<Theme, 'co
               backgroundColor: theme.palette.action.hover,
             },
             '&.MuiListItemButton-root.disabled-hover': {
-              pointerEvents: 'none',
-              backgroundColor: 'transparent',
+              pointerEvents: 'none !important',
+              backgroundColor: 'transparent !important',
+              '&:hover': {
+                backgroundColor: 'transparent !important',
+              },
             },
             '&.Mui-focusVisible': {
               backgroundColor: 'transparent',
