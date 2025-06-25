@@ -80,16 +80,6 @@ const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
     '&.MuiAccordion-root:before': {
       content: variant === 'outlined' ? '""' : 'none',
     },
-    '&:first-of-type': {
-      borderTopLeftRadius: '4px',
-      borderTopRightRadius: '4px',
-      borderBottomLeftRadius: '0px',
-      borderBottomRightRadius: '0px',
-    },
-    '&:last-of-type': {
-      borderBottomLeftRadius: '4px',
-      borderBottomRightRadius: '4px',
-    },
     '&.MuiAccordion-root .MuiAccordion-root': {
       borderTopRightRadius: '0px',
       borderBottomRightRadius: '0px',
