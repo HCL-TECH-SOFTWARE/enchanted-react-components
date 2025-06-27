@@ -11,6 +11,7 @@
 - Fixed ref forwarding support for the List component to allow parent components to access the underlying DOM element.
 - Fixed placeholder color for TextField component when multiline prop is passed.
 - Fixed Progress bar cancelled item on hover css
+- Fixed Tool tip on Tab hover by forwarding ref
 
 ### Changed
 
