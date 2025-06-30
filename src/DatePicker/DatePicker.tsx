@@ -187,7 +187,8 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
 };
 
 const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
-  const { customStyles = {} } = props;
+  const { customStyles = {}, onChange } = props;
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
   const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
@@ -263,6 +264,19 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     };
     return textFieldProps;
   };
+  const handleClose = () => {
+    setTimeout(() => { // Added the set timeout so that blur can be allied at the last to override anyother styels
+      window.requestAnimationFrame(() => {
+        if (inputRef.current) {
+          inputRef.current.blur();
+        }
+        const activeElement = document.activeElement as HTMLElement;
+        if (activeElement?.closest('.MuiInputBase-root')) {
+          activeElement.blur();
+        }
+      });
+    }, 0);
+  };
 
   return (
     <MuiDatePicker
@@ -271,6 +285,9 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       autoFocus={false}
       onOpen={focusDialog}
       dayOfWeekFormatter={(day) => { return day; }}
+      onClose={handleClose}
+      onChange={(value: TDate | null, keyboardInputValue?: string) => (
+        onChange(value, keyboardInputValue))}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
