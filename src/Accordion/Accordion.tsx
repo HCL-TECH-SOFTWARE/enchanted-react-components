@@ -30,6 +30,7 @@ export type AccordionPropsAll = AccordionProps & {
   hasDivider?: boolean;
   showSecondaryText?: boolean,
   type: AccordionTypes,
+  square?: boolean,
 }
 
 const StyledAccordion = styled(MuiAccordion)<AccordionPropsAll>((props) => {
@@ -130,6 +131,7 @@ const Accordion = ({ ...props }: AccordionPropsAll) => {
       isfocused={isFocused}
       hasNested={props.hasNested}
       hasDivider={props.hasDivider}
+      square={props.square}
     />
   );
 };
@@ -138,6 +140,7 @@ const defaultProps: AccordionPropsAll = {
   type: AccordionTypes.OUTLINED,
   children: '',
   variant: 'nopadding',
+  square: false,
 };
 
 Accordion.defaultProps = defaultProps;

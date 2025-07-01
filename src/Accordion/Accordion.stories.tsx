@@ -84,10 +84,16 @@ export default {
       },
       description: 'Show a hover action button, only for Storybook use',
     },
+    square: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, removes the border radius',
+    },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },
-    square: { table: { disable: true } },
     ref: { table: { disable: true } },
     isfocused: { table: { disable: true } },
   },
