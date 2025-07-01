@@ -13,11 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { styled } from '@mui/material/styles';
 import MuiTab, { TabProps } from '@mui/material/Tab';
 
-const TabStyled = styled(MuiTab)(({ theme, iconPosition }) => {
+const TabStyled = styled(MuiTab)<TabProps>(({ theme, iconPosition }) => {
   return {
     '&.MuiTab-root': {
       ...theme.typography.subtitle2,
@@ -41,7 +41,7 @@ const TabStyled = styled(MuiTab)(({ theme, iconPosition }) => {
   };
 });
 
-const Tab = ({ ...props }: TabProps) => {
+const Tab = forwardRef<HTMLDivElement, TabProps>((props, ref) => {
   return (
     <TabStyled
       {...props}
@@ -50,10 +50,11 @@ const Tab = ({ ...props }: TabProps) => {
         minWidth: 'auto',
         textTransform: 'none',
       }}
+      ref={ref}
       onClick={props.onClick}
     />
   );
-};
+});
 
 Tab.defaultProps = {
 };
