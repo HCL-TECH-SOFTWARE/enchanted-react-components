@@ -414,7 +414,13 @@ const ProgressItems = (props: ProgressItemsProps) => {
                   ? (
                     <ListItemText
                       primary={(
-                        <Tooltip title={queueItem.name} tooltipsize="small">
+                        <Tooltip
+                          title={queueItem.name}
+                          tooltipsize="small"
+                          PopperProps={{
+                            disablePortal: true,
+                          }}
+                        >
                           <span>{queueItem.name}</span>
                         </Tooltip>
                       )}

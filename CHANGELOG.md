@@ -12,6 +12,7 @@
 - Fixed placeholder color for TextField component when multiline prop is passed.
 - Fixed Progress bar cancelled item on hover css
 - Fixed Tooltip on Tab hover by forwarding ref
+- Fixed tooltip overflow on progress bars during hover and scroll of uploaded items.
 - Fixed accordion to apply square prop
 
 ### Changed
