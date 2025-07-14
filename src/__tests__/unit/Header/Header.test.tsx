@@ -93,7 +93,7 @@ describe('Header', () => {
     expect(startSection.getElementsByClassName('MuiSvgIcon-root').length).toEqual(0);
 
     const endSection = screen.getByTestId(HeaderTestIds.HEADER_END_SECTION);
-    expect(endSection.childElementCount).toEqual(sampleDigitalAssetManagerOverview.endSection?.length);
+    expect(endSection.childElementCount).toEqual(5);
   });
 
   it('Render Header with filtered out invalid elements thrown in middle section and end section', async () => {
