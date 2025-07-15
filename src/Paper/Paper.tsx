@@ -17,9 +17,11 @@ import React from 'react';
 import MuiPaper, { PaperProps } from '@mui/material/Paper';
 import { Components, Theme } from '@mui/material';
 
-const Paper = ({ ...props }: PaperProps) => {
-  return <MuiPaper {...props} />;
-};
+const Paper = React.forwardRef<HTMLUListElement, PaperProps> (
+  (props: PaperProps, ref: React.Ref<HTMLUListElement>) => {
+    return <MuiPaper ref={ref} {...props} />;
+  }
+);
 
 declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
