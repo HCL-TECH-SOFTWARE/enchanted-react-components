@@ -34,7 +34,6 @@ import IconFolder from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
 import IconStar from '@hcl-software/enchanted-icons/dist/carbon/es/star';
 import IconGrid from '@hcl-software/enchanted-icons/dist/carbon/es/grid';
 import IconList from '@hcl-software/enchanted-icons/dist/carbon/es/list';
-import { display } from '@mui/system';
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
 import IconButton from '../IconButton';
 import Avatar from '../Avatar';

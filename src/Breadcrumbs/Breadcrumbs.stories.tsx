@@ -83,7 +83,6 @@ export default {
   },
 } as Meta<typeof Breadcrumbs>;
 
-
 const Template: StoryFn<typeof Breadcrumbs> = (args) => {
   return (
     <Breadcrumbs {...args}>
