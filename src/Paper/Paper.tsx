@@ -17,10 +17,10 @@ import React from 'react';
 import MuiPaper, { PaperProps } from '@mui/material/Paper';
 import { Components, Theme } from '@mui/material';
 
-const Paper = React.forwardRef<HTMLUListElement, PaperProps> (
-  (props: PaperProps, ref: React.Ref<HTMLUListElement>) => {
+const Paper = React.forwardRef<HTMLDivElement, PaperProps>(
+  (props: PaperProps, ref: React.Ref<HTMLDivElement>) => {
     return <MuiPaper ref={ref} {...props} />;
-  }
+  },
 );
 
 declare module '@mui/material/Paper' {
