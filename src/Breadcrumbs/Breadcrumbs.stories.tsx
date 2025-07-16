@@ -17,9 +17,20 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import IconInformation from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
+import {
+  Button, Badge, Divider, ListItemIcon, ListItemText, MenuItem, Tooltip,
+} from '@mui/material';
+import IconCheckmark from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
+
+import IconCaretDown from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import IconFilter from '@hcl-software/enchanted-icons/dist/carbon/es/filter';
+import SortAscendingAlt from '@hcl-software/enchanted-icons/dist/apps/es/Sort-ascending--alt';
+import IconButton from '../IconButton';
 import Breadcrumbs from './Breadcrumbs';
 import Link from '../Link';
 import Typography from '../Typography';
+import { ButtonVariants } from '../Button';
+import Menu from '../Menu';
 
 export default {
   title: 'Navigation/Breadcrumbs',
@@ -94,4 +105,145 @@ export const ExampleBreadcrumbs = {
   args: {
     ...Breadcrumbs.defaultProps,
   },
+};
+
+const VisualTestTemplate: StoryFn<typeof Breadcrumbs> = (args) => {
+  const [badgeVisible, setBadgeVisible] = React.useState(false);
+  return (
+    <>
+      <Breadcrumbs {...args}>
+        <Link href="/">Search</Link>
+        <Link href="/material-ui/getting-started/installation/">
+          <IconInformation />
+        </Link>
+        <Link href="/material-ui/getting-started/installation/">
+          <IconInformation sx={{ mr: '4px' }} />
+          Content
+        </Link>
+        <Typography color="text.primary" variant="body2" component="span">Elements</Typography>
+      </Breadcrumbs>
+      &nbsp;
+      <div style={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        gap: '12px',
+      }}
+      >
+        <Breadcrumbs {...args}>
+          <Link href="/">Search</Link>
+          <Link href="/material-ui/getting-started/installation/">
+            <IconInformation />
+          </Link>
+          <Link href="/material-ui/getting-started/installation/">
+            <IconInformation sx={{ mr: '4px' }} />
+            Content
+          </Link>
+          <Typography color="text.primary" variant="body2" component="span">Elements</Typography>
+        </Breadcrumbs>
+        <div>
+
+          <div
+            className="sortButtonContainer"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              flexShrink: 0,
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-evenly',
+            }}
+            >
+              <Typography variant="body2">
+                Sorted by:
+              </Typography>
+              <Button
+                id="sortButton"
+                variant={ButtonVariants.TEXT}
+                endIcon={<IconCaretDown />}
+                sx={{ maxHeight: '28px' }}
+              >
+                Name
+              </Button>
+              <Divider orientation="vertical" color="blue" flexItem />
+              <Tooltip title="Sorted By: Z-A" placement="bottom" arrow>
+                <Button
+                  variant={ButtonVariants.TEXT}
+                  data-testid="testSortOrderIcon"
+                  sx={{ padding: '0px 6px 0px 6px', minWidth: '0px', maxHeight: '28px' }}
+                >
+                  <SortAscendingAlt fontSize="small" />
+                </Button>
+              </Tooltip>
+              <Menu
+                data-testid="testSortDropDownItems"
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                PaperProps={{
+                  sx: {
+                    padding: '0px',
+                  },
+                }}
+                open={false}
+                size=""
+              >
+                <MenuItem
+                  data-testid="testSortDate"
+                  selected
+                >
+                  <ListItemIcon><IconCheckmark fontSize="small" sx={{ visibility: 'hidden' }} /></ListItemIcon>
+                  <ListItemText primary="Date" />
+                </MenuItem>
+              </Menu>
+              <div
+                className="filterButtonWrapper"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Tooltip title="Filter Assets">
+                  <span data-testid="testFilterButtonContainer">
+                    <Badge
+                      color="primary"
+                      variant="dot"
+                      invisible={!badgeVisible}
+                      overlap="circular"
+                      data-testid="testFilterBadge"
+                      sx={{
+                        '& .MuiBadge-dot': { top: '5%', right: '5%' },
+                      }}
+                    >
+                      <IconButton
+                        value="filter"
+                        sx={{ height: '26px', width: '26px' }}
+                        disabled={false}
+                        data-testid="testFilterButton"
+                        onClick={() => { return setBadgeVisible((prev) => { return !prev; }); }}
+                      >
+                        <IconFilter />
+                      </IconButton>
+                    </Badge>
+                  </span>
+                </Tooltip>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const VisualTest = VisualTestTemplate.bind({});
+VisualTest.parameters = {
+  options: { showPanel: false },
+};
+VisualTest.args = {
 };

@@ -28,6 +28,7 @@ import {
 } from '../../../theme';
 import Link from '../../../Link';
 import { ColorNames, Colors } from '../../../colors';
+import BadgeFilterButton from '../../../Breadcrumbs/BadgeFilterButton';
 
 afterEach(cleanup);
 
@@ -74,5 +75,30 @@ describe('Breadcrumbs', () => {
       expect(style.border).toBe(`1px solid ${(ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07))).toLowerCase()}`);
       expect(style.borderRadius).toBe('2px');
     });
+  });
+});
+
+describe('BadgeFilterButton', () => {
+  it('toggles badge dot visibility when filter button is clicked', async () => {
+    const { container } = render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <BadgeFilterButton />
+      </ThemeProvider>,
+    );
+    const filterButton = screen.getByTestId('testFilterButton');
+
+    const badgeDot = container.querySelector('.MuiBadge-dot');
+
+    // Initially invisible
+    expect(badgeDot).not.toBeNull();
+    expect(badgeDot && badgeDot.classList.contains('MuiBadge-invisible')).toBe(true);
+
+    // Click to show badge
+    await userEvent.click(filterButton);
+    expect(badgeDot && badgeDot.classList.contains('MuiBadge-invisible')).toBe(false);
+
+    // Click again to hide badge
+    await userEvent.click(filterButton);
+    expect(badgeDot && badgeDot.classList.contains('MuiBadge-invisible')).toBe(true);
   });
 });

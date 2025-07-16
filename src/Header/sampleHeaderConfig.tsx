@@ -13,7 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { InputAdornment, FormControl } from '@mui/material';
+import {
+  InputAdornment, FormControl, ToggleButton, ToggleButtonGroup, Tooltip,
+} from '@mui/material';
 import IconCrop from '@hcl-software/enchanted-icons/dist/carbon/es/crop';
 import IconRotateCounterClockwise from '@hcl-software/enchanted-icons/dist/carbon/es/rotate--counterclockwise';
 import IconRotateClockwise from '@hcl-software/enchanted-icons/dist/carbon/es/rotate--clockwise';
@@ -25,10 +27,13 @@ import IconFilter from '@hcl-software/enchanted-icons/dist/carbon/es/filter';
 import IconSettings from '@hcl-software/enchanted-icons/dist/carbon/es/settings';
 import IconColumn from '@hcl-software/enchanted-icons/dist/carbon/es/column';
 import IconUndo from '@hcl-software/enchanted-icons/dist/carbon/es/undo';
+import IconFolderAdd from '@hcl-software/enchanted-icons/dist/carbon/es/folder--add';
 import IconRedo from '@hcl-software/enchanted-icons/dist/carbon/es/redo';
 import IconDocumentTasks from '@hcl-software/enchanted-icons/dist/carbon/es/document--tasks';
 import IconFolder from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
 import IconStar from '@hcl-software/enchanted-icons/dist/carbon/es/star';
+import IconGrid from '@hcl-software/enchanted-icons/dist/carbon/es/grid';
+import IconList from '@hcl-software/enchanted-icons/dist/carbon/es/list';
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
 import IconButton from '../IconButton';
 import Avatar from '../Avatar';
@@ -135,27 +140,72 @@ export const sampleDigitalAssetManagerOverview: Partial<HeaderProps> = {
     subtitle: '120 items',
   },
   endSection: [
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>,
-    <TextField
-      hiddenLabel
-      sx={{
-        borderRadius: '2px',
-      }}
-      InputProps={{
-        startAdornment: <InputAdornment position="start"><IconSearch /></InputAdornment>,
-      }}
-      placeholder="Search for assets and collections"
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          /* eslint-why sample handler only */
-          /* eslint-disable-next-line no-console */
-          console.log(e.currentTarget.querySelector('input')?.value);
-        }
-      }}
-    />,
-    <IconButton {...IconButton.defaultProps}><IconFilter /></IconButton>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
-    <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>,
+    <>
+      <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>
+      <Button
+        variant={ButtonVariants.OUTLINED}
+        startIcon={<IconFolderAdd />}
+        data-acceptance-test-id="clickAddNewCollectionBTN"
+        sx={{ whiteSpace: 'nowrap', maxHeight: '28px' }}
+      >
+        Create collection
+      </Button>
+      <TextField
+        hiddenLabel
+        sx={{
+          borderRadius: '2px',
+        }}
+        InputProps={{
+          startAdornment: <InputAdornment position="start"><IconSearch /></InputAdornment>,
+        }}
+        placeholder="Search for assets and collections"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            /* eslint-why sample handler only */
+            /* eslint-disable-next-line no-console */
+            console.log(e.currentTarget.querySelector('input')?.value);
+          }
+        }}
+      />
+      <ToggleButtonGroup
+        data-testid="testSelectedView"
+        size="medium"
+      >
+        <Tooltip title="List view">
+          <ToggleButton
+            id="listView"
+            value="listView"
+            selected
+            aria-pressed
+            data-testid="testListView"
+          >
+            <IconList style={{
+              margin: '3px',
+              padding: '0px',
+              height: '20px',
+              width: '20px',
+            }}
+            />
+          </ToggleButton>
+        </Tooltip>
+        <Tooltip title="Grid view">
+          <ToggleButton
+            id="gridView"
+            value="gridView"
+            data-testid="testGridView"
+          >
+            <IconGrid style={{
+              margin: '3px',
+              padding: '0px',
+              height: '20px',
+              width: '20px',
+            }}
+            />
+          </ToggleButton>
+        </Tooltip>
+      </ToggleButtonGroup>
+      <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>
+    </>,
   ],
 };
 
