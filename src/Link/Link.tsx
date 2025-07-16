@@ -126,7 +126,9 @@ export const getMuiLinkThemeOverrides = (): Components<Omit<Theme, 'components'>
   };
 };
 
-const Link = ({ ...props }: LinkProps) => {
+const Link = ({ hoverBackground, spacing, ...props }: LinkProps) => {
+  // Remove custom props (hoverBackground, spacing) from props passed to MuiLink
+  // to prevent React warnings about non-standard DOM attributes
   return (
     <MuiLink {...props} />
   );

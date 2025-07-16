@@ -123,7 +123,6 @@ const VisualTestTemplate: StoryFn<typeof Breadcrumbs> = (args) => {
         <Typography color="text.primary" variant="body2" component="span">Elements</Typography>
       </Breadcrumbs>
       &nbsp;
-
       <div style={{
         display: 'flex',
         alignItems: 'flex-start',
