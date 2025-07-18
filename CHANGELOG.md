@@ -17,6 +17,7 @@
 - Fixed ref forwarding support for the paper component
 
 ### Changed
+- Upgraded dependency to Enchanted Icons v1.5.0
 
 ### Breaking changes
 
