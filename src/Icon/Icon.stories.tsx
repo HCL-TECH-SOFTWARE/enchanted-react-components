@@ -1428,6 +1428,7 @@ import IconResultDraft from '@hcl-software/enchanted-icons/dist/carbon/es/result
 import IconResultNew from '@hcl-software/enchanted-icons/dist/carbon/es/result--new';
 import IconResultOld from '@hcl-software/enchanted-icons/dist/carbon/es/result--old';
 import IconRetryFailed from '@hcl-software/enchanted-icons/dist/carbon/es/retry--failed';
+import IconReturn from '@hcl-software/enchanted-icons/dist/carbon/es/return';
 import IconReview from '@hcl-software/enchanted-icons/dist/carbon/es/review';
 import IconRewind10 from '@hcl-software/enchanted-icons/dist/carbon/es/rewind--10';
 import IconRewind30 from '@hcl-software/enchanted-icons/dist/carbon/es/rewind--30';
@@ -3395,6 +3396,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../carbon/es/result--new', <IconResultNew {...args} />)}
       {renderGridItem('../carbon/es/result--old', <IconResultOld {...args} />)}
       {renderGridItem('../carbon/es/retry--failed', <IconRetryFailed {...args} />)}
+      {renderGridItem('../carbon/es/return', <IconReturn {...args} />)}
       {renderGridItem('../carbon/es/review', <IconReview {...args} />)}
       {renderGridItem('../carbon/es/rewind--10', <IconRewind10 {...args} />)}
       {renderGridItem('../carbon/es/rewind--30', <IconRewind30 {...args} />)}
