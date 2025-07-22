@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Fixing the focus issue when after selecting a date the focus remains there on the input field and date picker icon.
 
 ### Added
 
