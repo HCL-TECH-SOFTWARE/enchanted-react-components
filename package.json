@@ -44,7 +44,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.11.5",
-    "@hcl-software/enchanted-icons": "^1.4.0",
+    "@hcl-software/enchanted-icons": "^1.5.0",
     "@mui/lab": "5.0.0-alpha.103",
     "@mui/material": "5.10.10",
     "@mui/system": "5.15.13",

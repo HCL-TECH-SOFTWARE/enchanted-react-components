@@ -24,6 +24,9 @@
 - Fixed accordion to apply square prop
 - Fixed ref forwarding support for the paper component
 
+### Changed
+- Upgraded dependency to Enchanted Icons v1.5.0
+
 ## 2.2.0
 
 ### Added
