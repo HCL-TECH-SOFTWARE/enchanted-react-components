@@ -5,6 +5,14 @@
 ### Added
 
 ### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.2.1
+
+### Fixed
 - Fixed the disabled state CSS for the `cancel` All button, removed the `cancel all` button from the ProgressBar subheader, and removed focus from cancelled items in the ProgressBar.
 - Fixed tab indicator not updating when tabValue changes in `Tabs` component
 - Fixed the CSS for cancelled items in progress bar item list on hover.
@@ -18,8 +26,6 @@
 
 ### Changed
 - Upgraded dependency to Enchanted Icons v1.5.0
-
-### Breaking changes
 
 ## 2.2.0
 
