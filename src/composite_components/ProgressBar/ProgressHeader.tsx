@@ -235,6 +235,12 @@ const ProgressHeader = (props: progressHeaderProps) => {
                 if (cancelAll) cancelAll();
               }}
               disabled={isCancelAllDisabled}
+              sx={{
+              whiteSpace: 'nowrap',
+              maxWidth: '121px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              }}
             >
               {stringLiterals.cancelAllLabel}
             </Button>
