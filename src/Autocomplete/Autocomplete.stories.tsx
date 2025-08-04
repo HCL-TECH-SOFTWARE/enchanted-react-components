@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -165,6 +165,15 @@ export default {
       control: false,
       description: 'actionProps of the Action Buttons',
     },
+    iconHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'If `true`, the helper icon will have a gray background on hover.',
+    },
     clearIcon: {
       control: false,
       description: 'clear Icon of the Autocomplete component.',
@@ -254,6 +263,7 @@ export const ExampleAutocomplete = {
     autoFocus: false,
     hiddenLabel: false,
     nonEdit: false,
+    iconHoverEffect: false,
     actionProps: [
       // In component, this will render only max 2 action links at least until Figma design for action link variants is finalized
       {

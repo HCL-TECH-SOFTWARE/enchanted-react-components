@@ -50,6 +50,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
+  iconHoverEffect?: boolean;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -92,6 +93,7 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
     hiddenLabel: props.hiddenLabel,
     isFocus,
     fullWidth: props.fullWidth,
+    iconHoverEffect: props.iconHoverEffect,
   };
   return inputLabelProps;
 };
