@@ -165,7 +165,7 @@ export default {
       control: false,
       description: 'actionProps of the Action Buttons',
     },
-    iconHoverEffect: {
+    enableHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: {
@@ -263,7 +263,7 @@ export const ExampleAutocomplete = {
     autoFocus: false,
     hiddenLabel: false,
     nonEdit: false,
-    iconHoverEffect: false,
+    enableHoverEffect: false,
     actionProps: [
       // In component, this will render only max 2 action links at least until Figma design for action link variants is finalized
       {

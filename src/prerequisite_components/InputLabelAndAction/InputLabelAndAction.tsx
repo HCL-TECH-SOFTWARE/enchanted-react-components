@@ -57,8 +57,8 @@ export const MuiInputHelpIcon = styled(HelpIcon)<{ enableHoverEffect?: boolean }
     fontSize: '16px',
     ...(enableHoverEffect && {
       ':hover': {
-        borderRadius: '4px',
-        backgroundColor: theme.palette.grey[100],
+        borderRadius: '10px',
+        backgroundColor: theme.palette.grey[200],
       },
     }),
   };
