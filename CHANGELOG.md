@@ -23,6 +23,7 @@
 - Fixed tooltip overflow on progress bars during hover and scroll of uploaded items.
 - Fixed accordion to apply square prop
 - Fixed ref forwarding support for the paper component
+- Fixed the tab and added a new prop to enable the hover effect on the help icon
 
 ### Changed
 - Upgraded dependency to Enchanted Icons v1.5.0
