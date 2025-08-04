@@ -37,7 +37,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   label?: ReactNode | string;
   isFocus?: boolean;
   fullWidth?: boolean;
-  iconHoverEffect?: boolean;
+  enableHoverEffect?: boolean;
 }
 
 export const labelFocus = styled('div')((theme) => {
@@ -49,16 +49,16 @@ export const labelFocus = styled('div')((theme) => {
   };
 });
 
-export const MuiInputHelpIcon = styled(HelpIcon)<{ iconHoverEffect?: boolean }>(({ theme, iconHoverEffect }) => {
+export const MuiInputHelpIcon = styled(HelpIcon)<{ enableHoverEffect?: boolean }>(({ theme, enableHoverEffect }) => {
   return {
     ...theme.typography.subtitle2,
     marginLeft: '8px',
     marginBottom: '-4px',
     fontSize: '16px',
-    ...(iconHoverEffect && {
+    ...(enableHoverEffect && {
       ':hover': {
         borderRadius: '4px',
-        backgroundColor: theme.palette.grey[200],
+        backgroundColor: theme.palette.grey[100],
       },
     }),
   };
@@ -118,7 +118,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
           title={props.helperIconTooltip}
           placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
         >
-          <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} iconHoverEffect={props.iconHoverEffect} />
+          <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHoverEffect={props.enableHoverEffect} />
         </Tooltip>
       ) : (
         ''
