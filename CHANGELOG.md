@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+ - Fixed the CSS for ProgressBar and added tooltip on hover for uploaded text in progressBar header.
 
 ### Fixed
 
