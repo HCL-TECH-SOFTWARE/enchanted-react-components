@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed Progress Bar Storybook update
 
 ### Changed
 
