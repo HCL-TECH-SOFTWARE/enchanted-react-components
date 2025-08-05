@@ -49,7 +49,10 @@ export const labelFocus = styled('div')((theme) => {
   };
 });
 
-export const MuiInputHelpIcon = styled(HelpIcon)<{ enableHoverEffect?: boolean }>(({ theme, enableHoverEffect }) => {
+export const MuiInputHelpIcon = styled(HelpIcon, {
+  // Prevent `enableHoverEffect` from being passed to the DOM
+  shouldForwardProp: (prop) => { return prop !== 'enableHoverEffect'; },
+})<{ enableHoverEffect?: boolean }>(({ theme, enableHoverEffect }) => {
   return {
     ...theme.typography.subtitle2,
     marginLeft: '8px',
