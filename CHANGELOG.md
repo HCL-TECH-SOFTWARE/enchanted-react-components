@@ -23,6 +23,7 @@
 - Fixed tooltip overflow on progress bars during hover and scroll of uploaded items.
 - Fixed accordion to apply square prop
 - Fixed ref forwarding support for the paper component
+- Fixed Progress Bar Storybook update
 
 ### Changed
 - Upgraded dependency to Enchanted Icons v1.5.0
