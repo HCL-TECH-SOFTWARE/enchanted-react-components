@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -33,6 +33,7 @@ export interface SelectProps extends MuiSelectProps {
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
+  enableHoverEffect?: boolean;
   helperIconTooltip?: string;
   margin?: 'none' | 'dense';
   color?: 'primary';
@@ -246,6 +247,7 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
+    enableHoverEffect: props.enableHoverEffect,
   };
   return inputLabelProps;
 };
@@ -273,6 +275,7 @@ Select.defaultProps = {
   size: 'medium',
   label: '',
   helperText: '',
+  enableHoverEffect: false,
   helperIconTooltip: '',
   placeholder: '',
   unitLabel: '',

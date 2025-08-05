@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -42,6 +42,7 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
+  enableHoverEffect?: boolean;
   helperIconTooltip?: string;
   margin?: 'none' | 'dense';
   color?: 'primary';
@@ -305,6 +306,7 @@ const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): I
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
     isFocus,
+    enableHoverEffect: props.enableHoverEffect,
   };
   return inputLabelProps;
 };

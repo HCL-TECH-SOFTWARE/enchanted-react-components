@@ -52,6 +52,15 @@ export default {
       description:
         'Tooltip text hovering on ? mark for Autocomplete component',
     },
+    enableHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
+    },
     tooltipPlacement: {
       description: 'Tooltip placement for ? mark for Autocomplete component.',
       options: [
@@ -164,15 +173,6 @@ export default {
     actionProps: {
       control: false,
       description: 'actionProps of the Action Buttons',
-    },
-    enableHoverEffect: {
-      control: 'boolean',
-      table: {
-        defaultValue: {
-          summary: false,
-        },
-      },
-      description: 'If `true`, the helper icon will have a gray background on hover.',
     },
     clearIcon: {
       control: false,

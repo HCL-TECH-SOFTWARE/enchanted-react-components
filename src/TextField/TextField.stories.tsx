@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -71,6 +71,13 @@ export default {
       table: {
         defaultValue: { summary: TextField.defaultProps?.helperText },
       },
+    },
+    enableHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
     },
     helperIconTooltip: {
       description: 'Attribute to set t of the tooltip for the helper icon.',
@@ -174,6 +181,7 @@ export const ExampleTextField = {
     label: 'Label',
     id: 'input-id',
     helperText: 'Some important text',
+    enableHoverEffect: false,
     helperIconTooltip: 'Some information about that component.',
     placeholder: 'Placeholder',
     unitLabel: 'kg',

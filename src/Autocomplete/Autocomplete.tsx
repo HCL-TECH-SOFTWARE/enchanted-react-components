@@ -38,6 +38,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   actionProps?: ActionProps[];
   nonEdit?: boolean;
   helperText?: string;
+  enableHoverEffect?: boolean;
   helperIconTooltip?: string;
   tooltipPlacement?: TooltipPlacement;
   label?: string;
@@ -50,7 +51,6 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
-  enableHoverEffect?: boolean;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
