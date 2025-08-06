@@ -132,31 +132,31 @@ const Panel: React.FC<InspectorPanelProps> = ({
         hideSidebar={hideSidebar}
         isPanelCollapsed={isPanelCollapsed}
       >
-      <>
+        <>
           {tabList && (
-            <>
-              { hideSidebar !== true && (
-                <PanelTabs
-                  tabs={tabList}
-                  handleTabChange={handleTabChange || handleTabChangeDefault}
-                  selectedTabValue={selectedTabValue || selectedTabValueDefault}
-                  isPanelCollapsed={isPanelCollapsed}
-                  togglePanel={togglePanel}
-                  translation={translation}
-                  togglePanelLabel={togglePanelLabel}
-                />
-              )}
-              { !isPanelCollapsed && (
-              <PanelTabContent
-                open={open}
-                tabs={tabList}
-                selectedTabValue={selectedTabValue || selectedTabValueDefault}
-                variant={panelVariant || PanelVariants.WITH_PADDING}
-                toggleClose={rest.toggleClose || undefined}
-                translation={translation}
-              />
-              )}
-            </>
+          <>
+            { hideSidebar !== true && (
+            <PanelTabs
+              tabs={tabList}
+              handleTabChange={handleTabChange || handleTabChangeDefault}
+              selectedTabValue={selectedTabValue || selectedTabValueDefault}
+              isPanelCollapsed={isPanelCollapsed}
+              togglePanel={togglePanel}
+              translation={translation}
+              togglePanelLabel={togglePanelLabel}
+            />
+            )}
+            { !isPanelCollapsed && (
+            <PanelTabContent
+              open={open}
+              tabs={tabList}
+              selectedTabValue={selectedTabValue || selectedTabValueDefault}
+              variant={panelVariant || PanelVariants.WITH_PADDING}
+              toggleClose={rest.toggleClose || undefined}
+              translation={translation}
+            />
+            )}
+          </>
           )}
         </>
       </PanelBody>
