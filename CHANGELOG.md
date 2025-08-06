@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Added the `togglePanelLabel` props in Panel and PanelTabs components
+- Added a new prop - enableHelpHoverEffect - to improve accessibility of help icon in input field components (Textfield, Select Single/Multiple, Autocomplete, MultipleSelectChip, DatePicker).
 
 ### Added
 - Added tooltip on hover for uploaded text in progressBar header.
@@ -27,7 +28,6 @@
 - Fixed tooltip overflow on progress bars during hover and scroll of uploaded items.
 - Fixed accordion to apply square prop
 - Fixed ref forwarding support for the paper component
-- Added a new prop - enableHelpHoverEffect - to improve accessibility of help icon in input field components (Textfield, Select Single/Multiple, Autocomplete, MultipleSelectChip, DatePicker).
 
 ### Changed
 - Upgraded dependency to Enchanted Icons v1.5.0

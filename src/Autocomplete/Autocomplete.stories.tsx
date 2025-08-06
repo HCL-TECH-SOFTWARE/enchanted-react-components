@@ -52,7 +52,7 @@ export default {
       description:
         'Tooltip text hovering on ? mark for Autocomplete component',
     },
-    enableHoverEffect: {
+    enableHelpHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: {
@@ -263,7 +263,7 @@ export const ExampleAutocomplete = {
     autoFocus: false,
     hiddenLabel: false,
     nonEdit: false,
-    enableHoverEffect: false,
+    enableHelpHoverEffect: false,
     actionProps: [
       // In component, this will render only max 2 action links at least until Figma design for action link variants is finalized
       {

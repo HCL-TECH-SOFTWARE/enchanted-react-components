@@ -112,7 +112,7 @@ export default {
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
     },
-    enableHoverEffect: {
+    enableHelpHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -309,7 +309,7 @@ export const ExampleMultipleSelectChip = {
     size: 'medium',
     label: 'Example label',
     helperText: 'Helper text',
-    enableHoverEffect: false,
+    enableHelpHoverEffect: false,
     helperIconTooltip: 'Some information about that component.',
     tooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',

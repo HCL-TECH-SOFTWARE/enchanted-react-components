@@ -31,7 +31,7 @@ const DEFAULT_FORMAT: string = 'MM/DD/YYYY';
 export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
   label?: string;
   helperText?: string;
-  enableHoverEffect?: boolean,
+  enableHelpHoverEffect?: boolean,
   helperIconTooltip?: string;
   format?: string,
   margin?: 'none' | 'dense';
@@ -240,7 +240,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       inputRef: muiTextFieldProps.inputRef,
       label: props.label,
       helperText: props.helperText,
-      enableHoverEffect: props.enableHoverEffect,
+      enableHelpHoverEffect: props.enableHelpHoverEffect,
       helperIconTooltip: props.helperIconTooltip,
       required: props.required,
       disabled: props.disabled,
@@ -350,7 +350,7 @@ DatePicker.defaultProps = {
   size: 'medium',
   label: '',
   helperText: '',
-  enableHoverEffect: false,
+  enableHelpHoverEffect: false,
   helperIconTooltip: '',
   format: DEFAULT_FORMAT,
   unitLabel: '',

@@ -72,7 +72,7 @@ export default {
         defaultValue: { summary: TextField.defaultProps?.helperText },
       },
     },
-    enableHoverEffect: {
+    enableHelpHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
@@ -181,7 +181,7 @@ export const ExampleTextField = {
     label: 'Label',
     id: 'input-id',
     helperText: 'Some important text',
-    enableHoverEffect: false,
+    enableHelpHoverEffect: false,
     helperIconTooltip: 'Some information about that component.',
     placeholder: 'Placeholder',
     unitLabel: 'kg',

@@ -65,10 +65,10 @@ export default {
         defaultValue: { summary: DatePicker.defaultProps.helperText },
       },
     },
-    enableHoverEffect: {
+    enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.enableHoverEffect },
+        defaultValue: { summary: DatePicker.defaultProps.enableHelpHoverEffect },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },

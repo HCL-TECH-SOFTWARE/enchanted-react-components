@@ -33,7 +33,7 @@ export interface SelectProps extends MuiSelectProps {
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
-  enableHoverEffect?: boolean;
+  enableHelpHoverEffect?: boolean;
   helperIconTooltip?: string;
   margin?: 'none' | 'dense';
   color?: 'primary';
@@ -119,7 +119,7 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   delete cleanedProps.helperIconTooltip;
   delete cleanedProps.helperText;
   delete cleanedProps.hiddenLabel;
-  delete cleanedProps.enableHoverEffect;
+  delete cleanedProps.enableHelpHoverEffect;
 
   const handleMouseDown = ((event: React.MouseEvent<HTMLElement>) => {
     if (props.disabled || props.readOnly) {
@@ -248,7 +248,7 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
-    enableHoverEffect: props.enableHoverEffect,
+    enableHelpHoverEffect: props.enableHelpHoverEffect,
   };
   return inputLabelProps;
 };
@@ -276,7 +276,7 @@ Select.defaultProps = {
   size: 'medium',
   label: '',
   helperText: '',
-  enableHoverEffect: false,
+  enableHelpHoverEffect: false,
   helperIconTooltip: '',
   placeholder: '',
   unitLabel: '',

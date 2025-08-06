@@ -42,7 +42,7 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
-  enableHoverEffect?: boolean;
+  enableHelpHoverEffect?: boolean;
   helperIconTooltip?: string;
   margin?: 'none' | 'dense';
   color?: 'primary';
@@ -306,7 +306,7 @@ const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): I
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
     isFocus,
-    enableHoverEffect: props.enableHoverEffect,
+    enableHelpHoverEffect: props.enableHelpHoverEffect,
   };
   return inputLabelProps;
 };
@@ -337,7 +337,7 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
   delete cleanedProps.helperIconTooltip;
   delete cleanedProps.renderNonEditInput;
   delete cleanedProps.endAdornmentAction;
-  delete cleanedProps.enableHoverEffect;
+  delete cleanedProps.enableHelpHoverEffect;
 
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,

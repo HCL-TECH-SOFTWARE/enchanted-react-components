@@ -43,7 +43,7 @@ export default {
     helperText: {
       description: 'The label of the helpertext.',
     },
-    enableHoverEffect: {
+    enableHelpHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: { summary: false },
