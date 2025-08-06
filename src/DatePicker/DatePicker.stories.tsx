@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -64,6 +64,13 @@ export default {
       table: {
         defaultValue: { summary: DatePicker.defaultProps.helperText },
       },
+    },
+    enableHelpHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: DatePicker.defaultProps.enableHelpHoverEffect },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
     },
     helperIconTooltip: {
       description: 'Attribute to set t of the tooltip for the helper icon.',

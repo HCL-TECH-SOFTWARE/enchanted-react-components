@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Added the `togglePanelLabel` props in Panel and PanelTabs components
+- Added a new prop - enableHelpHoverEffect - to improve accessibility of help icon in input field components (Textfield, Select Single/Multiple, Autocomplete, MultipleSelectChip, DatePicker).
 
 ### Added
 - Added tooltip on hover for uploaded text in progressBar header.

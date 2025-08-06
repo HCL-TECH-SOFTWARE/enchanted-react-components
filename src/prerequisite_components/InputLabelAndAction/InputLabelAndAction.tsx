@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -37,6 +37,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   label?: ReactNode | string;
   isFocus?: boolean;
   fullWidth?: boolean;
+  enableHelpHoverEffect?: boolean;
 }
 
 export const labelFocus = styled('div')((theme) => {
@@ -48,12 +49,21 @@ export const labelFocus = styled('div')((theme) => {
   };
 });
 
-export const MuiInputHelpIcon = styled(HelpIcon)((theme) => {
+export const MuiInputHelpIcon = styled(HelpIcon, {
+  // Prevent `enableHelpHoverEffect` from being passed to the DOM
+  shouldForwardProp: (prop) => { return prop !== 'enableHelpHoverEffect'; },
+})<{ enableHelpHoverEffect?: boolean }>(({ theme, enableHelpHoverEffect }) => {
   return {
-    ...theme.theme.typography.subtitle2,
+    ...theme.typography.subtitle2,
     marginLeft: '8px',
     marginBottom: '-4px',
     fontSize: '16px',
+    ...(enableHelpHoverEffect && {
+      ':hover': {
+        borderRadius: '10px',
+        backgroundColor: theme.palette.grey[200],
+      },
+    }),
   };
 });
 
@@ -111,7 +121,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
           title={props.helperIconTooltip}
           placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
         >
-          <MuiInputHelpIcon color="action" fontSize="small" />
+          <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHelpHoverEffect={props.enableHelpHoverEffect} />
         </Tooltip>
       ) : (
         ''

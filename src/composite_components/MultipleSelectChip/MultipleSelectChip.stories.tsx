@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -111,6 +111,13 @@ export default {
     sx: {
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    enableHelpHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
     },
     placeholder: {
       description:
@@ -302,6 +309,7 @@ export const ExampleMultipleSelectChip = {
     size: 'medium',
     label: 'Example label',
     helperText: 'Helper text',
+    enableHelpHoverEffect: false,
     helperIconTooltip: 'Some information about that component.',
     tooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',

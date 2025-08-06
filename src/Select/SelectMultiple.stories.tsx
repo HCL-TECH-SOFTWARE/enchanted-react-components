@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2025 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -42,6 +42,13 @@ export default {
     },
     helperText: {
       description: 'The label of the helpertext.',
+    },
+    enableHelpHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
     },
     placeholder: {
       description: 'The short hint displayed in the input before the user enters a value.',
