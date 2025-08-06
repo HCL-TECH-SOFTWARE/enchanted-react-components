@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Added the `togglePanelLabel` props in Panel and PanelTabs components
 
 ### Added
 
