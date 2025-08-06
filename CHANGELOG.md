@@ -3,9 +3,11 @@
 ## Unreleased
 
 ### Added
+- Added tooltip on hover for uploaded text in progressBar header.
 
 ### Fixed
 - Fixed Progress Bar Storybook update
+- Fixed the CSS for ProgressBarHeader to ensure text displays in a single line.
 
 ### Changed
 
