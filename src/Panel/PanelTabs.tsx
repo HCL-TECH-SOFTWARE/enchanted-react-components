@@ -179,7 +179,7 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
                 onClick={togglePanel}
                 aria-expanded={!isPanelCollapsed}
                 aria-controls="panelContent"
-                aria-label={togglePanelLabel || 'Toggle Panel'}
+                aria-label={togglePanelLabel || 'Toggle panel'}
               >
                 { getArrowIcon(isPanelCollapsed) }
               </IconButton>
