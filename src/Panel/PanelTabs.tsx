@@ -31,6 +31,7 @@ export interface PanelTabsProps {
   isPanelCollapsed?: boolean;
   togglePanel?: (event: React.ChangeEvent<{}>) => void;
   translation: PanelLocalization | undefined;
+  togglePanelLabel?: string;
 }
 
 const PanelTabContainerStyled = styled('div')((props) => {
@@ -108,6 +109,7 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
   isPanelCollapsed,
   togglePanel,
   translation,
+  togglePanelLabel,
 }: PanelTabsProps) => {
   const [activeTab, setActiveTab] = React.useState<number | null>(null);
 
@@ -177,7 +179,7 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
                 onClick={togglePanel}
                 aria-expanded={!isPanelCollapsed}
                 aria-controls="panelContent"
-                aria-label="Toggle panel"
+                aria-label={togglePanelLabel || 'Toggle Panel'}
               >
                 { getArrowIcon(isPanelCollapsed) }
               </IconButton>
