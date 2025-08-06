@@ -4,9 +4,11 @@
 - Added the `togglePanelLabel` props in Panel and PanelTabs components
 
 ### Added
+- Added tooltip on hover for uploaded text in progressBar header.
 
 ### Fixed
 - Fixed Progress Bar Storybook update
+- Fixed the CSS for ProgressBarHeader to ensure text displays in a single line.
 
 ### Changed
 
