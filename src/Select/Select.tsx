@@ -119,6 +119,7 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   delete cleanedProps.helperIconTooltip;
   delete cleanedProps.helperText;
   delete cleanedProps.hiddenLabel;
+  delete cleanedProps.enableHoverEffect;
 
   const handleMouseDown = ((event: React.MouseEvent<HTMLElement>) => {
     if (props.disabled || props.readOnly) {

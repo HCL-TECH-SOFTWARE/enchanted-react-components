@@ -102,7 +102,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
   ({ ...props }: AutocompleteProps<T, Multiple, DisableClearable, FreeSolo>) => {
   const {
-    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, renderNonEditInput, endAdornmentAction, ...rest // clean up rest of props for MuiAutocomplete tag
+    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, enableHoverEffect, renderNonEditInput, endAdornmentAction, ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
   // prevents DOM warning for error=boolean
@@ -159,6 +159,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               renderNonEditInput,
               endAdornmentAction,
               value: props.value,
+              enableHoverEffect,
             };
             const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
             textFieldArgs.inputProps = {

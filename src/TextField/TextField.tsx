@@ -337,6 +337,8 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
   delete cleanedProps.helperIconTooltip;
   delete cleanedProps.renderNonEditInput;
   delete cleanedProps.endAdornmentAction;
+  delete cleanedProps.enableHoverEffect;
+
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,
     variant: 'outlined',
