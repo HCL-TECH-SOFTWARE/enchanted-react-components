@@ -58,6 +58,7 @@ export interface InspectorPanelProps extends DrawerProps{
   togglePanel?: (event: React.ChangeEvent<{}>) => void;
   isPanelCollapsed?: boolean;
   translation?: PanelLocalization | undefined;
+  togglePanelLabel?: string;
 }
 
 export interface PanelProps {
@@ -112,6 +113,7 @@ const Panel: React.FC<InspectorPanelProps> = ({
   togglePanel,
   isPanelCollapsed,
   translation,
+  togglePanelLabel,
   ...rest
 }: InspectorPanelProps) => {
   const [selectedTabValueDefault, setSelelectedTabValueDefault] = React.useState(0);
@@ -141,6 +143,7 @@ const Panel: React.FC<InspectorPanelProps> = ({
                   isPanelCollapsed={isPanelCollapsed}
                   togglePanel={togglePanel}
                   translation={translation}
+                  togglePanelLabel={togglePanelLabel}
                 />
               )}
               { !isPanelCollapsed && (
