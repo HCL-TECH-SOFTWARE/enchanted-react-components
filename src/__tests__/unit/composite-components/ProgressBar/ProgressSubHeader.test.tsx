@@ -54,7 +54,7 @@ describe('ProgressSubHeader', () => {
     );
     const totalSizeElement = screen.getByText('500MB');
     const totalTimeElement = screen.getByText('5 minutes');
-    
+
     expect(window.getComputedStyle(totalSizeElement).marginLeft).toBe('4px');
     expect(window.getComputedStyle(totalTimeElement).marginLeft).toBe('8px');
   });
@@ -67,7 +67,7 @@ describe('ProgressSubHeader', () => {
     );
     const totalSizeElement = screen.getByText('500MB');
     const totalTimeElement = screen.getByText('5 minutes');
-    
+
     expect(window.getComputedStyle(totalSizeElement).marginRight).toBe('4px');
     expect(window.getComputedStyle(totalTimeElement).marginRight).toBe('8px');
   });
