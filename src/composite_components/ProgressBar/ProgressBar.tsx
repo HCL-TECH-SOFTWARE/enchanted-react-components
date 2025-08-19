@@ -15,6 +15,7 @@
 
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ProgressHeader from './ProgressHeader';
 import ProgressItems from './ProgressItems';
 import ProgressSubHeader from './ProgressSubHeader';
@@ -97,6 +98,7 @@ const ProgressBar = (props: progressBarProps) => {
   } = props;
 
   const [expanded, setExpanded] = useState(false);
+  const theme = useTheme();
 
   /**
    * Toggles the state of the progress bar.
@@ -141,6 +143,7 @@ const ProgressBar = (props: progressBarProps) => {
           literals={stringLiterals}
           learnMoreOnFailure={learnMoreOnFailure}
           translation={translation}
+          direction={theme.direction}
         />
       )}
     </Box>

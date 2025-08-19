@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { Literals } from './ProgressBar';
 import Typography from '../../Typography';
 
@@ -33,9 +33,11 @@ const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
   const {
     totalSize, totalTime, literals,
   } = props;
+  const theme = useTheme();
+  const isRTL = theme.direction === 'rtl';
   return (
     <Box
-      sx={(theme) => {
+      sx={() => {
         return ({
           padding: '5px 12px',
           background: theme.palette.background.secondary,
@@ -52,11 +54,11 @@ const ProgressSubHeader = (props: ProgressSubHeaderProps) => {
         <Typography variant="caption" color="text.secondary">
           {`${literals.totalSizeLabel}:`}
         </Typography>
-        <Typography variant="caption" color="text.primary" style={{ marginLeft: '4px' }}>
+        <Typography variant="caption" color="text.primary" style={{ [isRTL ? 'marginRight' : 'marginLeft']: '4px' }}>
           {totalSize}
         </Typography>
         {totalTime && (
-          <Typography variant="caption" color="text.primary" style={{ marginLeft: '8px' }}>
+          <Typography variant="caption" color="text.primary" style={{ [isRTL ? 'marginRight' : 'marginLeft']: '8px' }}>
             {totalTime}
           </Typography>
         )}

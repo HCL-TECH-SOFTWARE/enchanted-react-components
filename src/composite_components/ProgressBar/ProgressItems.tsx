@@ -89,6 +89,7 @@ interface ProgressItemsProps {
   literals: Literals;
   learnMoreOnFailure(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>): void;
   translation?: ProgressBarLocalization | undefined;
+  direction?: 'ltr' | 'rtl';
 }
 
 /**
@@ -181,8 +182,9 @@ const StyledList = styled(List)((props) => {
  */
 const ProgressItems = (props: ProgressItemsProps) => {
   const {
-    file, retryUploadItem, cancelItem, navigateFolder, literals, learnMoreOnFailure, translation,
+    file, retryUploadItem, cancelItem, navigateFolder, literals, learnMoreOnFailure, translation, direction = 'ltr',
   } = props;
+  const isRTL = direction === 'rtl';
   const [hover, setHover] = useState<string | null>(null);
   const [focus, setFocus] = useState<string | null>(null);
 
@@ -217,7 +219,21 @@ const ProgressItems = (props: ProgressItemsProps) => {
   const renderHoverIcon = (queueItem: IProgressState): React.ReactNode => {
     if (queueItem.status === EnumUploadStatus.SUCCESS && navigateFolder) {
       return (
-        <Tooltip title={translation?.navigateButtonTooltip} tooltipsize="small">
+        <Tooltip
+          title={translation?.navigateButtonTooltip}
+          tooltipsize="small"
+          placement="left"
+          PopperProps={{
+            disablePortal: true,
+          }}
+          componentsProps={{
+            tooltip: {
+              sx: {
+                whiteSpace: 'nowrap',
+              },
+            },
+          }}
+        >
           <IconButton
             data-testid="navigate-folder"
             onClick={() => { return navigateFolder(queueItem); }}
@@ -233,7 +249,21 @@ const ProgressItems = (props: ProgressItemsProps) => {
       );
     } if ((queueItem.status === EnumUploadStatus.PROGRESS || queueItem.status === EnumUploadStatus.PENDING) && cancelItem) {
       return (
-        <Tooltip title={translation?.errorButtonTooltip} tooltipsize="small">
+        <Tooltip
+          title={translation?.errorButtonTooltip}
+          tooltipsize="small"
+          placement="left"
+          PopperProps={{
+            disablePortal: true,
+          }}
+          componentsProps={{
+            tooltip: {
+              sx: {
+                whiteSpace: 'nowrap',
+              },
+            },
+          }}
+        >
           <IconButton
             data-testid="cancel-upload"
             onClick={() => { return cancelItem(queueItem); }}
@@ -249,7 +279,21 @@ const ProgressItems = (props: ProgressItemsProps) => {
       );
     } if (queueItem.status === EnumUploadStatus.FAILURE && retryUploadItem) {
       return (
-        <Tooltip title={translation?.retryButtonTooltip} tooltipsize="small">
+        <Tooltip
+          title={translation?.retryButtonTooltip}
+          tooltipsize="small"
+          placement="left"
+          PopperProps={{
+            disablePortal: true,
+          }}
+          componentsProps={{
+            tooltip: {
+              sx: {
+                whiteSpace: 'nowrap',
+              },
+            },
+          }}
+        >
           <IconButton
             data-testid="retry-upload"
             onClick={() => { retryUploadItem(queueItem); }}
@@ -417,8 +461,16 @@ const ProgressItems = (props: ProgressItemsProps) => {
                         <Tooltip
                           title={queueItem.name}
                           tooltipsize="small"
+                          placement="left"
                           PopperProps={{
                             disablePortal: true,
+                          }}
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                whiteSpace: 'nowrap',
+                              },
+                            },
                           }}
                         >
                           <span>{queueItem.name}</span>
@@ -427,7 +479,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                       secondary={(
                         <>
                           {queueItem.type !== 'folder' && (
-                            <span style={{ marginRight: '8px' }} data-testid="file-size" className="file-size">
+                            <span style={{ [isRTL ? 'marginLeft' : 'marginRight']: '8px' }} data-testid="file-size" className="file-size">
                               {`${fileSizeValueConverter(queueItem.size)}`}
                             </span>
                           )}
@@ -455,7 +507,21 @@ const ProgressItems = (props: ProgressItemsProps) => {
                             </Tooltip>
                           )}
                           {showLearnMoreButton && (
-                            <Tooltip title={literals.learnMoreLabel} tooltipsize="small">
+                            <Tooltip
+                              title={literals.learnMoreLabel}
+                              tooltipsize="small"
+                              placement="left"
+                              PopperProps={{
+                                disablePortal: true,
+                              }}
+                              componentsProps={{
+                                tooltip: {
+                                  sx: {
+                                    whiteSpace: 'nowrap',
+                                  },
+                                },
+                              }}
+                            >
                               <Button
                                 style={{ marginLeft: '4px', padding: '0px 3px 3px 3px' }}
                                 onClick={learnMoreOnFailure}
@@ -476,7 +542,14 @@ const ProgressItems = (props: ProgressItemsProps) => {
                   ) : (
                     <ListItemText
                       primary={(
-                        <Tooltip title={queueItem.name} tooltipsize="small">
+                        <Tooltip
+                          title={queueItem.name}
+                          tooltipsize="small"
+                          placement="left"
+                          PopperProps={{
+                            disablePortal: true,
+                          }}
+                        >
                           <span data-testid="pending-item-text-primary">
                             {queueItem.name}
                           </span>
@@ -485,7 +558,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
                       secondary={(
                         <>
                           {queueItem.type !== 'folder' && (
-                            <span style={{ marginRight: '8px' }} className="file-size" data-testid="pending-item-text-secondary">
+                            <span style={{ [isRTL ? 'marginLeft' : 'marginRight']: '8px' }} className="file-size" data-testid="pending-item-text-secondary">
                               {`${fileSizeValueConverter(queueItem.size)}`}
                             </span>
                           )}
@@ -499,7 +572,8 @@ const ProgressItems = (props: ProgressItemsProps) => {
                   style={
                     renderHoverIcon(queueItem) !== null
                     && (hover === `${queueItem.name}_${queueItem.timestamp}` || focus === `${queueItem.name}_${queueItem.timestamp}`)
-                      ? { marginRight: '28px' } : { marginRight: '0px' }
+                      ? { [isRTL ? 'marginLeft' : 'marginRight']: '28px' }
+                      : { [isRTL ? 'marginLeft' : 'marginRight']: '0px' }
                   }
                 >
                   {renderProgressIndicator(queueItem.status, queueItem.progress)}

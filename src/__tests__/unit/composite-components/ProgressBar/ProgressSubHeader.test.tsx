@@ -45,4 +45,30 @@ describe('ProgressSubHeader', () => {
     expect(screen.getByText('500MB')).not.toBeNull();
     expect(screen.getByText('5 minutes')).not.toBeNull();
   });
+
+  it('applies correct margins in LTR mode', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressSubHeader {...mockProps} />
+      </ThemeProvider>,
+    );
+    const totalSizeElement = screen.getByText('500MB');
+    const totalTimeElement = screen.getByText('5 minutes');
+    
+    expect(window.getComputedStyle(totalSizeElement).marginLeft).toBe('4px');
+    expect(window.getComputedStyle(totalTimeElement).marginLeft).toBe('8px');
+  });
+
+  it('applies correct margins in RTL mode', () => {
+    render(
+      <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.RTL, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+        <ProgressSubHeader {...mockProps} />
+      </ThemeProvider>,
+    );
+    const totalSizeElement = screen.getByText('500MB');
+    const totalTimeElement = screen.getByText('5 minutes');
+    
+    expect(window.getComputedStyle(totalSizeElement).marginRight).toBe('4px');
+    expect(window.getComputedStyle(totalTimeElement).marginRight).toBe('8px');
+  });
 });
