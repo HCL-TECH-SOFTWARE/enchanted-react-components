@@ -159,7 +159,7 @@ InteractiveExample.args = {
       name: 'Folder',
       collectionId: '',
       status: 'FAILURE',
-      message: 'Collection name already exists in this location. Please use a different folder name.',
+      message: 'Collection name already exists. Please enter unique collection name.',
       type: 'folder',
       timestamp: 1588996092645,
     },

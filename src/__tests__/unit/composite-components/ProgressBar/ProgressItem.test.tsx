@@ -283,4 +283,22 @@ describe('ProgressItem Component', () => {
     fireEvent.mouseOver(listItemButton!);
     expect(screen.queryByTestId('cancel-upload')).toBeNull();
   });
+
+  test('renders progress indicator with correct margin in RTL mode', () => {
+    const rtlTheme = createEnchantedTheme(ThemeDirectionType.RTL, ThemeModeType.LIGHT_NEUTRAL_GREY);
+    render(
+      <ThemeProvider theme={rtlTheme}>
+        <ProgressItems
+          {...mockProps}
+          direction="rtl"
+        />
+      </ThemeProvider>,
+    );
+
+    // Hover over the item to trigger the hover icon
+    fireEvent.mouseOver(screen.getByText('testFile.jpg'));
+
+    const progressIndicator = screen.getByTestId('progress-indicator');
+    expect(window.getComputedStyle(progressIndicator).marginLeft).toBe('28px');
+  });
 });
