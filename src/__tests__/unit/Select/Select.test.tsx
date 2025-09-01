@@ -15,9 +15,13 @@
 
 import React from 'react';
 import {
-  configure, cleanup, render, screen,
+  configure,
+  cleanup,
+  render,
+  screen,
   fireEvent,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Select from '../../../Select/Select';
@@ -158,5 +162,47 @@ describe('Select', () => {
       </Select>,
     );
     expect(screen.getByText(exampleValue)).not.toBeNull();
+  });
+
+  it('Opens menu when "click" on input', async () => {
+    const label = 'My Label';
+    const option1Txt = 'Option 1';
+    const { getByRole } = render(
+      <Select label={label}>
+        <MenuItem value="1">{option1Txt}</MenuItem>
+        <MenuItem value="2">Option 2</MenuItem>
+        <MenuItem value="3">Option 3</MenuItem>
+      </Select>,
+    );
+    // verify menu not present
+    expect(screen.queryByRole('listbox')).toBeNull();
+    const select = getByRole('button', { name: /My Label\s*/ });
+    const user = userEvent.setup();
+    await user.click(select);
+    expect(screen.queryByRole('listbox')).not.toBeNull();
+  });
+
+  it('Opens menu when "click" on down arrow', async () => {
+    const label = 'My Label';
+    const option1Txt = 'Option 1';
+    const { container } = render(
+      <Select label={label}>
+        <MenuItem value="1">{option1Txt}</MenuItem>
+        <MenuItem value="2">Option 2</MenuItem>
+        <MenuItem value="3">Option 3</MenuItem>
+      </Select>,
+    );
+    // verify menu not present
+    expect(screen.queryByRole('listbox')).toBeNull();
+
+    const downArrow = container.querySelector('.MuiInputAdornment-root');
+    if (downArrow) {
+      const user = userEvent.setup();
+      await user.click(downArrow);
+    } else {
+      throw new Error('cannot find down arrow');
+    }
+    // now menu should be visible
+    expect(screen.queryByRole('listbox')).not.toBeNull();
   });
 });

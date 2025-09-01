@@ -22,7 +22,7 @@ import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
 
 export default {
-  title: 'Inputs/SelectMultiple',
+  title: 'Inputs/Select (Multiple)',
   component: Select,
   argTypes: {
     multiple: {

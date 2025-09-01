@@ -113,6 +113,7 @@ const InputAdornment = styled(MuiInputAdornment)(({ theme }) => {
 
 const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   const cleanedProps = { ...props };
+  cleanedProps.id += '-select';
   delete cleanedProps.actionProps;
   delete cleanedProps.nonEdit;
   delete cleanedProps.unitLabel;
@@ -128,7 +129,9 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
 
     // This is workaround solution to catch the mousedown on the InputAdornment section
     // and to simulate a mousedown event on the select section to open the menu component
-    const element = document.getElementById(props.id || '');
+    // Try to get the sibling node with this id (just in case somebody has accidentally used the same id elsewhere)
+    const parent = (event.target as HTMLElement).parentElement;
+    const element = parent?.querySelector(`:scope [id='${props.id}-select']`);
     if (element) {
       event.preventDefault();
       const elementPosition = element.getBoundingClientRect();
@@ -205,6 +208,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     <MuiSelect
       {...selectProps}
       aria-label={typeof props.label === 'string' ? props.label : props.placeholder}
+      labelId={`${props.id}-label`}
       inputProps={{ id: props.id }}
       MenuProps={{
         ...selectProps.MenuProps,
@@ -235,6 +239,7 @@ const renderInput = (props: SelectProps, id?: string) => {
 };
 
 const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionProps => {
+  const inputLabelId = `${props.id}-label`;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
     disabled: props.disabled,
@@ -242,7 +247,7 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     required: props.required,
     sx: props.sx,
     htmlFor: props.id,
-    id: props.id,
+    id: inputLabelId,
     label: props.label,
     helperIconTooltip: props.helperIconTooltip,
     actionProps: props.actionProps,
