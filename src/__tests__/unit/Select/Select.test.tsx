@@ -202,7 +202,7 @@ describe('Select', () => {
     if (downArrow) {
       const user = userEvent.setup();
       await act(async () => {
-        await user.click(downArrow);  
+        await user.click(downArrow);
       });
     } else {
       throw new Error('cannot find down arrow');
