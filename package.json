@@ -33,7 +33,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "lint-fix": "eslint --ext .ts,.tsx --fix src",
     "test-storyshots": "jest --collectCoverage=false --testPathPattern \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --testTimeout=15000 --reporters=jest-reporter-log-validator --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --runInBand --testTimeout=15000 --reporters=jest-reporter-log-validator --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "test-unit": "cross-env CI=true jest --config ./jest.config.js --runInBand --testTimeout=10000 --testPathPattern \"__tests__/unit\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
