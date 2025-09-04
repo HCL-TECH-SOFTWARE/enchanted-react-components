@@ -15,9 +15,14 @@
 
 import React from 'react';
 import {
-  configure, cleanup, render, screen,
+  act,
+  configure,
+  cleanup,
+  render,
+  screen,
   fireEvent,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Select from '../../../Select/Select';
@@ -30,7 +35,7 @@ const placeholder = 'Placeholder test message';
 describe('Select', () => {
   it('Render with placeholder messages', () => {
     render(
-      <Select value="none">
+      <Select value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -45,7 +50,7 @@ describe('Select', () => {
   it('Render with label messages', () => {
     const label = 'Label test message';
     render(
-      <Select label={label} value="none">
+      <Select label={label} value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -59,7 +64,7 @@ describe('Select', () => {
   it('Render with required start', () => {
     const requiredStar = '*';
     render(
-      <Select required value="none">
+      <Select required value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -73,7 +78,7 @@ describe('Select', () => {
   it('Render with helper text messages', () => {
     const helperText = 'Helper test message';
     render(
-      <Select helperText={helperText} value="none">
+      <Select helperText={helperText} value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -91,7 +96,7 @@ describe('Select', () => {
 
     render(
       <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
-        <Select actionProps={[{ href: actionHref, label: actionLabel }]} value="none">
+        <Select actionProps={[{ href: actionHref, label: actionLabel }]} value="none" id="select">
           <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
           <MenuItem value="10">Ten</MenuItem>
           <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -108,7 +113,7 @@ describe('Select', () => {
   it('Render with a unit label', () => {
     const unitLabel = 'kg';
     render(
-      <Select unitLabel={unitLabel} value="none">
+      <Select unitLabel={unitLabel} value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -122,7 +127,7 @@ describe('Select', () => {
   it('Render with error state', () => {
     configure({ testIdAttribute: 'data-mui-test' });
     const { container } = render(
-      <Select error value="none">
+      <Select error value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -136,7 +141,7 @@ describe('Select', () => {
 
   it('Render with disabled state', () => {
     const { container } = render(
-      <Select disabled value="none">
+      <Select disabled value="none" id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value="10">Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -150,7 +155,7 @@ describe('Select', () => {
   it('Render with non edit state', () => {
     const exampleValue = '10';
     render(
-      <Select nonEdit value={exampleValue}>
+      <Select nonEdit value={exampleValue} id="select">
         <MenuItem value="none" disabled><em>{placeholder}</em></MenuItem>
         <MenuItem value={exampleValue}>Ten</MenuItem>
         <MenuItem value="20">Twenty - long text, long text, long text</MenuItem>
@@ -158,5 +163,51 @@ describe('Select', () => {
       </Select>,
     );
     expect(screen.getByText(exampleValue)).not.toBeNull();
+  });
+
+  it('Opens menu when "click" on input', async () => {
+    const label = 'My Label';
+    const option1Txt = 'Option 1';
+    const { getByRole } = render(
+      <Select label={label} value="" id="select">
+        <MenuItem value="1">{option1Txt}</MenuItem>
+        <MenuItem value="2">Option 2</MenuItem>
+        <MenuItem value="3">Option 3</MenuItem>
+      </Select>,
+    );
+    // verify menu not present
+    expect(screen.queryByRole('listbox')).toBeNull();
+    const select = getByRole('button', { name: /My Label\s*/ });
+    const user = userEvent.setup();
+    await act(async () => {
+      await user.click(select);
+    });
+    expect(screen.queryByRole('listbox')).not.toBeNull();
+  });
+
+  it('Opens menu when "click" on down arrow', async () => {
+    const label = 'My Label';
+    const option1Txt = 'Option 1';
+    const { container } = render(
+      <Select label={label} value="" id="select">
+        <MenuItem value="1">{option1Txt}</MenuItem>
+        <MenuItem value="2">Option 2</MenuItem>
+        <MenuItem value="3">Option 3</MenuItem>
+      </Select>,
+    );
+    // verify menu not present
+    expect(screen.queryByRole('listbox')).toBeNull();
+
+    const downArrow = container.querySelector('.MuiInputAdornment-root');
+    if (downArrow) {
+      const user = userEvent.setup();
+      await act(async () => {
+        await user.click(downArrow);
+      });
+    } else {
+      throw new Error('cannot find down arrow');
+    }
+    // now menu should be visible
+    expect(screen.queryByRole('listbox')).not.toBeNull();
   });
 });

@@ -22,7 +22,7 @@ import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
 
 export default {
-  title: 'Inputs/SelectSingle',
+  title: 'Inputs/Select (Single)',
   component: Select,
   argTypes: {
     label: {

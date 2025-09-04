@@ -10,6 +10,7 @@
 ### Fixed
 - Fixed Progress Bar Storybook update
 - Fixed the CSS for ProgressBarHeader to ensure text displays in a single line.
+- Fixed click on Select down arrow to open menu (https://github.com/HCL-TECH-SOFTWARE/enchanted-react-components/issues/302)
 
 ### Changed
 
