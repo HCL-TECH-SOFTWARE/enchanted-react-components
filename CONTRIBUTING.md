@@ -31,3 +31,4 @@ If you want to get involved in a role (including ones we may have missed!) reach
 
 - When ready, complete a PR and submit.
 - Review the requirements for submitting a PR, for example updating documentation.
+- Ensure that your CLA is signed. If the CLA check in the PR fails, you can sign the CLA here: https://cla-assistant.io/HCL-TECH-SOFTWARE/enchanted-react-components
