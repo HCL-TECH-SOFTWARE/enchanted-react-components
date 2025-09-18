@@ -66,7 +66,7 @@
     "@storybook/addon-links": "^7.6.3",
     "@storybook/addon-themes": "^7.6.3",
     "@storybook/react": "^7.6.3",
-    "@storybook/react-webpack5": "^7.6.3",
+    "@storybook/react-webpack5": "^9.1.7",
     "@storybook/testing-library": "0.2.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.2.1",
