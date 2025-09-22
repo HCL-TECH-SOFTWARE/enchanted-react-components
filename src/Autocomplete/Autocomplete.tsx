@@ -15,7 +15,9 @@
 
 import React from 'react';
 import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
-import { Components, Theme } from '@mui/material';
+import {
+  Components, Popper, PopperProps, Theme,
+} from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -49,6 +51,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   clearIcon?: React.ReactNode;
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
+  customPopper?: PopperProps;
   placeholder?: string;
 }
 
@@ -96,11 +99,27 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
   return inputLabelProps;
 };
 
+// CustomPopper component that merges customPopper props and placement
+const CustomPopper = (props: PopperProps & { customPopper?: PopperProps }) => {
+  const { customPopper, ...rest } = props;
+  console.log('CustomPopper props: ', props);
+
+  // Merge style and placement from customPopper if provided
+  const mergedStyle = { ...rest.style, ...(customPopper?.style || {}) };
+  const placement = customPopper?.placement || rest.placement || 'bottom-start';
+  console.log('CustomPopper mergedStyle: ', mergedStyle);
+  console.log('CustomPopper placement: ', placement);
+
+  // eslint-why KeyboardEvent for accessibility does not match expected TablePagination onRowsPerPageChange event type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return <Popper {...(rest as any)} {...(customPopper as PopperProps)} style={mergedStyle} placement={placement} />;
+};
+
 const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
   ({ ...props }: AutocompleteProps<T, Multiple, DisableClearable, FreeSolo>) => {
   const {
-    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, renderNonEditInput, endAdornmentAction, ...rest // clean up rest of props for MuiAutocomplete tag
+    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, renderNonEditInput, endAdornmentAction, customPopper, ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
   // prevents DOM warning for error=boolean
@@ -171,6 +190,13 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               </Tooltip>
             );
           }}
+          {...(Object.keys(customPopper ?? {}).length > 0 && {
+            PopperComponent: (popperProps) => {
+              return (
+                <CustomPopper {...popperProps} customPopper={customPopper} />
+              );
+            },
+          })}
         />
         <MuiFormHelperText id={helperTextId} sx={{ marginTop: nonEdit ? '0px' : '4px' }}>{helperText}</MuiFormHelperText>
       </MuiFormControl>

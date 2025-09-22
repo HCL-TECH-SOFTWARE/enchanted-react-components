@@ -177,6 +177,9 @@ export default {
       control: false,
       description: 'render non editable Input field.',
     },
+    customPopper: {
+      description: 'Custom props for popper component.',
+    },
     ref: {
       control: false,
       description: 'ref of the Autocomplete component.',
