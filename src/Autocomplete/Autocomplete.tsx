@@ -102,13 +102,10 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
 // CustomPopper component that merges customPopper props and placement
 const CustomPopper = (props: PopperProps & { customPopper?: PopperProps }) => {
   const { customPopper, ...rest } = props;
-  console.log('CustomPopper props: ', props);
 
   // Merge style and placement from customPopper if provided
   const mergedStyle = { ...rest.style, ...(customPopper?.style || {}) };
   const placement = customPopper?.placement || rest.placement || 'bottom-start';
-  console.log('CustomPopper mergedStyle: ', mergedStyle);
-  console.log('CustomPopper placement: ', placement);
 
   // eslint-why KeyboardEvent for accessibility does not match expected TablePagination onRowsPerPageChange event type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
