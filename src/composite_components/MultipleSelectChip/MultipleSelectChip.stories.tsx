@@ -194,6 +194,9 @@ export default {
       control: false,
       description: 'Render the component Non Edittable Input',
     },
+    customPopper: {
+      description: 'Custom props for popper component.',
+    },
     ref: {
       control: false,
       description: 'https://mui.com/material-ui/api/chip/',
