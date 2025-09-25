@@ -118,6 +118,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
 
+  //
+  const [isInputInOptions, setIsInputInOptions] = React.useState(false);
+
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
     if (textFieldElement && textFieldElement.scrollWidth > textFieldElement.clientWidth) {
@@ -141,6 +144,17 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           }}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
+          // onInputChange={(_, value: string) => {
+          //   // setIsInputInOptions(isIncluded);
+          //   if (props && props.options) {
+          //     const isIncluded = props.options.some((option) => {
+          //       if (option && typeof option === 'object' && 'label' in option) return option.label === value;
+          //       return false;
+          //     });
+          //     console.log('isIncluded: ', isIncluded);
+          //     setIsInputInOptions(isIncluded);
+          //   }
+          // }}
           renderInput={(params) => {
             const textFieldArgs: TextFieldProps = {
               ...params,
@@ -161,13 +175,35 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               value: props.value,
               enableHelpHoverEffect,
             };
-            const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
+
+            // check if we can used the logic here
+            let isIncluded = false;
+            if (props && props.options) {
+              isIncluded = props.options.some((option) => {
+                if (option && typeof option === 'object' && 'label' in option) return option.label === textfieldRef.current?.value;
+                return false;
+              });
+              // setIsInputInOptions(isIncluded);
+            }
+
+            console.log('isIncluded: ', isIncluded);
+            console.log('type: ', textfieldRef.current?.value);
+
+            const tooltipTitle = (isValueOverFlowing && isIncluded) ? textFieldArgs.value.label || textfieldRef.current?.value : '';
+            // const tooltipTitle = (isValueOverFlowing && (textFieldArgs.value && textFieldArgs.value.label)) ? textFieldArgs.value.label || '' : '';
             textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
               'aria-errormessage': props.error ? helperTextId : undefined,
               'aria-labelledby': props.id ? `${props.id}-label` : undefined,
               ...textFieldArgs.inputProps,
             };
+            // return (
+            //   isInputInOptions ? (
+            //     <Tooltip title={tooltipTitle} tooltipsize="small">
+            //       <TextField {...textFieldArgs} inputRef={textfieldRef} />
+            //     </Tooltip>
+            //   ) : <TextField {...textFieldArgs} inputRef={textfieldRef} />
+            // );
             return (
               <Tooltip title={tooltipTitle} tooltipsize="small">
                 <TextField {...textFieldArgs} inputRef={textfieldRef} />
@@ -233,7 +269,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '58px' : '48px',
+                  marginRight: ownerState.error ? '58px' : '40px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
