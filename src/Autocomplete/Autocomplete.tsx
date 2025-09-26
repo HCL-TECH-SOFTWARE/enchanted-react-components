@@ -148,10 +148,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               error: Boolean(props.error),
               required: props.required,
               fullWidth: props.fullWidth,
-              sx: {
-                ...props.sx,
-                width: 220,
-              },
+              sx: props.sx,
               focused,
               hiddenLabel,
               helperIconTooltip,
@@ -173,7 +170,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                 },
               );
 
-            const tooltipTitle = (isValueOverFlowing && isInputValueInOptions && textFieldArgs.value?.label) ? textFieldArgs.value.label : '';
+            const tooltipTitle = (isValueOverFlowing && (isInputValueInOptions || !isFocus) && textFieldArgs.value?.label) ? textFieldArgs.value.label : '';
 
             textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
