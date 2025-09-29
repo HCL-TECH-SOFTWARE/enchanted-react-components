@@ -244,7 +244,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '66px' : '40px',
+                  marginRight: ownerState.error ? '64px' : '35px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
