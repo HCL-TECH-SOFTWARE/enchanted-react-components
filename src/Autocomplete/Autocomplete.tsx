@@ -117,6 +117,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
+  const [inputWidth, setInputWidth] = React.useState<{parentWidth: number, currValue: string }>({ parentWidth: 0, currValue: '' });
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -126,6 +127,42 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       setIsValueOverFlowing(false);
     }
   }, [props.value]);
+
+  React.useEffect(() => {
+    if (textfieldRef.current) {
+      const parentWidth = textfieldRef.current.parentElement?.clientWidth || 0;
+      setInputWidth({
+        parentWidth,
+        currValue: textfieldRef.current.value,
+      });
+    }
+  }, [props.value, props.clearIcon, props.popupIcon, props.error, props.disabled, props.freeSolo]);
+
+  const getDynamicMarginRight = () => {
+    const { parentWidth, currValue } = inputWidth;
+    const {
+      disabled: isDisabled,
+      error: isError,
+      freeSolo: hasFreeSolo,
+    } = props;
+
+    // the value of 22px is based on the icon size 16px
+    if (parentWidth <= 150) {
+      if (!currValue) return isError ? '22px' : '0px';
+
+      if (isDisabled) {
+        if (isError && !hasFreeSolo) return '44px';
+        if (isError || !hasFreeSolo) return '22px';
+        if (hasFreeSolo) return '22px';
+        return '0px';
+      }
+
+      if (hasFreeSolo) return isError ? '22px' : '0px';
+      return isError ? '66px' : '44px';
+    }
+
+    return isError ? '68px' : '48px';
+  };
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -160,6 +197,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
               enableHelpHoverEffect,
+              inputProps: {
+                ...params.inputProps,
+                style: {
+                  marginRight: getDynamicMarginRight(),
+                },
+              },
             };
 
             const inputValue = textfieldRef.current?.value ?? '';
@@ -244,7 +287,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '64px' : '35px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
