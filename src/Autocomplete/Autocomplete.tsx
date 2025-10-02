@@ -151,10 +151,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       if (!currValue) return isError ? '22px' : '0px';
 
       if (isDisabled) {
-        if (isError && !hasFreeSolo) return '44px';
-        if (isError || !hasFreeSolo) return '22px';
-        if (hasFreeSolo) return '22px';
-        return '0px';
+        return isError ? '22px' : '0px';
       }
 
       if (hasFreeSolo) return isError ? '22px' : '0px';
@@ -284,6 +281,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
+                width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
