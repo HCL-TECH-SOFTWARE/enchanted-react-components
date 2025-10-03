@@ -25,7 +25,6 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
-import { width } from '@mui/system';
 
 /**
  * @typedef AutocompleteProps
