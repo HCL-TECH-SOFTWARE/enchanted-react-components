@@ -25,6 +25,7 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
+import { width } from '@mui/system';
 
 /**
  * @typedef AutocompleteProps
@@ -138,7 +139,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value, props.clearIcon, props.popupIcon, props.error, props.disabled, props.freeSolo]);
 
-  const getDynamicMarginRight = () => {
+  const getDynamicMarginRight = () : string => {
     const { parentWidth, currValue } = inputWidth;
     const {
       disabled: isDisabled,
@@ -146,16 +147,19 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       freeSolo: hasFreeSolo,
     } = props;
 
-    // the value of 22px is based on the icon size 16px
+    // The value of 22px is based on the icon size
     if (parentWidth <= 150) {
-      if (!currValue) return isError ? '22px' : '0px';
+      let value = 0;
 
-      if (isDisabled) {
-        return isError ? '22px' : '0px';
+      if (isError) {
+        value += 22;
       }
 
-      if (hasFreeSolo) return isError ? '22px' : '0px';
-      return isError ? '66px' : '44px';
+      if (!hasFreeSolo) {
+        value += currValue && !isDisabled ? 44 : 22;
+      }
+
+      return `${value}px`;
     }
 
     return isError ? '68px' : '48px';
@@ -281,7 +285,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
-                width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
