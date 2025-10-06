@@ -41,13 +41,9 @@ export const getMuiListItemThemeOverrides = (): Components<Omit<Theme, 'componen
   };
 };
 
-const ListItem = ({ ...props }: ListItemProps) => {
-  return (
-    <MuiListItem
-      {...props}
-    />
-  );
-};
+const ListItem = React.forwardRef<HTMLLIElement, ListItemProps>((props, ref) => {
+  return <MuiListItem ref={ref} {...props} />;
+});
 
 ListItem.defaultProps = {
   hasBorder: false,
