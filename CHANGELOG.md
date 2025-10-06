@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Fixed the tooltip in Autocomplete and adjusted the marginRight (px) to prevent truncation in small width.
 
 ### Added
 
@@ -22,7 +23,6 @@
 - Fixed Progress Bar Storybook update
 - Fixed the CSS for ProgressBarHeader to ensure text displays in a single line.
 - Fixed click on Select down arrow to open menu (https://github.com/HCL-TECH-SOFTWARE/enchanted-react-components/issues/302)
-- Fixed the tooltip in Autocomplete and adjusted the marginRight (px) to prevent truncation in small width.
 
 ### Changed
 

@@ -147,21 +147,25 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     } = props;
 
     // The value of 22px is based on the icon size
-    if (parentWidth <= 150) {
-      let value = 0;
+    let value = 0;
 
-      if (isError) {
-        value += 22;
+    // The two icon
+    if (!hasFreeSolo) {
+      if (isDisabled) {
+        value += (parentWidth <= 150 ? 0 : 22); // caret only
+      } else {
+        // eslint-why - using nested ternary to reduce unnecessary code blocks
+        // eslint-disable-next-line no-nested-ternary
+        value += currValue ? 44 : parentWidth > 150 ? 22 : 0; // both icons or caret only
       }
-
-      if (!hasFreeSolo) {
-        value += currValue && !isDisabled ? 44 : 22;
-      }
-
-      return `${value}px`;
     }
 
-    return isError ? '68px' : '48px';
+    // close icon
+    if (isError) {
+      value += 22;
+    }
+
+    return `${value}px`;
   };
 
   return (
