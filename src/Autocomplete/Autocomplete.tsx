@@ -117,7 +117,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
-  const [inputWidth, setInputWidth] = React.useState<{parentWidth: number, currValue: string }>({ parentWidth: 0, currValue: '' });
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -127,46 +126,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       setIsValueOverFlowing(false);
     }
   }, [props.value]);
-
-  React.useEffect(() => {
-    if (textfieldRef.current) {
-      const parentWidth = textfieldRef.current.parentElement?.clientWidth || 0;
-      setInputWidth({
-        parentWidth,
-        currValue: textfieldRef.current.value,
-      });
-    }
-  }, [props.value, props.clearIcon, props.popupIcon, props.error, props.disabled, props.freeSolo]);
-
-  const getDynamicMarginRight = () : string => {
-    const { parentWidth, currValue } = inputWidth;
-    const {
-      disabled: isDisabled,
-      error: isError,
-      freeSolo: hasFreeSolo,
-    } = props;
-
-    // The value of 22px is based on the icon size
-    let value = 0;
-
-    // The two icon
-    if (!hasFreeSolo) {
-      if (isDisabled) {
-        value += (parentWidth <= 150 ? 0 : 22); // caret only
-      } else {
-        // eslint-why - using nested ternary to reduce unnecessary code blocks
-        // eslint-disable-next-line no-nested-ternary
-        value += currValue ? 44 : parentWidth > 150 ? 22 : 0; // both icons or caret only
-      }
-    }
-
-    // close icon
-    if (isError) {
-      value += 22;
-    }
-
-    return `${value}px`;
-  };
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -201,12 +160,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
               enableHelpHoverEffect,
-              inputProps: {
-                ...params.inputProps,
-                style: {
-                  marginRight: getDynamicMarginRight(),
-                },
-              },
             };
 
             const inputValue = textfieldRef.current?.value ?? '';
@@ -291,6 +244,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
+                  marginRight: ownerState.error ? '58px' : '48px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
