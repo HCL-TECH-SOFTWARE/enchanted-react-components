@@ -6,7 +6,7 @@
 
 ### Fixed
 - Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
-- Fixed the tooltip in Autocomplete and adjusted the marginRight (px) to prevent truncation in small width.
+- Fixed the tooltip in Autocomplete.
 
 ### Changed
 
