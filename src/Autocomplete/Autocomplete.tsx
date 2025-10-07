@@ -143,6 +143,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       iconCount += 1;
     }
 
+    // Calculate the total width needed for the input adornment area based on the number of icons.
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 3px for tighter spacing.
     const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 3 : 0));
 
     return Math.max(iconWidth, 0);
@@ -176,7 +178,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                 ...props.sx,
                 '& .MuiInputAdornment-root': {
                   width: getAdornmentWidth(),
-                  // border: '2px solid black',
                 },
               },
               focused,
@@ -274,7 +275,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
-                // width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
