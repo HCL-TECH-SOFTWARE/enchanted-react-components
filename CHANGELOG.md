@@ -6,8 +6,8 @@
 
 ### Fixed
 - Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
-- Fixed the issue where the Autocomplete tooltip was overwritten by transient input.
-- Fixed the issue where the text was truncating prematurely (ellipses) despite having available space.
+- Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.  
+- Fixed the issue where the `Autocomplete` text was truncating prematurely (ellipses) despite having available space.
 
 ### Changed
 
