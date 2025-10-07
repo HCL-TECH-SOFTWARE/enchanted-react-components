@@ -129,39 +129,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
   const getAdornmentWidth = React.useCallback(() => {
     let iconCount = 0;
-    let padding = 0;
-    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
-
-    // // if false show the three icon
-    // if (!props.disabled) {
-    //   iconCount += props.freeSolo ? 1 : 2;
-    //   // eslint-why - a nested ternary is needed
-    //   // eslint-disable-next-line no-nested-ternary
-    //   padding = props.freeSolo ? (props.error ? -20 : 20) : 0;
-    // } else {
-    //   iconCount += props.freeSolo ? 0 : 1;
-    //   // eslint-why - a nested ternary is needed
-    //   // eslint-disable-next-line no-nested-ternary
-    //   padding = props.freeSolo ? 0 : (props.error ? 20 : -20);
-    // }
 
     // show three icon
     if (!props.disabled) {
       iconCount += props.freeSolo ? 1 : 2;
-      if (props.freeSolo && props.error) {
-        padding = -15; // to adjust the width when disabled
-      }
-      if (props.freeSolo && !props.error) {
-        padding = 15; // to adjust the width when disabled
-      }
     } else { // if true show dropdown or error
       iconCount += !props.freeSolo ? 1 : 0;
-      if (!props.freeSolo && !props.error) {
-        padding = parentWidth <= 150 ? 0 : -15; // to adjust the width when disabled
-      }
-      if (!props.freeSolo && props.error) {
-        padding = 15; // to adjust the width when disabled
-      }
     }
 
     if (props.error) {
@@ -170,7 +143,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
     // minus 24
 
-    const iconWidth = ((iconCount) * 22 + 0);
+    const iconWidth = ((iconCount) * 22);
     return iconWidth;
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
 
@@ -287,7 +260,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '58px' : '48px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
