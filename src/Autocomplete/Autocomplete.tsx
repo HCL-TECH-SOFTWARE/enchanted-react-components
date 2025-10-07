@@ -147,8 +147,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     return iconWidth;
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
 
-  console.log('### getAdornmentWidth: ', getAdornmentWidth());
-
   return (
     <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
@@ -174,7 +172,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                 ...props.sx,
                 '& .MuiInputAdornment-root': {
                   width: getAdornmentWidth(),
-                  border: '1px solid black',
                 },
               },
               focused,
