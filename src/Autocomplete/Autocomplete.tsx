@@ -27,6 +27,7 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
+import { isError } from 'lodash';
 
 /**
  * @typedef AutocompleteProps
@@ -141,6 +142,55 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value]);
 
+  const getAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+    let padding = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+
+    // // if false show the three icon
+    // if (!props.disabled) {
+    //   iconCount += props.freeSolo ? 1 : 2;
+    //   // eslint-why - a nested ternary is needed
+    //   // eslint-disable-next-line no-nested-ternary
+    //   padding = props.freeSolo ? (props.error ? -20 : 20) : 0;
+    // } else {
+    //   iconCount += props.freeSolo ? 0 : 1;
+    //   // eslint-why - a nested ternary is needed
+    //   // eslint-disable-next-line no-nested-ternary
+    //   padding = props.freeSolo ? 0 : (props.error ? 20 : -20);
+    // }
+
+    // show three icon
+    if (!props.disabled) {
+      iconCount += props.freeSolo ? 1 : 2;
+      if (props.freeSolo && props.error) {
+        padding = -15; // to adjust the width when disabled
+      }
+      if (props.freeSolo && !props.error) {
+        padding = 15; // to adjust the width when disabled
+      }
+    } else { // if true show dropdown or error
+      iconCount += !props.freeSolo ? 1 : 0;
+      if (!props.freeSolo && !props.error) {
+        padding = parentWidth <= 150 ? 0 : -15; // to adjust the width when disabled
+      }
+      if (!props.freeSolo && props.error) {
+        padding = 15; // to adjust the width when disabled
+      }
+    }
+
+    if (props.error) {
+      iconCount += 1;
+    }
+
+    // minus 24
+
+    const iconWidth = ((iconCount) * 22 + 0);
+    return iconWidth;
+  }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+
+  console.log('### getAdornmentWidth: ', getAdornmentWidth());
+
   return (
     <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
@@ -162,7 +212,13 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               error: Boolean(props.error),
               required: props.required,
               fullWidth: props.fullWidth,
-              sx: props.sx,
+              sx: {
+                ...props.sx,
+                '& .MuiInputAdornment-root': {
+                  width: getAdornmentWidth(),
+                  border: '1px solid black',
+                },
+              },
               focused,
               hiddenLabel,
               helperIconTooltip,
@@ -250,10 +306,10 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
+                width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '58px' : '48px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
