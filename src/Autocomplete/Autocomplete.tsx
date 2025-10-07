@@ -128,6 +128,28 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value]);
 
+  const getAdornmentWidth = React.useCallback(() => {
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+    let iconCount = 0;
+
+    // show three icon
+    if (props.disabled) { // two icon show either error or caret
+      iconCount += props.freeSolo ? 0 : 1;
+    } else { // three icon show caret & close icon or error
+      iconCount += !props.freeSolo ? 2 : 1;
+    }
+
+    if (props.error) {
+      iconCount += 1;
+    }
+
+    // Calculate the total width needed for the input adornment area based on the number of icons.
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 3px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 3 : 0));
+
+    return Math.max(iconWidth, 0);
+  }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+
   return (
     <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
@@ -152,7 +174,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               error: Boolean(props.error),
               required: props.required,
               fullWidth: props.fullWidth,
-              sx: props.sx,
+              sx: {
+                ...props.sx,
+                '& .MuiInputAdornment-root': {
+                  width: getAdornmentWidth(),
+                },
+              },
               focused,
               hiddenLabel,
               helperIconTooltip,
@@ -251,7 +278,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
-                  marginRight: ownerState.error ? '58px' : '48px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',
                   whiteSpace: 'nowrap',
