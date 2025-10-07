@@ -117,6 +117,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
+  const [prevValue, setPrevValue] = React.useState('');
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -138,6 +139,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           }}
           onBlur={() => {
             setIsFocus(false);
+            if (textfieldRef.current) {
+              setPrevValue(textfieldRef.current.value);
+            }
           }}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
@@ -163,14 +167,17 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             };
 
             const inputValue = textfieldRef.current?.value ?? '';
-            const isInputValueInOptions = Array.isArray(props.options)
-              && props.options.some(
-                (option) => {
-                  return option && typeof option === 'object' && 'label' in option && option.label === inputValue;
-                },
-              );
+            let tooltipTitle = '';
 
-            const tooltipTitle = (isValueOverFlowing && (isInputValueInOptions || !isFocus) && textFieldArgs.value?.label) ? textFieldArgs.value.label : '';
+            if (isValueOverFlowing) {
+              if (props.freeSolo) {
+                tooltipTitle = inputValue;
+              } else if (inputValue === prevValue) {
+                tooltipTitle = textFieldArgs.value?.label ?? '';
+              } else {
+                tooltipTitle = inputValue;
+              }
+            }
 
             textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
