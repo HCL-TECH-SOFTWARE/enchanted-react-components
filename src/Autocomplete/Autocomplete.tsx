@@ -117,6 +117,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const inputLabelAndActionProps = getInputLabelAndActionProps(props, isFocus);
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
+  const [prevValue, setPrevValue] = React.useState('');
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -138,6 +139,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           }}
           onBlur={() => {
             setIsFocus(false);
+            if (textfieldRef.current) {
+              setPrevValue(textfieldRef.current.value);
+            }
           }}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
@@ -161,13 +165,27 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               value: props.value,
               enableHelpHoverEffect,
             };
-            const tooltipTitle = isValueOverFlowing ? textfieldRef.current?.value || '' : '';
+
+            const inputValue = textfieldRef.current?.value ?? '';
+            let tooltipTitle = '';
+
+            if (isValueOverFlowing) {
+              if (props.freeSolo) {
+                tooltipTitle = inputValue;
+              } else if (inputValue === prevValue) {
+                tooltipTitle = textFieldArgs.value?.label ?? '';
+              } else {
+                tooltipTitle = inputValue;
+              }
+            }
+
             textFieldArgs.inputProps = {
               'aria-describedby': props.error ? undefined : helperTextId,
               'aria-errormessage': props.error ? helperTextId : undefined,
               'aria-labelledby': props.id ? `${props.id}-label` : undefined,
               ...textFieldArgs.inputProps,
             };
+
             return (
               <Tooltip title={tooltipTitle} tooltipsize="small">
                 <TextField {...textFieldArgs} inputRef={textfieldRef} />
