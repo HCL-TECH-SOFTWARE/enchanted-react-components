@@ -128,21 +128,23 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   }, [props.value]);
 
   const getAdornmentWidth = React.useCallback(() => {
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
     let iconCount = 0;
 
     // show three icon
-    if (!props.disabled) {
-      iconCount += props.freeSolo ? 1 : 2;
-    } else { // if true show dropdown or error
-      iconCount += !props.freeSolo ? 1 : 0;
+    if (props.disabled) { // two icon show either error or caret
+      iconCount += props.freeSolo ? 0 : 1;
+    } else { // three icon show caret & close icon or error
+      iconCount += !props.freeSolo ? 2 : 1;
     }
 
     if (props.error) {
       iconCount += 1;
     }
 
-    const iconWidth = ((iconCount) * 22);
-    return iconWidth;
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 3 : 0));
+
+    return Math.max(iconWidth, 0);
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
 
   return (
@@ -170,6 +172,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                 ...props.sx,
                 '& .MuiInputAdornment-root': {
                   width: getAdornmentWidth(),
+                  // border: '2px solid black',
                 },
               },
               focused,
@@ -253,6 +256,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
+                // width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
