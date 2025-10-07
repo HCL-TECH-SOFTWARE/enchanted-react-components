@@ -224,6 +224,11 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
     <Autocomplete
       value={value}
       autoHighlight
+      onInput={(event) => {
+        if (args.freeSolo) {
+          setValue((event.target as HTMLInputElement).value);
+        }
+      }}
       onChange={(event, newValue) => {
         setValue(newValue as string);
       }}
