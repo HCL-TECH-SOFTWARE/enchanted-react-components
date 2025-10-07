@@ -5,6 +5,8 @@
 ### Added
 
 ### Fixed
+- Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
+- Fixed the issue where the Autocomplete tooltip was overwritten by transient input.
 
 ### Changed
 
