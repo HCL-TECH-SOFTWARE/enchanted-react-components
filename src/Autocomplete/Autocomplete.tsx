@@ -127,6 +127,24 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value]);
 
+  const getAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+
+    // show three icon
+    if (!props.disabled) {
+      iconCount += props.freeSolo ? 1 : 2;
+    } else { // if true show dropdown or error
+      iconCount += !props.freeSolo ? 1 : 0;
+    }
+
+    if (props.error) {
+      iconCount += 1;
+    }
+
+    const iconWidth = ((iconCount) * 22);
+    return iconWidth;
+  }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+
   return (
     <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
@@ -148,7 +166,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               error: Boolean(props.error),
               required: props.required,
               fullWidth: props.fullWidth,
-              sx: props.sx,
+              sx: {
+                ...props.sx,
+                '& .MuiInputAdornment-root': {
+                  width: getAdornmentWidth(),
+                },
+              },
               focused,
               hiddenLabel,
               helperIconTooltip,
