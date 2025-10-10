@@ -158,13 +158,13 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
 
     // Calculate the total width needed for the input adornment area based on the number of icons.
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 3px for tighter spacing.
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 7px for tighter spacing.
     const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 7 : 0));
 
     return Math.max(iconWidth, 0);
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
 
-  const handleChange = (_: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null, reason?: string, details?: unknown) => {
+  const handleChange = (_: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
     // Value can be an option from the list or null if cleared
     setSelectedOption(value as T | null);
     if (textfieldRef.current) {
@@ -193,8 +193,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           onBlur={() => {
             setIsFocus(false);
           }}
-          onChange={(event, value, reason, details) => {
-            return handleChange(event, value, reason, details);
+          onChange={(event, value) => {
+            return handleChange(event, value);
           }}
           onInputChange={handleInputChange}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
