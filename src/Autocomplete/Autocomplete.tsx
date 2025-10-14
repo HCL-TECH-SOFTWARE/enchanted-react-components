@@ -158,8 +158,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
 
     // Calculate the total width needed for the input adornment area based on the number of icons.
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 7px for tighter spacing.
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 7 : 0));
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
 
     return Math.max(iconWidth, 0);
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
