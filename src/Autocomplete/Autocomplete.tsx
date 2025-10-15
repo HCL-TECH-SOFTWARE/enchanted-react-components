@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
+import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
 import { Components, Theme } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
@@ -164,21 +164,26 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     return Math.max(iconWidth, 0);
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
 
-  const handleChange = (_: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
+  const handleChange = (event: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
     // Value can be an option from the list or null if cleared
     setSelectedOption(value as T | null);
     if (textfieldRef.current) {
       setPrevValue(textfieldRef.current.value);
     }
     if (rest.onChange) {
-      rest.onChange(_, value, 'selectOption');
+      rest.onChange(event, value, 'selectOption');
     }
   };
 
-  const handleInputChange = (_: React.SyntheticEvent, inputValue: string) => {
+  const handleInputChange = (event: React.SyntheticEvent, inputValue: string, reason?: string) => {
     // When user types, we clear the selectedOption as it's no longer a confirmed selection
     setSelectedOption(null);
     setPrevValue(inputValue);
+
+    // Call the existing onInputChange from props if it exists
+    if (rest.onInputChange) {
+      rest.onInputChange(event, inputValue, reason as AutocompleteInputChangeReason);
+    }
   };
 
   return (
