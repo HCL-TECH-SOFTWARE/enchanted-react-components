@@ -170,6 +170,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     if (textfieldRef.current) {
       setPrevValue(textfieldRef.current.value);
     }
+
+    // Call the existing onChange from props if it exists
     if (rest.onChange) {
       rest.onChange(event, value, 'selectOption');
     }
@@ -198,9 +200,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           onBlur={() => {
             setIsFocus(false);
           }}
-          onChange={(event, value) => {
-            return handleChange(event, value);
-          }}
+          onChange={handleChange}
           onInputChange={handleInputChange}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
@@ -253,12 +253,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             // Checking for selectedOption covers cases where user selects from dropdown or clears input
             if (selectedOption && isValueOverFlowing && isValueInOptions(selectedValue)) {
               tooltipTitle = selectedValue;
-            // Checking for prevValue covers cases where user tabs back to a previous value
-            } else if (prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue)) {
-              tooltipTitle = prevValue;
             // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
             } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
               tooltipTitle = inputValue;
+            // Checking for prevValue covers cases where user types a value that overflows but does not select it
+            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue)) || isValueOverFlowing) {
+              tooltipTitle = prevValue;
             }
 
             textFieldArgs.inputProps = {
