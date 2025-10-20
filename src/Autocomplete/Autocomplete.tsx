@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
+import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
 import { Components, Theme } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
@@ -102,7 +102,16 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
   ({ ...props }: AutocompleteProps<T, Multiple, DisableClearable, FreeSolo>) => {
   const {
-    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, enableHelpHoverEffect, renderNonEditInput, endAdornmentAction, ...rest // clean up rest of props for MuiAutocomplete tag
+    helperText,
+    helperIconTooltip,
+    actionProps,
+    focused,
+    hiddenLabel,
+    nonEdit,
+    enableHelpHoverEffect,
+    renderNonEditInput,
+    endAdornmentAction,
+    ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
   // prevents DOM warning for error=boolean
@@ -118,6 +127,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
   const [prevValue, setPrevValue] = React.useState('');
+  const [selectedOption, setSelectedOption] = React.useState<T | null>();
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -126,17 +136,21 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     } else {
       setIsValueOverFlowing(false);
     }
-  }, [props.value]);
+  }, [props.value, prevValue]);
 
   const getAdornmentWidth = React.useCallback(() => {
-    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
     let iconCount = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
 
     // show three icon
     if (props.disabled) { // two icon show either error or caret
       iconCount += props.freeSolo ? 0 : 1;
-    } else { // three icon show caret & close icon or error
-      iconCount += !props.freeSolo ? 2 : 1;
+    } else {
+      // freeSolo is false - two icon show either error or caret and clear icon
+      // disableClearable is true - one icon show caret down icon only
+      // eslint-why - a nested ternary is needed
+      // eslint-disable-next-line no-nested-ternary
+      iconCount += !props.freeSolo ? (props.disableClearable ? 1 : 2) : 1;
     }
 
     if (props.error) {
@@ -144,11 +158,35 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
 
     // Calculate the total width needed for the input adornment area based on the number of icons.
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 3px for tighter spacing.
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 3 : 0));
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
 
     return Math.max(iconWidth, 0);
   }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+
+  const handleChange = (event: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
+    // Value can be an option from the list or null if cleared
+    setSelectedOption(value as T | null);
+    if (textfieldRef.current) {
+      setPrevValue(textfieldRef.current.value);
+    }
+
+    // Call the existing onChange from props if it exists
+    if (rest.onChange) {
+      rest.onChange(event, value, 'selectOption');
+    }
+  };
+
+  const handleInputChange = (event: React.SyntheticEvent, inputValue: string, reason?: string) => {
+    // When user types, we clear the selectedOption as it's no longer a confirmed selection
+    setSelectedOption(null);
+    setPrevValue(inputValue);
+
+    // Call the existing onInputChange from props if it exists
+    if (rest.onInputChange) {
+      rest.onInputChange(event, inputValue, reason as AutocompleteInputChangeReason);
+    }
+  };
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -161,10 +199,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           }}
           onBlur={() => {
             setIsFocus(false);
-            if (textfieldRef.current) {
-              setPrevValue(textfieldRef.current.value);
-            }
           }}
+          onChange={handleChange}
+          onInputChange={handleInputChange}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
@@ -193,17 +230,38 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               enableHelpHoverEffect,
             };
 
-            const inputValue = textfieldRef.current?.value ?? '';
             let tooltipTitle = '';
+            const inputValue = textfieldRef.current?.value ?? '';
 
-            if (isValueOverFlowing) {
-              if (props.freeSolo) {
-                tooltipTitle = inputValue;
-              } else if (inputValue === prevValue) {
-                tooltipTitle = textFieldArgs.value?.label ?? '';
-              } else {
-                tooltipTitle = inputValue;
-              }
+            // Helper to check if a value matches an option
+            const isValueInOptions = (selctedValue: string) => {
+              if (!selctedValue) return false;
+
+              return Array.isArray(props.options)
+                ? props.options.some((option) => {
+                  if (typeof option === 'object' && option !== null) {
+                    return option.label === selctedValue || option.value === selctedValue;
+                  }
+                  return option === selctedValue;
+                })
+                : false;
+            };
+
+            const hasSelectedValue = selectedOption && typeof selectedOption === 'object' && 'label' in selectedOption;
+            const selectedValue = hasSelectedValue ? (selectedOption.label as string) : (selectedOption as string);
+
+            // Checking for selectedOption covers cases where user selects from dropdown or clears input
+            if (selectedOption && isValueOverFlowing && isValueInOptions(selectedValue)) {
+              tooltipTitle = selectedValue;
+            // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
+            } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
+              tooltipTitle = inputValue;
+            // Checking for prevValue covers cases where user tabs back to a previous value or
+            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue))) {
+              tooltipTitle = prevValue;
+            // Checking for freeSolo mode where user can type arbitrary values
+            } else if (isValueOverFlowing) {
+              tooltipTitle = props.freeSolo ? inputValue : prevValue;
             }
 
             textFieldArgs.inputProps = {
