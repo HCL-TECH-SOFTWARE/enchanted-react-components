@@ -256,9 +256,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
             } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
               tooltipTitle = inputValue;
-            // Checking for prevValue covers cases where user types a value that overflows but does not select it
-            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue)) || isValueOverFlowing) {
+            // Checking for prevValue covers cases where user tabs back to a previous value or
+            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue))) {
               tooltipTitle = prevValue;
+            // Checking for freeSolo mode where user can type arbitrary values
+            } else if (isValueOverFlowing) {
+              tooltipTitle = props.freeSolo ? inputValue : prevValue;
             }
 
             textFieldArgs.inputProps = {
