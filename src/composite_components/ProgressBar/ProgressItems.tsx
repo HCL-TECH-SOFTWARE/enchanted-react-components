@@ -495,7 +495,8 @@ const ProgressItems = (props: ProgressItemsProps) => {
                             <span>{translation?.cancelledLabel}</span>
                           )}
                           {queueItem.status === EnumUploadStatus.FAILURE && (
-                            <Tooltip title={queueItem.message}
+                            <Tooltip
+                              title={queueItem.message}
                               placement="top"
                               tooltipsize="small"
                               PopperProps={{
