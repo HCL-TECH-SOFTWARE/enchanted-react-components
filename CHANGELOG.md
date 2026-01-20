@@ -5,11 +5,15 @@
 ### Added
 
 ### Fixed
-- Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
 
 ### Changed
 
 ### Breaking changes
+
+## 2.3.2
+
+### Fixed
+- Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
 
 ## 2.3.1
 
