@@ -20,6 +20,7 @@ import MuiFormHelperText from '@mui/material/FormHelperText';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import {
   Components, Theme, InputAdornment,
+  SvgIconProps,
 } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
 
@@ -50,6 +51,7 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   unitLabel?: string;
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
 export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -307,6 +309,7 @@ const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): I
     fullWidth: props.fullWidth,
     isFocus,
     enableHelpHoverEffect: props.enableHelpHoverEffect,
+    customIcon: props.customIcon,
   };
   return inputLabelProps;
 };

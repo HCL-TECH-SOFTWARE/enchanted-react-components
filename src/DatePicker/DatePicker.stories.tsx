@@ -15,6 +15,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
@@ -238,5 +239,13 @@ export const ExampleDatePickerFullWidth = {
   args: {
     ...ExampleDatePicker.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleDatePickerWithCustomIcon = {
+  render: Template,
+  args: {
+    ...ExampleDatePicker.args,
+    customIcon: InformationIcon,
   },
 };

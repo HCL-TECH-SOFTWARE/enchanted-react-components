@@ -16,6 +16,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Select, { SelectChangeEvent } from './Select';
 import MenuItem from '../Menu/MenuItem';
@@ -210,5 +211,13 @@ export const ExampleSingleSelectFullWidth = {
     ...ExampleSingleSelect.args,
     id: 'example-single-select-fullwidth',
     fullWidth: true,
+  },
+};
+
+export const ExampleSingleSelectWithCustomIcon = {
+  render: Template,
+  args: {
+    ...ExampleSingleSelect.args,
+    customIcon: InformationIcon,
   },
 };

@@ -16,6 +16,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import { Box } from '@mui/material';
@@ -323,5 +324,13 @@ export const ExampleTextFieldWithUnitSelector = {
         />
       </Box>
     );
+  },
+};
+
+export const ExampleTextWithCustomIcon = {
+  render: Template,
+  args: {
+    ...ExampleTextField.args,
+    customIcon: InformationIcon,
   },
 };

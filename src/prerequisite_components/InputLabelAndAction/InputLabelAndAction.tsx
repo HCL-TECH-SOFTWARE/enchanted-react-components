@@ -16,7 +16,7 @@ import React, { ReactNode } from 'react';
 import MuiInputLabel, { InputLabelProps as MuiInputLabelProps } from '@mui/material/InputLabel';
 import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
-import { styled, Theme } from '@mui/material';
+import { styled, Theme, SvgIconProps } from '@mui/material';
 import Tooltip, { TooltipPlacement } from '../../Tooltip';
 import ActionButton from '../../ActionButton';
 
@@ -38,6 +38,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   isFocus?: boolean;
   fullWidth?: boolean;
   enableHelpHoverEffect?: boolean;
+  customIcon?: React.ComponentType<SvgIconProps>;
 }
 
 export const labelFocus = styled('div')((theme) => {
@@ -66,6 +67,10 @@ export const MuiInputHelpIcon = styled(HelpIcon, {
     }),
   };
 });
+
+const styledCustomIcon = (Icon: React.ComponentType<SvgIconProps>) => {
+  return <Icon sx={{ marginLeft: '8px', marginBottom: '-4px', fontSize: '16px' }} color="action" fontSize="small" />;
+};
 
 export const StyledInputLabel = styled(MuiInputLabel)((theme) => {
   return {
@@ -121,7 +126,9 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
           title={props.helperIconTooltip}
           placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
         >
-          <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHelpHoverEffect={props.enableHelpHoverEffect} />
+          <span>
+            {props.customIcon ? styledCustomIcon(props.customIcon) : <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHelpHoverEffect={props.enableHelpHoverEffect} />}
+          </span>
         </Tooltip>
       ) : (
         ''

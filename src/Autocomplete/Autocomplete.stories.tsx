@@ -16,6 +16,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
@@ -334,5 +335,13 @@ export const ExampleAutocompleteFullWidth = {
   args: {
     ...ExampleAutocomplete.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleAutocompleteWithCustomIcon = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    customIcon: InformationIcon,
   },
 };

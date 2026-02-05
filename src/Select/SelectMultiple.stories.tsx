@@ -16,6 +16,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Select, { SelectChangeEvent } from './Select';
 import MenuItem from '../Menu/MenuItem';
@@ -233,5 +234,13 @@ export const ExampleMultipleSelectFullWidth = {
   args: {
     ...ExampleMultipleSelect.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleMultipleSelectWithCustomIcon = {
+  render: Template,
+  args: {
+    ...ExampleMultipleSelect.args,
+    customIcon: InformationIcon,
   },
 };

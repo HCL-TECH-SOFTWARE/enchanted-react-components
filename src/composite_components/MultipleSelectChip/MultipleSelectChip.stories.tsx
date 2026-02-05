@@ -17,6 +17,7 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
@@ -375,5 +376,14 @@ export const ExampleMultipleSelectChipFullWidth = {
   args: {
     ...ExampleMultipleSelectChip.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleMultipleSelectWithCustomIcon = {
+  render: Template,
+
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    customIcon: InformationIcon,
   },
 };
