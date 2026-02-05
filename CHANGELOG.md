@@ -12,6 +12,9 @@
 
 ## 2.3.2
 
+### Added
+- Added an information icon beside the overflow menu icon for collection tiles, visible only in trash view.
+
 ### Fixed
 - Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
 

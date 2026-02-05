@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -202,6 +202,7 @@ export interface TilePropsType {
   disabled?: boolean;
   syncIcon?: ReactNode;
   hoverPreviewMenu?: string
+  isTrash?: boolean;
 }
 
 export enum TileTestIds {
@@ -219,7 +220,7 @@ const Tile = (props: TilePropsType) => {
   const {
     itemId, imageUrl, avatar, itemClickedAction, handlePreviewAction, tileActions, activeItem,
     imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef, hideAvatarIfImageIsLoaded,
-    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu,
+    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu, isTrash,
   } = props;
 
   useEffect(() => {
@@ -435,6 +436,7 @@ const Tile = (props: TilePropsType) => {
                 menuSize={menuSize}
                 disabled={disabled}
                 hasThumbnail={hasThumbnail}
+                isTrash={isTrash}
               />
             </Box>
           )}

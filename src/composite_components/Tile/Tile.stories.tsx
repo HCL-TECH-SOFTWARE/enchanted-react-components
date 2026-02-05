@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -78,6 +78,13 @@ export default {
         'Actions to be displayed on the tilebar.',
       control: 'false',
     },
+    isTrash: {
+      control: { type: 'boolean' },
+      description: 'Show info icon (Trash view only)',
+      table: {
+        defaultValue: { summary: false },
+      },
+    },
     showSyncIcon: {
       control: {
         type: 'boolean',
@@ -151,6 +158,7 @@ const StyledImageList = styled(ImageList)({
 interface ExtendTilePropsType extends TilePropsType
 {
   showSyncIcon: boolean;
+  isTrash?: boolean;
 }
 const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
   const tileActions: IActions[] = args.hasThumbnail ? ItemActions : data;
@@ -173,26 +181,54 @@ const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
     </>
   );
   return (
-    <StyledImageList
-      gap={12}
-      cols={0}
-      sx={{
-        display: 'grid',
-        padding: '2px',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-      }}
-    >
-      <Tile
-        {...args}
-        tileActions={tileActions}
-        activeItem={onSelectionFlag}
-        itemClickedAction={itemClickedAction}
-        handlePreviewAction={handlePreviewAction}
-        handleCheckboxChange={handleCheckboxChange}
-        avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
-        syncIcon={args.showSyncIcon ? syncIcon : undefined}
-      />
-    </StyledImageList>
+    <>
+      <StyledImageList
+        gap={12}
+        cols={0}
+        sx={{
+          display: 'grid',
+          padding: '2px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        }}
+      >
+        <Tile
+          {...args}
+          tileActions={tileActions}
+          activeItem={onSelectionFlag}
+          itemClickedAction={itemClickedAction}
+          handlePreviewAction={handlePreviewAction}
+          handleCheckboxChange={handleCheckboxChange}
+          avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
+          syncIcon={args.showSyncIcon ? syncIcon : undefined}
+          isTrash={false}
+        />
+      </StyledImageList>
+      <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);', mt: 2 }} variant="body1">
+        Collection Tile
+      </Typography>
+      <StyledImageList
+        gap={12}
+        cols={0}
+        sx={{
+          display: 'grid',
+          padding: '2px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        }}
+      >
+        <Tile
+          {...args}
+          tileActions={tileActions}
+          activeItem={onSelectionFlag}
+          itemClickedAction={itemClickedAction}
+          handlePreviewAction={handlePreviewAction}
+          handleCheckboxChange={handleCheckboxChange}
+          avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
+          syncIcon={args.showSyncIcon ? syncIcon : undefined}
+          isTrash={args.isTrash}
+          hasThumbnail={false}
+        />
+      </StyledImageList>
+    </>
   );
 };
 
@@ -247,6 +283,7 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
           handleCheckboxChange={handleCheckboxChange}
           title={itemData.title}
           imageUrl="green bowl_bea.png"
+          isTrash={false}
         />
       </StyledImageList>
       <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
@@ -270,6 +307,7 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
           imageUrl="green bowl_bea.png"
           hasThumbnail={false}
           tileActions={data}
+          isTrash={args.isTrash}
         />
       </StyledImageList>
       &nbsp;
@@ -296,6 +334,7 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
                 subTitle={asset.subTitle}
                 itemClickedAction={itemClickedAction}
                 avatar={getAvatarToDisplayForFileType(asset.itemType, asset.title)}
+                isTrash={false} // Do not show info icon for non-collection tiles
               />
             </div>
           );

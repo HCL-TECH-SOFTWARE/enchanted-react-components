@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -15,6 +15,7 @@
 
 import React, { ReactElement } from 'react';
 import IconOverflowMenuHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';
+import IconInformation from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import ListItemText from '../../List/ListItemText';
 import Menu, { MenuSizes } from '../../Menu';
 import ListItemIcon from '../../List/ListItemIcon';
@@ -31,6 +32,7 @@ export interface ITileActionMenuProps {
   menuSize?: string;
   disabled?: boolean;
   hasThumbnail?: boolean;
+  isTrash?: boolean; // Show info icon only in trash view
 }
 
 export enum TileActionTestIds {
@@ -40,7 +42,7 @@ export enum TileActionTestIds {
 
 const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuProps) => {
   const {
-    itemId, actionList, overflowTooltip, disabled, hasThumbnail,
+    itemId, actionList, overflowTooltip, disabled, hasThumbnail, isTrash,
   } = props;
   const overflowIconTitle = overflowTooltip;
 
@@ -83,7 +85,46 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
   };
 
   return (
-    <>
+    <div
+      style={{
+        // Actions container
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        padding: 0,
+        gap: 8,
+        width: 48,
+        height: 16,
+      }}
+    >
+      {isTrash && (
+      <Tooltip title="Information">
+        <IconButton
+          data-testid="tile-action-info"
+          aria-label="Information"
+          size="small"
+          sx={{
+            width: '20px',
+            height: '20px',
+            padding: '2px',
+            isolation: 'isolate',
+            borderRadius: '2px',
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.07)',
+              borderRadius: '2px',
+            },
+            '&:focus': {
+              outlineOffset: '1px',
+              borderRadius: '4px',
+            },
+          }}
+          tabIndex={0}
+        >
+          <IconInformation style={{ width: 16, height: 16 }} />
+        </IconButton>
+      </Tooltip>
+      )}
       <Tooltip title={overflowIconTitle}>
         <IconButton
           data-testid={TileActionTestIds.TILE_ACTION_OVERFLOW}
@@ -117,7 +158,7 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
           return null;
         })}
       </Menu>
-    </>
+    </div>
   );
 };
 
