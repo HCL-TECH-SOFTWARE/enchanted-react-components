@@ -99,31 +99,16 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
       }}
     >
       {isTrash && (
-      <Tooltip title="Information">
-        <IconButton
-          data-testid="tile-action-info"
-          aria-label="Information"
-          size="small"
-          sx={{
-            width: '20px',
-            height: '20px',
-            padding: '2px',
-            isolation: 'isolate',
-            borderRadius: '2px',
-            '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.07)',
-              borderRadius: '2px',
-            },
-            '&:focus': {
-              outlineOffset: '1px',
-              borderRadius: '4px',
-            },
-          }}
-          tabIndex={0}
-        >
-          <IconInformation style={{ width: 16, height: 16 }} />
-        </IconButton>
-      </Tooltip>
+        <Tooltip title="Information">
+          <IconButton
+            data-testid="tile-action-info"
+            aria-label="Information"
+            size="small"
+            tabIndex={0}
+          >
+            <IconInformation />
+          </IconButton>
+        </Tooltip>
       )}
       <Tooltip title={overflowIconTitle}>
         <IconButton
