@@ -3,15 +3,26 @@
 ## Unreleased
 
 ### Added
+- Add the `customIcon` props in InputLabelAndAction component.
+- Added the new prop - customIcon - for alternative icon to helper icon to TextField, DatePicker, Autocomplete, SelectMultiple, SelectSingle, and MultiSelectChip components.
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.3.2
+
+### Fixed
+- Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
+
+## 2.3.1
 
 ### Fixed
 - Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
 - Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.  
 - Fixed the issue where the `Autocomplete` text was truncating prematurely (ellipses) despite having available space.
-
-### Changed
-
-### Breaking changes
 
 ## 2.3.0
 

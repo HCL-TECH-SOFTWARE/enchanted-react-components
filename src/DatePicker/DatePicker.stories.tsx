@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -15,6 +15,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -154,6 +155,11 @@ export default {
       control: false,
       description: 'Attribute to define the customStyles.',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+    },
   },
 } as Meta<typeof DatePicker>;
 
@@ -161,6 +167,19 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
   const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as string, DatePicker.defaultProps.format) : null);
   // @ts-ignore - The adapterLocale control it's not a property of the DatePicker but it is need for PickersLocalizationProvider.
   const { adapterLocale } = args;
+
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
   return (
     <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -169,6 +188,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
         onChange={(newValue) => {
           setValue(newValue as Dayjs | null);
         }}
+        customIcon={customIcon}
       />
     </PickersLocalizationProvider>
   );
@@ -239,13 +259,5 @@ export const ExampleDatePickerFullWidth = {
   args: {
     ...ExampleDatePicker.args,
     fullWidth: true,
-  },
-};
-
-export const ExampleDatePickerWithCustomIcon = {
-  render: Template,
-  args: {
-    ...ExampleDatePicker.args,
-    customIcon: InformationIcon,
   },
 };
