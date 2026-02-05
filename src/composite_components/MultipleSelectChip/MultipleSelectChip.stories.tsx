@@ -231,17 +231,17 @@ export default {
 const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
   const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
 
-let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
-switch (args.customIcon as unknown as string) {
-  case 'CaretDownIcon':
-    customIcon = CaretDownIcon;
-    break;
-  case 'InformationIcon':
-    customIcon = InformationIcon;
-    break;
-  default:
-    customIcon = undefined;
-}
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
 
   return (
     <MultipleSelectChip

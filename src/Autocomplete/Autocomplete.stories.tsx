@@ -239,7 +239,7 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
     default:
       customIcon = undefined;
   }
-  
+
   return (
     <Autocomplete
       value={value}
@@ -357,4 +357,3 @@ export const ExampleAutocompleteFullWidth = {
     fullWidth: true,
   },
 };
-
