@@ -80,9 +80,23 @@ export default {
     },
     isTrash: {
       control: { type: 'boolean' },
-      description: 'Show info icon (Trash view only)',
+      description: 'Enable trash view mode. Shows lock notice badge on media tiles (with thumbnail) and info icon on collection tiles (without thumbnail).',
       table: {
         defaultValue: { summary: false },
+      },
+    },
+    trashInfoTooltip: {
+      control: { type: 'text' },
+      description: 'Tooltip text for info icon (shown on collection tiles when isTrash=true)',
+      table: {
+        defaultValue: { summary: '' },
+      },
+    },
+    lockNoticeText: {
+      control: { type: 'text' },
+      description: 'Text to display in the lock notice badge (shown on media tiles when isTrash=true)',
+      table: {
+        defaultValue: { summary: '' },
       },
     },
     showSyncIcon: {
@@ -155,10 +169,8 @@ const StyledImageList = styled(ImageList)({
   rowHeight: 'auto',
 });
 
-interface ExtendTilePropsType extends TilePropsType
-{
+interface ExtendTilePropsType extends TilePropsType {
   showSyncIcon: boolean;
-  isTrash?: boolean;
 }
 const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
   const tileActions: IActions[] = args.hasThumbnail ? ItemActions : data;
@@ -200,7 +212,9 @@ const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
           handleCheckboxChange={handleCheckboxChange}
           avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
           syncIcon={args.showSyncIcon ? syncIcon : undefined}
-          isTrash={false}
+          hasThumbnail
+          isTrash={args.isTrash}
+          lockNoticeText={args.lockNoticeText}
         />
       </StyledImageList>
       <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);', mt: 2 }} variant="body1">
@@ -225,6 +239,7 @@ const InteractiveExampleTemplate: StoryFn<ExtendTilePropsType> = (args) => {
           avatar={getAvatarToDisplay('image/jpg', 'green bowl_bea.png')}
           syncIcon={args.showSyncIcon ? syncIcon : undefined}
           isTrash={args.isTrash}
+          trashInfoTooltip={args.trashInfoTooltip}
           hasThumbnail={false}
         />
       </StyledImageList>
@@ -249,6 +264,9 @@ InteractiveExample.args = {
   menuSize: 'medium',
   itemId: '3',
   showSyncIcon: false,
+  isTrash: false,
+  trashInfoTooltip: '10 days',
+  lockNoticeText: '15 days',
 };
 
 const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
@@ -283,7 +301,8 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
           handleCheckboxChange={handleCheckboxChange}
           title={itemData.title}
           imageUrl="green bowl_bea.png"
-          isTrash={false}
+          isTrash={args.isTrash}
+          lockNoticeText={args.lockNoticeText}
         />
       </StyledImageList>
       <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
@@ -308,6 +327,7 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
           hasThumbnail={false}
           tileActions={data}
           isTrash={args.isTrash}
+          trashInfoTooltip={args.trashInfoTooltip}
         />
       </StyledImageList>
       &nbsp;
@@ -334,7 +354,8 @@ const VisualTestTemplate: StoryFn<typeof Tile> = (args) => {
                 subTitle={asset.subTitle}
                 itemClickedAction={itemClickedAction}
                 avatar={getAvatarToDisplayForFileType(asset.itemType, asset.title)}
-                isTrash={false} // Do not show info icon for non-collection tiles
+                isTrash={args.isTrash}
+                lockNoticeText={args.lockNoticeText}
               />
             </div>
           );
@@ -358,4 +379,7 @@ VisualTest.args = {
   menuSize: 'medium',
   hasThumbnail: true,
   showSyncIcon: false,
+  isTrash: false,
+  trashInfoTooltip: '10 days',
+  lockNoticeText: '< 1 hour',
 };

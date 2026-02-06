@@ -28,6 +28,7 @@ export interface ITileActionBarProps {
   disabled?: boolean;
   hasThumbnail?: boolean;
   isTrash?: boolean;
+  trashInfoTooltip?: string;
 }
 
 const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps) => {
@@ -75,7 +76,9 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
           overflowTooltip={overflowTooltip}
           menuSize={menuSize}
           disabled={disabled}
+          hasThumbnail={hasThumbnail}
           isTrash={props.isTrash}
+          trashInfoTooltip={props.trashInfoTooltip}
         />
         )}
       </>
@@ -89,6 +92,7 @@ const TileActionBar: React.FC<ITileActionBarProps> = (props: ITileActionBarProps
         disabled={disabled}
         hasThumbnail={hasThumbnail}
         isTrash={props.isTrash}
+        trashInfoTooltip={props.trashInfoTooltip}
       />
       )}
     </>

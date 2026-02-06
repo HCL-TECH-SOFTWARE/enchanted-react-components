@@ -33,6 +33,7 @@ export interface ITileActionMenuProps {
   disabled?: boolean;
   hasThumbnail?: boolean;
   isTrash?: boolean; // Show info icon only in trash view
+  trashInfoTooltip?: string;
 }
 
 export enum TileActionTestIds {
@@ -98,11 +99,12 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
         height: 16,
       }}
     >
-      {isTrash && (
-        <Tooltip title="Information">
+      {/* Info icon for collection tiles in trash view */}
+      {isTrash && !hasThumbnail && (
+        <Tooltip title={props.trashInfoTooltip || ''}>
           <IconButton
             data-testid="tile-action-info"
-            aria-label="Information"
+            aria-label={props.trashInfoTooltip || ''}
             size="small"
             tabIndex={0}
           >
