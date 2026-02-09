@@ -13,7 +13,9 @@
 ## 2.3.2
 
 ### Added
+
 - Added an information icon beside the overflow menu icon for collection tiles, visible only in trash view.
+- Added a lock notice overlay for media items in trash view, displaying a lock icon and message.
 
 ### Fixed
 - Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
