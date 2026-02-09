@@ -1,11 +1,11 @@
 /* ======================================================================== *
- * Copyright 2026 HCL America Inc.                                          *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
- * *
+ *                                                                          *
  * http://www.apache.org/licenses/LICENSE-2.0                               *
- * *
+ *                                                                          *
  * Unless required by applicable law or agreed to in writing, software      *
  * distributed under the License is distributed on an "AS IS" BASIS,        *
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
@@ -60,9 +60,9 @@ const StyledSyncIcon = styled('div')(({ theme }) => {
 const StyledLockNotice = styled('div')(() => {
   return {
     position: 'absolute',
-    top: '6px',
-    right: '6px',
-    display: 'inline-flex',
+    top: '12px',
+    right: '12px',
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     padding: '4px',
@@ -70,22 +70,32 @@ const StyledLockNotice = styled('div')(() => {
     height: '24px',
     background: 'rgba(30, 30, 30, 0.8)',
     borderRadius: '2px',
+    flex: 'none',
+    order: 1,
+    flexGrow: 0,
     zIndex: 1,
-    pointerEvents: 'none',
   };
 });
 
 // Using built-in typography variant="body2"
 const StyledLockNoticeText = styled(Typography)(() => {
   return {
+    width: '45px',
+    height: '16px',
+    fontSize: '12px',
+    lineHeight: '16px',
+    letterSpacing: '0px',
     color: 'rgba(255, 255, 255, 0.7)',
-    whiteSpace: 'nowrap',
+    flex: 'none',
+    order: 1,
+    flexGrow: 0,
   };
 });
 
 const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ theme }) => {
   const { disabled, isChecked } = React.useContext(ImageListContext);
   return {
+    position: 'relative',
     backgroundColor: isChecked ? theme.palette.action.selectedOpacityModified : theme.palette.background.default,
     border: `1px solid ${theme.palette.border.secondary}`,
     borderRadius: `${theme.spacing(0.5)}`,
@@ -251,7 +261,8 @@ const Tile = (props: TilePropsType) => {
     subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu, isTrash, trashInfoTooltip, lockNoticeText,
   } = props;
 
-  const showLockNotice = isTrash;
+  // Show lock notice for media tiles (hasThumbnail=true) in trash view when lockNoticeText has content
+  const showLockNotice = isTrash && hasThumbnail && !!lockNoticeText;
 
   useEffect(() => {
     const titleElement = titleRef.current;
@@ -311,6 +322,14 @@ const Tile = (props: TilePropsType) => {
         ref={tileRef}
       >
         {props.syncIcon && (<StyledSyncIcon>{props.syncIcon}</StyledSyncIcon>)}
+
+        {/* Lock notice badge for media tiles in trash view */}
+        {showLockNotice && (
+          <StyledLockNotice>
+            <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
+          </StyledLockNotice>
+        )}
+
         {(imageUrl && !avatar && hasThumbnail) && (
           <ImageContainer>
             <img
@@ -323,12 +342,6 @@ const Tile = (props: TilePropsType) => {
               src={imageUrl}
               alt={imageAltName || ''}
             />
-            {/* Added check for lockNoticeText to prevent empty box rendering */}
-            {showLockNotice && (
-              <StyledLockNotice>
-                <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
-              </StyledLockNotice>
-            )}
             {!disabled && (
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
@@ -358,11 +371,6 @@ const Tile = (props: TilePropsType) => {
               src={imageUrl}
               alt={imageAltName || ''}
             />
-            {showLockNotice && (
-              <StyledLockNotice>
-                <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
-              </StyledLockNotice>
-            )}
             {!disabled && (
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
@@ -385,11 +393,6 @@ const Tile = (props: TilePropsType) => {
             <StyledBox>
               {avatar}
             </StyledBox>
-            {showLockNotice && (
-              <StyledLockNotice>
-                <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
-              </StyledLockNotice>
-            )}
             {!disabled && (
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
@@ -412,11 +415,6 @@ const Tile = (props: TilePropsType) => {
             <StyledBox>
               {avatar}
             </StyledBox>
-            {showLockNotice && (
-              <StyledLockNotice>
-                <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
-              </StyledLockNotice>
-            )}
             {!disabled && (
               <Overlay className={`overlay ${isOverlayVisible ? 'visible' : ''}`}>
                 <IconButton
