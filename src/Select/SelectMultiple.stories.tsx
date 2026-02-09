@@ -120,6 +120,11 @@ export default {
       description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
       options: ['None', 'CaretDownIcon', 'InformationIcon'],
       control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
     },
   },
 } as Meta<typeof Select>;
@@ -209,6 +214,7 @@ export const ExampleMultipleSelect = {
         label: 'Action',
       },
     ],
+    customIcon: 'None',
   },
 };
 

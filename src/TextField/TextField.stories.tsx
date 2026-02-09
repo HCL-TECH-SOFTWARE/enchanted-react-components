@@ -160,6 +160,11 @@ export default {
       description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
       options: ['None', 'CaretDownIcon', 'InformationIcon'],
       control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
     },
   },
 } as Meta<typeof TextField>;
@@ -230,6 +235,7 @@ export const ExampleTextField = {
       </Button>
     ),
     sx: { minWidth: '240px' },
+    customIcon: 'None',
   },
 };
 
