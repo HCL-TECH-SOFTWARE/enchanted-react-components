@@ -109,7 +109,6 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
           componentsProps={{
             tooltip: {
               sx: {
-                // Layout and positioning
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'flex-start',
@@ -118,7 +117,6 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
                 background: 'rgba(56, 56, 56, 1)',
                 borderRadius: '2px',
                 maxWidth: '300px',
-                // Typography styles
                 fontSize: '12px',
                 lineHeight: '16px',
                 color: 'rgba(255, 255, 255, 0.93)',

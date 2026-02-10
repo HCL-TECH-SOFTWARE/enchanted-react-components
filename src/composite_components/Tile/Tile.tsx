@@ -67,28 +67,12 @@ const StyledLockNotice = styled('div')(() => {
     alignItems: 'center',
     padding: '4px',
     gap: '4px',
-    height: '24px',
     background: 'rgba(30, 30, 30, 0.8)',
     borderRadius: '2px',
     flex: 'none',
     order: 1,
     flexGrow: 0,
     zIndex: 1,
-  };
-});
-
-// Using built-in typography variant="body2"
-const StyledLockNoticeText = styled(Typography)(() => {
-  return {
-    width: '45px',
-    height: '16px',
-    fontSize: '12px',
-    lineHeight: '16px',
-    letterSpacing: '0px',
-    color: 'rgba(255, 255, 255, 0.7)',
-    flex: 'none',
-    order: 1,
-    flexGrow: 0,
   };
 });
 
@@ -326,7 +310,7 @@ const Tile = (props: TilePropsType) => {
         {/* Lock notice badge for media tiles in trash view */}
         {showLockNotice && (
           <StyledLockNotice>
-            <StyledLockNoticeText variant="body2">{lockNoticeText}</StyledLockNoticeText>
+            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>{lockNoticeText}</Typography>
           </StyledLockNotice>
         )}
 
