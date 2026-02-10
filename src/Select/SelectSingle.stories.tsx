@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -16,6 +16,8 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Select, { SelectChangeEvent } from './Select';
 import MenuItem from '../Menu/MenuItem';
@@ -100,18 +102,40 @@ export default {
       control: false,
       description: 'https://mui.com/material-ui/api/select/',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
   },
 } as Meta<typeof Select>;
 
 const Template: StoryFn<typeof Select> = (args) => {
   const [value, setValue] = React.useState(args.value ? args.value : 'None');
 
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
   const handleChange = (event: SelectChangeEvent<unknown>) => {
     setValue(event.target.value as string);
   };
 
   return (
-    <Select {...args} value={value} onChange={handleChange}>
+    <Select {...args} value={value} onChange={handleChange} customIcon={customIcon}>
       <MenuItem key="None" value="None" disabled>
         <em>{args.placeholder}</em>
       </MenuItem>
@@ -161,6 +185,7 @@ export const ExampleSingleSelect = {
         label: 'Action',
       },
     ],
+    customIcon: 'None',
   },
 };
 

@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -22,6 +22,7 @@ import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import {
   Components, Theme, InputAdornment as MuiInputAdornment, styled,
+  SvgIconProps,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -42,6 +43,7 @@ export interface SelectProps extends MuiSelectProps {
   options?: { label: string }[];
   hiddenLabel?: boolean,
   value?: string,
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
 export const getMuiSelectThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -254,6 +256,7 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
     enableHelpHoverEffect: props.enableHelpHoverEffect,
+    customIcon: props.customIcon,
   };
   return inputLabelProps;
 };

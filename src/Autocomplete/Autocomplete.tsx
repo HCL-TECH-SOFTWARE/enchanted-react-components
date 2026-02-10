@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -15,7 +15,7 @@
 
 import React from 'react';
 import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
-import { Components, Theme } from '@mui/material';
+import { Components, SvgIconProps, Theme } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -51,6 +51,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -94,6 +95,7 @@ DisableClearable extends boolean | undefined = undefined, FreeSolo extends boole
     isFocus,
     fullWidth: props.fullWidth,
     enableHelpHoverEffect: props.enableHelpHoverEffect,
+    customIcon: props.customIcon,
   };
   return inputLabelProps;
 };

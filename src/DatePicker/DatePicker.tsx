@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -14,7 +14,7 @@
  * ======================================================================== */
 import React, { KeyboardEvent } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import { Theme } from '@mui/material';
+import { SvgIconProps, Theme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { v4 as uuid } from 'uuid';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
@@ -46,6 +46,7 @@ export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerPr
   fullWidth?: boolean,
   actionProps?: ActionProps[];
   customStyles?: React.CSSProperties | {[key:string] : React.CSSProperties };
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
 const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[key:string] : React.CSSProperties }) => {
@@ -262,6 +263,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
         ...muiTextFieldProps.inputProps,
         placeholder: props.format,
       },
+      customIcon: props.customIcon,
     };
     return textFieldProps;
   };

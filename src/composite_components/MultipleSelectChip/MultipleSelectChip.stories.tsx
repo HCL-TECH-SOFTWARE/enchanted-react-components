@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -17,6 +17,8 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
@@ -218,11 +220,34 @@ export default {
       },
       description: 'https://mui.com/material-ui/api/chip/',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
   },
 } as Meta<typeof MultipleSelectChip>;
 
 const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
   const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
+
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
   return (
     <MultipleSelectChip
       {...args}
@@ -297,6 +322,7 @@ const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
           );
         });
       }}
+      customIcon={customIcon}
     />
   );
 };
@@ -339,6 +365,7 @@ export const ExampleMultipleSelectChip = {
       return (option as IFilm).label;
     },
     emptyOptions: false,
+    customIcon: 'None',
   },
 };
 

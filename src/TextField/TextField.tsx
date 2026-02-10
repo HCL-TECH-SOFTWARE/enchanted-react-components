@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -20,6 +20,7 @@ import MuiFormHelperText from '@mui/material/FormHelperText';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import {
   Components, Theme, InputAdornment,
+  SvgIconProps,
 } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
 
@@ -50,6 +51,7 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   unitLabel?: string;
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
 export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -307,6 +309,7 @@ const getInputLabelAndActionProps = (props: TextFieldProps, isFocus: boolean): I
     fullWidth: props.fullWidth,
     isFocus,
     enableHelpHoverEffect: props.enableHelpHoverEffect,
+    customIcon: props.customIcon,
   };
   return inputLabelProps;
 };
