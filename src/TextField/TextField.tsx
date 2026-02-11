@@ -288,13 +288,12 @@ const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   if (props.InputProps?.startAdornment) {
     if (!isComboBox) {
       return props.InputProps.startAdornment;
-    } else {
-      return (
-        <InputAdornment position="start">
-          {props.InputProps.startAdornment}
-        </InputAdornment>
-      );
     }
+    return (
+      <InputAdornment position="start">
+        {props.InputProps.startAdornment}
+      </InputAdornment>
+    );
   }
   return null;
 };
