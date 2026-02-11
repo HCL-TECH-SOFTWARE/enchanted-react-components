@@ -5,6 +5,8 @@
 ### Added
 - Add the `customIcon` props in InputLabelAndAction component.
 - Added the new prop - customIcon - for alternative icon to helper icon to TextField, DatePicker, Autocomplete, SelectMultiple, SelectSingle, and MultiSelectChip components.
+- Add the `startAdornment` props in Autocomplete component.
+- Added the new prop - startAdornment - to add an icon at the start of the Autocomplete component.
 
 ### Fixed
 
