@@ -222,6 +222,16 @@ export default {
         },
       },
     },
+    startAdornment: {
+      description: 'This can be used to add an icon at the start of the Autocomplete component.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    }
   },
 } as Meta<typeof Autocomplete>;
 
@@ -243,6 +253,18 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       break;
     default:
       customIcon = undefined;
+  }
+
+  let startAdornment: React.ReactNode = null;
+  switch (args.startAdornment as unknown as string) {
+    case 'CaretDownIcon':
+      startAdornment = <CaretDownIcon />;
+      break;
+    case 'InformationIcon':
+      startAdornment = <InformationIcon />;
+      break;
+    default:
+      startAdornment = null;
   }
 
   return (
@@ -272,6 +294,7 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       }}
       {...args}
       customIcon={customIcon}
+      startAdornment={startAdornment}
     />
   );
 };
@@ -317,6 +340,7 @@ export const ExampleAutocomplete = {
     options: top100Films,
     sx: { minWidth: '240px' },
     customIcon: 'None',
+    startAdornment: 'None',
   },
 };
 
@@ -361,5 +385,13 @@ export const ExampleAutocompleteFullWidth = {
   args: {
     ...ExampleAutocomplete.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleAutocompleteStartAdornment = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    startAdornment: 'InformationIcon',
   },
 };

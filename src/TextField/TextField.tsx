@@ -236,6 +236,16 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             },
             '& [class*=MuiInputAdornment-positionStart]': {
               marginRight: '8px',
+              height: '18px',
+              '& svg': {
+                margin: '0px 0px 0px 4px',
+                padding: '0px',
+                fontSize: '16px',
+              },
+              '& [class*=MuiTypography-body2]': {
+                margin: '0px 0px 0px 8px',
+                cursor: 'default',
+              },
             },
             '& [class*=MuiInputAdornment-positionEnd]': {
               height: '18px',
@@ -273,6 +283,21 @@ const StyledMuiFormControl = styled(MuiFormControl)((theme) => {
     },
   };
 });
+
+const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
+  if (props.InputProps?.startAdornment) {
+    if (!isComboBox) {
+      return props.InputProps.startAdornment;
+    } else {
+      return (
+        <InputAdornment position="start">
+          {props.InputProps.startAdornment}
+        </InputAdornment>
+      );
+    }
+  }
+  return null;
+};
 
 const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   // This is workaround until proper Search component has already been implemented
@@ -348,6 +373,7 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
     label: undefined, // The label will be separately handled and not via the MuiTextField
     InputProps: {
       ...props.InputProps, // since we checking the class name for Inputpros and making sure that upper component is autocomplete
+      startAdornment: getStartAdornment(props, isComboBox),
       endAdornment: props.InputProps?.endAdornment && !isComboBox
         ? props.InputProps?.endAdornment
         : <InputAdornment position="end">{getEndAdornment(props, isComboBox)}</InputAdornment>,
