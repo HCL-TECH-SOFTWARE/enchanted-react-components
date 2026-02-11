@@ -234,8 +234,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               enableHelpHoverEffect,
               InputProps: {
                 ...params.InputProps,
-                startAdornment: startAdornment ? startAdornment : params.InputProps?.startAdornment,
-              }
+                startAdornment: startAdornment ?? params.InputProps?.startAdornment,
+              },
             };
 
             let tooltipTitle = '';

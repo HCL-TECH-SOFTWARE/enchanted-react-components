@@ -231,7 +231,7 @@ export default {
           summary: 'None',
         },
       },
-    }
+    },
   },
 } as Meta<typeof Autocomplete>;
 
