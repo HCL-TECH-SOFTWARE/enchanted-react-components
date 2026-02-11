@@ -52,6 +52,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
+  startAdornment?: React.ReactNode;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -113,6 +114,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     enableHelpHoverEffect,
     renderNonEditInput,
     endAdornmentAction,
+    startAdornment,
     ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
@@ -230,6 +232,10 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
               enableHelpHoverEffect,
+              InputProps: {
+                ...params.InputProps,
+                startAdornment: startAdornment ? startAdornment : params.InputProps?.startAdornment,
+              }
             };
 
             let tooltipTitle = '';
