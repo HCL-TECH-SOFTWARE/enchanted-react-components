@@ -53,6 +53,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   placeholder?: string;
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
   startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -115,6 +116,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     renderNonEditInput,
     endAdornmentAction,
     startAdornment,
+    endAdornment,
     ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
@@ -142,31 +144,51 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value, prevValue]);
 
-  const getAdornmentWidth = React.useCallback(() => {
+  const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
+    return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
+  }, []);
+
+  const getStartAdornmentWidth = React.useCallback(() => {
     let iconCount = 0;
     const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
 
-    // show three icon
-    if (props.disabled) { // two icon show either error or caret
-      iconCount += props.freeSolo ? 0 : 1;
-    } else {
-      // freeSolo is false - two icon show either error or caret and clear icon
-      // disableClearable is true - one icon show caret down icon only
-      // eslint-why - a nested ternary is needed
-      // eslint-disable-next-line no-nested-ternary
-      iconCount += !props.freeSolo ? (props.disableClearable ? 1 : 2) : 1;
+    if (props.startAdornment) {
+      iconCount += getIconsCount(props.startAdornment);
     }
 
-    if (props.error) {
-      iconCount += 1;
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
+    return Math.max(iconWidth, 0);
+  }, [props.startAdornment]);
+
+  const getEndAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+
+    if (props.endAdornment) {
+      iconCount += getIconsCount(props.endAdornment);
     }
+
+    // Check for freeSolo first because if it's true, then the caret down icon will not be shown.
+    iconCount += props.freeSolo ? 0 : 1;
+
+    // Check if the component is disabled or disableClearable is true.
+    // If either is true, the clear icon will not be shown.
+    if (!props.disabled && !(props.disableClearable ?? false)) {
+      if (props.value) {
+        iconCount += 1; // show clear icon
+      }
+    }
+
+    // Check if error icon should be shown.
+    iconCount += props.error ? 1 : 0;
 
     // Calculate the total width needed for the input adornment area based on the number of icons.
     // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
     const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
 
     return Math.max(iconWidth, 0);
-  }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+  }, [props.endAdornment, props.error, props.freeSolo, props.disabled, textfieldRef]);
 
   const handleChange = (event: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
     // Value can be an option from the list or null if cleared
@@ -217,8 +239,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               fullWidth: props.fullWidth,
               sx: {
                 ...props.sx,
-                '& .MuiInputAdornment-root': {
-                  width: getAdornmentWidth(),
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+                  width: getStartAdornmentWidth(),
+                },
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
+                  width: getEndAdornmentWidth(),
+                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px', // add some spacing if there are icons in the end adornment
                 },
               },
               focused,
@@ -235,6 +261,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               InputProps: {
                 ...params.InputProps,
                 startAdornment: startAdornment ?? params.InputProps?.startAdornment,
+                endAdornment: (
+                  <>
+                    {endAdornment}
+                    {params.InputProps?.endAdornment}
+                  </>
+                ),
               },
             };
 

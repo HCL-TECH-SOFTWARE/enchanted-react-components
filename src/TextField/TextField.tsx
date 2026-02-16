@@ -237,7 +237,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             '& [class*=MuiInputAdornment-positionStart]': {
               marginRight: '8px',
               height: '18px',
-              '& svg': {
+              '& svg:not(.MuiCircularProgress-svg)': {
                 margin: '0px 0px 0px 4px',
                 padding: '0px',
                 fontSize: '16px',
@@ -249,8 +249,8 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             },
             '& [class*=MuiInputAdornment-positionEnd]': {
               height: '18px',
-              '& svg': {
-                margin: '0px 0px 0px 4px',
+              '& svg:not(.MuiCircularProgress-svg)': {
+                margin: '0px',
                 padding: '0px',
                 fontSize: '16px',
               },
