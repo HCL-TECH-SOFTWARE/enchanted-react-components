@@ -7,7 +7,7 @@
 ### Fixed
 
 ### Changed
-- Sswitch to the last @hcl-software/enchanted-icons package
+- Switch to the last @hcl-software/enchanted-icons package
 - Extends the IconPreview with new icons
 
 ### Breaking changes
