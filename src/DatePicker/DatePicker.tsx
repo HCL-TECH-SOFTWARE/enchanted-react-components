@@ -186,7 +186,6 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
       display: '-webkit-box',
       padding: '12px 0px',
       justifyContent: 'center',
-      borderTop: 'none',
     },
     '& .MuiPickersArrowSwitcher-button': {
       '&:hover': {
