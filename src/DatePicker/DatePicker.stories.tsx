@@ -165,6 +165,15 @@ export default {
         },
       },
     },
+    staticMode: {
+      description: 'If true, renders a static date picker without input field. Useful for embedded calendar views.',
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: DatePicker.defaultProps.staticMode,
+        },
+      },
+    },
   },
 } as Meta<typeof DatePicker>;
 
@@ -265,5 +274,19 @@ export const ExampleDatePickerFullWidth = {
   args: {
     ...ExampleDatePicker.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleStaticDatePicker = {
+  render: Template,
+  args: {
+    ...DatePicker.defaultProps,
+    staticMode: true,
+  },
+  parameters: {
+    controls: {
+      // Only show controls relevant to the static calendar — input-field-specific controls are not applicable
+      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale'],
+    },
   },
 };

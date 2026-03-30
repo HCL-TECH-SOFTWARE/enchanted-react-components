@@ -14,11 +14,12 @@
  * ======================================================================== */
 import React, { KeyboardEvent } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
-import { SvgIconProps, Theme } from '@mui/material';
+import { StaticDatePicker as MuiStaticDatePicker, StaticDatePickerProps as MuiStaticDatePickerProps } from '@mui/x-date-pickers/StaticDatePicker';
+import { Paper, SvgIconProps, Theme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { v4 as uuid } from 'uuid';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
 import IconCalendar from '@hcl-software/enchanted-icons/dist/carbon/es/calendar';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
@@ -47,17 +48,24 @@ export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerPr
   actionProps?: ActionProps[];
   customStyles?: React.CSSProperties | {[key:string] : React.CSSProperties };
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
+  /**
+   * If true, renders a static date picker without input field. Useful for embedded calendar views
+   */
+  staticMode?: boolean;
 }
 
-const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[key:string] : React.CSSProperties }) => {
+const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { [key: string]: React.CSSProperties }, staticMode?: boolean) => {
   return {
     ...theme.typography.body2,
-    margin: '6px 0px 0px -8px',
+    margin: staticMode ? '0px' : '6px 0px 0px -8px',
     padding: '0px',
     height: 'auto',
     width: '228px',
     color: `1px solid ${theme.palette.background.paper}`,
     boxShadow: theme.shadows[1],
+    '& .MuiPickerStaticWrapper-content': {
+      minWidth: 'unset',
+    },
     '& .MuiCalendarPicker-root': {
       width: '228px',
       margin: '0px',
@@ -178,6 +186,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
       display: '-webkit-box',
       padding: '12px 0px',
       justifyContent: 'center',
+      borderTop: 'none',
     },
     '& .MuiPickersArrowSwitcher-button': {
       '&:hover': {
@@ -189,7 +198,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | {[
 };
 
 const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
-  const { customStyles = {} } = props;
+  const { customStyles = {}, staticMode = false } = props;
   const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
@@ -268,6 +277,80 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     return textFieldProps;
   };
 
+  const renderDay = (day: TDate, _value: TDate[], DayComponentProps: PickersDayProps<TDate>) => {
+    return (
+      <Badge
+        key={(day as unknown as Date).toString()}
+        overlap="circular"
+        variant="standard"
+        color={
+          (DayComponentProps.today && DayComponentProps.selected) ? 'default' : 'primary'
+        }
+        badgeContent={
+          DayComponentProps.today ? <DotMark fontSize="small" /> : undefined
+        }
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        sx={{
+          '& .MuiBadge-badge': {
+            right: '50%',
+            padding: '1px',
+            width: '4px',
+            height: '1px',
+            borderRadius: 'unset',
+            minWidth: '0px',
+            top: '70%',
+            '& .MuiSvgIcon-root': {
+              ...(DayComponentProps.today && DayComponentProps.selected) && {
+                fill: (theme: Theme) => { return theme.palette.common.white; },
+                width: '2px',
+                height: '2px',
+              },
+              ...!(DayComponentProps.today && DayComponentProps.selected) && {
+                fill: 'none',
+                width: '1px',
+                height: '1px',
+              },
+              fontSize: '1px',
+            },
+          },
+        }}
+      >
+        <PickersDay {...DayComponentProps} />
+      </Badge>
+    );
+  };
+  // Static mode - render calendar without input field
+  if (staticMode) {
+    return (
+      <Paper
+        aria-label="Date picker"
+        elevation={8}
+        sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
+      >
+        <MuiStaticDatePicker
+          {...props as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          displayStaticWrapperAs="desktop"
+          reduceAnimations
+          dayOfWeekFormatter={(day) => { return day; }}
+          componentsProps={{
+            actionBar: { actions: ['today'] },
+            leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
+            rightArrowButton: { onKeyDown: handleOnKeyDownRight },
+          }}
+          components={{
+            SwitchViewIcon: CaretDownIcon,
+          }}
+          renderDay={renderDay}
+          renderInput={(_params: MuiTextFieldProps) => { return <span />; }}
+        />
+      </Paper>
+    );
+  }
+
+  // Render regular DatePicker with input field
   return (
     <MuiDatePicker
       {...props}
@@ -297,51 +380,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
           <TextField {...textFieldProps} />
         );
       }}
-      renderDay={(day, _value, DayComponentProps) => {
-        return (
-          <Badge
-            key={(day as unknown as Date).toString()}
-            overlap="circular"
-            variant="standard"
-            color={
-              (DayComponentProps.today && DayComponentProps.selected) ? 'default' : 'primary'
-            }
-            badgeContent={
-              DayComponentProps.today ? <DotMark fontSize="small" /> : undefined
-            }
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            sx={{
-              '& .MuiBadge-badge': {
-                right: '50%',
-                padding: '1px',
-                width: '4px',
-                height: '1px',
-                borderRadius: 'unset',
-                minWidth: '0px',
-                top: '70%',
-                '& .MuiSvgIcon-root': {
-                  ...(DayComponentProps.today && DayComponentProps.selected) && {
-                    fill: (theme: Theme) => { return theme.palette.common.white; },
-                    width: '2px',
-                    height: '2px',
-                  },
-                  ...!(DayComponentProps.today && DayComponentProps.selected) && {
-                    fill: 'none',
-                    width: '1px',
-                    height: '1px',
-                  },
-                  fontSize: '1px',
-                },
-              },
-            }}
-          >
-            <PickersDay {...DayComponentProps} />
-          </Badge>
-        );
-      }}
+      renderDay={renderDay}
     />
   );
 };
@@ -363,7 +402,9 @@ DatePicker.defaultProps = {
   nonEdit: false,
   showDaysOutsideCurrentMonth: true,
   error: false,
+  staticMode: false,
 };
 
 export * from '@mui/x-date-pickers/DatePicker';
+export * from '@mui/x-date-pickers/StaticDatePicker';
 export default DatePicker;
