@@ -14,8 +14,8 @@
  * ======================================================================== */
 import React, { KeyboardEvent } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
+import { SvgIconProps, Theme } from '@mui/material';
 import { StaticDatePicker as MuiStaticDatePicker, StaticDatePickerProps as MuiStaticDatePickerProps } from '@mui/x-date-pickers/StaticDatePicker';
-import { Paper, SvgIconProps, Theme } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { v4 as uuid } from 'uuid';
 import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
@@ -23,11 +23,21 @@ import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
 import IconCalendar from '@hcl-software/enchanted-icons/dist/carbon/es/calendar';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import Paper from '../Paper';
 import Badge from '../Badge/Badge';
 import { ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField';
 
 const DEFAULT_FORMAT: string = 'MM/DD/YYYY';
+
+// Shared formatter used by both static and regular date picker variants
+const dayOfWeekFormatter = (day: string) => { return day; };
+
+// Display mode for the static date picker
+const staticWrapperAs = 'desktop' as const;
+
+// Reduce animations for both static and regular date picker variants
+const shouldReduceAnimations = true;
 
 export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
   label?: string;
@@ -325,15 +335,14 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   if (staticMode) {
     return (
       <Paper
-        aria-label="Date picker"
-        elevation={8}
+        variant="elevation"
         sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
       >
         <MuiStaticDatePicker
           {...props as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
-          displayStaticWrapperAs="desktop"
-          reduceAnimations
-          dayOfWeekFormatter={(day) => { return day; }}
+          displayStaticWrapperAs={staticWrapperAs}
+          reduceAnimations={shouldReduceAnimations}
+          dayOfWeekFormatter={dayOfWeekFormatter}
           componentsProps={{
             actionBar: { actions: ['today'] },
             leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
@@ -353,10 +362,10 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   return (
     <MuiDatePicker
       {...props}
-      reduceAnimations
+      reduceAnimations={shouldReduceAnimations}
       autoFocus={false}
       onOpen={focusDialog}
-      dayOfWeekFormatter={(day) => { return day; }}
+      dayOfWeekFormatter={dayOfWeekFormatter}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
       }}
@@ -405,5 +414,4 @@ DatePicker.defaultProps = {
 };
 
 export * from '@mui/x-date-pickers/DatePicker';
-export * from '@mui/x-date-pickers/StaticDatePicker';
 export default DatePicker;
