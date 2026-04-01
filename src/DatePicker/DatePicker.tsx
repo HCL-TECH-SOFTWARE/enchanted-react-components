@@ -80,7 +80,12 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
       width: '228px',
       margin: '0px',
       height: 'auto',
+      overflowY: 'hidden',
       flexGrow: 1,
+    },
+    '& .MuiYearPicker-root': {
+      maxHeight: '168px',
+      overflowY: 'auto',
     },
     '& .MuiTouchRipple-root': {
       color: 'transparent',
@@ -196,6 +201,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
       display: '-webkit-box',
       padding: '12px 0px',
       justifyContent: 'center',
+      borderTop: 'none',
     },
     '& .MuiPickersArrowSwitcher-button': {
       '&:hover': {
@@ -206,8 +212,73 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
   };
 };
 
-const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
-  const { customStyles = {}, staticMode = false } = props;
+/**
+ * Default prop values for DatePicker.
+ * Exported for use in Storybook argTypes and story args.
+ */
+export const DatePickerDefaults = {
+  margin: 'none' as const,
+  color: 'primary' as const,
+  size: 'medium' as const,
+  label: '',
+  helperText: '',
+  enableHelpHoverEffect: false,
+  helperIconTooltip: '',
+  format: DEFAULT_FORMAT,
+  unitLabel: '',
+  required: false,
+  disabled: false,
+  fullWidth: false,
+  hiddenLabel: false,
+  nonEdit: false,
+  showDaysOutsideCurrentMonth: true,
+  error: false,
+  staticMode: false,
+};
+
+const DatePicker = <TInputDate, TDate>({
+  customStyles = {},
+  staticMode = false,
+  margin = 'none',
+  color = 'primary',
+  size = 'medium',
+  label = '',
+  helperText = '',
+  enableHelpHoverEffect = false,
+  helperIconTooltip = '',
+  format = DEFAULT_FORMAT,
+  unitLabel = '',
+  required = false,
+  disabled = false,
+  fullWidth = false,
+  hiddenLabel = false,
+  nonEdit = false,
+  showDaysOutsideCurrentMonth = true,
+  error = false,
+  ...rest
+}: DatePickerProps<TInputDate, TDate>) => {
+  // Reconstruct full props for spreading to MUI components and internal access
+  const props: DatePickerProps<TInputDate, TDate> = {
+    customStyles,
+    staticMode,
+    margin,
+    color,
+    size,
+    label,
+    helperText,
+    enableHelpHoverEffect,
+    helperIconTooltip,
+    format,
+    unitLabel,
+    required,
+    disabled,
+    fullWidth,
+    hiddenLabel,
+    nonEdit,
+    showDaysOutsideCurrentMonth,
+    error,
+    ...rest,
+  };
   const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
@@ -228,8 +299,8 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
     }
   };
 
-  const formatValue = (value: Dayjs, format: string): string => {
-    return value.format(format);
+  const formatValue = (value: Dayjs, dateFormat: string): string => {
+    return value.format(dateFormat);
   };
   const focusDialog = () => {
     window.requestAnimationFrame(() => {
@@ -246,12 +317,12 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
   };
 
   const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
-    let error = false;
+    let hasError = false;
     if (props.value !== null) {
       const day = props.value as unknown as Dayjs;
       if (!Number.isNaN(day.day()) && !Number.isNaN(day.month()) && !Number.isNaN(day.year())) {
         const valid = dayjs(day, props.format, true).isValid();
-        error = !valid;
+        hasError = !valid;
       }
     }
     const textFieldProps: TextFieldProps = {
@@ -267,7 +338,7 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       color: props.color,
       size: props.size,
       autoComplete: 'off',
-      error: props.error || error,
+      error: props.error || hasError,
       fullWidth: props.fullWidth,
       unitLabel: props.unitLabel,
       hiddenLabel: props.hiddenLabel,
@@ -391,26 +462,6 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
       renderDay={renderDay}
     />
   );
-};
-
-DatePicker.defaultProps = {
-  margin: 'none',
-  color: 'primary',
-  size: 'medium',
-  label: '',
-  helperText: '',
-  enableHelpHoverEffect: false,
-  helperIconTooltip: '',
-  format: DEFAULT_FORMAT,
-  unitLabel: '',
-  required: false,
-  disabled: false,
-  fullWidth: false,
-  hiddenLabel: false,
-  nonEdit: false,
-  showDaysOutsideCurrentMonth: true,
-  error: false,
-  staticMode: false,
 };
 
 export * from '@mui/x-date-pickers/DatePicker';

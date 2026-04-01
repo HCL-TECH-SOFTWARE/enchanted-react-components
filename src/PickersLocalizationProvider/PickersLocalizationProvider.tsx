@@ -156,30 +156,30 @@ const verfiyAdapterLocale = (adapterLocale?: string | object) => {
 };
 
 export type PickersLocalizationProviderProps = MuiLocalizationProviderProps & {
+  onLocaleLoad?: (locale: string) => void;
+  adapterLocale: string | object;
 }
 
-const PickersLocalizationProvider = ({ ...props }: PickersLocalizationProviderProps) => {
+const PickersLocalizationProvider = ({ adapterLocale: adapterLocaleProp = 'en', onLocaleLoad, ...rest }: PickersLocalizationProviderProps) => {
   const [adapterLocale, setAdapterLocale] = useState('en');
   useEffect(() => {
-    if (props.adapterLocale !== undefined && typeof props.adapterLocale === 'string') {
-      const loadDayJsLocale = async (dayJsLocal: string) => {
-        await DAYJS_LOCALE_PACKAGE[dayJsLocal];
-        dayjs.locale(dayJsLocal);
-        setAdapterLocale(dayJsLocal);
+    if (adapterLocaleProp !== undefined && typeof adapterLocaleProp === 'string') {
+      const loadDayJsLocale = async (dayJsLocale: string) => {
+        await DAYJS_LOCALE_PACKAGE[dayJsLocale];
+        dayjs.locale(dayJsLocale);
+        setAdapterLocale(dayJsLocale);
+        onLocaleLoad?.(dayJsLocale);
       };
-      const locale = (props.adapterLocale !== undefined && !SUPPORTED_LOCALE.includes(props.adapterLocale)) ? 'en' : props.adapterLocale;
+      const locale = (!SUPPORTED_LOCALE.includes(adapterLocaleProp)) ? 'en' : adapterLocaleProp;
       loadDayJsLocale(locale);
     }
-  }, [props.adapterLocale]);
+  }, [adapterLocaleProp, onLocaleLoad]);
 
-  verfiyAdapterLocale(props.adapterLocale);
+  verfiyAdapterLocale(adapterLocaleProp);
 
   // Set Monday as the first day of the week in the calendar
   dayjs.Ls[`${adapterLocale}`].weekStart = 1;
-  return <MuiLocalizationProvider {...props} adapterLocale={adapterLocale} localeText={getLocaleText(props.adapterLocale)} />;
-};
-
-PickersLocalizationProvider.defaultProps = {
+  return <MuiLocalizationProvider {...rest} adapterLocale={adapterLocale} localeText={getLocaleText(adapterLocaleProp)} />;
 };
 
 export * from '@mui/x-date-pickers/LocalizationProvider';
