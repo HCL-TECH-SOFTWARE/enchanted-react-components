@@ -26,10 +26,7 @@ import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../.
 
 afterEach(cleanup);
 
-/**
- * Wraps the given UI in the theme and localisation providers required by
- * every DatePicker test, eliminating the repeated boilerplate.
- */
+// Shared render helper — wraps UI in ThemeProvider + PickersLocalizationProvider.
 const renderWithProviders = (ui: React.ReactElement) => {
   return render(
     <ThemeProvider theme={createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
@@ -72,10 +69,8 @@ describe('DatePicker staticMode', () => {
 
   it('Render static DatePicker renders calendar day buttons', () => {
     const dateValue = dayjs('2024-01-15');
-    const { getAllByRole } = renderWithProviders(
-      <DatePicker staticMode value={dateValue} onChange={jest.fn()} />,
-    );
-    expect(getAllByRole('button').length).toBeGreaterThan(0);
+    renderWithProviders(<DatePicker staticMode value={dateValue} onChange={jest.fn()} />);
+    expect(screen.getAllByRole('button').length).toBeGreaterThan(0);
   });
 
   it('Render static DatePicker shows the Today button in action bar', () => {
