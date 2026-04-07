@@ -160,7 +160,11 @@ export type PickersLocalizationProviderProps = MuiLocalizationProviderProps & {
   adapterLocale: string | object;
 }
 
-const PickersLocalizationProvider = ({ adapterLocale: adapterLocaleProp = 'en', onLocaleLoad, ...rest }: PickersLocalizationProviderProps) => {
+const PickersLocalizationProvider = ({
+  adapterLocale: adapterLocaleProp = 'en',
+  onLocaleLoad,
+  ...rest
+}: PickersLocalizationProviderProps) => {
   const [adapterLocale, setAdapterLocale] = useState('en');
   useEffect(() => {
     if (adapterLocaleProp !== undefined && typeof adapterLocaleProp === 'string') {

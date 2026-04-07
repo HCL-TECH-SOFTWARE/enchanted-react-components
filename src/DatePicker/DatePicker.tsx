@@ -36,9 +36,6 @@ const dayOfWeekFormatter = (day: string) => { return day; };
 // Display mode for the static date picker
 const staticWrapperAs = 'desktop' as const;
 
-// Reduce animations for both static and regular date picker variants
-const shouldReduceAnimations = true;
-
 export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
   label?: string;
   helperText?: string;
@@ -236,49 +233,30 @@ export const DatePickerDefaults = {
   staticMode: false,
 };
 
-const DatePicker = <TInputDate, TDate>({
-  customStyles = {},
-  staticMode = false,
-  margin = 'none',
-  color = 'primary',
-  size = 'medium',
-  label = '',
-  helperText = '',
-  enableHelpHoverEffect = false,
-  helperIconTooltip = '',
-  format = DEFAULT_FORMAT,
-  unitLabel = '',
-  required = false,
-  disabled = false,
-  fullWidth = false,
-  hiddenLabel = false,
-  nonEdit = false,
-  showDaysOutsideCurrentMonth = true,
-  error = false,
-  ...rest
-}: DatePickerProps<TInputDate, TDate>) => {
-  // Reconstruct full props for spreading to MUI components and internal access
-  const props: DatePickerProps<TInputDate, TDate> = {
-    customStyles,
-    staticMode,
-    margin,
-    color,
-    size,
-    label,
-    helperText,
-    enableHelpHoverEffect,
-    helperIconTooltip,
-    format,
-    unitLabel,
-    required,
-    disabled,
-    fullWidth,
-    hiddenLabel,
-    nonEdit,
-    showDaysOutsideCurrentMonth,
-    error,
-    ...rest,
-  };
+const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
+  const {
+    customStyles = {},
+    staticMode = false,
+    margin = 'none',
+    color = 'primary',
+    size = 'medium',
+    label = '',
+    helperText = '',
+    enableHelpHoverEffect = false,
+    helperIconTooltip = '',
+    format = DEFAULT_FORMAT,
+    unitLabel = '',
+    required = false,
+    disabled = false,
+    fullWidth = false,
+    hiddenLabel = false,
+    nonEdit = false,
+    error = false,
+    actionProps,
+    customIcon,
+    value,
+    ...muiProps
+  } = props;
   const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
@@ -299,8 +277,8 @@ const DatePicker = <TInputDate, TDate>({
     }
   };
 
-  const formatValue = (value: Dayjs, dateFormat: string): string => {
-    return value.format(dateFormat);
+  const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
+    return dateValue.format(dateFormat);
   };
   const focusDialog = () => {
     window.requestAnimationFrame(() => {
@@ -328,31 +306,31 @@ const DatePicker = <TInputDate, TDate>({
     const textFieldProps: TextFieldProps = {
       ...muiTextFieldProps as TextFieldProps,
       inputRef: muiTextFieldProps.inputRef,
-      label: props.label,
-      helperText: props.helperText,
-      enableHelpHoverEffect: props.enableHelpHoverEffect,
-      helperIconTooltip: props.helperIconTooltip,
-      required: props.required,
-      disabled: props.disabled,
-      margin: props.margin,
-      color: props.color,
-      size: props.size,
+      label,
+      helperText,
+      enableHelpHoverEffect,
+      helperIconTooltip,
+      required,
+      disabled,
+      margin,
+      color,
+      size,
       autoComplete: 'off',
-      error: props.error || hasError,
-      fullWidth: props.fullWidth,
-      unitLabel: props.unitLabel,
-      hiddenLabel: props.hiddenLabel,
-      nonEdit: props.nonEdit,
-      value: props.value !== null ? `${formatValue(props.value as unknown as Dayjs, props.format || DEFAULT_FORMAT)}` : '',
-      actionProps: props.actionProps,
+      error: error || hasError,
+      fullWidth,
+      unitLabel,
+      hiddenLabel,
+      nonEdit,
+      value: value !== null ? `${formatValue(value as unknown as Dayjs, format || DEFAULT_FORMAT)}` : '',
+      actionProps,
       InputProps: {
         ...muiTextFieldProps.InputProps,
       },
       inputProps: {
         ...muiTextFieldProps.inputProps,
-        placeholder: props.format,
+        placeholder: format,
       },
-      customIcon: props.customIcon,
+      customIcon,
     };
     return textFieldProps;
   };
@@ -410,9 +388,11 @@ const DatePicker = <TInputDate, TDate>({
         sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
       >
         <MuiStaticDatePicker
-          {...props as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          disabled={disabled}
+          value={value}
           displayStaticWrapperAs={staticWrapperAs}
-          reduceAnimations={shouldReduceAnimations}
+          reduceAnimations
           dayOfWeekFormatter={dayOfWeekFormatter}
           componentsProps={{
             actionBar: { actions: ['today'] },
@@ -432,8 +412,10 @@ const DatePicker = <TInputDate, TDate>({
   // Render regular DatePicker with input field
   return (
     <MuiDatePicker
-      {...props}
-      reduceAnimations={shouldReduceAnimations}
+      {...muiProps}
+      disabled={disabled}
+      value={value}
+      reduceAnimations
       autoFocus={false}
       onOpen={focusDialog}
       dayOfWeekFormatter={dayOfWeekFormatter}
