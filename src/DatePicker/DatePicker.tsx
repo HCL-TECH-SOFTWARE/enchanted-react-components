@@ -233,30 +233,29 @@ export const DatePickerDefaults = {
   staticMode: false,
 };
 
-const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate, TDate>) => {
-  const {
-    customStyles = {},
-    staticMode = false,
-    margin = 'none',
-    color = 'primary',
-    size = 'medium',
-    label = '',
-    helperText = '',
-    enableHelpHoverEffect = false,
-    helperIconTooltip = '',
-    format = DEFAULT_FORMAT,
-    unitLabel = '',
-    required = false,
-    disabled = false,
-    fullWidth = false,
-    hiddenLabel = false,
-    nonEdit = false,
-    error = false,
-    actionProps,
-    customIcon,
-    value,
-    ...muiProps
-  } = props;
+const DatePicker = <TInputDate, TDate>({
+  customStyles = {},
+  staticMode = false,
+  margin = 'none',
+  color = 'primary',
+  size = 'medium',
+  label = '',
+  helperText = '',
+  enableHelpHoverEffect = false,
+  helperIconTooltip = '',
+  format = DEFAULT_FORMAT,
+  unitLabel = '',
+  required = false,
+  disabled = false,
+  fullWidth = false,
+  hiddenLabel = false,
+  nonEdit = false,
+  error = false,
+  actionProps,
+  customIcon,
+  value,
+  ...muiProps
+}: DatePickerProps<TInputDate, TDate>) => {
   const popperId = uuid();
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
@@ -296,10 +295,10 @@ const DatePicker = <TInputDate, TDate>({ ...props }: DatePickerProps<TInputDate,
 
   const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
     let hasError = false;
-    if (props.value !== null) {
-      const day = props.value as unknown as Dayjs;
+    if (value !== null) {
+      const day = value as unknown as Dayjs;
       if (!Number.isNaN(day.day()) && !Number.isNaN(day.month()) && !Number.isNaN(day.year())) {
-        const valid = dayjs(day, props.format, true).isValid();
+        const valid = dayjs(day, format, true).isValid();
         hasError = !valid;
       }
     }
