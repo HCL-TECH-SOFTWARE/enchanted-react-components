@@ -23,8 +23,9 @@ import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
 import IconCalendar from '@hcl-software/enchanted-icons/dist/carbon/es/calendar';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import { svgIconClasses } from '@mui/material/SvgIcon';
 import Paper from '../Paper';
-import Badge from '../Badge/Badge';
+import Badge, { badgeClasses } from '../Badge/Badge';
 import { ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField';
 
@@ -69,7 +70,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     height: 'auto',
     width: '228px',
     color: `1px solid ${theme.palette.background.paper}`,
-    boxShadow: theme.shadows[1],
+    boxShadow: 1,
     '& .MuiPickerStaticWrapper-content': {
       minWidth: 'unset',
     },
@@ -111,7 +112,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     },
     '& .MuiDayPicker-weekDayLabel': {
       ...theme.typography.body2,
-      color: theme.palette.text.secondary,
+      color: 'text.secondary',
       margin: '4px 2px',
       width: '24px',
       padding: '0px',
@@ -126,7 +127,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
 
     },
     '& .MuiIconButton-root': {
-      '& .MuiSvgIcon-root': {
+      [`& .${svgIconClasses.root}`]: {
         padding: '0px',
         width: '16px',
         height: '16px',
@@ -155,10 +156,10 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         position: 'relative',
       },
       '&.MuiPickersDay-dayOutsideMonth': {
-        color: theme.palette.text.disabled,
+        color: 'text.disabled',
       },
       '&:hover': {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: 'action.hover',
       },
       '&:focus-visible': {
         backgroundColor: 'transparent',
@@ -166,25 +167,25 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         outline: `1px solid ${theme.palette.action.focus}`,
         outlineOffset: '3px',
         '&:hover': {
-          backgroundColor: theme.palette.action.hover,
+          backgroundColor: 'action.hover',
           border: 'none',
           outline: `1px solid ${theme.palette.action.focus}`,
           outlineOffset: '3px',
         },
       },
       '&.Mui-selected': {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.text.tertiary1,
+        backgroundColor: 'primary.main',
+        color: 'text.tertiary1',
         '&:hover': {
-          backgroundColor: theme.palette.primary.dark,
+          backgroundColor: 'primary.dark',
         },
         '&:focus-visible': {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: 'primary.main',
           border: 'none',
           outline: `1px solid ${theme.palette.action.focus}`,
           outlineOffset: '3px',
           '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: 'primary.dark',
           },
         },
       },
@@ -202,7 +203,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     },
     '& .MuiPickersArrowSwitcher-button': {
       '&:hover': {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: 'action.hover',
       },
     },
     ...customStyles,
@@ -351,7 +352,7 @@ const DatePicker = <TInputDate, TDate>({
           horizontal: 'right',
         }}
         sx={{
-          '& .MuiBadge-badge': {
+          [`& .${badgeClasses.badge}`]: {
             right: '50%',
             padding: '1px',
             width: '4px',
@@ -359,9 +360,9 @@ const DatePicker = <TInputDate, TDate>({
             borderRadius: 'unset',
             minWidth: '0px',
             top: '70%',
-            '& .MuiSvgIcon-root': {
+            [`& .${svgIconClasses.root}`]: {
               ...(DayComponentProps.today && DayComponentProps.selected) && {
-                fill: (theme: Theme) => { return theme.palette.common.white; },
+                fill: 'common.white',
                 width: '2px',
                 height: '2px',
               },
