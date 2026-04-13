@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Add `staticMode` prop to DatePicker for rendering inline calendar via StaticDatePicker.
 
 ### Fixed
 
