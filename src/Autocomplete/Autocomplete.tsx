@@ -15,7 +15,9 @@
 
 import React from 'react';
 import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
-import { Components, SvgIconProps, Theme } from '@mui/material';
+import {
+  Components, InputAdornment, SvgIconProps, Theme,
+} from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -260,7 +262,16 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               enableHelpHoverEffect,
               InputProps: {
                 ...params.InputProps,
-                startAdornment: startAdornment ?? params.InputProps?.startAdornment,
+                startAdornment: startAdornment
+                  ? (
+                    <>
+                      <InputAdornment position="start">
+                        {startAdornment}
+                      </InputAdornment>
+                      {params.InputProps?.startAdornment}
+                    </>
+                  )
+                  : params.InputProps?.startAdornment,
                 endAdornment: (
                   <>
                     {endAdornment}
