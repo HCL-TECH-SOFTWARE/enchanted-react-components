@@ -112,7 +112,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     },
     '& .MuiDayPicker-weekDayLabel': {
       ...theme.typography.body2,
-      color: 'text.secondary',
+      color: theme.palette.text.secondary,
       margin: '4px 2px',
       width: '24px',
       padding: '0px',
@@ -156,10 +156,10 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         position: 'relative',
       },
       '&.MuiPickersDay-dayOutsideMonth': {
-        color: 'text.disabled',
+        color: theme.palette.text.disabled,
       },
       '&:hover': {
-        backgroundColor: 'action.hover',
+        backgroundColor: theme.palette.action.hover,
       },
       '&:focus-visible': {
         backgroundColor: 'transparent',
@@ -167,25 +167,25 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         outline: `1px solid ${theme.palette.action.focus}`,
         outlineOffset: '3px',
         '&:hover': {
-          backgroundColor: 'action.hover',
+          backgroundColor: theme.palette.action.hover,
           border: 'none',
           outline: `1px solid ${theme.palette.action.focus}`,
           outlineOffset: '3px',
         },
       },
       '&.Mui-selected': {
-        backgroundColor: 'primary.main',
-        color: 'text.tertiary1',
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.text.tertiary1,
         '&:hover': {
-          backgroundColor: 'primary.dark',
+          backgroundColor: theme.palette.primary.dark,
         },
         '&:focus-visible': {
-          backgroundColor: 'primary.main',
+          backgroundColor: theme.palette.primary.main,
           border: 'none',
           outline: `1px solid ${theme.palette.action.focus}`,
           outlineOffset: '3px',
           '&:hover': {
-            backgroundColor: 'primary.dark',
+            backgroundColor: theme.palette.primary.dark,
           },
         },
       },
@@ -203,7 +203,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     },
     '& .MuiPickersArrowSwitcher-button': {
       '&:hover': {
-        backgroundColor: 'action.hover',
+        backgroundColor: theme.palette.action.hover,
       },
     },
     ...customStyles,
