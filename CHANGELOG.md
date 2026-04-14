@@ -7,6 +7,9 @@
 ### Fixed
 
 ### Changed
+- Switch to the last @hcl-software/enchanted-icons package
+- Extends the IconPreview with new icons
+- Fix MultipleSelectChip broken layout caused by startAdornment wrapping chips in InputAdornment
 
 ### Breaking changes
 

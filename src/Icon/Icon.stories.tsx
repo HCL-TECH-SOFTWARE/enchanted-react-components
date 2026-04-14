@@ -21,6 +21,7 @@ import {
 
 import CustomIconSortDescendingAlt from '@hcl-software/enchanted-icons/dist/apps/es/Sort--descending--alt';
 import CustomIconSortAscendingAlt from '@hcl-software/enchanted-icons/dist/apps/es/Sort-ascending--alt';
+import CustomIconAiSparkle from '@hcl-software/enchanted-icons/dist/apps/es/ai--sparkle';
 import CustomIconAppSwitcher from '@hcl-software/enchanted-icons/dist/apps/es/app-switcher';
 import CustomIconArrows from '@hcl-software/enchanted-icons/dist/apps/es/arrows';
 import CustomIconBackToTop from '@hcl-software/enchanted-icons/dist/apps/es/back-to-top';
@@ -45,6 +46,9 @@ import CustomIconContentItem from '@hcl-software/enchanted-icons/dist/apps/es/co
 import CustomIconContentItemFilled from '@hcl-software/enchanted-icons/dist/apps/es/content-item--filled';
 import CustomIconContentSites from '@hcl-software/enchanted-icons/dist/apps/es/content-sites';
 import CustomIconContentViewAlt from '@hcl-software/enchanted-icons/dist/apps/es/content-view--alt';
+import CustomIconContextPreview from '@hcl-software/enchanted-icons/dist/apps/es/context-preview';
+import CustomIconContextPreviewView from '@hcl-software/enchanted-icons/dist/apps/es/context-preview--view';
+import CustomIconDataAnalytics from '@hcl-software/enchanted-icons/dist/apps/es/data-analytics';
 import CustomIconDataComponent from '@hcl-software/enchanted-icons/dist/apps/es/data-component';
 import CustomIconDataContainer from '@hcl-software/enchanted-icons/dist/apps/es/data-container';
 import CustomIconDataText from '@hcl-software/enchanted-icons/dist/apps/es/data-text';
@@ -86,6 +90,7 @@ import CustomIconFormFormButton from '@hcl-software/enchanted-icons/dist/apps/es
 import CustomIconFormInput from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/input';
 import CustomIconFormLabel from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/label';
 import CustomIconFormTextArea from '@hcl-software/enchanted-icons/dist/apps/es/elements/wcm/form/text-area';
+import CustomIconEventWarning from '@hcl-software/enchanted-icons/dist/apps/es/event--warning';
 import CustomIconExitAlt from '@hcl-software/enchanted-icons/dist/apps/es/exit--alt';
 import CustomIconFooter from '@hcl-software/enchanted-icons/dist/apps/es/footer';
 import CustomIconFooterContent from '@hcl-software/enchanted-icons/dist/apps/es/footer--content';
@@ -97,7 +102,9 @@ import CustomIconHeaderContent from '@hcl-software/enchanted-icons/dist/apps/es/
 import CustomIconId from '@hcl-software/enchanted-icons/dist/apps/es/id';
 import CustomIconImages from '@hcl-software/enchanted-icons/dist/apps/es/images';
 import CustomIconItemsSearchEmpty from '@hcl-software/enchanted-icons/dist/apps/es/items--search--empty';
+import CustomIconItemsSearchInitial from '@hcl-software/enchanted-icons/dist/apps/es/items--search--initial';
 import CustomIconLayersAlt from '@hcl-software/enchanted-icons/dist/apps/es/layers--alt';
+import CustomIconLayersExternal from '@hcl-software/enchanted-icons/dist/apps/es/layers--external';
 import CustomIconLayersFilled from '@hcl-software/enchanted-icons/dist/apps/es/layers--filled';
 import CustomIconLayersHidden from '@hcl-software/enchanted-icons/dist/apps/es/layers--hidden';
 import CustomIconLayoutOff from '@hcl-software/enchanted-icons/dist/apps/es/layout--off';
@@ -1989,6 +1996,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
     <Grid container spacing={4}>
       {renderGridItem('../apps/es/Sort--descending--alt', <CustomIconSortDescendingAlt {...args} />)}
       {renderGridItem('../apps/es/Sort-ascending--alt', <CustomIconSortAscendingAlt {...args} />)}
+      {renderGridItem('../apps/es/ai--sparkle', <CustomIconAiSparkle {...args} />)}
       {renderGridItem('../apps/es/app-switcher', <CustomIconAppSwitcher {...args} />)}
       {renderGridItem('../apps/es/arrows', <CustomIconArrows {...args} />)}
       {renderGridItem('../apps/es/back-to-top', <CustomIconBackToTop {...args} />)}
@@ -2013,6 +2021,9 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../apps/es/content-item--filled', <CustomIconContentItemFilled {...args} />)}
       {renderGridItem('../apps/es/content-sites', <CustomIconContentSites {...args} />)}
       {renderGridItem('../apps/es/content-view--alt', <CustomIconContentViewAlt {...args} />)}
+      {renderGridItem('../apps/es/context-preview', <CustomIconContextPreview {...args} />)}
+      {renderGridItem('../apps/es/context-preview--view', <CustomIconContextPreviewView {...args} />)}
+      {renderGridItem('../apps/es/data-analytics', <CustomIconDataAnalytics {...args} />)}
       {renderGridItem('../apps/es/data-component', <CustomIconDataComponent {...args} />)}
       {renderGridItem('../apps/es/data-container', <CustomIconDataContainer {...args} />)}
       {renderGridItem('../apps/es/data-text', <CustomIconDataText {...args} />)}
@@ -2054,6 +2065,7 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../apps/es/elements/wcm/form/input', <CustomIconFormInput {...args} />)}
       {renderGridItem('../apps/es/elements/wcm/form/label', <CustomIconFormLabel {...args} />)}
       {renderGridItem('../apps/es/elements/wcm/form/text-area', <CustomIconFormTextArea {...args} />)}
+      {renderGridItem('../apps/es/event--warning', <CustomIconEventWarning {...args} />)}
       {renderGridItem('../apps/es/exit--alt', <CustomIconExitAlt {...args} />)}
       {renderGridItem('../apps/es/footer', <CustomIconFooter {...args} />)}
       {renderGridItem('../apps/es/footer--content', <CustomIconFooterContent {...args} />)}
@@ -2065,7 +2077,9 @@ const Template: StoryFn<typeof Icon> = (args) => {
       {renderGridItem('../apps/es/id', <CustomIconId {...args} />)}
       {renderGridItem('../apps/es/images', <CustomIconImages {...args} />)}
       {renderGridItem('../apps/es/items--search--empty', <CustomIconItemsSearchEmpty {...args} />)}
+      {renderGridItem('../apps/es/items--search--initial', <CustomIconItemsSearchInitial {...args} />)}
       {renderGridItem('../apps/es/layers--alt', <CustomIconLayersAlt {...args} />)}
+      {renderGridItem('../apps/es/layers--external', <CustomIconLayersExternal {...args} />)}
       {renderGridItem('../apps/es/layers--filled', <CustomIconLayersFilled {...args} />)}
       {renderGridItem('../apps/es/layers--hidden', <CustomIconLayersHidden {...args} />)}
       {renderGridItem('../apps/es/layout--off', <CustomIconLayoutOff {...args} />)}
