@@ -284,6 +284,52 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             let tooltipTitle = '';
             const inputValue = textfieldRef.current?.value ?? '';
 
+            const getPathSegmentLabel = (segment: unknown): string => {
+              if (typeof segment === 'string') {
+                return segment;
+              }
+              if (typeof segment === 'object' && segment !== null) {
+                const segmentRecord = segment as Record<string, unknown>;
+                const labelCandidate = segmentRecord.label;
+                const titleCandidate = segmentRecord.title;
+                const valueCandidate = segmentRecord.value;
+
+                // Prefer nested title.value from path nodes for consistent breadcrumb labels.
+                if (typeof titleCandidate === 'object' && titleCandidate !== null) {
+                  const titleValueCandidate = (titleCandidate as Record<string, unknown>).value;
+                  if (typeof titleValueCandidate === 'string') return titleValueCandidate;
+                }
+
+                if (typeof labelCandidate === 'string') return labelCandidate;
+                if (typeof titleCandidate === 'string') return titleCandidate;
+                if (typeof valueCandidate === 'string') return valueCandidate;
+              }
+              return '';
+            };
+
+            // Build full breadcrumb-like text from option.path.
+            const getFullPathLabel = (option: unknown): string => {
+              if (typeof option !== 'object' || option === null) {
+                return '';
+              }
+
+              const optionRecord = option as Record<string, unknown>;
+              const pathValue = optionRecord.path;
+
+              if (Array.isArray(pathValue)) {
+                const segments = pathValue
+                  .map((segment) => { return getPathSegmentLabel(segment).trim(); })
+                  .filter((segment) => { return Boolean(segment); });
+                return segments.join(' / ');
+              }
+
+              if (typeof pathValue === 'string') {
+                return pathValue;
+              }
+
+              return '';
+            };
+
             // Helper to check if a value matches an option
             const isValueInOptions = (selctedValue: string) => {
               if (!selctedValue) return false;
@@ -300,10 +346,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
             const hasSelectedValue = selectedOption && typeof selectedOption === 'object' && 'label' in selectedOption;
             const selectedValue = hasSelectedValue ? (selectedOption.label as string) : (selectedOption as string);
+            const selectedPathValue = getFullPathLabel(selectedOption);
+            const selectedTooltipValue = selectedPathValue || selectedValue || '';
 
             // Checking for selectedOption covers cases where user selects from dropdown or clears input
-            if (selectedOption && isValueOverFlowing && isValueInOptions(selectedValue)) {
-              tooltipTitle = selectedValue;
+            if (selectedOption && isValueOverFlowing) {
+              tooltipTitle = selectedTooltipValue;
             // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
             } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
               tooltipTitle = inputValue;
