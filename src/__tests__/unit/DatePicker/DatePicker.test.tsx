@@ -15,8 +15,7 @@
 
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
@@ -76,13 +75,12 @@ describe('DatePicker staticMode', () => {
     expect(screen.getByRole('button', { name: 'Today' })).toBeInTheDocument();
   });
 
-  it('Render static DatePicker calls onChange with correct dayjs value when a day is clicked', async () => {
+  it('Render static DatePicker calls onChange with correct dayjs value when a day is clicked', () => {
     const handleChange = jest.fn();
     const dateValue = dayjs('2024-01-15');
-    const user = userEvent.setup();
     renderWithProviders(<DatePicker staticMode value={dateValue} onChange={handleChange} />);
-    const date10Button = screen.getByRole('button', { name: '10' });
-    await user.click(date10Button);
+    const date10Button = screen.getByRole('gridcell', { name: '10' });
+    fireEvent.click(date10Button);
     expect(handleChange).toHaveBeenCalledTimes(1);
     const calledWith = handleChange.mock.calls[0][0] as Dayjs;
     expect(dayjs.isDayjs(calledWith)).toBe(true);
