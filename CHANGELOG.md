@@ -6,6 +6,7 @@
 - Add `staticMode` prop to DatePicker for rendering inline calendar via StaticDatePicker.
 
 ### Fixed
+- Fixed AutoComplete tooltip when hovering into input field showing full details instead of truncated
 
 ### Changed
 - Switch to the last @hcl-software/enchanted-icons package
