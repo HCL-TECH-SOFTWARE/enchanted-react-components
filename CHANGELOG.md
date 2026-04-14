@@ -11,8 +11,9 @@
 - Switch to the last @hcl-software/enchanted-icons package
 - Extends the IconPreview with new icons
 - Fix MultipleSelectChip broken layout caused by startAdornment wrapping chips in InputAdornment
-- Updates @mui/material and @mui/system packages to the latest available v5 version
+- Updates @mui/material and @mui/system packages to the latest available v5 version, 5.18.0
   - Fix resulting type errors in Select.tsx and Tabs.tsx
+- Updates lodash package to the latest version, 4.18.1
 
 ### Breaking changes
 
