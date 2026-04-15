@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Add `staticMode` prop to DatePicker for rendering inline calendar via StaticDatePicker.
 
 ### Fixed
 - Fixed unwanted blue border appearing on `DataGrid` cells when clicked with mouse by using `:focus-visible` to distinguish between mouse and keyboard focus
