@@ -406,7 +406,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                   '.MuiAutocomplete-endAdornment': { // end icon
                     right: '8px',
                     '.MuiButtonBase-root': { // for both clear icon and caret down icon
-                      top: '3px',
+                      top: '-1px',
                       // eslint-why - a nested ternary is needed
                       // eslint-disable-next-line no-nested-ternary
                       margin: ownerState.error ? (ownerState.freeSolo ? '0px 30px 0px 4px' : '0px 36px 0px 4px') : '0px 6px 0px 4px',
