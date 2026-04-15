@@ -142,6 +142,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
       },
     },
     '& .MuiDataGrid-cell:focus': {
+      outline: 'none',
+    },
+    '& .MuiDataGrid-cell:focus-visible': {
       border: `1px ${theme.palette.action.focus} solid`,
       outline: 'none',
     },
@@ -241,6 +244,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
       borderBottom: `1px ${theme.palette.action.activeOpacity} solid !important`, // need to be important so border bottom will not primary when it is a checkbox cell
     },
     '& .MuiDataGrid-cell:focus-within': {
+      outline: 'none',
+    },
+    '& .MuiDataGrid-cell:has(:focus-visible)': {
       outline: 'none',
       border: `1px ${theme.palette.action.focus} solid`,
       borderBottom: `1px ${theme.palette.action.focus} solid !important`, // need to be important to override data grid border bottom behaviour when focused
