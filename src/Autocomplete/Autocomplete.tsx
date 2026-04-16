@@ -349,8 +349,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             const selectedPathValue = getFullPathLabel(selectedOption);
 
             const selectedTooltipValue = selectedPathValue && selectedPathValue.length > selectedValue.length
-                  ? selectedPathValue
-                  : (selectedValue || selectedPathValue || '');
+              ? selectedPathValue
+              : (selectedValue || selectedPathValue || '');
 
             // Checking for selectedOption covers cases where user selects from dropdown or clears input
             if (selectedOption && isValueOverFlowing) {
