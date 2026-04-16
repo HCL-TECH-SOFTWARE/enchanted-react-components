@@ -7,6 +7,7 @@
 
 ### Fixed
 - Fixed AutoComplete tooltip when hovering into input field showing full details instead of truncated
+- Fixed unwanted blue border appearing on `DataGrid` cells when clicked with mouse by using `:focus-visible` to distinguish between mouse and keyboard focus
 
 ### Changed
 - Switch to the last @hcl-software/enchanted-icons package
