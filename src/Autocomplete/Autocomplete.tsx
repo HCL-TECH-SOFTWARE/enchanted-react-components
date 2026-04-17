@@ -14,7 +14,9 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
+import MuiAutocomplete, {
+  AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material/Autocomplete';
 import {
   Components, InputAdornment, SvgIconProps, Theme,
 } from '@mui/material';
@@ -192,7 +194,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     return Math.max(iconWidth, 0);
   }, [props.endAdornment, props.error, props.freeSolo, props.disabled, textfieldRef]);
 
-  const handleChange = (event: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
+  const handleChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: T | NonNullable<string | T> | (string | T)[] | null,
+    reason: AutocompleteChangeReason,
+    details?: AutocompleteChangeDetails<T>,
+  ) => {
     // Value can be an option from the list or null if cleared
     setSelectedOption(value as T | null);
     if (textfieldRef.current) {
@@ -201,7 +208,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
     // Call the existing onChange from props if it exists
     if (rest.onChange) {
-      rest.onChange(event, value, 'selectOption');
+      rest.onChange(event, value, reason, details);
     }
   };
 
