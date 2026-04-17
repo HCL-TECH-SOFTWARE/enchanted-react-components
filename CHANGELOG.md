@@ -3,6 +3,16 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.5.0
+
+### Added
 - Add `staticMode` prop to DatePicker for rendering inline calendar via StaticDatePicker.
 
 ### Fixed
@@ -17,8 +27,6 @@
 - Updates @mui/material and @mui/system packages to the latest available v5 version, 5.18.0
   - Fix resulting type errors in Select.tsx and Tabs.tsx
 - Updates lodash package to the latest version, 4.18.1
-
-### Breaking changes
 
 ## 2.4.0
 
