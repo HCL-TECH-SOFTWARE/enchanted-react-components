@@ -30,7 +30,7 @@ import Typography from '../Typography';
 import InputLabelAndAction, { ActionProps, InputLabelAndActionProps } from '../prerequisite_components/InputLabelAndAction';
 import { ThemeDirectionType } from '../theme';
 
-export interface SelectProps extends MuiSelectProps {
+export type SelectProps = MuiSelectProps & {
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
@@ -44,7 +44,10 @@ export interface SelectProps extends MuiSelectProps {
   hiddenLabel?: boolean,
   value?: string,
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
-}
+  label?: string;
+  placeholder?: string;
+  children?: React.ReactNode;
+};
 
 export const getMuiSelectThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -219,7 +222,7 @@ const renderInput = (props: SelectProps, id?: string) => {
         PaperProps: {
           style: paperPropsStyle,
           elevation: 2,
-          ref: (node) => {
+          ref: (node: HTMLDivElement | null) => {
             if (node && props.fullWidth && props.id) {
               // Dynamically set the Paper width to match the Select input width
               const selectElement = document.getElementById(props.id)?.parentElement;

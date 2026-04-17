@@ -18,6 +18,7 @@ import MuiTabs, { TabsProps as MuiTabsProps } from '@mui/material/Tabs';
 import { styled } from '@mui/material/styles';
 
 interface TabsProps extends MuiTabsProps {
+  disabled?: boolean;
   iconposition?: 'start' | 'top';
   showIcon?: boolean;
   showLabel?: boolean;
@@ -57,7 +58,7 @@ const StyledTabs = styled(MuiTabs)((props) => {
 const Tabs = ({ ...props }: TabsProps) => {
   const [value, setValue] = useState(props.value || 0);
   const [indicatorStyle, setIndicatorStyle] = useState({});
-  const tabsRef = useRef<HTMLButtonElement | null>(null);
+  const tabsRef = useRef<HTMLDivElement | null>(null);
 
   /**
   * This function calculates and updates the style of the tab indicator. It determines the orientation of the tabs,
