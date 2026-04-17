@@ -8,11 +8,15 @@
 ### Fixed
 - Fixed AutoComplete tooltip when hovering into input field showing full details instead of truncated
 - Fixed unwanted blue border appearing on `DataGrid` cells when clicked with mouse by using `:focus-visible` to distinguish between mouse and keyboard focus
+- Fixed autocomplete onChange function always passing 'selectOption' as reason
 
 ### Changed
 - Switch to the last @hcl-software/enchanted-icons package
 - Extends the IconPreview with new icons
 - Fix MultipleSelectChip broken layout caused by startAdornment wrapping chips in InputAdornment
+- Updates @mui/material and @mui/system packages to the latest available v5 version, 5.18.0
+  - Fix resulting type errors in Select.tsx and Tabs.tsx
+- Updates lodash package to the latest version, 4.18.1
 
 ### Breaking changes
 
@@ -40,7 +44,7 @@
 
 ### Fixed
 - Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
-- Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.  
+- Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.
 - Fixed the issue where the `Autocomplete` text was truncating prematurely (ellipses) despite having available space.
 
 ## 2.3.0
@@ -136,7 +140,7 @@
 - Fixed screen reader accessibility issue with the zoom in & zoom out `button` in the `Preview` component.
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
 - Fixed screen reader accessibility issue with the `label` in `Select` component
-- Added `component` props in `Typography`. 
+- Added `component` props in `Typography`.
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
 - Fixed Text spacing accessibility issue on `Pagination` component
@@ -189,7 +193,7 @@
 - corrected the hex value for HCLSOFTWAREBLUE06 to #003CE6
 
 ### Changed
-- Added hasThumbnail and disabled properties to the Tile component. 
+- Added hasThumbnail and disabled properties to the Tile component.
 - Added as hover image preview icon for the Tile component.
 - Adding props for error handling in Preview component.
 - Adding handleClick, disabled and tooltip to the ActionProps interface in the InputLabelAndAction component.
@@ -208,8 +212,8 @@
 - Updated breadcrumb icons to reflect directionality (RTL/LTR)
 - Resolved spacing issues for icon buttons in the panel component.
 - Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
-- Added `isRowClickable` prop to the `DataGrid` component. 
-- Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
+- Added `isRowClickable` prop to the `DataGrid` component.
+- Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component.
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
 - Resolved tooltip issue of options in `Autocomplete` component

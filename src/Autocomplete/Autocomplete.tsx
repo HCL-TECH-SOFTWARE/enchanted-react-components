@@ -14,7 +14,9 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiAutocomplete, { AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
+import MuiAutocomplete, {
+  AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material/Autocomplete';
 import {
   Components, InputAdornment, SvgIconProps, Theme,
 } from '@mui/material';
@@ -192,7 +194,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     return Math.max(iconWidth, 0);
   }, [props.endAdornment, props.error, props.freeSolo, props.disabled, textfieldRef]);
 
-  const handleChange = (event: React.SyntheticEvent<Element, Event>, value: T | NonNullable<string | T> | (string | T)[] | null) => {
+  const handleChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: T | NonNullable<string | T> | (string | T)[] | null,
+    reason: AutocompleteChangeReason,
+    details?: AutocompleteChangeDetails<T>,
+  ) => {
     // Value can be an option from the list or null if cleared
     setSelectedOption(value as T | null);
     if (textfieldRef.current) {
@@ -201,7 +208,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
     // Call the existing onChange from props if it exists
     if (rest.onChange) {
-      rest.onChange(event, value, 'selectOption');
+      rest.onChange(event, value, reason, details);
     }
   };
 
@@ -457,7 +464,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                   '.MuiAutocomplete-endAdornment': { // end icon
                     right: '8px',
                     '.MuiButtonBase-root': { // for both clear icon and caret down icon
-                      top: '3px',
+                      top: '-1px',
                       // eslint-why - a nested ternary is needed
                       // eslint-disable-next-line no-nested-ternary
                       margin: ownerState.error ? (ownerState.freeSolo ? '0px 30px 0px 4px' : '0px 36px 0px 4px') : '0px 6px 0px 4px',

@@ -177,7 +177,7 @@ describe('Select', () => {
     );
     // verify menu not present
     expect(screen.queryByRole('listbox')).toBeNull();
-    const select = getByRole('button', { name: /My Label\s*/ });
+    const select = getByRole('combobox', { name: /My Label\s*/ });
     const user = userEvent.setup();
     await act(async () => {
       await user.click(select);

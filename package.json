@@ -43,13 +43,13 @@
     "@emotion/styled": "^11.11.5",
     "@hcl-software/enchanted-icons": "^1.9.0",
     "@mui/lab": "5.0.0-alpha.103",
-    "@mui/material": "5.10.10",
-    "@mui/system": "5.15.13",
+    "@mui/material": "5.18.0",
+    "@mui/system": "5.18.0",
     "@mui/x-data-grid": "5.17.8",
     "@mui/x-date-pickers": "5.0.4",
     "dayjs": "^1.11.10",
     "jest-reporter-log-validator": "^0.1.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.18.1",
     "stylis-plugin-rtl": "^2.1.1",
     "uuid": "^8.3.0"
   },
@@ -100,7 +100,7 @@
     "webpack": "^5.89.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0 || ^19.0.0"
   },
   "overrides": {
     "stylis-plugin-rtl": {
