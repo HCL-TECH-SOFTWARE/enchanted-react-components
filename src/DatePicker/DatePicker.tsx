@@ -35,7 +35,7 @@ const DEFAULT_FORMAT: string = 'MM/DD/YYYY';
 const dayOfWeekFormatter = (day: string) => { return day; };
 
 // Display mode for the static date picker
-const staticWrapperAs = 'desktop' as const;
+const staticWrapperAs = 'mobile' as const;
 
 export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
   label?: string;
@@ -392,6 +392,8 @@ const DatePicker = <TInputDate, TDate>({
           disabled={disabled}
           value={value}
           displayStaticWrapperAs={staticWrapperAs}
+          closeOnSelect={false}
+          showToolbar={false}
           reduceAnimations
           dayOfWeekFormatter={dayOfWeekFormatter}
           componentsProps={{
