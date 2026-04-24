@@ -37,6 +37,11 @@ const dayOfWeekFormatter = (day: string) => { return day; };
 // Display mode for the static date picker
 const staticWrapperAs = 'mobile' as const;
 
+// Number of year columns rendered in the year picker view.
+// Must match `yearsInRow` used by MUI internally (set via displayStaticWrapperAs='mobile' for StaticDatePicker).
+// Also used by handleYearPickerKeyDown to correct arrow-key navigation for the non-static DatePicker.
+const YEARS_PER_ROW = 3;
+
 export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
   label?: string;
   helperText?: string;
@@ -84,6 +89,16 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     '& .MuiYearPicker-root': {
       maxHeight: '168px',
       overflowY: 'auto',
+    },
+    // Assumes year view displays 3 years across.
+    // Requires `displayStaticWrapperAs: 'mobile'` to set
+    // `yearsInRow = 3` for arrow key navigation.
+    '& .PrivatePickersYear-root': {
+      flexBasis: '33.33%',
+    },
+    '& .PrivatePickersYear-yearButton': {
+      width: '100%',
+      maxWidth: 'unset',
     },
     '& .MuiTouchRipple-root': {
       color: 'transparent',
@@ -280,6 +295,33 @@ const DatePicker = <TInputDate, TDate>({
   const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
     return dateValue.format(dateFormat);
   };
+
+  /**
+   * Corrects Up/Down arrow key navigation in the year picker for the non-static DatePicker.
+   * MUI v5 desktop mode hard-codes yearsInRow=4, but our CSS renders 3 columns.
+   * This intercepts the event before MUI handles it and manually moves focus by 3
+   * to match the visual row layout, preventing diagonal jumps.
+   */
+  const handleYearPickerKeyDown = (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement;
+    if (!target.classList.contains('PrivatePickersYear-yearButton')) return;
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const yearButtons = Array.from(
+      document.querySelectorAll<HTMLElement>('.PrivatePickersYear-yearButton:not([disabled])'),
+    );
+    const currentIndex = yearButtons.indexOf(target);
+    if (currentIndex === -1) return;
+
+    const nextIndex = event.key === 'ArrowDown' ? currentIndex + YEARS_PER_ROW : currentIndex - YEARS_PER_ROW;
+    if (nextIndex >= 0 && nextIndex < yearButtons.length) {
+      yearButtons[nextIndex].focus();
+    }
+  };
+
   const focusDialog = () => {
     window.requestAnimationFrame(() => {
       const dialog = document.querySelector(`#datepickerPopper-${popperId}`) ?? document.querySelector('.MuiPickersPopper-root');
@@ -423,6 +465,7 @@ const DatePicker = <TInputDate, TDate>({
       dayOfWeekFormatter={dayOfWeekFormatter}
       PaperProps={{
         sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
+        onKeyDownCapture: handleYearPickerKeyDown,
       }}
       PopperProps={{
         placement: 'bottom-start',
