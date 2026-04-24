@@ -6,6 +6,7 @@
 
 ### Fixed
 - Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency
+- Fixed StaticDatePicker year grid keyboard navigation: up/down arrows now move vertically in the same column. Set `displayStaticWrapperAs='mobile'`, `showToolbar={false}`, and `closeOnSelect={false}` for correct layout and UX.
 
 ### Changed
 
