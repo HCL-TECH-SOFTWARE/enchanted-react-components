@@ -58,6 +58,12 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  /**
+   * When provided, renders this node as a non-interactive, non-focusable banner
+   * pinned to the top of the dropdown listbox. Pass any React component or JSX.
+   * The banner sits outside the option list so keyboard navigation skips it.
+   */
+  listboxBanner?: React.ReactNode;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -73,6 +79,35 @@ const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefi
   };
   return muiFormControlProps;
 };
+
+const BannerListboxContext = React.createContext<React.ReactNode>(null);
+
+// Component to render the listbox with an optional banner at the top. The banner content is provided via context.
+const BannerListboxComponent = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement>>(
+  ({ children, ...listboxProps }, ref) => {
+    // Access the banner content from context so it can be rendered inside the listbox
+    const bannerContent = React.useContext(BannerListboxContext);
+
+    // Render the listbox with the optional banner
+    return (
+      <ul ref={ref} {...listboxProps}>
+        {bannerContent && (
+          <li
+            role="presentation"
+            aria-hidden="true"
+            style={{ pointerEvents: 'none' }}
+          >
+            {bannerContent}
+          </li>
+        )}
+        {children}
+      </ul>
+    );
+  },
+);
+
+// Set the display name for debugging
+BannerListboxComponent.displayName = 'BannerListboxComponent';
 
 const AutoCompleteContainer = styled('div')((theme) => {
   return {
@@ -121,6 +156,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     endAdornmentAction,
     startAdornment,
     endAdornment,
+    listboxBanner,
     ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
@@ -129,6 +165,11 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
   // create a unique id for the autocomplete component if not provided
   props.id ||= `autocomplete-${(React.createRef().current as HTMLElement)?.id || Math.random().toString(36).substring(7)}`;
+
+  const bannerNode = React.useMemo<React.ReactNode>(
+    () => { return listboxBanner ?? null; },
+    [listboxBanner],
+  );
 
   const [isFocus, setIsFocus] = React.useState(false);
   const helperTextId = props.helperText ? `${props.id}-helper-text` : undefined;
@@ -227,166 +268,169 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     <AutoCompleteContainer className="autocomplete-container">
       <MuiFormControl {...muiFormControlProps}>
         <InputLabelAndAction {...inputLabelAndActionProps} />
-        <MuiAutocomplete
-          {...rest}
-          onFocus={() => {
-            setIsFocus(true);
-          }}
-          onBlur={() => {
-            setIsFocus(false);
-          }}
-          onChange={handleChange}
-          onInputChange={handleInputChange}
-          clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
-          popupIcon={<CaretDownIcon color="action" />}
-          renderInput={(params) => {
-            const textFieldArgs: TextFieldProps = {
-              ...params,
-              placeholder: props.placeholder,
-              error: Boolean(props.error),
-              required: props.required,
-              fullWidth: props.fullWidth,
-              sx: {
-                ...props.sx,
-                '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
-                  width: getStartAdornmentWidth(),
+        <BannerListboxContext.Provider value={bannerNode}>
+          <MuiAutocomplete
+            {...rest}
+            {...(listboxBanner && { ListboxComponent: BannerListboxComponent })}
+            onFocus={() => {
+              setIsFocus(true);
+            }}
+            onBlur={() => {
+              setIsFocus(false);
+            }}
+            onChange={handleChange}
+            onInputChange={handleInputChange}
+            clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
+            popupIcon={<CaretDownIcon color="action" />}
+            renderInput={(params) => {
+              const textFieldArgs: TextFieldProps = {
+                ...params,
+                placeholder: props.placeholder,
+                error: Boolean(props.error),
+                required: props.required,
+                fullWidth: props.fullWidth,
+                sx: {
+                  ...props.sx,
+                  '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+                    width: getStartAdornmentWidth(),
+                  },
+                  '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
+                    width: getEndAdornmentWidth(),
+                    marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px', // add some spacing if there are icons in the end adornment
+                  },
                 },
-                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
-                  width: getEndAdornmentWidth(),
-                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px', // add some spacing if there are icons in the end adornment
-                },
-              },
-              focused,
-              hiddenLabel,
-              helperIconTooltip,
-              actionProps,
-              nonEdit,
-              size: props.size,
-              autoFocus: props.autoFocus,
-              renderNonEditInput,
-              endAdornmentAction,
-              value: props.value,
-              enableHelpHoverEffect,
-              InputProps: {
-                ...params.InputProps,
-                startAdornment: startAdornment
-                  ? (
+                focused,
+                hiddenLabel,
+                helperIconTooltip,
+                actionProps,
+                nonEdit,
+                size: props.size,
+                autoFocus: props.autoFocus,
+                renderNonEditInput,
+                endAdornmentAction,
+                value: props.value,
+                enableHelpHoverEffect,
+                InputProps: {
+                  ...params.InputProps,
+                  startAdornment: startAdornment
+                    ? (
+                      <>
+                        <InputAdornment position="start">
+                          {startAdornment}
+                        </InputAdornment>
+                        {params.InputProps?.startAdornment}
+                      </>
+                    )
+                    : params.InputProps?.startAdornment,
+                  endAdornment: (
                     <>
-                      <InputAdornment position="start">
-                        {startAdornment}
-                      </InputAdornment>
-                      {params.InputProps?.startAdornment}
+                      {endAdornment}
+                      {params.InputProps?.endAdornment}
                     </>
-                  )
-                  : params.InputProps?.startAdornment,
-                endAdornment: (
-                  <>
-                    {endAdornment}
-                    {params.InputProps?.endAdornment}
-                  </>
-                ),
-              },
-            };
+                  ),
+                },
+              };
 
-            let tooltipTitle = '';
-            const inputValue = textfieldRef.current?.value ?? '';
+              let tooltipTitle = '';
+              const inputValue = textfieldRef.current?.value ?? '';
 
-            const getPathSegmentLabel = (segment: unknown): string => {
-              if (typeof segment === 'string') {
-                return segment;
-              }
-              if (typeof segment === 'object' && segment !== null) {
-                const segmentRecord = segment as Record<string, unknown>;
-                const labelCandidate = segmentRecord.label;
-                const titleCandidate = segmentRecord.title;
-                const valueCandidate = segmentRecord.value;
+              const getPathSegmentLabel = (segment: unknown): string => {
+                if (typeof segment === 'string') {
+                  return segment;
+                }
+                if (typeof segment === 'object' && segment !== null) {
+                  const segmentRecord = segment as Record<string, unknown>;
+                  const labelCandidate = segmentRecord.label;
+                  const titleCandidate = segmentRecord.title;
+                  const valueCandidate = segmentRecord.value;
 
-                // Prefer nested title.value from path nodes for consistent breadcrumb labels.
-                if (typeof titleCandidate === 'object' && titleCandidate !== null) {
-                  const titleValueCandidate = (titleCandidate as Record<string, unknown>).value;
-                  if (typeof titleValueCandidate === 'string') return titleValueCandidate;
+                  // Prefer nested title.value from path nodes for consistent breadcrumb labels.
+                  if (typeof titleCandidate === 'object' && titleCandidate !== null) {
+                    const titleValueCandidate = (titleCandidate as Record<string, unknown>).value;
+                    if (typeof titleValueCandidate === 'string') return titleValueCandidate;
+                  }
+
+                  if (typeof labelCandidate === 'string') return labelCandidate;
+                  if (typeof titleCandidate === 'string') return titleCandidate;
+                  if (typeof valueCandidate === 'string') return valueCandidate;
+                }
+                return '';
+              };
+
+              // Build full breadcrumb-like text from option.path.
+              const getFullPathLabel = (option: unknown): string => {
+                if (typeof option !== 'object' || option === null) {
+                  return '';
                 }
 
-                if (typeof labelCandidate === 'string') return labelCandidate;
-                if (typeof titleCandidate === 'string') return titleCandidate;
-                if (typeof valueCandidate === 'string') return valueCandidate;
-              }
-              return '';
-            };
+                const optionRecord = option as Record<string, unknown>;
+                const pathValue = optionRecord.path;
 
-            // Build full breadcrumb-like text from option.path.
-            const getFullPathLabel = (option: unknown): string => {
-              if (typeof option !== 'object' || option === null) {
+                if (Array.isArray(pathValue)) {
+                  const segments = pathValue
+                    .map((segment) => { return getPathSegmentLabel(segment).trim(); })
+                    .filter((segment) => { return Boolean(segment); });
+                  return segments.join(' / ');
+                }
+
+                if (typeof pathValue === 'string') {
+                  return pathValue;
+                }
+
                 return '';
+              };
+
+              // Helper to check if a value matches an option
+              const isValueInOptions = (selctedValue: string) => {
+                if (!selctedValue) return false;
+
+                return Array.isArray(props.options)
+                  ? props.options.some((option) => {
+                    if (typeof option === 'object' && option !== null) {
+                      return option.label === selctedValue || option.value === selctedValue;
+                    }
+                    return option === selctedValue;
+                  })
+                  : false;
+              };
+
+              const hasSelectedValue = selectedOption && typeof selectedOption === 'object' && 'label' in selectedOption;
+              const selectedValue = hasSelectedValue ? (selectedOption.label as string) : (selectedOption as string);
+              const selectedPathValue = getFullPathLabel(selectedOption);
+
+              const selectedTooltipValue = selectedPathValue && selectedPathValue.length > selectedValue.length
+                ? selectedPathValue
+                : (selectedValue || selectedPathValue || '');
+
+              // Checking for selectedOption covers cases where user selects from dropdown or clears input
+              if (selectedOption && isValueOverFlowing) {
+                tooltipTitle = selectedTooltipValue;
+              // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
+              } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
+                tooltipTitle = inputValue;
+              // Checking for prevValue covers cases where user tabs back to a previous value or
+              } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue))) {
+                tooltipTitle = prevValue;
+              // Checking for freeSolo mode where user can type arbitrary values
+              } else if (isValueOverFlowing) {
+                tooltipTitle = props.freeSolo ? inputValue : prevValue;
               }
 
-              const optionRecord = option as Record<string, unknown>;
-              const pathValue = optionRecord.path;
+              textFieldArgs.inputProps = {
+                'aria-describedby': props.error ? undefined : helperTextId,
+                'aria-errormessage': props.error ? helperTextId : undefined,
+                'aria-labelledby': props.id ? `${props.id}-label` : undefined,
+                ...textFieldArgs.inputProps,
+              };
 
-              if (Array.isArray(pathValue)) {
-                const segments = pathValue
-                  .map((segment) => { return getPathSegmentLabel(segment).trim(); })
-                  .filter((segment) => { return Boolean(segment); });
-                return segments.join(' / ');
-              }
-
-              if (typeof pathValue === 'string') {
-                return pathValue;
-              }
-
-              return '';
-            };
-
-            // Helper to check if a value matches an option
-            const isValueInOptions = (selctedValue: string) => {
-              if (!selctedValue) return false;
-
-              return Array.isArray(props.options)
-                ? props.options.some((option) => {
-                  if (typeof option === 'object' && option !== null) {
-                    return option.label === selctedValue || option.value === selctedValue;
-                  }
-                  return option === selctedValue;
-                })
-                : false;
-            };
-
-            const hasSelectedValue = selectedOption && typeof selectedOption === 'object' && 'label' in selectedOption;
-            const selectedValue = hasSelectedValue ? (selectedOption.label as string) : (selectedOption as string);
-            const selectedPathValue = getFullPathLabel(selectedOption);
-
-            const selectedTooltipValue = selectedPathValue && selectedPathValue.length > selectedValue.length
-              ? selectedPathValue
-              : (selectedValue || selectedPathValue || '');
-
-            // Checking for selectedOption covers cases where user selects from dropdown or clears input
-            if (selectedOption && isValueOverFlowing) {
-              tooltipTitle = selectedTooltipValue;
-            // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
-            } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
-              tooltipTitle = inputValue;
-            // Checking for prevValue covers cases where user tabs back to a previous value or
-            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue))) {
-              tooltipTitle = prevValue;
-            // Checking for freeSolo mode where user can type arbitrary values
-            } else if (isValueOverFlowing) {
-              tooltipTitle = props.freeSolo ? inputValue : prevValue;
-            }
-
-            textFieldArgs.inputProps = {
-              'aria-describedby': props.error ? undefined : helperTextId,
-              'aria-errormessage': props.error ? helperTextId : undefined,
-              'aria-labelledby': props.id ? `${props.id}-label` : undefined,
-              ...textFieldArgs.inputProps,
-            };
-
-            return (
-              <Tooltip title={tooltipTitle} tooltipsize="small">
-                <TextField {...textFieldArgs} inputRef={textfieldRef} />
-              </Tooltip>
-            );
-          }}
-        />
+              return (
+                <Tooltip title={tooltipTitle} tooltipsize="small">
+                  <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                </Tooltip>
+              );
+            }}
+          />
+        </BannerListboxContext.Provider>
         <MuiFormHelperText id={helperTextId} sx={{ marginTop: nonEdit ? '0px' : '4px' }}>{helperText}</MuiFormHelperText>
       </MuiFormControl>
     </AutoCompleteContainer>

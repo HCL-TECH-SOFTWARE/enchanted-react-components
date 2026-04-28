@@ -3,6 +3,12 @@
 ## Unreleased
 
 ### Added
+- Added `listboxBanner` prop to `Autocomplete` component — accepts any `React.ReactNode` and renders it as a non-interactive, non-focusable banner pinned to the top of the dropdown listbox. The banner is excluded from keyboard navigation.
+  - Internally implemented via `BannerListboxContext` and `BannerListboxComponent` (a `React.forwardRef`-wrapped listbox that injects the banner as a `<li role="presentation" aria-hidden="true">` before the option list).
+- Added three Storybook stories for `Autocomplete` demonstrating the `listboxBanner` prop:
+  - `ExampleAutocompleteWithKeywordSearchInfo` — info-style blue banner
+  - `ExampleAutocompleteWithWarningBanner` — warning-style orange banner
+  - `ExampleAutocompleteWithCustomColorBanner` — custom purple-colored banner
 
 ### Fixed
 - Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency

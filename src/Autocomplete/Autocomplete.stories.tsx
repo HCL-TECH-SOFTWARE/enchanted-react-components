@@ -19,6 +19,7 @@ import { userEvent, within } from '@storybook/testing-library';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
@@ -244,6 +245,13 @@ export default {
         },
       },
     },
+    listboxBanner: {
+      control: false,
+      description:
+        'Pass any React node/component as a non-interactive banner pinned to the top of the '
+        + 'dropdown listbox. The banner sits outside the option list so keyboard navigation '
+        + 'skips it. Style and content are fully controlled by the consumer.',
+    },
   },
 } as Meta<typeof Autocomplete>;
 
@@ -258,10 +266,10 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
   let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
-      customIcon = CaretDownIcon;
+      customIcon = CaretDownIcon as unknown as React.ComponentType<React.SVGProps<SVGSVGElement>>;
       break;
     case 'InformationIcon':
-      customIcon = InformationIcon;
+      customIcon = InformationIcon as unknown as React.ComponentType<React.SVGProps<SVGSVGElement>>;
       break;
     default:
       customIcon = undefined;
@@ -317,7 +325,9 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
         );
       }}
       {...args}
-      customIcon={customIcon}
+      // eslint-why: enchanted icon type is compatible at runtime; cast avoids SvgIconProps mismatch
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      customIcon={customIcon as any}
       startAdornment={startAdornment}
       endAdornment={endAdornment}
     />
@@ -420,5 +430,116 @@ export const ExampleAutocompleteStartAndEndAdornment = {
     ...ExampleAutocomplete.args,
     startAdornment: 'SearchIcon',
     endAdornment: 'Loading',
+  },
+};
+
+export const ExampleAutocompleteWithKeywordSearchInfo = {
+  render: (args: React.ComponentProps<typeof Autocomplete>) => {
+    return (
+      <Template
+        {...args}
+        listboxBanner={(
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '6px',
+            padding: '6px 16px',
+            backgroundColor: '#E5F0FF',
+            border: '1px solid #0066CC',
+            borderRadius: '4px',
+          }}
+          >
+            <InformationIcon style={{
+              width: '16px', height: '16px', flexShrink: 0, marginTop: '2px', color: '#0066CC',
+            }}
+            />
+            <span style={{ fontSize: '12px', color: '#0066CC' }}>
+              Results include all items containing your keywords, regardless of the display title
+            </span>
+          </div>
+        )}
+      />
+    );
+  },
+  args: {
+    ...ExampleAutocomplete.args,
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
+  },
+};
+
+export const ExampleAutocompleteWithWarningBanner = {
+  render: (args: React.ComponentProps<typeof Autocomplete>) => {
+    return (
+      <Template
+        {...args}
+        listboxBanner={(
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '6px',
+            padding: '6px 16px',
+            backgroundColor: '#FFF4E5',
+            border: '1px solid #E67700',
+            borderRadius: '4px',
+          }}
+          >
+            <WarningIcon style={{
+              width: '16px', height: '16px', flexShrink: 0, marginTop: '2px', color: '#E67700',
+            }}
+            />
+            <span style={{ fontSize: '12px', color: '#E67700' }}>
+              Some results may be hidden due to permission restrictions.
+            </span>
+          </div>
+        )}
+      />
+    );
+  },
+  args: {
+    ...ExampleAutocomplete.args,
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
+  },
+};
+
+export const ExampleAutocompleteWithCustomColorBanner = {
+  render: (args: React.ComponentProps<typeof Autocomplete>) => {
+    return (
+      <Template
+        {...args}
+        listboxBanner={(
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '6px',
+            padding: '6px 16px',
+            backgroundColor: '#F3EAFF',
+            border: '1px solid #7B2FF7',
+            borderRadius: '4px',
+          }}
+          >
+            <InformationIcon style={{
+              width: '16px', height: '16px', flexShrink: 0, marginTop: '2px', color: '#7B2FF7',
+            }}
+            />
+            <span style={{ fontSize: '12px', color: '#7B2FF7' }}>
+              Custom styled banner — colors fully overridden.
+            </span>
+          </div>
+        )}
+      />
+    );
+  },
+  args: {
+    ...ExampleAutocomplete.args,
+  },
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole('button'));
   },
 };
