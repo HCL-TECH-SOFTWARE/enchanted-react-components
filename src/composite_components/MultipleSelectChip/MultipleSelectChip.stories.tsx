@@ -19,7 +19,10 @@ import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import { SvgIconProps } from '@mui/material';
 
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -230,13 +233,17 @@ export default {
         },
       },
     },
+    listboxBanner: {
+      control: false,
+      description: 'When provided, renders this node as a non-interactive, non-focusable banner pinned to the top of the dropdown listbox.',
+    },
   },
 } as Meta<typeof MultipleSelectChip>;
 
 const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
   const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;
@@ -402,5 +409,116 @@ export const ExampleMultipleSelectChipFullWidth = {
   args: {
     ...ExampleMultipleSelectChip.args,
     fullWidth: true,
+  },
+};
+
+const BannerTemplate: StoryFn<typeof MultipleSelectChip> = (args) => {
+  const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
+
+  const bannerContent = (
+    <Box
+      sx={{
+        padding: '8px 16px',
+        backgroundColor: 'background.default',
+        borderBottom: '1px solid',
+        borderColor: 'divider',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+      }}
+    >
+      <InformationIcon color="info" />
+      <Typography variant="body2" color="text.secondary">
+        Select multiple films from the list below. You can select up to 10 items.
+      </Typography>
+    </Box>
+  );
+
+  return (
+    <MultipleSelectChip
+      {...args}
+      value={value}
+      options={top100Films}
+      listboxBanner={bannerContent}
+      onChange={(event, newValue) => {
+        setValue([...(newValue as IChip[])]);
+      }}
+      getOptionLabel={(option) => {
+        return (option as IChip).label;
+      }}
+      filterSelectedOptions={false}
+      disableCloseOnSelect
+      renderOption={(props, option, state) => {
+        return (
+          <MenuItem
+            disableGutters
+            cascading={false}
+            selected={state.selected}
+            size="small"
+            {...props}
+          >
+            {state.selected && (
+              <ListItemIcon>
+                <CheckmarkIcon fontSize="small" />
+              </ListItemIcon>
+            )}
+            <ListItemText primary={(option as IChip).label} tooltip={(option as IChip).label} inset={!state.selected} />
+          </MenuItem>
+        );
+      }}
+      renderTags={(tagValue, getTagProps) => {
+        return tagValue.map((option, index) => {
+          return (
+            <Chip
+              trailingIcon={<CloseIcon />}
+              onDeleteFunc={() => {
+                setValue([
+                  ...value.filter((valueItem) => {
+                    return value.indexOf(valueItem) !== index;
+                  }),
+                ]);
+              }}
+              hideTrailingIcon={false}
+              size="small"
+              variant="filled"
+              label={typeof option === 'string' ? option : (option as IChip).label}
+              {...getTagProps({ index })}
+            />
+          );
+        });
+      }}
+      renderNonEditInput={() => {
+        return value.map((option, index) => {
+          return (
+            <Chip
+              key={(option as IChip).label}
+              trailingIcon={<CloseIcon />}
+              onDeleteFunc={() => {
+                setValue([
+                  ...value.filter((valueItem) => {
+                    return value.indexOf(valueItem) !== index;
+                  }),
+                ]);
+              }}
+              disabled={args.disabled}
+              hideTrailingIcon
+              size="small"
+              variant="filled"
+              label={(option as IChip).label}
+            />
+          );
+        });
+      }}
+    />
+  );
+};
+
+export const ExampleMultipleSelectChipWithBanner = {
+  render: BannerTemplate,
+
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    label: 'Select Films',
+    helperText: 'Choose your favorite films',
   },
 };

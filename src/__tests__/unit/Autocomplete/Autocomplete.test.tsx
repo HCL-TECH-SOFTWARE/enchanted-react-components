@@ -15,9 +15,11 @@
 
 import React from 'react';
 import {
-  render, fireEvent, screen, configure, cleanup,
+  render, fireEvent, screen, configure, cleanup, within,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Autocomplete from '../../../Autocomplete';
 
@@ -131,5 +133,147 @@ describe('Autocomplete', () => {
     const input = screen.queryByRole('input');
     expect(input).toBeNull();
     jest.clearAllMocks();
+  });
+
+  describe('listboxBanner functionality', () => {
+    const options = ['Apple', 'Banana', 'Cherry', 'Durian'];
+
+    it('Should render banner when listboxBanner prop is provided', () => {
+      const bannerContent = (
+        <Box data-testid="test-banner">
+          <Typography>Banner content</Typography>
+        </Box>
+      );
+
+      render(
+        <Autocomplete
+          options={options}
+          listboxBanner={bannerContent}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      expect(screen.getByTestId('test-banner')).toBeTruthy();
+      expect(screen.getByText('Banner content')).toBeTruthy();
+    });
+
+    it('Should render banner at the top of the listbox', () => {
+      const bannerContent = (
+        <Box data-testid="test-banner">
+          <Typography>Banner content</Typography>
+        </Box>
+      );
+
+      render(
+        <Autocomplete
+          options={options}
+          listboxBanner={bannerContent}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      const listbox = screen.getByRole('listbox');
+      const banner = screen.getByTestId('test-banner');
+
+      // Banner should be first child of listbox
+      expect(listbox.firstChild).toBe(banner);
+    });
+
+    it('Should render banner with correct accessibility attributes', () => {
+      const bannerContent = (
+        <Box data-testid="test-banner">
+          <Typography>Banner content</Typography>
+        </Box>
+      );
+
+      render(
+        <Autocomplete
+          options={options}
+          listboxBanner={bannerContent}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      const banner = screen.getByTestId('test-banner');
+      const bannerLi = banner.closest('li');
+
+      // Banner should have aria-hidden="true" and role="presentation"
+      expect(bannerLi?.getAttribute('role')).toBe('presentation');
+      expect(bannerLi?.getAttribute('aria-hidden')).toBe('true');
+      expect(bannerLi?.style.pointerEvents).toBe('none');
+    });
+
+    it('Should still render options when banner is present', () => {
+      const bannerContent = (
+        <Box data-testid="test-banner">
+          <Typography>Banner content</Typography>
+        </Box>
+      );
+
+      render(
+        <Autocomplete
+          options={options}
+          listboxBanner={bannerContent}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      // Banner should be present
+      expect(screen.getByTestId('test-banner')).toBeTruthy();
+
+      // Options should still be rendered
+      const listbox = within(screen.getByRole('listbox'));
+      expect(listbox.getByText('Apple')).toBeTruthy();
+      expect(listbox.getByText('Banana')).toBeTruthy();
+      expect(listbox.getByText('Cherry')).toBeTruthy();
+    });
+
+    it('Should not render banner when listboxBanner prop is not provided', () => {
+      render(
+        <Autocomplete
+          options={options}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      expect(screen.queryByTestId('test-banner')).toBeNull();
+
+      // Options should render normally
+      const listbox = within(screen.getByRole('listbox'));
+      expect(listbox.getByText('Apple')).toBeTruthy();
+    });
+
+    it('Should work with complex banner content', () => {
+      const complexBanner = (
+        <Box data-testid="complex-banner" sx={{ padding: 2, backgroundColor: 'grey.100' }}>
+          <Typography variant="h6">Complex Banner</Typography>
+          <Typography variant="body2">This is a complex banner with multiple elements</Typography>
+        </Box>
+      );
+
+      render(
+        <Autocomplete
+          options={options}
+          listboxBanner={complexBanner}
+        />,
+      );
+
+      const element = screen.getByRole('combobox');
+      fireEvent.mouseDown(element);
+
+      expect(screen.getByTestId('complex-banner')).toBeTruthy();
+      expect(screen.getByText('Complex Banner')).toBeTruthy();
+      expect(screen.getByText('This is a complex banner with multiple elements')).toBeTruthy();
+    });
   });
 });
