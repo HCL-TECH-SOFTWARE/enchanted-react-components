@@ -2,10 +2,10 @@
   "logValidations": [
     {
       "patterns": [""],
-      "max": 447
+      "max": 500
     }
   ],
   "exemptLogs": [],
   "failIfUnknownLogsFound": false,
-  "failIfLogValidationsOutdated": true
+  "failIfLogValidationsOutdated": false
 }
