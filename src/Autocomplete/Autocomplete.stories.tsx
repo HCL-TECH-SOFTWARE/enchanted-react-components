@@ -19,13 +19,16 @@ import { userEvent, within } from '@storybook/testing-library';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 
+import { Box } from '@mui/material';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
 import { TooltipPlacement } from '../Tooltip';
 import CircularProgress from '../ProgressIndicator/CircularProgress';
+import Typography from '../Typography';
 
 export default {
   title: 'Inputs/Autocomplete',
@@ -420,5 +423,84 @@ export const ExampleAutocompleteStartAndEndAdornment = {
     ...ExampleAutocomplete.args,
     startAdornment: 'SearchIcon',
     endAdornment: 'Loading',
+  },
+};
+
+export const ExampleAutocompleteWithInformationMessage = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    label: 'Search Movies',
+    helperText: 'Start typing to search through our movie database',
+    helperIconTooltip: 'This search includes movies from various genres and decades. Use the search field to quickly find what you\'re looking for.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#E5F0FF',
+        border: '1px solid #0066CC',
+        borderRadius: '4px',
+      }}
+      >
+        <InformationIcon
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
+          }}
+        />
+        <Typography variant="body2" color="info.dark">
+          Results include all items containing your keywords, regardless of the display title
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Autocomplete with information only - no errors or warnings. Shows how to provide helpful tips and guidance to users.',
+      },
+    },
+  },
+};
+
+export const ExampleAutocompleteWithWarningMessage = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    label: 'Select a Movie',
+    helperText: 'Some films may not be available in your region',
+    error: false,
+    helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some films in this list may not be playable in your location.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#FFF4E5',
+        border: '1px solid #E67700',
+        borderRadius: '4px',
+      }}
+      >
+        <WarningIcon
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
+          }}
+        />
+        <Typography variant="body2" color="#E67700">
+          Results include all items containing your keywords, regardless of the display title
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Autocomplete with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
+      },
+    },
   },
 };
