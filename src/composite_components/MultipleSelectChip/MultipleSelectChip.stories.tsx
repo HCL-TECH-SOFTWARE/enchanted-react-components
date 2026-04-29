@@ -371,7 +371,7 @@ export const ExampleMultipleSelectChip = {
   },
 };
 
-export const ExampleMultipleSelectChipWithInfoBanner = {
+export const ExampleMultipleSelectChipWithInformationMessage = {
   render: Template,
   args: {
     ...ExampleMultipleSelectChip.args,
@@ -410,7 +410,7 @@ export const ExampleMultipleSelectChipWithInfoBanner = {
   },
 };
 
-export const ExampleMultipleSelectChipWithWarningBanner = {
+export const ExampleMultipleSelectChipWithWarningMessage = {
   render: Template,
   args: {
     ...ExampleMultipleSelectChip.args,

@@ -426,7 +426,7 @@ export const ExampleAutocompleteStartAndEndAdornment = {
   },
 };
 
-export const ExampleAutocompleteInformationOnly = {
+export const ExampleAutocompleteWithInformationMessage = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
@@ -465,7 +465,7 @@ export const ExampleAutocompleteInformationOnly = {
   },
 };
 
-export const ExampleAutocompleteWarningOnly = {
+export const ExampleAutocompleteWithWarningMessage = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
