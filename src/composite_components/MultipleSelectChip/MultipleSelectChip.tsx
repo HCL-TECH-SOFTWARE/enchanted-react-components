@@ -13,11 +13,12 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import * as React from 'react';
+import React from 'react';
 import { Theme, SxProps } from '@mui/material';
 import ClearFilledIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close--filled';
 
-import Autocomplete, { AutocompleteProps } from '../../Autocomplete';
+import Autocomplete, { AutocompleteProps } from '../../Autocomplete/Autocomplete';
+import { AutocompleteBannerProps } from '../../Autocomplete/Autocomplete';
 import { white } from '../../colors';
 
 /**
@@ -29,12 +30,17 @@ import { white } from '../../colors';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface MultipleSelectChipProps<T, Multiple, DisableClearable, FreeSolo> extends AutocompleteProps<T, boolean, boolean, boolean> {
   emptyOptions?: boolean;
+  /**
+   * When provided, renders an informational banner at the top of the dropdown listbox.
+   * The banner is non-interactive and excluded from keyboard navigation.
+   */
+  listboxBanner?: AutocompleteBannerProps;
 }
 
 const MultipleSelectChip = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
   ({ ...props }: MultipleSelectChipProps<T, Multiple, DisableClearable, FreeSolo>) => {
-  const { emptyOptions, ...rest } = props;
+  const { emptyOptions, listboxBanner, ...rest } = props;
   const getMuiInputBasePaddingRight = () => {
     if (props.error && !props.emptyOptions) {
       return '82px !important';
@@ -90,6 +96,7 @@ const MultipleSelectChip = <T, Multiple extends boolean | undefined = undefined,
       sx={sxProps}
       multiple
       clearIcon={<ClearFilledIcon color="action" />}
+      listboxBanner={listboxBanner}
     />
   );
 };

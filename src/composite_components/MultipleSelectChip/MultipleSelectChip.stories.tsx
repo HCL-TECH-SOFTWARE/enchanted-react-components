@@ -19,7 +19,9 @@ import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
-
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
+import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
+import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -27,6 +29,9 @@ import ListItemIcon from '../../List/ListItemIcon';
 import ListItemText from '../../List/ListItemText';
 import { IFilm, top100Films } from '../../Autocomplete/data';
 import { TooltipPlacement } from '../../Tooltip';
+import { AutocompleteBannerProps } from '../../Autocomplete/Autocomplete';
+import { Box } from '@mui/material';
+import Typography from '../../Typography';
 
 interface IChip {
   label: string;
@@ -368,6 +373,84 @@ export const ExampleMultipleSelectChip = {
     customIcon: 'None',
   },
 };
+
+export const ExampleMultipleSelectChipWithInfoBanner = {
+  render: Template,
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    label: 'Browse Collection',
+    helperText: 'Explore our curated collection with helpful guidance',
+    helperIconTooltip: 'This collection contains various categories. Use the search feature to filter by type or keyword.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{ 
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#E5F0FF',
+        border: '1px solid #0066CC',
+        borderRadius: '4px',
+      }}>
+        <InformationIcon 
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
+          }}
+        />
+        <Typography variant="body2" color="#0066CC">
+          Results include all items containing your keywords, regardless of the display title
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'MultipleSelectChip with information only - no errors or warnings. Shows how to provide helpful tips and guidance to users.',
+      },
+    },
+  },
+};
+
+export const ExampleMultipleSelectChipWithWarningBanner = {
+  render: Template,
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    label: 'Select Items',
+    helperText: 'Some items may not be available in your region',
+    error: false,
+    helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some items in this list may not be playable in your location.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{ 
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#FFF4E5',
+        border: '1px solid #E67700',
+        borderRadius: '4px',
+      }}>
+        <WarningIcon 
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
+          }}
+        />
+        <Typography variant="body2" color="#E67700">
+          Results include all items containing your keywords, regardless of the display title
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'MultipleSelectChip with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
+      },
+    },
+  },
+};
+
 
 export const ExampleMultipleSelectChipError = {
   render: Template,
