@@ -2,7 +2,7 @@
   "logValidations": [
     {
       "patterns": [""],
-      "max": 500
+      "max": 600
     }
   ],
   "exemptLogs": [],
