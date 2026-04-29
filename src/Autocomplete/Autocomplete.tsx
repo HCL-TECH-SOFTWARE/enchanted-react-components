@@ -35,6 +35,23 @@ import Tooltip, { TooltipPlacement } from '../Tooltip';
  */
 export type AutocompleteBannerProps = React.ReactNode;
 
+// Component to render listbox with an optional banner at the top
+const BannerListboxComponent = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement> & { listboxBanner?: AutocompleteBannerProps }>(
+  ({ children, listboxBanner, ...listboxProps }, ref) => {
+    // Render the listbox with the optional banner
+    return (
+      <ul {...listboxProps} ref={ref}>
+        {listboxBanner && (
+          <li role="presentation" aria-hidden="true" style={{ pointerEvents: 'none' }}>
+            {listboxBanner}
+          </li>
+        )}
+        {children}
+      </ul>
+    );
+  },
+);
+
 /**
  * @typedef AutocompleteProps
  * @type {object}
@@ -135,31 +152,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
-  // Component to render listbox with an optional banner at the top
-  const BannerListboxComponent = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement>>(
-    ({ children, ...listboxProps }) => {
-
-      // Render the listbox with the optional banner
-      return (
-        <ul {...listboxProps}>
-          {listboxBanner && (
-            <li
-              role="presentation"
-              aria-hidden="true"
-              style={{ pointerEvents: 'none' }}
-            >
-              {listboxBanner}
-            </li>
-          )}
-          {children}
-        </ul>
-      );
-    },
-  );
-
-  // Set the display name for debugging
-  BannerListboxComponent.displayName = 'BannerListboxComponent';
-
   const [isFocus, setIsFocus] = React.useState(false);
   const helperTextId = props.helperText ? `${props.id}-helper-text` : undefined;
   const muiFormControlProps = getMuiFormControlProps(props);
@@ -259,7 +251,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
         <InputLabelAndAction {...inputLabelAndActionProps} />
         <MuiAutocomplete
           {...rest}
-          {...(listboxBanner && { ListboxComponent: (props) => <BannerListboxComponent {...props} />})}
+          {...(listboxBanner && { ListboxComponent: (listboxProps) => { return <BannerListboxComponent {...listboxProps} listboxBanner={listboxBanner} />; } })}
           onFocus={() => {
             setIsFocus(true);
           }}

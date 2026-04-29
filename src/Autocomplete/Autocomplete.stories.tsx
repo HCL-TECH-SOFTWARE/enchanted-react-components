@@ -20,16 +20,14 @@ import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--d
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
-import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 
+import { Box } from '@mui/material';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
 import { TooltipPlacement } from '../Tooltip';
 import CircularProgress from '../ProgressIndicator/CircularProgress';
-import { Box } from '@mui/material';
 import Typography from '../Typography';
 
 export default {
@@ -437,7 +435,7 @@ export const ExampleAutocompleteInformationOnly = {
     helperIconTooltip: 'This search includes movies from various genres and decades. Use the search field to quickly find what you\'re looking for.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{ 
+      <Box sx={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '6px',
@@ -445,11 +443,12 @@ export const ExampleAutocompleteInformationOnly = {
         backgroundColor: '#E5F0FF',
         border: '1px solid #0066CC',
         borderRadius: '4px',
-      }}>
-        <InformationIcon 
+      }}
+      >
+        <InformationIcon
           style={{
             width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
-        }}
+          }}
         />
         <Typography variant="body2" color="info.dark">
           Results include all items containing your keywords, regardless of the display title
@@ -476,7 +475,7 @@ export const ExampleAutocompleteWarningOnly = {
     helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some films in this list may not be playable in your location.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{ 
+      <Box sx={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '6px',
@@ -484,8 +483,9 @@ export const ExampleAutocompleteWarningOnly = {
         backgroundColor: '#FFF4E5',
         border: '1px solid #E67700',
         borderRadius: '4px',
-      }}>
-        <WarningIcon 
+      }}
+      >
+        <WarningIcon
           style={{
             width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
           }}

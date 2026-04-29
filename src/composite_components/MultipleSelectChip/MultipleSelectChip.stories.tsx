@@ -20,8 +20,7 @@ import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmar
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
-import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
+import { Box } from '@mui/material';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -29,8 +28,6 @@ import ListItemIcon from '../../List/ListItemIcon';
 import ListItemText from '../../List/ListItemText';
 import { IFilm, top100Films } from '../../Autocomplete/data';
 import { TooltipPlacement } from '../../Tooltip';
-import { AutocompleteBannerProps } from '../../Autocomplete/Autocomplete';
-import { Box } from '@mui/material';
 import Typography from '../../Typography';
 
 interface IChip {
@@ -383,7 +380,7 @@ export const ExampleMultipleSelectChipWithInfoBanner = {
     helperIconTooltip: 'This collection contains various categories. Use the search feature to filter by type or keyword.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{ 
+      <Box sx={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '6px',
@@ -391,8 +388,9 @@ export const ExampleMultipleSelectChipWithInfoBanner = {
         backgroundColor: '#E5F0FF',
         border: '1px solid #0066CC',
         borderRadius: '4px',
-      }}>
-        <InformationIcon 
+      }}
+      >
+        <InformationIcon
           style={{
             width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
           }}
@@ -422,7 +420,7 @@ export const ExampleMultipleSelectChipWithWarningBanner = {
     helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some items in this list may not be playable in your location.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{ 
+      <Box sx={{
         display: 'flex',
         alignItems: 'flex-start',
         gap: '6px',
@@ -430,8 +428,9 @@ export const ExampleMultipleSelectChipWithWarningBanner = {
         backgroundColor: '#FFF4E5',
         border: '1px solid #E67700',
         borderRadius: '4px',
-      }}>
-        <WarningIcon 
+      }}
+      >
+        <WarningIcon
           style={{
             width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
           }}
@@ -450,7 +449,6 @@ export const ExampleMultipleSelectChipWithWarningBanner = {
     },
   },
 };
-
 
 export const ExampleMultipleSelectChipError = {
   render: Template,

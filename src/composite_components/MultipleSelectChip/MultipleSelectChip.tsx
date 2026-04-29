@@ -17,8 +17,7 @@ import React from 'react';
 import { Theme, SxProps } from '@mui/material';
 import ClearFilledIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close--filled';
 
-import Autocomplete, { AutocompleteProps } from '../../Autocomplete/Autocomplete';
-import { AutocompleteBannerProps } from '../../Autocomplete/Autocomplete';
+import Autocomplete, { AutocompleteProps, AutocompleteBannerProps } from '../../Autocomplete/Autocomplete';
 import { white } from '../../colors';
 
 /**
