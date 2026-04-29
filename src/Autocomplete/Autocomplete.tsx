@@ -35,22 +35,23 @@ import Tooltip, { TooltipPlacement } from '../Tooltip';
  */
 export type AutocompleteBannerProps = React.ReactNode;
 
-// Component to render listbox with an optional banner at the top
-const BannerListboxComponent = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement> & { listboxBanner?: AutocompleteBannerProps }>(
-  ({ children, listboxBanner, ...listboxProps }, ref) => {
-    // Render the listbox with the optional banner
-    return (
-      <ul {...listboxProps} ref={ref}>
-        {listboxBanner && (
-          <li role="presentation" aria-hidden="true" style={{ pointerEvents: 'none' }}>
-            {listboxBanner}
-          </li>
-        )}
-        {children}
-      </ul>
-    );
-  },
-);
+// Factory function to create a stable ListboxComponent with banner
+const createBannerListboxComponent = (banner: AutocompleteBannerProps) => {
+  return React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement>>(
+    ({ children, ...listboxProps }, ref) => {
+      return (
+        <ul {...listboxProps} ref={ref}>
+          {banner && (
+            <li role="presentation" aria-hidden="true" style={{ pointerEvents: 'none' }}>
+              {banner}
+            </li>
+          )}
+          {children}
+        </ul>
+      );
+    },
+  );
+};
 
 /**
  * @typedef AutocompleteProps
@@ -251,7 +252,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
         <InputLabelAndAction {...inputLabelAndActionProps} />
         <MuiAutocomplete
           {...rest}
-          {...(listboxBanner && { ListboxComponent: (listboxProps) => { return <BannerListboxComponent {...listboxProps} listboxBanner={listboxBanner} />; } })}
+          {...(listboxBanner && { ListboxComponent: createBannerListboxComponent(listboxBanner) })}
           onFocus={() => {
             setIsFocus(true);
           }}
