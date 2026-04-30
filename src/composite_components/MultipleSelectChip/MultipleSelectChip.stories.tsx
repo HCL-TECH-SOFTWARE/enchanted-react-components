@@ -235,7 +235,7 @@ export default {
     listboxBanner: {
       control: false,
       description: 'Banner component to be displayed at the top of the dropdown listbox to provide additional context or information.',
-    }
+    },
   },
 } as Meta<typeof MultipleSelectChip>;
 
@@ -424,7 +424,11 @@ export const ExampleMultipleSelectChipWithCustomizedBanner = {
           }}
         />
         <Typography variant="body2" color="#E67700">
-          Customized <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span> Banner
+          Customized
+          {' '}
+          <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span>
+          {' '}
+          Banner
         </Typography>
       </Box>
     ),
