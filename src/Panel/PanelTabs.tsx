@@ -49,7 +49,7 @@ const ToggleButtonContainerStyled = styled('div')(() => {
   return {
     position: 'fixed',
     bottom: '0px',
-    padding: '8px 12px',
+    padding: '8px 13px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
