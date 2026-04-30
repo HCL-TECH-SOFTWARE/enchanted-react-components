@@ -3,8 +3,10 @@
 ## Unreleased
 
 ### Added
+- Added `listboxBanner` prop to Autocomplete to display informational banner at the top of the dropdown listbox
 
 ### Fixed
+- Fixed Tooltip ref forwarding warnings in Autocomplete by conditionally rendering Tooltip only when there's a title
 - Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency
 - Fixed StaticDatePicker year grid keyboard navigation: up/down arrows now move vertically in the same column. Set `displayStaticWrapperAs='mobile'`, `showToolbar={false}`, and `closeOnSelect={false}` for correct layout and UX.
 - Fix `PanelTabs` styling issue for the toggle button
