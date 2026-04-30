@@ -404,10 +404,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               ...textFieldArgs.inputProps,
             };
 
-            return (
+            return tooltipTitle ? (
               <Tooltip title={tooltipTitle} tooltipsize="small">
                 <TextField {...textFieldArgs} inputRef={textfieldRef} />
               </Tooltip>
+            ) : (
+              <TextField {...textFieldArgs} inputRef={textfieldRef} />
             );
           }}
         />

@@ -21,7 +21,7 @@ import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
@@ -247,6 +247,10 @@ export default {
         },
       },
     },
+    listboxBanner: {
+      control: false,
+      description: 'Banner component to be displayed at the top of the dropdown listbox to provide additional context or information.',
+    }
   },
 } as Meta<typeof Autocomplete>;
 
@@ -426,7 +430,7 @@ export const ExampleAutocompleteStartAndEndAdornment = {
   },
 };
 
-export const ExampleAutocompleteWithInformationMessage = {
+export const ExampleAutocompleteWithAlertComponentBanner = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
@@ -435,25 +439,9 @@ export const ExampleAutocompleteWithInformationMessage = {
     helperIconTooltip: 'This search includes movies from various genres and decades. Use the search field to quickly find what you\'re looking for.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '6px',
-        padding: '6px 16px',
-        backgroundColor: '#E5F0FF',
-        border: '1px solid #0066CC',
-        borderRadius: '4px',
-      }}
-      >
-        <InformationIcon
-          style={{
-            width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
-          }}
-        />
-        <Typography variant="body2" color="info.dark">
-          Results include all items containing your keywords, regardless of the display title
-        </Typography>
-      </Box>
+      <Alert severity="info" variant="contained">
+        Results include all items containing your keywords, regardless of the display title
+      </Alert>
     ),
   },
   parameters: {
@@ -465,7 +453,7 @@ export const ExampleAutocompleteWithInformationMessage = {
   },
 };
 
-export const ExampleAutocompleteWithWarningMessage = {
+export const ExampleAutocompleteWithCustomizedBanner = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
@@ -491,7 +479,7 @@ export const ExampleAutocompleteWithWarningMessage = {
           }}
         />
         <Typography variant="body2" color="#E67700">
-          Results include all items containing your keywords, regardless of the display title
+          Customized <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span> Banner
         </Typography>
       </Box>
     ),

@@ -3,8 +3,10 @@
 ## Unreleased
 
 ### Added
+- Added `listboxBanner` prop to Autocomplete to display informational banner at the top of the dropdown listbox
 
 ### Fixed
+- Fixed Tooltip ref forwarding warnings in Autocomplete by conditionally rendering Tooltip only when there's a title
 - Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency
 
 ### Changed

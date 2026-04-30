@@ -20,7 +20,7 @@ import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmar
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -232,6 +232,10 @@ export default {
         },
       },
     },
+    listboxBanner: {
+      control: false,
+      description: 'Banner component to be displayed at the top of the dropdown listbox to provide additional context or information.',
+    }
   },
 } as Meta<typeof MultipleSelectChip>;
 
@@ -371,7 +375,7 @@ export const ExampleMultipleSelectChip = {
   },
 };
 
-export const ExampleMultipleSelectChipWithInformationMessage = {
+export const ExampleMultipleSelectChipWithAlertComponentBanner = {
   render: Template,
   args: {
     ...ExampleMultipleSelectChip.args,
@@ -380,25 +384,9 @@ export const ExampleMultipleSelectChipWithInformationMessage = {
     helperIconTooltip: 'This collection contains various categories. Use the search feature to filter by type or keyword.',
     enableHelpHoverEffect: true,
     listboxBanner: (
-      <Box sx={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '6px',
-        padding: '6px 16px',
-        backgroundColor: '#E5F0FF',
-        border: '1px solid #0066CC',
-        borderRadius: '4px',
-      }}
-      >
-        <InformationIcon
-          style={{
-            width: '16px', height: '16px', flexShrink: 0, color: '#0066CC',
-          }}
-        />
-        <Typography variant="body2" color="#0066CC">
-          Results include all items containing your keywords, regardless of the display title
-        </Typography>
-      </Box>
+      <Alert severity="info" variant="contained">
+        Results include all items containing your keywords, regardless of the display title
+      </Alert>
     ),
   },
   parameters: {
@@ -410,7 +398,7 @@ export const ExampleMultipleSelectChipWithInformationMessage = {
   },
 };
 
-export const ExampleMultipleSelectChipWithWarningMessage = {
+export const ExampleMultipleSelectChipWithCustomizedBanner = {
   render: Template,
   args: {
     ...ExampleMultipleSelectChip.args,
@@ -436,7 +424,7 @@ export const ExampleMultipleSelectChipWithWarningMessage = {
           }}
         />
         <Typography variant="body2" color="#E67700">
-          Results include all items containing your keywords, regardless of the display title
+          Customized <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span> Banner
         </Typography>
       </Box>
     ),
