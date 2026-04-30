@@ -6,6 +6,7 @@
 
 ### Fixed
 - Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency
+- Fix `PanelTabs` styling issue for the toggle button
 
 ### Changed
 
