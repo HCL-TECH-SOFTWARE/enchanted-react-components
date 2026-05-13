@@ -270,9 +270,13 @@ const DatePicker = <TInputDate, TDate>({
   actionProps,
   customIcon,
   value,
+  onAccept,
   ...muiProps
 }: DatePickerProps<TInputDate, TDate>) => {
   const popperId = uuid();
+  // Controls the active view of StaticDatePicker. Resets to 'day' on Today click since
+  // MUI v5 StaticDatePicker does not reset the view automatically.
+  const [staticView, setStaticView] = React.useState<'day' | 'month' | 'year'>('day');
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
@@ -290,6 +294,17 @@ const DatePicker = <TInputDate, TDate>({
         (element.previousElementSibling.previousElementSibling as HTMLButtonElement).focus();
       }
     }
+  };
+
+  const handleStaticViewChange = (newView: 'day' | 'month' | 'year') => {
+    setStaticView(newView);
+    if (muiProps.onViewChange) { muiProps.onViewChange(newView); }
+  };
+
+  // Today button fires onAccept — reset to 'day' view so the calendar returns from year/month view.
+  const handleStaticAccept = (acceptedValue: TDate | null) => {
+    setStaticView('day');
+    if (onAccept) { onAccept(acceptedValue); }
   };
 
   const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
@@ -433,6 +448,9 @@ const DatePicker = <TInputDate, TDate>({
           {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
           disabled={disabled}
           value={value}
+          // view/onViewChange are forwarded to the internal CalendarPicker but not typed on StaticDatePickerProps.
+          {...{ view: staticView, onViewChange: handleStaticViewChange } as object}
+          onAccept={handleStaticAccept}
           displayStaticWrapperAs={staticWrapperAs}
           closeOnSelect={false}
           showToolbar={false}
