@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useState, useCallback } from 'react';
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/x-date-pickers/DatePicker';
 import { SvgIconProps, Theme } from '@mui/material';
 import { StaticDatePicker as MuiStaticDatePicker, StaticDatePickerProps as MuiStaticDatePickerProps } from '@mui/x-date-pickers/StaticDatePicker';
@@ -277,7 +277,7 @@ const DatePicker = <TInputDate, TDate>({
   const popperId = uuid();
   // Controls the active view of StaticDatePicker. Resets to 'day' on Today click since
   // MUI v5 StaticDatePicker does not reset the view automatically.
-  const [staticView, setStaticView] = React.useState<'day' | 'month' | 'year'>('day');
+  const [staticView, setStaticView] = useState<'day' | 'month' | 'year'>('day');
 
   const handleOnKeyDownLeft = (event: KeyboardEvent) => {
     if (event.key === 'ArrowRight') {
@@ -297,13 +297,13 @@ const DatePicker = <TInputDate, TDate>({
     }
   };
 
-  const handleStaticViewChange = React.useCallback((newView: 'day' | 'month' | 'year') => {
+  const handleStaticViewChange = useCallback((newView: 'day' | 'month' | 'year') => {
     setStaticView(newView);
     onViewChange?.(newView);
   }, [onViewChange]);
 
   // Today button fires onAccept — reset to 'day' view so the calendar returns from year/month view.
-  const handleStaticAccept = React.useCallback((acceptedValue: TDate | null) => {
+  const handleStaticAccept = useCallback((acceptedValue: TDate | null) => {
     setStaticView('day');
     onAccept?.(acceptedValue);
   }, [onAccept]);
