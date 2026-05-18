@@ -7,6 +7,7 @@
 ### Fixed
 
 ### Changed
+- Updated uuid package to the latest version, 14.0.0. Also updated various transitive dependencies.
 
 ### Breaking changes
 
