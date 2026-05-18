@@ -33,12 +33,6 @@ export default {
   title: 'Navigation/TreeView',
   component: TreeView,
   argTypes: {
-    multiSelect: {
-      if: { arg: 'interactive' },
-      description: 'If true, ctrl and shift will trigger multiselect.',
-      control: { type: 'boolean' },
-      table: { defaultValue: { summary: 'false' } },
-    },
     disableSelection: {
       if: { arg: 'interactive' },
       description: 'If true, selection is disabled.',
@@ -100,6 +94,12 @@ export default {
       options: ['label', 'end'],
       table: { defaultValue: { summary: 'label' } },
     },
+    showLevelLine: {
+      if: { arg: 'interactive' },
+      description: 'When false, hides the vertical level-line that connects parent items to their children.',
+      control: { type: 'boolean' },
+      table: { defaultValue: { summary: 'true' } },
+    },
     defaultExpanded: { table: { disable: true } },
     defaultCollapseIcon: { table: { disable: true } },
     defaultExpandIcon: { table: { disable: true } },
@@ -127,7 +127,6 @@ const StatusBadge = () => {
 /* ── Interactive template ────────────────────────────────────────────────── */
 interface ExtendedTreeViewArgs {
   interactive?: boolean;
-  multiSelect?: boolean;
   disableSelection?: boolean;
   showStartIcon?: boolean;
   showStatusBadge?: boolean;
@@ -138,11 +137,11 @@ interface ExtendedTreeViewArgs {
   showHoverActions?: boolean;
   disabled?: boolean;
   detailsAlign?: 'label' | 'end';
+  showLevelLine?: boolean;
 }
 
 const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
   const {
-    multiSelect,
     disableSelection,
     showStartIcon,
     showStatusBadge,
@@ -153,6 +152,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
     showHoverActions,
     disabled,
     detailsAlign = 'label',
+    showLevelLine = true,
   } = args;
 
   const [selected, setSelected] = React.useState<string[]>([]);
@@ -196,11 +196,11 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
       <TreeView
         ref={treeRef}
         key={String(disabled)}
-        multiSelect={multiSelect as true | undefined}
         disableSelection={disableSelection}
         defaultExpanded={['1']}
         selected={selected}
         onNodeSelect={handleNodeSelect}
+        showLevelLine={showLevelLine}
       >
         <TreeItem
           nodeId="1"
@@ -288,7 +288,6 @@ export const InteractiveExample = {
   render: Template,
   args: {
     interactive: true,
-    multiSelect: false,
     disableSelection: false,
     showStartIcon: true,
     showStatusBadge: true,
@@ -299,10 +298,11 @@ export const InteractiveExample = {
     showHoverActions: true,
     disabled: true,
     detailsAlign: 'label',
+    showLevelLine: true,
   },
 };
 
-/* ── Visual test – all Figma variants ─────────────────────────────────── */
+/* ── Visual test ─────────────────────────────────── */
 const VisualTestTemplate: StoryFn<object> = () => {
   const overflowAction = (
     <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}>

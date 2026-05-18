@@ -32,12 +32,14 @@ export interface TreeViewContextValue {
   focusTree: () => void;
   navigateWithKey: (key: string) => void;
   navigateToNextItemAction: (reverse: boolean, fromContent: HTMLElement) => void;
+  showLevelLine: boolean;
 }
 export const TreeViewContext = React.createContext<TreeViewContextValue>({
   usingKeyboardRef: { current: false },
   focusTree: () => { return undefined; },
   navigateWithKey: () => { return undefined; },
   navigateToNextItemAction: () => { return undefined; },
+  showLevelLine: true,
 });
 
 export interface EnhancedTreeItemProps extends Omit<TreeItemProps, 'endIcon'> {
@@ -108,7 +110,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
   ) => {
     const depth = React.useContext(TreeDepthContext);
     const {
-      usingKeyboardRef, focusTree, navigateToNextItemAction,
+      usingKeyboardRef, focusTree, navigateToNextItemAction, showLevelLine,
     } = React.useContext(TreeViewContext);
     // Access MUI's internal focus(event, nodeId) — lets us set focusedNodeId
     // to the correct item before dispatching arrow keys, bypassing MUI's
@@ -213,22 +215,24 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
     // Wrap children: render the real line div + increment depth for grandchildren.
     const wrappedChildren = children ? (
       <TreeDepthContext.Provider value={depth + 1}>
-        <Box
-          aria-hidden
-          className="tree-level-line"
-          sx={(theme) => {
-            return {
-              position: 'absolute',
-              left: `${lineLeft}px`,
-              top: 0,
-              bottom: 0,
-              width: '1px',
-              backgroundColor: theme.palette.border.secondary,
-              pointerEvents: 'none',
-              zIndex: 0,
-            };
-          }}
-        />
+        {showLevelLine && (
+          <Box
+            aria-hidden
+            className="tree-level-line"
+            sx={(theme) => {
+              return {
+                position: 'absolute',
+                left: `${lineLeft}px`,
+                top: 0,
+                bottom: 0,
+                width: '1px',
+                backgroundColor: theme.palette.border.secondary,
+                pointerEvents: 'none',
+                zIndex: 0,
+              };
+            }}
+          />
+        )}
         {children}
       </TreeDepthContext.Provider>
     ) : undefined;

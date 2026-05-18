@@ -24,6 +24,11 @@ export { TreeViewContext, TreeDepthContext } from './TreeItem';
 
 export { TreeViewProps };
 
+export type EnhancedTreeViewProps = TreeViewProps & {
+  /** When false, hides the vertical level-line connecting parent to children. Defaults to true. */
+  showLevelLine?: boolean;
+};
+
 /**
  * Override out of the box styling from MUI to align with designer theme.
  * @returns override TreeView and TreeItem component styles and props
@@ -188,6 +193,36 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
               backgroundColor: 'rgba(5, 80, 220, 0.04)',
               borderRadius: '0 0 2px 2px',
             },
+            // When a parent is selected, colour the level-lines in the selected colour.
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .tree-level-line': {
+              backgroundColor: theme.palette.action.selected,
+            },
+            // When a parent is selected, apply the selected visual treatment to ALL
+            // descendant content items at any depth (excluding disabled items).
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .MuiTreeItem-content:not(.Mui-disabled)': {
+              backgroundColor: theme.palette.action.selectedOpacity,
+              '& .tree-item-icon svg': {
+                color: theme.palette.action.selected,
+              },
+              '& .tree-item-label-text': {
+                color: theme.palette.action.selected,
+              },
+              '& .tree-item-details-text': {
+                color: theme.palette.action.selected,
+              },
+              '& .tree-item-end-action svg': {
+                color: theme.palette.action.selected,
+              },
+              '& .tree-item-hover-actions svg': {
+                color: theme.palette.action.selected,
+              },
+              '& .MuiTreeItem-iconContainer svg': {
+                color: theme.palette.action.selected,
+              },
+              '&:hover': {
+                backgroundColor: theme.palette.action.selectedOpacityHover,
+              },
+            },
           };
         },
       },
@@ -195,10 +230,10 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
   };
 };
 
-const TreeView = React.forwardRef<HTMLUListElement, TreeViewProps>(
-  (props: TreeViewProps, ref: React.Ref<HTMLUListElement>) => {
+const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
+  (props: EnhancedTreeViewProps, ref: React.Ref<HTMLUListElement>) => {
     const {
-      defaultCollapseIcon, defaultExpandIcon, onMouseLeave, ...rest
+      defaultCollapseIcon, defaultExpandIcon, onMouseLeave, showLevelLine = true, ...rest
     } = props;
 
     const treeRef = React.useRef<HTMLUListElement>(null);
@@ -285,10 +320,10 @@ const TreeView = React.forwardRef<HTMLUListElement, TreeViewProps>(
     const contextValue = React.useMemo(
       () => {
         return {
-          usingKeyboardRef: isKeyboardNav, focusTree, navigateWithKey, navigateToNextItemAction,
+          usingKeyboardRef: isKeyboardNav, focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine,
         };
       },
-      [focusTree, navigateWithKey, navigateToNextItemAction],
+      [focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine],
     );
 
     return (
