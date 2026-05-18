@@ -6,7 +6,7 @@
 - Added the `TreeView` component.
 
 ### Fixed
-
+- Fixed an issue in Static DatePicker (MUI) where the "Today" action did not correctly update or reflect the selected date when triggered from the year/month view.
 ### Changed
 
 ### Breaking changes
