@@ -146,7 +146,7 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
               '&.Mui-disabled': {
                 pointerEvents: 'none',
               },
-              '&:hover .tree-item-hover-actions, &.Mui-focused .tree-item-hover-actions, &:focus-within .tree-item-hover-actions': {
+              '&:hover .tree-item-hover-actions, &.Mui-focused .tree-item-hover-actions, & .tree-item-hover-actions:focus-within': {
                 opacity: 1,
               },
             },

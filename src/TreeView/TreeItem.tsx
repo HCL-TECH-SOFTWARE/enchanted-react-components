@@ -14,12 +14,8 @@
  * ======================================================================== */
 import React, { ReactNode } from 'react';
 import MuiTreeItem, { TreeItemProps } from '@mui/lab/TreeItem';
-// @ts-ignore - accessing MUI Lab's internal TreeViewContext (private API, no type declarations available)
-import MuiTreeViewInternalContextRaw from '@mui/lab/TreeView/TreeViewContext';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
-const MuiTreeViewInternalContext = MuiTreeViewInternalContextRaw as React.Context<{ focus?: (event: unknown, nodeId: string) => void }>;
 
 /**
  * Context tracking nesting depth (0 = root level).
@@ -113,10 +109,6 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
     const {
       usingKeyboardRef, focusTree, navigateToNextItemAction, showLevelLine,
     } = React.useContext(TreeViewContext);
-    // Access MUI's internal focus(event, nodeId) — lets us set focusedNodeId
-    // to the correct item before dispatching arrow keys, bypassing MUI's
-    // handleBlur-clears-focusedNodeId + handleFocus-restores-to-firstSelected issue.
-    const muiFocus = (React.useContext(MuiTreeViewInternalContext) as { focus?: (e: unknown, nodeId: string) => void }).focus;
 
     // Each item watches its own content for Mui-focused class changes,
     // and shows the ring only when keyboard is being used.
@@ -146,6 +138,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       const treeUl = (e.currentTarget as HTMLElement).closest<HTMLElement>('ul[role="tree"]');
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
+        e.stopPropagation();
         if (!treeUl) { focusTree(); return; }
         const li = (e.currentTarget as HTMLElement).closest<HTMLElement>('li[role="treeitem"]');
         const content = li?.querySelector<HTMLElement>('.MuiTreeItem-content');
@@ -158,31 +151,26 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
           focusTree();
           return;
         }
+        // Focus the target li element — MUI's handleFocus on li fires only when
+        // li itself is focused (currentTarget === target), which then calls
+        // setFocusedNodeId(nodeId) and redirects DOM focus to the tree ul.
         const targetLi = allContents[targetIndex].closest<HTMLElement>('li[role="treeitem"]');
-        const treeId = treeUl.id;
-        const liId = targetLi?.id ?? '';
-        const targetNodeId = treeId && liId.startsWith(`${treeId}-`)
-          ? liId.slice(treeId.length + 1)
-          : liId;
-        if (!targetNodeId) { focusTree(); return; }
-        // Focus tree (MUI handleFocus restores to firstSelected || first).
-        // Override in rAF after React flushes that state update.
-        treeUl.focus();
-        requestAnimationFrame(() => { muiFocus?.(e, targetNodeId); });
+        targetLi?.focus();
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         e.preventDefault();
+        e.stopPropagation();
         if (!treeUl) { focusTree(); return; }
         const { key } = e;
-        // Two rAFs: first sets focusedNodeId to THIS item, second dispatches the key.
-        treeUl.focus();
+        // Focus this item's li so MUI sets focusedNodeId to this node,
+        // then dispatch the key so MUI's handleKeyDown acts on the correct node.
+        const thisLi = (e.currentTarget as HTMLElement).closest<HTMLElement>('li[role="treeitem"]');
+        thisLi?.focus();
         requestAnimationFrame(() => {
-          muiFocus?.(e, props.nodeId);
-          requestAnimationFrame(() => {
-            treeUl.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
-          });
+          treeUl.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
         });
       } else if (e.key === 'Home' || e.key === 'End') {
         e.preventDefault();
+        e.stopPropagation();
         if (!treeUl) { focusTree(); return; }
         const { key } = e;
         // after handleFocus sets any focusedNodeId (needed to pass MUI's guard).
@@ -201,7 +189,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
           navigateToNextItemAction(e.shiftKey, content);
         }
       }
-    }, [focusTree, navigateToNextItemAction, muiFocus, props.nodeId]);
+    }, [focusTree, navigateToNextItemAction, props.nodeId]);
 
     const contentPaddingLeft = depth > 0 ? 4 + depth * 8 : undefined;
 
@@ -349,7 +337,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
               alignItems: 'center',
               gap: '8px',
               marginLeft: '4px',
-              '.MuiTreeItem-content:hover &, .MuiTreeItem-content.Mui-focused &, .MuiTreeItem-content:focus-within &': {
+              '.MuiTreeItem-content:hover &, .MuiTreeItem-content.Mui-focused &, &:focus-within': {
                 maxWidth: '200px',
                 opacity: 1,
                 visibility: 'visible',
