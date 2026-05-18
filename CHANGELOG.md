@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added the `TreeView` component.
 
 ### Fixed
 

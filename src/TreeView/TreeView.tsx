@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -65,7 +65,7 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
                 color: theme.palette.action.active,
               },
               '&.Mui-selected': {
-                backgroundColor: theme.palette.action.selectedOpacity,
+                backgroundColor: theme.palette.action.selectedOpacityModified,
                 '& .tree-item-icon svg': {
                   color: theme.palette.action.selected,
                 },
@@ -125,18 +125,19 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
                   backgroundColor: 'transparent',
                 },
               },
-              '&.Mui-focused': {
+              // Only suppress MUI's default focus background when cursor is NOT on the row.
+              '&.Mui-focused:not(:hover)': {
                 backgroundColor: 'transparent',
               },
               '&.Mui-focused.Mui-selected': {
-                backgroundColor: `${theme.palette.action.selectedOpacity} !important`,
+                backgroundColor: `${theme.palette.action.selectedOpacityModified} !important`,
                 '&:hover': {
                   backgroundColor: `${theme.palette.action.selectedOpacityHover} !important`,
                 },
               },
               '&:focus-visible': {
                 '&.Mui-selected': {
-                  backgroundColor: theme.palette.action.selectedOpacity,
+                  backgroundColor: theme.palette.action.selectedOpacityModified,
                   '&:hover': {
                     backgroundColor: theme.palette.action.selectedOpacityHover,
                   },
@@ -199,7 +200,7 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
             },
             // When a parent is selected, apply the selected visual treatment to ALL
             // descendant content items at any depth (excluding disabled items).
-            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .MuiTreeItem-content:not(.Mui-disabled)': {
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .MuiTreeItem-content': {
               backgroundColor: theme.palette.action.selectedOpacity,
               '& .tree-item-icon svg': {
                 color: theme.palette.action.selected,

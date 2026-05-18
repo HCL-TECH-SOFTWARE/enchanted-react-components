@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -83,6 +83,7 @@ const ICON_SLOT_SX = {
 const IconSlot = ({ className, children }: { className?: string; children: ReactNode }) => {
   return (
     <Box
+      aria-hidden="true"
       className={`tree-item-icon${className ? ` ${className}` : ''}`}
       sx={ICON_SLOT_SX}
     >
@@ -117,7 +118,6 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
     // handleBlur-clears-focusedNodeId + handleFocus-restores-to-firstSelected issue.
     const muiFocus = (React.useContext(MuiTreeViewInternalContext) as { focus?: (e: unknown, nodeId: string) => void }).focus;
 
-    // Per-item focus ring — Accordion pattern:
     // Each item watches its own content for Mui-focused class changes,
     // and shows the ring only when keyboard is being used.
     const liRef = React.useRef<HTMLLIElement>(null);
@@ -142,7 +142,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       else if (ref) (ref as React.MutableRefObject<HTMLLIElement | null>).current = node;
     }, [ref]);
 
-    const handleActionKeyDown = (e: React.KeyboardEvent) => {
+    const handleActionKeyDown = React.useCallback((e: React.KeyboardEvent) => {
       const treeUl = (e.currentTarget as HTMLElement).closest<HTMLElement>('ul[role="tree"]');
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
@@ -201,15 +201,11 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
           navigateToNextItemAction(e.shiftKey, content);
         }
       }
-    };
+    }, [focusTree, navigateToNextItemAction, muiFocus, props.nodeId]);
 
-    // Content left padding: 4px (root) + 8px per nesting level.
-    // Keeps caret visually at 4px + depth*8 from the left edge.
     const contentPaddingLeft = depth > 0 ? 4 + depth * 8 : undefined;
 
     // Vertical level line sits at the horizontal center of the parent's caret:
-    // 4px (content padding) + 8px (half of 16px icon) = 12px, minus 1px (line width) = 11px base.
-    // Each deeper level adds 8px (= half icon width).
     const lineLeft = 11 + depth * 8;
 
     // Wrap children: render the real line div + increment depth for grandchildren.
@@ -250,7 +246,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
         {startIcon && <IconSlot className="tree-item-start-icon">{startIcon}</IconSlot>}
 
         {statusBadge && (
-          <Box className="tree-item-icon tree-item-status" sx={ICON_SLOT_SX}>
+          <Box aria-hidden="true" className="tree-item-icon tree-item-status" sx={ICON_SLOT_SX}>
             {statusBadge}
           </Box>
         )}
@@ -346,7 +342,8 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
               maxWidth: 0,
               overflow: 'hidden',
               opacity: 0,
-              transition: 'max-width 0.2s ease, opacity 0.2s ease',
+              visibility: 'hidden',
+              transition: 'max-width 0.2s ease, opacity 0.2s ease, visibility 0s 0.2s',
               display: 'flex',
               flexShrink: 0,
               alignItems: 'center',
@@ -355,6 +352,8 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
               '.MuiTreeItem-content:hover &, .MuiTreeItem-content.Mui-focused &, .MuiTreeItem-content:focus-within &': {
                 maxWidth: '200px',
                 opacity: 1,
+                visibility: 'visible',
+                transition: 'max-width 0.2s ease, opacity 0.2s ease, visibility 0s',
               },
             }}
           >
