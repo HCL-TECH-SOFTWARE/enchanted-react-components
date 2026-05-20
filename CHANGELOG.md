@@ -6,7 +6,7 @@
 
 ### Fixed
 - Fixed an issue in Static DatePicker (MUI) where the "Today" action did not correctly update or reflect the selected date when triggered from the year/month view.
-- Fixed an issue in Static DatePicker where re-selecting the already-selected date did not trigger `onChange`. MUI v5 `StaticDatePicker` suppresses `onChange` when the clicked day matches the current value; added a manual click handler in `renderDay` (static mode only) to re-fire the callback, allowing consumers to treat re-selection as a valid user action.
+- Fixed an issue in Static DatePicker where re-selecting the already-selected date did not trigger `onChange`.
 ### Changed
 
 ### Breaking changes

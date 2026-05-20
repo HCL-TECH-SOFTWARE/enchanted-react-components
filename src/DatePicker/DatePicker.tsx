@@ -397,11 +397,13 @@ const DatePicker = <TInputDate, TDate>({
     // MUI v5 StaticDatePicker does not fire onChange when the user clicks an
     // already-selected day.  For static mode we attach a manual click handler
     // so that re-selecting the current date still notifies the consumer.
-    // The handler is omitted entirely for the regular (non-static) DatePicker
-    // so that MUI's built-in behaviour is preserved there.
-    const handleDayClick = (staticMode && DayComponentProps.selected)
-      ? () => { muiProps.onChange?.(day); }
-      : undefined;
+    // The onClick is only spread in static mode so that the non-static
+    // DatePicker's built-in MUI click behaviour is never overridden.
+    const handleDayClick = () => {
+      if (staticMode && DayComponentProps.selected) {
+        muiProps?.onChange?.(day);
+      }
+    };
 
     return (
       <Badge
@@ -443,7 +445,7 @@ const DatePicker = <TInputDate, TDate>({
           },
         }}
       >
-        <PickersDay {...DayComponentProps} {...(handleDayClick && { onClick: handleDayClick })} />
+        <PickersDay {...DayComponentProps} {...(staticMode && { onClick: handleDayClick })} />
       </Badge>
     );
   };
