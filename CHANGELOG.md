@@ -8,6 +8,7 @@
 - Fixed an issue in Static DatePicker (MUI) where the "Today" action did not correctly update or reflect the selected date when triggered from the year/month view.
 - Fixed an issue in Static DatePicker where re-selecting the already-selected date did not trigger `onChange`.
 ### Changed
+- Updated uuid package to the latest version, 14.0.0. Also updated various transitive dependencies.
 
 ### Breaking changes
 
