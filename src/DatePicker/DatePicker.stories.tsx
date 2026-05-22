@@ -240,7 +240,7 @@ export const ExampleDatePickerOpen = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole('button'));
+    await userEvent.click(canvas.getByRole('button', { name: 'Choose date' }));
   },
 };
 

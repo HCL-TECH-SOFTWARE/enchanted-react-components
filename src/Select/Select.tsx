@@ -156,7 +156,11 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   const muiTextFieldProps: MuiSelectProps = {
     ...cleanedProps,
     label: undefined, // The label will be separately handled and not via the MuiSelect
-    endAdornment: <InputAdornment position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>{getEndAdornment(props)}</InputAdornment>,
+    endAdornment: (
+      <InputAdornment data-testid="endAdornment" position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>
+        {getEndAdornment(props)}
+      </InputAdornment>
+    ),
     IconComponent: CaretDownIcon,
   };
   return muiTextFieldProps;
