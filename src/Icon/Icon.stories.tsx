@@ -1933,6 +1933,10 @@ import IconZoomReset from '@hcl-software/enchanted-icons/dist/carbon/es/zoom--re
 export default {
   title: 'Data display/IconPreview',
   component: Icon,
+  parameters: {
+    // Disables Chromatic's snapshotting on a component level
+    chromatic: { disableSnapshot: true },
+  },
   argTypes: {
     children: {
       control: false,
