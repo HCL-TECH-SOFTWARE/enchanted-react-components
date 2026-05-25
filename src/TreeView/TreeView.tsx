@@ -27,6 +27,8 @@ export { TreeViewProps };
 export type EnhancedTreeViewProps = TreeViewProps & {
   /** When false, hides the vertical level-line connecting parent to children. Defaults to true. */
   showLevelLine?: boolean;
+  /** When true, all tree items in the tree are disabled. */
+  disabled?: boolean;
 };
 
 /**
@@ -234,7 +236,7 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
 const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
   (props: EnhancedTreeViewProps, ref: React.Ref<HTMLUListElement>) => {
     const {
-      defaultCollapseIcon, defaultExpandIcon, onMouseLeave, showLevelLine = true, ...rest
+      defaultCollapseIcon, defaultExpandIcon, onMouseLeave, showLevelLine = true, disabled, ...rest
     } = props;
 
     const treeRef = React.useRef<HTMLUListElement>(null);
@@ -321,10 +323,10 @@ const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
     const contextValue = React.useMemo(
       () => {
         return {
-          usingKeyboardRef: isKeyboardNav, focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine,
+          usingKeyboardRef: isKeyboardNav, focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine, disabled,
         };
       },
-      [focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine],
+      [focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine, disabled],
     );
 
     return (

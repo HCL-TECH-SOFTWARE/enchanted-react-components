@@ -29,6 +29,8 @@ export interface TreeViewContextValue {
   navigateWithKey: (key: string) => void;
   navigateToNextItemAction: (reverse: boolean, fromContent: HTMLElement) => void;
   showLevelLine: boolean;
+  /** When true, all tree items are disabled regardless of their own disabled prop. */
+  disabled?: boolean;
 }
 export const TreeViewContext = React.createContext<TreeViewContextValue>({
   usingKeyboardRef: { current: false },
@@ -101,13 +103,14 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       endAction,
       hoverActions,
       children,
+      disabled,
       ...props
     },
     ref,
   ) => {
     const depth = React.useContext(TreeDepthContext);
     const {
-      usingKeyboardRef, focusTree, navigateToNextItemAction, showLevelLine,
+      usingKeyboardRef, focusTree, navigateToNextItemAction, showLevelLine, disabled: contextDisabled,
     } = React.useContext(TreeViewContext);
 
     // Each item watches its own content for Mui-focused class changes,
@@ -189,7 +192,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
           navigateToNextItemAction(e.shiftKey, content);
         }
       }
-    }, [focusTree, navigateToNextItemAction, props.nodeId]);
+    }, [focusTree, navigateToNextItemAction]);
 
     const contentPaddingLeft = depth > 0 ? 4 + depth * 8 : undefined;
 
@@ -206,7 +209,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
             sx={(theme) => {
               return {
                 position: 'absolute',
-                left: `${lineLeft}px`,
+                insetInlineStart: `${lineLeft}px`,
                 top: 0,
                 bottom: 0,
                 width: '1px',
@@ -355,8 +358,9 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       <MuiTreeItem
         ref={setRef}
         className={isFocused ? 'keyboard-focused' : undefined}
-        ContentProps={contentPaddingLeft !== undefined ? { style: { paddingLeft: `${contentPaddingLeft}px` } } : undefined}
+        ContentProps={contentPaddingLeft !== undefined ? { style: { paddingInlineStart: `${contentPaddingLeft}px` } } : undefined}
         {...props}
+        disabled={contextDisabled || disabled}
         label={customLabel}
       >
         {wrappedChildren}

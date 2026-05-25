@@ -83,9 +83,9 @@ export default {
     },
     disabled: {
       if: { arg: 'interactive' },
-      description: 'If true, the last item will be rendered as disabled.',
+      description: 'If true, all tree items in the tree are globally disabled.',
       control: { type: 'boolean' },
-      table: { defaultValue: { summary: 'true' } },
+      table: { defaultValue: { summary: 'false' } },
     },
     detailsAlign: {
       if: { arg: 'interactive' },
@@ -166,6 +166,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
       size="small"
       variant={IconButtonVariants.WITHOUT_PADDING}
       showendicon={0}
+      aria-label="More actions"
       onClick={(e) => { e.stopPropagation(); }}
     >
       <OverflowMenuHorizontalIcon />
@@ -201,6 +202,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
         selected={selected}
         onNodeSelect={handleNodeSelect}
         showLevelLine={showLevelLine}
+        disabled={disabled}
       >
         <TreeItem
           nodeId="1"
@@ -276,7 +278,6 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
             endIcon={showEndIcon ? <HomeIcon /> : undefined}
             endAction={overflowAction}
             hoverActions={hoverActionButtons}
-            disabled={disabled}
           />
         </TreeItem>
       </TreeView>
@@ -296,7 +297,7 @@ export const InteractiveExample = {
     showEndIcon: true,
     showEndAction: true,
     showHoverActions: true,
-    disabled: true,
+    disabled: false,
     detailsAlign: 'label',
     showLevelLine: true,
   },
