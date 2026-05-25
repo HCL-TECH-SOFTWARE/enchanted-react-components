@@ -66,6 +66,12 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
               '& .tree-item-details-icon svg': {
                 color: theme.palette.action.active,
               },
+              '& .tree-item-hover-actions svg': {
+                color: theme.palette.action.active,
+              },
+              '& .tree-item-end-action svg': {
+                color: theme.palette.action.active,
+              },
               '&.Mui-selected': {
                 backgroundColor: theme.palette.action.selectedOpacityModified,
                 '& .tree-item-icon svg': {
