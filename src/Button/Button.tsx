@@ -82,7 +82,7 @@ export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components
         root: ({ ownerState, theme }) => {
           return ({
             borderRadius: '2px',
-            padding: '6px 12px',
+            padding: '26px 12px',
             ...theme.typography.subtitle2,
             textTransform: 'none',
             boxSizing: 'border-box',
