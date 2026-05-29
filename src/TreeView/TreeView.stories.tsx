@@ -25,6 +25,7 @@ import EditIcon from '@hcl-software/enchanted-icons/dist/carbon/es/edit';
 import TrashCanIcon from '@hcl-software/enchanted-icons/dist/carbon/es/trash-can';
 import Box from '@mui/material/Box';
 import CustomIconUserStatusActive from '@hcl-software/enchanted-icons/dist/apps/es/user-status--active';
+import { green } from '../colors';
 import IconButton from '../IconButton';
 import { IconButtonVariants } from '../IconButton/IconButton';
 import TreeView, { TreeItem } from './TreeView';
@@ -120,7 +121,7 @@ export default {
 /* ── Shared helpers ──────────────────────────────────────────────────────── */
 const StatusBadge = () => {
   return (
-    <CustomIconUserStatusActive style={{ fontSize: 16, color: '#15D36E' }} sx={{ '& path': { stroke: '#07432F' } }} />
+    <CustomIconUserStatusActive style={{ fontSize: 16, color: green.GREEN400 }} sx={{ '& path': { stroke: green.GREEN1000 } }} />
   );
 };
 
