@@ -3,19 +3,80 @@
 ## Unreleased
 
 ### Added
+- Added the `TreeView` component.
 
 ### Fixed
-- Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
 
 ### Changed
 
 ### Breaking changes
 
+## 2.7.0
+
+### Added
+- Adding chromatic PR worklfow snapshot tests
+
+### Fixed
+- Fixed an issue in Static DatePicker (MUI) where the "Today" action did not correctly update or reflect the selected date when triggered from the year/month view.
+- Fixed an issue in Static DatePicker where re-selecting the already-selected date did not trigger `onChange`.
+
+### Changed
+- Updated uuid package to the latest version, 14.0.0. Also updated various transitive dependencies.
+
+## 2.6.0
+
+### Added
+- Added `listboxBanner` prop to Autocomplete to display informational banner at the top of the dropdown listbox
+
+### Fixed
+- Fixed Tooltip ref forwarding warnings in Autocomplete by conditionally rendering Tooltip only when there's a title
+- Reverted `DataGrid` focus-visible changes as the fix was breaking accessibility standards - blue border now appears on all cell focus (both mouse and keyboard) for consistency
+- Fixed StaticDatePicker year grid keyboard navigation: up/down arrows now move vertically in the same column. Set `displayStaticWrapperAs='mobile'`, `showToolbar={false}`, and `closeOnSelect={false}` for correct layout and UX.
+- Fix `PanelTabs` styling issue for the toggle button
+
+## 2.5.0
+
+### Added
+- Add `staticMode` prop to DatePicker for rendering inline calendar via StaticDatePicker.
+
+### Fixed
+- Fixed AutoComplete tooltip when hovering into input field showing full details instead of truncated
+- Fixed unwanted blue border appearing on `DataGrid` cells when clicked with mouse by using `:focus-visible` to distinguish between mouse and keyboard focus
+- Fixed autocomplete onChange function always passing 'selectOption' as reason
+
+### Changed
+- Switch to the last @hcl-software/enchanted-icons package
+- Extends the IconPreview with new icons
+- Fix MultipleSelectChip broken layout caused by startAdornment wrapping chips in InputAdornment
+- Updates @mui/material and @mui/system packages to the latest available v5 version, 5.18.0
+  - Fix resulting type errors in Select.tsx and Tabs.tsx
+- Updates lodash package to the latest version, 4.18.1
+
+## 2.4.0
+
+### Added
+- Add the `customIcon` props in InputLabelAndAction component.
+- Added the new prop - customIcon - for alternative icon to helper icon to TextField, DatePicker, Autocomplete, SelectMultiple, SelectSingle, and MultiSelectChip components.
+- Add the `startAdornment` and `endAdornment` props in Autocomplete component.
+- Added these new props:
+  - startAdornment - to add an icon at the start of the Autocomplete component.
+  - endAdornment - to add an icon at the end of the Autocomplete component.
+
+## 2.3.2
+
+### Added
+
+- Added an information icon beside the overflow menu icon for collection tiles, visible only in trash view.
+- Added a lock notice overlay for media items in trash view, displaying a lock icon and message.
+
+### Fixed
+- Fixed the CSS for ProgressItems to ensure the tooltip will not overflow outside of progressBar.
+
 ## 2.3.1
 
 ### Fixed
 - Fixed ref forwarding support for the `ListItem` component, allowing access to the underlying DOM element.
-- Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.  
+- Fixed the issue where the `Autocomplete` tooltip was overwritten by transient input.
 - Fixed the issue where the `Autocomplete` text was truncating prematurely (ellipses) despite having available space.
 
 ## 2.3.0
@@ -111,7 +172,7 @@
 - Fixed screen reader accessibility issue with the zoom in & zoom out `button` in the `Preview` component.
 - Fixed focus handling on the expand/collapse icon button in the `ProgressBar` component to address accessibility issues
 - Fixed screen reader accessibility issue with the `label` in `Select` component
-- Added `component` props in `Typography`. 
+- Added `component` props in `Typography`.
 - Fixed focus issue for different status icon buttons in the `ProgressBar` component
 - Fixed button height to align with design specifications
 - Fixed Text spacing accessibility issue on `Pagination` component
@@ -164,7 +225,7 @@
 - corrected the hex value for HCLSOFTWAREBLUE06 to #003CE6
 
 ### Changed
-- Added hasThumbnail and disabled properties to the Tile component. 
+- Added hasThumbnail and disabled properties to the Tile component.
 - Added as hover image preview icon for the Tile component.
 - Adding props for error handling in Preview component.
 - Adding handleClick, disabled and tooltip to the ActionProps interface in the InputLabelAndAction component.
@@ -183,8 +244,8 @@
 - Updated breadcrumb icons to reflect directionality (RTL/LTR)
 - Resolved spacing issues for icon buttons in the panel component.
 - Updated Tooltip title type with React.ReactNode from string so as to accept string as well as html node.
-- Added `isRowClickable` prop to the `DataGrid` component. 
-- Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component. 
+- Added `isRowClickable` prop to the `DataGrid` component.
+- Added `tooltipPlacement` prop to the `MultipleSelectChip`, `Autocomplete` and `Panel` component.
 - Updated icon button spacing in Snackbar
 - Adjusted checkbox alignment in `DataGrid` component
 - Resolved tooltip issue of options in `Autocomplete` component

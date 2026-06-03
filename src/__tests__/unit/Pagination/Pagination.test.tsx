@@ -89,7 +89,7 @@ describe('TablePagination', () => {
 
     const element = screen.getAllByRole('combobox')[0];
     fireEvent.mouseDown(element);
-    const listbox = within(screen.getAllByRole('listbox')[2]);
+    const listbox = within(screen.getByRole('listbox'));
     expect(listbox.getByText('25')).not.toBeNull();
     fireEvent.click(listbox.getByText('25'));
     await waitFor(() => { expect(mockFn).toHaveBeenCalled(); });
@@ -104,7 +104,7 @@ describe('TablePagination', () => {
       </ThemeProvider>,
     );
 
-    const element = screen.getAllByRole('combobox')[1];
+    const element = screen.getAllByRole('combobox')[2];
     fireEvent.mouseDown(element);
     const listbox = within(screen.getAllByRole('listbox')[2]);
     expect(listbox.getByText('5')).not.toBeNull();

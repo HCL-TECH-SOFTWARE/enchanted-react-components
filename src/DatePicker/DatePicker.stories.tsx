@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -15,10 +15,12 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from 'dayjs';
-import DatePicker from './DatePicker';
+import DatePicker, { DatePickerDefaults } from './DatePicker';
 import PickersLocalizationProvider, {
   SUPPORTED_LOCALE,
 } from '../PickersLocalizationProvider/PickersLocalizationProvider';
@@ -33,7 +35,7 @@ export default {
       options: ['dense', 'none'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.margin },
+        defaultValue: { summary: DatePickerDefaults.margin },
       },
     },
     color: {
@@ -42,7 +44,7 @@ export default {
       options: ['primary'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.color },
+        defaultValue: { summary: DatePickerDefaults.color },
       },
     },
     size: {
@@ -50,50 +52,50 @@ export default {
       options: ['medium'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.size },
+        defaultValue: { summary: DatePickerDefaults.size },
       },
     },
     label: {
       description: 'Attribute to set the label.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.label },
+        defaultValue: { summary: DatePickerDefaults.label },
       },
     },
     helperText: {
       description: 'Attribute to set the helper text.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.helperText },
+        defaultValue: { summary: DatePickerDefaults.helperText },
       },
     },
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.enableHelpHoverEffect },
+        defaultValue: { summary: DatePickerDefaults.enableHelpHoverEffect },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
     helperIconTooltip: {
       description: 'Attribute to set t of the tooltip for the helper icon.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.helperIconTooltip },
+        defaultValue: { summary: DatePickerDefaults.helperIconTooltip },
       },
     },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.hiddenLabel },
+        defaultValue: { summary: DatePickerDefaults.hiddenLabel },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.nonEdit },
+        defaultValue: { summary: DatePickerDefaults.nonEdit },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.disabled },
+        defaultValue: { summary: DatePickerDefaults.disabled },
       },
     },
     fullWidth: {
@@ -105,13 +107,13 @@ export default {
     required: {
       description: 'If `true`, the `input` element is required.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.required },
+        defaultValue: { summary: DatePickerDefaults.required },
       },
     },
     showDaysOutsideCurrentMonth: {
       description: 'If true, days outside the current month are rendered',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.required },
+        defaultValue: { summary: DatePickerDefaults.showDaysOutsideCurrentMonth },
       },
     },
     actionProps: {
@@ -141,7 +143,7 @@ export default {
     format: {
       description: 'Attribute which is used to verified the date.',
       table: {
-        defaultValue: { summary: DatePicker.defaultProps.format },
+        defaultValue: { summary: DatePickerDefaults.format },
       },
       control: false,
     },
@@ -153,13 +155,45 @@ export default {
       control: false,
       description: 'Attribute to define the customStyles.',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
+    staticMode: {
+      description: 'If true, renders a static date picker without input field. Useful for embedded calendar views.',
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: DatePickerDefaults.staticMode,
+        },
+      },
+    },
   },
 } as Meta<typeof DatePicker>;
 
 const Template: StoryFn<typeof DatePicker> = (args) => {
-  const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as string, DatePicker.defaultProps.format) : null);
+  const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as string, DatePickerDefaults.format) : null);
   // @ts-ignore - The adapterLocale control it's not a property of the DatePicker but it is need for PickersLocalizationProvider.
   const { adapterLocale } = args;
+
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
   return (
     <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs}>
       <DatePicker
@@ -168,6 +202,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
         onChange={(newValue) => {
           setValue(newValue as Dayjs | null);
         }}
+        customIcon={customIcon}
       />
     </PickersLocalizationProvider>
   );
@@ -176,7 +211,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
 export const ExampleDatePicker = {
   render: Template,
   args: {
-    ...DatePicker.defaultProps,
+    ...DatePickerDefaults,
     label: 'Label',
     helperText: 'Some important text',
     helperIconTooltip: 'Some information about that component.',
@@ -194,6 +229,7 @@ export const ExampleDatePicker = {
     InputProps: {
       sx: { minWidth: '240px' },
     },
+    customIcon: 'None',
   },
 };
 
@@ -204,7 +240,7 @@ export const ExampleDatePickerOpen = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole('button'));
+    await userEvent.click(canvas.getByRole('button', { name: 'Choose date' }));
   },
 };
 
@@ -238,5 +274,19 @@ export const ExampleDatePickerFullWidth = {
   args: {
     ...ExampleDatePicker.args,
     fullWidth: true,
+  },
+};
+
+export const ExampleStaticDatePicker = {
+  render: Template,
+  args: {
+    ...DatePickerDefaults,
+    staticMode: true,
+  },
+  parameters: {
+    controls: {
+      // Only show controls relevant to the static calendar — input-field-specific controls are not applicable
+      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale'],
+    },
   },
 };

@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -57,9 +57,29 @@ const StyledSyncIcon = styled('div')(({ theme }) => {
   };
 });
 
+const StyledLockNotice = styled('div')(() => {
+  return {
+    position: 'absolute',
+    top: '12px',
+    right: '12px',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: '4px',
+    gap: '4px',
+    background: 'rgba(30, 30, 30, 0.8)',
+    borderRadius: '2px',
+    flex: 'none',
+    order: 1,
+    flexGrow: 0,
+    zIndex: 1,
+  };
+});
+
 const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ theme }) => {
   const { disabled, isChecked } = React.useContext(ImageListContext);
   return {
+    position: 'relative',
     backgroundColor: isChecked ? theme.palette.action.selectedOpacityModified : theme.palette.background.default,
     border: `1px solid ${theme.palette.border.secondary}`,
     borderRadius: `${theme.spacing(0.5)}`,
@@ -123,7 +143,7 @@ const StyledSubTitle = styled(Box)<StyledSubTitleProps>(({ theme, disabled }) =>
   };
 });
 
-const CustomCheckbox = styled(Checkbox)(({ theme }) => {
+const CustomCheckbox = styled(Checkbox)(() => {
   return {
     '&.MuiCheckbox-root': {
       padding: '0px',
@@ -201,7 +221,10 @@ export interface TilePropsType {
   hasThumbnail?: boolean;
   disabled?: boolean;
   syncIcon?: ReactNode;
-  hoverPreviewMenu?: string
+  hoverPreviewMenu?: string;
+  isTrash?: boolean;
+  trashInfoTooltip?: string;
+  lockNoticeText?: string;
 }
 
 export enum TileTestIds {
@@ -219,8 +242,11 @@ const Tile = (props: TilePropsType) => {
   const {
     itemId, imageUrl, avatar, itemClickedAction, handlePreviewAction, tileActions, activeItem,
     imageAltName, ariaLabel, ariaLabelledBy, overflowTooltip, tileRef, hideAvatarIfImageIsLoaded,
-    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu,
+    subTitle, menuSize, hasCheckBox, hasThumbnail, disabled, hoverPreviewMenu, isTrash, trashInfoTooltip, lockNoticeText,
   } = props;
+
+  // Show lock notice for media tiles (hasThumbnail=true) in trash view when lockNoticeText has content
+  const showLockNotice = isTrash && hasThumbnail && !!lockNoticeText;
 
   useEffect(() => {
     const titleElement = titleRef.current;
@@ -280,6 +306,14 @@ const Tile = (props: TilePropsType) => {
         ref={tileRef}
       >
         {props.syncIcon && (<StyledSyncIcon>{props.syncIcon}</StyledSyncIcon>)}
+
+        {/* Lock notice badge for media tiles in trash view */}
+        {showLockNotice && (
+          <StyledLockNotice>
+            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>{lockNoticeText}</Typography>
+          </StyledLockNotice>
+        )}
+
         {(imageUrl && !avatar && hasThumbnail) && (
           <ImageContainer>
             <img
@@ -435,6 +469,8 @@ const Tile = (props: TilePropsType) => {
                 menuSize={menuSize}
                 disabled={disabled}
                 hasThumbnail={hasThumbnail}
+                isTrash={isTrash}
+                trashInfoTooltip={trashInfoTooltip}
               />
             </Box>
           )}

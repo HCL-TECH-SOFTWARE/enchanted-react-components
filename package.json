@@ -1,6 +1,6 @@
 {
   "name": "@hcl-software/enchanted-react-components",
-  "version": "2.3.1",
+  "version": "2.7.0",
   "description": "Enchanted React Components is a collection of components that are used in HCL Software products.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,25 +36,23 @@
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu CI=true jest --config ./jest.config.js --runInBand --testTimeout=15000 --reporters=jest-reporter-log-validator --testPathPattern \"__tests__/(unit|integration)\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "test-unit": "cross-env CI=true jest --config ./jest.config.js --runInBand --testTimeout=10000 --testPathPattern \"__tests__/unit\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "engines": {
-    "node": ">=20.x"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_6f661388be77742"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.11.5",
-    "@hcl-software/enchanted-icons": "^1.5.0",
+    "@hcl-software/enchanted-icons": "^1.9.0",
     "@mui/lab": "5.0.0-alpha.103",
-    "@mui/material": "5.10.10",
-    "@mui/system": "5.15.13",
+    "@mui/material": "5.18.0",
+    "@mui/system": "5.18.0",
     "@mui/x-data-grid": "5.17.8",
     "@mui/x-date-pickers": "5.0.4",
     "dayjs": "^1.11.10",
     "jest-reporter-log-validator": "^0.1.6",
-    "lodash": "^4.17.15",
+    "lodash": "^4.18.1",
     "stylis-plugin-rtl": "^2.1.1",
-    "uuid": "^8.3.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -83,6 +81,7 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "babel-loader": "^8.2.5",
+    "chromatic": "^15.1.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -103,7 +102,7 @@
     "webpack": "^5.89.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.2.0 || ^19.0.0"
   },
   "overrides": {
     "stylis-plugin-rtl": {
