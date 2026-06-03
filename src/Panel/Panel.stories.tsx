@@ -80,6 +80,15 @@ export default {
       description: 'sidebar of Panel component.',
       control: false,
     },
+    togglePanelLabel: {
+      description: 'toggle label of Panel component.',
+      if: { arg: 'interactive' },
+      table: {
+        defaultValue: {
+          summary: 'Toggle panel',
+        },
+      },
+    },
     BackdropComponent: {
       description: 'BackdropComponent of Panel component.',
       control: false,

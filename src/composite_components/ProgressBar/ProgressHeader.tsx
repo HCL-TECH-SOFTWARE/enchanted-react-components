@@ -82,6 +82,19 @@ const StyledHeader = styled(Box)((props) => {
           padding: '2px 0px 2px 0px',
           wordBreak: 'break-word',
           color: theme.palette.action.inverse,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: '180px',
+          cursor: 'pointer',
+        },
+        // Tooltip on hover for full text
+        '&.MuiTypography-root': {
+          '&:hover': {
+            padding: '2px 0px 2px 0px',
+            wordBreak: 'break-word',
+            color: theme.palette.action.inverse,
+          },
         },
       },
       '&[data-testid=end-actions]': {
@@ -98,8 +111,8 @@ const StyledHeader = styled(Box)((props) => {
             textTransform: 'none',
             minWidth: 'auto',
             wordBreak: 'normal',
-            overflowWrap: 'anywhere',
             position: 'relative',
+            whiteSpace: 'nowrap',
             '&:hover': {
               backgroundColor: theme.palette.action.hoverInverse,
               borderRadius: '2px',
@@ -207,9 +220,11 @@ const ProgressHeader = (props: progressHeaderProps) => {
     <StyledHeader style={{ borderRadius: expanded ? '4px 4px 0px 0px' : '4px' }}>
       <Box data-testid="wrapper">
         {renderIcon()}
-        <Typography variant="body2">
-          {uploadStatus}
-        </Typography>
+        <Tooltip title={uploadStatus} tooltipsize="small">
+          <Typography variant="body2">
+            {uploadStatus}
+          </Typography>
+        </Tooltip>
       </Box>
       <Box data-testid="end-actions">
         {pauseButton
