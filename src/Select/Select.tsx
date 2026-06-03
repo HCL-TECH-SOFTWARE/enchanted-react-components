@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -22,6 +22,7 @@ import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import {
   Components, Theme, InputAdornment as MuiInputAdornment, styled,
+  SvgIconProps,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -29,10 +30,11 @@ import Typography from '../Typography';
 import InputLabelAndAction, { ActionProps, InputLabelAndActionProps } from '../prerequisite_components/InputLabelAndAction';
 import { ThemeDirectionType } from '../theme';
 
-export interface SelectProps extends MuiSelectProps {
+export type SelectProps = MuiSelectProps & {
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
+  enableHelpHoverEffect?: boolean;
   helperIconTooltip?: string;
   margin?: 'none' | 'dense';
   color?: 'primary';
@@ -41,7 +43,11 @@ export interface SelectProps extends MuiSelectProps {
   options?: { label: string }[];
   hiddenLabel?: boolean,
   value?: string,
-}
+  customIcon?: React.ComponentType<SvgIconProps> | undefined;
+  label?: string;
+  placeholder?: string;
+  children?: React.ReactNode;
+};
 
 export const getMuiSelectThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -112,12 +118,14 @@ const InputAdornment = styled(MuiInputAdornment)(({ theme }) => {
 
 const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   const cleanedProps = { ...props };
+  cleanedProps.id += '-select';
   delete cleanedProps.actionProps;
   delete cleanedProps.nonEdit;
   delete cleanedProps.unitLabel;
   delete cleanedProps.helperIconTooltip;
   delete cleanedProps.helperText;
   delete cleanedProps.hiddenLabel;
+  delete cleanedProps.enableHelpHoverEffect;
 
   const handleMouseDown = ((event: React.MouseEvent<HTMLElement>) => {
     if (props.disabled || props.readOnly) {
@@ -126,7 +134,9 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
 
     // This is workaround solution to catch the mousedown on the InputAdornment section
     // and to simulate a mousedown event on the select section to open the menu component
-    const element = document.getElementById(props.id || '');
+    // Try to get the sibling node with this id (just in case somebody has accidentally used the same id elsewhere)
+    const parent = (event.target as HTMLElement).parentElement;
+    const element = parent?.querySelector(`:scope [id='${props.id}-select']`);
     if (element) {
       event.preventDefault();
       const elementPosition = element.getBoundingClientRect();
@@ -146,7 +156,11 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   const muiTextFieldProps: MuiSelectProps = {
     ...cleanedProps,
     label: undefined, // The label will be separately handled and not via the MuiSelect
-    endAdornment: <InputAdornment position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>{getEndAdornment(props)}</InputAdornment>,
+    endAdornment: (
+      <InputAdornment data-testid="endAdornment" position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>
+        {getEndAdornment(props)}
+      </InputAdornment>
+    ),
     IconComponent: CaretDownIcon,
   };
   return muiTextFieldProps;
@@ -203,6 +217,7 @@ const renderInput = (props: SelectProps, id?: string) => {
     <MuiSelect
       {...selectProps}
       aria-label={typeof props.label === 'string' ? props.label : props.placeholder}
+      labelId={`${props.id}-label`}
       inputProps={{ id: props.id }}
       MenuProps={{
         ...selectProps.MenuProps,
@@ -211,7 +226,7 @@ const renderInput = (props: SelectProps, id?: string) => {
         PaperProps: {
           style: paperPropsStyle,
           elevation: 2,
-          ref: (node) => {
+          ref: (node: HTMLDivElement | null) => {
             if (node && props.fullWidth && props.id) {
               // Dynamically set the Paper width to match the Select input width
               const selectElement = document.getElementById(props.id)?.parentElement;
@@ -233,6 +248,7 @@ const renderInput = (props: SelectProps, id?: string) => {
 };
 
 const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionProps => {
+  const inputLabelId = `${props.id}-label`;
   const inputLabelProps: InputLabelAndActionProps = {
     color: props.color,
     disabled: props.disabled,
@@ -240,12 +256,14 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     required: props.required,
     sx: props.sx,
     htmlFor: props.id,
-    id: props.id,
+    id: inputLabelId,
     label: props.label,
     helperIconTooltip: props.helperIconTooltip,
     actionProps: props.actionProps,
     hiddenLabel: props.hiddenLabel,
     fullWidth: props.fullWidth,
+    enableHelpHoverEffect: props.enableHelpHoverEffect,
+    customIcon: props.customIcon,
   };
   return inputLabelProps;
 };
@@ -273,6 +291,7 @@ Select.defaultProps = {
   size: 'medium',
   label: '',
   helperText: '',
+  enableHelpHoverEffect: false,
   helperIconTooltip: '',
   placeholder: '',
   unitLabel: '',

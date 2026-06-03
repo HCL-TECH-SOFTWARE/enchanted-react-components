@@ -16,17 +16,11 @@
 import React from 'react';
 import MuiBadge, { BadgeProps } from '@mui/material/Badge';
 
-const Badge = ({ ...props }: BadgeProps) => {
-  return <MuiBadge {...props} />;
+const Badge = ({
+  color = 'primary', overlap = 'rectangular', variant = 'standard', ...props
+}: BadgeProps) => {
+  return <MuiBadge color={color} overlap={overlap} variant={variant} {...props} />;
 };
-
-const defaultProps: BadgeProps = {
-  color: 'primary',
-  overlap: 'rectangular',
-  variant: 'standard',
-};
-
-Badge.defaultProps = defaultProps;
 
 export * from '@mui/material/Badge';
 export default Badge;

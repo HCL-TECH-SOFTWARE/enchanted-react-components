@@ -126,8 +126,8 @@ export { default as Tabs } from './Tabs';
 export * from './Tabs';
 export { default as TimePicker } from './hidden_components/TimePicker';
 export * from './hidden_components/TimePicker';
-export { default as TreeView } from './hidden_components/TreeView';
-export * from './hidden_components/TreeView';
+export { default as TreeView } from './TreeView';
+export * from './TreeView';
 
 /* Place pre-requisite component module exports here below */
 export { default as FormControlLabel } from './prerequisite_components/FormControlLabel';

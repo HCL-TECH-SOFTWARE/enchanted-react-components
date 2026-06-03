@@ -95,7 +95,7 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     collapseTooltip: 'Hide upload details',
     navigateButtonTooltip: 'View location',
     retryButtonTooltip: 'Retry upload',
-    errorButtonTooltip: 'Pause/Stop uploading',
+    errorButtonTooltip: 'Cancel uploading',
     successLabel: 'Uploaded.',
     failureLabel: 'Upload Failed.',
     pendingLabel: 'Waiting...',
@@ -159,7 +159,7 @@ InteractiveExample.args = {
       name: 'Folder',
       collectionId: '',
       status: 'FAILURE',
-      message: 'Collection name already exists in this location. Please use a different folder name.',
+      message: 'Collection name already exists. Please enter unique collection name.',
       type: 'folder',
       timestamp: 1588996092645,
     },
@@ -213,6 +213,16 @@ InteractiveExample.args = {
       message: 'Cancelled.',
       timestamp: 1588996092651,
     },
+    {
+      progress: 0,
+      size: 0,
+      name: 'Folder2',
+      collectionId: '',
+      status: 'CANCELLED',
+      message: 'Cancelled.',
+      type: 'folder',
+      timestamp: 1588996092652,
+    },
   ],
   stringLiterals: {
     learnMoreLabel: 'Learn more',
@@ -230,5 +240,8 @@ InteractiveExample.args = {
   },
   cancelItem: () => {
     // cancel item action
+  },
+  cancelAll: () => {
+    // cancel all action
   },
 };

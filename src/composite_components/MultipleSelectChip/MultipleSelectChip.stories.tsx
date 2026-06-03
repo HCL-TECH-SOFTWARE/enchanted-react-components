@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -17,7 +17,10 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
-
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
+import { Alert, Box } from '@mui/material';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -25,6 +28,7 @@ import ListItemIcon from '../../List/ListItemIcon';
 import ListItemText from '../../List/ListItemText';
 import { IFilm, top100Films } from '../../Autocomplete/data';
 import { TooltipPlacement } from '../../Tooltip';
+import Typography from '../../Typography';
 
 interface IChip {
   label: string;
@@ -111,6 +115,13 @@ export default {
     sx: {
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+    },
+    enableHelpHoverEffect: {
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: false },
+      },
+      description: 'If true, the helper icon displays a gray background when hovered.',
     },
     placeholder: {
       description:
@@ -211,11 +222,38 @@ export default {
       },
       description: 'https://mui.com/material-ui/api/chip/',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
+    listboxBanner: {
+      control: false,
+      description: 'Banner component to be displayed at the top of the dropdown listbox to provide additional context or information.',
+    },
   },
 } as Meta<typeof MultipleSelectChip>;
 
 const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
   const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
+
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
   return (
     <MultipleSelectChip
       {...args}
@@ -290,6 +328,7 @@ const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
           );
         });
       }}
+      customIcon={customIcon}
     />
   );
 };
@@ -302,6 +341,7 @@ export const ExampleMultipleSelectChip = {
     size: 'medium',
     label: 'Example label',
     helperText: 'Helper text',
+    enableHelpHoverEffect: false,
     helperIconTooltip: 'Some information about that component.',
     tooltipPlacement: TooltipPlacement.BOTTOM,
     placeholder: 'Placeholder',
@@ -331,6 +371,74 @@ export const ExampleMultipleSelectChip = {
       return (option as IFilm).label;
     },
     emptyOptions: false,
+    customIcon: 'None',
+  },
+};
+
+export const ExampleMultipleSelectChipWithAlertComponentBanner = {
+  render: Template,
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    label: 'Browse Collection',
+    helperText: 'Explore our curated collection with helpful guidance',
+    helperIconTooltip: 'This collection contains various categories. Use the search feature to filter by type or keyword.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Alert severity="info" variant="contained">
+        Results include all items containing your keywords, regardless of the display title
+      </Alert>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'MultipleSelectChip with information only - no errors or warnings. Shows how to provide helpful tips and guidance to users.',
+      },
+    },
+  },
+};
+
+export const ExampleMultipleSelectChipWithCustomizedBanner = {
+  render: Template,
+  args: {
+    ...ExampleMultipleSelectChip.args,
+    label: 'Select Items',
+    helperText: 'Some items may not be available in your region',
+    error: false,
+    helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some items in this list may not be playable in your location.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#FFF4E5',
+        border: '1px solid #E67700',
+        borderRadius: '4px',
+      }}
+      >
+        <WarningIcon
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
+          }}
+        />
+        <Typography variant="body2" color="#E67700">
+          Customized
+          {' '}
+          <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span>
+          {' '}
+          Banner
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'MultipleSelectChip with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
+      },
+    },
   },
 };
 
