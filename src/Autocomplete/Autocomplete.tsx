@@ -409,7 +409,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
 
             return tooltipTitle ? (
               <Tooltip title={tooltipTitle} tooltipsize="small">
-                <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                <div>
+                  <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                </div>
               </Tooltip>
             ) : (
               <TextField {...textFieldArgs} inputRef={textfieldRef} />
