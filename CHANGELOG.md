@@ -6,6 +6,7 @@
 - Added the `TreeView` component.
 
 ### Fixed
+- Autocomplete - fix the dependency between the label and input component
 
 ### Changed
 
