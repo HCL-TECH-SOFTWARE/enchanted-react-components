@@ -3,14 +3,20 @@
 ## Unreleased
 
 ### Added
-- Added the `TreeView` component.
 
 ### Fixed
-- Autocomplete - fix the dependency between the label and input component
 
 ### Changed
 
 ### Breaking changes
+
+## 2.8.0
+
+### Added
+- Added the `TreeView` component.
+
+### Fixed
+- Autocomplete - fix the dependency between the label and input component
 
 ## 2.7.0
 
