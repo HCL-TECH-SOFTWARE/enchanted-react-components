@@ -47,7 +47,7 @@
     "@mui/material": "5.18.0",
     "@mui/system": "5.18.0",
     "@mui/x-data-grid": "5.17.8",
-    "@mui/x-date-pickers": "5.0.4",
+    "@mui/x-date-pickers": "9.4.0",
     "dayjs": "^1.11.10",
     "jest-reporter-log-validator": "^0.1.6",
     "lodash": "^4.18.1",
