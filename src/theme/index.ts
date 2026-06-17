@@ -52,6 +52,7 @@ import { getMuiListItemButtonThemeOverrides } from '../List/ListItemButton';
 import { getMuiListItemIconThemeOverrides } from '../List/ListItemIcon';
 import { getMuiListItemTextThemeOverrides } from '../List/ListItemText';
 import { getMuiToggleButtonGroupThemeOverrides } from '../ToggleButtonGroup';
+import { getMuiTreeViewThemeOverrides } from '../TreeView';
 
 declare module '@mui/material/styles' {
   interface TypographyVariants {
@@ -465,6 +466,7 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
       ...getMuiListItemButtonThemeOverrides(),
       ...getMuiListItemIconThemeOverrides(),
       ...getMuiListItemTextThemeOverrides(),
+      ...getMuiTreeViewThemeOverrides(),
     },
   };
   return themeOptions;

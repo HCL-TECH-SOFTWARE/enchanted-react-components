@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -14,8 +14,12 @@
  * ======================================================================== */
 
 import React from 'react';
-import MuiAutocomplete, { AutocompleteProps as MuiAutocompleteProps } from '@mui/material/Autocomplete';
-import { Components, SvgIconProps, Theme } from '@mui/material';
+import MuiAutocomplete, {
+  AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteInputChangeReason, AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material/Autocomplete';
+import {
+  Components, InputAdornment, SvgIconProps, Theme,
+} from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiFormHelperText from '@mui/material/FormHelperText';
@@ -25,6 +29,29 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
+
+/**
+ * Banner configuration for autocomplete listbox
+ */
+export type AutocompleteBannerProps = React.ReactNode;
+
+// Factory function to create a stable ListboxComponent with banner
+const createBannerListboxComponent = (banner: AutocompleteBannerProps) => {
+  return React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLElement>>(
+    ({ children, ...listboxProps }, ref) => {
+      return (
+        <ul {...listboxProps} ref={ref}>
+          {banner && (
+            <li role="presentation" aria-hidden="true" style={{ pointerEvents: 'none' }}>
+              {banner}
+            </li>
+          )}
+          {children}
+        </ul>
+      );
+    },
+  );
+};
 
 /**
  * @typedef AutocompleteProps
@@ -52,6 +79,13 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
   renderNonEditInput?: () => React.ReactNode;
   placeholder?: string;
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
+  startAdornment?: React.ReactNode;
+  endAdornment?: React.ReactNode;
+  /**
+   * When provided, renders an informational banner at the top of the dropdown listbox.
+   * The banner is non-interactive and excluded from keyboard navigation.
+   */
+  listboxBanner?: AutocompleteBannerProps;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -104,11 +138,20 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   DisableClearable extends boolean | undefined = undefined, FreeSolo extends boolean | undefined = undefined>
   ({ ...props }: AutocompleteProps<T, Multiple, DisableClearable, FreeSolo>) => {
   const {
-    helperText, helperIconTooltip, actionProps, focused, hiddenLabel, nonEdit, enableHelpHoverEffect, renderNonEditInput, endAdornmentAction, ...rest // clean up rest of props for MuiAutocomplete tag
+    helperText,
+    helperIconTooltip,
+    actionProps,
+    focused,
+    hiddenLabel,
+    nonEdit,
+    enableHelpHoverEffect,
+    renderNonEditInput,
+    endAdornmentAction,
+    startAdornment,
+    endAdornment,
+    listboxBanner,
+    ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
-
-  // prevents DOM warning for error=boolean
-  rest.error = rest.error ? 1 : 0;
 
   // create a unique id for the autocomplete component if not provided
   props.id ||= `autocomplete-${(React.createRef().current as HTMLElement)?.id || Math.random().toString(36).substring(7)}`;
@@ -130,25 +173,81 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     }
   }, [props.value]);
 
-  const getAdornmentWidth = React.useCallback(() => {
+  const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
+    return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
+  }, []);
+
+  const getStartAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
     const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
     let iconCount = 0;
 
-    // show three icon
-    if (props.disabled) { // two icon show either error or caret
-      iconCount += props.freeSolo ? 0 : 1;
-    } else { // three icon show caret & close icon or error
-      iconCount += !props.freeSolo ? 2 : 1;
+    if (props.startAdornment) {
+      iconCount += getIconsCount(props.startAdornment);
     }
 
-    if (props.error) {
-      iconCount += 1;
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
+    return Math.max(iconWidth, 0);
+  }, [props.startAdornment]);
+
+  const getEndAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+
+    if (props.endAdornment) {
+      iconCount += getIconsCount(props.endAdornment);
     }
 
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 3 : 0));
+    // Check for freeSolo first because if it's true, then the caret down icon will not be shown.
+    iconCount += props.freeSolo ? 0 : 1;
+
+    // Check if the component is disabled or disableClearable is true.
+    // If either is true, the clear icon will not be shown.
+    if (!props.disabled && !(props.disableClearable ?? false)) {
+      if (props.value) {
+        iconCount += 1; // show clear icon
+      }
+    }
+
+    // Check if error icon should be shown.
+    iconCount += props.error ? 1 : 0;
+
+    // Calculate the total width needed for the input adornment area based on the number of icons.
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
 
     return Math.max(iconWidth, 0);
-  }, [props.error, props.freeSolo, props.disabled, textfieldRef]);
+  }, [props.endAdornment, props.error, props.freeSolo, props.disabled, textfieldRef]);
+
+  const handleChange = (
+    event: React.SyntheticEvent<Element, Event>,
+    value: T | NonNullable<string | T> | (string | T)[] | null,
+    reason: AutocompleteChangeReason,
+    details?: AutocompleteChangeDetails<T>,
+  ) => {
+    // Value can be an option from the list or null if cleared
+    setSelectedOption(value as T | null);
+    if (textfieldRef.current) {
+      setPrevValue(textfieldRef.current.value);
+    }
+
+    // Call the existing onChange from props if it exists
+    if (rest.onChange) {
+      rest.onChange(event, value, reason, details);
+    }
+  };
+
+  const handleInputChange = (event: React.SyntheticEvent, inputValue: string, reason?: string) => {
+    // When user types, we clear the selectedOption as it's no longer a confirmed selection
+    setSelectedOption(null);
+    setPrevValue(inputValue);
+
+    // Call the existing onInputChange from props if it exists
+    if (rest.onInputChange) {
+      rest.onInputChange(event, inputValue, reason as AutocompleteInputChangeReason);
+    }
+  };
 
   return (
     <AutoCompleteContainer className="autocomplete-container">
@@ -156,6 +255,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
         <InputLabelAndAction {...inputLabelAndActionProps} />
         <MuiAutocomplete
           {...rest}
+          {...(listboxBanner && { ListboxComponent: createBannerListboxComponent(listboxBanner) })}
           onFocus={() => {
             setIsFocus(true);
           }}
@@ -176,9 +276,12 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               fullWidth: props.fullWidth,
               sx: {
                 ...props.sx,
-                '& .MuiInputAdornment-root': {
-                  width: getAdornmentWidth(),
-                  // border: '2px solid black',
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+                  width: getStartAdornmentWidth(),
+                },
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
+                  width: getEndAdornmentWidth(),
+                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px', // add some spacing if there are icons in the end adornment
                 },
               },
               focused,
@@ -192,19 +295,110 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentAction,
               value: props.value,
               enableHelpHoverEffect,
+              InputProps: {
+                ...params.InputProps,
+                startAdornment: startAdornment
+                  ? (
+                    <>
+                      <InputAdornment position="start">
+                        {startAdornment}
+                      </InputAdornment>
+                      {params.InputProps?.startAdornment}
+                    </>
+                  )
+                  : params.InputProps?.startAdornment,
+                endAdornment: (
+                  <>
+                    {endAdornment}
+                    {params.InputProps?.endAdornment}
+                  </>
+                ),
+              },
             };
 
             const inputValue = textfieldRef.current?.value ?? '';
             let tooltipTitle = '';
 
-            if (isValueOverFlowing) {
-              if (props.freeSolo) {
-                tooltipTitle = inputValue;
-              } else if (inputValue === prevValue) {
-                tooltipTitle = textFieldArgs.value?.label ?? '';
-              } else {
-                tooltipTitle = inputValue;
+            const getPathSegmentLabel = (segment: unknown): string => {
+              if (typeof segment === 'string') {
+                return segment;
               }
+              if (typeof segment === 'object' && segment !== null) {
+                const segmentRecord = segment as Record<string, unknown>;
+                const labelCandidate = segmentRecord.label;
+                const titleCandidate = segmentRecord.title;
+                const valueCandidate = segmentRecord.value;
+
+                // Prefer nested title.value from path nodes for consistent breadcrumb labels.
+                if (typeof titleCandidate === 'object' && titleCandidate !== null) {
+                  const titleValueCandidate = (titleCandidate as Record<string, unknown>).value;
+                  if (typeof titleValueCandidate === 'string') return titleValueCandidate;
+                }
+
+                if (typeof labelCandidate === 'string') return labelCandidate;
+                if (typeof titleCandidate === 'string') return titleCandidate;
+                if (typeof valueCandidate === 'string') return valueCandidate;
+              }
+              return '';
+            };
+
+            // Build full breadcrumb-like text from option.path.
+            const getFullPathLabel = (option: unknown): string => {
+              if (typeof option !== 'object' || option === null) {
+                return '';
+              }
+
+              const optionRecord = option as Record<string, unknown>;
+              const pathValue = optionRecord.path;
+
+              if (Array.isArray(pathValue)) {
+                const segments = pathValue
+                  .map((segment) => { return getPathSegmentLabel(segment).trim(); })
+                  .filter((segment) => { return Boolean(segment); });
+                return segments.join(' / ');
+              }
+
+              if (typeof pathValue === 'string') {
+                return pathValue;
+              }
+
+              return '';
+            };
+
+            // Helper to check if a value matches an option
+            const isValueInOptions = (selctedValue: string) => {
+              if (!selctedValue) return false;
+
+              return Array.isArray(props.options)
+                ? props.options.some((option) => {
+                  if (typeof option === 'object' && option !== null) {
+                    return option.label === selctedValue || option.value === selctedValue;
+                  }
+                  return option === selctedValue;
+                })
+                : false;
+            };
+
+            const hasSelectedValue = selectedOption && typeof selectedOption === 'object' && 'label' in selectedOption;
+            const selectedValue = hasSelectedValue ? (selectedOption.label as string) : (selectedOption as string);
+            const selectedPathValue = getFullPathLabel(selectedOption);
+
+            const selectedTooltipValue = selectedPathValue && selectedPathValue.length > selectedValue.length
+              ? selectedPathValue
+              : (selectedValue || selectedPathValue || '');
+
+            // Checking for selectedOption covers cases where user selects from dropdown or clears input
+            if (selectedOption && isValueOverFlowing) {
+              tooltipTitle = selectedTooltipValue;
+            // Checking for inputValue covers cases where user types a value and then selects it from the dropdown
+            } else if (!selectedOption && isValueOverFlowing && isValueInOptions(inputValue)) {
+              tooltipTitle = inputValue;
+            // Checking for prevValue covers cases where user tabs back to a previous value or
+            } else if ((prevValue === inputValue && isValueOverFlowing && isValueInOptions(prevValue))) {
+              tooltipTitle = prevValue;
+            // Checking for freeSolo mode where user can type arbitrary values
+            } else if (isValueOverFlowing) {
+              tooltipTitle = props.freeSolo ? inputValue : prevValue;
             }
 
             textFieldArgs.inputProps = {
@@ -214,10 +408,14 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               ...textFieldArgs.inputProps,
             };
 
-            return (
+            return tooltipTitle ? (
               <Tooltip title={tooltipTitle} tooltipsize="small">
-                <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                <div>
+                  <TextField {...textFieldArgs} inputRef={textfieldRef} />
+                </div>
               </Tooltip>
+            ) : (
+              <TextField {...textFieldArgs} inputRef={textfieldRef} />
             );
           }}
         />
@@ -299,7 +497,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                   '.MuiAutocomplete-endAdornment': { // end icon
                     right: '8px',
                     '.MuiButtonBase-root': { // for both clear icon and caret down icon
-                      top: '3px',
+                      top: '-1px',
                       // eslint-why - a nested ternary is needed
                       // eslint-disable-next-line no-nested-ternary
                       margin: ownerState.error ? (ownerState.freeSolo ? '0px 30px 0px 4px' : '0px 36px 0px 4px') : '0px 6px 0px 4px',

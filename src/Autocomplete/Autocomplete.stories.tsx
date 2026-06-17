@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -16,13 +16,19 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
+import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 
+import { Alert, Box } from '@mui/material';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
 import ListItemText from '../List/ListItemText';
 import { TooltipPlacement } from '../Tooltip';
+import CircularProgress from '../ProgressIndicator/CircularProgress';
+import Typography from '../Typography';
 
 export default {
   title: 'Inputs/Autocomplete',
@@ -211,6 +217,40 @@ export default {
       },
       description: 'https://mui.com/material-ui/api/text-field/',
     },
+    customIcon: {
+      description: 'This can be used to add a custom icon replacing the default information icon for helper text.',
+      options: ['None', 'CaretDownIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
+    startAdornment: {
+      description: 'This can be used to add an icon at the start of the Autocomplete component.',
+      options: ['None', 'SearchIcon', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
+    endAdornment: {
+      description: 'This can be used to add an icon at the end of the Autocomplete component.',
+      options: ['None', 'Loading', 'InformationIcon'],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: {
+          summary: 'None',
+        },
+      },
+    },
+    listboxBanner: {
+      control: false,
+      description: 'Banner component to be displayed at the top of the dropdown listbox to provide additional context or information.',
+    },
   },
 } as Meta<typeof Autocomplete>;
 
@@ -221,6 +261,43 @@ interface Movie {
 
 const Template: StoryFn<typeof Autocomplete> = (args) => {
   const [value, setValue] = React.useState(args.value ? args.value : null);
+
+  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  switch (args.customIcon as unknown as string) {
+    case 'CaretDownIcon':
+      customIcon = CaretDownIcon;
+      break;
+    case 'InformationIcon':
+      customIcon = InformationIcon;
+      break;
+    default:
+      customIcon = undefined;
+  }
+
+  let startAdornment: React.ReactNode = null;
+  switch (args.startAdornment as unknown as string) {
+    case 'SearchIcon':
+      startAdornment = <SearchIcon />;
+      break;
+    case 'InformationIcon':
+      startAdornment = <InformationIcon />;
+      break;
+    default:
+      startAdornment = null;
+  }
+
+  let endAdornment: React.ReactNode = null;
+  switch (args.endAdornment as unknown as string) {
+    case 'InformationIcon':
+      endAdornment = <InformationIcon />;
+      break;
+    case 'Loading':
+      endAdornment = <CircularProgress color="inherit" size={16} variant="indeterminate" />;
+      break;
+    default:
+      endAdornment = null;
+  }
+
   return (
     <Autocomplete
       value={value}
@@ -247,6 +324,9 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
         );
       }}
       {...args}
+      customIcon={customIcon}
+      startAdornment={startAdornment}
+      endAdornment={endAdornment}
     />
   );
 };
@@ -291,6 +371,9 @@ export const ExampleAutocomplete = {
     ],
     options: top100Films,
     sx: { minWidth: '240px' },
+    customIcon: 'None',
+    startAdornment: 'None',
+    endAdornment: 'None',
   },
 };
 
@@ -301,7 +384,7 @@ export const ExampleAutocompleteOpen = {
   },
   play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole('button'));
+    await userEvent.click(canvas.getByRole('button', { name: 'Open' }));
   },
 };
 
@@ -338,10 +421,78 @@ export const ExampleAutocompleteFullWidth = {
   },
 };
 
-export const ExampleAutocompleteWithCustomIcon = {
+export const ExampleAutocompleteStartAndEndAdornment = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
-    customIcon: InformationIcon,
+    startAdornment: 'SearchIcon',
+    endAdornment: 'Loading',
+  },
+};
+
+export const ExampleAutocompleteWithAlertComponentBanner = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    label: 'Search Movies',
+    helperText: 'Start typing to search through our movie database',
+    helperIconTooltip: 'This search includes movies from various genres and decades. Use the search field to quickly find what you\'re looking for.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Alert severity="info" variant="contained">
+        Results include all items containing your keywords, regardless of the display title
+      </Alert>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Autocomplete with information only - no errors or warnings. Shows how to provide helpful tips and guidance to users.',
+      },
+    },
+  },
+};
+
+export const ExampleAutocompleteWithCustomizedBanner = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    label: 'Select a Movie',
+    helperText: 'Some films may not be available in your region',
+    error: false,
+    helperIconTooltip: 'Content availability varies by region due to licensing restrictions. Some films in this list may not be playable in your location.',
+    enableHelpHoverEffect: true,
+    listboxBanner: (
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: '6px',
+        padding: '6px 16px',
+        backgroundColor: '#FFF4E5',
+        border: '1px solid #E67700',
+        borderRadius: '4px',
+      }}
+      >
+        <WarningIcon
+          style={{
+            width: '16px', height: '16px', flexShrink: 0, color: '#E67700',
+          }}
+        />
+        <Typography variant="body2" color="#E67700">
+          Customized
+          {' '}
+          <span style={{ color: '#E67700', fontWeight: 'bold' }}>Warning Message</span>
+          {' '}
+          Banner
+        </Typography>
+      </Box>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Autocomplete with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
+      },
+    },
   },
 };

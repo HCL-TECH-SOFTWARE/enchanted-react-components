@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -236,11 +236,21 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             },
             '& [class*=MuiInputAdornment-positionStart]': {
               marginRight: '8px',
+              height: '18px',
+              '& svg:not(.MuiCircularProgress-svg)': {
+                margin: '0px 0px 0px 4px',
+                padding: '0px',
+                fontSize: '16px',
+              },
+              '& [class*=MuiTypography-body2]': {
+                margin: '0px 0px 0px 8px',
+                cursor: 'default',
+              },
             },
             '& [class*=MuiInputAdornment-positionEnd]': {
               height: '18px',
-              '& svg': {
-                margin: '0px 0px 0px 4px',
+              '& svg:not(.MuiCircularProgress-svg)': {
+                margin: '0px',
                 padding: '0px',
                 fontSize: '16px',
               },
@@ -273,6 +283,17 @@ const StyledMuiFormControl = styled(MuiFormControl)((theme) => {
     },
   };
 });
+
+const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
+  if (props.InputProps?.startAdornment) {
+    // For comboBox (Autocomplete), startAdornment may contain chips from MUI's
+    // multiple mode or custom icons already wrapped by Autocomplete.
+    // Pass through as-is to avoid double-wrapping in InputAdornment which
+    // constrains chips to fixed height and breaks chip layout.
+    return props.InputProps.startAdornment;
+  }
+  return null;
+};
 
 const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   // This is workaround until proper Search component has already been implemented
@@ -341,6 +362,7 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
   delete cleanedProps.renderNonEditInput;
   delete cleanedProps.endAdornmentAction;
   delete cleanedProps.enableHelpHoverEffect;
+  delete cleanedProps.customIcon;
 
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,
@@ -348,6 +370,7 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
     label: undefined, // The label will be separately handled and not via the MuiTextField
     InputProps: {
       ...props.InputProps, // since we checking the class name for Inputpros and making sure that upper component is autocomplete
+      startAdornment: getStartAdornment(props, isComboBox),
       endAdornment: props.InputProps?.endAdornment && !isComboBox
         ? props.InputProps?.endAdornment
         : <InputAdornment position="end">{getEndAdornment(props, isComboBox)}</InputAdornment>,

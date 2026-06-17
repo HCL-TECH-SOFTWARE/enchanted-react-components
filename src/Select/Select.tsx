@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -30,7 +30,7 @@ import Typography from '../Typography';
 import InputLabelAndAction, { ActionProps, InputLabelAndActionProps } from '../prerequisite_components/InputLabelAndAction';
 import { ThemeDirectionType } from '../theme';
 
-export interface SelectProps extends MuiSelectProps {
+export type SelectProps = MuiSelectProps & {
   nonEdit?: boolean;
   actionProps?: ActionProps[];
   helperText?: string;
@@ -44,7 +44,10 @@ export interface SelectProps extends MuiSelectProps {
   hiddenLabel?: boolean,
   value?: string,
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
-}
+  label?: string;
+  placeholder?: string;
+  children?: React.ReactNode;
+};
 
 export const getMuiSelectThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
@@ -153,7 +156,11 @@ const getMuiSelectProps = (props: SelectProps): MuiSelectProps => {
   const muiTextFieldProps: MuiSelectProps = {
     ...cleanedProps,
     label: undefined, // The label will be separately handled and not via the MuiSelect
-    endAdornment: <InputAdornment position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>{getEndAdornment(props)}</InputAdornment>,
+    endAdornment: (
+      <InputAdornment data-testid="endAdornment" position="end" onMouseDown={handleMouseDown} style={{ cursor: (props.disabled || props.readOnly) ? 'default' : 'pointer' }}>
+        {getEndAdornment(props)}
+      </InputAdornment>
+    ),
     IconComponent: CaretDownIcon,
   };
   return muiTextFieldProps;
@@ -219,7 +226,7 @@ const renderInput = (props: SelectProps, id?: string) => {
         PaperProps: {
           style: paperPropsStyle,
           elevation: 2,
-          ref: (node) => {
+          ref: (node: HTMLDivElement | null) => {
             if (node && props.fullWidth && props.id) {
               // Dynamically set the Paper width to match the Select input width
               const selectElement = document.getElementById(props.id)?.parentElement;
