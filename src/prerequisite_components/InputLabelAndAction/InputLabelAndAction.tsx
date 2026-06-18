@@ -14,10 +14,9 @@
  * ======================================================================== */
 import React, { ReactNode } from 'react';
 import MuiInputLabel, { InputLabelProps as MuiInputLabelProps } from '@mui/material/InputLabel';
-import {
-  Stack, styled, Theme, SvgIconProps,
-} from '@mui/material';
+import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
+import { styled, Theme, SvgIconProps } from '@mui/material';
 import Tooltip, { TooltipPlacement } from '../../Tooltip';
 import ActionButton from '../../ActionButton';
 
@@ -138,13 +137,17 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
   );
 };
 
-export const Grid = styled(Stack)((theme) => {
+export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
   return {
-    margin: '0px 0px 4px 0px',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: 0,
+    '&.MuiGrid-container': {
+      margin: '0px 0px 4px 0px',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    '&.MuiGrid-item': {
+      padding: 0,
+    },
   };
 });
 
@@ -165,8 +168,8 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
     const limitedActionProps = props.actionProps.slice(0, 2);
 
     return (
-      <Grid direction="row" spacing={2}>
-        <Grid
+      <MuiGrid container spacing={2}>
+        <MuiGrid
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -181,8 +184,8 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
           }}
         >
           {renderInputLabel(props)}
-        </Grid>
-        <Grid
+        </MuiGrid>
+        <MuiGrid
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -213,16 +216,16 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
               </Tooltip>
             );
           })}
-        </Grid>
-      </Grid>
+        </MuiGrid>
+      </MuiGrid>
     );
   }
   return (
-    <Grid direction="row">
-      <Grid sx={{ width: '100%' }}>
+    <MuiGrid container>
+      <MuiGrid size={{ xs: 12 }}>
         {renderInputLabel(props)}
-      </Grid>
-    </Grid>
+      </MuiGrid>
+    </MuiGrid>
   );
 };
 
