@@ -5,6 +5,7 @@ coverage
 .DS_Store
 .npmrc
 *.tgz
+!hcl-software-enchanted-icons-1.10.0.tgz
 storybook-static
 __image_snapshots__
 build-storybook.log
