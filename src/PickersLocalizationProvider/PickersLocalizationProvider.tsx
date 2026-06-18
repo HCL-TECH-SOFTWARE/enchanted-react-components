@@ -14,6 +14,7 @@
  * ======================================================================== */
 import React, { useState, useEffect } from 'react';
 import { LocalizationProvider as MuiLocalizationProvider, LocalizationProviderProps as MuiLocalizationProviderProps } from '@mui/x-date-pickers/LocalizationProvider';
+import type { Dayjs } from 'dayjs';
 import * as locales from '@mui/x-date-pickers/locales';
 import { PickersLocaleText } from '@mui/x-date-pickers/locales';
 import * as dayjs from 'dayjs';
@@ -155,7 +156,7 @@ const verfiyAdapterLocale = (adapterLocale?: string | object) => {
   }
 };
 
-export type PickersLocalizationProviderProps = MuiLocalizationProviderProps & {
+export type PickersLocalizationProviderProps = MuiLocalizationProviderProps<Dayjs, string> & {
   onLocaleLoad?: (locale: string) => void;
   adapterLocale: string | object;
 }

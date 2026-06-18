@@ -456,9 +456,9 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
               '.MuiFormHelperText-root': { // removes helper text inside autocomplete
                 display: 'none',
               },
-              ...TYPOGRAPHY.body1,
+              ...(TYPOGRAPHY.body1 as React.CSSProperties),
               '& .MuiFormLabel-root': { // label text
-                ...TYPOGRAPHY.subtitle2,
+                ...(TYPOGRAPHY.subtitle2 as React.CSSProperties),
                 height: '16px',
               },
               '& .MuiSvgIcon-colorError': {
@@ -474,7 +474,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingLeft: '8px',
                 height: '28px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
-                  ...TYPOGRAPHY.body2,
+                  ...(TYPOGRAPHY.body2 as React.CSSProperties),
                   padding: '0px',
                   overflow: 'hidden',
                   textOverflow: 'ellipsis',

@@ -67,7 +67,7 @@ const Popper = ({ ...props }: PopperProps) => {
             borderRadius: '4px',
             '&.MuiGrid-root': {
               '&.MuiTypography-root': {
-                ...TYPOGRAPHY.h6,
+                ...(TYPOGRAPHY.h6 as React.CSSProperties),
               },
               '&.MuiIconButton-root': {
                 position: 'absolute',

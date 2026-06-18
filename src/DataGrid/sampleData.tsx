@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { GridValueGetterParams, GridColumnHeaderParams } from '@mui/x-data-grid';
+import { GridColumnHeaderParams } from '@mui/x-data-grid';
 import IconDocument from '@hcl-software/enchanted-icons/dist/carbon/es/document--tasks';
 import IconEdit from '@hcl-software/enchanted-icons/dist/carbon/es/edit';
 import IconUser from '@hcl-software/enchanted-icons/dist/carbon/es/user';
@@ -47,7 +47,7 @@ export const sampleColumns: ExtendedGridColDef[] = [
     avatar: true,
     endActions: true,
     renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
-    valueGetter: (params: GridValueGetterParams) => { return `${params.row.firstName || ''} ${params.row.lastName || ''}`; },
+    valueGetter: (params: any) => { return `${params.row.firstName || ''} ${params.row.lastName || ''}`; },
   },
   {
     field: 'id',

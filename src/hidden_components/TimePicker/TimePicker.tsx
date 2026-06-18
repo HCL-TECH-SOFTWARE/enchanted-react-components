@@ -19,7 +19,7 @@ import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 import TextField, { TextFieldProps } from '../../TextField';
 import { ActionProps } from '../../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 
-export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerProps<TInputDate, TDate>, 'renderInput'> {
+export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerProps<TInputDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   helperIconTooltip?: string;
@@ -87,11 +87,13 @@ const TimePicker = <TInputDate, TDate>({ ...props }: TimePickerProps<TInputDate,
   return (
     <MuiTimePicker
       {...props}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
+      slots={{
+        textField: TextField,
+      }}
+      slotProps={{
+        textField: (params) => {
+          return getTextFieldProps(params as MuiTextFieldProps) as any;
+        },
       }}
     />
   );

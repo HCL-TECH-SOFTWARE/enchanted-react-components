@@ -32,19 +32,20 @@ type GridColumnMenuProps = MuiGridColumnMenuProps & {
 
 export const ExtendedGridColumnMenu = ({
   currentColumn, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel, ...rest
-}: GridColumnMenuProps) => {
+}: GridColumnMenuProps & any) => {
   const apiContext = useGridApiContext();
+  const colDef = (rest as any).colDef || currentColumn;
 
   const handleSortModelChange = (value: string) => {
-    onSortModelChange([{ field: currentColumn.field, sort: value }]);
+    onSortModelChange([{ field: colDef.field, sort: value }]);
   };
 
   const handleHideColumn = () => {
-    onColumnVisibilityModelChange({ ...columnVisibilityModel, [currentColumn.field]: false });
+    onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
   };
 
   return (
-    <GridColumnMenuContainer currentColumn={currentColumn} {...rest}>
+    <GridColumnMenuContainer {...rest} {...(currentColumn ? { currentColumn } : {})}>
       <MenuItem onClick={() => { handleSortModelChange('asc'); }}>
         <ArrowUp />
         {' '}

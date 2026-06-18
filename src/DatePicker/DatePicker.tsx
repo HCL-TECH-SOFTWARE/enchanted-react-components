@@ -42,7 +42,7 @@ const staticWrapperAs = 'mobile' as const;
 // Also used by handleYearPickerKeyDown to correct arrow-key navigation for the non-static DatePicker.
 const YEARS_PER_ROW = 3;
 
-export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
+export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   enableHelpHoverEffect?: boolean,
@@ -305,7 +305,7 @@ const DatePicker = <TInputDate, TDate>({
   // Today button fires onAccept — reset to 'day' view so the calendar returns from year/month view.
   const handleStaticAccept = useCallback((acceptedValue: TDate | null) => {
     setStaticView('day');
-    onAccept?.(acceptedValue);
+    (onAccept as any)?.(acceptedValue);
   }, [onAccept]);
 
   const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
@@ -401,7 +401,7 @@ const DatePicker = <TInputDate, TDate>({
     // DatePicker's built-in MUI click behaviour is never overridden.
     const handleDayClick = () => {
       if (staticMode && DayComponentProps.selected) {
-        muiProps?.onChange?.(day);
+        (muiProps?.onChange as any)?.(day);
       }
     };
 
@@ -454,31 +454,29 @@ const DatePicker = <TInputDate, TDate>({
     return (
       <Paper
         variant="elevation"
-        sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
+        sx={(theme: any) => { return getDatePickerStyle(theme, customStyles, true); }}
       >
         <MuiStaticDatePicker
-          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate>}
           disabled={disabled}
           value={value}
           // view is forwarded to the internal CalendarPicker but not typed on StaticDatePickerProps.
           {...{ view: staticView } as object}
           onViewChange={handleStaticViewChange}
-          onAccept={handleStaticAccept}
+          onAccept={handleStaticAccept as any}
           displayStaticWrapperAs={staticWrapperAs}
-          closeOnSelect={false}
-          showToolbar={false}
           reduceAnimations
-          dayOfWeekFormatter={dayOfWeekFormatter}
-          componentsProps={{
+          dayOfWeekFormatter={dayOfWeekFormatter as any}
+          slotProps={{
             actionBar: { actions: ['today'] },
             leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
             rightArrowButton: { onKeyDown: handleOnKeyDownRight },
-          }}
-          components={{
-            SwitchViewIcon: CaretDownIcon,
-          }}
-          renderDay={renderDay}
-          renderInput={(_params: MuiTextFieldProps) => { return <span />; }}
+            day: renderDay,
+          } as any}
+          slots={{
+            switchViewIcon: CaretDownIcon,
+            day: renderDay,
+          } as any}
         />
       </Paper>
     );
@@ -493,31 +491,31 @@ const DatePicker = <TInputDate, TDate>({
       reduceAnimations
       autoFocus={false}
       onOpen={focusDialog}
-      dayOfWeekFormatter={dayOfWeekFormatter}
-      PaperProps={{
-        sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
-        onKeyDownCapture: handleYearPickerKeyDown,
-      }}
+      dayOfWeekFormatter={dayOfWeekFormatter as any}
+      {...{
+        PaperProps: {
+          sx: (theme: any) => { return getDatePickerStyle(theme, customStyles); },
+          onKeyDownCapture: handleYearPickerKeyDown,
+        },
+      } as any}
       PopperProps={{
         placement: 'bottom-start',
         id: `datepickerPopper-${popperId}`,
       }}
-      componentsProps={{
+      slotProps={{
         actionBar: { actions: ['today'] },
         leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
         rightArrowButton: { onKeyDown: handleOnKeyDownRight },
-      }}
-      components={{
-        OpenPickerIcon: IconCalendar,
-        SwitchViewIcon: CaretDownIcon,
-      }}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
-      }}
-      renderDay={renderDay}
+        textField: (params: any) => {
+          return getTextFieldProps(params) as any;
+        },
+      } as any}
+      slots={{
+        openPickerIcon: IconCalendar,
+        switchViewIcon: CaretDownIcon,
+        textField: TextField,
+        day: renderDay,
+      } as any}
     />
   );
 };

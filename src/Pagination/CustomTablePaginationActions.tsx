@@ -14,7 +14,6 @@
  * ======================================================================== */
 
 import React from 'react';
-import { TablePaginationActionsProps as MuiTablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions';
 import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
@@ -41,6 +40,13 @@ export enum TablePaginationTestIds {
   TABLE_PAGINATION_ROWS_DIV = 'tablePaginationActionsRowsDiv',
   TABLE_PAGINATION_ROWS_LABEL = 'tablePaginationActionsRowsLabel',
   TABLE_PAGINATION_ROWS_TOTAL = 'tablePaginationActionsRowsTotal',
+}
+
+interface MuiTablePaginationActionsProps {
+  count: number;
+  page: number;
+  rowsPerPage: number;
+  onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null, page: number) => void;
 }
 
 type CustomTablePaginationActionsProps = MuiTablePaginationActionsProps & TablePaginationProps;
@@ -86,11 +92,11 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
           options={rowsPerPageOptions}
           getOptionLabel={(option) => { return (Number(option)).toString(); }}
           sx={{ '& .MuiFormControl-root': { minWidth: '0px' }, '& .MuiAutocomplete-inputRoot': { width: '62px' } }}
-          componentsProps={{
+          slotProps={{
             popper: {
               sx: {
                 '.MuiAutocomplete-listbox': {
-                  ...TYPOGRAPHY.body2,
+                  ...(TYPOGRAPHY.body2 as React.CSSProperties),
                   '::-webkit-scrollbar': {
                     display: 'none',
                   },
@@ -186,11 +192,11 @@ const CustomTablePaginationActions = (props: CustomTablePaginationActionsProps) 
           options={Array.from(Array(Math.ceil(count / rowsPerPage)).keys())}
           getOptionLabel={(option) => { return (Number(option) + 1).toString(); }}
           sx={{ '& .MuiFormControl-root': { minWidth: '0px' }, '& .MuiAutocomplete-inputRoot': { width: '40px' } }}
-          componentsProps={{
+          slotProps={{
             popper: {
               sx: {
                 '.MuiAutocomplete-listbox': {
-                  ...TYPOGRAPHY.body2,
+                  ...(TYPOGRAPHY.body2 as React.CSSProperties),
                   '::-webkit-scrollbar': {
                     display: 'none',
                   },

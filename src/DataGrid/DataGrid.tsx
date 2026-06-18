@@ -39,7 +39,8 @@ import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
  * @member {string} tooltip If we have tooltip, the cell will display tooltip on hover on the cell
  * @member {boolean} subTitle If true, the cell will display the subTitle in row data
  */
-export interface ExtendedGridColDef extends GridColDef {
+export interface ExtendedGridColDef extends Omit<GridColDef, 'field'> {
+  field: string,
   iconEnd?: boolean,
   iconStart?: boolean,
   avatar?: boolean,
@@ -310,7 +311,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
 /**
 * Renders a data grid, it replaces the table component.
 */
-const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
+const DataGrid = ({ slots, slotProps, ...props }: DataGridProps) => {
   const {
     onCheckboxClick, translation, totalCount, page, pageSize, rowsPerPageOptions,
   } = props;
@@ -708,18 +709,18 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   };
 
   const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
-    if (props.onPageChange !== undefined) {
+    if ((props as any).onPageChange !== undefined) {
       // eslint-why check DataGrid onPageChange type def, GridCallbackDetails expect any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      props.onPageChange(newPage, event as any);
+      (props as any).onPageChange(newPage, event as any);
     }
   };
 
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (props.onPageSizeChange && event.target) {
+    if ((props as any).onPageSizeChange && event.target) {
       // eslint-why check DataGrid onPageChange type def, GridCallbackDetails expect any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      props.onPageSizeChange(Number(event.target.value), event as any);
+      (props as any).onPageSizeChange(Number(event.target.value), event as any);
     }
   };
 
@@ -741,11 +742,11 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
   };
 
   const componentsOverride: Partial<GridSlotsComponent> = {
-    BaseCheckbox: Checkbox,
-    ColumnSortedAscendingIcon,
-    ColumnSortedDescendingIcon,
-    ColumnResizeIcon: DataGridDivider,
-    Pagination: DataGridTablePagination,
+    baseCheckbox: Checkbox,
+    columnSortedAscendingIcon: ColumnSortedAscendingIcon,
+    columnSortedDescendingIcon: ColumnSortedDescendingIcon,
+    columnResizeIcon: DataGridDivider,
+    pagination: DataGridTablePagination,
     // ColumnMenu: ExtendedGridColumnMenu, commented out until https://jira.cwp.pnp-hcl.com/browse/DXQ-30099 implementation starts
   };
 
@@ -754,9 +755,9 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
       {...props}
       focusedRow={focusRow}
         // For list of components that can be overriden with custom components inside DataGrid - See https://mui.com/x/api/data-grid/data-grid/#slots
-      components={{ ...components, ...componentsOverride }}
-      componentsProps={{
-        ...componentsProps,
+      slots={{ ...slots, ...componentsOverride }}
+      slotProps={{
+        ...slotProps,
         ...props.checkboxSelection && {
           baseCheckbox: {
             'data-testid': DataGridTestIds.DATAGRID_CHECKBOX,
@@ -783,7 +784,7 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
           onColumnVisibilityModelChange: props.onColumnVisibilityModelChange,
           columnVisibilityModel: props.columnVisibilityModel,
         },
-      }}
+      } as any}
       getRowClassName={(params) => {
         const classes = ['MuiDataGrid-hide-checkbox'];
         if (params.row.disabled) {

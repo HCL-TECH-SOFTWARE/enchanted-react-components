@@ -18,8 +18,7 @@ import { v4 as uuid } from 'uuid';
 import { styled } from '@mui/material/styles';
 import ArrowLeft from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--left';
 import ArrowRight from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--right';
-import { Theme, useTheme } from '@mui/material';
-import Grid, { GridProps as MuiGridProps } from '@mui/material/Grid';
+import { Theme, useTheme, Box } from '@mui/material';
 import Container, { ContainerProps as MuiContainerProps } from '@mui/material/Container';
 import Typography from '../Typography';
 import IconButton, { IconButtonSizes } from '../IconButton';
@@ -87,24 +86,8 @@ const MuiContainer = styled(Container)<MuiContainerProps>((theme) => {
   };
 });
 
-const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
-  return {
-    minWidth: '0',
-    minHeight: '54px',
-    '&.MuiGrid-container': {
-      margin: '0px',
-      display: 'flex',
-      minWidth: '0',
-      justifyContent: 'space-between',
-      width: '100%',
-    },
-    '&.MuiGrid-root': {
-      justifyContent: 'end',
-    },
-  };
-});
 
-const StartSectionGridStyled = styled(Grid)((theme) => {
+const StartSectionGridStyled = styled(Box)((theme) => {
   return {
     alignItems: 'center',
     display: 'flex',
@@ -146,7 +129,7 @@ const StartSectionGridStyled = styled(Grid)((theme) => {
   };
 });
 
-const MiddleSectionGridStyled = styled(Grid)((theme) => {
+const MiddleSectionGridStyled = styled(Box)((theme) => {
   return {
     alignItems: 'center',
     display: 'flex',
@@ -162,7 +145,7 @@ const MiddleSectionGridStyled = styled(Grid)((theme) => {
   };
 });
 
-const EndSectionGridStyled = styled(Grid)((theme) => {
+const EndSectionGridStyled = styled(Box)((theme) => {
   return {
     alignItems: 'center',
     display: 'flex',
@@ -219,15 +202,12 @@ const Header = ({ ...props }: HeaderProps) => {
 
   return (
     <MuiContainer {...muiContainerProps}>
-      <MuiGrid
-        container
-        spacing={2}
+      <Box
+        sx={{ display: 'flex', gap: 2 }}
         data-testid={HeaderTestIds.HEADER_CONTAINER}
       >
         <StartSectionGridStyled
-          item
-          xs={4}
-          sx={{ '&.MuiGrid-root': { paddingLeft: hamburgerSpace ? '68px' : '12px' } }}
+          sx={{ flex: '1 1 33.33%', paddingLeft: hamburgerSpace ? '68px' : '12px' }}
           data-testid={HeaderTestIds.HEADER_START_SECTION}
         >
           {(startSection?.withBackButton !== undefined && startSection.withBackButton && startSection?.avatar !== undefined)
@@ -280,7 +260,7 @@ const Header = ({ ...props }: HeaderProps) => {
             && (
               <Typography
                 sx={{
-                  ...TYPOGRAPHY.caption,
+                  ...(TYPOGRAPHY.caption as React.CSSProperties),
                   height: '14px',
                   color: (scopedTheme: Theme) => { return scopedTheme.palette.text.secondary; },
                 }}
@@ -309,8 +289,7 @@ const Header = ({ ...props }: HeaderProps) => {
         {
           withMiddleSection && (
             <MiddleSectionGridStyled
-              item
-              xs={4}
+              sx={{ flex: '1 1 33.33%' }}
               data-testid={HeaderTestIds.HEADER_MIDDLE_SECTION}
             >
               {
@@ -322,8 +301,7 @@ const Header = ({ ...props }: HeaderProps) => {
           )
         }
         <EndSectionGridStyled
-          item
-          xs={withMiddleSection ? 4 : 8}
+          sx={{ flex: withMiddleSection ? '1 1 33.33%' : '1 1 66.67%' }}
           data-testid={HeaderTestIds.HEADER_END_SECTION}
         >
           {
@@ -332,7 +310,7 @@ const Header = ({ ...props }: HeaderProps) => {
             })
           }
         </EndSectionGridStyled>
-      </MuiGrid>
+      </Box>
       <Divider
         type={DividerTypes.PRIMARY}
         sx={{

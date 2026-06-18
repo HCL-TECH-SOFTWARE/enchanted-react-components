@@ -15,7 +15,7 @@
 
 import React from 'react';
 import {
-  Grid, Components, Theme,
+  Components, Theme, Box,
 } from '@mui/material';
 import MuiListItemText, { ListItemTextProps as MuiListItemTextProps } from '@mui/material/ListItemText';
 import Tooltip from '../Tooltip';
@@ -79,9 +79,9 @@ const ListItemText = ({
         title={tooltipValue}
         placement={tooltipPlacement}
       >
-        <Grid container>
-          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{primaryReactNode}</Grid>
-        </Grid>
+        <Box sx={{ display: 'flex' }}>
+          <Box sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{primaryReactNode}</Box>
+        </Box>
       </Tooltip>
     );
   }
@@ -92,11 +92,11 @@ const ListItemText = ({
         title={secondaryTooltipValue}
         placement={secondaryTooltipPlacement}
       >
-        <Grid container>
-          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        <Box sx={{ display: 'flex' }}>
+          <Box sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {secondaryReactNode}
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Tooltip>
     );
   }
