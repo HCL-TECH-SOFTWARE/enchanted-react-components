@@ -14,9 +14,10 @@
  * ======================================================================== */
 import React, { ReactNode } from 'react';
 import MuiInputLabel, { InputLabelProps as MuiInputLabelProps } from '@mui/material/InputLabel';
-import { Stack, Box } from '@mui/material';
+import {
+  Stack, styled, Theme, SvgIconProps,
+} from '@mui/material';
 import HelpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/help';
-import { styled, Theme, SvgIconProps } from '@mui/material';
 import Tooltip, { TooltipPlacement } from '../../Tooltip';
 import ActionButton from '../../ActionButton';
 

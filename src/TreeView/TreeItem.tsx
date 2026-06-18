@@ -132,8 +132,14 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
 
     // Combine the forwarded ref with our own liRef.
     const setRef = React.useCallback((node: HTMLDivElement | null) => {
+      // eslint-why MUI v7 TreeItem ref type changed to HTMLDivElement
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (liRef as React.MutableRefObject<HTMLDivElement | null>).current = node as any;
+      // eslint-why MUI v7 TreeItem ref type changed to HTMLDivElement
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if (typeof ref === 'function') ref(node as any);
+      // eslint-why MUI v7 TreeItem ref type changed to HTMLDivElement
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node as any;
     }, [ref]);
 

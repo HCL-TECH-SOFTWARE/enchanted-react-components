@@ -47,6 +47,8 @@ export const sampleColumns: ExtendedGridColDef[] = [
     avatar: true,
     endActions: true,
     renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
+    // eslint-why MUI v7 GridValueGetterParams removed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     valueGetter: (params: any) => { return `${params.row.firstName || ''} ${params.row.lastName || ''}`; },
   },
   {

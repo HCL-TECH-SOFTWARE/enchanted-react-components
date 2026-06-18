@@ -86,7 +86,6 @@ const MuiContainer = styled(Container)<MuiContainerProps>((theme) => {
   };
 });
 
-
 const StartSectionGridStyled = styled(Box)((theme) => {
   return {
     alignItems: 'center',

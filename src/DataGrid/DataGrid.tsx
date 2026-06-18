@@ -709,6 +709,8 @@ const DataGrid = ({ slots, slotProps, ...props }: DataGridProps) => {
   };
 
   const handlePageChange = (event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null, newPage: number) => {
+    // eslint-why MUI v7 onPageChange type changed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((props as any).onPageChange !== undefined) {
       // eslint-why check DataGrid onPageChange type def, GridCallbackDetails expect any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -717,6 +719,8 @@ const DataGrid = ({ slots, slotProps, ...props }: DataGridProps) => {
   };
 
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // eslint-why MUI v7 onPageSizeChange type changed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((props as any).onPageSizeChange && event.target) {
       // eslint-why check DataGrid onPageChange type def, GridCallbackDetails expect any
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -784,6 +788,8 @@ const DataGrid = ({ slots, slotProps, ...props }: DataGridProps) => {
           onColumnVisibilityModelChange: props.onColumnVisibilityModelChange,
           columnVisibilityModel: props.columnVisibilityModel,
         },
+      // eslint-why MUI v7 slotProps type incompatibility
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any}
       getRowClassName={(params) => {
         const classes = ['MuiDataGrid-hide-checkbox'];

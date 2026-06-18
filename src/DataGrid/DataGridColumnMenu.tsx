@@ -32,8 +32,12 @@ type GridColumnMenuProps = MuiGridColumnMenuProps & {
 
 export const ExtendedGridColumnMenu = ({
   currentColumn, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel, ...rest
+// eslint-why MUI v7 GridColumnMenuProps changed
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: GridColumnMenuProps & any) => {
   const apiContext = useGridApiContext();
+  // eslint-why MUI v7 currentColumn prop removed
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const colDef = (rest as any).colDef || currentColumn;
 
   const handleSortModelChange = (value: string) => {

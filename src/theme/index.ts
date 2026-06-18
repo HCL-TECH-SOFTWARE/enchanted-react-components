@@ -428,6 +428,8 @@ shadows[24] = '0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 
 
 const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => {
   const themeOptions: ThemeOptions = {
+    // eslint-why MUI v7 typography type incompatibility
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     typography: TYPOGRAPHY as any,
     palette: getPalette(mode),
     direction,
