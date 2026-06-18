@@ -163,6 +163,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const textfieldRef = React.useRef<HTMLInputElement>(null);
   const [isValueOverFlowing, setIsValueOverFlowing] = React.useState(false);
   const [prevValue, setPrevValue] = React.useState('');
+  const [selectedOption, setSelectedOption] = React.useState<T | null>();
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -171,7 +172,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     } else {
       setIsValueOverFlowing(false);
     }
-  }, [props.value]);
+  }, [props.value, prevValue]);
 
   const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
     return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
@@ -180,7 +181,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const getStartAdornmentWidth = React.useCallback(() => {
     let iconCount = 0;
     const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
-    let iconCount = 0;
 
     if (props.startAdornment) {
       iconCount += getIconsCount(props.startAdornment);
@@ -261,10 +261,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           }}
           onBlur={() => {
             setIsFocus(false);
-            if (textfieldRef.current) {
-              setPrevValue(textfieldRef.current.value);
-            }
           }}
+          onChange={handleChange}
+          onInputChange={handleInputChange}
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
@@ -316,8 +315,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               },
             };
 
-            const inputValue = textfieldRef.current?.value ?? '';
             let tooltipTitle = '';
+            const inputValue = textfieldRef.current?.value ?? '';
 
             const getPathSegmentLabel = (segment: unknown): string => {
               if (typeof segment === 'string') {
@@ -474,7 +473,6 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 paddingBottom: '5px',
                 paddingLeft: '8px',
                 height: '28px',
-                // width: '140px',
                 '&.MuiOutlinedInput-root .MuiAutocomplete-input': { // for input truncation
                   ...TYPOGRAPHY.body2,
                   padding: '0px',
