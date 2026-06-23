@@ -27,6 +27,7 @@ import IconButton, { IconButtonVariants } from '../IconButton';
 import Typography from '../Typography';
 import CircularProgress, { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 import Tooltip from '../Tooltip';
+import GroupedSnackbar, { GroupedSnackbarItem, GroupedSnackbarPolicy } from './GroupedSnackbar';
 
 export enum SnackbarVariants {
   WARNING = 'warning',
@@ -182,6 +183,18 @@ export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'componen
   };
 };
 
+export interface SnackbarGroupedModeProps {
+  enabled: boolean;
+  items: GroupedSnackbarItem[];
+  policy?: GroupedSnackbarPolicy;
+  maxVisible?: number;
+  defaultExpanded?: boolean;
+  includeProgressInHeaderCounts?: boolean;
+  onCloseItem?: (id: string) => void;
+  onCloseAll?: () => void;
+  onExpandChange?: (expanded: boolean) => void;
+}
+
 /**
  * @typedef SnackbarProps
  * @type {object}
@@ -195,6 +208,7 @@ export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'componen
  * @property {boolean} showPlaceholderIcon - Used to toggle visibility of placeholder icon.
  * @property {CircularProgressVariants} progressVariant - This will only affect component when the variant is in progress. Choose what variant of CircularProgress to use.
  * @property {boolean} progressValue - The value of the progress indicator for the determinate variant. Value between 0 and 100.
+ * @property {SnackbarGroupedModeProps} groupedMode - Configuration for grouped snackbar mode. When enabled, renders multiple snackbars with header counts and expand/collapse functionality.
  */
 export type SnackbarProps = MuiSnackbarProps & {
   variant: SnackbarVariants,
@@ -209,6 +223,7 @@ export type SnackbarProps = MuiSnackbarProps & {
   progressVariant?: CircularProgressVariants,
   progressValue?: number,
   closeIconToolTip?: string,
+  groupedMode?: SnackbarGroupedModeProps,
 }
 
 const Snackbar = ({ ...props }: SnackbarProps) => {
@@ -216,8 +231,28 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
     disabledSnackbar, buttonAction, buttonText, // these 3 props handle main action Button in design
     placeholderIcon, placeholderIconAction, showPlaceholderIcon, // these 3 props handle placeholder IconButton in design
     progressVariant, progressValue, // these 2 props handle progress indicator
+    groupedMode, // grouped mode configuration
     ...rest // Do not put trailing comma here
   } = props;
+
+  // If grouped mode is enabled, delegate to GroupedSnackbar
+  if (groupedMode?.enabled) {
+    return (
+      <GroupedSnackbar
+        open={rest.open || false}
+        items={groupedMode.items}
+        policy={groupedMode.policy}
+        maxVisible={groupedMode.maxVisible}
+        defaultExpanded={groupedMode.defaultExpanded}
+        includeProgressInHeaderCounts={groupedMode.includeProgressInHeaderCounts}
+        onCloseItem={groupedMode.onCloseItem}
+        onCloseAll={groupedMode.onCloseAll}
+        onExpandChange={groupedMode.onExpandChange}
+        anchorOrigin={rest.anchorOrigin}
+        sx={rest.sx}
+      />
+    );
+  }
 
   /**
    * Gets default icon for snackbar based on the status or type of notification

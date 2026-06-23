@@ -3,10 +3,12 @@
 ## Unreleased
 
 ### Added
+- Added GroupedSnackbar component and its tests
 
 ### Fixed
 
 ### Changed
+- Add `groupedMode` prop to Snackbar component for grouping multiple snackbars
 
 ### Breaking changes
 

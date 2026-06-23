@@ -13,6 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import Snackbar from './Snackbar';
+import GroupedSnackbar from './GroupedSnackbar';
 
 export default Snackbar;
 export * from './Snackbar';
+export { default as GroupedSnackbar } from './GroupedSnackbar';
+export * from './GroupedSnackbar';
