@@ -40,6 +40,22 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: 'color-contrast',
+          enabled: true,
+        },
+      ],
+    },
+    options: {
+      runOnly: {
+        type: 'tag',
+        values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
+      },
+    },
+  },
 }
 
 export const globalTypes = {
