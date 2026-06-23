@@ -16,3 +16,5 @@ import Snackbar from './Snackbar';
 
 export default Snackbar;
 export * from './Snackbar';
+export { default as GroupedSnackbar } from './GroupedSnackbar';
+export * from './GroupedSnackbar';

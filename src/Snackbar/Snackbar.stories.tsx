@@ -12,10 +12,11 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React from 'react';
+import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import Snackbar, { SnackbarVariants } from './Snackbar';
+import GroupedSnackbar, { GroupedSnackbarItem } from './GroupedSnackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 
@@ -108,10 +109,11 @@ export default {
   },
 } as Meta<typeof Snackbar>;
 
-const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args) => {
+// eslint-why Storybook args require flexible typing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args: any) => {
   const messageTwo = `${args.message} > a bit longer`;
   const messageThree = `${args.message} > a bit much more longer ;-)`;
-  // @ts-ignore for test only, its purpose is to show snackbar when its stack
   if (args.showStackSnackbar) {
     return (
       <SnackbarContainer position={SnackbarContainerPosition.LEFT}>
@@ -165,4 +167,66 @@ VisualTest.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
+};
+
+const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = () => {
+  const [items, setItems] = useState<GroupedSnackbarItem[]>([
+    {
+      id: '1',
+      message: 'Sample error message #1',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '2',
+      message: 'Sample error message #2',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '3',
+      message: 'Sample error message #3',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '4',
+      message: 'Sample error message #4',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '5',
+      message: 'Sample error message #5',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '6',
+      message: 'Sample error message #6',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+  ]);
+
+  return (
+    <SnackbarContainer>
+      <GroupedSnackbar
+        open
+        items={items}
+        policy="stack"
+        maxVisible={2}
+        defaultExpanded={false}
+        showHeaderCounts
+        includeProgressInHeaderCounts={false}
+        onCloseItem={(id) => { return setItems((prev) => { return prev.filter((x) => { return x.id !== id; }); }); }}
+        onCloseAll={() => { return setItems([]); }}
+      />
+    </SnackbarContainer>
+  );
+};
+
+export const GroupedSnackbarExample = GroupedSnackbarTemplate.bind({});
+GroupedSnackbarExample.parameters = {
+  options: { showPanel: true },
 };
