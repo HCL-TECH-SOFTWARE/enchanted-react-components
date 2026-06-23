@@ -196,21 +196,11 @@ const renderInput = (props: SelectProps, id?: string) => {
   // Also we have to support the option that some stylings will handover via the MenuProps?.PaperProps?.style.
   const defaultStyle = {
     width: props.fullWidth ? '100%' : '240px',
-    // eslint-why - using nested ternary to reduce unnecessary code blocks
-    // eslint-disable-next-line no-nested-ternary
-    marginLeft: props.fullWidth ? '0px' : (theme.direction === ThemeDirectionType.RTL ? '8px' : '-8px'),
-    marginTop: '21px',
     padding: '0',
   };
   const paperPropsStyle = selectProps.MenuProps?.PaperProps?.style ? selectProps.MenuProps?.PaperProps?.style : defaultStyle;
   if (!paperPropsStyle.width) {
     paperPropsStyle.width = defaultStyle.width;
-  }
-  if (!paperPropsStyle.marginLeft) {
-    paperPropsStyle.marginLeft = defaultStyle.marginLeft;
-  }
-  if (!paperPropsStyle.marginTop) {
-    paperPropsStyle.marginTop = defaultStyle.marginTop;
   }
 
   return (
@@ -222,7 +212,7 @@ const renderInput = (props: SelectProps, id?: string) => {
       MenuProps={{
         ...selectProps.MenuProps,
         transformOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
-        anchorOrigin: { vertical: 'top', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
+        anchorOrigin: { vertical: 'bottom', horizontal: theme.direction === ThemeDirectionType.RTL ? 'right' : 'left' },
         PaperProps: {
           style: paperPropsStyle,
           elevation: 2,
