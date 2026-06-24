@@ -170,7 +170,6 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
     return (
       <MuiGrid container spacing={2}>
         <MuiGrid
-          item
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -187,7 +186,6 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
           {renderInputLabel(props)}
         </MuiGrid>
         <MuiGrid
-          item
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -224,7 +222,7 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
   }
   return (
     <MuiGrid container>
-      <MuiGrid item xs={12}>
+      <MuiGrid size={{ xs: 12 }}>
         {renderInputLabel(props)}
       </MuiGrid>
     </MuiGrid>

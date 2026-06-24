@@ -42,7 +42,7 @@ const staticWrapperAs = 'mobile' as const;
 // Also used by handleYearPickerKeyDown to correct arrow-key navigation for the non-static DatePicker.
 const YEARS_PER_ROW = 3;
 
-export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
+export interface DatePickerProps<TInputDate> extends Omit<MuiDatePickerProps<TInputDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   enableHelpHoverEffect?: boolean,
@@ -273,7 +273,7 @@ const DatePicker = <TInputDate, TDate>({
   onViewChange,
   onAccept,
   ...muiProps
-}: DatePickerProps<TInputDate, TDate>) => {
+}: DatePickerProps<TInputDate>) => {
   const popperId = uuid();
   // Controls the active view of StaticDatePicker. Resets to 'day' on Today click since
   // MUI v5 StaticDatePicker does not reset the view automatically.
@@ -305,7 +305,9 @@ const DatePicker = <TInputDate, TDate>({
   // Today button fires onAccept — reset to 'day' view so the calendar returns from year/month view.
   const handleStaticAccept = useCallback((acceptedValue: TDate | null) => {
     setStaticView('day');
-    onAccept?.(acceptedValue);
+    // eslint-why MUI v7 onAccept type incompatibility
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (onAccept as any)?.(acceptedValue);
   }, [onAccept]);
 
   const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
@@ -401,7 +403,9 @@ const DatePicker = <TInputDate, TDate>({
     // DatePicker's built-in MUI click behaviour is never overridden.
     const handleDayClick = () => {
       if (staticMode && DayComponentProps.selected) {
-        muiProps?.onChange?.(day);
+        // eslint-why MUI v7 onChange type incompatibility
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (muiProps?.onChange as any)?.(day);
       }
     };
 
@@ -454,31 +458,39 @@ const DatePicker = <TInputDate, TDate>({
     return (
       <Paper
         variant="elevation"
-        sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
+        // eslint-why MUI v7 theme parameter type
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        sx={(theme: any) => { return getDatePickerStyle(theme, customStyles, true); }}
       >
         <MuiStaticDatePicker
-          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate>}
           disabled={disabled}
           value={value}
           // view is forwarded to the internal CalendarPicker but not typed on StaticDatePickerProps.
           {...{ view: staticView } as object}
           onViewChange={handleStaticViewChange}
-          onAccept={handleStaticAccept}
+          // eslint-why MUI v7 onAccept type incompatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onAccept={handleStaticAccept as any}
           displayStaticWrapperAs={staticWrapperAs}
-          closeOnSelect={false}
-          showToolbar={false}
           reduceAnimations
-          dayOfWeekFormatter={dayOfWeekFormatter}
-          componentsProps={{
+          // eslint-why MUI v7 dayOfWeekFormatter type incompatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          dayOfWeekFormatter={dayOfWeekFormatter as any}
+          slotProps={{
             actionBar: { actions: ['today'] },
             leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
             rightArrowButton: { onKeyDown: handleOnKeyDownRight },
-          }}
-          components={{
-            SwitchViewIcon: CaretDownIcon,
-          }}
-          renderDay={renderDay}
-          renderInput={(_params: MuiTextFieldProps) => { return <span />; }}
+            day: renderDay,
+          // eslint-why MUI v7 slotProps type incompatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any}
+          slots={{
+            switchViewIcon: CaretDownIcon,
+            day: renderDay,
+          // eslint-why MUI v7 slots type incompatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any}
         />
       </Paper>
     );
@@ -493,31 +505,45 @@ const DatePicker = <TInputDate, TDate>({
       reduceAnimations
       autoFocus={false}
       onOpen={focusDialog}
-      dayOfWeekFormatter={dayOfWeekFormatter}
-      PaperProps={{
-        sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
-        onKeyDownCapture: handleYearPickerKeyDown,
-      }}
+      // eslint-why MUI v7 dayOfWeekFormatter type incompatibility
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      dayOfWeekFormatter={dayOfWeekFormatter as any}
+      {...{
+        PaperProps: {
+          // eslint-why MUI v7 theme parameter type
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          sx: (theme: any) => { return getDatePickerStyle(theme, customStyles); },
+          onKeyDownCapture: handleYearPickerKeyDown,
+        },
+      // eslint-why MUI v7 PaperProps not in DatePicker props
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any}
       PopperProps={{
         placement: 'bottom-start',
         id: `datepickerPopper-${popperId}`,
       }}
-      componentsProps={{
+      slotProps={{
         actionBar: { actions: ['today'] },
         leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
         rightArrowButton: { onKeyDown: handleOnKeyDownRight },
-      }}
-      components={{
-        OpenPickerIcon: IconCalendar,
-        SwitchViewIcon: CaretDownIcon,
-      }}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
-      }}
-      renderDay={renderDay}
+        // eslint-why MUI v7 textField params type
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        textField: (params: any) => {
+          // eslint-why MUI v7 getTextFieldProps return type
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return getTextFieldProps(params) as any;
+        },
+      // eslint-why MUI v7 slotProps type incompatibility
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any}
+      slots={{
+        openPickerIcon: IconCalendar,
+        switchViewIcon: CaretDownIcon,
+        textField: TextField,
+        day: renderDay,
+      // eslint-why MUI v7 slots type incompatibility
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any}
     />
   );
 };

@@ -15,7 +15,7 @@
 
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Grid } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import IconClose from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 
 import { PanelLocalization, PanelVariants, TabsPanelProps } from './Panel';
@@ -37,14 +37,14 @@ export interface TabBodyProps {
   maxHeight?: string;
 }
 
-const PanelTabContentStyled = styled(Grid)((props) => {
+const PanelTabContentStyled = styled(Box)((props) => {
   return {
     width: '260px',
     overflow: 'hidden',
   };
 });
 
-const TabHeaderStyled = styled(Grid)((props) => {
+const TabHeaderStyled = styled(Stack)((props) => {
   const { theme } = props;
   return {
     display: 'flex',
@@ -53,7 +53,7 @@ const TabHeaderStyled = styled(Grid)((props) => {
   };
 });
 
-const TabBodyStyled = styled(Grid)<TabBodyProps>((props) => {
+const TabBodyStyled = styled(Box)<TabBodyProps>((props) => {
   return {
     padding: props.variant === PanelVariants.WITH_PADDING ? '12px' : 0,
     maxHeight: props.maxHeight || 'calc(100vh - 48px)',
@@ -70,7 +70,7 @@ const PanelTitle = styled(Typography)((props) => {
   };
 });
 
-const PanelActions = styled(Grid)((props) => {
+const PanelActions = styled(Stack)((props) => {
   return {
     maxWidth: '50%',
   };
@@ -104,40 +104,36 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                 flexGrow={1}
                 flexShrink={0}
               >
-                <Grid
-                  container
+                <Stack
                   direction="column"
                 >
                   <TabHeaderStyled
-                    container
                     data-testid="panel-header"
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <Grid
-                      item
-                      xs={6}
+                    <Box
+                      sx={{ flex: '1 1 50%' }}
                     >
                       <PanelTitle
                         variant="subtitle1"
                       >
                         {tab.content.title}
                       </PanelTitle>
-                    </Grid>
+                    </Box>
                     <PanelActions
-                      container
                       direction="row"
                       justifyContent="flex-end"
                       alignItems="center"
                     >
-                      <Grid
+                      <Box
                         sx={{
                           display: 'flex',
                         }}
                       >
                         {tab.content.actionHeaderBar}
-                      </Grid>
+                      </Box>
                       {toggleClose && (
                       <Tooltip title={(translation && translation.closeButtonTooltip) ? translation.closeButtonTooltip : ''}>
                         <CloseButtonStyled
@@ -157,11 +153,11 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                     variant={variant}
                     maxHeight={tab.content.maxHeight}
                   >
-                    <Grid>
+                    <Box>
                       {tab.content.body}
-                    </Grid>
+                    </Box>
                   </TabBodyStyled>
-                </Grid>
+                </Stack>
               </PanelTabContentStyled>
             )}
           </React.Fragment>

@@ -62,12 +62,12 @@ export const getMuiAlertThemeOverrides = (): Components<Omit<Theme, 'components'
               padding: '2px',
             },
             '& .MuiAlert-message': {
-              ...TYPOGRAPHY.body2,
+              ...(TYPOGRAPHY.body2 as React.CSSProperties),
               marginRight: '8px',
               padding: '2px 0px 0px 0px',
             },
             '& .MuiTypography-root .MuiAlertTitle-root': {
-              ...TYPOGRAPHY.body2,
+              ...(TYPOGRAPHY.body2 as React.CSSProperties),
             },
             '& .MuiAlert-action': {
               padding: '0',

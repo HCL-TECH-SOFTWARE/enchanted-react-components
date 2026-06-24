@@ -22,9 +22,9 @@ import { TreeViewContext } from './TreeItem';
 
 export { TreeViewContext, TreeDepthContext } from './TreeItem';
 
-export { TreeViewProps };
+export type { TreeViewProps };
 
-export type EnhancedTreeViewProps = TreeViewProps & {
+export type EnhancedTreeViewProps = TreeViewProps<boolean> & {
   /** When false, hides the vertical level-line connecting parent to children. Defaults to true. */
   showLevelLine?: boolean;
   /** When true, all tree items in the tree are disabled. */
@@ -37,16 +37,18 @@ export type EnhancedTreeViewProps = TreeViewProps & {
  */
 export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
-    MuiTreeView: {
-      styleOverrides: {
-        root: () => {
-          return {
-            padding: '0px',
-          };
-        },
-      },
-    },
-    MuiTreeItem: {
+    // MuiTreeView has been moved to @mui/x-tree-view in MUI v7
+    // MuiTreeView: {
+    //   styleOverrides: {
+    //     root: () => {
+    //       return {
+    //         padding: '0px',
+    //       };
+    //     },
+    //   },
+    // },
+    // MuiTreeItem has also been moved to @mui/x-tree-view in MUI v7
+    /* MuiTreeItem: {
       styleOverrides: {
         root: ({ theme }: { theme: Theme }) => {
           return {
@@ -235,24 +237,24 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
           };
         },
       },
-    },
+    }, */
   };
 };
 
-const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
-  (props: EnhancedTreeViewProps, ref: React.Ref<HTMLUListElement>) => {
+const TreeView = React.forwardRef<HTMLDivElement, EnhancedTreeViewProps>(
+  (props: EnhancedTreeViewProps, ref: React.Ref<HTMLDivElement>) => {
     const {
       defaultCollapseIcon, defaultExpandIcon, onMouseLeave, showLevelLine = true, disabled, ...rest
     } = props;
 
-    const treeRef = React.useRef<HTMLUListElement>(null);
+    const treeRef = React.useRef<HTMLDivElement>(null);
     // Accordion pattern: ref (not state) so MutationObserver callbacks read it synchronously.
     const isKeyboardNav = React.useRef(false);
 
-    const combinedRef = (node: HTMLUListElement) => {
-      (treeRef as React.MutableRefObject<HTMLUListElement | null>).current = node;
+    const combinedRef = (node: HTMLDivElement | null) => {
+      (treeRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
       if (typeof ref === 'function') ref(node);
-      else if (ref) (ref as React.MutableRefObject<HTMLUListElement | null>).current = node;
+      else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
     };
 
     // Accordion pattern: window-level keydown/mousedown listeners.

@@ -19,7 +19,7 @@ import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 import TextField, { TextFieldProps } from '../../TextField';
 import { ActionProps } from '../../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 
-export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerProps<TInputDate, TDate>, 'renderInput'> {
+export interface TimePickerProps<TInputDate> extends Omit<MuiTimePickerProps<TInputDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   helperIconTooltip?: string;
@@ -40,7 +40,9 @@ export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerPr
 
 const DEFAULT_FORMAT: string = 'hh:mm';
 
-const TimePicker = <TInputDate, TDate>({ ...props }: TimePickerProps<TInputDate, TDate>) => {
+const TimePicker = <TInputDate, >({ ...props }: TimePickerProps<TInputDate>) => {
+  // eslint-why MUI v7 slots/slotProps pattern requires any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formatValue = (value: Dayjs, format: string): string => {
     return value.format(format);
   };
@@ -87,11 +89,15 @@ const TimePicker = <TInputDate, TDate>({ ...props }: TimePickerProps<TInputDate,
   return (
     <MuiTimePicker
       {...props}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
+      slots={{
+        textField: TextField,
+      }}
+      slotProps={{
+        textField: (params) => {
+          // eslint-why MUI v7 slotProps textField type incompatibility
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          return getTextFieldProps(params as MuiTextFieldProps) as any;
+        },
       }}
     />
   );

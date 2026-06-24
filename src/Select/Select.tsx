@@ -17,7 +17,7 @@ import React from 'react';
 import MuiSelect, { SelectProps as MuiSelectProps } from '@mui/material/Select';
 import MuiFormControl, { FormControlProps as MuiFormControlProps } from '@mui/material/FormControl';
 import MuiFormHelperText from '@mui/material/FormHelperText';
-import useId from '@mui/material/utils/useId';
+import { unstable_useId as useId } from '@mui/utils';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import {

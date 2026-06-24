@@ -17,7 +17,7 @@ import {
   Theme, createTheme, PaletteOptions, Shadows,
 } from '@mui/material/styles';
 import { ThemeOptions } from '@mui/material/styles/createTheme';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { TypographyStyleOptions } from '@mui/material/styles/createTypography';
 import { Colors, ColorNames, UNKNOWN_COLOR_CODE } from '../colors';
 import { getMuiTextFieldThemeOverrides } from '../TextField';
 import { getMuiChipThemeOverrides } from '../Chip/Chip';
@@ -164,7 +164,7 @@ export const ensureToGetColor = (color: string | undefined): string => {
   return color;
 };
 
-export const TYPOGRAPHY: TypographyOptions = {
+export const TYPOGRAPHY: TypographyStyleOptions = {
   fontFamily: 'Inter, sans-serif',
   h1: {
     fontWeight: '300',
@@ -428,7 +428,9 @@ shadows[24] = '0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 
 
 const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => {
   const themeOptions: ThemeOptions = {
-    typography: TYPOGRAPHY,
+    // eslint-why MUI v7 typography type incompatibility
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    typography: TYPOGRAPHY as any,
     palette: getPalette(mode),
     direction,
     shadows,

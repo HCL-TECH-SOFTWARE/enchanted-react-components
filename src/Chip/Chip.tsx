@@ -110,7 +110,9 @@ export const getMuiChipThemeOverrides = (): Components<Omit<Theme, 'components'>
     MuiChip: {
       styleOverrides: {
         root: ({ ownerState, theme }) => {
-          const leadingLetter: string = ownerState.avatar?.props.letter as string;
+          // eslint-why MUI v7 avatar.props type is unknown
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const leadingLetter: string = (ownerState.avatar?.props as any)?.letter as string;
           return ({
             height: '24px',
             padding: '4px',
