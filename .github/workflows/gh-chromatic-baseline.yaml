@@ -38,5 +38,5 @@ jobs:
         with:
           # Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: chpt_6f661388be77742
-          auto-accept-changes: true
-          only-changed: true
+          autoAcceptChanges: true
+          onlyChanged: true
