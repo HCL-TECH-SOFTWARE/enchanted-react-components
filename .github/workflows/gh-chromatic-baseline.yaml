@@ -1,0 +1,32 @@
+name: Update chromatic baseline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+jobs:
+  chromatic:
+    name: Update chromatic baseline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        # See your package manager's documentation for the correct command to install dependencies in a CI environment.
+        run: npm ci
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          # Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
+          projectToken: chpt_6f661388be77742
+          auto-accept-changes: true
+          only-changed: true
