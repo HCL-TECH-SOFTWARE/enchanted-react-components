@@ -16,18 +16,10 @@ import React, { useState, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material/styles';
 import MuiSnackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
-import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
-import ChevronUpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--up';
-import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
-import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
-import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
-import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
-import IconButton, { IconButtonVariants } from '../IconButton';
-import Typography from '../Typography';
-import Button from '../Button';
-import Tooltip from '../Tooltip';
 import { SnackbarVariants } from './Snackbar';
+import { PaletteMode } from '../theme';
+import GroupedSnackbarHeader from './GroupedSnackbarHeader';
+import GroupedSnackbarItems from './GroupedSnackbarItems';
 
 export interface GroupedSnackbarItem {
   id: string;
@@ -54,25 +46,28 @@ export interface GroupedSnackbarProps {
   onCloseAll?: () => void;
   onExpandChange?: (expanded: boolean) => void;
   anchorOrigin?: SnackbarOrigin;
+  themeMode?: PaletteMode;
   sx?: SxProps<Theme>;
 }
 
 const DEFAULT_MAX_VISIBLE = 5;
 const DEFAULT_POLICY: GroupedSnackbarPolicy = 'stack';
 
-const getVariantIcon = (variant: SnackbarVariants) => {
-  switch (variant) {
-    case SnackbarVariants.ERROR:
-      return <ErrorIcon />;
-    case SnackbarVariants.WARNING:
-      return <WarningIcon />;
-    case SnackbarVariants.SUCCESS:
-      return <SuccessIcon />;
-    case SnackbarVariants.INFO:
-      return <InformationIcon />;
-    default:
-      return null;
+const getThemeColors = (mode: PaletteMode) => {
+  if (mode === 'light') {
+    return {
+      background: '#f5f5f5',
+      text: '#000000',
+      textTertiary: '#424242',
+      iconColor: '#000000',
+    };
   }
+  return {
+    background: '#1a1a1a',
+    text: '#ffffff',
+    textTertiary: '#b0b0b0',
+    iconColor: '#ffffff',
+  };
 };
 
 const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
@@ -89,11 +84,13 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
       onCloseAll,
       onExpandChange,
       anchorOrigin,
+      themeMode = PaletteMode.LIGHT,
       sx,
     },
     ref,
   ) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
+    const colors = getThemeColors(themeMode);
 
     const handleExpandChange = (newExpanded: boolean) => {
       setExpanded(newExpanded);
@@ -160,298 +157,24 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
             };
           }}
         >
-          <Box
-            sx={(theme) => {
-              return {
-                ...theme.typography.body2,
-                position: 'relative',
-                background: theme.palette.background.dark,
-                borderRadius: '4px',
-                boxShadow: theme.shadows[6],
-                color: theme.palette.text.tertiary1,
-                display: 'flex !important',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                minHeight: '36px',
-                padding: '8px 12px',
-                gap: '8px',
-                flexWrap: 'nowrap',
-                width: '100%',
-                boxSizing: 'border-box',
-              };
-            }}
-          >
-            <Box sx={{
-              display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0, overflow: 'hidden',
-            }}
-            >
-              {showHeaderCounts && (
-                <>
-                  {variantCounts[SnackbarVariants.ERROR] > 1 && (
-                    <Tooltip title={`${variantCounts[SnackbarVariants.ERROR]} error(s)`}>
-                      <Box
-                        sx={(theme) => {
-                          return {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            padding: '2px 6px',
-                            borderRadius: '2px',
-                            backgroundColor: theme.palette.error.inverse,
-                            color: theme.palette.background.dark,
-                            fontSize: '12px',
-                            fontWeight: 600,
-                          };
-                        }}
-                      >
-                        <ErrorIcon style={{ width: '14px', height: '14px' }} />
-                        {/* {variantCounts[SnackbarVariants.ERROR]} */}
-                      </Box>
-                    </Tooltip>
-                  )}
-                  {variantCounts[SnackbarVariants.WARNING] > 1 && (
-                    <Tooltip title={`${variantCounts[SnackbarVariants.WARNING]} warning(s)`}>
-                      <Box
-                        sx={(theme) => {
-                          return {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            padding: '2px 6px',
-                            borderRadius: '2px',
-                            backgroundColor: theme.palette.warning.inverse,
-                            color: theme.palette.background.dark,
-                            fontSize: '12px',
-                            fontWeight: 600,
-                          };
-                        }}
-                      >
-                        <WarningIcon style={{ width: '14px', height: '14px' }} />
-                        {/* {variantCounts[SnackbarVariants.WARNING]} */}
-                      </Box>
-                    </Tooltip>
-                  )}
-                  {variantCounts[SnackbarVariants.SUCCESS] > 1 && (
-                    <Tooltip title={`${variantCounts[SnackbarVariants.SUCCESS]} success(es)`}>
-                      <Box
-                        sx={(theme) => {
-                          return {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            padding: '2px 6px',
-                            borderRadius: '2px',
-                            backgroundColor: theme.palette.success.inverse,
-                            color: theme.palette.background.dark,
-                            fontSize: '12px',
-                            fontWeight: 600,
-                          };
-                        }}
-                      >
-                        <SuccessIcon style={{ width: '14px', height: '14px' }} />
-                        {/* {variantCounts[SnackbarVariants.SUCCESS]} */}
-                      </Box>
-                    </Tooltip>
-                  )}
-                  {variantCounts[SnackbarVariants.INFO] > 1 && (
-                    <Tooltip title={`${variantCounts[SnackbarVariants.INFO]} info(s)`}>
-                      <Box
-                        sx={(theme) => {
-                          return {
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '4px',
-                            padding: '2px 6px',
-                            borderRadius: '2px',
-                            backgroundColor: theme.palette.primary.inverse,
-                            color: theme.palette.background.dark,
-                            fontSize: '12px',
-                            fontWeight: 600,
-                          };
-                        }}
-                      >
-                        <InformationIcon style={{ width: '14px', height: '14px' }} />
-                        {/* {variantCounts[SnackbarVariants.INFO]} */}
-                      </Box>
-                    </Tooltip>
-                  )}
-                </>
-              )}
-              <Typography
-                variant="body2"
-                sx={{
-                  color: 'inherit',
-                  marginLeft: '8px',
-                }}
-              >
-                {totalCount}
-                {' '}
-                notification
-                {totalCount !== 1 ? 's' : ''}
-              </Typography>
-            </Box>
-
-            <Box sx={{
-              display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0,
-            }}
-            >
-              {hasOverflow && (
-                <Tooltip title={expanded ? 'Collapse' : 'Expand'}>
-                  <IconButton
-                    onClick={() => { return handleExpandChange(!expanded); }}
-                    variant={IconButtonVariants.WITH_PADDING}
-                    aria-expanded={expanded}
-                    aria-label="Toggle notification list"
-                    sx={{
-                      '& svg': {
-                        color: '#ffffff',
-                      },
-                    }}
-                  >
-                    {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                  </IconButton>
-                </Tooltip>
-              )}
-              {onCloseAll && (
-                <Tooltip title="Close all">
-                  <IconButton
-                    onClick={onCloseAll}
-                    variant={IconButtonVariants.WITH_PADDING}
-                    aria-label="Close all notifications"
-                    sx={{
-                      '& svg': {
-                        color: '#ffffff',
-                      },
-                    }}
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
-            </Box>
-          </Box>
-
-          {expanded && visibleItems.length > 0 && (
-            <Box
-              sx={(muiTheme) => {
-                return {
-                  display: 'flex !important',
-                  flexDirection: 'column',
-                  gap: '0',
-                  background: muiTheme.palette.background.dark,
-                  borderRadius: '4px',
-                  boxShadow: muiTheme.shadows[6],
-                  overflow: 'auto !important',
-                  overflowX: 'hidden !important',
-                  maxHeight: '240px !important',
-                  height: 'auto !important',
-                  marginTop: '8px',
-                  width: '100%',
-                };
-              }}
-            >
-              {visibleItems.map((item, index) => {
-                return (
-                  <Box
-                    key={item.id}
-                    sx={(theme) => {
-                      return {
-                        display: 'flex !important',
-                        alignItems: 'center !important',
-                        justifyContent: 'flex-start',
-                        padding: '8px 12px',
-                        backgroundColor: theme.palette.background.dark,
-                        borderBottom: index !== visibleItems.length - 1 ? `1px solid ${theme.palette.divider}` : 'none',
-                        gap: '8px',
-                        minHeight: '40px',
-                        width: '100%',
-                        boxSizing: 'border-box',
-                      };
-                    }}
-                  >
-                    <Box sx={{
-                      display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0,
-                    }}
-                    >
-                      <Box sx={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '20px', flexShrink: 0,
-                      }}
-                      >
-                        {getVariantIcon(item.variant)}
-                      </Box>
-                      <Typography
-                        variant="body2"
-                        sx={(muiTheme) => {
-                          return {
-                            color: muiTheme.palette.text.tertiary1,
-                            flex: 1,
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                          };
-                        }}
-                      >
-                        {item.message}
-                      </Typography>
-                    </Box>
-
-                    <Box sx={{
-                      display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0,
-                    }}
-                    >
-                      {item.showActionButton && item.buttonText && item.buttonAction && (
-                      <Button
-                        onClick={item.buttonAction}
-                        sx={{
-                          fontSize: '12px',
-                          padding: '2px 6px',
-                          minWidth: 'auto',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {item.buttonText}
-                      </Button>
-                      )}
-                      {onCloseItem && (
-                        <Tooltip title="Close">
-                          <IconButton
-                            onClick={() => { return onCloseItem(item.id); }}
-                            variant={IconButtonVariants.WITH_PADDING}
-                            aria-label={`Close notification: ${item.message}`}
-                            sx={{
-                              '& svg': {
-                                color: '#ffffff',
-                              },
-                            }}
-                          >
-                            <CloseIcon />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </Box>
-                  </Box>
-                );
-              })}
-            </Box>
-          )}
-
-          {policy === 'queue' && items.length > 1 && (
-            <Typography
-              variant="caption"
-              sx={(theme) => {
-                return {
-                  color: theme.palette.text.tertiary1,
-                  textAlign: 'center',
-                  padding: '0 8px',
-                };
-              }}
-            >
-              +
-              {items.length - 1}
-              {' '}
-              more in queue
-            </Typography>
-          )}
+          <GroupedSnackbarHeader
+            variantCounts={variantCounts}
+            totalCount={totalCount}
+            showHeaderCounts={showHeaderCounts}
+            hasOverflow={hasOverflow}
+            expanded={expanded}
+            colors={colors}
+            onExpandChange={handleExpandChange}
+            onCloseAll={onCloseAll}
+          />
+          <GroupedSnackbarItems
+            visibleItems={visibleItems}
+            expanded={expanded}
+            policy={policy}
+            items={items}
+            colors={colors}
+            onCloseItem={onCloseItem}
+          />
         </Box>
       </MuiSnackbar>
     );

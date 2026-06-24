@@ -19,6 +19,7 @@ import Snackbar, { SnackbarVariants } from './Snackbar';
 import GroupedSnackbar, { GroupedSnackbarItem } from './GroupedSnackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
+import { PaletteMode } from '../theme';
 
 export default {
   title: 'Feedback/Snackbar',
@@ -141,7 +142,6 @@ InteractiveExample.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
-  showStackSnackbar: false,
 };
 
 const VisualTestTemplate: StoryFn<typeof Snackbar> = (args) => {
@@ -169,7 +169,7 @@ VisualTest.args = {
   showPlaceholderIcon: true,
 };
 
-const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = () => {
+const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = (args) => {
   const [items, setItems] = useState<GroupedSnackbarItem[]>([
     {
       id: '1',
@@ -189,24 +189,6 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = () => {
       variant: SnackbarVariants.ERROR,
       showActionButton: false,
     },
-    {
-      id: '4',
-      message: 'Sample error message #4',
-      variant: SnackbarVariants.ERROR,
-      showActionButton: false,
-    },
-    {
-      id: '5',
-      message: 'Sample error message #5',
-      variant: SnackbarVariants.ERROR,
-      showActionButton: false,
-    },
-    {
-      id: '6',
-      message: 'Sample error message #6',
-      variant: SnackbarVariants.ERROR,
-      showActionButton: false,
-    },
   ]);
 
   return (
@@ -221,6 +203,7 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = () => {
         includeProgressInHeaderCounts={false}
         onCloseItem={(id) => { return setItems((prev) => { return prev.filter((x) => { return x.id !== id; }); }); }}
         onCloseAll={() => { return setItems([]); }}
+        themeMode={args.themeMode}
       />
     </SnackbarContainer>
   );
@@ -229,4 +212,14 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = () => {
 export const GroupedSnackbarExample = GroupedSnackbarTemplate.bind({});
 GroupedSnackbarExample.parameters = {
   options: { showPanel: true },
+};
+GroupedSnackbarExample.args = {
+  themeMode: PaletteMode.DARK,
+};
+GroupedSnackbarExample.argTypes = {
+  themeMode: {
+    control: 'select',
+    options: [PaletteMode.LIGHT, PaletteMode.DARK],
+    description: 'The theme mode for the snackbar',
+  },
 };
