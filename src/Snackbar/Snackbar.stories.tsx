@@ -19,7 +19,6 @@ import Snackbar, { SnackbarVariants } from './Snackbar';
 import GroupedSnackbar, { GroupedSnackbarItem } from './GroupedSnackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
-import { PaletteMode } from '../theme';
 
 export default {
   title: 'Feedback/Snackbar',
@@ -173,19 +172,19 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = (args) => {
   const [items, setItems] = useState<GroupedSnackbarItem[]>([
     {
       id: '1',
-      message: 'Sample error message #1',
+      message: 'The width you entered is too small. It has been resized to the minimum supported width of 320px.',
       variant: SnackbarVariants.ERROR,
       showActionButton: false,
     },
     {
       id: '2',
-      message: 'Sample error message #2',
+      message: 'The dimensions entered exceeds 500% of your device\'s viewport.',
       variant: SnackbarVariants.ERROR,
       showActionButton: false,
     },
     {
       id: '3',
-      message: 'Sample error message #3',
+      message: 'Invalid color. Please enter a valid Hex, RGB, or color name.',
       variant: SnackbarVariants.ERROR,
       showActionButton: false,
     },
@@ -203,7 +202,6 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = (args) => {
         includeProgressInHeaderCounts={false}
         onCloseItem={(id) => { return setItems((prev) => { return prev.filter((x) => { return x.id !== id; }); }); }}
         onCloseAll={() => { return setItems([]); }}
-        themeMode={args.themeMode}
       />
     </SnackbarContainer>
   );
@@ -212,14 +210,4 @@ const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = (args) => {
 export const GroupedSnackbarExample = GroupedSnackbarTemplate.bind({});
 GroupedSnackbarExample.parameters = {
   options: { showPanel: true },
-};
-GroupedSnackbarExample.args = {
-  themeMode: PaletteMode.DARK,
-};
-GroupedSnackbarExample.argTypes = {
-  themeMode: {
-    control: 'select',
-    options: [PaletteMode.LIGHT, PaletteMode.DARK],
-    description: 'The theme mode for the snackbar',
-  },
 };

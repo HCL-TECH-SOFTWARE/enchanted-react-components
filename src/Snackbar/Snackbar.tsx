@@ -28,7 +28,6 @@ import Typography from '../Typography';
 import CircularProgress, { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 import Tooltip from '../Tooltip';
 import GroupedSnackbar, { GroupedSnackbarItem, GroupedSnackbarPolicy } from './GroupedSnackbar';
-import { PaletteMode } from '../theme';
 
 export enum SnackbarVariants {
   WARNING = 'warning',
@@ -225,7 +224,6 @@ export type SnackbarProps = MuiSnackbarProps & {
   progressValue?: number,
   closeIconToolTip?: string,
   groupedMode?: SnackbarGroupedModeProps,
-  themeMode?: PaletteMode,
 }
 
 const Snackbar = ({ ...props }: SnackbarProps) => {
@@ -234,7 +232,6 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
     placeholderIcon, placeholderIconAction, showPlaceholderIcon, // these 3 props handle placeholder IconButton in design
     progressVariant, progressValue, // these 2 props handle progress indicator
     groupedMode, // grouped mode configuration
-    themeMode, // theme mode configuration
     ...rest // Do not put trailing comma here
   } = props;
 
@@ -252,7 +249,6 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
         onCloseAll={groupedMode.onCloseAll}
         onExpandChange={groupedMode.onExpandChange}
         anchorOrigin={rest.anchorOrigin}
-        themeMode={themeMode}
         sx={rest.sx}
       />
     );
@@ -276,20 +272,10 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
     }
   };
 
-  const getSnackbarThemeColors = (mode?: PaletteMode) => {
-    if (mode === 'light') {
-      return {
-        background: '#f5f5f5',
-        text: '#000000',
-      };
-    }
-    return {
-      background: '#1a1a1a',
-      text: '#ffffff',
-    };
+  const themeColors = {
+    background: '#1a1a1a',
+    text: '#ffffff',
   };
-
-  const themeColors = getSnackbarThemeColors(themeMode);
 
   return (
     <MuiSnackbar {...rest} sx={{ ...rest.sx, backgroundColor: themeColors.background }}>

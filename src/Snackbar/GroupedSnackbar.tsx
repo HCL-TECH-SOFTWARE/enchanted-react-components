@@ -17,7 +17,6 @@ import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material/styles';
 import MuiSnackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import { SnackbarVariants } from './Snackbar';
-import { PaletteMode } from '../theme';
 import GroupedSnackbarHeader from './GroupedSnackbarHeader';
 import GroupedSnackbarItems from './GroupedSnackbarItems';
 
@@ -46,29 +45,11 @@ export interface GroupedSnackbarProps {
   onCloseAll?: () => void;
   onExpandChange?: (expanded: boolean) => void;
   anchorOrigin?: SnackbarOrigin;
-  themeMode?: PaletteMode;
   sx?: SxProps<Theme>;
 }
 
 const DEFAULT_MAX_VISIBLE = 5;
 const DEFAULT_POLICY: GroupedSnackbarPolicy = 'stack';
-
-const getThemeColors = (mode: PaletteMode) => {
-  if (mode === 'light') {
-    return {
-      background: '#f5f5f5',
-      text: '#000000',
-      textTertiary: '#424242',
-      iconColor: '#000000',
-    };
-  }
-  return {
-    background: '#1a1a1a',
-    text: '#ffffff',
-    textTertiary: '#b0b0b0',
-    iconColor: '#ffffff',
-  };
-};
 
 const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
   (
@@ -84,14 +65,17 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
       onCloseAll,
       onExpandChange,
       anchorOrigin,
-      themeMode = PaletteMode.LIGHT,
       sx,
     },
     ref,
   ) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const colors = getThemeColors(themeMode);
-
+    const colors = {
+      background: '#1a1a1a',
+      text: '#ffffff',
+      textTertiary: '#b0b0b0',
+      iconColor: '#ffffff',
+    };
     const handleExpandChange = (newExpanded: boolean) => {
       setExpanded(newExpanded);
       onExpandChange?.(newExpanded);
@@ -149,7 +133,7 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
             return {
               display: 'flex !important',
               flexDirection: 'column',
-              gap: '8px',
+              gap: '0px',
               minWidth: '300px',
               maxWidth: '800px',
               position: 'relative',

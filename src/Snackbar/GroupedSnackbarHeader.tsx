@@ -73,9 +73,9 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
             ...theme.typography.body2,
             position: 'relative',
             background: colors.background,
-            borderRadius: '4px',
+            borderRadius: expanded ? '4px 4px 0px 0px' : '4px',
             boxShadow: theme.shadows[6],
-            color: colors.textTertiary,
+            color: colors.text,
             display: 'flex !important',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -95,88 +95,69 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
           {showHeaderCounts && (
             <>
               {variantCounts[SnackbarVariants.ERROR] > 1 && (
-                <Tooltip title={`${variantCounts[SnackbarVariants.ERROR]} error(s)`}>
-                  <Box
-                    sx={(theme) => {
-                      return {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '2px 6px',
-                        borderRadius: '2px',
-                        backgroundColor: theme.palette.error.inverse,
-                        color: theme.palette.background.dark,
-                        fontSize: '12px',
-                        fontWeight: 600,
-                      };
-                    }}
-                  >
-                    <ErrorIcon style={{ width: '14px', height: '14px' }} />
-                  </Box>
-                </Tooltip>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '2px 6px',
+                    borderRadius: '2px',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                  }}
+                >
+                  <ErrorIcon style={{ width: '14px', height: '14px' }} />
+                </Box>
               )}
               {variantCounts[SnackbarVariants.WARNING] > 1 && (
-                <Tooltip title={`${variantCounts[SnackbarVariants.WARNING]} warning(s)`}>
-                  <Box
-                    sx={(theme) => {
-                      return {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '2px 6px',
-                        borderRadius: '2px',
-                        backgroundColor: theme.palette.warning.inverse,
-                        color: theme.palette.background.dark,
-                        fontSize: '12px',
-                        fontWeight: 600,
-                      };
-                    }}
-                  >
-                    <WarningIcon style={{ width: '14px', height: '14px' }} />
-                  </Box>
-                </Tooltip>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '2px 6px',
+                    borderRadius: '2px',
+                    backgroundColor: colors.background === '#f5f5f5' ? '#ffb74d' : '#f57c00',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                  }}
+                >
+                  <WarningIcon style={{ width: '14px', height: '14px' }} />
+                </Box>
               )}
               {variantCounts[SnackbarVariants.SUCCESS] > 1 && (
-                <Tooltip title={`${variantCounts[SnackbarVariants.SUCCESS]} success(es)`}>
-                  <Box
-                    sx={(theme) => {
-                      return {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '2px 6px',
-                        borderRadius: '2px',
-                        backgroundColor: theme.palette.success.inverse,
-                        color: theme.palette.background.dark,
-                        fontSize: '12px',
-                        fontWeight: 600,
-                      };
-                    }}
-                  >
-                    <SuccessIcon style={{ width: '14px', height: '14px' }} />
-                  </Box>
-                </Tooltip>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '2px 6px',
+                    borderRadius: '2px',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                  }}
+                >
+                  <SuccessIcon style={{ width: '14px', height: '14px' }} />
+                </Box>
               )}
               {variantCounts[SnackbarVariants.INFO] > 1 && (
-                <Tooltip title={`${variantCounts[SnackbarVariants.INFO]} info(s)`}>
-                  <Box
-                    sx={(theme) => {
-                      return {
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '4px',
-                        padding: '2px 6px',
-                        borderRadius: '2px',
-                        backgroundColor: theme.palette.primary.inverse,
-                        color: theme.palette.background.dark,
-                        fontSize: '12px',
-                        fontWeight: 600,
-                      };
-                    }}
-                  >
-                    <InformationIcon style={{ width: '14px', height: '14px' }} />
-                  </Box>
-                </Tooltip>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '2px 6px',
+                    borderRadius: '2px',
+                    color: '#ffffff',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                  }}
+                >
+                  <InformationIcon style={{ width: '14px', height: '14px' }} />
+                </Box>
               )}
             </>
           )}
@@ -187,8 +168,38 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
               marginLeft: '8px',
             }}
           >
-            {totalCount}
-            {' '}
+            {variantCounts[SnackbarVariants.ERROR] > 0 && (
+              <>
+                {variantCounts[SnackbarVariants.ERROR]}
+                {' '}
+                error(s)
+                {' '}
+              </>
+            )}
+            {variantCounts[SnackbarVariants.WARNING] > 0 && (
+              <>
+                {variantCounts[SnackbarVariants.WARNING]}
+                {' '}
+                warning(s)
+                {' '}
+              </>
+            )}
+            {variantCounts[SnackbarVariants.SUCCESS] > 0 && (
+              <>
+                {variantCounts[SnackbarVariants.SUCCESS]}
+                {' '}
+                success(es)
+                {' '}
+              </>
+            )}
+            {variantCounts[SnackbarVariants.INFO] > 0 && (
+              <>
+                {variantCounts[SnackbarVariants.INFO]}
+                {' '}
+                info(s)
+                {' '}
+              </>
+            )}
             notification
             {totalCount !== 1 ? 's' : ''}
           </Typography>

@@ -19,6 +19,7 @@ import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import Divider from '@mui/material/Divider';
 import Typography from '../Typography';
 import List from '../List';
 import ListItem from '../List/ListItem';
@@ -50,37 +51,69 @@ const StyledList = styled(List)((props) => {
     maxHeight: '240px',
     width: '100%',
     overflowY: 'scroll',
-    marginTop: '8px',
+    marginTop: '0px',
     '.MuiListItem-root': {
       '.MuiListItemButton-root': {
+        alignItems: 'center !important',
         '.MuiListItemText-root': {
+          maxWidth: 'unset',
+          width: '100%',
           '& .MuiListItemText-primary': {
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
             color: '#000000',
+            whiteSpace: 'normal',
+            wordBreak: 'break-word',
+            maxWidth: 'unset',
+            width: '100%',
+            margin: '8px 8px 8px 0',
+          },
+        },
+        '& .MuiBox-root': {
+          '& .MuiSvgIcon-root': {
+            margin: '7px 8px 8px 2px',
           },
         },
         '&:hover': {
           backgroundColor: theme.palette.action.hover,
+          '.MuiListItemText-root': {
+            '& .MuiListItemText-primary': {
+              whiteSpace: 'normal',
+              wordBreak: 'break-word',
+            },
+          },
         },
       },
     },
   });
 });
 
-const getVariantIcon = (variant: SnackbarVariants) => {
+const getVariantIcon = (variant: SnackbarVariants, color: string) => {
+  const style = { color };
   switch (variant) {
     case SnackbarVariants.ERROR:
-      return <ErrorIcon />;
+      return <ErrorIcon style={style} />;
     case SnackbarVariants.WARNING:
-      return <WarningIcon />;
+      return <WarningIcon style={style} />;
     case SnackbarVariants.SUCCESS:
-      return <SuccessIcon />;
+      return <SuccessIcon style={style} />;
     case SnackbarVariants.INFO:
-      return <InformationIcon />;
+      return <InformationIcon style={style} />;
     default:
       return null;
+  }
+};
+
+const getVariantColor = (variant: SnackbarVariants) => {
+  switch (variant) {
+    case SnackbarVariants.ERROR:
+      return '#c10c0d';
+    case SnackbarVariants.WARNING:
+      return '#d84315';
+    case SnackbarVariants.SUCCESS:
+      return '#1b5e20';
+    case SnackbarVariants.INFO:
+      return '#0d47a1';
+    default:
+      return '#ffffff';
   }
 };
 
@@ -100,35 +133,39 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
       <Box ref={ref}>
         {expanded && visibleItems.length > 0 && (
           <StyledList>
-            {visibleItems.map((item) => {
+            {visibleItems.map((item, index) => {
               return (
-                <ListItem key={item.id} disablePadding>
-                  <ListItemButton size={ListSizes.SMALL}>
-                    <ListItemText
-                      primary={item.message}
-                      primaryTypographyProps={{
-                        sx: {
-                          color: '#000000',
-                        },
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        minWidth: '24px',
-                        flexShrink: 0,
-                        marginLeft: '8px',
-                        '& svg': {
-                          color: '#000000',
-                        },
-                      }}
-                    >
-                      {getVariantIcon(item.variant)}
-                    </Box>
-                  </ListItemButton>
-                </ListItem>
+                <React.Fragment key={item.id}>
+                  <ListItem disablePadding>
+                    <ListItemButton size={ListSizes.SMALL} sx={{ alignItems: 'center' }}>
+                      <ListItemText
+                        primary={item.message}
+                        primaryTypographyProps={{
+                          sx: {
+                            color: '#000000',
+                          },
+                        }}
+                      />
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          minWidth: '24px',
+                          flexShrink: 0,
+                          marginLeft: '8px',
+                          alignSelf: 'center',
+                          '& svg': {
+                            color: `${getVariantColor(item.variant)} !important`,
+                          },
+                        }}
+                      >
+                        {getVariantIcon(item.variant, getVariantColor(item.variant))}
+                      </Box>
+                    </ListItemButton>
+                  </ListItem>
+                  {index < visibleItems.length - 1 && <Divider />}
+                </React.Fragment>
               );
             })}
           </StyledList>
