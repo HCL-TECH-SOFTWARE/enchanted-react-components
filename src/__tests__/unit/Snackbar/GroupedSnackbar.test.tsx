@@ -88,7 +88,6 @@ describe('GroupedSnackbar unit tests', () => {
     expect(screen.getByText('3 notifications')).toBeInTheDocument();
   });
 
-
   it('Should call onCloseAll when close all icon button is clicked', async () => {
     const onCloseAll = jest.fn();
     render(
