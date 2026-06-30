@@ -60,7 +60,7 @@ describe('eventUtils', () => {
       const child = document.createElement('div');
       child.className = 'other-class';
       parent.appendChild(child);
-      
+
       const result = findTargetElement(child, 'test-class', true, true);
       expect(result).toBeUndefined();
     });
@@ -74,7 +74,7 @@ describe('eventUtils', () => {
       child.className = 'child-class';
       grandparent.appendChild(parent);
       parent.appendChild(child);
-      
+
       const result = findTargetElement(child, 'target-class', true, true);
       expect(result).toBe(grandparent);
     });
@@ -123,7 +123,7 @@ describe('eventUtils', () => {
       const row2 = document.createElement('div');
       row2.className = 'disabled-row';
       const row3 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
@@ -137,7 +137,7 @@ describe('eventUtils', () => {
       const row1 = document.createElement('div');
       const row2 = document.createElement('div');
       row2.className = 'disabled-row';
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
 
@@ -154,7 +154,7 @@ describe('eventUtils', () => {
       row3.className = 'disabled-row';
       const row4 = document.createElement('div');
       row4.className = 'disabled-row';
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
@@ -167,7 +167,7 @@ describe('eventUtils', () => {
     it('should return null when current row is the last row', () => {
       const container = document.createElement('div');
       const row1 = document.createElement('div');
-      
+
       container.appendChild(row1);
 
       const result = findNextFocusableRow(row1);
@@ -178,7 +178,7 @@ describe('eventUtils', () => {
       const container = document.createElement('div');
       const row1 = document.createElement('div');
       const row2 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
 
@@ -194,7 +194,7 @@ describe('eventUtils', () => {
       const row3 = document.createElement('div');
       row3.className = 'disabled-row';
       const row4 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
@@ -212,7 +212,7 @@ describe('eventUtils', () => {
       const row2 = document.createElement('div');
       row2.className = 'disabled-row';
       const row3 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
@@ -226,7 +226,7 @@ describe('eventUtils', () => {
       const row1 = document.createElement('div');
       row1.className = 'disabled-row';
       const row2 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
 
@@ -243,7 +243,7 @@ describe('eventUtils', () => {
       const row3 = document.createElement('div');
       row3.className = 'disabled-row';
       const row4 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
@@ -256,7 +256,7 @@ describe('eventUtils', () => {
     it('should return null when current row is the first row', () => {
       const container = document.createElement('div');
       const row1 = document.createElement('div');
-      
+
       container.appendChild(row1);
 
       const result = findPreviousFocusableRow(row1 as HTMLDivElement);
@@ -267,7 +267,7 @@ describe('eventUtils', () => {
       const container = document.createElement('div');
       const row1 = document.createElement('div');
       const row2 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
 
@@ -283,7 +283,7 @@ describe('eventUtils', () => {
       const row3 = document.createElement('div');
       row3.className = 'disabled-row';
       const row4 = document.createElement('div');
-      
+
       container.appendChild(row1);
       container.appendChild(row2);
       container.appendChild(row3);
