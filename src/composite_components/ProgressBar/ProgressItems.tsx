@@ -145,6 +145,11 @@ const StyledList = styled(List)((props) => {
             },
           },
         },
+        '& .MuiListItemSecondaryAction-root': {
+          '.IconButtonMainContainer': {
+            margin: '0',
+          },
+        },
         '&:hover .MuiListItemText-primary, &:hover .MuiListItemText-secondary': {
           width: 'unset',
         },
