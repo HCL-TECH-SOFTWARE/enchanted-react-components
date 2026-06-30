@@ -41,7 +41,6 @@ interface GroupedSnackbarItemsProps {
   policy: GroupedSnackbarPolicy;
   items: GroupedSnackbarItem[];
   colors: ThemeColors;
-  onCloseItem?: (id: string) => void;
 }
 
 const StyledList = styled(List)((props) => {
@@ -59,17 +58,11 @@ const StyledList = styled(List)((props) => {
           maxWidth: 'unset',
           width: '100%',
           '& .MuiListItemText-primary': {
-            color: '#000000',
             whiteSpace: 'normal',
             wordBreak: 'break-word',
             maxWidth: 'unset',
             width: '100%',
             margin: '8px 8px 8px 0',
-          },
-        },
-        '& .MuiBox-root': {
-          '& .MuiSvgIcon-root': {
-            margin: '7px 8px 8px 2px',
           },
         },
         '&:hover': {
@@ -125,7 +118,6 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
       policy,
       items,
       colors,
-      onCloseItem,
     },
     ref,
   ) => {
@@ -140,11 +132,6 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
                     <ListItemButton size={ListSizes.SMALL} sx={{ alignItems: 'center' }}>
                       <ListItemText
                         primary={item.message}
-                        primaryTypographyProps={{
-                          sx: {
-                            color: '#000000',
-                          },
-                        }}
                       />
                       <Box
                         sx={{
@@ -155,16 +142,13 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
                           flexShrink: 0,
                           marginLeft: '8px',
                           alignSelf: 'center',
-                          '& svg': {
-                            color: `${getVariantColor(item.variant)} !important`,
-                          },
                         }}
                       >
                         {getVariantIcon(item.variant, getVariantColor(item.variant))}
                       </Box>
                     </ListItemButton>
                   </ListItem>
-                  {index < visibleItems.length - 1 && <Divider />}
+                  {index < visibleItems.length - 1 && <Divider key={`divider-${item.id}`} />}
                 </React.Fragment>
               );
             })}
@@ -174,12 +158,10 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
         {policy === 'queue' && items.length > 1 && (
           <Typography
             variant="caption"
-            sx={(theme) => {
-              return {
-                color: colors.textTertiary,
-                textAlign: 'center',
-                padding: '0 8px',
-              };
+            sx={{
+              color: colors.textTertiary,
+              textAlign: 'center',
+              padding: '0 8px',
             }}
           >
             +

@@ -157,7 +157,6 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
             policy={policy}
             items={items}
             colors={colors}
-            onCloseItem={onCloseItem}
           />
         </Box>
       </MuiSnackbar>

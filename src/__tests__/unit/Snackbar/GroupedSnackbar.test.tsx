@@ -88,26 +88,6 @@ describe('GroupedSnackbar unit tests', () => {
     expect(screen.getByText('3 notifications')).toBeInTheDocument();
   });
 
-  it('Should call onCloseItem when item close button is clicked', async () => {
-    const onCloseItem = jest.fn();
-    render(
-      <ThemeProvider theme={theme}>
-        <GroupedSnackbar
-          open
-          items={mockItems}
-          defaultExpanded
-          onCloseItem={onCloseItem}
-        />
-      </ThemeProvider>,
-    );
-
-    const closeButtons = screen.getAllByLabelText(/Close notification/i);
-    fireEvent.click(closeButtons[0]);
-
-    await waitFor(() => {
-      expect(onCloseItem).toHaveBeenCalledWith('1');
-    });
-  });
 
   it('Should call onCloseAll when close all icon button is clicked', async () => {
     const onCloseAll = jest.fn();
