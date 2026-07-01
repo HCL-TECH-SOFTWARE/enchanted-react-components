@@ -63,6 +63,7 @@ const StyledList = styled(List)((props) => {
             maxWidth: 'unset',
             width: '100%',
             margin: '8px 8px 8px 0',
+            color: theme.palette.text.primary,
           },
         },
         '&:hover': {
@@ -132,6 +133,11 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
                     <ListItemButton size={ListSizes.SMALL} sx={{ alignItems: 'center' }}>
                       <ListItemText
                         primary={item.message}
+                        sx={{
+                          '& .MuiListItemText-primary': {
+                            color: 'text.primary',
+                          },
+                        }}
                       />
                       <Box
                         sx={{
