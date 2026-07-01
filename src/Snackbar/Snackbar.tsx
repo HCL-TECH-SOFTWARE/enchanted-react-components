@@ -46,6 +46,11 @@ export enum SnackbarTestIds {
 }
 
 export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
+  const themeColors = {
+    background: '#1a1a1a',
+    text: '#ffffff',
+  };
+
   return {
     MuiSnackbar: {
       styleOverrides: {
@@ -60,10 +65,10 @@ export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'componen
             boxSizing: 'border-box',
             maxWidth: 'inherit',
             justifyContent: 'flex-start',
-            background: theme.palette.background.dark,
+            background: themeColors.background,
             borderRadius: '4px',
             boxShadow: theme.shadows[6],
-            color: theme.palette.text.tertiary1,
+            color: themeColors.text,
             display: 'flex',
             alignItems: 'flex-start',
             minHeight: '36px',
@@ -272,14 +277,9 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
     }
   };
 
-  const themeColors = {
-    background: '#1a1a1a',
-    text: '#ffffff',
-  };
-
   return (
-    <MuiSnackbar {...rest} sx={{ ...rest.sx, backgroundColor: themeColors.background }}>
-      <Box sx={{ color: themeColors.text }}>
+    <MuiSnackbar {...rest} sx={rest.sx}>
+      <Box>
         { getStatusIcon(rest.variant) }
         <Typography
           role="alert" // for screen readers to announce the message

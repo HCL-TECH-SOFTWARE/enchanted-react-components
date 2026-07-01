@@ -20,6 +20,28 @@ import { SnackbarVariants } from './Snackbar';
 import GroupedSnackbarHeader from './GroupedSnackbarHeader';
 import GroupedSnackbarItems from './GroupedSnackbarItems';
 
+export const GROUPED_SNACKBAR_COLORS = {
+  background: '#1a1a1a',
+  text: '#ffffff',
+  textTertiary: '#b0b0b0',
+  iconColor: '#ffffff',
+};
+
+const GROUPED_SNACKBAR_MUI_STYLES = {
+  padding: '0 !important',
+  alignItems: 'center !important',
+} as const;
+
+const GROUPED_SNACKBAR_CONTENT_BOX_STYLES = {
+  display: 'flex !important',
+  flexDirection: 'column',
+  gap: '0px',
+  minWidth: '300px',
+  maxWidth: '800px',
+  position: 'relative',
+  maxHeight: 'none !important',
+} as const;
+
 export interface GroupedSnackbarItem {
   id: string;
   message: React.ReactNode;
@@ -70,12 +92,7 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
     ref,
   ) => {
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const colors = {
-      background: '#1a1a1a',
-      text: '#ffffff',
-      textTertiary: '#b0b0b0',
-      iconColor: '#ffffff',
-    };
+    const colors = GROUPED_SNACKBAR_COLORS;
     const handleExpandChange = (newExpanded: boolean) => {
       setExpanded(newExpanded);
       onExpandChange?.(newExpanded);
@@ -123,24 +140,11 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
         open={open}
         anchorOrigin={anchorOrigin || { vertical: 'bottom', horizontal: 'right' }}
         sx={{
-          padding: '0 !important',
-          alignItems: 'center !important',
+          ...GROUPED_SNACKBAR_MUI_STYLES,
           ...sx,
         }}
       >
-        <Box
-          sx={(theme) => {
-            return {
-              display: 'flex !important',
-              flexDirection: 'column',
-              gap: '0px',
-              minWidth: '300px',
-              maxWidth: '800px',
-              position: 'relative',
-              maxHeight: 'none !important',
-            };
-          }}
-        >
+        <Box sx={GROUPED_SNACKBAR_CONTENT_BOX_STYLES}>
           <GroupedSnackbarHeader
             variantCounts={variantCounts}
             totalCount={totalCount}

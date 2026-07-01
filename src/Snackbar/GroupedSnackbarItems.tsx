@@ -43,6 +43,14 @@ interface GroupedSnackbarItemsProps {
   colors: ThemeColors;
 }
 
+export const VARIANT_COLORS: Record<SnackbarVariants, string> = {
+  error: '#c10c0d',
+  warning: '#d84315',
+  success: '#1b5e20',
+  information: '#0d47a1',
+  progress: '#ffffff',
+};
+
 const StyledList = styled(List)((props) => {
   const { theme } = props;
   return ({
@@ -96,19 +104,8 @@ const getVariantIcon = (variant: SnackbarVariants, color: string) => {
   }
 };
 
-const getVariantColor = (variant: SnackbarVariants) => {
-  switch (variant) {
-    case SnackbarVariants.ERROR:
-      return '#c10c0d';
-    case SnackbarVariants.WARNING:
-      return '#d84315';
-    case SnackbarVariants.SUCCESS:
-      return '#1b5e20';
-    case SnackbarVariants.INFO:
-      return '#0d47a1';
-    default:
-      return '#ffffff';
-  }
+const getVariantColor = (variant: SnackbarVariants): string => {
+  return VARIANT_COLORS[variant];
 };
 
 const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarItemsProps>(

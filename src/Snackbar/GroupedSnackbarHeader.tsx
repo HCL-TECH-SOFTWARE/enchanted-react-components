@@ -51,6 +51,42 @@ interface GroupedSnackbarHeaderProps {
   onCloseAll?: () => void;
 }
 
+const HEADER_TYPOGRAPHY_STYLES = {
+  color: 'inherit',
+  marginLeft: '8px',
+} as const;
+
+const VARIANT_COUNT_BOX_BASE_STYLES = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  padding: '2px 6px',
+  borderRadius: '2px',
+  color: '#ffffff',
+  fontSize: '12px',
+  fontWeight: 600,
+} as const;
+
+const VARIANT_ICON_STYLES = {
+  width: '14px',
+  height: '14px',
+} as const;
+
+const HEADER_ACTIONS_BOX_STYLES = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  flexShrink: 0,
+} as const;
+
+const getHeaderIconButtonStyles = (iconColor: string) => {
+  return {
+    '& svg': {
+      color: iconColor,
+    },
+  };
+};
+
 const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHeaderProps>(
   (
     {
@@ -95,78 +131,35 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
           {showHeaderCounts && (
             <>
               {variantCounts[SnackbarVariants.ERROR] > 1 && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '2px 6px',
-                    borderRadius: '2px',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <ErrorIcon style={{ width: '14px', height: '14px' }} />
+                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                  <ErrorIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.WARNING] > 1 && (
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '2px 6px',
-                    borderRadius: '2px',
+                    ...VARIANT_COUNT_BOX_BASE_STYLES,
                     backgroundColor: colors.background === '#f5f5f5' ? '#ffb74d' : '#f57c00',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 600,
                   }}
                 >
-                  <WarningIcon style={{ width: '14px', height: '14px' }} />
+                  <WarningIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.SUCCESS] > 1 && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '2px 6px',
-                    borderRadius: '2px',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <SuccessIcon style={{ width: '14px', height: '14px' }} />
+                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                  <SuccessIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.INFO] > 1 && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    padding: '2px 6px',
-                    borderRadius: '2px',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                  }}
-                >
-                  <InformationIcon style={{ width: '14px', height: '14px' }} />
+                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                  <InformationIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
             </>
           )}
           <Typography
             variant="body2"
-            sx={{
-              color: 'inherit',
-              marginLeft: '8px',
-            }}
+            sx={HEADER_TYPOGRAPHY_STYLES}
           >
             {variantCounts[SnackbarVariants.ERROR] > 0 && (
               <>
@@ -205,10 +198,7 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
           </Typography>
         </Box>
 
-        <Box sx={{
-          display: 'flex', alignItems: 'center', gap: '4px', flexShrink: 0,
-        }}
-        >
+        <Box sx={HEADER_ACTIONS_BOX_STYLES}>
           {hasOverflow && (
             <Tooltip title={expanded ? 'Collapse' : 'Expand'}>
               <IconButton
@@ -216,11 +206,7 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
                 variant={IconButtonVariants.WITH_PADDING}
                 aria-expanded={expanded}
                 aria-label="Toggle notification list"
-                sx={{
-                  '& svg': {
-                    color: colors.iconColor,
-                  },
-                }}
+                sx={getHeaderIconButtonStyles(colors.iconColor)}
               >
                 {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </IconButton>
@@ -232,11 +218,7 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
                 onClick={onCloseAll}
                 variant={IconButtonVariants.WITH_PADDING}
                 aria-label="Close all notifications"
-                sx={{
-                  '& svg': {
-                    color: colors.iconColor,
-                  },
-                }}
+                sx={getHeaderIconButtonStyles(colors.iconColor)}
               >
                 <CloseIcon />
               </IconButton>
