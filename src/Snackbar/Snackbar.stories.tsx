@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -12,10 +12,11 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-import React from 'react';
+import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import Snackbar, { SnackbarVariants } from './Snackbar';
+import GroupedSnackbar, { GroupedSnackbarItem } from './GroupedSnackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 
@@ -108,10 +109,11 @@ export default {
   },
 } as Meta<typeof Snackbar>;
 
-const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args) => {
+// eslint-why Storybook args require flexible typing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args: any) => {
   const messageTwo = `${args.message} > a bit longer`;
   const messageThree = `${args.message} > a bit much more longer ;-)`;
-  // @ts-ignore for test only, its purpose is to show snackbar when its stack
   if (args.showStackSnackbar) {
     return (
       <SnackbarContainer position={SnackbarContainerPosition.LEFT}>
@@ -139,7 +141,6 @@ InteractiveExample.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
-  showStackSnackbar: false,
 };
 
 const VisualTestTemplate: StoryFn<typeof Snackbar> = (args) => {
@@ -165,4 +166,48 @@ VisualTest.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
+};
+
+const GroupedSnackbarTemplate: StoryFn<typeof GroupedSnackbar> = (args) => {
+  const [items, setItems] = useState<GroupedSnackbarItem[]>([
+    {
+      id: '1',
+      message: 'The width you entered is too small. It has been resized to the minimum supported width of 320px.',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '2',
+      message: 'The dimensions entered exceeds 500% of your device\'s viewport.',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+    {
+      id: '3',
+      message: 'Invalid color. Please enter a valid Hex, RGB, or color name.',
+      variant: SnackbarVariants.ERROR,
+      showActionButton: false,
+    },
+  ]);
+
+  return (
+    <SnackbarContainer>
+      <GroupedSnackbar
+        open
+        items={items}
+        policy="stack"
+        maxVisible={2}
+        defaultExpanded={false}
+        showHeaderCounts
+        includeProgressInHeaderCounts={false}
+        onCloseItem={(id) => { return setItems((prev) => { return prev.filter((x) => { return x.id !== id; }); }); }}
+        onCloseAll={() => { return setItems([]); }}
+      />
+    </SnackbarContainer>
+  );
+};
+
+export const GroupedSnackbarExample = GroupedSnackbarTemplate.bind({});
+GroupedSnackbarExample.parameters = {
+  options: { showPanel: true },
 };

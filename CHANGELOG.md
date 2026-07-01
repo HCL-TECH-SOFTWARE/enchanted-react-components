@@ -3,12 +3,14 @@
 ## Unreleased
 
 ### Added
+- Added GroupedSnackbar component and its tests
 
 ### Fixed
 - Fixed Select dropdown menu positioning and overlap by anchoring to the bottom of the input field.
 - Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ### Changed
+- Add `groupedMode` prop to Snackbar component for grouping multiple snackbars
 
 ### Breaking changes
 
