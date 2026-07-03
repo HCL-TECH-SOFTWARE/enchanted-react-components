@@ -14,12 +14,13 @@
  * ======================================================================== */
 import React from 'react';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material';
+import { styled, useTheme } from '@mui/material';
 import ErrorIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import Divider from '@mui/material/Divider';
+import { Theme } from '@mui/material/styles';
 import Typography from '../Typography';
 import List from '../List';
 import ListItem from '../List/ListItem';
@@ -43,12 +44,14 @@ interface GroupedSnackbarItemsProps {
   colors: ThemeColors;
 }
 
-export const VARIANT_COLORS: Record<SnackbarVariants, string> = {
-  error: '#c10c0d',
-  warning: '#d84315',
-  success: '#1b5e20',
-  information: '#0d47a1',
-  progress: '#ffffff',
+export const getVariantColors = (theme: Theme): Record<SnackbarVariants, string> => {
+  return {
+    error: theme.palette.error.main,
+    warning: theme.palette.warning.main,
+    success: theme.palette.success.main,
+    information: theme.palette.info.main,
+    progress: theme.palette.common.white,
+  };
 };
 
 const StyledList = styled(List)((props) => {
@@ -104,8 +107,9 @@ const getVariantIcon = (variant: SnackbarVariants, color: string) => {
   }
 };
 
-const getVariantColor = (variant: SnackbarVariants): string => {
-  return VARIANT_COLORS[variant];
+const getVariantColor = (variant: SnackbarVariants, theme: Theme): string => {
+  const variantColors = getVariantColors(theme);
+  return variantColors[variant];
 };
 
 const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarItemsProps>(
@@ -119,6 +123,8 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
     },
     ref,
   ) => {
+    const theme = useTheme();
+
     return (
       <Box ref={ref}>
         {expanded && visibleItems.length > 0 && (
@@ -147,7 +153,7 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
                           alignSelf: 'center',
                         }}
                       >
-                        {getVariantIcon(item.variant, getVariantColor(item.variant))}
+                        {getVariantIcon(item.variant, getVariantColor(item.variant, theme))}
                       </Box>
                     </ListItemButton>
                   </ListItem>

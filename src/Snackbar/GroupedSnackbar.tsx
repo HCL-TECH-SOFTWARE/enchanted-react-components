@@ -14,17 +14,19 @@
  * ======================================================================== */
 import React, { useState, useMemo } from 'react';
 import Box from '@mui/material/Box';
-import { SxProps, Theme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import MuiSnackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import { SnackbarVariants } from './Snackbar';
 import GroupedSnackbarHeader from './GroupedSnackbarHeader';
 import GroupedSnackbarItems from './GroupedSnackbarItems';
 
-export const GROUPED_SNACKBAR_COLORS = {
-  background: '#1a1a1a',
-  text: '#ffffff',
-  textTertiary: '#b0b0b0',
-  iconColor: '#ffffff',
+export const getGroupedSnackbarColors = (theme: Theme) => {
+  return {
+    background: theme.palette.background.dark,
+    text: theme.palette.common.white,
+    textTertiary: theme.palette.text.secondary,
+    iconColor: theme.palette.common.white,
+  };
 };
 
 const GROUPED_SNACKBAR_MUI_STYLES = {
@@ -91,8 +93,9 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
     },
     ref,
   ) => {
+    const theme = useTheme();
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const colors = GROUPED_SNACKBAR_COLORS;
+    const colors = getGroupedSnackbarColors(theme);
     const handleExpandChange = (newExpanded: boolean) => {
       setExpanded(newExpanded);
       onExpandChange?.(newExpanded);

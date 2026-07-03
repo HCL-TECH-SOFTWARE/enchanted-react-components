@@ -10,7 +10,6 @@
 - Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ### Changed
-- Add `groupedMode` prop to Snackbar component for grouping multiple snackbars
 
 ### Breaking changes
 

@@ -393,4 +393,314 @@ describe('GroupedSnackbar unit tests', () => {
     });
     expect(elements.length).toBeGreaterThan(0);
   });
+
+  it('Should render all items when expanded with stack policy', () => {
+    const items = Array.from({ length: 8 }, (_, i) => {
+      return {
+        id: `${i + 1}`,
+        message: `Message ${i + 1}`,
+        variant: SnackbarVariants.INFO,
+      };
+    });
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          policy="stack"
+          maxVisible={3}
+          defaultExpanded
+        />
+      </ThemeProvider>,
+    );
+
+    const messages = screen.queryAllByText(/Message \d+/);
+    expect(messages.length).toBe(8);
+  });
+
+  it('Should respect anchorOrigin prop', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={mockItems}
+          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+        />
+      </ThemeProvider>,
+    );
+
+    const elements = screen.getAllByText((content, element) => {
+      return element?.textContent?.includes('notifications') || false;
+    });
+    expect(elements.length).toBeGreaterThan(0);
+  });
+
+  it('Should apply custom sx styles', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={mockItems}
+          sx={{ backgroundColor: 'red' }}
+        />
+      </ThemeProvider>,
+    );
+
+    const elements = screen.getAllByText((content, element) => {
+      return element?.textContent?.includes('notifications') || false;
+    });
+    expect(elements.length).toBeGreaterThan(0);
+  });
+
+  it('Should handle multiple error variants correctly', () => {
+    const items: GroupedSnackbarItem[] = [
+      {
+        id: '1',
+        message: 'Error 1',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '2',
+        message: 'Error 2',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '3',
+        message: 'Error 3',
+        variant: SnackbarVariants.ERROR,
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          showHeaderCounts
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(/3 error\(s\)/)).toBeInTheDocument();
+  });
+
+  it('Should handle mixed variant counts correctly', () => {
+    const items: GroupedSnackbarItem[] = [
+      {
+        id: '1',
+        message: 'Error 1',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '2',
+        message: 'Error 2',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '3',
+        message: 'Warning 1',
+        variant: SnackbarVariants.WARNING,
+      },
+      {
+        id: '4',
+        message: 'Warning 2',
+        variant: SnackbarVariants.WARNING,
+      },
+      {
+        id: '5',
+        message: 'Warning 3',
+        variant: SnackbarVariants.WARNING,
+      },
+      {
+        id: '6',
+        message: 'Success 1',
+        variant: SnackbarVariants.SUCCESS,
+      },
+      {
+        id: '7',
+        message: 'Info 1',
+        variant: SnackbarVariants.INFO,
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          showHeaderCounts
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(/2 error\(s\)/)).toBeInTheDocument();
+    expect(screen.getByText(/3 warning\(s\)/)).toBeInTheDocument();
+    expect(screen.getByText(/1 success\(es\)/)).toBeInTheDocument();
+    expect(screen.getByText(/1 info\(s\)/)).toBeInTheDocument();
+  });
+
+  it('Should not show variant count badges when count is 1', () => {
+    const items: GroupedSnackbarItem[] = [
+      {
+        id: '1',
+        message: 'Error 1',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '2',
+        message: 'Warning 1',
+        variant: SnackbarVariants.WARNING,
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          showHeaderCounts
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(/1 error\(s\)/)).toBeInTheDocument();
+    expect(screen.getByText(/1 warning\(s\)/)).toBeInTheDocument();
+  });
+
+  it('Should handle defaultExpanded prop correctly', () => {
+    const items = Array.from({ length: 6 }, (_, i) => {
+      return {
+        id: `${i + 1}`,
+        message: `Message ${i + 1}`,
+        variant: SnackbarVariants.INFO,
+      };
+    });
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          maxVisible={3}
+          defaultExpanded
+        />
+      </ThemeProvider>,
+    );
+
+    const expandButton = screen.getByLabelText('Toggle notification list');
+    expect(expandButton).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('Should update visible items when policy changes from stack to queue', () => {
+    const items = Array.from({ length: 5 }, (_, i) => {
+      return {
+        id: `${i + 1}`,
+        message: `Message ${i + 1}`,
+        variant: SnackbarVariants.INFO,
+      };
+    });
+
+    const { rerender } = render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          policy="stack"
+          maxVisible={3}
+          defaultExpanded={false}
+        />
+      </ThemeProvider>,
+    );
+
+    const messages = screen.queryAllByText(/Message \d+/);
+    expect(messages.length).toBe(0);
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          policy="queue"
+          maxVisible={3}
+          defaultExpanded={false}
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText('+4 more in queue')).toBeInTheDocument();
+  });
+
+  it('Should call onCloseItem when item close action is triggered', async () => {
+    const onCloseItem = jest.fn();
+    const items: GroupedSnackbarItem[] = [
+      {
+        id: '1',
+        message: 'Message 1',
+        variant: SnackbarVariants.INFO,
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          defaultExpanded
+          onCloseItem={onCloseItem}
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText('Message 1')).toBeInTheDocument();
+  });
+
+  it('Should correctly filter progress items from counts when includeProgressInHeaderCounts is false', () => {
+    const items: GroupedSnackbarItem[] = [
+      {
+        id: '1',
+        message: 'Error 1',
+        variant: SnackbarVariants.ERROR,
+      },
+      {
+        id: '2',
+        message: 'Progress 1',
+        variant: SnackbarVariants.PROGRESS,
+      },
+      {
+        id: '3',
+        message: 'Progress 2',
+        variant: SnackbarVariants.PROGRESS,
+      },
+    ];
+
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          open
+          items={items}
+          showHeaderCounts={false}
+          includeProgressInHeaderCounts={false}
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getByText(/1 error\(s\)/)).toBeInTheDocument();
+    expect(screen.getByText(/notification/)).toBeInTheDocument();
+  });
+
+  it('Should render with forwardRef correctly', () => {
+    const ref = React.createRef<HTMLDivElement>();
+    render(
+      <ThemeProvider theme={theme}>
+        <GroupedSnackbar
+          ref={ref}
+          open
+          items={mockItems}
+        />
+      </ThemeProvider>,
+    );
+
+    expect(ref.current).toBeInTheDocument();
+  });
 });

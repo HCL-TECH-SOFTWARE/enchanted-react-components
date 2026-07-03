@@ -14,6 +14,7 @@
  * ======================================================================== */
 import React from 'react';
 import Box from '@mui/material/Box';
+import { useTheme, Theme } from '@mui/material/styles';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import ChevronUpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--up';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
@@ -56,16 +57,19 @@ const HEADER_TYPOGRAPHY_STYLES = {
   marginLeft: '8px',
 } as const;
 
-const VARIANT_COUNT_BOX_BASE_STYLES = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
-  padding: '2px 6px',
-  borderRadius: '2px',
-  color: '#ffffff',
-  fontSize: '12px',
-  fontWeight: 600,
-} as const;
+const getVariantCountBoxBaseStyles = (theme: Theme, backgroundColor: string) => {
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+    padding: '2px 6px',
+    borderRadius: '2px',
+    fontSize: '12px',
+    fontWeight: 600,
+    backgroundColor,
+    color: theme.palette.common.white,
+  };
+};
 
 const VARIANT_ICON_STYLES = {
   width: '14px',
@@ -101,16 +105,18 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
     },
     ref,
   ) => {
+    const theme = useTheme();
+
     return (
       <Box
         ref={ref}
-        sx={(theme) => {
+        sx={(muiTheme) => {
           return {
-            ...theme.typography.body2,
+            ...muiTheme.typography.body2,
             position: 'relative',
             background: colors.background,
             borderRadius: expanded ? '4px 4px 0px 0px' : '4px',
-            boxShadow: theme.shadows[6],
+            boxShadow: muiTheme.shadows[6],
             color: colors.text,
             display: 'flex !important',
             alignItems: 'center',
@@ -131,27 +137,22 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
           {showHeaderCounts && (
             <>
               {variantCounts[SnackbarVariants.ERROR] > 1 && (
-                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                <Box sx={getVariantCountBoxBaseStyles(theme, theme.palette.error.main)}>
                   <ErrorIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.WARNING] > 1 && (
-                <Box
-                  sx={{
-                    ...VARIANT_COUNT_BOX_BASE_STYLES,
-                    backgroundColor: colors.background === '#f5f5f5' ? '#ffb74d' : '#f57c00',
-                  }}
-                >
+                <Box sx={getVariantCountBoxBaseStyles(theme, theme.palette.warning.main)}>
                   <WarningIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.SUCCESS] > 1 && (
-                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                <Box sx={getVariantCountBoxBaseStyles(theme, theme.palette.success.main)}>
                   <SuccessIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
               {variantCounts[SnackbarVariants.INFO] > 1 && (
-                <Box sx={VARIANT_COUNT_BOX_BASE_STYLES}>
+                <Box sx={getVariantCountBoxBaseStyles(theme, theme.palette.info.main)}>
                   <InformationIcon style={VARIANT_ICON_STYLES} />
                 </Box>
               )}
