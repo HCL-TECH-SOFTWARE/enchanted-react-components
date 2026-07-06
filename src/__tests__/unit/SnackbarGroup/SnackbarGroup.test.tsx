@@ -19,7 +19,7 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider } from '@emotion/react';
-import GroupedSnackbar, { GroupedSnackbarItem } from '../../../Snackbar/GroupedSnackbar';
+import SnackbarGroup, { SnackbarGroupItem } from '../../../SnackbarGroup/SnackbarGroup';
 import { SnackbarVariants } from '../../../Snackbar';
 import { createEnchantedTheme, ThemeDirectionType, ThemeModeType } from '../../../theme';
 
@@ -27,8 +27,8 @@ const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_N
 
 afterEach(cleanup);
 
-describe('GroupedSnackbar unit tests', () => {
-  const mockItems: GroupedSnackbarItem[] = [
+describe('SnackbarGroup unit tests', () => {
+  const mockItems: SnackbarGroupItem[] = [
     {
       id: '1',
       message: 'Error message 1',
@@ -46,13 +46,13 @@ describe('GroupedSnackbar unit tests', () => {
     },
   ];
 
-  it('Should render grouped snackbar when open is true', () => {
+  it('Should render snackbar group when open is true', () => {
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={mockItems}
-          showHeaderCounts={false}
+          showVariantBadges={false}
         />
       </ThemeProvider>,
     );
@@ -63,10 +63,10 @@ describe('GroupedSnackbar unit tests', () => {
     expect(elements.length).toBeGreaterThan(0);
   });
 
-  it('Should not render grouped snackbar when open is false', () => {
+  it('Should not render snackbar group when open is false', () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open={false}
           items={mockItems}
         />
@@ -80,10 +80,10 @@ describe('GroupedSnackbar unit tests', () => {
   it('Should display correct variant counts in header', () => {
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={mockItems}
-          showHeaderCounts
+          showVariantBadges
         />
       </ThemeProvider>,
     );
@@ -98,7 +98,7 @@ describe('GroupedSnackbar unit tests', () => {
     const onCloseAll = jest.fn();
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={mockItems}
           onCloseAll={onCloseAll}
@@ -125,7 +125,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           maxVisible={5}
@@ -156,7 +156,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           maxVisible={5}
@@ -184,7 +184,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           policy="stack"
@@ -209,7 +209,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           policy="queue"
@@ -224,7 +224,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should exclude progress items from header count when includeProgressInHeaderCounts is false', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Success message',
@@ -239,10 +239,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts={false}
+          showVariantBadges={false}
           includeProgressInHeaderCounts={false}
         />
       </ThemeProvider>,
@@ -252,7 +252,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should include progress items in header count when includeProgressInHeaderCounts is true', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Success message',
@@ -267,10 +267,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts={false}
+          showVariantBadges={false}
           includeProgressInHeaderCounts
         />
       </ThemeProvider>,
@@ -283,7 +283,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should render action button when showActionButton is true', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Message with action',
@@ -296,7 +296,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           defaultExpanded
@@ -309,7 +309,7 @@ describe('GroupedSnackbar unit tests', () => {
 
   it('Should call buttonAction when action button is clicked', async () => {
     const buttonAction = jest.fn();
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Message with action',
@@ -322,7 +322,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           defaultExpanded
@@ -344,7 +344,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           maxVisible={5}
@@ -366,10 +366,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts={false}
+          showVariantBadges={false}
         />
       </ThemeProvider>,
     );
@@ -380,10 +380,10 @@ describe('GroupedSnackbar unit tests', () => {
   it('Should handle empty items array', () => {
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={[]}
-          showHeaderCounts={false}
+          showVariantBadges={false}
         />
       </ThemeProvider>,
     );
@@ -405,7 +405,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           policy="stack"
@@ -422,7 +422,7 @@ describe('GroupedSnackbar unit tests', () => {
   it('Should respect anchorOrigin prop', () => {
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={mockItems}
           anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
@@ -439,7 +439,7 @@ describe('GroupedSnackbar unit tests', () => {
   it('Should apply custom sx styles', () => {
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={mockItems}
           sx={{ backgroundColor: 'red' }}
@@ -454,7 +454,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should handle multiple error variants correctly', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Error 1',
@@ -474,10 +474,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts
+          showVariantBadges
         />
       </ThemeProvider>,
     );
@@ -486,7 +486,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should handle mixed variant counts correctly', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Error 1',
@@ -526,10 +526,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts
+          showVariantBadges
         />
       </ThemeProvider>,
     );
@@ -541,7 +541,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should not show variant count badges when count is 1', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Error 1',
@@ -556,10 +556,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts
+          showVariantBadges
         />
       </ThemeProvider>,
     );
@@ -579,7 +579,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           maxVisible={3}
@@ -603,7 +603,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     const { rerender } = render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           policy="stack"
@@ -618,7 +618,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     rerender(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           policy="queue"
@@ -633,7 +633,7 @@ describe('GroupedSnackbar unit tests', () => {
 
   it('Should call onCloseItem when item close action is triggered', async () => {
     const onCloseItem = jest.fn();
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Message 1',
@@ -643,7 +643,7 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
           defaultExpanded
@@ -656,7 +656,7 @@ describe('GroupedSnackbar unit tests', () => {
   });
 
   it('Should correctly filter progress items from counts when includeProgressInHeaderCounts is false', () => {
-    const items: GroupedSnackbarItem[] = [
+    const items: SnackbarGroupItem[] = [
       {
         id: '1',
         message: 'Error 1',
@@ -676,10 +676,10 @@ describe('GroupedSnackbar unit tests', () => {
 
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           open
           items={items}
-          showHeaderCounts={false}
+          showVariantBadges={false}
           includeProgressInHeaderCounts={false}
         />
       </ThemeProvider>,
@@ -693,7 +693,7 @@ describe('GroupedSnackbar unit tests', () => {
     const ref = React.createRef<HTMLDivElement>();
     render(
       <ThemeProvider theme={theme}>
-        <GroupedSnackbar
+        <SnackbarGroup
           ref={ref}
           open
           items={mockItems}

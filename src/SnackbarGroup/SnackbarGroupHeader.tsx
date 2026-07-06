@@ -25,7 +25,7 @@ import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/inform
 import IconButton, { IconButtonVariants } from '../IconButton';
 import Typography from '../Typography';
 import Tooltip from '../Tooltip';
-import { SnackbarVariants } from './Snackbar';
+import { SnackbarVariants } from '../Snackbar/Snackbar';
 
 interface ThemeColors {
   background: string;
@@ -41,10 +41,10 @@ interface VariantCounts {
   [SnackbarVariants.INFO]: number;
 }
 
-interface GroupedSnackbarHeaderProps {
+interface SnackbarGroupHeaderProps {
   variantCounts: VariantCounts;
   totalCount: number;
-  showHeaderCounts: boolean;
+  showVariantBadges: boolean;
   hasOverflow: boolean;
   expanded: boolean;
   colors: ThemeColors;
@@ -91,12 +91,12 @@ const getHeaderIconButtonStyles = (iconColor: string) => {
   };
 };
 
-const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHeaderProps>(
+const SnackbarGroupHeader = React.forwardRef<HTMLDivElement, SnackbarGroupHeaderProps>(
   (
     {
       variantCounts,
       totalCount,
-      showHeaderCounts,
+      showVariantBadges,
       hasOverflow,
       expanded,
       colors,
@@ -131,10 +131,10 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
         }}
       >
         <Box sx={{
-          display: 'flex', alignItems: 'center', gap: '8px', flex: 1, minWidth: 0, overflow: 'hidden',
+          display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, overflow: 'hidden',
         }}
         >
-          {showHeaderCounts && (
+          {showVariantBadges && (
             <>
               {variantCounts[SnackbarVariants.ERROR] > 1 && (
                 <Box sx={getVariantCountBoxBaseStyles(theme, theme.palette.error.main)}>
@@ -231,6 +231,6 @@ const GroupedSnackbarHeader = React.forwardRef<HTMLDivElement, GroupedSnackbarHe
   },
 );
 
-GroupedSnackbarHeader.displayName = 'GroupedSnackbarHeader';
+SnackbarGroupHeader.displayName = 'SnackbarGroupHeader';
 
-export default GroupedSnackbarHeader;
+export default SnackbarGroupHeader;

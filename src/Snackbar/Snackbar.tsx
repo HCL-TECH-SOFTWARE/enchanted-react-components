@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2026 HCL America Inc.                                    *
+ * Copyright 2024 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -49,11 +49,6 @@ export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'componen
     MuiSnackbar: {
       styleOverrides: {
         root: ({ theme }) => {
-          const themeColors = {
-            background: theme.palette.background.dark,
-            text: theme.palette.common.white,
-          };
-
           return ({
             ...theme.typography.body2,
             position: 'static',
@@ -64,10 +59,10 @@ export const getMuiSnackbarThemeOverrides = (): Components<Omit<Theme, 'componen
             boxSizing: 'border-box',
             maxWidth: 'inherit',
             justifyContent: 'flex-start',
-            background: themeColors.background,
+            background: theme.palette.background.dark,
             borderRadius: '4px',
             boxShadow: theme.shadows[6],
-            color: themeColors.text,
+            color: theme.palette.text.tertiary1,
             display: 'flex',
             alignItems: 'flex-start',
             minHeight: '36px',
@@ -243,7 +238,7 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
   };
 
   return (
-    <MuiSnackbar {...rest} sx={rest.sx}>
+    <MuiSnackbar {...rest}>
       <Box>
         { getStatusIcon(rest.variant) }
         <Typography

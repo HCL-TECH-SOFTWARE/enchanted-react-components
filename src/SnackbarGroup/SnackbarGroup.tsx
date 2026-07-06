@@ -16,11 +16,11 @@ import React, { useState, useMemo } from 'react';
 import Box from '@mui/material/Box';
 import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import MuiSnackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
-import { SnackbarVariants } from './Snackbar';
-import GroupedSnackbarHeader from './GroupedSnackbarHeader';
-import GroupedSnackbarItems from './GroupedSnackbarItems';
+import { SnackbarVariants } from '../Snackbar/Snackbar';
+import SnackbarGroupHeader from './SnackbarGroupHeader';
+import SnackbarGroupItems from './SnackbarGroupItems';
 
-export const getGroupedSnackbarColors = (theme: Theme) => {
+export const getSnackbarGroupColors = (theme: Theme) => {
   return {
     background: theme.palette.background.dark,
     text: theme.palette.common.white,
@@ -29,22 +29,23 @@ export const getGroupedSnackbarColors = (theme: Theme) => {
   };
 };
 
-const GROUPED_SNACKBAR_MUI_STYLES = {
+const SNACKBAR_GROUP_MUI_STYLES = {
   padding: '0 !important',
   alignItems: 'center !important',
 } as const;
 
-const GROUPED_SNACKBAR_CONTENT_BOX_STYLES = {
+const SNACKBAR_GROUP_CONTENT_BOX_STYLES = {
   display: 'flex !important',
   flexDirection: 'column',
   gap: '0px',
   minWidth: '300px',
   maxWidth: '800px',
+  width: '100%',
   position: 'relative',
   maxHeight: 'none !important',
 } as const;
 
-export interface GroupedSnackbarItem {
+export interface SnackbarGroupItem {
   id: string;
   message: React.ReactNode;
   variant: SnackbarVariants;
@@ -55,15 +56,15 @@ export interface GroupedSnackbarItem {
   meta?: Record<string, unknown>;
 }
 
-export type GroupedSnackbarPolicy = 'stack' | 'queue';
+export type SnackbarGroupPolicy = 'stack' | 'queue';
 
-export interface GroupedSnackbarProps {
+export interface SnackbarGroupProps {
   open: boolean;
-  items: GroupedSnackbarItem[];
-  policy?: GroupedSnackbarPolicy;
+  items: SnackbarGroupItem[];
+  policy?: SnackbarGroupPolicy;
   maxVisible?: number;
   defaultExpanded?: boolean;
-  showHeaderCounts?: boolean;
+  showVariantBadges?: boolean;
   includeProgressInHeaderCounts?: boolean;
   onCloseItem?: (id: string) => void;
   onCloseAll?: () => void;
@@ -73,9 +74,9 @@ export interface GroupedSnackbarProps {
 }
 
 const DEFAULT_MAX_VISIBLE = 5;
-const DEFAULT_POLICY: GroupedSnackbarPolicy = 'stack';
+const DEFAULT_POLICY: SnackbarGroupPolicy = 'stack';
 
-const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
+const SnackbarGroup = React.forwardRef<HTMLDivElement, SnackbarGroupProps>(
   (
     {
       open,
@@ -83,7 +84,7 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
       policy = DEFAULT_POLICY,
       maxVisible = DEFAULT_MAX_VISIBLE,
       defaultExpanded = false,
-      showHeaderCounts = true,
+      showVariantBadges = true,
       includeProgressInHeaderCounts = false,
       onCloseItem,
       onCloseAll,
@@ -95,7 +96,7 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
   ) => {
     const theme = useTheme();
     const [expanded, setExpanded] = useState(defaultExpanded);
-    const colors = getGroupedSnackbarColors(theme);
+    const colors = getSnackbarGroupColors(theme);
     const handleExpandChange = (newExpanded: boolean) => {
       setExpanded(newExpanded);
       onExpandChange?.(newExpanded);
@@ -143,22 +144,22 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
         open={open}
         anchorOrigin={anchorOrigin || { vertical: 'bottom', horizontal: 'right' }}
         sx={{
-          ...GROUPED_SNACKBAR_MUI_STYLES,
+          ...SNACKBAR_GROUP_MUI_STYLES,
           ...sx,
         }}
       >
-        <Box sx={GROUPED_SNACKBAR_CONTENT_BOX_STYLES}>
-          <GroupedSnackbarHeader
+        <Box sx={SNACKBAR_GROUP_CONTENT_BOX_STYLES}>
+          <SnackbarGroupHeader
             variantCounts={variantCounts}
             totalCount={totalCount}
-            showHeaderCounts={showHeaderCounts}
+            showVariantBadges={showVariantBadges}
             hasOverflow={hasOverflow}
             expanded={expanded}
             colors={colors}
             onExpandChange={handleExpandChange}
             onCloseAll={onCloseAll}
           />
-          <GroupedSnackbarItems
+          <SnackbarGroupItems
             visibleItems={visibleItems}
             expanded={expanded}
             policy={policy}
@@ -171,6 +172,6 @@ const GroupedSnackbar = React.forwardRef<HTMLDivElement, GroupedSnackbarProps>(
   },
 );
 
-GroupedSnackbar.displayName = 'GroupedSnackbar';
+SnackbarGroup.displayName = 'SnackbarGroup';
 
-export default GroupedSnackbar;
+export default SnackbarGroup;

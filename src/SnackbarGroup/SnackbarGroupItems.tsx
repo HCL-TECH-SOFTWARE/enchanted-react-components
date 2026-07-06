@@ -26,8 +26,8 @@ import List from '../List';
 import ListItem from '../List/ListItem';
 import ListItemButton, { ListSizes } from '../List/ListItemButton';
 import ListItemText from '../List/ListItemText';
-import { SnackbarVariants } from './Snackbar';
-import { GroupedSnackbarItem, GroupedSnackbarPolicy } from './GroupedSnackbar';
+import { SnackbarVariants } from '../Snackbar/Snackbar';
+import { SnackbarGroupItem, SnackbarGroupPolicy } from './SnackbarGroup';
 
 interface ThemeColors {
   background: string;
@@ -36,11 +36,11 @@ interface ThemeColors {
   iconColor: string;
 }
 
-interface GroupedSnackbarItemsProps {
-  visibleItems: GroupedSnackbarItem[];
+interface SnackbarGroupItemsProps {
+  visibleItems: SnackbarGroupItem[];
   expanded: boolean;
-  policy: GroupedSnackbarPolicy;
-  items: GroupedSnackbarItem[];
+  policy: SnackbarGroupPolicy;
+  items: SnackbarGroupItem[];
   colors: ThemeColors;
 }
 
@@ -60,21 +60,28 @@ const StyledList = styled(List)((props) => {
     background: theme.palette.background.paper,
     maxHeight: '240px',
     width: '100%',
-    overflowY: 'scroll',
+    overflowY: 'auto',
+    overflowX: 'hidden',
     marginTop: '0px',
+    boxSizing: 'border-box',
     '.MuiListItem-root': {
       '.MuiListItemButton-root': {
-        alignItems: 'center !important',
+        alignItems: 'flex-start !important',
+        padding: '8px 12px',
+        minHeight: 'auto',
         '.MuiListItemText-root': {
           maxWidth: 'unset',
           width: '100%',
+          margin: 0,
           '& .MuiListItemText-primary': {
             whiteSpace: 'normal',
             wordBreak: 'break-word',
+            overflowWrap: 'break-word',
             maxWidth: 'unset',
             width: '100%',
-            margin: '8px 8px 8px 0',
+            margin: '0 8px 0 0',
             color: theme.palette.text.primary,
+            lineHeight: 1.5,
           },
         },
         '&:hover': {
@@ -83,6 +90,7 @@ const StyledList = styled(List)((props) => {
             '& .MuiListItemText-primary': {
               whiteSpace: 'normal',
               wordBreak: 'break-word',
+              overflowWrap: 'break-word',
             },
           },
         },
@@ -112,7 +120,7 @@ const getVariantColor = (variant: SnackbarVariants, theme: Theme): string => {
   return variantColors[variant];
 };
 
-const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarItemsProps>(
+const SnackbarGroupItems = React.forwardRef<HTMLDivElement, SnackbarGroupItemsProps>(
   (
     {
       visibleItems,
@@ -133,7 +141,7 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
               return (
                 <React.Fragment key={item.id}>
                   <ListItem disablePadding>
-                    <ListItemButton size={ListSizes.SMALL} sx={{ alignItems: 'center' }}>
+                    <ListItemButton size={ListSizes.SMALL} sx={{ alignItems: 'flex-start', gap: '8px' }}>
                       <ListItemText
                         primary={item.message}
                         sx={{
@@ -148,9 +156,10 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
                           alignItems: 'center',
                           justifyContent: 'center',
                           minWidth: '24px',
+                          width: '24px',
+                          height: '24px',
                           flexShrink: 0,
-                          marginLeft: '8px',
-                          alignSelf: 'center',
+                          marginTop: '2px',
                         }}
                       >
                         {getVariantIcon(item.variant, getVariantColor(item.variant, theme))}
@@ -184,6 +193,6 @@ const GroupedSnackbarItems = React.forwardRef<HTMLDivElement, GroupedSnackbarIte
   },
 );
 
-GroupedSnackbarItems.displayName = 'GroupedSnackbarItems';
+SnackbarGroupItems.displayName = 'SnackbarGroupItems';
 
-export default GroupedSnackbarItems;
+export default SnackbarGroupItems;
