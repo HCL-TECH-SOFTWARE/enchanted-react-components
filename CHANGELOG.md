@@ -3,7 +3,7 @@
 ## Unreleased
 
 ### Added
-- Added `SnackbarGroup` component and its tests
+- Added the `SnackbarGroup` component and its associated tests.
 
 ### Fixed
 - Fixed Select dropdown menu positioning and overlap by anchoring to the bottom of the input field.
