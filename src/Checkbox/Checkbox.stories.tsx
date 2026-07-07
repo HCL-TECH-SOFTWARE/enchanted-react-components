@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { FormControl, FormGroup, FormHelperText } from '@mui/material';
 
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
@@ -31,28 +31,28 @@ export default {
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     indeterminate: {
       description:
         'If `true`, the component appears indeterminate. This does not set the native input element to indeterminate due to inconsistent behavior across browsers.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
       control: false,
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     disableRipple: {
       description: 'If `true`, the ripple effect is disabled.',
       control: false,
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     centerRipple: {

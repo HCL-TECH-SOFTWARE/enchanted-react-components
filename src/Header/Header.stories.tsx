@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconStar from '@hcl-software/enchanted-icons/dist/carbon/es/star';
 import IconStarFilled from '@hcl-software/enchanted-icons/dist/carbon/es/star--filled';
 import Header, { HeaderDemo, HeaderPageVariant } from './Header';
@@ -32,7 +32,7 @@ export default {
       if: { arg: 'interactive' },
       description: "It's a helper control to enable and disable the 'hamburgerSpace'.",
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     hideMiddleSection: {

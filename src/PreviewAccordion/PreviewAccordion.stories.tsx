@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import Button from '../Button/Button';
@@ -116,10 +116,10 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
   const {
     showCheckBox, disabled, showAvatar, showIcon, showSecondaryText,
   } = args;
-  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [linkLabels, setLinkLabels] = useState(['Link 1', 'Link 2', 'Link 3']);
   const [optionalLabels, setOptionalLabels] = useState(['Optional 1', 'Optional 2', 'Optional 3']);
-  const [expandedAccordionId, setExpandedAccordionId] = useState(null);
+  const [expandedAccordionId, setExpandedAccordionId] = useState<number | null>(null);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
@@ -135,7 +135,7 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
     return null;
   };
 
-  const handleChange = (accordionId) => {
+  const handleChange = (accordionId: number) => {
     return () => {
       if (expandedAccordionId === accordionId) {
         linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');
@@ -296,10 +296,10 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
   } = args;
   const [linkLabels, setLinkLabels] = useState(['Link 1', 'Link 2', 'Link 3']);
   const [optionalLabels, setOptionalLabels] = useState(['Optional 1', 'Optional 2', 'Optional 3']);
-  const [expandedAccordionId, setExpandedAccordionId] = useState(null);
-  const [checkedItems, setCheckedItems] = useState({});
+  const [expandedAccordionId, setExpandedAccordionId] = useState<number | null>(null);
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
-  const handleChange = (accordionId) => {
+  const handleChange = (accordionId: number) => {
     return () => {
       if (expandedAccordionId === accordionId) {
         linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');

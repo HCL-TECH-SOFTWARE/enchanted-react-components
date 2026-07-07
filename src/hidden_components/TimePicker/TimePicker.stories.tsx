@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -72,31 +72,31 @@ export default {
     unitLabel: {
       description: 'Attribute which can be used to define the unit of that component',
       table: {
-        defaultValue: { summary: TimePicker.defaultProps.hiddenLabel },
+        defaultValue: { summary: String(TimePicker.defaultProps.hiddenLabel) },
       },
     },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       table: {
-        defaultValue: { summary: TimePicker.defaultProps.hiddenLabel },
+        defaultValue: { summary: String(TimePicker.defaultProps.hiddenLabel) },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
       table: {
-        defaultValue: { summary: TimePicker.defaultProps.nonEdit },
+        defaultValue: { summary: String(TimePicker.defaultProps.nonEdit) },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: TimePicker.defaultProps.disabled },
+        defaultValue: { summary: String(TimePicker.defaultProps.disabled) },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
       table: {
-        defaultValue: { summary: TimePicker.defaultProps.required },
+        defaultValue: { summary: String(TimePicker.defaultProps.required) },
       },
     },
     actionProps: {

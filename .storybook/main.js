@@ -21,10 +21,9 @@ module.exports = {
 
   "addons": [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
     "@storybook/addon-themes",
-    "@storybook/addon-a11y"
+    "@storybook/addon-a11y",
+    "@storybook/addon-docs"
   ],
 
   "framework": {
@@ -39,10 +38,25 @@ module.exports = {
       ...config.watchOptions,
       ignored: ['**/node_modules/', '**/src/__tests__/unit/__image_snapshots__/**/*.png']
     };
-    return config;
-  },
 
-  docs: {
-    autodocs: true
+    // Add babel-loader to handle TypeScript and JSX files
+    config.module.rules.push({
+      test: /\.(ts|tsx|js|jsx)$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: require.resolve('babel-loader'),
+          options: {
+            presets: [
+              require.resolve('@babel/preset-env'),
+              require.resolve('@babel/preset-react'),
+              require.resolve('@babel/preset-typescript'),
+            ],
+          },
+        },
+      ],
+    });
+
+    return config;
   }
 }

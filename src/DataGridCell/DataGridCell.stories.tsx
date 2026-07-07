@@ -14,7 +14,8 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { GridRenderCellParams } from '@mui/x-data-grid';
 import DataGridCell from './DataGridCell';
 import DataGrid, { ExtendedGridColDef } from '../DataGrid/DataGrid';
 import Typography from '../Typography';
@@ -147,7 +148,7 @@ InteractiveExample.args = {
   hideFooter: true,
   pageSize: 10,
   totalCount: sampleRows.length,
-};
+} as unknown as GridRenderCellParams;
 
 const VisualTestTemplate: StoryFn<typeof DataGridCell> = (args) => {
   return (
@@ -226,4 +227,4 @@ VisualTest.args = {
   hideFooter: true,
   disableColumnMenu: true,
   totalCount: 1,
-};
+} as unknown as GridRenderCellParams;

@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import Dialog from './Dialog';
 import Button from '../Button';
@@ -37,7 +37,7 @@ export default {
       if: { arg: 'interactive' },
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },

@@ -9,6 +9,15 @@
 - Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ### Changed
+- Upgraded Storybook from v7.6.3 to v10.4.6 (latest non-breaking version). Changes include:
+  - Updated all `@storybook/*` packages to `^10.4.6`: `addon-a11y`, `addon-docs`, `addon-links`, `addon-themes`, `react`, `react-webpack5`; also updated the standalone `storybook` package to `^10.4.6`.
+  - Replaced deprecated `@storybook/testing-library` (0.2.2) with `storybook/test` (re-exported from the `storybook` package) in `Autocomplete`, `DatePicker`, `SelectMultiple`, and `SelectSingle` stories.
+  - Removed standalone `@storybook/addon-actions` (actions are now handled natively by the Storybook 10 core; `addon-essentials` and `addon-interactions` were also removed as they are no longer separate packages).
+  - Removed deprecated `parameters.actions.argTypesRegex` from `.storybook/preview.js` (replaced by automatic action spying in Storybook 10).
+  - Fixed `table.defaultValue.summary` type in all story files: converted `boolean` and `number` literals to their string equivalents (`'false'`, `'true'`, `'40'`, etc.) to satisfy Storybook 10's stricter `ComponentAnnotations` typing.
+  - Fixed `customIcon` variable type in `Autocomplete`, `DatePicker`, `SelectMultiple`, `SelectSingle`, `MultipleSelectChip`, and `TextField` stories from `React.ComponentType<React.SVGProps<SVGSVGElement>>` to `React.ComponentType<any>` to resolve `SvgIconProps` vs `SVGProps` incompatibility.
+  - Added explicit `{ canvasElement }: { canvasElement: HTMLElement }` type annotation in `DatePicker` play function.
+  - Fixed `value` prop type in `SelectMultiple` story template (`string[]` cast to `string` for multiple-select mode).
 
 ### Breaking changes
 

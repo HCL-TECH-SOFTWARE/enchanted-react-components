@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -114,7 +114,7 @@ export default {
       description: 'Hide the table, and this is for testing only and not an actual property of Search Criteria.',
       control: 'boolean',
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     secondaryText: {

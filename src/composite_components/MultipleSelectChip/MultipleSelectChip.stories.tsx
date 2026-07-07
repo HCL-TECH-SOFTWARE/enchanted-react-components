@@ -14,13 +14,13 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import CheckmarkIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, SvgIconProps } from '@mui/material';
 import Chip from '../../Chip/Chip';
 import MultipleSelectChip from './MultipleSelectChip';
 import MenuItem from '../../Menu/MenuItem';
@@ -43,7 +43,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'Indicates the combobox value is invalid.',
@@ -90,7 +90,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
       description:
@@ -119,7 +119,7 @@ export default {
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
@@ -136,7 +136,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true`, the component is displayed in focused state.',
@@ -145,7 +145,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true`, the label is hidden.',
@@ -154,7 +154,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true` value cannot be editable',
@@ -170,7 +170,7 @@ export default {
         'If true, the input will take up the full width of its container.',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -178,7 +178,7 @@ export default {
       description: 'If true, hide the selected options from the list box.',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -217,7 +217,7 @@ export default {
       control: false,
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'https://mui.com/material-ui/api/chip/',
@@ -242,7 +242,7 @@ export default {
 const Template: StoryFn<typeof MultipleSelectChip> = (args) => {
   const [value, setValue] = React.useState([top100Films[13], top100Films[10], top100Films[2]]);
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;

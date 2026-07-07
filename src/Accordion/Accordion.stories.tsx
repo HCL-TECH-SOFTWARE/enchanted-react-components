@@ -15,7 +15,7 @@
 
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import Accordion, { AccordionTypes, AccordionProps } from './Accordion';
@@ -109,7 +109,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
   const {
     showCheckBox, disabled, showSecondaryText, showHoverActions,
   } = args;
-  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });

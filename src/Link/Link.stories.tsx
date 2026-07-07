@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import { Grid } from '@mui/material';
 import Link, { LinkType } from './Link';
@@ -28,7 +28,7 @@ export default {
       description: 'If `true`, the component is disabled.',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },

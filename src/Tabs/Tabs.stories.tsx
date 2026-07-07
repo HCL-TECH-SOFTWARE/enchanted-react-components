@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconPaintBrush from '@hcl-software/enchanted-icons/dist/carbon/es/paint-brush';
 import Box from '@mui/material/Box';
 import Tabs from './Tabs';
@@ -101,7 +101,7 @@ export default {
       control: false,
     },
     'aria-label': {
-      control: 'false',
+      control: false,
       description: 'The label for the Tabs as a string.',
     },
     'aria-labelledby': { table: { disable: true } },

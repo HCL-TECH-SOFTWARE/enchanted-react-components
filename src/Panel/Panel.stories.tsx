@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconTools from '@hcl-software/enchanted-icons/dist/carbon/es/tools';
 import IconDocument from '@hcl-software/enchanted-icons/dist/carbon/es/document';
 import IconOverflowHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';

@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import MailIcon from '@hcl-software/enchanted-icons/dist/carbon/es/email';
 import { Grid } from '@mui/material';
 

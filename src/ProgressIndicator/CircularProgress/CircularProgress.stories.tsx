@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import CircularProgress, { CircularProgressVariants } from './CircularProgress';
 
 export default {
@@ -35,7 +35,7 @@ export default {
         'The size of the component. If using a number, the pixel unit is assumed. If using a string, you need to provide the CSS unit, e.g `3rem`.',
       table: {
         defaultValue: {
-          summary: 40,
+          summary: '40',
         },
       },
     },
@@ -45,7 +45,7 @@ export default {
       control: { type: 'range', min: 0, max: 100 },
       table: {
         defaultValue: {
-          summary: 0,
+          summary: '0',
         },
       },
     },
@@ -55,7 +55,7 @@ export default {
       control: { type: 'boolean' },
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -64,7 +64,7 @@ export default {
       control: false,
       table: {
         defaultValue: {
-          summary: 3.5,
+          summary: '3.5',
         },
       },
     },

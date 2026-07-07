@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconInformation from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import {
@@ -40,7 +40,7 @@ export default {
       description: 'If `true`, the component is disabled.',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },

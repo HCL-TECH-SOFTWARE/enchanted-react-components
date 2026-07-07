@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
 
 import Typography from '../Typography';

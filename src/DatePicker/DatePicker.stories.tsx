@@ -13,8 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { userEvent, within } from '@storybook/testing-library';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { userEvent, within } from 'storybook/test';
+import { SvgIconProps } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
@@ -70,7 +71,7 @@ export default {
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: DatePickerDefaults.enableHelpHoverEffect },
+        defaultValue: { summary: String(DatePickerDefaults.enableHelpHoverEffect) },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
@@ -83,37 +84,37 @@ export default {
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       table: {
-        defaultValue: { summary: DatePickerDefaults.hiddenLabel },
+        defaultValue: { summary: String(DatePickerDefaults.hiddenLabel) },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
       table: {
-        defaultValue: { summary: DatePickerDefaults.nonEdit },
+        defaultValue: { summary: String(DatePickerDefaults.nonEdit) },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: DatePickerDefaults.disabled },
+        defaultValue: { summary: String(DatePickerDefaults.disabled) },
       },
     },
     fullWidth: {
       description: 'If `true`,the component will take the max width.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
       table: {
-        defaultValue: { summary: DatePickerDefaults.required },
+        defaultValue: { summary: String(DatePickerDefaults.required) },
       },
     },
     showDaysOutsideCurrentMonth: {
       description: 'If true, days outside the current month are rendered',
       table: {
-        defaultValue: { summary: DatePickerDefaults.showDaysOutsideCurrentMonth },
+        defaultValue: { summary: String(DatePickerDefaults.showDaysOutsideCurrentMonth) },
       },
     },
     actionProps: {
@@ -170,7 +171,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: DatePickerDefaults.staticMode,
+          summary: String(DatePickerDefaults.staticMode),
         },
       },
     },
@@ -182,7 +183,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
   // @ts-ignore - The adapterLocale control it's not a property of the DatePicker but it is need for PickersLocalizationProvider.
   const { adapterLocale } = args;
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;
@@ -238,7 +239,7 @@ export const ExampleDatePickerOpen = {
   args: {
     ...ExampleDatePicker.args,
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement }: { canvasElement: HTMLElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole('button', { name: 'Choose date' }));
   },

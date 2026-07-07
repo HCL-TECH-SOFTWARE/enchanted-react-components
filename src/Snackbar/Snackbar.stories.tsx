@@ -13,9 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
-import Snackbar, { SnackbarVariants } from './Snackbar';
+import Snackbar, { SnackbarProps, SnackbarVariants } from './Snackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 
@@ -41,7 +41,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -78,7 +78,7 @@ export default {
       control: { type: 'range', min: 0, max: 100 },
       table: {
         defaultValue: {
-          summary: 0,
+          summary: '0',
         },
       },
     },
@@ -108,10 +108,13 @@ export default {
   },
 } as Meta<typeof Snackbar>;
 
-const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args) => {
+interface ExtendSnackbarProps extends SnackbarProps {
+  showStackSnackbar: boolean;
+}
+
+const InteractiveExampleTemplate: StoryFn<ExtendSnackbarProps> = (args) => {
   const messageTwo = `${args.message} > a bit longer`;
   const messageThree = `${args.message} > a bit much more longer ;-)`;
-  // @ts-ignore for test only, its purpose is to show snackbar when its stack
   if (args.showStackSnackbar) {
     return (
       <SnackbarContainer position={SnackbarContainerPosition.LEFT}>

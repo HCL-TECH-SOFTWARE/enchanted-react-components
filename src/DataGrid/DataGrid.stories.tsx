@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { GridSortModel, GridColumnVisibilityModel } from '@mui/x-data-grid';
 import DataGrid from './DataGrid';
 import {
@@ -34,7 +34,7 @@ export default {
       type: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -57,7 +57,7 @@ export default {
       type: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -66,7 +66,7 @@ export default {
       description: 'Set the height in pixel of a row in the grid.',
       table: {
         defaultValue: {
-          summary: 37,
+          summary: '37',
         },
       },
     },
@@ -75,7 +75,7 @@ export default {
       description: 'Set the height in pixel of the column headers in the grid.',
       table: {
         defaultValue: {
-          summary: 37,
+          summary: '37',
         },
       },
     },
@@ -85,7 +85,7 @@ export default {
       type: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -94,7 +94,7 @@ export default {
       description: 'If true, the grid height is dynamic and follow the number of rows in the grid.',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -117,7 +117,7 @@ export default {
       control: false,
       table: {
         defaultValue: {
-          summary: [10, 25, 50, 100],
+          summary: '[10, 25, 50, 100]',
         },
       },
     },

@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconPhone from '@hcl-software/enchanted-icons/dist/carbon/es/phone';
 import UserAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/user--avatar';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';

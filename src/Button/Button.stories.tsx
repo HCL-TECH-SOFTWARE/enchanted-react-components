@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Grid } from '@mui/material';
 
 import IconStart from '@hcl-software/enchanted-icons/dist/carbon/es/add';
@@ -44,7 +44,7 @@ export default {
       description: 'disabled of Button component.',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     color: {

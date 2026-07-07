@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Paper from './Paper';
 import PlaceholderArea from '../utils/PlaceholderArea';
 import Typography from '../Typography';

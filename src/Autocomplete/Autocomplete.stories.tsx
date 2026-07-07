@@ -14,14 +14,14 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { userEvent, within } from '@storybook/testing-library';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { userEvent, within } from 'storybook/test';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
 
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, SvgIconProps } from '@mui/material';
 import Autocomplete from './Autocomplete';
 import { top100Films } from './data';
 import MenuItem from '../Menu/MenuItem';
@@ -63,7 +63,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
@@ -103,7 +103,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
       description:
@@ -113,7 +113,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true`, the component is disabled.',
@@ -122,7 +122,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description:
@@ -132,7 +132,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description:
@@ -142,7 +142,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true`, the component is displayed in focused state.',
@@ -151,7 +151,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description:
@@ -161,7 +161,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true` value cannot be editable',
@@ -212,7 +212,7 @@ export default {
       control: false,
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'https://mui.com/material-ui/api/text-field/',
@@ -262,7 +262,7 @@ interface Movie {
 const Template: StoryFn<typeof Autocomplete> = (args) => {
   const [value, setValue] = React.useState(args.value ? args.value : null);
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;

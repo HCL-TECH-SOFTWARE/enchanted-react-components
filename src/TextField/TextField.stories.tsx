@@ -14,12 +14,12 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
 import InputAdornment from '@mui/material/InputAdornment';
-import { Box } from '@mui/material';
+import { Box, SvgIconProps } from '@mui/material';
 import TextField from './TextField';
 import Button from '../Button';
 
@@ -76,7 +76,7 @@ export default {
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
@@ -172,7 +172,7 @@ export default {
 const Template: StoryFn<typeof TextField> = (args) => {
   const [value, setValue] = React.useState(args.value ? args.value : '');
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;
