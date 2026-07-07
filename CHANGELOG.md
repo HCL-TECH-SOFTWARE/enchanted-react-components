@@ -3,11 +3,8 @@
 ## Unreleased
 
 ### Added
-- Added the `SnackbarGroup` component and its associated tests.
 
 ### Fixed
-- Fixed Select dropdown menu positioning and overlap by anchoring to the bottom of the input field.
-- Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ### Changed
 - Upgraded Storybook from v7.6.3 to v10.4.6.
@@ -18,6 +15,15 @@
 - Removed deprecated addons and ensured compatibility with the new Storybook version.
 
 ### Breaking changes
+
+## 2.9.0
+
+### Added
+- Added the `SnackbarGroup` component and its associated tests.
+
+### Fixed
+- Fixed Select dropdown menu positioning and overlap by anchoring to the bottom of the input field.
+- Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ## 2.8.0
 
