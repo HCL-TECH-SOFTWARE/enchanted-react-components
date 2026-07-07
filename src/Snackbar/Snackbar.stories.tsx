@@ -108,6 +108,8 @@ export default {
   },
 } as Meta<typeof Snackbar>;
 
+// eslint-why Storybook args require flexible typing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface ExtendSnackbarProps extends SnackbarProps {
   showStackSnackbar: boolean;
 }
@@ -142,7 +144,6 @@ InteractiveExample.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
-  showStackSnackbar: false,
 };
 
 const VisualTestTemplate: StoryFn<typeof Snackbar> = (args) => {
