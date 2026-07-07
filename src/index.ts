@@ -76,6 +76,8 @@ export { default as Select } from './Select';
 export * from './Select';
 export { default as Snackbar } from './Snackbar';
 export * from './Snackbar';
+export { default as SnackbarGroup } from './SnackbarGroup';
+export * from './SnackbarGroup';
 export { default as Switch } from './Switch';
 export * from './Switch';
 export { default as Table } from './Table';
