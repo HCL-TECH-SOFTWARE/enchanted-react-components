@@ -10,7 +10,7 @@
 - Fixed the ListItem CSS to stop flicking frequently while hovering.
 
 ### Changed
-- Upgraded Storybook from v7.6.3 to v10.4.6 (latest non-breaking version). Changes include:
+- Upgraded Storybook from v7.6.3 to v10.4.6.
 - Updated imports from '@storybook/react' to '@storybook/react-webpack5' in multiple component story files.
 - Changed default value summaries in story tables from boolean values to string representations for consistency.
 - Refactored ProgressBar stories to utilize EnumUploadStatus and ProgressItemType for status and type properties.
