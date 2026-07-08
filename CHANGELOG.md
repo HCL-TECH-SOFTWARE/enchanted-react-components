@@ -11,7 +11,6 @@
 - Updated imports from '@storybook/react' to '@storybook/react-webpack5' in multiple component story files.
 - Changed default value summaries in story tables from boolean values to string representations for consistency.
 - Refactored ProgressBar stories to utilize EnumUploadStatus and ProgressItemType for status and type properties.
-- Added a debug log file to track the upgrade process and automigrations.
 - Removed deprecated addons and ensured compatibility with the new Storybook version.
 
 ### Breaking changes
