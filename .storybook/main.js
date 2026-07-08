@@ -39,7 +39,7 @@ module.exports = {
       ignored: ['**/node_modules/', '**/src/__tests__/unit/__image_snapshots__/**/*.png']
     };
 
-    // Added babel-loader to handle TypeScript and JSX files
+    // Added babel-loader to handle TypeScript and JSX files.
     config.module.rules.push({
       test: /\.(ts|tsx|js|jsx)$/,
       exclude: /node_modules/,
