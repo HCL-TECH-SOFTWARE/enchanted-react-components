@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react-webpack5';
 import SnackbarGroup, { SnackbarGroupItem } from './SnackbarGroup';
 import SnackbarContainer, { SnackbarContainerPosition } from '../Snackbar/SnackbarContainer';
 import { SnackbarVariants } from '../Snackbar/Snackbar';
@@ -49,7 +49,7 @@ export default {
       control: { type: 'number' },
       table: {
         defaultValue: {
-          summary: 5,
+          summary: '5',
         },
       },
     },
@@ -58,7 +58,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -67,7 +67,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -76,7 +76,7 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
