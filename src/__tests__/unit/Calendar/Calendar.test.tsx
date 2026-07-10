@@ -63,7 +63,6 @@ describe('Calendar - Month View', () => {
     expect(screen.getByRole('region', { name: 'Calendar' })).toBeInTheDocument();
   });
 
-
   it('Render calendar displays weekday headers', () => {
     renderWithProviders(
       <Calendar view="month" currentDate={dayjs('2024-01-15').toDate()} items={[]} />,
@@ -123,7 +122,6 @@ describe('Calendar - Month View', () => {
       title: '5 Expire pending',
     }));
   });
-
 });
 
 describe('Calendar - Week View', () => {
@@ -133,7 +131,6 @@ describe('Calendar - Week View', () => {
     );
     expect(screen.getByRole('region', { name: 'Calendar' })).toBeInTheDocument();
   });
-
 
   it('Render calendar displays 7 days with weekend', () => {
     renderWithProviders(
@@ -158,7 +155,6 @@ describe('Calendar - Week View', () => {
     expect(screen.getByText('Meeting')).toBeInTheDocument();
     expect(screen.getByText('10:00 AM')).toBeInTheDocument();
   });
-
 });
 
 describe('Calendar - Accessibility', () => {
@@ -168,7 +164,6 @@ describe('Calendar - Accessibility', () => {
     );
     expect(screen.getByLabelText('5 Expire pending')).toBeInTheDocument();
   });
-
 
   it('Render calendar items support keyboard activation', () => {
     const handleItemClick = jest.fn();
@@ -533,7 +528,6 @@ describe('Calendar - Edge Cases', () => {
 
     expect(screen.getByText('Leap Day Event')).toBeInTheDocument();
   });
-
 });
 
 describe('Calendar - Locale Support', () => {
@@ -759,5 +753,4 @@ describe('Calendar - Uncontrolled Mode', () => {
       expect(handleDateChange).toHaveBeenCalled();
     }
   });
-
 });
