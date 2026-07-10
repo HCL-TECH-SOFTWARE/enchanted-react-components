@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Added
+- Added the `Calendar` component.
 
 ### Fixed
 

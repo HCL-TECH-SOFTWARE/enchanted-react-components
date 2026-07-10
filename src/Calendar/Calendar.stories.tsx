@@ -110,12 +110,16 @@ export default {
       table: { disable: true },
     },
     labels: {
-      description: 'Custom labels for accessibility and localization. Includes weekday names, navigation labels, and date formats.',
-      table: { disable: true },
-    },
-    dateFormatter: {
-      description: 'Custom date formatting function. Receives a Dayjs date and format string, returns formatted string.',
-      table: { disable: true },
+      if: { arg: 'interactive' },
+      description: 'Custom labels for accessibility and localization. Includes weekday names, date formats, and time preposition. '
+        + 'Example: { calendar: "Calendar", weekdaysShort: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], '
+        + 'dateFormat: "MMMM YYYY", dateFormatLong: "MMMM D, YYYY", timePreposition: "at", dayFormat: "D", dayAbbreviationFormat: "ddd" }',
+      control: { type: 'object' },
+      table: {
+        defaultValue: {
+          summary: '{ calendar: "Calendar", weekdaysShort: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], dateFormat: "MMMM YYYY", ... }',
+        },
+      },
     },
     customStyles: {
       description: 'Custom CSS styles to apply to the calendar container. Can be a CSSProperties object or nested style object.',

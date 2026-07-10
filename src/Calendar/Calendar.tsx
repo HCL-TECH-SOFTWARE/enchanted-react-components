@@ -34,7 +34,6 @@ export interface CalendarProps {
   disabled?: boolean;
   customStyles?: React.CSSProperties | { [key: string]: React.CSSProperties };
   labels?: CalendarLabels;
-  dateFormatter?: (date: Dayjs, format: string) => string;
   width?: string | number;
   height?: string | number;
   responsive?: boolean;
@@ -42,10 +41,6 @@ export interface CalendarProps {
 
 const DEFAULT_LABELS: Required<CalendarLabels> = {
   calendar: 'Calendar',
-  previousMonth: 'Previous month',
-  nextMonth: 'Next month',
-  previousWeek: 'Previous week',
-  nextWeek: 'Next week',
   weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
   weekdaysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   dateFormat: 'MMMM YYYY',
@@ -71,7 +66,8 @@ const getCalendarStyle = (
     minHeight: responsive ? '400px' : undefined,
     maxWidth: responsive ? '100%' : undefined,
     border: `1px solid ${theme.palette.divider}`,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: '4px',
+    padding: '0px',
     overflow: 'hidden',
     display: 'flex',
     flexDirection: view === 'month' ? 'column' : 'row',
@@ -93,7 +89,6 @@ const Calendar = ({
   disabled = false,
   customStyles = {},
   labels,
-  dateFormatter,
   width,
   height,
   responsive = false,
@@ -240,8 +235,9 @@ const Calendar = ({
         role="grid"
         aria-readonly="true"
       >
-        {weeks.map((week) => {
+        {weeks.map((week, weekIndex) => {
           const weekKey = week[0]?.format('YYYY-MM-DD') || 'week';
+          const isLastWeek = weekIndex === weeks.length - 1;
           return (
             <Box
               key={weekKey}
@@ -268,6 +264,7 @@ const Calendar = ({
                     isToday={isToday}
                     isSelected={isSelected}
                     isFocused={focusedDate?.isSame(day, 'day')}
+                    isLastRow={isLastWeek}
                     disabled={disabled}
                     onDateClick={onDateChange}
                     onItemClick={onItemClick}

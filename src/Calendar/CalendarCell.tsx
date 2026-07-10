@@ -29,6 +29,7 @@ interface CalendarCellProps {
   isToday: boolean;
   isSelected: boolean;
   isFocused?: boolean;
+  isLastRow?: boolean;
   disabled?: boolean;
   onDateClick?: (date: Dayjs) => void;
   onItemClick?: (item: CalendarItemType) => void;
@@ -48,6 +49,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
   isToday,
   isSelected,
   isFocused = false,
+  isLastRow = false,
   disabled = false,
   onDateClick,
   onItemClick,
@@ -201,7 +203,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
           minWidth: 0,
           padding: '6px 4px',
           backgroundColor: theme.palette.background.paper,
-          borderBottom: `1px solid ${theme.palette.divider}`,
+          borderBottom: isLastRow ? 'none' : `1px solid ${theme.palette.divider}`,
           borderRight: `1px solid ${theme.palette.divider}`,
           overflow: 'hidden',
           '&:nth-of-type(7n)': {
@@ -213,45 +215,54 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
       aria-label={formatDate(date, dateFormatLong)}
     >
       <Box
-        sx={(theme) => {
-          return {
-            display: 'flex',
-            alignItems: 'flex-start',
-            padding: theme.spacing(0.25, 0.5),
-          };
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          padding: '4px 2px',
+          width: '28px',
+          height: '32px',
+          flex: 'none',
         }}
       >
         <Box
           ref={dateButtonRef}
           sx={(theme) => {
             return {
+              boxSizing: 'border-box',
               display: 'flex',
-              alignItems: 'center',
+              flexDirection: 'column',
               justifyContent: 'center',
-              width: theme.spacing(3),
-              height: theme.spacing(3),
-              borderRadius: '50%',
+              alignItems: 'center',
+              padding: '0px',
+              isolation: 'isolate',
+              width: '24px',
+              height: '24px',
+              border: isToday ? `1px solid ${theme.palette.text.primary}` : 'none',
+              borderRadius: '100px',
               cursor: disabled ? 'default' : 'pointer',
               backgroundColor: isSelected ? theme.palette.primary.main : 'transparent',
-              color: getDateColor(theme),
+              color: isSelected ? theme.palette.common.white : getDateColor(theme),
               position: 'relative',
+              flex: 'none',
               '&:hover': !disabled && !isSelected && {
                 backgroundColor: theme.palette.action.hover,
               },
               '&:focus-visible': {
-                outline: `1px solid ${theme.palette.action.focus}`,
-                outlineOffset: '3px',
+                border: `2px solid ${theme.palette.primary.main}`,
+                outline: 'none',
               },
-              ...(isToday && !isSelected && {
+              ...(!isToday && isSelected && {
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  bottom: '2px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: theme.spacing(0.5),
-                  height: theme.spacing(0.25),
-                  backgroundColor: isSelected ? theme.palette.common.white : theme.palette.primary.main,
+                  width: '4px',
+                  height: '0px',
+                  left: 'calc(50% - 2px)',
+                  bottom: '4px',
+                  border: `1px solid ${theme.palette.primary.main}`,
+                  flex: 'none',
+                  zIndex: 0,
                 },
               }),
             };
@@ -265,7 +276,18 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
           aria-pressed={isSelected}
           aria-disabled={disabled}
         >
-          <Typography variant="body2">
+          <Typography
+            variant="body2"
+            sx={{
+              fontFamily: 'Inter',
+              fontStyle: 'normal',
+              fontWeight: 400,
+              fontSize: '12px',
+              lineHeight: '16px',
+              flex: 'none',
+              zIndex: 2,
+            }}
+          >
             {formatDate(date, dayFormat)}
           </Typography>
         </Box>

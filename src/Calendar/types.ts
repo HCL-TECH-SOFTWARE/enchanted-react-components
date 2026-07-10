@@ -39,10 +39,6 @@ export interface CalendarItemColors {
 
 export interface CalendarLabels {
   calendar?: string;
-  previousMonth?: string;
-  nextMonth?: string;
-  previousWeek?: string;
-  nextWeek?: string;
   weekdays?: string[];
   weekdaysShort?: string[];
   dateFormat?: string;
