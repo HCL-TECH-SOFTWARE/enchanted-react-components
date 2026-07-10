@@ -20,6 +20,7 @@ module.exports = {
   ],
 
   "addons": [
+    "@storybook/addon-webpack5-compiler-babel",
     "@storybook/addon-links",
     "@storybook/addon-themes",
     "@storybook/addon-a11y",
@@ -31,6 +32,23 @@ module.exports = {
     options: {}
   },
 
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => {
+        if (prop.parent) {
+          return !prop.parent.fileName.includes('node_modules');
+        }
+        return true;
+      },
+    },
+  },
+
+  docs: {
+    autodocs: 'tag',
+  },
+
   staticDirs: ['../public'],
 
   webpackFinal: async (config) => {
@@ -38,24 +56,6 @@ module.exports = {
       ...config.watchOptions,
       ignored: ['**/node_modules/', '**/src/__tests__/unit/__image_snapshots__/**/*.png']
     };
-
-    // Added babel-loader to handle TypeScript and JSX files.
-    config.module.rules.push({
-      test: /\.(ts|tsx|js|jsx)$/,
-      exclude: /node_modules/,
-      use: [
-        {
-          loader: require.resolve('babel-loader'),
-          options: {
-            presets: [
-              require.resolve('@babel/preset-env'),
-              require.resolve('@babel/preset-react'),
-              require.resolve('@babel/preset-typescript'),
-            ],
-          },
-        },
-      ],
-    });
 
     return config;
   }

@@ -18,7 +18,7 @@ import { Box } from '@mui/material';
 import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
-import Accordion, { AccordionTypes, AccordionProps } from './Accordion';
+import Accordion, { AccordionTypes, AccordionPropsAll } from './Accordion';
 import AccordionSummary from './AccordionSummary';
 import AccordionDetails from './AccordionDetails';
 import Checkbox from '../Checkbox/Checkbox';
@@ -99,9 +99,7 @@ export default {
   },
 } as Meta<typeof Accordion>;
 
-interface ExtendedAccordionProps extends AccordionProps {
-  showCheckBox: boolean,
-  showSecondaryText: boolean,
+interface ExtendedAccordionProps extends AccordionPropsAll {
   showHoverActions: boolean,
 }
 

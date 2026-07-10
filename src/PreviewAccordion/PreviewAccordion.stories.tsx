@@ -18,7 +18,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import Button from '../Button/Button';
-import PreviewAccordion, { PreviewAccordionTypes, AccordionProps } from './PreviewAccordion';
+import PreviewAccordion, { PreviewAccordionTypes, PreviewAccordionPropsAll } from './PreviewAccordion';
 import PreviewAccordionSummary from './PreviewAccordionSummary';
 import PreviewAccordionDetails from './PreviewAccordionDetails';
 import Checkbox from '../Checkbox/Checkbox';
@@ -104,9 +104,7 @@ export default {
   },
 } as Meta<typeof PreviewAccordion>;
 
-interface ExtendedPreviewAccordionProps extends AccordionProps {
-  showCheckBox: boolean,
-  showSecondaryText: boolean,
+interface ExtendedPreviewAccordionProps extends PreviewAccordionPropsAll {
   showAvatar: boolean,
   showIcon: boolean,
   showHoverActions: boolean,
