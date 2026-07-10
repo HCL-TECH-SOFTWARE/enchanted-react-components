@@ -67,7 +67,7 @@ export default {
       control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
-    inversecolors: {  
+    inversecolors: {
       description: 'The colors of the Button are updated to the inverse color variant when inversecolors is enabled.',
       control: 'boolean',
       if: { arg: 'interactive' },
