@@ -83,30 +83,35 @@ export default {
     },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: String(DatePickerDefaults.hiddenLabel) },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
+      control: 'boolean',
       table: {
         defaultValue: { summary: String(DatePickerDefaults.nonEdit) },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: String(DatePickerDefaults.disabled) },
       },
     },
     fullWidth: {
       description: 'If `true`,the component will take the max width.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: String(DatePickerDefaults.required) },
       },

@@ -29,6 +29,7 @@ export default {
   argTypes: {
     open: {
       description: 'If true, the component is shown.',
+      control: 'boolean',
     },
     items: {
       description: 'Array of notification items to display.',

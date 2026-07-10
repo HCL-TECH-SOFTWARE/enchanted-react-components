@@ -38,6 +38,7 @@ export default {
   argTypes: {
     disabled: {
       description: 'If `true`, the component is disabled.',
+      control: 'boolean',
       table: {
         defaultValue: {
           summary: 'false',

@@ -35,12 +35,12 @@ export default {
     open: {
       description: 'To show or hide the panel',
       if: { arg: 'interactive' },
-      type: 'boolean',
+      control: 'boolean',
     },
     isPanelCollapsed: {
       description: 'To expand or collapse the panel',
       if: { arg: 'interactive' },
-      type: 'boolean',
+      control: 'boolean',
     },
     panelVariant: {
       description: 'Adds padding to the content of the panel',
@@ -54,15 +54,16 @@ export default {
     hideSidebar: {
       description: 'If true, the sidebar will be hidden',
       if: { arg: 'interactive' },
-      type: 'boolean',
+      control: 'boolean',
     },
     tabList: {
       description: 'Required. Array of objects of type TabsPanelProps',
+      control: 'object',
       if: { arg: 'interactive' },
     },
     selectedTabValue: {
       description: 'Index of the current selected tab',
-      control: false,
+      control: 'number',
     },
     toggleClose: {
       description: 'Event handler for close button',

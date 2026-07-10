@@ -27,10 +27,13 @@ export default {
   argTypes: {
     badgeContent: {
       description: 'The badgeContent of the Badge.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     color: {
       description: 'https://mui.com/material-ui/api/badge/#badge-prop-color',
+      options: ['default', 'primary', 'secondary', 'error', 'info', 'success', 'warning'],
+      control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
     overlap: {

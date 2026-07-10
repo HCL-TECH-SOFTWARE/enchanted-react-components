@@ -1943,6 +1943,11 @@ export default {
       description: 'https://mui.com/material-ui/api/icon/#icon-prop-children',
       defaultValue: { summary: 'false' },
     },
+    showendicon: {
+      control: false,
+      description: 'https://mui.com/material-ui/api/icon/#icon-prop-showendicon',
+      defaultValue: { summary: 'false' },
+    },
     classes: {
       control: false,
       description: 'https://mui.com/material-ui/api/icon/#icon-prop-classes',

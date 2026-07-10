@@ -25,10 +25,12 @@ export default {
   argTypes: {
     elevation: {
       description: 'The elevation of the Paper component.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     square: {
       description: 'The square of the Paper component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     variant: {

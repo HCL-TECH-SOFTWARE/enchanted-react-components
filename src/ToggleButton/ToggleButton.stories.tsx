@@ -41,6 +41,8 @@ export default {
     variant: {
       if: { arg: 'interactive' },
       description: 'Adds padding to the component',
+      options: [ToggleButtonVariants.WITH_PADDING, ToggleButtonVariants.WITHOUT_PADDING],
+      control: { type: 'radio' },
       table: {
         defaultValue: {
           summary: 'with padding',
@@ -49,34 +51,42 @@ export default {
     },
     disabled: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'Disables the ToggleButton',
     },
     selected: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'Set the togglebutton as selected',
     },
     tabIndex: {
       description: 'The tabIndex of the ToggleButton.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     centerRipple: {
       description: 'The centerRipple of the ToggleButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableRipple: {
       description: 'The disableRipple of the ToggleButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableTouchRipple: {
       description: 'The disableTouchRipple of the ToggleButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     focusRipple: {
       description: 'The focusRipple of the ToggleButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableFocusRipple: {
       description: 'The disableFocusRipple of the ToggleButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     color: {

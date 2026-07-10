@@ -39,25 +39,35 @@ export default {
   title: 'Inputs/MultipleSelectChip',
   component: MultipleSelectChip,
   argTypes: {
+    size: {
+      control: { type: 'radio' },
+      options: ['small', 'medium'],
+      description: 'The size of the component.',
+      table: { type: { summary: 'string' } },
+    },
     error: {
       control: 'boolean',
       table: {
         defaultValue: {
           summary: 'false',
         },
+        type: { summary: 'boolean' },
       },
       description: 'Indicates the combobox value is invalid.',
     },
     emptyOptions: {
       control: 'boolean',
+      table: { type: { summary: 'boolean' } },
       description:
         'Adds freeSolo and empty options array to the MultiSelectChip which would allow it to accept free undetermined values (e.g. any word or phrase)',
     },
     helperIconTooltip: {
+      control: 'text',
       table: {
         defaultValue: {
           summary: 'Some information about that component.',
         },
+        type: { summary: 'string' },
       },
       description:
         'Tooltip text hovering on ? mark for MultiSelectChip component',
@@ -84,6 +94,7 @@ export default {
         defaultValue: {
           summary: TooltipPlacement.BOTTOM,
         },
+        type: { summary: 'string' },
       },
     },
     required: {
@@ -92,44 +103,53 @@ export default {
         defaultValue: {
           summary: 'true',
         },
+        type: { summary: 'boolean' },
       },
       description:
         'Indicates that multiSelectchip is required field if it is true',
     },
     label: {
+      control: 'text',
       table: {
         defaultValue: {
           summary: 'Label',
         },
+        type: { summary: 'string' },
       },
       description: 'Label for MultiSelectChip component',
     },
     helperText: {
+      control: 'text',
       table: {
         defaultValue: {
           summary: 'Helper text',
         },
+        type: { summary: 'string' },
       },
       description: 'The helper text content.',
     },
     sx: {
       description:
         'The system prop that allows defining system overrides as well as additional CSS styles.',
+      control: false,
     },
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
+        type: { summary: 'boolean' },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
     placeholder: {
+      control: 'text',
       description:
         'The short hint displayed in the input before the user enters a value.',
       table: {
         defaultValue: {
           summary: 'Placeholder',
         },
+        type: { summary: 'string' },
       },
     },
     focused: {
@@ -138,6 +158,7 @@ export default {
         defaultValue: {
           summary: 'false',
         },
+        type: { summary: 'boolean' },
       },
       description: 'If `true`, the component is displayed in focused state.',
     },
@@ -147,6 +168,7 @@ export default {
         defaultValue: {
           summary: 'false',
         },
+        type: { summary: 'boolean' },
       },
       description: 'If `true`, the label is hidden.',
     },
@@ -156,41 +178,52 @@ export default {
         defaultValue: {
           summary: 'false',
         },
+        type: { summary: 'boolean' },
       },
       description: 'If `true` value cannot be editable',
     },
     actionProps: {
       description: 'Contains the action props and key-value',
+      control: false,
     },
     disabled: {
       description: 'If true, the component is disabled.',
+      control: 'boolean',
+      table: { type: { summary: 'boolean' } },
     },
     fullWidth: {
+      control: 'boolean',
       description:
         'If true, the input will take up the full width of its container.',
       table: {
         defaultValue: {
           summary: 'false',
         },
+        type: { summary: 'boolean' },
       },
     },
     filterSelectedOptions: {
+      control: 'boolean',
       description: 'If true, hide the selected options from the list box.',
       table: {
         defaultValue: {
           summary: 'true',
         },
+        type: { summary: 'boolean' },
       },
     },
     options: {
       description: 'Array of options.',
+      control: 'object',
     },
     id: {
+      control: 'text',
       description: 'Id of the component.',
       table: {
         defaultValue: {
           summary: 'id',
         },
+        type: { summary: 'string' },
       },
     },
     clearIcon: {

@@ -34,6 +34,7 @@ export default {
     translation: {
       description:
         "Use the Pagination component's exported enum TablePaginationLocalizationPlaceholders to write your translations",
+      control: false,
     },
     page: {
       description:

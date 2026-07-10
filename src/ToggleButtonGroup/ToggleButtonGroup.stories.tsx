@@ -40,10 +40,12 @@ export default {
     },
     disabled: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'Disables the ToggleButton',
     },
     exclusive: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'If value is exclusive or not',
     },
     orientation: {

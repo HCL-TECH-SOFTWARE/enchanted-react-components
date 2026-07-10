@@ -30,6 +30,8 @@ export default {
   argTypes: {
     variant: {
       description: 'The variant to use that will determine leading icon in snackbar.',
+      options: Object.values(SnackbarVariants),
+      control: { type: 'radio' },
       table: {
         defaultValue: {
           summary: 'information',
@@ -47,21 +49,26 @@ export default {
     },
     disabledSnackbar: {
       description: 'Renders snackbar buttons as disabled',
+      control: 'boolean',
     },
     buttonText: {
       description:
         'Text to show inside action Button. If empty string or no corresponding buttonAction function, it will hide itself.',
+      control: 'text',
       default: 'Button',
     },
     message: {
       description: 'The message to display.',
+      control: 'text',
       default: 'Alert message',
     },
     open: {
       description: 'If true, the component is shown.',
+      control: 'boolean',
     },
     showPlaceholderIcon: {
       description: 'Used to toggle visibility of placeholder icon.',
+      control: 'boolean',
     },
     progressVariant: {
       options: [CircularProgressVariants.DETERMINATE, CircularProgressVariants.INDETERMINATE],

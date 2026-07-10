@@ -36,9 +36,11 @@ export default {
   argTypes: {
     rows: {
       description: 'Set of rows of type GridColDef[].',
+      control: 'object',
     },
     columns: {
       description: 'Set of columns of type GridColDef[].',
+      control: 'object',
     },
     pageSize: {
       control: false,
@@ -46,9 +48,11 @@ export default {
     },
     checkboxSelection: {
       description: 'If true, it will activate checkbox selection.',
+      control: 'boolean',
     },
     hideFooter: {
       description: 'If true, the footer will be hidden.',
+      control: 'boolean',
     },
     colDef: {
       control: 'object',

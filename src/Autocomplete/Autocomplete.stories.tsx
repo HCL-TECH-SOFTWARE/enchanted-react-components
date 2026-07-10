@@ -169,13 +169,16 @@ export default {
     sx: {
       description:
         'The sx prop lets you work with a superset of CSS that packages all of the style functions exposed in @mui/system .',
+      control: false,
     },
     options: {
       description: 'Array of options.',
+      control: false,
     },
     freeSolo: {
       description:
         'If true, the Autocomplete is free solo, meaning that the user input is not bound to provided options.',
+      control: 'boolean',
     },
     actionProps: {
       control: false,

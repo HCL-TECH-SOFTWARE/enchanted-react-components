@@ -30,6 +30,7 @@ export default {
   argTypes: {
     hamburgerSpace: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: "It's a helper control to enable and disable the 'hamburgerSpace'.",
       table: {
         defaultValue: { summary: 'false' },
@@ -37,6 +38,7 @@ export default {
     },
     hideMiddleSection: {
       description: 'hideMiddleSection of Header component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     headerPageVariant: {

@@ -33,49 +33,59 @@ export default {
   argTypes: {
     open: {
       description: 'To show or hide the preview',
-      type: 'boolean',
+      control: 'boolean',
     },
     images: {
       description: 'List of images to be displayed in Preview',
+      control: false,
     },
     renditionLabel: {
       description: 'Label of rendition',
+      control: 'text',
     },
     isSelectButtonDisabled: {
       description: 'Enable/disable select button',
-      type: 'boolean',
+      control: 'boolean',
     },
     selectButtonTitle: {
       description: 'Text of select button',
+      control: 'text',
     },
     index: {
       description: 'Index of image to be shown',
-      type: 'number',
+      control: 'number',
     },
     handleSelect: {
       description: 'Event handler for select',
+      control: false,
     },
     handleDownload: {
       description: 'Event handler for download',
+      control: false,
     },
     assets: {
       description: 'Set of images',
+      control: 'object',
     },
     isFetchingAssets: {
       description: 'It indicates whether the assets prop is still fetching',
+      control: 'boolean',
     },
     isVersionComparison: {
       description: 'It indicates whether the preview component is used for version comparison',
-      type: 'boolean',
+      control: 'boolean',
     },
     isNextButtonDisabled: {
       description: 'Enable/disable next button.',
+      control: 'boolean',
     },
     isPreviousButtonDisabled: {
       description: 'Enable/disable previous button.',
+      control: 'boolean',
     },
     customHeaderTitle: {
       description: 'Custom header title.',
+      control: 'text',
     },
     overrideHandleNext: {
       control: false,

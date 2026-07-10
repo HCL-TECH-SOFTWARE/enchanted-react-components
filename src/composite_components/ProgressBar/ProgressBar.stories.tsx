@@ -54,14 +54,17 @@ export default {
       description: 'Uploaded file',
     },
     navigateFolder: {
+      control: false,
       action: 'navigateFolder',
       description: 'Click the folder icon to view the asset\'s collection.',
     },
     retryUploadItem: {
+      control: false,
       action: 'retryUploadItem',
       description: 'Click the icon to retry the upload.',
     },
     cancelItem: {
+      control: false,
       action: 'cancelItem',
       description: 'Click the icon to pause or stop file upload.',
     },
@@ -70,6 +73,7 @@ export default {
       description: 'Cancel all',
     },
     learnMoreOnFailure: {
+      control: false,
       action: 'learnMoreOnFailure',
       description: 'Learn more on failure',
     },
@@ -78,6 +82,7 @@ export default {
       description: 'String literals',
     },
     closeModal: {
+      control: false,
       action: 'closeModal',
       description: 'Close modal',
     },

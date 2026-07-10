@@ -26,6 +26,7 @@ export default {
   argTypes: {
     disabled: {
       description: 'If `true`, the component is disabled.',
+      control: 'boolean',
       table: {
         defaultValue: {
           summary: 'false',
@@ -34,9 +35,11 @@ export default {
     },
     spacing: {
       description: 'Determines if the link has padding or not.',
+      control: 'boolean',
     },
     hoverBackground: {
       description: 'Determines if the link has hover background or not.',
+      control: 'boolean',
     },
     underline: {
       description: 'Determines the underline of the Link component',
@@ -55,6 +58,7 @@ export default {
     },
     href: {
       description: 'The href of the link.',
+      control: 'text',
     },
     color: {
       control: false,

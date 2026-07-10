@@ -37,6 +37,7 @@ export default {
     },
     handleClick: {
       if: { arg: 'interactive' },
+      control: false,
       action: 'clicked',
       description: 'The function to be called when the action button is clicked.',
     },

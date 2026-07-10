@@ -27,9 +27,12 @@ export default {
   argTypes: {
     variant: {
       description: 'Determines if the checkbox has padding or not.',
+      options: [CheckboxVariants.WITHOUT_PADDING, CheckboxVariants.WITH_PADDING],
+      control: { type: 'radio' },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
       },
@@ -37,6 +40,7 @@ export default {
     indeterminate: {
       description:
         'If `true`, the component appears indeterminate. This does not set the native input element to indeterminate due to inconsistent behavior across browsers.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: 'false' },
       },

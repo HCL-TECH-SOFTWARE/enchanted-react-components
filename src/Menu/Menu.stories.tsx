@@ -45,6 +45,7 @@ export default {
     },
     showDivider: {
       description: 'Enabling this props will enable divider between menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -52,6 +53,7 @@ export default {
     },
     showFooterAction: {
       description: 'Enabling this props will show footer action button, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -67,6 +69,7 @@ export default {
     },
     showIcon: {
       description: 'Enabling this props will enable icon in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -74,6 +77,7 @@ export default {
     },
     showCheck: {
       description: 'Enabling this props will enable check in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -81,6 +85,7 @@ export default {
     },
     showHint: {
       description: 'Enabling this props will enable shortcuts in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -88,6 +93,7 @@ export default {
     },
     showCascading: {
       description: 'Enabling this props will enable nested menulist in menuitems.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -95,6 +101,7 @@ export default {
     },
     selected: {
       description: 'Enabling this props will make menuitem selected and then style and state can be checked.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -102,6 +109,7 @@ export default {
     },
     disabled: {
       description: 'Enabling this props will make menuitem disabled.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },

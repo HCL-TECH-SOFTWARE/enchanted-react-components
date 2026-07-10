@@ -99,14 +99,17 @@ export default {
   argTypes: {
     label: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the Search Criteria header.',
     },
     helperIconTooltip: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Help text for Search Criteria.',
     },
     footerButtonProps: {
       if: { arg: 'interactive' },
+      control: 'object',
       description: 'List of button props to render in the footer.',
     },
     showBody: {
@@ -119,14 +122,17 @@ export default {
     },
     secondaryText: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Secondary text for the Search Criteria summary.',
     },
     expandButtonLabel: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the expand button in Search Criteria summary.',
     },
     collapseButtonLabel: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the collapse button in Search Criteria summary.',
     },
     secondaryTextProps: {

@@ -32,6 +32,7 @@ export default {
   argTypes: {
     hideSubHeader: {
       description: 'Show / Hide the subheader ',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: {

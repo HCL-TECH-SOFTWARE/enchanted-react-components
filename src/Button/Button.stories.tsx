@@ -28,6 +28,7 @@ export default {
   argTypes: {
     disableElevation: {
       description: 'disableElevation of Button component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     size: {
@@ -38,10 +39,12 @@ export default {
     },
     fullWidth: {
       description: 'fullWidth of Button component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disabled: {
       description: 'disabled of Button component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: { summary: 'false' },
@@ -49,10 +52,13 @@ export default {
     },
     color: {
       description: 'color of Button component.',
+      options: ['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'],
+      control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
     tabIndex: {
       description: 'tabIndex of Button component.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     variant: {
@@ -61,8 +67,9 @@ export default {
       control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
-    inversecolors: {
+    inversecolors: {  
       description: 'The colors of the Button are updated to the inverse color variant when inversecolors is enabled.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     sx: {

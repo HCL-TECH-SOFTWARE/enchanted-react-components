@@ -100,45 +100,54 @@ export default {
     },
     error: {
       description: 'If `true`, the error state will be enabled.',
+      control: 'boolean',
       table: {
         disable: TextField.defaultProps?.error,
       },
     },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: TextField.defaultProps?.hiddenLabel },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
+      control: 'boolean',
       table: {
         defaultValue: { summary: TextField.defaultProps?.nonEdit },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: TextField.defaultProps?.disabled },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
+      control: 'boolean',
       table: {
         defaultValue: { summary: TextField.defaultProps?.required },
       },
     },
     sx: {
       description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      control: false,
     },
     fullWidth: {
       description: 'If true, the input will take up the full width of its container.',
+      control: 'boolean',
     },
     autoFocus: {
       description: 'If true, the input element is focused during the first mount.',
+      control: 'boolean',
     },
     multiline: {
       description: 'If true, a textarea element is rendered instead of an input.',
+      control: 'boolean',
     },
     endAdornmentAction: {
       control: false,

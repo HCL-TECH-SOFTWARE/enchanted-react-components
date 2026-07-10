@@ -35,10 +35,12 @@ export default {
     },
     gutterBottom: {
       description: 'The gutterBottom of the Typography component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     noWrap: {
       description: 'The noWrap of the Typography component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     component: {
@@ -46,8 +48,7 @@ export default {
       control: false,
     },
     paragraph: {
-      description: 'Deprecated－Use the component prop instead. The paragraph of the Typography component.',
-      if: { arg: 'interactive' },
+      description: 'Deprecated－Use the component prop instead. The paragraph of the Typography component.',      control: 'boolean',      if: { arg: 'interactive' },
     },
     ref: {
       description: 'https://mui.com/material-ui/api/typography/',

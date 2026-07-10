@@ -50,6 +50,7 @@ export default {
     },
     imageAltProps: {
       description: 'imageAltProps of Avatar component.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     alt: {

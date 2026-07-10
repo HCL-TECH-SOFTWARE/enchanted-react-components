@@ -29,6 +29,7 @@ export default {
     variant: {
       if: { arg: 'interactive' },
       options: [ChipVariants.CONTAINED, ChipVariants.OUTLINED],
+      control: { type: 'radio' },
       description: 'Changes background and border of Chip',
       table: {
         defaultValue: {
@@ -44,10 +45,12 @@ export default {
     },
     hideTrailingIcon: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'Toggles visibility of trailing icon, only for Storybook use',
     },
     selected: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'Toggles selected state for Storybook use only - adds :active state to component root',
     },
     leadingavatartype: {
@@ -63,14 +66,17 @@ export default {
     },
     disabled: {
       if: { arg: 'interactive' },
+      control: 'boolean',
       description: 'disables the Chip component',
     },
     leadingLetter: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Letters (max 2 - see Avatar documentation) to render as avatar of type string',
     },
     leadingImage: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Image to render as avatar using src of type string',
     },
     leadingImageAlt: {
@@ -90,6 +96,7 @@ export default {
     },
     label: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'label of the Chip component,',
     },
     leadingIcon: {

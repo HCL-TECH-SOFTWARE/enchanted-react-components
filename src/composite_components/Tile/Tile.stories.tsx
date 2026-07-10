@@ -133,14 +133,17 @@ export default {
     hasCheckBox: {
       description:
         'Enable or disable checkbox.',
+      control: 'boolean',
     },
     hasThumbnail: {
       description:
         'Enable or disable Thumbnail.',
+      control: 'boolean',
     },
     disabled: {
       description:
         'Enable or disable the component.',
+      control: 'boolean',
     },
     tileRef: { table: { disable: true } },
     ariaLabel: {

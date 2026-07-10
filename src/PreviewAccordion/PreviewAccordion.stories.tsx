@@ -90,6 +90,27 @@ export default {
       },
       description: 'Show a icon, only for Storybook use',
     },
+    defaultExpanded: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will be expanded by default',
+    },
+    disableGutters: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will not have gutters',
+    },
+    expanded: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will be expanded',
+    },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },

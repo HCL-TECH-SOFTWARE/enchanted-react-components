@@ -77,6 +77,7 @@ export default {
     },
     title: {
       description: 'Tooltip title. Zero-length titles string, undefined, null and false are never displayed.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     ref: {
