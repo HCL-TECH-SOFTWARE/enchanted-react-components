@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -21,6 +21,18 @@ import Paper from '../Paper';
 import Typography from '../Typography';
 import CalendarCell from './CalendarCell';
 import { CalendarItem, CalendarView, CalendarLabels } from './types';
+import {
+  DATE_KEY_FORMAT,
+  MONTH_YEAR_FORMAT,
+  FULL_DATE_FORMAT,
+  DAY_FORMAT,
+  DAY_ABBREVIATION_FORMAT,
+  WEEK_RANGE_FORMAT,
+  WEEK_RANGE_END_FORMAT,
+  DEFAULT_CALENDAR_WIDTH,
+  DEFAULT_CALENDAR_HEIGHT,
+  DEFAULT_MIN_HEIGHT,
+} from './constants';
 
 export interface CalendarProps {
   view?: CalendarView;
@@ -37,19 +49,20 @@ export interface CalendarProps {
   width?: string | number;
   height?: string | number;
   responsive?: boolean;
+  weekStartsOn?: 0 | 1;
 }
 
 const DEFAULT_LABELS: Required<CalendarLabels> = {
   calendar: 'Calendar',
   weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
   weekdaysShort: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  dateFormat: 'MMMM YYYY',
-  dateFormatLong: 'MMMM D, YYYY',
+  dateFormat: MONTH_YEAR_FORMAT,
+  dateFormatLong: FULL_DATE_FORMAT,
   timePreposition: 'at',
-  dayFormat: 'D',
-  dayAbbreviationFormat: 'ddd',
-  weekRangeFormat: 'MMM D',
-  weekRangeEndFormat: 'MMM D, YYYY',
+  dayFormat: DAY_FORMAT,
+  dayAbbreviationFormat: DAY_ABBREVIATION_FORMAT,
+  weekRangeFormat: WEEK_RANGE_FORMAT,
+  weekRangeEndFormat: WEEK_RANGE_END_FORMAT,
 };
 
 const getCalendarStyle = (
@@ -61,9 +74,9 @@ const getCalendarStyle = (
   responsive?: boolean,
 ) => {
   const baseStyles: React.CSSProperties = {
-    width: width || (responsive ? '100%' : '841px'),
-    height: height || (responsive ? 'auto' : '805px'),
-    minHeight: responsive ? '400px' : undefined,
+    width: width || (responsive ? '100%' : DEFAULT_CALENDAR_WIDTH),
+    height: height || (responsive ? 'auto' : DEFAULT_CALENDAR_HEIGHT),
+    minHeight: responsive ? DEFAULT_MIN_HEIGHT : undefined,
     maxWidth: responsive ? '100%' : undefined,
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: '4px',
@@ -92,6 +105,7 @@ const Calendar = ({
   width,
   height,
   responsive = false,
+  weekStartsOn = 1,
 }: CalendarProps) => {
   const mergedLabels = { ...DEFAULT_LABELS, ...labels };
   const [internalDate, setInternalDate] = useState<Dayjs>(() => {
@@ -120,12 +134,15 @@ const Calendar = ({
 
   const weekdays = useMemo(() => {
     const days = mergedLabels.weekdaysShort;
-    return showWeekend ? days : days.slice(0, 5);
-  }, [showWeekend, mergedLabels.weekdaysShort]);
+    const rotated = weekStartsOn === 0 ? [days[days.length - 1], ...days.slice(0, days.length - 1)] : days;
+    return showWeekend ? rotated : rotated.slice(0, 5);
+  }, [showWeekend, mergedLabels.weekdaysShort, weekStartsOn]);
 
   const calendarDays = useMemo(() => {
     if (view === 'week') {
-      const startOfWeek = activeDate.startOf('week').add(1, 'day');
+      const startOfWeek = weekStartsOn === 0
+        ? activeDate.startOf('week')
+        : activeDate.startOf('week').add(1, 'day');
       const days: Dayjs[] = [];
       const daysToShow = showWeekend ? 7 : 5;
 
@@ -137,8 +154,12 @@ const Calendar = ({
 
     const startOfMonth = activeDate.startOf('month');
     const endOfMonth = activeDate.endOf('month');
-    const startDate = startOfMonth.startOf('week').add(1, 'day');
-    const endDate = endOfMonth.endOf('week').add(1, 'day');
+    const startDate = weekStartsOn === 0
+      ? startOfMonth.startOf('week')
+      : startOfMonth.startOf('week').add(1, 'day');
+    const endDate = weekStartsOn === 0
+      ? endOfMonth.endOf('week')
+      : endOfMonth.endOf('week').add(1, 'day');
 
     const days: Dayjs[] = [];
     let currentDay = startDate;
@@ -149,12 +170,16 @@ const Calendar = ({
     }
 
     return days;
-  }, [activeDate, view, showWeekend]);
+  }, [activeDate, view, showWeekend, weekStartsOn]);
 
   const itemsByDate = useMemo(() => {
     const map = new Map<string, CalendarItem[]>();
     items.forEach((item) => {
-      const dateKey = dayjs(item.date).format('YYYY-MM-DD');
+      const date = dayjs(item.date);
+      if (!date.isValid()) {
+        return;
+      }
+      const dateKey = date.format(DATE_KEY_FORMAT);
       if (!map.has(dateKey)) {
         map.set(dateKey, []);
       }
@@ -164,7 +189,7 @@ const Calendar = ({
   }, [items]);
 
   const getItemsForDate = useCallback((date: Dayjs): CalendarItem[] => {
-    return itemsByDate.get(date.format('YYYY-MM-DD')) || [];
+    return itemsByDate.get(date.format(DATE_KEY_FORMAT)) || [];
   }, [itemsByDate]);
 
   const handleGridKeyDown = useCallback((event: KeyboardEvent, dateParam: Dayjs) => {
@@ -211,7 +236,7 @@ const Calendar = ({
       setFocusedDate(newFocusDate);
 
       const formattedDate = newFocusDate.locale(locale).format(mergedLabels.dateFormatLong);
-      const itemCount = itemsByDate.get(newFocusDate.format('YYYY-MM-DD'))?.length || 0;
+      const itemCount = itemsByDate.get(newFocusDate.format(DATE_KEY_FORMAT))?.length || 0;
       const itemText = itemCount === 1 ? '1 event' : `${itemCount} events`;
       setAnnouncement(`${formattedDate}, ${itemText}`);
 
@@ -236,7 +261,7 @@ const Calendar = ({
         aria-readonly="true"
       >
         {weeks.map((week, weekIndex) => {
-          const weekKey = week[0]?.format('YYYY-MM-DD') || 'week';
+          const weekKey = week[0]?.format(DATE_KEY_FORMAT) || 'week';
           const isLastWeek = weekIndex === weeks.length - 1;
           return (
             <Box
@@ -256,7 +281,7 @@ const Calendar = ({
 
                 return (
                   <CalendarCell
-                    key={day.format('YYYY-MM-DD')}
+                    key={day.format(DATE_KEY_FORMAT)}
                     date={day}
                     items={dayItems}
                     view="month"
@@ -300,7 +325,7 @@ const Calendar = ({
 
           return (
             <CalendarCell
-              key={day.format('YYYY-MM-DD')}
+              key={day.format(DATE_KEY_FORMAT)}
               date={day}
               items={dayItems}
               view="week"

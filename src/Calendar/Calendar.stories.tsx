@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -79,6 +79,15 @@ export default {
       control: { type: 'text' },
       table: {
         defaultValue: { summary: '805px (or auto if responsive)' },
+      },
+    },
+    weekStartsOn: {
+      if: { arg: 'interactive' },
+      description: 'Defines which day the week starts on. 0 = Sunday, 1 = Monday.',
+      control: { type: 'radio' },
+      options: [0, 1],
+      table: {
+        defaultValue: { summary: 1 },
       },
     },
     showItems: {

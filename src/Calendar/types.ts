@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -20,6 +20,13 @@ export type CalendarItemColor = 'neutral' | 'red' | 'orange' | 'blue' | 'green';
 
 export type CalendarItemVariant = 'block' | 'text';
 
+export interface CalendarItemColors {
+  iconBackground: string;
+  background: string;
+  border: string;
+  text: string;
+}
+
 export interface CalendarItem {
   id: string;
   title: string;
@@ -28,13 +35,7 @@ export interface CalendarItem {
   color: CalendarItemColor;
   variant: CalendarItemVariant;
   onClick?: (item: CalendarItem) => void;
-}
-
-export interface CalendarItemColors {
-  iconBackground: string;
-  background: string;
-  border: string;
-  text: string;
+  customColors?: CalendarItemColors;
 }
 
 export interface CalendarLabels {

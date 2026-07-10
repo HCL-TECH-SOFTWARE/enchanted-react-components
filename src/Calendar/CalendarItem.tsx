@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2026 HCL America Inc.                                          *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -27,7 +27,15 @@ interface CalendarItemProps {
   timePreposition?: string;
 }
 
-const getItemColors = (color: CalendarItemType['color'], theme: Theme): CalendarItemColors => {
+const getItemColors = (
+  color: CalendarItemType['color'],
+  theme: Theme,
+  customColors?: CalendarItemColors,
+): CalendarItemColors => {
+  if (customColors) {
+    return customColors;
+  }
+
   const colorMap: Record<CalendarItemType['color'], CalendarItemColors> = {
     neutral: {
       iconBackground: theme.palette.background.default,
@@ -120,7 +128,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
       >
         <Box
           sx={(theme) => {
-            const colors = getItemColors(item.color, theme);
+            const colors = getItemColors(item.color, theme, item.customColors);
             return {
               width: theme.spacing(1),
               height: theme.spacing(1),
@@ -164,7 +172,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
   return (
     <Box
       sx={(theme) => {
-        const colors = getItemColors(item.color, theme);
+        const colors = getItemColors(item.color, theme, item.customColors);
         return {
           display: 'flex',
           flexDirection: 'column',
@@ -215,7 +223,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
           <Typography
             variant="body2"
             sx={(theme) => {
-              const colors = getItemColors(item.color, theme);
+              const colors = getItemColors(item.color, theme, item.customColors);
               return {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
@@ -240,7 +248,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
             <Typography
               variant="body2"
               sx={(theme) => {
-                const colors = getItemColors(item.color, theme);
+                const colors = getItemColors(item.color, theme, item.customColors);
                 return {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
