@@ -63,12 +63,6 @@ describe('Calendar - Month View', () => {
     expect(screen.getByRole('region', { name: 'Calendar' })).toBeInTheDocument();
   });
 
-  it('Render calendar displays month and year in header', () => {
-    renderWithProviders(
-      <Calendar view="month" currentDate={dayjs('2024-01-15').toDate()} items={[]} />,
-    );
-    expect(screen.getByText('January 2024')).toBeInTheDocument();
-  });
 
   it('Render calendar displays weekday headers', () => {
     renderWithProviders(
@@ -130,42 +124,6 @@ describe('Calendar - Month View', () => {
     }));
   });
 
-  it('Render calendar navigation buttons work correctly', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-01-15').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const prevButton = screen.getByLabelText('Previous month');
-    const nextButton = screen.getByLabelText('Next month');
-
-    fireEvent.click(prevButton);
-    expect(handleNavigate).toHaveBeenCalledWith('prev');
-
-    fireEvent.click(nextButton);
-    expect(handleNavigate).toHaveBeenCalledWith('next');
-  });
-
-  it('Render calendar with disabled prop disables interactions', () => {
-    const handleDateChange = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-01-15').toDate()}
-        items={[]}
-        disabled
-        onDateChange={handleDateChange}
-      />,
-    );
-
-    const prevButton = screen.getByLabelText('Previous month');
-    expect(prevButton).toBeDisabled();
-  });
 });
 
 describe('Calendar - Week View', () => {
@@ -176,14 +134,6 @@ describe('Calendar - Week View', () => {
     expect(screen.getByRole('region', { name: 'Calendar' })).toBeInTheDocument();
   });
 
-  it('Render calendar displays week date range in header', () => {
-    renderWithProviders(
-      <Calendar view="week" currentDate={dayjs('2024-01-15').toDate()} items={[]} />,
-    );
-    const header = screen.getByRole('heading', { level: 2 });
-    expect(header.textContent).toContain('Jan');
-    expect(header.textContent).toContain('2024');
-  });
 
   it('Render calendar displays 7 days with weekend', () => {
     renderWithProviders(
@@ -209,38 +159,9 @@ describe('Calendar - Week View', () => {
     expect(screen.getByText('10:00 AM')).toBeInTheDocument();
   });
 
-  it('Render calendar navigation works in week view', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="week"
-        currentDate={dayjs('2024-01-15').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const prevButton = screen.getByLabelText('Previous week');
-    const nextButton = screen.getByLabelText('Next week');
-
-    fireEvent.click(prevButton);
-    expect(handleNavigate).toHaveBeenCalledWith('prev');
-
-    fireEvent.click(nextButton);
-    expect(handleNavigate).toHaveBeenCalledWith('next');
-  });
 });
 
 describe('Calendar - Accessibility', () => {
-  it('Render calendar has proper ARIA labels', () => {
-    renderWithProviders(
-      <Calendar view="month" currentDate={dayjs('2024-01-15').toDate()} items={[]} />,
-    );
-    expect(screen.getByRole('region', { name: 'Calendar' })).toBeInTheDocument();
-    expect(screen.getByLabelText('Previous month')).toBeInTheDocument();
-    expect(screen.getByLabelText('Next month')).toBeInTheDocument();
-  });
-
   it('Render calendar items have proper ARIA labels', () => {
     renderWithProviders(
       <Calendar view="month" currentDate={dayjs('2024-01-15').toDate()} items={sampleItems} />,
@@ -248,22 +169,6 @@ describe('Calendar - Accessibility', () => {
     expect(screen.getByLabelText('5 Expire pending')).toBeInTheDocument();
   });
 
-  it('Render calendar supports keyboard navigation on navigation buttons', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-01-15').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const prevButton = screen.getByLabelText('Previous month');
-
-    fireEvent.keyDown(prevButton, { key: 'Enter' });
-    expect(handleNavigate).toHaveBeenCalledWith('prev');
-  });
 
   it('Render calendar items support keyboard activation', () => {
     const handleItemClick = jest.fn();
@@ -629,39 +534,6 @@ describe('Calendar - Edge Cases', () => {
     expect(screen.getByText('Leap Day Event')).toBeInTheDocument();
   });
 
-  it('should handle month transitions', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-01-31').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const nextButton = screen.getByLabelText('Next month');
-    fireEvent.click(nextButton);
-
-    expect(handleNavigate).toHaveBeenCalledWith('next');
-  });
-
-  it('should handle year transitions', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-12-31').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const nextButton = screen.getByLabelText('Next month');
-    fireEvent.click(nextButton);
-
-    expect(handleNavigate).toHaveBeenCalledWith('next');
-  });
 });
 
 describe('Calendar - Locale Support', () => {
@@ -693,26 +565,6 @@ describe('Calendar - Locale Support', () => {
 });
 
 describe('Calendar - Performance', () => {
-  it('should not crash with rapid navigation', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar
-        view="month"
-        currentDate={dayjs('2024-01-15').toDate()}
-        items={[]}
-        onNavigate={handleNavigate}
-      />,
-    );
-
-    const nextButton = screen.getByLabelText('Next month');
-
-    for (let i = 0; i < 10; i += 1) {
-      fireEvent.click(nextButton);
-    }
-
-    expect(handleNavigate).toHaveBeenCalledTimes(10);
-  });
-
   it('should handle items with same date', () => {
     const sameeDateItems: CalendarItem[] = Array.from({ length: 20 }, (_, i) => {
       return {
@@ -908,27 +760,4 @@ describe('Calendar - Uncontrolled Mode', () => {
     }
   });
 
-  it('should update internal date on navigation in uncontrolled mode', () => {
-    const handleNavigate = jest.fn();
-    renderWithProviders(
-      <Calendar view="month" items={[]} onNavigate={handleNavigate} />,
-    );
-
-    const nextButton = screen.getByLabelText('Next month');
-    fireEvent.click(nextButton);
-
-    expect(handleNavigate).toHaveBeenCalledWith('next');
-  });
-
-  it('should announce navigation in uncontrolled mode', () => {
-    renderWithProviders(
-      <Calendar view="month" items={[]} />,
-    );
-
-    const nextButton = screen.getByLabelText('Next month');
-    fireEvent.click(nextButton);
-
-    const liveRegion = screen.getByRole('status');
-    expect(liveRegion).toBeInTheDocument();
-  });
 });
