@@ -278,15 +278,6 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
         >
           <Typography
             variant="body2"
-            sx={{
-              fontFamily: 'Inter',
-              fontStyle: 'normal',
-              fontWeight: 400,
-              fontSize: '12px',
-              lineHeight: '16px',
-              flex: 'none',
-              zIndex: 2,
-            }}
           >
             {formatDate(date, dayFormat)}
           </Typography>

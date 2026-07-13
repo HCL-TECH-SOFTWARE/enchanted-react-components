@@ -56,15 +56,6 @@ export default {
         defaultValue: { summary: false },
       },
     },
-    locale: {
-      if: { arg: 'interactive' },
-      description: 'Locale string for date formatting (e.g., "en", "fr", "de"). Affects day names and date display format.',
-      control: { type: 'select' },
-      options: ['en', 'fr', 'de', 'es', 'it', 'ja', 'zh', 'pt', 'ru', 'ar'],
-      table: {
-        defaultValue: { summary: 'en' },
-      },
-    },
     width: {
       if: { arg: 'interactive' },
       description: 'Custom width for the calendar. Can be a number (pixels) or string (e.g., "100%", "500px").',
@@ -97,6 +88,9 @@ export default {
       table: {
         defaultValue: { summary: true },
       },
+    },
+    locale: {
+      table: { disable: true },
     },
     items: {
       description: 'Array of calendar items to display. Each item must have id, title, date, color, and variant properties.',
