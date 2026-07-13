@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { FormControl } from '@mui/material';
 
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
@@ -28,25 +28,25 @@ export default {
     disableRipple: {
       description: 'If `true`, the ripple effect is disabled.',
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     checked: {
       description: 'If `true`, the component is checked.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     ref: {

@@ -14,8 +14,9 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
-import { userEvent, within } from '@storybook/testing-library';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { userEvent, within } from 'storybook/test';
+import { SvgIconProps } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 
@@ -30,42 +31,49 @@ export default {
     multiple: {
       control: 'boolean',
       description: 'Is use for a special configuration to select multiple items.',
-      defaultValue: { summary: false },
+      defaultValue: { summary: 'false' },
     },
     displayEmpty: {
       control: 'boolean',
       if: { arg: 'multiple' },
       description:
         'If the property `multiple` is `true` we can hide the placeholder with this property. Is `displayEmpty=true` the placeholder will be displayed.',
-      defaultValue: { summary: false },
+      defaultValue: { summary: 'false' },
     },
     label: {
       description: 'The label of the input.',
+      control: 'text',
     },
     helperText: {
       description: 'The label of the helpertext.',
+      control: 'text',
     },
     enableHelpHoverEffect: {
       control: 'boolean',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
       description: 'If true, the helper icon displays a gray background when hovered.',
     },
     placeholder: {
       description: 'The short hint displayed in the input before the user enters a value.',
+      control: 'text',
     },
     required: {
       description: 'If true, the input element is required.',
+      control: 'boolean',
     },
     disabled: {
       description: 'If true, the component is disabled.',
+      control: 'boolean',
     },
     error: {
       description: 'If true, the input will indicate an error.',
+      control: 'boolean',
     },
     fullWidth: {
       description: 'If true, the input will take up the full width of its container.',
+      control: 'boolean',
     },
     helperIconTooltip: {
       table: {
@@ -77,12 +85,13 @@ export default {
     },
     unitLabel: {
       description: 'Attribute which can be used to define the unit of that component',
+      control: 'text',
     },
     hiddenLabel: {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description:
@@ -92,16 +101,18 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
       description: 'If `true` value cannot be editable',
     },
     autoFocus: {
       description: 'If true, the input element is focused during the first mount.',
+      control: 'boolean',
     },
     sx: {
       description: 'The system prop that allows defining system overrides as well as additional CSS styles.',
+      control: false,
     },
     ref: {
       control: false,
@@ -141,7 +152,7 @@ const Template: StoryFn<typeof Select> = (args) => {
     setValues(typeof value === 'string' ? value.split(',') : value);
   };
 
-  let customIcon: React.ComponentType<React.SVGProps<SVGSVGElement>> | undefined;
+  let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
     case 'CaretDownIcon':
       customIcon = CaretDownIcon;
@@ -156,7 +167,7 @@ const Template: StoryFn<typeof Select> = (args) => {
   return (
     <Select
       {...args}
-      value={values}
+      value={values as unknown as string}
       onChange={handleChange}
       renderValue={(selected) => {
         if ((selected as string[]).length === 0) {

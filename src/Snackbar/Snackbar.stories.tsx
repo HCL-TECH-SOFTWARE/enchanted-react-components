@@ -13,9 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
-import Snackbar, { SnackbarVariants } from './Snackbar';
+import Snackbar, { SnackbarProps, SnackbarVariants } from './Snackbar';
 import SnackbarContainer, { SnackbarContainerPosition } from './SnackbarContainer';
 import { CircularProgressVariants } from '../ProgressIndicator/CircularProgress';
 
@@ -30,6 +30,8 @@ export default {
   argTypes: {
     variant: {
       description: 'The variant to use that will determine leading icon in snackbar.',
+      options: Object.values(SnackbarVariants),
+      control: { type: 'radio' },
       table: {
         defaultValue: {
           summary: 'information',
@@ -41,27 +43,32 @@ export default {
       control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
     disabledSnackbar: {
       description: 'Renders snackbar buttons as disabled',
+      control: 'boolean',
     },
     buttonText: {
       description:
         'Text to show inside action Button. If empty string or no corresponding buttonAction function, it will hide itself.',
+      control: 'text',
       default: 'Button',
     },
     message: {
       description: 'The message to display.',
+      control: 'text',
       default: 'Alert message',
     },
     open: {
       description: 'If true, the component is shown.',
+      control: 'boolean',
     },
     showPlaceholderIcon: {
       description: 'Used to toggle visibility of placeholder icon.',
+      control: 'boolean',
     },
     progressVariant: {
       options: [CircularProgressVariants.DETERMINATE, CircularProgressVariants.INDETERMINATE],
@@ -78,7 +85,7 @@ export default {
       control: { type: 'range', min: 0, max: 100 },
       table: {
         defaultValue: {
-          summary: 0,
+          summary: '0',
         },
       },
     },
@@ -110,7 +117,11 @@ export default {
 
 // eslint-why Storybook args require flexible typing
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args: any) => {
+interface ExtendSnackbarProps extends SnackbarProps {
+  showStackSnackbar: boolean;
+}
+
+const InteractiveExampleTemplate: StoryFn<ExtendSnackbarProps> = (args) => {
   const messageTwo = `${args.message} > a bit longer`;
   const messageThree = `${args.message} > a bit much more longer ;-)`;
   if (args.showStackSnackbar) {

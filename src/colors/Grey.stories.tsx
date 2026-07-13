@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import * as React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 import { Theme } from '@mui/material';
 import { DataGrid, ExtendedGridColDef } from '../DataGrid';
@@ -43,7 +43,7 @@ const columns: ExtendedGridColDef[] = [
           return {
             width: '100%',
             height: '100%',
-            backgroundColor: theme.palette.grey[params.row.color],
+            backgroundColor: theme.palette.grey[params.row.color as keyof typeof theme.palette.grey],
           };
         }}
         />

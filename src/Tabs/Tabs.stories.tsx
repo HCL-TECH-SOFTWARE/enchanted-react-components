@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconPaintBrush from '@hcl-software/enchanted-icons/dist/carbon/es/paint-brush';
 import Box from '@mui/material/Box';
 import Tabs from './Tabs';
@@ -31,11 +31,21 @@ export default {
       options: ['horizontal', 'vertical'],
       description: 'Orientation of tabs',
     },
+    showIcon: {
+      description: 'Show / Hide the icon in tabs',
+      control: 'boolean',
+      table: { type: { summary: 'boolean' } },
+    },
+    showLabel: {
+      description: 'Show / Hide the label in tabs',
+      control: 'boolean',
+      table: { type: { summary: 'boolean' } },
+    },
     iconposition: {
       control: { type: 'radio' },
-      if: {
-        arg: 'orientation', eq: 'horizontal', then: { options: ['start', 'top'] }, value: 'start',
-      },
+      options: ['start', 'top'],
+      if: { arg: 'orientation', eq: 'horizontal' },
+      table: { type: { summary: 'string' } },
     },
     classes: {
       description: 'https://mui.com/material-ui/api/tabs/#classes',
@@ -63,6 +73,7 @@ export default {
     },
     tabIndex: {
       description: 'The tabIndex of the Tabs.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     centerRipple: {
@@ -101,7 +112,7 @@ export default {
       control: false,
     },
     'aria-label': {
-      control: 'false',
+      control: false,
       description: 'The label for the Tabs as a string.',
     },
     'aria-labelledby': { table: { disable: true } },

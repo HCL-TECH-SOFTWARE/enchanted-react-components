@@ -17,7 +17,7 @@ import React from 'react';
 import {
   StoryFn,
   Meta,
-} from '@storybook/react';
+} from '@storybook/react-webpack5';
 
 import LinearProgress from './LinearProgress';
 

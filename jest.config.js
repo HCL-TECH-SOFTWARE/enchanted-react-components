@@ -17,7 +17,14 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jest-environment-jsdom',
   transform: {
-    '\\.(ts|tsx)?$': 'ts-jest',
+    '\\.(ts|tsx)?$': ['ts-jest', {
+      tsconfig: {
+        baseUrl: '.',
+        paths: {
+          'storybook/internal/csf-tools': ['node_modules/storybook/dist/csf-tools/index'],
+        },
+      },
+    }],
     '\\.(js|jsx)?$': './jestTransform.js',
   },
   transformIgnorePatterns: ['../../node_modules/(?!(@carbon)/)'],

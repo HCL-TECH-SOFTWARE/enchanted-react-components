@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconAvatar from '@hcl-software/enchanted-icons/dist/carbon/es/folder';
 
 import Typography from '../Typography';
@@ -50,6 +50,7 @@ export default {
     },
     imageAltProps: {
       description: 'imageAltProps of Avatar component.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     alt: {
