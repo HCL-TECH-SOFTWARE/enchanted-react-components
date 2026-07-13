@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Grid, Box, Typography } from '@mui/material';
 import Tooltip, {
   TooltipPlacement, TooltipSizes, TooltipTypes,
@@ -77,6 +77,7 @@ export default {
     },
     title: {
       description: 'Tooltip title. Zero-length titles string, undefined, null and false are never displayed.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     ref: {

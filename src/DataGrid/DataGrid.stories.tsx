@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { GridSortModel, GridColumnVisibilityModel } from '@mui/x-data-grid';
 import DataGrid from './DataGrid';
 import {
@@ -31,33 +31,34 @@ export default {
     checkboxSelection: {
       if: { arg: 'interactive' },
       description: 'If true, the grid get a first column with a checkbox that allows to select rows.',
-      type: 'boolean',
+      control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
     rows: {
       description: 'Required. Array of objects of type GridRowsProp. Must always have a unique row identifier preferably id.',
-      // if: { arg: 'interactive' },
+      control: 'object',
     },
     columns: {
-      // if: { arg: 'interactive' },
+      control: 'object',
       description: 'Required. Array of objects of type GridColumns.',
     },
     disableColumnMenu: {
       if: { arg: 'interactive' },
       description: 'If true, the column menu is disabled.',
+      control: 'boolean',
       table: { disable: false },
     },
     stickyHeader: {
       description: ' If true, it will make column header fixed on the top.',
       if: { arg: 'interactive' },
-      type: 'boolean',
+      control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
@@ -66,7 +67,7 @@ export default {
       description: 'Set the height in pixel of a row in the grid.',
       table: {
         defaultValue: {
-          summary: 37,
+          summary: '37',
         },
       },
     },
@@ -75,26 +76,27 @@ export default {
       description: 'Set the height in pixel of the column headers in the grid.',
       table: {
         defaultValue: {
-          summary: 37,
+          summary: '37',
         },
       },
     },
     hideFooter: {
       if: { arg: 'interactive' },
       description: 'If true, the grid get the footer will be visible.',
-      type: 'boolean',
+      control: 'boolean',
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },
     autoHeight: {
       if: { arg: 'interactive' },
       description: 'If true, the grid height is dynamic and follow the number of rows in the grid.',
+      control: 'boolean',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -117,7 +119,7 @@ export default {
       control: false,
       table: {
         defaultValue: {
-          summary: [10, 25, 50, 100],
+          summary: '[10, 25, 50, 100]',
         },
       },
     },
@@ -136,6 +138,15 @@ export default {
     focusedRow: {
       control: false,
       description: 'Props state to tell data grid what is the focused row',
+    },
+    isRowClickable: {
+      description: 'If true, the row will be clickable and will have a hover effect.',
+      control: 'boolean',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+      },
     },
   },
 } as Meta<typeof DataGrid>;

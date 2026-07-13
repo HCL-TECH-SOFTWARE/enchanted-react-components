@@ -15,7 +15,7 @@
 import { MatchImageSnapshotOptions } from 'jest-image-snapshot';
 import fs from 'fs';
 import * as puppeteer from 'puppeteer';
-import { readCsf, CsfFile, CsfOptions } from '@storybook/csf-tools';
+import { readCsf, CsfFile, CsfOptions } from 'storybook/internal/csf-tools';
 
 import { toMatchImageSnapshotExtended } from './jestMatcherExtended';
 

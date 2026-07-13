@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Pagination from './Pagination';
 
 export default {
@@ -34,6 +34,7 @@ export default {
     translation: {
       description:
         "Use the Pagination component's exported enum TablePaginationLocalizationPlaceholders to write your translations",
+      control: false,
     },
     page: {
       description:

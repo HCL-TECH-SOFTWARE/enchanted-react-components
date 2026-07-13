@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React, { useState } from 'react';
-import { Meta, StoryFn } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
 import { ImageList } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import IconVideoChat from '@hcl-software/enchanted-icons/dist/carbon/es/video--chat';
@@ -54,7 +54,7 @@ export default {
       },
     },
     itemId: {
-      control: 'false',
+      control: false,
       description:
         ' Unique Id of the Tile component.',
     },
@@ -63,7 +63,7 @@ export default {
         'Enable or disable avatar if image is loaded.',
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
@@ -76,13 +76,13 @@ export default {
     tileActions: {
       description:
         'Actions to be displayed on the tilebar.',
-      control: 'false',
+      control: false,
     },
     isTrash: {
       control: { type: 'boolean' },
       description: 'Enable trash view mode. Shows lock notice badge on media tiles (with thumbnail) and info icon on collection tiles (without thumbnail).',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     trashInfoTooltip: {
@@ -120,41 +120,44 @@ export default {
     },
     handleCheckboxChange: {
       description: 'Event handler for checkbox change',
-      control: 'false',
+      control: false,
     },
     itemClickedAction: {
       description: 'Event handler for tile click',
-      control: 'false',
+      control: false,
     },
     handlePreviewAction: {
       description: 'Event handler for preview',
-      control: 'false',
+      control: false,
     },
     hasCheckBox: {
       description:
         'Enable or disable checkbox.',
+      control: 'boolean',
     },
     hasThumbnail: {
       description:
         'Enable or disable Thumbnail.',
+      control: 'boolean',
     },
     disabled: {
       description:
         'Enable or disable the component.',
+      control: 'boolean',
     },
     tileRef: { table: { disable: true } },
     ariaLabel: {
-      control: 'false',
+      control: false,
       description: 'Aria-label for the tile. Provides a direct text description to the tile for screen readers.',
     },
     ariaLabelledBy: { table: { disable: true } },
     avatar: {
       description: 'Avatar to be displayed on the tile.',
-      control: 'false',
+      control: false,
     },
     imageAltName: {
       description: 'Alt text for the image.',
-      control: 'false',
+      control: false,
     },
     activeItem: { table: { disable: true } },
   },
@@ -378,7 +381,6 @@ VisualTest.args = {
   hideAvatarIfImageIsLoaded: true,
   menuSize: 'medium',
   hasThumbnail: true,
-  showSyncIcon: false,
   isTrash: false,
   trashInfoTooltip: '10 days',
   lockNoticeText: '< 1 hour',

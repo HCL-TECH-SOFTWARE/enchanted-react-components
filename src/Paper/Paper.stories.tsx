@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Paper from './Paper';
 import PlaceholderArea from '../utils/PlaceholderArea';
 import Typography from '../Typography';
@@ -25,10 +25,12 @@ export default {
   argTypes: {
     elevation: {
       description: 'The elevation of the Paper component.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     square: {
       description: 'The square of the Paper component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     variant: {

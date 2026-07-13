@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import IconRocket from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import IconCheckmark from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark';
@@ -45,16 +45,18 @@ export default {
     },
     showDivider: {
       description: 'Enabling this props will enable divider between menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     showFooterAction: {
       description: 'Enabling this props will show footer action button, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     footerActionButtonText: {
@@ -67,44 +69,50 @@ export default {
     },
     showIcon: {
       description: 'Enabling this props will enable icon in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     showCheck: {
       description: 'Enabling this props will enable check in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     showHint: {
       description: 'Enabling this props will enable shortcuts in menuitems, only for Storybook use',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     showCascading: {
       description: 'Enabling this props will enable nested menulist in menuitems.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     selected: {
       description: 'Enabling this props will make menuitem selected and then style and state can be checked.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     disabled: {
       description: 'Enabling this props will make menuitem disabled.',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     footerActionFunction: {

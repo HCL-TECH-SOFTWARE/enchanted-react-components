@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Grid } from '@mui/material';
 import ButtonGroup from './ButtonGroup';
 import Button from '../../Button';
@@ -25,10 +25,12 @@ export default {
   argTypes: {
     ref: {
       description: 'ref of ButtonGroup component.',
+      control: false,
       if: { arg: 'interactive' },
     },
     sx: {
       description: 'sx of ButtonGroup component.',
+      control: false,
       if: { arg: 'interactive' },
     },
     variant: {
@@ -51,34 +53,43 @@ export default {
     },
     fullWidth: {
       description: 'fullWidth of ButtonGroup component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableRipple: {
       description: 'disableRipple of ButtonGroup component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableFocusRipple: {
       description: 'disableFocusRipple of ButtonGroup component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableElevation: {
       description: 'disableFocusRipple of ButtonGroup component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disabled: {
       description: 'disabled of ButtonGroup component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     color: {
       description: 'color of ButtonGroup component.',
+      options: ['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'],
+      control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
     classes: {
       description: 'classes of ButtonGroup component.',
+      control: false,
       if: { arg: 'interactive' },
     },
     children: {
       description: 'children of ButtonGroup component.',
+      control: false,
       if: { arg: 'interactive' },
     },
   },

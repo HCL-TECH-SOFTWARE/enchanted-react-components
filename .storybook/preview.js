@@ -18,22 +18,21 @@ import { ensureToGetColor } from '../src/theme';
 import { Colors, ColorNames } from '../src/colors';
 
 import { ThemeDirectionType, ThemeModeType } from '../src/theme';
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
   backgrounds: {
-    default: 'light',
-    values: [
-      {
+    options: {
+      light: {
         name: 'light',
         value: ensureToGetColor(Colors.get(ColorNames.INTERFACE_BG_PAPER)),
       },
-      {
+
+      dark: {
         name: 'dark',
         value: ensureToGetColor(Colors.get(ColorNames.INTERFACE_BG_PAPER_INVERSE)),
       }
-    ]
+    }
   },
   controls: {
     matchers: {
@@ -89,3 +88,10 @@ export const globalTypes = {
 };
 
 export const decorators = [withThemeProvider];
+
+export const initialGlobals = {
+  backgrounds: {
+    value: 'light'
+  }
+};
+export const tags = ['autodocs'];

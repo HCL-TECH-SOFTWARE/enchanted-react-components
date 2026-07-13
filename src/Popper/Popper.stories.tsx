@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Button from '@hcl-software/enchanted-icons/dist/carbon/es/column';
 import { debounce } from '@mui/material';
 
@@ -32,10 +32,11 @@ export default {
   argTypes: {
     hideSubHeader: {
       description: 'Show / Hide the subheader ',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: {
-          summary: false,
+          summary: 'false',
         },
       },
     },

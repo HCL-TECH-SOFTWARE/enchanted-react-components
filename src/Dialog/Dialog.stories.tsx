@@ -13,9 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
-import Dialog from './Dialog';
+import Dialog, { DialogSizes } from './Dialog';
 import Button from '../Button';
 import Typography from '../Typography';
 
@@ -25,6 +25,8 @@ export default {
   argTypes: {
     size: {
       description: 'Sets max-width of Dialog',
+      options: Object.values(DialogSizes),
+      control: { type: 'radio' },
       if: { arg: 'interactive' },
       table: {
         defaultValue: {
@@ -34,23 +36,27 @@ export default {
     },
     withPadding: {
       description: 'Adds default padding of 12px all around DialogContent if set to `true`',
+      control: 'boolean',
       if: { arg: 'interactive' },
       table: {
         defaultValue: {
-          summary: true,
+          summary: 'true',
         },
       },
     },
     onClose: {
       description: 'Callback fired when the component requests to be closed.',
+      control: false,
       if: { arg: 'interactive' },
     },
     hideHeader: {
       description: 'Toggles header or DialogTitle, if `true`, then it is hidden',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     hideFooter: {
       description: 'Toggles footer or DialogActions, if `true`, then it is hidden',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     BackdropComponent: {
