@@ -108,10 +108,11 @@ export default {
   },
 } as Meta<typeof Snackbar>;
 
-const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args) => {
+// eslint-why Storybook args require flexible typing
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const InteractiveExampleTemplate: StoryFn<typeof Snackbar> = (args: any) => {
   const messageTwo = `${args.message} > a bit longer`;
   const messageThree = `${args.message} > a bit much more longer ;-)`;
-  // @ts-ignore for test only, its purpose is to show snackbar when its stack
   if (args.showStackSnackbar) {
     return (
       <SnackbarContainer position={SnackbarContainerPosition.LEFT}>
@@ -139,7 +140,6 @@ InteractiveExample.args = {
   buttonText: 'Button',
   placeholderIcon: <ChevronDownIcon />,
   showPlaceholderIcon: true,
-  showStackSnackbar: false,
 };
 
 const VisualTestTemplate: StoryFn<typeof Snackbar> = (args) => {
