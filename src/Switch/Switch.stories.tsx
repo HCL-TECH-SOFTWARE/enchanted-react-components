@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 
 import { FormControl } from '@mui/material';
 
@@ -29,7 +29,7 @@ export default {
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     ref: {

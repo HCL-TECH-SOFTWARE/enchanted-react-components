@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconAdd from '@hcl-software/enchanted-icons/dist/carbon/es/add';
 import { Grid } from '@mui/material';
 import IconButton, { IconButtonSizes, IconButtonVariants } from './IconButton';
@@ -38,6 +38,8 @@ export default {
     variant: {
       if: { arg: 'interactive' },
       description: 'Adds padding to the button',
+      options: [IconButtonVariants.WITH_PADDING, IconButtonVariants.WITHOUT_PADDING],
+      control: { type: 'radio' },
       table: {
         defaultValue: {
           summary: 'without padding',
@@ -52,46 +54,57 @@ export default {
     },
     selected: {
       description: 'Set IconButton as selected.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     showendicon: {
       description: 'Show endIcon if set to true.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     label: {
       description: 'Label of the IconButton',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     tabIndex: {
       description: 'The tabIndex of the IconButton.',
+      control: 'number',
       if: { arg: 'interactive' },
     },
     disabled: {
       description: 'The disabled of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     inversecolors: {
       description: 'The colors of the IconButton are updated to the inverse color variant when inversecolors is enabled.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     centerRipple: {
       description: 'The centerRipple of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableRipple: {
       description: 'The disableRipple of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableTouchRipple: {
       description: 'The disableTouchRipple of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     focusRipple: {
       description: 'The focusRipple of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     disableFocusRipple: {
       description: 'The disableFocusRipple of the IconButton.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     edge: {

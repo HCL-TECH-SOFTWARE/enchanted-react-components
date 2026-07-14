@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import MailIcon from '@hcl-software/enchanted-icons/dist/carbon/es/email';
 import { Grid } from '@mui/material';
 
@@ -27,10 +27,13 @@ export default {
   argTypes: {
     badgeContent: {
       description: 'The badgeContent of the Badge.',
+      control: 'text',
       if: { arg: 'interactive' },
     },
     color: {
       description: 'https://mui.com/material-ui/api/badge/#badge-prop-color',
+      options: ['default', 'primary', 'secondary', 'error', 'info', 'success', 'warning'],
+      control: { type: 'radio' },
       if: { arg: 'interactive' },
     },
     overlap: {

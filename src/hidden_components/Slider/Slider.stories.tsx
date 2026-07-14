@@ -16,7 +16,7 @@ import React from 'react';
 import {
   StoryFn,
   Meta,
-} from '@storybook/react';
+} from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 
 import Slider from './Slider';

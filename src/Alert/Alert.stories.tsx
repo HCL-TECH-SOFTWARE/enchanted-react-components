@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Grid } from '@mui/material';
 import IconRocket from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import Close from '@hcl-software/enchanted-icons/dist/carbon/es/close';
@@ -62,7 +62,7 @@ export default {
       control: { type: 'number' },
       table: {
         defaultValue: {
-          summary: 240,
+          summary: '240',
         },
       },
     },

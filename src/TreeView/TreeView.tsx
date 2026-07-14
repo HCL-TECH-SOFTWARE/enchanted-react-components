@@ -13,7 +13,8 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import MuiTreeView, { TreeViewProps } from '@mui/lab/TreeView';
+import MuiTreeView from '@mui/lab/TreeView';
+import type { TreeViewProps } from '@mui/lab/TreeView';
 import '@mui/lab/themeAugmentation';
 import { Components, Theme } from '@mui/material';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
@@ -22,7 +23,7 @@ import { TreeViewContext } from './TreeItem';
 
 export { TreeViewContext, TreeDepthContext } from './TreeItem';
 
-export { TreeViewProps };
+export type { TreeViewProps };
 
 export type EnhancedTreeViewProps = TreeViewProps & {
   /** When false, hides the vertical level-line connecting parent to children. Defaults to true. */

@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { useTheme } from '@mui/material';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
@@ -176,7 +176,7 @@ const InteractiveExampleTemplate: StoryFn = (args) => {
       <Typography variant="caption">{secondary}</Typography>
     </>
   );
-  const handleClick = (event) => {
+  const handleClick = (event: React.SyntheticEvent) => {
     event.stopPropagation();
   };
   const secondaryActions = (
@@ -219,7 +219,6 @@ const InteractiveExampleTemplate: StoryFn = (args) => {
           <ListItemText
             primary={primaryReactNode}
             secondary={secondaryReactNode}
-            size={size}
           />
           {(showHint)
             && (

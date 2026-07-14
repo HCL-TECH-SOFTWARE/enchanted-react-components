@@ -14,7 +14,8 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
+import { GridRenderCellParams } from '@mui/x-data-grid';
 import DataGridCell from './DataGridCell';
 import DataGrid, { ExtendedGridColDef } from '../DataGrid/DataGrid';
 import Typography from '../Typography';
@@ -35,9 +36,11 @@ export default {
   argTypes: {
     rows: {
       description: 'Set of rows of type GridColDef[].',
+      control: 'object',
     },
     columns: {
       description: 'Set of columns of type GridColDef[].',
+      control: 'object',
     },
     pageSize: {
       control: false,
@@ -45,9 +48,11 @@ export default {
     },
     checkboxSelection: {
       description: 'If true, it will activate checkbox selection.',
+      control: 'boolean',
     },
     hideFooter: {
       description: 'If true, the footer will be hidden.',
+      control: 'boolean',
     },
     colDef: {
       control: 'object',
@@ -147,7 +152,7 @@ InteractiveExample.args = {
   hideFooter: true,
   pageSize: 10,
   totalCount: sampleRows.length,
-};
+} as unknown as GridRenderCellParams;
 
 const VisualTestTemplate: StoryFn<typeof DataGridCell> = (args) => {
   return (
@@ -226,4 +231,4 @@ VisualTest.args = {
   hideFooter: true,
   disableColumnMenu: true,
   totalCount: 1,
-};
+} as unknown as GridRenderCellParams;

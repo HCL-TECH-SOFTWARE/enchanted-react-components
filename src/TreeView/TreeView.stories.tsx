@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import DocumentIcon from '@hcl-software/enchanted-icons/dist/carbon/es/document';
 import IconView from '@hcl-software/enchanted-icons/dist/carbon/es/view';
 import HomeIcon from '@hcl-software/enchanted-icons/dist/carbon/es/home';

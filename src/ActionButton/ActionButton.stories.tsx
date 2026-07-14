@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ActionButton from './ActionButton';
 
 export default {
@@ -37,6 +37,7 @@ export default {
     },
     handleClick: {
       if: { arg: 'interactive' },
+      control: false,
       action: 'clicked',
       description: 'The function to be called when the action button is clicked.',
     },

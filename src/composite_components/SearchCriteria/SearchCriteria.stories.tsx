@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
@@ -99,14 +99,17 @@ export default {
   argTypes: {
     label: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the Search Criteria header.',
     },
     helperIconTooltip: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Help text for Search Criteria.',
     },
     footerButtonProps: {
       if: { arg: 'interactive' },
+      control: 'object',
       description: 'List of button props to render in the footer.',
     },
     showBody: {
@@ -114,19 +117,22 @@ export default {
       description: 'Hide the table, and this is for testing only and not an actual property of Search Criteria.',
       control: 'boolean',
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     secondaryText: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Secondary text for the Search Criteria summary.',
     },
     expandButtonLabel: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the expand button in Search Criteria summary.',
     },
     collapseButtonLabel: {
       if: { arg: 'interactive' },
+      control: 'text',
       description: 'Label for the collapse button in Search Criteria summary.',
     },
     secondaryTextProps: {

@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 
 import Divider from '../Divider';
@@ -35,10 +35,12 @@ export default {
     },
     gutterBottom: {
       description: 'The gutterBottom of the Typography component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     noWrap: {
       description: 'The noWrap of the Typography component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     component: {
@@ -47,6 +49,7 @@ export default {
     },
     paragraph: {
       description: 'Deprecated－Use the component prop instead. The paragraph of the Typography component.',
+      control: 'boolean',
       if: { arg: 'interactive' },
     },
     ref: {

@@ -14,8 +14,8 @@
  * ======================================================================== */
 
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import ProgressBar from './ProgressBar';
+import { Meta, StoryFn } from '@storybook/react-webpack5';
+import ProgressBar, { EnumUploadStatus, ProgressItemType } from './ProgressBar';
 
 export default {
   title: 'Data display/ProgressBar',
@@ -54,14 +54,17 @@ export default {
       description: 'Uploaded file',
     },
     navigateFolder: {
+      control: false,
       action: 'navigateFolder',
       description: 'Click the folder icon to view the asset\'s collection.',
     },
     retryUploadItem: {
+      control: false,
       action: 'retryUploadItem',
       description: 'Click the icon to retry the upload.',
     },
     cancelItem: {
+      control: false,
       action: 'cancelItem',
       description: 'Click the icon to pause or stop file upload.',
     },
@@ -70,6 +73,7 @@ export default {
       description: 'Cancel all',
     },
     learnMoreOnFailure: {
+      control: false,
       action: 'learnMoreOnFailure',
       description: 'Learn more on failure',
     },
@@ -78,6 +82,7 @@ export default {
       description: 'String literals',
     },
     closeModal: {
+      control: false,
       action: 'closeModal',
       description: 'Close modal',
     },
@@ -124,7 +129,8 @@ InteractiveExample.args = {
       size: 4000,
       name: 'testImage.jpg',
       collectionId: '1',
-      status: 'SUCCESS',
+      status: EnumUploadStatus.SUCCESS,
+      message: '',
       timestamp: 1588996092641,
     },
     {
@@ -132,9 +138,9 @@ InteractiveExample.args = {
       size: 0,
       name: 'Folder',
       collectionId: '2',
-      status: 'SUCCESS',
+      status: EnumUploadStatus.SUCCESS,
       message: 'Collection created successfully.',
-      type: 'folder',
+      type: ProgressItemType.Folder,
       timestamp: 1588996092642,
     },
     {
@@ -142,7 +148,8 @@ InteractiveExample.args = {
       size: 4000,
       name: 'testPDF.pdf',
       collectionId: '2',
-      status: 'SUCCESS',
+      status: EnumUploadStatus.SUCCESS,
+      message: '',
       timestamp: 1588996092643,
     },
     {
@@ -150,7 +157,8 @@ InteractiveExample.args = {
       size: 50000,
       name: 'testImage_1.gif',
       collectionId: '2',
-      status: 'SUCCESS',
+      status: EnumUploadStatus.SUCCESS,
+      message: '',
       timestamp: 1588996092644,
     },
     {
@@ -158,9 +166,9 @@ InteractiveExample.args = {
       size: 0,
       name: 'Folder',
       collectionId: '',
-      status: 'FAILURE',
+      status: EnumUploadStatus.FAILURE,
       message: 'Collection name already exists. Please enter unique collection name.',
-      type: 'folder',
+      type: ProgressItemType.Folder,
       timestamp: 1588996092645,
     },
     {
@@ -168,7 +176,8 @@ InteractiveExample.args = {
       size: 5366330,
       name: 'testPDF_1.pdf',
       collectionId: '1',
-      status: 'FAILURE',
+      status: EnumUploadStatus.FAILURE,
+      message: '',
       showLearnMore: true,
       timestamp: 1588996092646,
     },
@@ -177,7 +186,8 @@ InteractiveExample.args = {
       size: 53000,
       name: 'testVideo.mp4',
       collectionId: '1',
-      status: 'PROGRESS',
+      status: EnumUploadStatus.PROGRESS,
+      message: '',
       timestamp: 1588996092647,
     },
     {
@@ -185,7 +195,8 @@ InteractiveExample.args = {
       size: 5736420,
       name: 'testDOCX.docx',
       collectionId: '1',
-      status: 'PENDING',
+      status: EnumUploadStatus.PENDING,
+      message: '',
       timestamp: 1588996092648,
     },
     {
@@ -193,7 +204,8 @@ InteractiveExample.args = {
       size: 50276287,
       name: 'testXLSX.xlsx',
       collectionId: '1',
-      status: 'SUCCESS',
+      status: EnumUploadStatus.SUCCESS,
+      message: '',
       timestamp: 1588996092649,
     },
     {
@@ -201,7 +213,8 @@ InteractiveExample.args = {
       size: 50276287,
       name: 'testPPT.ppt',
       collectionId: '1',
-      status: 'PROGRESS',
+      status: EnumUploadStatus.PROGRESS,
+      message: '',
       timestamp: 1588996092650,
     },
     {
@@ -209,7 +222,7 @@ InteractiveExample.args = {
       size: 50276287,
       name: 'testItem.jpeg',
       collectionId: '1',
-      status: 'CANCELLED',
+      status: EnumUploadStatus.CANCELLED,
       message: 'Cancelled.',
       timestamp: 1588996092651,
     },
@@ -218,16 +231,15 @@ InteractiveExample.args = {
       size: 0,
       name: 'Folder2',
       collectionId: '',
-      status: 'CANCELLED',
+      status: EnumUploadStatus.CANCELLED,
       message: 'Cancelled.',
-      type: 'folder',
+      type: ProgressItemType.Folder,
       timestamp: 1588996092652,
     },
   ],
   stringLiterals: {
     learnMoreLabel: 'Learn more',
     totalSizeLabel: 'Total file size',
-    retryLabel: 'Retry',
     cancelLabel: 'Cancel',
     cancelAllLabel: 'Cancel all',
     pauseButtonLabel: 'Pause',

@@ -14,11 +14,11 @@
  * ======================================================================== */
 
 import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import RocketIcon from '@hcl-software/enchanted-icons/dist/carbon/es/rocket';
 import Button from '../Button/Button';
-import PreviewAccordion, { PreviewAccordionTypes, AccordionProps } from './PreviewAccordion';
+import PreviewAccordion, { PreviewAccordionTypes, PreviewAccordionPropsAll } from './PreviewAccordion';
 import PreviewAccordionSummary from './PreviewAccordionSummary';
 import PreviewAccordionDetails from './PreviewAccordionDetails';
 import Checkbox from '../Checkbox/Checkbox';
@@ -90,6 +90,27 @@ export default {
       },
       description: 'Show a icon, only for Storybook use',
     },
+    defaultExpanded: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will be expanded by default',
+    },
+    disableGutters: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will not have gutters',
+    },
+    expanded: {
+      if: { arg: 'interactive' },
+      control: {
+        type: 'boolean',
+      },
+      description: 'If true, the accordion will be expanded',
+    },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },
@@ -104,9 +125,7 @@ export default {
   },
 } as Meta<typeof PreviewAccordion>;
 
-interface ExtendedPreviewAccordionProps extends AccordionProps {
-  showCheckBox: boolean,
-  showSecondaryText: boolean,
+interface ExtendedPreviewAccordionProps extends PreviewAccordionPropsAll {
   showAvatar: boolean,
   showIcon: boolean,
   showHoverActions: boolean,
@@ -116,10 +135,10 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
   const {
     showCheckBox, disabled, showAvatar, showIcon, showSecondaryText,
   } = args;
-  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
   const [linkLabels, setLinkLabels] = useState(['Link 1', 'Link 2', 'Link 3']);
   const [optionalLabels, setOptionalLabels] = useState(['Optional 1', 'Optional 2', 'Optional 3']);
-  const [expandedAccordionId, setExpandedAccordionId] = useState(null);
+  const [expandedAccordionId, setExpandedAccordionId] = useState<number | null>(null);
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({ ...checkedItems, [event.target.id]: event.target.checked });
@@ -135,7 +154,7 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
     return null;
   };
 
-  const handleChange = (accordionId) => {
+  const handleChange = (accordionId: number) => {
     return () => {
       if (expandedAccordionId === accordionId) {
         linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');
@@ -296,10 +315,10 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
   } = args;
   const [linkLabels, setLinkLabels] = useState(['Link 1', 'Link 2', 'Link 3']);
   const [optionalLabels, setOptionalLabels] = useState(['Optional 1', 'Optional 2', 'Optional 3']);
-  const [expandedAccordionId, setExpandedAccordionId] = useState(null);
-  const [checkedItems, setCheckedItems] = useState({});
+  const [expandedAccordionId, setExpandedAccordionId] = useState<number | null>(null);
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
-  const handleChange = (accordionId) => {
+  const handleChange = (accordionId: number) => {
     return () => {
       if (expandedAccordionId === accordionId) {
         linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');
