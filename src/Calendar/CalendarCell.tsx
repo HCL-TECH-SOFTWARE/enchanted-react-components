@@ -87,7 +87,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
   };
 
   const getDateColor = (theme: Theme) => {
-    if (!isCurrentMonth) {
+    if (disabled || !isCurrentMonth) {
       return theme.palette.text.disabled;
     }
     if (isSelected) {
@@ -238,11 +238,11 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
               isolation: 'isolate',
               width: '24px',
               height: '24px',
-              border: isToday ? `1px solid ${theme.palette.text.primary}` : 'none',
+              border: isToday && !disabled ? `1px solid ${theme.palette.text.primary}` : 'none',
               borderRadius: '100px',
               cursor: disabled ? 'default' : 'pointer',
-              backgroundColor: isSelected ? theme.palette.primary.main : 'transparent',
-              color: isSelected ? theme.palette.common.white : getDateColor(theme),
+              backgroundColor: isSelected && !disabled ? theme.palette.primary.main : 'transparent',
+              color: isSelected && !disabled ? theme.palette.common.white : getDateColor(theme),
               position: 'relative',
               flex: 'none',
               '&:hover': !disabled && !isSelected && {
@@ -252,7 +252,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
                 border: `2px solid ${theme.palette.primary.main}`,
                 outline: 'none',
               },
-              ...(!isToday && isSelected && {
+              ...(!isToday && isSelected && !disabled && {
                 '&::after': {
                   content: '""',
                   position: 'absolute',

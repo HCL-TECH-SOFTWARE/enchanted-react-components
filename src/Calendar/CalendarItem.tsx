@@ -128,7 +128,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
       >
         <Box
           sx={(theme) => {
-            const colors = getItemColors(item.color, theme, item.customColors);
+            const colors = getItemColors(disabled ? 'neutral' : item.color, theme, disabled ? undefined : item.customColors);
             return {
               width: theme.spacing(1),
               height: theme.spacing(1),
@@ -172,7 +172,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
   return (
     <Box
       sx={(theme) => {
-        const colors = getItemColors(item.color, theme, item.customColors);
+        const colors = getItemColors(disabled ? 'neutral' : item.color, theme, disabled ? undefined : item.customColors);
         return {
           display: 'flex',
           flexDirection: 'column',
@@ -223,7 +223,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
           <Typography
             variant="body2"
             sx={(theme) => {
-              const colors = getItemColors(item.color, theme, item.customColors);
+              const colors = getItemColors(disabled ? 'neutral' : item.color, theme, disabled ? undefined : item.customColors);
               return {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
@@ -248,7 +248,7 @@ const CalendarItem: React.FC<CalendarItemProps> = React.memo(({
             <Typography
               variant="body2"
               sx={(theme) => {
-                const colors = getItemColors(item.color, theme, item.customColors);
+                const colors = getItemColors(disabled ? 'neutral' : item.color, theme, disabled ? undefined : item.customColors);
                 return {
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',
