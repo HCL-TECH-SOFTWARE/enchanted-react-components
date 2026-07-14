@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React, { useState } from 'react';
-import { StoryFn, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { Box } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import Calendar from './Calendar';
@@ -37,7 +37,7 @@ export default {
       description: 'If true, weekend days (Saturday and Sunday) are displayed in the calendar. When false, only weekdays (Monday-Friday) are shown.',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     disabled: {
@@ -45,7 +45,7 @@ export default {
       description: 'If true, disables all user interactions including navigation, date selection, and item clicks.',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     responsive: {
@@ -53,7 +53,7 @@ export default {
       description: 'If true, enables responsive layout that adapts to container width. When false, uses fixed dimensions.',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
     },
     width: {
@@ -78,7 +78,7 @@ export default {
       control: { type: 'radio' },
       options: [0, 1],
       table: {
-        defaultValue: { summary: 1 },
+        defaultValue: { summary: '1' },
       },
     },
     showItems: {
@@ -86,7 +86,7 @@ export default {
       description: 'Toggle to show or hide calendar items in the interactive example.',
       control: { type: 'boolean' },
       table: {
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     locale: {
