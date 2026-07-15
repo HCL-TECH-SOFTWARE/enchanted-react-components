@@ -42,4 +42,4 @@ jobs:
           onlyChanged: true
           # Wait for full Chromatic results (including a11y) before reporting status
           exitOnceUploaded: false
-          # skip: "dependabot/**" # Option to skip Chromatic for certain branches
+          skip: "dependabot/**" # Option to skip Chromatic for certain branches
