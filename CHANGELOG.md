@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Fixed tooltip cropping in ProgressBar when asset names exceed container width.
 
 ### Changed
 - Upgraded Storybook from v7.6.3 to v10.4.6.

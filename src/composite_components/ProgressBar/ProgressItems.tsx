@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -467,13 +467,11 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           title={queueItem.name}
                           tooltipsize="small"
                           placement="left"
-                          PopperProps={{
-                            disablePortal: true,
-                          }}
                           componentsProps={{
                             tooltip: {
                               sx: {
-                                whiteSpace: 'nowrap',
+                                maxWidth: '252px',
+                                wordBreak: 'break-all',
                               },
                             },
                           }}
@@ -516,9 +514,6 @@ const ProgressItems = (props: ProgressItemsProps) => {
                               title={literals.learnMoreLabel}
                               tooltipsize="small"
                               placement="left"
-                              PopperProps={{
-                                disablePortal: true,
-                              }}
                               componentsProps={{
                                 tooltip: {
                                   sx: {
@@ -551,8 +546,13 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           title={queueItem.name}
                           tooltipsize="small"
                           placement="left"
-                          PopperProps={{
-                            disablePortal: true,
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                maxWidth: '252px',
+                                wordBreak: 'break-all',
+                              },
+                            },
                           }}
                         >
                           <span data-testid="pending-item-text-primary">
