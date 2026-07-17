@@ -24,7 +24,6 @@ import { findNextFocusableRow, findPreviousFocusableRow, findTargetElement } fro
 import DataGridDivider from './DataGridDivider';
 import ColumnSortedAscendingIcon from './ColumnSortedAscendingIcon';
 import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
-// import { ExtendedGridColumnMenu } from './DataGridColumnMenu'; commented out until https://jira.cwp.pnp-hcl.com/browse/DXQ-30099 implementation starts
 
 /**
  * Extension for GridColDef it lets use or custon cell
@@ -746,7 +745,6 @@ const DataGrid = ({ components, componentsProps, ...props }: DataGridProps) => {
     ColumnSortedDescendingIcon,
     ColumnResizeIcon: DataGridDivider,
     Pagination: DataGridTablePagination,
-    // ColumnMenu: ExtendedGridColumnMenu, commented out until https://jira.cwp.pnp-hcl.com/browse/DXQ-30099 implementation starts
   };
 
   return (
@@ -803,7 +801,7 @@ DataGrid.defaultProps = {
   columns: [],
   rows: [],
   checkboxSelection: false,
-  disableColumnMenu: true, // hides menu icon (originally visible on hover) until https://jira.cwp.pnp-hcl.com/browse/DXQ-30099 implementation starts,
+  disableColumnMenu: true, // hides menu icon (originally visible on hover)
   page: 0,
   pageSize: 10,
   totalCount: 0,

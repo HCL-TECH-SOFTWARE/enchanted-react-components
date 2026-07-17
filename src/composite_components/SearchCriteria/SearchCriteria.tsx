@@ -206,7 +206,7 @@ const SearchCriteriaViewButton = styled(Button)<MuiButtonProps>(() => {
  * Renders a drawer that opens from the top on the parent div and is used for containers of search parameters.
  * Note: Please add style positon: 'relative' to the parent of this component to position this relative component to the parent and not to the browser.
  * Demo:
- * https://pages.git.cwp.pnp-hcl.com/websphere-portal-incubator/enchanted-material-ui-core/?path=/story/surfaces-searchcriteria--example-search-criteria
+ * https://opensource.hcltechsw.com/enchanted-react-components/?path=/story/surfaces-searchcriteria--interactive-example
  */
 const SearchCriteria: React.FC<SearchCriteriaProps> = ({
   footerButtonProps,
