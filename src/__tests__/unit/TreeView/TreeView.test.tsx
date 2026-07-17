@@ -31,6 +31,14 @@ const renderWithTheme = (ui: React.ReactElement) => {
   );
 };
 
+const renderWithDirection = (ui: React.ReactElement, direction: ThemeDirectionType) => {
+  return render(
+    <ThemeProvider theme={createEnchantedTheme(direction, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+      {ui}
+    </ThemeProvider>,
+  );
+};
+
 describe('TreeView', () => {
   it('Render TreeView without crashing', () => {
     const { container } = renderWithTheme(<TreeView aria-label="test-tree" />);
@@ -156,6 +164,19 @@ describe('TreeView', () => {
     fireEvent.click(container.querySelector('.MuiTreeItem-iconContainer') as HTMLElement);
     expect(screen.getAllByRole('treeitem')[0].getAttribute('aria-expanded')).toBe('false');
   });
+
+  it('Uses RTL default expand icon when theme direction is RTL', () => {
+    const { container } = renderWithDirection(
+      <TreeView>
+        <TreeItem nodeId="1" label="Parent">
+          <TreeItem nodeId="2" label="Child" />
+        </TreeItem>
+      </TreeView>,
+      ThemeDirectionType.RTL,
+    );
+    const icon = container.querySelector('[data-testid="treeview-default-expand-icon"]');
+    expect(icon?.getAttribute('data-icon-direction')).toBe('rtl');
+  });
 });
 
 describe('TreeItem', () => {
@@ -238,6 +259,92 @@ describe('TreeItem', () => {
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-hover-actions')).not.toBeNull();
+  });
+
+  it('Allows passing selectors to content and action containers', () => {
+    const { container } = renderWithTheme(
+      <TreeView>
+        <TreeItem
+          nodeId="1"
+          label="Item"
+          ContentProps={{ id: 'tree-content' }}
+          endAction={<button type="button">End action</button>}
+          endActionProps={{ id: 'tree-end-action' }}
+          hoverActions={<button type="button">Hover action</button>}
+          hoverActionsProps={{ id: 'tree-hover-action' }}
+        />
+      </TreeView>,
+    );
+    expect(container.querySelector('#tree-content')).not.toBeNull();
+    expect(container.querySelector('#tree-end-action')).not.toBeNull();
+    expect(container.querySelector('#tree-hover-action')).not.toBeNull();
+  });
+
+  it('Allows ArrowRight from action to move focus into first child when expanded', () => {
+    renderWithTheme(
+      <TreeView defaultExpanded={['1']}>
+        <TreeItem nodeId="1" label="Parent" endAction={<button type="button" aria-label="parent-action">Act</button>}>
+          <TreeItem nodeId="2" label="Child" />
+        </TreeItem>
+      </TreeView>,
+    );
+
+    const actionButton = screen.getByRole('button', { name: 'parent-action' });
+    actionButton.focus();
+    fireEvent.keyDown(actionButton, { key: 'ArrowRight' });
+
+    const tree = screen.getByRole('tree');
+    const childItem = screen.getAllByRole('treeitem')[1];
+    expect(tree.getAttribute('aria-activedescendant')).toBe(childItem.id);
+  });
+
+  it('Allows ArrowRight to move focus to overflow action button within the same row', () => {
+    renderWithTheme(
+      <TreeView>
+        <TreeItem
+          nodeId="1"
+          label="Row with actions"
+          endAction={(
+            <>
+              <button type="button" aria-label="edit-action">Edit</button>
+              <button type="button" aria-label="overflow-action">More</button>
+            </>
+          )}
+        />
+      </TreeView>,
+    );
+
+    const editButton = screen.getByRole('button', { name: 'edit-action' });
+    const overflowButton = screen.getByRole('button', { name: 'overflow-action' });
+    editButton.focus();
+    fireEvent.keyDown(editButton, { key: 'ArrowRight' });
+
+    expect(document.activeElement).toBe(overflowButton);
+  });
+
+  it('Returns focus to treeitem when focused action is removed from DOM', () => {
+    const ToggleActionTree = () => {
+      const [showAction, setShowAction] = React.useState(true);
+      return (
+        <TreeView>
+          <TreeItem
+            nodeId="1"
+            label="Focusable row"
+            endAction={showAction ? <button type="button" aria-label="row-action" onClick={() => { setShowAction(false); }}>Hide</button> : undefined}
+          />
+        </TreeView>
+      );
+    };
+
+    renderWithTheme(<ToggleActionTree />);
+
+    const actionButton = screen.getByRole('button', { name: 'row-action' });
+    actionButton.focus();
+    fireEvent.click(actionButton);
+
+    const tree = screen.getByRole('tree');
+    const treeItem = screen.getByRole('treeitem');
+    expect(tree.getAttribute('aria-activedescendant')).toBe(treeItem.id);
   });
 
   it('Render disabled TreeItem has Mui-disabled on content', () => {
