@@ -72,7 +72,6 @@ describe('DataGrid', () => {
     // Check if there are at least half the expected number of rows: DOM print limit https://testing-library.com/docs/dom-testing-library/api-debugging/
     expect(screen.getAllByRole('row').length).toBeGreaterThan(10);
 
-    // Expect no menu icon visible on columns - until https://jira.cwp.pnp-hcl.com/browse/DXQ-30099 implementation starts
     try {
       expect(screen.getAllByTestId('TripleDotsVerticalIcon')).toBeNull(); // should have disableColumnMenu=true by default as per design
     } catch (err) {
