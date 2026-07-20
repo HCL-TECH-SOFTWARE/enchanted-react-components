@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -300,5 +300,46 @@ describe('ProgressItem Component', () => {
 
     const progressIndicator = screen.getByTestId('progress-indicator');
     expect(window.getComputedStyle(progressIndicator).marginLeft).toBe('28px');
+  });
+
+  test('renders progress item tooltips through portal outside list item container', async () => {
+    const { unmount } = render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE, showLearnMore: true }]}
+        />
+      </ThemeProvider>,
+    );
+
+    const failureListItemButton = screen.getByText('testFile.jpg').closest('.MuiListItemButton-root');
+    fireEvent.mouseOver(screen.getByText('testFile.jpg'));
+    const nameTooltip = await screen.findByRole('tooltip');
+    expect(document.body).toContainElement(nameTooltip);
+    expect(failureListItemButton).not.toContainElement(nameTooltip);
+
+    const learnMoreButton = screen.getByTestId('learn-more-button');
+    fireEvent.mouseOver(learnMoreButton);
+    const learnMoreTooltip = await screen.findByRole('tooltip', { name: mockProps.literals.learnMoreLabel });
+    expect(document.body).toContainElement(learnMoreTooltip);
+    expect(failureListItemButton).not.toContainElement(learnMoreTooltip);
+
+    unmount();
+
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.PENDING }]}
+        />
+      </ThemeProvider>,
+    );
+
+    const pendingText = screen.getByTestId('pending-item-text-primary');
+    const pendingListItemButton = pendingText.closest('.MuiListItemButton-root');
+    fireEvent.mouseOver(pendingText);
+    const pendingTooltip = await screen.findByRole('tooltip');
+    expect(document.body).toContainElement(pendingTooltip);
+    expect(pendingListItemButton).not.toContainElement(pendingTooltip);
   });
 });
