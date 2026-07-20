@@ -12,6 +12,7 @@
 - Changed default value summaries in story tables from boolean values to string representations for consistency.
 - Refactored ProgressBar stories to utilize EnumUploadStatus and ProgressItemType for status and type properties.
 - Removed deprecated addons and ensured compatibility with the new Storybook version.
+- Removed internal links from source code.
 
 ### Breaking changes
 
