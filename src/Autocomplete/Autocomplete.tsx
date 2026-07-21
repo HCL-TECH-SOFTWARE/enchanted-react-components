@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
+// import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import MuiFormHelperText from '@mui/material/FormHelperText';
 import MuiFormControl, { FormControlProps as MuiFormControlProps } from '@mui/material/FormControl';
 import { styled } from '@mui/material/styles';
@@ -29,6 +30,9 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
+import IconButton from '../IconButton';
+import PopupIcon from '@hcl-software/enchanted-icons/dist/carbon/es/popup';
+
 
 /**
  * Banner configuration for autocomplete listbox
@@ -86,6 +90,7 @@ export interface AutocompleteProps<T, Multiple, DisableClearable, FreeSolo> exte
    * The banner is non-interactive and excluded from keyboard navigation.
    */
   listboxBanner?: AutocompleteBannerProps;
+  endAdornmentIconButton?: React.ReactNode;
 }
 
 const getMuiFormControlProps = <T, Multiple extends boolean | undefined = undefined,
@@ -150,6 +155,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     startAdornment,
     endAdornment,
     listboxBanner,
+    endAdornmentIconButton,
     ...rest // clean up rest of props for MuiAutocomplete tag
   } = props;
 
@@ -165,6 +171,30 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const [prevValue, setPrevValue] = React.useState('');
   const [selectedOption, setSelectedOption] = React.useState<T | null>();
 
+  const flattenAdornmentNodes = React.useCallback((node: React.ReactNode): React.ReactNode[] => {
+    if (node === null || node === undefined || typeof node === 'boolean') {
+      return [];
+    }
+
+    if (Array.isArray(node)) {
+      return node.reduce<React.ReactNode[]>((accumulator, child) => {
+        return accumulator.concat(flattenAdornmentNodes(child));
+      }, []);
+    }
+
+    if (React.isValidElement(node)) {
+      const elementProps = node.props as { hidden?: boolean; children?: React.ReactNode };
+      if (elementProps.hidden) {
+        return [];
+      }
+      if (node.type === React.Fragment) {
+        return flattenAdornmentNodes(elementProps.children);
+      }
+    }
+
+    return [node];
+  }, []);
+
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
     if (textFieldElement && textFieldElement.scrollWidth > textFieldElement.clientWidth) {
@@ -173,52 +203,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
       setIsValueOverFlowing(false);
     }
   }, [props.value, prevValue]);
-
-  const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
-    return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
-  }, []);
-
-  const getStartAdornmentWidth = React.useCallback(() => {
-    let iconCount = 0;
-    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
-
-    if (props.startAdornment) {
-      iconCount += getIconsCount(props.startAdornment);
-    }
-
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
-    return Math.max(iconWidth, 0);
-  }, [props.startAdornment]);
-
-  const getEndAdornmentWidth = React.useCallback(() => {
-    let iconCount = 0;
-    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
-
-    if (props.endAdornment) {
-      iconCount += getIconsCount(props.endAdornment);
-    }
-
-    // Check for freeSolo first because if it's true, then the caret down icon will not be shown.
-    iconCount += props.freeSolo ? 0 : 1;
-
-    // Check if the component is disabled or disableClearable is true.
-    // If either is true, the clear icon will not be shown.
-    if (!props.disabled && !(props.disableClearable ?? false)) {
-      if (props.value) {
-        iconCount += 1; // show clear icon
-      }
-    }
-
-    // Check if error icon should be shown.
-    iconCount += props.error ? 1 : 0;
-
-    // Calculate the total width needed for the input adornment area based on the number of icons.
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
-
-    return Math.max(iconWidth, 0);
-  }, [props.endAdornment, props.error, props.freeSolo, props.disabled, textfieldRef]);
 
   const handleChange = (
     event: React.SyntheticEvent<Element, Event>,
@@ -267,6 +251,70 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
+            console.log('params: ', params);
+            const endAdornmentCustomCount = flattenAdornmentNodes(endAdornment).length;
+            const endAdornmentActionCount = flattenAdornmentNodes(endAdornmentAction).length;
+            const popupIndicatorCount = props.freeSolo ? 0 : 1;
+
+            // Reserve clear-indicator space whenever clear can be shown, so text does not jump.
+            const clearIndicatorCount = (!props.disabled && !(props.disableClearable ?? false)) ? 1 : 0;
+            const errorIconCount = props.error ? 1 : 0;
+            const reservedAdornmentCount = Math.max(
+              1,
+              endAdornmentCustomCount + endAdornmentActionCount + popupIndicatorCount + clearIndicatorCount + errorIconCount,
+            );
+
+            const reservedAdornmentWidth = `${reservedAdornmentCount * 32}px`;
+
+
+            // ok ito
+            // const defaultAdornment = params.InputProps.endAdornment;
+
+            // const childrenArr = React.isValidElement(defaultAdornment) ? React.Children.toArray(defaultAdornment.props.children) : [];
+            // console.log('defaultAdornment:', defaultAdornment, 'childrenArr:', childrenArr);
+
+            // // 1. Safely convert children to an array
+            // const childrenArray = React.isValidElement(defaultAdornment)
+            //   ? React.Children.toArray(defaultAdornment.props.children)
+            //   : [];
+
+            // // 2. Identify the buttons by their class names (Safely checking if they exist)
+            // const clearButton = childrenArray.find(
+            //   (child) => {
+            //     return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-clearIndicator');
+            //   },
+            // );
+
+            // const popupButton = childrenArray.find(
+            //   (child) => {
+            //     return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-popupIndicator');
+            //   },
+            // );
+
+            // // 3. You can customize the positioning of the icons here. For example, you can always place the warning icon in the middle of the end adornment.
+            // const customIcon = [
+            //   // Clear Icon Segment, Mui Autocomplete Clear Icon
+            //   clearButton,
+            //   // Loading, Information Icon Segment
+            //   endAdornment,
+            //   // Caret Down Icon Segment, Mui Autocomplete Popup Icon
+            //   popupButton,
+            //   // Last Icon Segment, IconButton
+            //   endAdornmentIconButton,
+            // ].filter((item) => { return item !== undefined; }); // Filter out undefined items
+
+            // console.log('customIcon: ', customIcon);
+            // let customIconAlignment = defaultAdornment || customIcon;
+
+            // if (React.isValidElement(defaultAdornment)) {
+            //   customIconAlignment = React.cloneElement(
+            //     defaultAdornment,
+            //     {}, // No prop changes
+            //     customIcon,
+            //   );
+            // }
+
+            // console.log('Experiment', customIconAlignment);
             const textFieldArgs: TextFieldProps = {
               ...params,
               placeholder: props.placeholder,
@@ -275,13 +323,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               fullWidth: props.fullWidth,
               sx: {
                 ...props.sx,
-                '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
-                  width: getStartAdornmentWidth(),
-                },
-                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
-                  width: getEndAdornmentWidth(),
-                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px', // add some spacing if there are icons in the end adornment
-                },
               },
               focused,
               hiddenLabel,
@@ -296,6 +337,8 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               enableHelpHoverEffect,
               InputProps: {
                 ...params.InputProps,
+                // To make sure the startAdornment is not covered by the endAdornment
+                sx: { '--erc-autocomplete-end-adornment-width': reservedAdornmentWidth },
                 startAdornment: startAdornment
                   ? (
                     <>
@@ -312,6 +355,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                     {params.InputProps?.endAdornment}
                   </>
                 ),
+                // endAdornment: customIconAlignment,
               },
             };
 
@@ -462,11 +506,9 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                 height: '16px',
               },
               '& .MuiSvgIcon-colorError': {
-                position: 'absolute',
-                right: ownerState.freeSolo ? '10px' : '32px',
-                height: '100%',
-                verticalAlign: 'middle',
-                top: '0px',
+                position: 'static',
+                height: '16px',
+                width: '16px',
               },
               '& .MuiInputBase-root': {
                 paddingTop: '5px',
@@ -493,12 +535,13 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                     position: 'relative',
                   },
                   '.MuiAutocomplete-endAdornment': { // end icon
-                    right: '8px',
+                    position: 'static',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
                     '.MuiButtonBase-root': { // for both clear icon and caret down icon
-                      top: '-1px',
-                      // eslint-why - a nested ternary is needed
-                      // eslint-disable-next-line no-nested-ternary
-                      margin: ownerState.error ? (ownerState.freeSolo ? '0px 30px 0px 4px' : '0px 36px 0px 4px') : '0px 6px 0px 4px',
+                      top: 'auto',
+                      margin: '0px',
                       '&.MuiAutocomplete-popupIndicator ': { // caret down icon
                         position: 'relative',
                         margin: '0px',

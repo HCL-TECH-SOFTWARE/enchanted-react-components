@@ -39,6 +39,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   fullWidth?: boolean;
   enableHelpHoverEffect?: boolean;
   customIcon?: React.ComponentType<SvgIconProps>;
+  endAdornmentIconButton?: React.ReactNode;
 }
 
 export const labelFocus = styled('div')((theme) => {

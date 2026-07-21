@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024-2026 HCL America Inc.                                     *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -20,6 +20,7 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Autocomplete from '../../../Autocomplete';
+import Button from '../../../Button';
 
 afterEach(cleanup);
 
@@ -131,5 +132,18 @@ describe('Autocomplete', () => {
     const input = screen.queryByRole('input');
     expect(input).toBeNull();
     jest.clearAllMocks();
+  });
+
+  it('Renders endAdornmentAction as the last input action for autocomplete', () => {
+    const endActionText = 'END_ACTION';
+    render(
+      <Autocomplete
+        options={['Apple', 'Banana']}
+        value="Apple"
+        endAdornmentAction={<Button variant="text">{endActionText}</Button>}
+      />,
+    );
+
+    expect(screen.getByText(endActionText)).not.toBeNull();
   });
 });

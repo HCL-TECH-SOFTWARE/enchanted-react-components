@@ -17,6 +17,9 @@ import React from 'react';
 import { StoryFn, Meta } from '@storybook/react-webpack5';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
+import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
+import ViewIcon from '@hcl-software/enchanted-icons/dist/carbon/es/view';
+import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import { Box, SvgIconProps } from '@mui/material';
@@ -357,6 +360,32 @@ export const ExampleTextFieldWithUnitSelector = {
           }}
         />
       </Box>
+    );
+  },
+};
+
+export const ExampleTextFieldTrailingEndAction = {
+  render: () => {
+    const [value, setValue] = React.useState('Placeholder');
+
+    return (
+      <TextField
+        label="Label"
+        helperText="Helper text"
+        value={value}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setValue(event.target.value);
+        }}
+        sx={{ minWidth: '320px' }}
+        endAdornmentAction={(
+          <>
+            <CloseIcon color="action" />
+            <WarningIcon color="error" />
+            <ViewIcon color="action" />
+            <Button variant="text" color="inherit">Button</Button>
+          </>
+        )}
+      />
     );
   },
 };

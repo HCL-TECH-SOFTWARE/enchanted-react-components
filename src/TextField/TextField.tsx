@@ -51,6 +51,7 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   unitLabel?: string;
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
+  endAdornmentIconButton?: React.ReactNode;
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
@@ -62,6 +63,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
           return {
             // below MuiTextField override only applicable for Autocomplete to make sure Autocomplete is parent component
             '.MuiAutocomplete-inputRoot': {
+              position: 'relative',
               ...ownerState.error ? {
                 '&.MuiOutlinedInput-root:focus-within': {
                   '& .MuiOutlinedInput-notchedOutline': {
@@ -72,10 +74,6 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                   '& .MuiOutlinedInput-notchedOutline': {
                     borderColor: `${theme.palette.error.main}`,
                   },
-                },
-                '& .MuiAutocomplete-clearIndicator': {
-                  marginRight: '34px',
-                  left: '3px',
                 },
               } : {
                 '& .MuiInputBase-root:hover': {
@@ -89,6 +87,29 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               },
               '&.MuiOutlinedInput-root': {
                 paddingRight: ownerState.disabled ? '8px' : '16px',
+              },
+              '& .MuiAutocomplete-input': {
+                // Reserve a stable right-side area so selected text does not shift when icons toggle.
+                paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
+              },
+              '& [class*=MuiInputAdornment-positionEnd]': {
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: 'calc(var(--erc-autocomplete-end-adornment-width, 56px) - 8px)',
+                marginLeft: '0px',
+                justifyContent: 'flex-end',
+              },
+              '& .MuiAutocomplete-endAdornment': {
+                position: 'static',
+                transform: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+              },
+              '& .MuiAutocomplete-endAdornment .MuiButtonBase-root': {
+                position: 'static',
+                transform: 'none',
               },
             },
             '.MuiOutlinedInput-root': {
@@ -248,6 +269,12 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               },
             },
             '& [class*=MuiInputAdornment-positionEnd]': {
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              gap: '8px',
+              flexShrink: 0,
+              marginLeft: '8px',
               height: '18px',
               '& svg:not(.MuiCircularProgress-svg)': {
                 margin: '0px',
@@ -260,7 +287,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               },
               '& button': {
                 minWidth: '0px',
-                margin: '0px 0px 0px 8px',
+                margin: '0px',
                 padding: '0px',
                 '& svg': {
                   margin: '0px',
@@ -295,20 +322,101 @@ const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   return null;
 };
 
+const flattenAdornmentNodes = (node: React.ReactNode): React.ReactNode[] => {
+  if (node === null || node === undefined || typeof node === 'boolean') {
+    return [];
+  }
+
+  if (Array.isArray(node)) {
+    return node.reduce<React.ReactNode[]>((accumulator, child) => {
+      return accumulator.concat(flattenAdornmentNodes(child));
+    }, []);
+  }
+
+  if (React.isValidElement(node)) {
+    const elementProps = node.props as { hidden?: boolean; children?: React.ReactNode };
+    if (elementProps.hidden) {
+      return [];
+    }
+    if (node.type === React.Fragment) {
+      return flattenAdornmentNodes(elementProps.children);
+    }
+  }
+
+  return [node];
+};
+
 const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   // This is workaround until proper Search component has already been implemented
   // This hides the endAdornment when startAdornment is present and it's a simple Textfield (NOT affecting Autocomplete / Multiselect)
   if (props.InputProps?.startAdornment !== undefined && !isComboBox) {
     return null;
   }
-  // end of comment
 
+  // end of comment
+  // dito ata need ayusin yung mga element
+  let trailingAdornmentItems: React.ReactNode[] = [];
+  const endAdornmentActionButton = React.isValidElement(props.endAdornmentIconButton) ? props.endAdornmentIconButton : null;
+
+  if (props.InputProps) {
+    const defaultAdornment = props.InputProps!.endAdornment;
+
+    const childrenArr = React.isValidElement(defaultAdornment) ? React.Children.toArray(defaultAdornment.props.children) : [];
+    console.log('defaultAdornment:', defaultAdornment, 'childrenArr:', childrenArr);
+
+    // 1. Safely convert children to an array
+    const childrenArray = React.isValidElement(defaultAdornment)
+      ? React.Children.toArray(defaultAdornment.props.children)
+      : [];
+
+    // 2. Identify the buttons by their class names (Safely checking if they exist)
+    const clearButton = childrenArray.find(
+      (child) => {
+        return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-clearIndicator');
+      },
+    );
+
+    // 3. Identify the buttons by their class names (Safely checking if they exist)
+    const popupButton = childrenArray.find(
+      (child) => {
+        return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-popupIndicator');
+      },
+    );
+
+    // 3. You can customize the positioning of the icons here. For example, you can always place the warning icon in the middle of the end adornment.
+    const customIcon = [
+      // Clear Icon Segment, Mui Autocomplete Clear Icon
+      clearButton,
+      // Loading, Information Icon Segment
+      defaultAdornment,
+      // Caret Down Icon Segment, Mui Autocomplete Popup Icon
+      popupButton,
+      // // Last Icon Segment, IconButton
+      // endAdornmentActionButton,
+    ].filter((item) => { return item !== undefined || item !== null; }); // Filter out undefined items
+
+    console.log('customIcon: ', customIcon);
+    let customIconAlignment = defaultAdornment || customIcon;
+
+    if (React.isValidElement(defaultAdornment)) {
+      customIconAlignment = React.cloneElement(
+        defaultAdornment,
+        {}, // No prop changes
+        customIcon,
+      );
+    }
+
+   trailingAdornmentItems = flattenAdornmentNodes(customIconAlignment);
+  }
+
+  // if the component is a comboBox (Autocomplete), endAdornment may contain chips from MUI's
   return (
     <>
       {props.error ? <WarningIcon color="error" /> : null }
       {props.unitLabel ? <Typography variant="body2">{props.unitLabel}</Typography> : null }
-      {!isComboBox && props.endAdornmentAction ? props.endAdornmentAction : null }
-      {isComboBox && props.InputProps?.endAdornment}
+      {isComboBox && React.Children.toArray(trailingAdornmentItems)}
+      {/* {React.Children.toArray(trailingAdornmentItems)} */}
+      {endAdornmentActionButton ? endAdornmentActionButton : null}
     </>
   );
 };
@@ -364,6 +472,7 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
   delete cleanedProps.enableHelpHoverEffect;
   delete cleanedProps.customIcon;
 
+  // Check also here
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,
     variant: 'outlined',
@@ -420,6 +529,8 @@ const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: Re
   }
   const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   const muiFormControlProps = getMuiFormControlProps(props, forwardRef);
+
+  // dito check
   return (
     <StyledMuiFormControl {...muiFormControlProps}>
       <InputLabelAndAction {...muiInputLabelProps} />
