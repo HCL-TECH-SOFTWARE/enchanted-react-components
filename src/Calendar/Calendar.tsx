@@ -165,7 +165,9 @@ const Calendar = ({
     let currentDay = startDate;
 
     while (currentDay.isBefore(endDate) || currentDay.isSame(endDate, 'day')) {
-      days.push(currentDay);
+      if (showWeekend || (currentDay.day() !== 0 && currentDay.day() !== 6)) {
+        days.push(currentDay);
+      }
       currentDay = currentDay.add(1, 'day');
     }
 
@@ -250,8 +252,9 @@ const Calendar = ({
 
   const renderMonthView = () => {
     const weeks: Dayjs[][] = [];
-    for (let i = 0; i < calendarDays.length; i += 7) {
-      weeks.push(calendarDays.slice(i, i + 7));
+    const daysPerRow = showWeekend ? 7 : 5;
+    for (let i = 0; i < calendarDays.length; i += daysPerRow) {
+      weeks.push(calendarDays.slice(i, i + daysPerRow));
     }
 
     return (

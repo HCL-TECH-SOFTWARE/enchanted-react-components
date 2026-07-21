@@ -320,6 +320,18 @@ const VisualTestTemplate: StoryFn<object> = () => {
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>
+          View=Month · ShowWeekend=False · Disabled=False
+        </Box>
+        <Calendar
+          view="month"
+          currentDate={baseDate}
+          items={monthItems}
+          showWeekend={false}
+        />
+      </Box>
+
+      <Box>
+        <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>
           View=Week · ShowWeekend=True · Disabled=False
         </Box>
         <Calendar
