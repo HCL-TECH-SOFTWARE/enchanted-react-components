@@ -251,7 +251,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
-            console.log('params: ', params);
             const endAdornmentCustomCount = flattenAdornmentNodes(endAdornment).length;
             const endAdornmentActionCount = flattenAdornmentNodes(endAdornmentAction).length;
             const popupIndicatorCount = props.freeSolo ? 0 : 1;
@@ -264,57 +263,9 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               endAdornmentCustomCount + endAdornmentActionCount + popupIndicatorCount + clearIndicatorCount + errorIconCount,
             );
 
-            const reservedAdornmentWidth = `${reservedAdornmentCount * 32}px`;
+            // Make sure the endAdornment is not covered by the startAdornment
+            const reservedAdornmentWidth = `${reservedAdornmentCount * 31}px`;
 
-
-            // ok ito
-            // const defaultAdornment = params.InputProps.endAdornment;
-
-            // const childrenArr = React.isValidElement(defaultAdornment) ? React.Children.toArray(defaultAdornment.props.children) : [];
-            // console.log('defaultAdornment:', defaultAdornment, 'childrenArr:', childrenArr);
-
-            // // 1. Safely convert children to an array
-            // const childrenArray = React.isValidElement(defaultAdornment)
-            //   ? React.Children.toArray(defaultAdornment.props.children)
-            //   : [];
-
-            // // 2. Identify the buttons by their class names (Safely checking if they exist)
-            // const clearButton = childrenArray.find(
-            //   (child) => {
-            //     return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-clearIndicator');
-            //   },
-            // );
-
-            // const popupButton = childrenArray.find(
-            //   (child) => {
-            //     return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-popupIndicator');
-            //   },
-            // );
-
-            // // 3. You can customize the positioning of the icons here. For example, you can always place the warning icon in the middle of the end adornment.
-            // const customIcon = [
-            //   // Clear Icon Segment, Mui Autocomplete Clear Icon
-            //   clearButton,
-            //   // Loading, Information Icon Segment
-            //   endAdornment,
-            //   // Caret Down Icon Segment, Mui Autocomplete Popup Icon
-            //   popupButton,
-            //   // Last Icon Segment, IconButton
-            //   endAdornmentIconButton,
-            // ].filter((item) => { return item !== undefined; }); // Filter out undefined items
-
-            // console.log('customIcon: ', customIcon);
-            // let customIconAlignment = defaultAdornment || customIcon;
-
-            // if (React.isValidElement(defaultAdornment)) {
-            //   customIconAlignment = React.cloneElement(
-            //     defaultAdornment,
-            //     {}, // No prop changes
-            //     customIcon,
-            //   );
-            // }
-
-            // console.log('Experiment', customIconAlignment);
             const textFieldArgs: TextFieldProps = {
               ...params,
               placeholder: props.placeholder,
@@ -333,6 +284,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               autoFocus: props.autoFocus,
               renderNonEditInput,
               endAdornmentAction,
+              endAdornmentIconButton,
               value: props.value,
               enableHelpHoverEffect,
               InputProps: {

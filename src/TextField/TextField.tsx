@@ -88,24 +88,26 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               '&.MuiOutlinedInput-root': {
                 paddingRight: ownerState.disabled ? '8px' : '16px',
               },
-              '& .MuiAutocomplete-input': {
-                // Reserve a stable right-side area so selected text does not shift when icons toggle.
-                paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
-              },
-              '& [class*=MuiInputAdornment-positionEnd]': {
-                position: 'absolute',
-                right: '8px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: 'calc(var(--erc-autocomplete-end-adornment-width, 56px) - 8px)',
-                marginLeft: '0px',
-                justifyContent: 'flex-end',
-              },
-              '& .MuiAutocomplete-endAdornment': {
-                position: 'static',
-                transform: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
+              ...ownerState.endAdornment ?? {
+                '& .MuiAutocomplete-input': {
+                  // Reserve a stable right-side area so selected text does not shift when icons toggle.
+                  paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
+                },
+                  '& [class*=MuiInputAdornment-positionEnd]': {
+                  position: 'absolute',
+                  right: '8px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: 'calc(var(--erc-autocomplete-end-adornment-width, 56px) - 8px)',
+                  marginLeft: '0px',
+                  justifyContent: 'flex-end',
+                },
+                '& .MuiAutocomplete-endAdornment': {
+                  position: 'static',
+                  transform: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                },
               },
               '& .MuiAutocomplete-endAdornment .MuiButtonBase-root': {
                 position: 'static',
@@ -346,78 +348,156 @@ const flattenAdornmentNodes = (node: React.ReactNode): React.ReactNode[] => {
   return [node];
 };
 
-const getEndAdornment = (props: TextFieldProps, isComboBox: boolean) => {
-  // This is workaround until proper Search component has already been implemented
-  // This hides the endAdornment when startAdornment is present and it's a simple Textfield (NOT affecting Autocomplete / Multiselect)
+const ADORNMENT_GAP = 8;
+const ADORNMENT_SLOT_WIDTH = 16;
+const ADORNMENT_MIN_PADDING = 16;
+const ADORNMENT_SLOT_ATTRIBUTE = 'data-adornment-slot';
+const ADORNMENT_FIXED_SLOT_ATTRIBUTE = 'data-adornment-fixed';
+const CLEAR_INDICATOR_CLASS = 'clearIndicator';
+const POPUP_INDICATOR_CLASS = 'popupIndicator';
+const END_ADORNMENT_CLASS = 'MuiAutocomplete-endAdornment';
+
+// Extend standard MUI TextFieldProps to include your custom properties
+export type CustomTextFieldProps = TextFieldProps & {
+  unitLabel?: string;
+  endAdornmentIconButton?: React.ReactNode;
+  endAdornmentAction?: React.ReactNode;
+};
+
+// Wrapper Function
+const wrapAdornmentNodes = (nodes: React.ReactNode[], fixed = false) => {
+  return nodes.map((node, index) => {
+    return (
+      <span
+        // eslint-disable-next-line react/no-array-index-key
+        key={`erc-adornment-${fixed ? 'fixed' : 'flow'}-${index}`}
+        {...{ [ADORNMENT_SLOT_ATTRIBUTE]: 'true' }}
+        {...(fixed ? { [ADORNMENT_FIXED_SLOT_ATTRIBUTE]: 'true' } : {})}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          flexShrink: 0,
+        }}
+      >
+        {node}
+      </span>
+    );
+  });
+};
+
+// Optimized Deep Traversal Helper
+const partitionAdornmentNodes = (node: React.ReactNode) => {
+  const clearNodes: React.ReactNode[] = [];
+  const popupNodes: React.ReactNode[] = [];
+  const otherNodes: React.ReactNode[] = [];
+
+  const traverse = (currentNode: React.ReactNode) => {
+    React.Children.forEach(currentNode, (child) => {
+      if (!React.isValidElement(child)) return;
+
+      const className = (child.props as { className?: string }).className || '';
+
+      if (typeof className === 'string') {
+        if (className.includes(CLEAR_INDICATOR_CLASS)) {
+          clearNodes.push(child);
+          return;
+        }
+        if (className.includes(POPUP_INDICATOR_CLASS)) {
+          popupNodes.push(child);
+          return;
+        }
+        // If we hit the MUI wrapper, DO NOT add it. Instead, traverse inside it.
+        if (className.includes(END_ADORNMENT_CLASS)) {
+          if (child.props.children) traverse(child.props.children);
+          return;
+        }
+      }
+
+      // If we hit a React Fragment, unwrap it and traverse inside.
+      if (child.type === React.Fragment) {
+        if (child.props.children) traverse(child.props.children);
+        return;
+      }
+
+      // Catch everything else (like loading spinners)
+      otherNodes.push(child);
+    });
+  };
+
+  traverse(node);
+  return { clearNodes, popupNodes, otherNodes };
+};
+
+// Helper to safely inject new props
+const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
+  if (React.isValidElement(node)) {
+    return React.cloneElement(node, { 
+      ...customProps, 
+      key: node.key || undefined 
+    } as any);
+  }
+  return node;
+};
+
+// Main Extraction Function
+export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
+  const flowNodes: React.ReactNode[] = [];
+  const fixedNodes: React.ReactNode[] = [];
+
+  const defaultAdornment = props.InputProps?.endAdornment;
+
+  const { 
+    clearNodes: rawClearNodes, 
+    popupNodes: rawPopupNodes, 
+    otherNodes 
+  } = partitionAdornmentNodes(defaultAdornment);
+
+  const iconPropsToOverride = { size: 'small' };
+  const clearNodes = rawClearNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
+  const popupNodes = rawPopupNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
+
+  flowNodes.push(...clearNodes);
+
+  //  ADDED: key props to manual elements
+  if (props.error) flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+  if (props.unitLabel) flowNodes.push(<Typography variant="body2" key="unit-label">{props.unitLabel}</Typography>);
+  
+  flowNodes.push(...otherNodes);
+  flowNodes.push(...popupNodes);
+
+  if (props.endAdornmentIconButton) fixedNodes.push(props.endAdornmentIconButton);
+  if (props.endAdornmentAction) fixedNodes.push(props.endAdornmentAction);
+
+  return { flowNodes, fixedNodes };
+};
+
+//Final Render Generator
+export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean) => {
   if (props.InputProps?.startAdornment !== undefined && !isComboBox) {
     return null;
   }
+  const { flowNodes, fixedNodes } = getEndAdornmentSlots(props);
 
-  // end of comment
-  // dito ata need ayusin yung mga element
-  let trailingAdornmentItems: React.ReactNode[] = [];
-  const endAdornmentActionButton = React.isValidElement(props.endAdornmentIconButton) ? props.endAdornmentIconButton : null;
-
-  if (props.InputProps) {
-    const defaultAdornment = props.InputProps!.endAdornment;
-
-    const childrenArr = React.isValidElement(defaultAdornment) ? React.Children.toArray(defaultAdornment.props.children) : [];
-    console.log('defaultAdornment:', defaultAdornment, 'childrenArr:', childrenArr);
-
-    // 1. Safely convert children to an array
-    const childrenArray = React.isValidElement(defaultAdornment)
-      ? React.Children.toArray(defaultAdornment.props.children)
-      : [];
-
-    // 2. Identify the buttons by their class names (Safely checking if they exist)
-    const clearButton = childrenArray.find(
-      (child) => {
-        return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-clearIndicator');
-      },
-    );
-
-    // 3. Identify the buttons by their class names (Safely checking if they exist)
-    const popupButton = childrenArray.find(
-      (child) => {
-        return React.isValidElement(child) && child.props.className?.includes('MuiAutocomplete-popupIndicator');
-      },
-    );
-
-    // 3. You can customize the positioning of the icons here. For example, you can always place the warning icon in the middle of the end adornment.
-    const customIcon = [
-      // Clear Icon Segment, Mui Autocomplete Clear Icon
-      clearButton,
-      // Loading, Information Icon Segment
-      defaultAdornment,
-      // Caret Down Icon Segment, Mui Autocomplete Popup Icon
-      popupButton,
-      // // Last Icon Segment, IconButton
-      // endAdornmentActionButton,
-    ].filter((item) => { return item !== undefined || item !== null; }); // Filter out undefined items
-
-    console.log('customIcon: ', customIcon);
-    let customIconAlignment = defaultAdornment || customIcon;
-
-    if (React.isValidElement(defaultAdornment)) {
-      customIconAlignment = React.cloneElement(
-        defaultAdornment,
-        {}, // No prop changes
-        customIcon,
-      );
-    }
-
-   trailingAdornmentItems = flattenAdornmentNodes(customIconAlignment);
+  if (flowNodes.length === 0 && fixedNodes.length === 0) {
+    return null;
   }
 
-  // if the component is a comboBox (Autocomplete), endAdornment may contain chips from MUI's
+  // MUST be wrapped in InputAdornment for MUI to track it properly
   return (
-    <>
-      {props.error ? <WarningIcon color="error" /> : null }
-      {props.unitLabel ? <Typography variant="body2">{props.unitLabel}</Typography> : null }
-      {isComboBox && React.Children.toArray(trailingAdornmentItems)}
-      {/* {React.Children.toArray(trailingAdornmentItems)} */}
-      {endAdornmentActionButton ? endAdornmentActionButton : null}
-    </>
+    <InputAdornment position="end" className="erc-textfield-end-adornment-root">
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          gap: `${ADORNMENT_GAP}px`,
+          width: '100%',
+        }}
+      >
+        {wrapAdornmentNodes(flowNodes)}
+        {wrapAdornmentNodes(fixedNodes, true)}
+      </span>
+    </InputAdornment>
   );
 };
 
@@ -460,7 +540,7 @@ const getMuiFormControlProps = (props: TextFieldProps, forwardRef: React.Forward
   return muiFormControlProps;
 };
 
-const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => {
+const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: number): OutlinedTextFieldProps => {
   const isComboBox = Boolean(props.InputProps?.className?.startsWith('MuiAutocomplete'));
   const cleanedProps = { ...props };
   delete cleanedProps.actionProps;
@@ -471,18 +551,30 @@ const getMuiTextFieldProps = (props: TextFieldProps): OutlinedTextFieldProps => 
   delete cleanedProps.endAdornmentAction;
   delete cleanedProps.enableHelpHoverEffect;
   delete cleanedProps.customIcon;
+  delete cleanedProps.endAdornmentIconButton;
 
-  // Check also here
+  const userInputProps = props.InputProps ?? {};
+  const userInputSx = userInputProps.sx;
+
+  // check this also
+  const mergedInputSx = {
+    ...(typeof userInputSx === 'object' && userInputSx !== null ? userInputSx : {}),
+    '--erc-end-adornment-width': `${Math.max(0, Math.ceil(reservedAdornmentWidth))}px`,
+    '& .MuiInputBase-input, & .MuiAutocomplete-input': {
+      paddingRight: 'calc(var(--erc-end-adornment-width, 56px) + 4px) !important',
+      maxWidth: '100%',
+    },
+  };
+
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,
     variant: 'outlined',
     label: undefined, // The label will be separately handled and not via the MuiTextField
     InputProps: {
-      ...props.InputProps, // since we checking the class name for Inputpros and making sure that upper component is autocomplete
+      ...userInputProps, // since we checking the class name for Inputpros and making sure that upper component is autocomplete
       startAdornment: getStartAdornment(props, isComboBox),
-      endAdornment: props.InputProps?.endAdornment && !isComboBox
-        ? props.InputProps?.endAdornment
-        : <InputAdornment position="end">{getEndAdornment(props, isComboBox)}</InputAdornment>,
+      endAdornment: getEndAdornment(props, isComboBox),
+      sx: mergedInputSx,
     },
   };
   return muiTextFieldProps;
@@ -495,8 +587,12 @@ const renderNonEditInput = (props: TextFieldProps, muiTextFieldProps: OutlinedTe
   return <Typography variant="body2">{muiTextFieldProps.value ? muiTextFieldProps.value : null}</Typography>;
 };
 
-const renderInput = (props: TextFieldProps, setIsFocus: React.Dispatch<React.SetStateAction<boolean>>) => {
-  const muiTextFieldProps = getMuiTextFieldProps(props);
+const renderInput = (
+  props: TextFieldProps,
+  setIsFocus: React.Dispatch<React.SetStateAction<boolean>>,
+  reservedAdornmentWidth: number,
+) => {
+  const muiTextFieldProps = getMuiTextFieldProps(props, reservedAdornmentWidth);
   const helperTextId = props.helperText && props.id ? `${props.id}-helper-text` : undefined;
   if (props.nonEdit) {
     return (
@@ -521,6 +617,64 @@ const renderInput = (props: TextFieldProps, setIsFocus: React.Dispatch<React.Set
 
 const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: React.ForwardedRef<unknown>) => {
   const [isFocus, setIsFocus] = React.useState(false);
+  const [reservedAdornmentWidth, setReservedAdornmentWidth] = React.useState(ADORNMENT_MIN_PADDING);
+  const rootRef = React.useRef<HTMLDivElement | null>(null);
+
+  // To determine the width of the end adornment and reserve space for it, we use a 
+  // ResizeObserver to watch for changes in the adornment's size. This ensures that the input field does not shift when the adornment changes 
+  // (e.g., when an error icon appears or disappears).
+  React.useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+
+    const measure = () => {
+      // Get the width of the end adornment
+      const adornmentRoot = root.querySelector<HTMLElement>('.erc-textfield-end-adornment-root');
+
+      if (!adornmentRoot) {
+        setReservedAdornmentWidth(ADORNMENT_MIN_PADDING);
+        return;
+      }
+
+      // Get all elements that are marked as adornment slots
+      const slotElements = Array.from(adornmentRoot.querySelectorAll<HTMLElement>(`[${ADORNMENT_SLOT_ATTRIBUTE}="true"]`));
+
+      // Filter out any adornment slots that are not visible (e.g., those that are hidden due to conditional rendering)
+      const visibleSlots = slotElements.filter((element) => {
+        const style = window.getComputedStyle(element);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      });
+
+      // Calculate the width of the end adornment based on the number of visible slots
+      const countBasedWidth = visibleSlots.length > 0
+        ? (visibleSlots.length * ADORNMENT_SLOT_WIDTH) + ((visibleSlots.length - 1) * ADORNMENT_GAP) + ADORNMENT_MIN_PADDING
+        : ADORNMENT_MIN_PADDING;
+
+      const measuredWidth = Math.ceil(adornmentRoot.getBoundingClientRect().width);
+      setReservedAdornmentWidth(Math.max(measuredWidth, countBasedWidth));
+    };
+
+    measure();
+
+    if (typeof ResizeObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new ResizeObserver(() => {
+      measure();
+    });
+
+    observer.observe(root);
+    const adornmentRoot = root.querySelector<HTMLElement>('.erc-textfield-end-adornment-root');
+    if (adornmentRoot) {
+      observer.observe(adornmentRoot);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [props.error, props.unitLabel, props.endAdornmentIconButton, props.InputProps?.endAdornment]);
+
   if (!props.id) {
     const id = useId();
     props.id = id;
@@ -530,11 +684,19 @@ const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: Re
   const muiInputLabelProps = getInputLabelAndActionProps(props, isFocus);
   const muiFormControlProps = getMuiFormControlProps(props, forwardRef);
 
-  // dito check
   return (
-    <StyledMuiFormControl {...muiFormControlProps}>
+    <StyledMuiFormControl
+      {...muiFormControlProps}
+      ref={(node) => {
+        rootRef.current = node;
+        const forwarded = muiFormControlProps.ref;
+        if (typeof forwarded === 'function') {
+          forwarded(node);
+        }
+      }}
+    >
       <InputLabelAndAction {...muiInputLabelProps} />
-      {renderInput(props, setIsFocus)}
+      {renderInput(props, setIsFocus, reservedAdornmentWidth)}
     </StyledMuiFormControl>
   );
 }) as React.FC<TextFieldProps>;

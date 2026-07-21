@@ -325,7 +325,11 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       );
       break;
     default:
-      endAdornmentIconButton = null;
+      endAdornmentIconButton = (
+        <IconButton>
+          <PopupIcon style={{ width: 16, height: 16 }} />
+        </IconButton>
+      );
   }
 
   return (

@@ -47,7 +47,6 @@ export type SelectProps = MuiSelectProps & {
   label?: string;
   placeholder?: string;
   children?: React.ReactNode;
-  endAdornmentIconButton?: React.ReactNode;
 };
 
 export const getMuiSelectThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
@@ -234,7 +233,6 @@ const renderInput = (props: SelectProps, id?: string) => {
           },
         },
       }}
-      endAdornment
     />
   );
 };
@@ -256,7 +254,6 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
     fullWidth: props.fullWidth,
     enableHelpHoverEffect: props.enableHelpHoverEffect,
     customIcon: props.customIcon,
-    endAdornmentIconButton: props.endAdornmentIconButton,
   };
   return inputLabelProps;
 };
