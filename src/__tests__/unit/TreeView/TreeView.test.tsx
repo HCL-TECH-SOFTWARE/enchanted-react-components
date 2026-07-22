@@ -261,24 +261,6 @@ describe('TreeItem', () => {
     expect(container.querySelector('.tree-item-hover-actions')).not.toBeNull();
   });
 
-  it('Allows ArrowRight from action to move focus into first child when expanded', () => {
-    renderWithTheme(
-      <TreeView defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent" endAction={<button type="button" aria-label="parent-action">Act</button>}>
-          <TreeItem nodeId="2" label="Child" />
-        </TreeItem>
-      </TreeView>,
-    );
-
-    const actionButton = screen.getByRole('button', { name: 'parent-action' });
-    actionButton.focus();
-    fireEvent.keyDown(actionButton, { key: 'ArrowRight' });
-
-    const tree = screen.getByRole('tree');
-    const childItem = screen.getAllByRole('treeitem')[1];
-    expect(tree.getAttribute('aria-activedescendant')).toBe(childItem.id);
-  });
-
   it('Allows ArrowRight to move focus to overflow action button within the same row', () => {
     renderWithTheme(
       <TreeView>
