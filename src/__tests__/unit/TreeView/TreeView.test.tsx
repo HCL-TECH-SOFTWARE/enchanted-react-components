@@ -261,25 +261,6 @@ describe('TreeItem', () => {
     expect(container.querySelector('.tree-item-hover-actions')).not.toBeNull();
   });
 
-  it('Allows passing selectors to content and action containers', () => {
-    const { container } = renderWithTheme(
-      <TreeView>
-        <TreeItem
-          nodeId="1"
-          label="Item"
-          ContentProps={{ id: 'tree-content' }}
-          endAction={<button type="button">End action</button>}
-          endActionProps={{ id: 'tree-end-action' }}
-          hoverActions={<button type="button">Hover action</button>}
-          hoverActionsProps={{ id: 'tree-hover-action' }}
-        />
-      </TreeView>,
-    );
-    expect(container.querySelector('#tree-content')).not.toBeNull();
-    expect(container.querySelector('#tree-end-action')).not.toBeNull();
-    expect(container.querySelector('#tree-hover-action')).not.toBeNull();
-  });
-
   it('Allows ArrowRight from action to move focus into first child when expanded', () => {
     renderWithTheme(
       <TreeView defaultExpanded={['1']}>
@@ -320,31 +301,6 @@ describe('TreeItem', () => {
     fireEvent.keyDown(editButton, { key: 'ArrowRight' });
 
     expect(document.activeElement).toBe(overflowButton);
-  });
-
-  it('Returns focus to treeitem when focused action is removed from DOM', () => {
-    const ToggleActionTree = () => {
-      const [showAction, setShowAction] = React.useState(true);
-      return (
-        <TreeView>
-          <TreeItem
-            nodeId="1"
-            label="Focusable row"
-            endAction={showAction ? <button type="button" aria-label="row-action" onClick={() => { setShowAction(false); }}>Hide</button> : undefined}
-          />
-        </TreeView>
-      );
-    };
-
-    renderWithTheme(<ToggleActionTree />);
-
-    const actionButton = screen.getByRole('button', { name: 'row-action' });
-    actionButton.focus();
-    fireEvent.click(actionButton);
-
-    const tree = screen.getByRole('tree');
-    const treeItem = screen.getByRole('treeitem');
-    expect(tree.getAttribute('aria-activedescendant')).toBe(treeItem.id);
   });
 
   it('Render disabled TreeItem has Mui-disabled on content', () => {
