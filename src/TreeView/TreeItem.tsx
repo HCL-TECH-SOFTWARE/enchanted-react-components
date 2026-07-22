@@ -162,21 +162,20 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
 
           if (key === 'Tab') {
             // Tab moves forward, Shift+Tab moves backward
-            isNextButton = !e.shiftKey; 
+            isNextButton = !e.shiftKey;
           } else {
             // Handle RTL/LTR Arrow navigation
             isNextButton = (isRtl && key === 'ArrowLeft') || (!isRtl && key === 'ArrowRight');
           }
 
           const nextIndex = isNextButton ? currentIndex + 1 : currentIndex - 1;
-          
-          // If the next button exists, focus it and stop. 
+          // If the next button exists, focus it and stop.
           // (If it doesn't exist, let it fall through to the rest of the code!)
           if (nextIndex >= 0 && nextIndex < buttons.length) {
             e.preventDefault();
             e.stopPropagation();
             buttons[nextIndex].focus();
-            return; 
+            return;
           }
         }
       }
