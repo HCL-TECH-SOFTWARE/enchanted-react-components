@@ -120,6 +120,38 @@ describe('TextField', () => {
     expect(screen.getByText(endAdornmentText)).not.toBeNull();
   });
 
+  it('Arranges end adornment items in the expected order and keeps the action fixed last', () => {
+    configure({ testIdAttribute: 'data-mui-test' });
+    render(
+      <TextField
+        error
+        unitLabel="px"
+        InputProps={{
+          endAdornment: (
+            <>
+              <span className="custom-clearIndicator">Clear</span>
+              <span>Custom</span>
+              <span className="custom-popupIndicator">Popup</span>
+            </>
+          ),
+        }}
+        endAdornmentAction={<button type="button">Action</button>}
+      />,
+    );
+
+    const clearNode = screen.getByText('Clear');
+    const unitNode = screen.getByText('px');
+    const customNode = screen.getByText('Custom');
+    const popupNode = screen.getByText('Popup');
+    const actionNode = screen.getByRole('button', { name: 'Action' });
+
+    expect(screen.getByTestId('warningIcon')).not.toBeNull();
+    expect(clearNode.compareDocumentPosition(unitNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(unitNode.compareDocumentPosition(customNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(customNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(popupNode.compareDocumentPosition(actionNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('Render with non edit state', () => {
     const exampleMessage = 'Example message';
     render(<TextField nonEdit value={exampleMessage} />);

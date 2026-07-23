@@ -132,4 +132,18 @@ describe('Autocomplete', () => {
     expect(input).toBeNull();
     jest.clearAllMocks();
   });
+
+  it('renders the fixed end icon button passed through endAdornmentIconButton', () => {
+    render(
+      <Autocomplete
+        options={['Apple', 'Banana']}
+        value="Apple"
+        error
+        endAdornment={<span>Custom</span>}
+        endAdornmentIconButton={<button type="button" aria-label="fixed-end-action">Pinned</button>}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'fixed-end-action' })).not.toBeNull();
+  });
 });
