@@ -31,6 +31,14 @@ const renderWithTheme = (ui: React.ReactElement) => {
   );
 };
 
+const renderWithDirection = (ui: React.ReactElement, direction: ThemeDirectionType) => {
+  return render(
+    <ThemeProvider theme={createEnchantedTheme(direction, ThemeModeType.LIGHT_NEUTRAL_GREY)}>
+      {ui}
+    </ThemeProvider>,
+  );
+};
+
 describe('TreeView', () => {
   it('Render TreeView without crashing', () => {
     const { container } = renderWithTheme(<TreeView aria-label="test-tree" />);
@@ -156,6 +164,19 @@ describe('TreeView', () => {
     fireEvent.click(container.querySelector('.MuiTreeItem-iconContainer') as HTMLElement);
     expect(screen.getAllByRole('treeitem')[0].getAttribute('aria-expanded')).toBe('false');
   });
+
+  it('Uses RTL default expand icon when theme direction is RTL', () => {
+    const { container } = renderWithDirection(
+      <TreeView>
+        <TreeItem nodeId="1" label="Parent">
+          <TreeItem nodeId="2" label="Child" />
+        </TreeItem>
+      </TreeView>,
+      ThemeDirectionType.RTL,
+    );
+    const icon = container.querySelector('[data-testid="treeview-default-expand-icon"]');
+    expect(icon?.getAttribute('data-icon-direction')).toBe('rtl');
+  });
 });
 
 describe('TreeItem', () => {
@@ -238,6 +259,30 @@ describe('TreeItem', () => {
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-hover-actions')).not.toBeNull();
+  });
+
+  it('Allows ArrowRight to move focus to overflow action button within the same row', () => {
+    renderWithTheme(
+      <TreeView>
+        <TreeItem
+          nodeId="1"
+          label="Row with actions"
+          endAction={(
+            <>
+              <button type="button" aria-label="edit-action">Edit</button>
+              <button type="button" aria-label="overflow-action">More</button>
+            </>
+          )}
+        />
+      </TreeView>,
+    );
+
+    const editButton = screen.getByRole('button', { name: 'edit-action' });
+    const overflowButton = screen.getByRole('button', { name: 'overflow-action' });
+    editButton.focus();
+    fireEvent.keyDown(editButton, { key: 'ArrowRight' });
+
+    expect(document.activeElement).toBe(overflowButton);
   });
 
   it('Render disabled TreeItem has Mui-disabled on content', () => {
