@@ -20,7 +20,6 @@ import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--d
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
-import ViewIcon from '@hcl-software/enchanted-icons/dist/carbon/es/view';
 import PopupIcon from '@hcl-software/enchanted-icons/dist/carbon/es/popup';
 
 import { Alert, Box, SvgIconProps } from '@mui/material';

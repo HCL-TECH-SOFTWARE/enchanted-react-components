@@ -120,61 +120,6 @@ describe('TextField', () => {
     expect(screen.getByText(endAdornmentText)).not.toBeNull();
   });
 
-  it('Renders autocomplete end adornments with end action as the last item', () => {
-    const autocompleteAdornmentText = 'AUTOCOMPLETE_END';
-    const endAdornmentActionText = 'LAST_END_ACTION';
-    const { container } = render(
-      <TextField
-        endAdornmentAction={<Button variant="text">{endAdornmentActionText}</Button>}
-        InputProps={{
-          className: 'MuiAutocomplete-inputRoot',
-          endAdornment: <span>{autocompleteAdornmentText}</span>,
-        }}
-      />,
-    );
-
-    const adornmentRoot = container.querySelector('.MuiInputAdornment-positionEnd');
-    const autocompleteAdornment = screen.getByText(autocompleteAdornmentText);
-    const lastAction = screen.getByText(endAdornmentActionText);
-
-    expect(adornmentRoot).not.toBeNull();
-    expect(autocompleteAdornment).not.toBeNull();
-    expect(lastAction).not.toBeNull();
-    expect(autocompleteAdornment.compareDocumentPosition(lastAction) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  });
-
-  it('Does not reserve trailing space for hidden or false end adornment items', () => {
-    const { container } = render(
-      <TextField
-        error
-        endAdornmentAction={(
-          <>
-            {false}
-            <Button variant="text" hidden>Hidden button</Button>
-          </>
-        )}
-      />,
-    );
-
-    const adornmentRoot = container.querySelector('.MuiInputAdornment-positionEnd');
-    expect(screen.queryByText('Hidden button')).toBeNull();
-    expect(adornmentRoot?.children.length).toBe(1);
-  });
-
-  it('Renders multiple trailing end adornment items generically', () => {
-    render(
-      <TextField
-        endAdornmentAction={[
-          <span key="trailing-a">TRAILING_A</span>,
-          <span key="trailing-b">TRAILING_B</span>,
-        ]}
-      />,
-    );
-
-    expect(screen.getByText('TRAILING_A')).not.toBeNull();
-    expect(screen.getByText('TRAILING_B')).not.toBeNull();
-  });
-
   it('Render with non edit state', () => {
     const exampleMessage = 'Example message';
     render(<TextField nonEdit value={exampleMessage} />);

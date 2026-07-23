@@ -28,6 +28,15 @@ import { styled } from '@mui/material/styles';
 import Typography from '../Typography';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 
+const ADORNMENT_GAP = 8;
+const ADORNMENT_SLOT_WIDTH = 16;
+const ADORNMENT_MIN_PADDING = 16;
+const ADORNMENT_SLOT_ATTRIBUTE = 'data-adornment-slot';
+const ADORNMENT_FIXED_SLOT_ATTRIBUTE = 'data-adornment-fixed';
+const CLEAR_INDICATOR_CLASS = 'clearIndicator';
+const POPUP_INDICATOR_CLASS = 'popupIndicator';
+const END_ADORNMENT_CLASS = 'MuiAutocomplete-endAdornment';
+
 /**
  * @typedef OutlinedTextFieldProps
  * @type {object}
@@ -93,7 +102,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                   // Reserve a stable right-side area so selected text does not shift when icons toggle.
                   paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
                 },
-                  '& [class*=MuiInputAdornment-positionEnd]': {
+                '& [class*=MuiInputAdornment-positionEnd]': {
                   position: 'absolute',
                   right: '8px',
                   top: '50%',
@@ -324,39 +333,6 @@ const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   return null;
 };
 
-const flattenAdornmentNodes = (node: React.ReactNode): React.ReactNode[] => {
-  if (node === null || node === undefined || typeof node === 'boolean') {
-    return [];
-  }
-
-  if (Array.isArray(node)) {
-    return node.reduce<React.ReactNode[]>((accumulator, child) => {
-      return accumulator.concat(flattenAdornmentNodes(child));
-    }, []);
-  }
-
-  if (React.isValidElement(node)) {
-    const elementProps = node.props as { hidden?: boolean; children?: React.ReactNode };
-    if (elementProps.hidden) {
-      return [];
-    }
-    if (node.type === React.Fragment) {
-      return flattenAdornmentNodes(elementProps.children);
-    }
-  }
-
-  return [node];
-};
-
-const ADORNMENT_GAP = 8;
-const ADORNMENT_SLOT_WIDTH = 16;
-const ADORNMENT_MIN_PADDING = 16;
-const ADORNMENT_SLOT_ATTRIBUTE = 'data-adornment-slot';
-const ADORNMENT_FIXED_SLOT_ATTRIBUTE = 'data-adornment-fixed';
-const CLEAR_INDICATOR_CLASS = 'clearIndicator';
-const POPUP_INDICATOR_CLASS = 'popupIndicator';
-const END_ADORNMENT_CLASS = 'MuiAutocomplete-endAdornment';
-
 // Extend standard MUI TextFieldProps to include your custom properties
 export type CustomTextFieldProps = TextFieldProps & {
   unitLabel?: string;
@@ -364,13 +340,11 @@ export type CustomTextFieldProps = TextFieldProps & {
   endAdornmentAction?: React.ReactNode;
 };
 
-// Wrapper Function
+// Wrap each node in an InputAdornment
 const wrapAdornmentNodes = (nodes: React.ReactNode[], fixed = false) => {
-  return nodes.map((node, index) => {
+  return React.Children.map(nodes, (node) => {
     return (
       <span
-        // eslint-disable-next-line react/no-array-index-key
-        key={`erc-adornment-${fixed ? 'fixed' : 'flow'}-${index}`}
         {...{ [ADORNMENT_SLOT_ATTRIBUTE]: 'true' }}
         {...(fixed ? { [ADORNMENT_FIXED_SLOT_ATTRIBUTE]: 'true' } : {})}
         style={{
@@ -385,7 +359,7 @@ const wrapAdornmentNodes = (nodes: React.ReactNode[], fixed = false) => {
   });
 };
 
-// Optimized Deep Traversal Helper
+// Group the endAdornment nodes into clear, popup, and other nodes for proper ordering and styling
 const partitionAdornmentNodes = (node: React.ReactNode) => {
   const clearNodes: React.ReactNode[] = [];
   const popupNodes: React.ReactNode[] = [];
@@ -393,15 +367,21 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
 
   const traverse = (currentNode: React.ReactNode) => {
     React.Children.forEach(currentNode, (child) => {
+      // If the child is not a valid React element, skip it
       if (!React.isValidElement(child)) return;
 
+      // Check if the child has a className and categorize it based on known classes
       const className = (child.props as { className?: string }).className || '';
 
+      // If the child has a className, check for known classes and categorize accordingly
       if (typeof className === 'string') {
+        // If we hit the clear indicator, add it to the respective array and skip further traversal
         if (className.includes(CLEAR_INDICATOR_CLASS)) {
           clearNodes.push(child);
           return;
         }
+
+        // If we hit the popup indicator, add it to the popupNodes array and skip further traversal
         if (className.includes(POPUP_INDICATOR_CLASS)) {
           popupNodes.push(child);
           return;
@@ -424,18 +404,17 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
     });
   };
 
+  // Start the traversal with the initial node
   traverse(node);
   return { clearNodes, popupNodes, otherNodes };
 };
 
-// Helper to safely inject new props
+// Apply custom props to a React node if it's a valid element
 const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
   if (React.isValidElement(node)) {
-    return React.cloneElement(node, { 
-      ...customProps, 
-      key: node.key || undefined 
-    } as any);
+    return React.cloneElement(node, { ...customProps, key: node.key || undefined });
   }
+
   return node;
 };
 
@@ -446,23 +425,18 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
 
   const defaultAdornment = props.InputProps?.endAdornment;
 
-  const { 
-    clearNodes: rawClearNodes, 
-    popupNodes: rawPopupNodes, 
-    otherNodes 
-  } = partitionAdornmentNodes(defaultAdornment);
+  const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(defaultAdornment);
 
   const iconPropsToOverride = { size: 'small' };
-  const clearNodes = rawClearNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
-  const popupNodes = rawPopupNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
+  const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
+  const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
 
   flowNodes.push(...clearNodes);
 
   //  ADDED: key props to manual elements
   if (props.error) flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
   if (props.unitLabel) flowNodes.push(<Typography variant="body2" key="unit-label">{props.unitLabel}</Typography>);
-  
-  flowNodes.push(...otherNodes);
+  flowNodes.push(...rawOtherNodes);
   flowNodes.push(...popupNodes);
 
   if (props.endAdornmentIconButton) fixedNodes.push(props.endAdornmentIconButton);
@@ -471,7 +445,6 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
   return { flowNodes, fixedNodes };
 };
 
-//Final Render Generator
 export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean) => {
   if (props.InputProps?.startAdornment !== undefined && !isComboBox) {
     return null;
@@ -620,9 +593,7 @@ const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: Re
   const [reservedAdornmentWidth, setReservedAdornmentWidth] = React.useState(ADORNMENT_MIN_PADDING);
   const rootRef = React.useRef<HTMLDivElement | null>(null);
 
-  // To determine the width of the end adornment and reserve space for it, we use a 
-  // ResizeObserver to watch for changes in the adornment's size. This ensures that the input field does not shift when the adornment changes 
-  // (e.g., when an error icon appears or disappears).
+  // Measure the width of the endAdornment and update the reservedAdornmentWidth state
   React.useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;

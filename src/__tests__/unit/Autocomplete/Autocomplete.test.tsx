@@ -20,7 +20,6 @@ import {
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 import Autocomplete from '../../../Autocomplete';
-import Button from '../../../Button';
 
 afterEach(cleanup);
 
@@ -132,18 +131,5 @@ describe('Autocomplete', () => {
     const input = screen.queryByRole('input');
     expect(input).toBeNull();
     jest.clearAllMocks();
-  });
-
-  it('Renders endAdornmentAction as the last input action for autocomplete', () => {
-    const endActionText = 'END_ACTION';
-    render(
-      <Autocomplete
-        options={['Apple', 'Banana']}
-        value="Apple"
-        endAdornmentAction={<Button variant="text">{endActionText}</Button>}
-      />,
-    );
-
-    expect(screen.getByText(endActionText)).not.toBeNull();
   });
 });

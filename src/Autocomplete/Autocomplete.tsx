@@ -22,7 +22,6 @@ import {
 } from '@mui/material';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import ClearIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
-// import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import MuiFormHelperText from '@mui/material/FormHelperText';
 import MuiFormControl, { FormControlProps as MuiFormControlProps } from '@mui/material/FormControl';
 import { styled } from '@mui/material/styles';
@@ -30,9 +29,6 @@ import { TYPOGRAPHY } from '../theme';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 import TextField, { TextFieldProps } from '../TextField/TextField';
 import Tooltip, { TooltipPlacement } from '../Tooltip';
-import IconButton from '../IconButton';
-import PopupIcon from '@hcl-software/enchanted-icons/dist/carbon/es/popup';
-
 
 /**
  * Banner configuration for autocomplete listbox
@@ -195,6 +191,52 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     return [node];
   }, []);
 
+  const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
+    return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
+  }, []);
+
+  const getStartAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+
+    if (props.startAdornment) {
+      iconCount += getIconsCount(props.startAdornment);
+    }
+
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
+    return Math.max(iconWidth, 0);
+  }, [props.startAdornment, getIconsCount]);
+
+  const getEndAdornmentWidth = React.useCallback(() => {
+    let iconCount = 0;
+    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
+
+    if (props.endAdornment) {
+      iconCount += getIconsCount(props.endAdornment);
+    }
+
+    // Check for freeSolo first because if it's true, then the caret down icon will not be shown.
+    iconCount += props.freeSolo ? 0 : 1;
+
+    // Check if the component is disabled or disableClearable is true.
+    // If either is true, the clear icon will not be shown.
+    if (!props.disabled && !(props.disableClearable ?? false)) {
+      if (props.value) {
+        iconCount += 1; // show clear icon
+      }
+    }
+
+    // Check if error icon should be shown.
+    iconCount += props.error ? 1 : 0;
+
+    // Calculate the total width needed for the input adornment area based on the number of icons.
+    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
+    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
+
+    return Math.max(iconWidth, 0);
+  }, [props.endAdornment, props.error, props.freeSolo, props.disabled, props.value, props.disableClearable, getIconsCount]);
+
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
     if (textFieldElement && textFieldElement.scrollWidth > textFieldElement.clientWidth) {
@@ -274,6 +316,13 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               fullWidth: props.fullWidth,
               sx: {
                 ...props.sx,
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
+                  width: getStartAdornmentWidth(),
+                },
+                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
+                  width: getEndAdornmentWidth(),
+                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px',
+                },
               },
               focused,
               hiddenLabel,
@@ -307,7 +356,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                     {params.InputProps?.endAdornment}
                   </>
                 ),
-                // endAdornment: customIconAlignment,
               },
             };
 
