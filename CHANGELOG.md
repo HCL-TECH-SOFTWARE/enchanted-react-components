@@ -5,6 +5,11 @@
 ### Added
 
 ### Fixed
+- Fixed tooltip cropping in ProgressBar when asset names exceed container width.
+
+### Changed
+
+### 2.9.1
 
 ### Changed
 - Upgraded Storybook from v7.6.3 to v10.4.6.
@@ -12,8 +17,7 @@
 - Changed default value summaries in story tables from boolean values to string representations for consistency.
 - Refactored ProgressBar stories to utilize EnumUploadStatus and ProgressItemType for status and type properties.
 - Removed deprecated addons and ensured compatibility with the new Storybook version.
-
-### Breaking changes
+- Removed internal links from source code.
 
 ## 2.9.0
 
