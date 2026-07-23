@@ -195,14 +195,8 @@ export default {
       description: 'Action of the end endAdornment icon.',
     },
     endAdornmentIconButton: {
-      options: ['None', 'PopupIcon'],
-      control: { type: 'radio' },
-      table: {
-        defaultValue: {
-          summary: 'None',
-        },
-      },
-      description: 'Icon of the end endAdornment icon.',
+      control: false,
+      description: 'IconButton of the end endAdornment icon.',
     },
     renderNonEditInput: {
       control: false,
@@ -238,7 +232,7 @@ export default {
       control: { type: 'radio' },
       table: {
         defaultValue: {
-          summary: 'CaretDownIcon',
+          summary: 'None',
         },
       },
     },
@@ -248,7 +242,7 @@ export default {
       control: { type: 'radio' },
       table: {
         defaultValue: {
-          summary: 'SearchIcon',
+          summary: 'None',
         },
       },
     },
@@ -258,7 +252,7 @@ export default {
       control: { type: 'radio' },
       table: {
         defaultValue: {
-          summary: 'Loading',
+          summary: 'None',
         },
       },
     },
@@ -313,24 +307,6 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       endAdornment = null;
   }
 
-  // Temporary
-  let endAdornmentIconButton: React.ReactNode = null;
-  switch (args.endAdornmentIconButton as unknown as string) {
-    case 'PopupIcon':
-      endAdornmentIconButton = (
-        <IconButton>
-          <PopupIcon style={{ width: 16, height: 16 }} />
-        </IconButton>
-      );
-      break;
-    default:
-      endAdornmentIconButton = (
-        <IconButton>
-          <PopupIcon style={{ width: 16, height: 16 }} />
-        </IconButton>
-      );
-  }
-
   return (
     <Autocomplete
       value={value}
@@ -360,7 +336,6 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       customIcon={customIcon}
       startAdornment={startAdornment}
       endAdornment={endAdornment}
-      endAdornmentIconButton={endAdornmentIconButton}
     />
   );
 };
@@ -408,18 +383,6 @@ export const ExampleAutocomplete = {
     customIcon: 'None',
     startAdornment: 'None',
     endAdornment: 'None',
-  },
-};
-
-export const ExampleAutocompleteTrailingEndAction = {
-  render: Template,
-  args: {
-    ...ExampleAutocomplete.args,
-    value: top100Films[0],
-    error: true,
-    startAdornment: 'SearchIcon',
-    endAdornment: 'Loading',
-    endAdornmentIconButton: 'PopupIcon',
   },
 };
 
@@ -540,5 +503,22 @@ export const ExampleAutocompleteWithCustomizedBanner = {
         story: 'Autocomplete with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
       },
     },
+  },
+};
+
+export const ExampleAutocompleteWithEndAdornmentIconButton = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    value: top100Films[0],
+    error: true,
+    freeSolo: true,
+    startAdornment: 'SearchIcon',
+    endAdornmentIconButton: (
+      <IconButton>
+        <PopupIcon style={{ width: 16, height: 16 }} />
+      </IconButton>
+    ),
+    endAdornment: 'Loading',
   },
 };

@@ -363,20 +363,12 @@ export const ExampleTextFieldWithUnitSelector = {
   },
 };
 
-export const ExampleTextFieldTrailingEndAction = {
+export const ExampleTextFieldWithEndAdornmentIconButton = {
   render: () => {
-    const [value, setValue] = React.useState('Placeholder');
-
     return (
       <TextField
         label="Label"
-        helperText="Helper text"
-        value={value}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setValue(event.target.value);
-        }}
-        sx={{ minWidth: '320px' }}
-        endAdornmentAction={(
+        endAdornmentIconButton={(
           <IconButton>
             <PopupIcon style={{ width: 16, height: 16 }} />
           </IconButton>
