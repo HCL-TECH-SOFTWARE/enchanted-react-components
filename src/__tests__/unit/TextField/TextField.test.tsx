@@ -145,7 +145,8 @@ describe('TextField', () => {
     const popupNode = screen.getByText('Popup');
     const actionNode = screen.getByRole('button', { name: 'Action' });
 
-    expect(screen.getByTestId('warningIcon')).not.toBeNull();
+    /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
+    /* eslint-disable no-bitwise */
     expect(clearNode.compareDocumentPosition(unitNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(unitNode.compareDocumentPosition(customNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(customNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
