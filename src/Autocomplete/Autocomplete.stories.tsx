@@ -512,13 +512,13 @@ export const ExampleAutocompleteWithEndAdornmentIconButton = {
     ...ExampleAutocomplete.args,
     value: top100Films[0],
     error: true,
-    freeSolo: true,
+    freeSolo: false,
     startAdornment: 'SearchIcon',
+    endAdornment: 'Loading',
     endAdornmentIconButton: (
       <IconButton>
         <PopupIcon style={{ width: 16, height: 16 }} />
       </IconButton>
     ),
-    endAdornment: 'Loading',
   },
 };

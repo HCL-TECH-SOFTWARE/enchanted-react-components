@@ -340,7 +340,6 @@ export type CustomTextFieldProps = TextFieldProps & {
   endAdornmentAction?: React.ReactNode;
 };
 
-// Wrap each node in an InputAdornment
 const wrapAdornmentNodes = (nodes: React.ReactNode[], fixed = false) => {
   return React.Children.map(nodes, (node) => {
     return (
@@ -418,7 +417,7 @@ const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
   return node;
 };
 
-// Main Extraction Function
+// Group the endAdornment nodes into clear, popup, and other nodes for proper ordering and styling
 export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
   const flowNodes: React.ReactNode[] = [];
   const fixedNodes: React.ReactNode[] = [];
@@ -433,7 +432,7 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
 
   flowNodes.push(...clearNodes);
 
-  //  ADDED: key props to manual elements
+  // Add unit label and other nodes
   if (props.error) flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
   if (props.unitLabel) flowNodes.push(<Typography variant="body2" key="unit-label">{props.unitLabel}</Typography>);
   flowNodes.push(...rawOtherNodes);
@@ -455,7 +454,7 @@ export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean
     return null;
   }
 
-  // MUST be wrapped in InputAdornment for MUI to track it properly
+  // Wrap each node in an InputAdornment
   return (
     <InputAdornment position="end" className="erc-textfield-end-adornment-root">
       <span
@@ -529,7 +528,7 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
   const userInputProps = props.InputProps ?? {};
   const userInputSx = userInputProps.sx;
 
-  // check this also
+  // To make the endAdornment width dynamic
   const mergedInputSx = {
     ...(typeof userInputSx === 'object' && userInputSx !== null ? userInputSx : {}),
     '--erc-end-adornment-width': `${Math.max(0, Math.ceil(reservedAdornmentWidth))}px`,
