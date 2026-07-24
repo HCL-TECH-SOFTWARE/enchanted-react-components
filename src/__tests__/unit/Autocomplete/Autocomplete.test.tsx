@@ -155,14 +155,13 @@ describe('Autocomplete', () => {
         options={['Apple', 'Banana']}
         value="Apple"
         error
-        unitLabel="px"
-        endAdornment={
+        endAdornment={(
           <>
             <span className="clearIndicator">Clear</span>
             <span>Custom</span>
             <span className="popupIndicator">Popup</span>
           </>
-        }
+        )}
         endAdornmentIconButton={<button type="button" aria-label="fixed-button">Pinned</button>}
       />,
     );

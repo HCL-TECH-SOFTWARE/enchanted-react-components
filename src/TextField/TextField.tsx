@@ -290,7 +290,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               gap: '8px', // Naturally separates all nodes by exactly 8px
               margin: '0px',
               '& svg:not(.MuiCircularProgress-svg)': {
-                margin: '0px', 
+                margin: '0px',
                 padding: '0px',
                 fontSize: '16px',
               },
@@ -307,7 +307,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 minWidth: '0px',
                 margin: '0px',
                 padding: '0px',
-                display: 'flex',     
+                display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
                 '& svg': {
@@ -438,8 +438,8 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
 
     const iconPropsToOverride = { size: 'small' };
-    const clearNodes = rawClearNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
-    const popupNodes = rawPopupNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
+    const clearNodes = rawClearNodes.map((node) =>  { return applyCustomPropsToIcon(node, iconPropsToOverride); } );
+    const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); } );
 
     flowNodes.push(...clearNodes);
     flowNodes.push(...rawOtherNodes);
@@ -570,11 +570,9 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
     variant: 'outlined',
     label: undefined, // The label will be separately handled and not via the MuiTextField
     InputProps: {
-      ...userInputProps, 
+      ...userInputProps,
       startAdornment: getStartAdornment(props, isComboBox),
-      endAdornment: props.InputProps?.endAdornment && !isComboBox
-              ? props.InputProps?.endAdornment
-              : getEndAdornment(props, isComboBox),
+      endAdornment: props.InputProps?.endAdornment && !isComboBox ? props.InputProps?.endAdornment : getEndAdornment(props, isComboBox),
       sx: mergedInputSx,
     },
   };
