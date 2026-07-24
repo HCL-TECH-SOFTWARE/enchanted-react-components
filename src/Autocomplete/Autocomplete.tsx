@@ -306,7 +306,7 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             );
 
             // Make sure the endAdornment is not covered by the startAdornment
-            const reservedAdornmentWidth = `${reservedAdornmentCount * 31}px`;
+            const reservedAdornmentWidth = `${reservedAdornmentCount * 26}px`;
 
             const textFieldArgs: TextFieldProps = {
               ...params,

@@ -33,6 +33,7 @@ const ADORNMENT_SLOT_WIDTH = 16;
 const ADORNMENT_MIN_PADDING = 16;
 const ADORNMENT_SLOT_ATTRIBUTE = 'data-adornment-slot';
 const ADORNMENT_FIXED_SLOT_ATTRIBUTE = 'data-adornment-fixed';
+const ADORNMENT_ACTION_SLOT_ATTRIBUTE = 'data-adornment-action';
 const CLEAR_INDICATOR_CLASS = 'clearIndicator';
 const POPUP_INDICATOR_CLASS = 'popupIndicator';
 const END_ADORNMENT_CLASS = 'MuiAutocomplete-endAdornment';
@@ -279,27 +280,36 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 cursor: 'default',
               },
             },
+            // Clean Flexbox container handles 100% of the spacing naturally
             '& [class*=MuiInputAdornment-positionEnd]': {
-              display: 'inline-flex',
+              display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
-              gap: '8px',
-              flexShrink: 0,
-              marginLeft: '8px',
-              height: '18px',
+              height: '100%',
+              maxHeight: 'none',
+              gap: '8px', // Naturally separates all nodes by exactly 8px
+              margin: '0px',
               '& svg:not(.MuiCircularProgress-svg)': {
-                margin: '0px',
+                margin: '0px', 
                 padding: '0px',
                 fontSize: '16px',
               },
+              // Protects standard MUI Select dropdown carets
+              '& .MuiSelect-icon, & .MuiNativeSelect-icon': {
+                position: 'relative !important',
+                right: 'auto !important',
+              },
               '& [class*=MuiTypography-body2]': {
-                margin: '0px 0px 0px 8px',
+                margin: '0px',
                 cursor: 'default',
               },
-              '& button': {
+              '& button, & [role="button"], & [role="combobox"]': {
                 minWidth: '0px',
                 margin: '0px',
                 padding: '0px',
+                display: 'flex',     
+                alignItems: 'center',
+                gap: '8px',
                 '& svg': {
                   margin: '0px',
                   height: '16px',
@@ -340,14 +350,15 @@ export type CustomTextFieldProps = TextFieldProps & {
   endAdornmentAction?: React.ReactNode;
 };
 
-const wrapAdornmentNodes = (nodes: React.ReactNode[], fixed = false) => {
+const wrapAdornmentNodes = (nodes: React.ReactNode[], type: 'flow' | 'fixed' | 'action' = 'flow') => {
   return React.Children.map(nodes, (node) => {
     return (
       <span
         {...{ [ADORNMENT_SLOT_ATTRIBUTE]: 'true' }}
-        {...(fixed ? { [ADORNMENT_FIXED_SLOT_ATTRIBUTE]: 'true' } : {})}
+        {...(type === 'fixed' ? { [ADORNMENT_FIXED_SLOT_ATTRIBUTE]: 'true' } : {})}
+        {...(type === 'action' ? { [ADORNMENT_ACTION_SLOT_ATTRIBUTE]: 'true' } : {})}
         style={{
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
           flexShrink: 0,
         }}
@@ -385,8 +396,7 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
           popupNodes.push(child);
           return;
         }
-        // If we hit the MUI wrapper, DO NOT add it. Instead, traverse inside it.
-        if (className.includes(END_ADORNMENT_CLASS)) {
+        if (className.includes(END_ADORNMENT_CLASS) || className.includes('MuiInputAdornment-root')) {
           if (child.props.children) traverse(child.props.children);
           return;
         }
@@ -418,39 +428,53 @@ const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
 };
 
 // Group the endAdornment nodes into clear, popup, and other nodes for proper ordering and styling
-export const getEndAdornmentSlots = (props: CustomTextFieldProps) => {
+export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: boolean) => {
   const flowNodes: React.ReactNode[] = [];
   const fixedNodes: React.ReactNode[] = [];
+  const actionNodes: React.ReactNode[] = [];
 
-  const defaultAdornment = props.InputProps?.endAdornment;
+  // Parse and include native InputProps.endAdornment ONLY when it is a ComboBox
+  if (isComboBox && props.InputProps?.endAdornment) {
+    const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
 
-  const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(defaultAdornment);
+    const iconPropsToOverride = { size: 'small' };
+    const clearNodes = rawClearNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
+    const popupNodes = rawPopupNodes.map((node) => applyCustomPropsToIcon(node, iconPropsToOverride));
 
-  const iconPropsToOverride = { size: 'small' };
-  const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
-  const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
+    flowNodes.push(...clearNodes);
+    flowNodes.push(...rawOtherNodes);
+    flowNodes.push(...popupNodes);
+  }
 
-  flowNodes.push(...clearNodes);
+  if (props.error) {
+    flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+  }
 
-  // Add unit label and other nodes
-  if (props.error) flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
-  if (props.unitLabel) flowNodes.push(<Typography variant="body2" key="unit-label">{props.unitLabel}</Typography>);
-  flowNodes.push(...rawOtherNodes);
-  flowNodes.push(...popupNodes);
+  if (props.unitLabel) {
+    flowNodes.push(<Typography className="erc-unit-label" variant="body2" key="unit-label">{props.unitLabel}</Typography>);
+  }
 
-  if (props.endAdornmentIconButton) fixedNodes.push(props.endAdornmentIconButton);
-  if (props.endAdornmentAction) fixedNodes.push(props.endAdornmentAction);
+  if (props.endAdornmentIconButton) {
+    fixedNodes.push(props.endAdornmentIconButton);
+  }
 
-  return { flowNodes, fixedNodes };
+  // Strictly preserve non-comboBox condition for endAdornmentAction
+  if (!isComboBox && props.endAdornmentAction) {
+    actionNodes.push(props.endAdornmentAction);
+  }
+
+  return { flowNodes, fixedNodes, actionNodes };
 };
 
 export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean) => {
+  // Hide endAdornment when startAdornment is present on a simple TextField (NOT affecting Autocomplete)
   if (props.InputProps?.startAdornment !== undefined && !isComboBox) {
     return null;
   }
-  const { flowNodes, fixedNodes } = getEndAdornmentSlots(props);
 
-  if (flowNodes.length === 0 && fixedNodes.length === 0) {
+  const { flowNodes, fixedNodes, actionNodes } = getEndAdornmentSlots(props, isComboBox);
+
+  if (flowNodes.length === 0 && fixedNodes.length === 0 && actionNodes.length === 0) {
     return null;
   }
 
@@ -459,15 +483,16 @@ export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean
     <InputAdornment position="end" className="erc-textfield-end-adornment-root">
       <span
         style={{
-          display: 'inline-flex',
+          display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-end',
+          height: '100%',
           gap: `${ADORNMENT_GAP}px`,
-          width: '100%',
         }}
       >
-        {wrapAdornmentNodes(flowNodes)}
-        {wrapAdornmentNodes(fixedNodes, true)}
+        {wrapAdornmentNodes(flowNodes, 'flow')}
+        {wrapAdornmentNodes(fixedNodes, 'fixed')}
+        {wrapAdornmentNodes(actionNodes, 'action')}
       </span>
     </InputAdornment>
   );
@@ -531,11 +556,13 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
   // To make the endAdornment width dynamic
   const mergedInputSx = {
     ...(typeof userInputSx === 'object' && userInputSx !== null ? userInputSx : {}),
-    '--erc-end-adornment-width': `${Math.max(0, Math.ceil(reservedAdornmentWidth))}px`,
-    '& .MuiInputBase-input, & .MuiAutocomplete-input': {
-      paddingRight: 'calc(var(--erc-end-adornment-width, 56px) + 4px) !important',
-      maxWidth: '100%',
-    },
+    ...(isComboBox ? {
+      '--erc-end-adornment-width': `${Math.max(0, Math.ceil(reservedAdornmentWidth))}px`,
+      '& .MuiInputBase-input, & .MuiAutocomplete-input': {
+        paddingRight: 'calc(var(--erc-end-adornment-width, 56px)) !important',
+        maxWidth: '100%',
+      },
+    } : {}),
   };
 
   const muiTextFieldProps: OutlinedTextFieldProps = {
@@ -543,9 +570,11 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
     variant: 'outlined',
     label: undefined, // The label will be separately handled and not via the MuiTextField
     InputProps: {
-      ...userInputProps, // since we checking the class name for Inputpros and making sure that upper component is autocomplete
+      ...userInputProps, 
       startAdornment: getStartAdornment(props, isComboBox),
-      endAdornment: getEndAdornment(props, isComboBox),
+      endAdornment: props.InputProps?.endAdornment && !isComboBox
+              ? props.InputProps?.endAdornment
+              : getEndAdornment(props, isComboBox),
       sx: mergedInputSx,
     },
   };

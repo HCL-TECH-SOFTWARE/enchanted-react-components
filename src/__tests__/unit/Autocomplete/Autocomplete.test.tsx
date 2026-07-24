@@ -97,6 +97,7 @@ describe('Autocomplete', () => {
     expect(screen.getByTestId('warningIcon')).not.toBeNull();
     expect(container.querySelector('.Mui-error')).not.toBeNull();
   });
+
   it('Render with disabled state', () => {
     const { container } = render(
       <Autocomplete
@@ -145,5 +146,38 @@ describe('Autocomplete', () => {
     );
 
     expect(screen.getByRole('button', { name: 'fixed-end-action' })).not.toBeNull();
+  });
+
+  it('Arranges Autocomplete end adornment items in the expected order (Clear -> Error/Unit -> Custom -> Popup -> FixedIconButton)', () => {
+    configure({ testIdAttribute: 'data-mui-test' });
+    render(
+      <Autocomplete
+        options={['Apple', 'Banana']}
+        value="Apple"
+        error
+        unitLabel="px"
+        endAdornment={
+          <>
+            <span className="clearIndicator">Clear</span>
+            <span>Custom</span>
+            <span className="popupIndicator">Popup</span>
+          </>
+        }
+        endAdornmentIconButton={<button type="button" aria-label="fixed-button">Pinned</button>}
+      />,
+    );
+
+    const clearNode = screen.getByText('Clear');
+    const unitNode = screen.getByText('px');
+    const customNode = screen.getByText('Custom');
+    const popupNode = screen.getByText('Popup');
+    const fixedButtonNode = screen.getByRole('button', { name: 'fixed-button' });
+
+    /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
+    /* eslint-disable no-bitwise */
+    expect(clearNode.compareDocumentPosition(unitNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(unitNode.compareDocumentPosition(customNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(customNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(popupNode.compareDocumentPosition(fixedButtonNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

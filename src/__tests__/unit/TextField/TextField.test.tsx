@@ -22,7 +22,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 
-import TextField from '../../../TextField';
+import TextField, { getEndAdornment, getEndAdornmentSlots } from '../../../TextField';
 import Button from '../../../Button/Button';
 
 afterEach(cleanup);
@@ -120,39 +120,6 @@ describe('TextField', () => {
     expect(screen.getByText(endAdornmentText)).not.toBeNull();
   });
 
-  it('Arranges end adornment items in the expected order and keeps the action fixed last', () => {
-    configure({ testIdAttribute: 'data-mui-test' });
-    render(
-      <TextField
-        error
-        unitLabel="px"
-        InputProps={{
-          endAdornment: (
-            <>
-              <span className="custom-clearIndicator">Clear</span>
-              <span>Custom</span>
-              <span className="custom-popupIndicator">Popup</span>
-            </>
-          ),
-        }}
-        endAdornmentAction={<button type="button">Action</button>}
-      />,
-    );
-
-    const clearNode = screen.getByText('Clear');
-    const unitNode = screen.getByText('px');
-    const customNode = screen.getByText('Custom');
-    const popupNode = screen.getByText('Popup');
-    const actionNode = screen.getByRole('button', { name: 'Action' });
-
-    /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
-    /* eslint-disable no-bitwise */
-    expect(clearNode.compareDocumentPosition(unitNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(unitNode.compareDocumentPosition(customNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(customNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(popupNode.compareDocumentPosition(actionNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  });
-
   it('Render with non edit state', () => {
     const exampleMessage = 'Example message';
     render(<TextField nonEdit value={exampleMessage} />);
@@ -212,5 +179,65 @@ describe('TextField', () => {
 
     expect(label.getAttribute('for')).toBe(input.id);
     expect(input.getAttribute('aria-describedby')).toBe(helperText.id);
+  });
+
+  it('Renders Autocomplete (isComboBox) end adornments correctly and excludes endAdornmentAction', () => {
+    const comboClass = 'MuiAutocomplete-inputRoot';
+    const comboAdornment = <span className="custom-popupIndicator">ComboBoxIcon</span>;
+    const actionText = 'ShouldNotRenderForComboBox';
+
+    render(
+      <TextField
+        InputProps={{
+          className: comboClass,
+          endAdornment: comboAdornment,
+        }}
+        endAdornmentAction={<button type="button">{actionText}</button>}
+      />,
+    );
+
+    expect(screen.getByText('ComboBoxIcon')).not.toBeNull();
+    expect(screen.queryByText(actionText)).toBeNull();
+  });
+
+  it('Verifies getEndAdornmentSlots partitions nodes properly depending on isComboBox', () => {
+    const props = {
+      error: true,
+      unitLabel: 'kg',
+      endAdornmentAction: <span>ActionNode</span>,
+      endAdornmentIconButton: <span>IconButtonNode</span>,
+      InputProps: {
+        endAdornment: <span className="clearIndicator">ClearIcon</span>,
+      },
+    };
+
+    // When isComboBox is true, clearNodes from InputProps are included, but endAdornmentAction is excluded
+    const comboSlots = getEndAdornmentSlots(props, true);
+    expect(comboSlots.flowNodes.length).toBe(3); // ClearIcon, WarningIcon, UnitLabel
+    expect(comboSlots.fixedNodes.length).toBe(1); // IconButtonNode
+    expect(comboSlots.actionNodes.length).toBe(0); // Excluded for ComboBox
+
+    // When isComboBox is false, endAdornmentAction is included
+    const standardSlots = getEndAdornmentSlots(props, false);
+    expect(standardSlots.actionNodes.length).toBe(1); // ActionNode included for standard TextField
+  });
+
+  it('Renders endAdornmentIconButton in fixed slot', () => {
+    const buttonText = 'FixedIconButton';
+    render(<TextField endAdornmentIconButton={<button type="button">{buttonText}</button>} />);
+
+    expect(screen.getByRole('button', { name: buttonText })).not.toBeNull();
+  });
+
+  it('Returns null in getEndAdornment for non-combobox fields when startAdornment is defined', () => {
+    const props = {
+      InputProps: {
+        startAdornment: <span>Start</span>,
+      },
+      unitLabel: 'cm',
+    };
+
+    expect(getEndAdornment(props, false)).toBeNull();
+    expect(getEndAdornment(props, true)).not.toBeNull();
   });
 });
