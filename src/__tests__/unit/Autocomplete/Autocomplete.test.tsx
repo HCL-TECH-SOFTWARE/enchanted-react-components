@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024-2026 HCL America Inc.                                     *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -131,5 +131,19 @@ describe('Autocomplete', () => {
     const input = screen.queryByRole('input');
     expect(input).toBeNull();
     jest.clearAllMocks();
+  });
+
+  it('renders the fixed end icon button passed through endAdornmentIconButton', () => {
+    render(
+      <Autocomplete
+        options={['Apple', 'Banana']}
+        value="Apple"
+        error
+        endAdornment={<span>Custom</span>}
+        endAdornmentIconButton={<button type="button" aria-label="fixed-end-action">Pinned</button>}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'fixed-end-action' })).not.toBeNull();
   });
 });
