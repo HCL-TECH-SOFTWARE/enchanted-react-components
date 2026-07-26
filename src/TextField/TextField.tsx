@@ -438,8 +438,8 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
 
     const iconPropsToOverride = { size: 'small' };
-    const clearNodes = rawClearNodes.map((node) =>  { return applyCustomPropsToIcon(node, iconPropsToOverride); } );
-    const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); } );
+    const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
+    const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
 
     flowNodes.push(...clearNodes);
     flowNodes.push(...rawOtherNodes);
