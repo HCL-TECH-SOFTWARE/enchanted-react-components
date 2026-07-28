@@ -176,8 +176,8 @@ describe('Autocomplete', () => {
     /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
     /* eslint-disable no-bitwise */
     expect(clearNode.compareDocumentPosition(customNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(customNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(popupNode.compareDocumentPosition(warningIconNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(warningIconNode.compareDocumentPosition(fixedButtonNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(customNode.compareDocumentPosition(warningIconNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(warningIconNode.compareDocumentPosition(popupNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(popupNode.compareDocumentPosition(fixedButtonNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

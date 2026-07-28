@@ -22,7 +22,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 
-import TextField, { getEndAdornment, getEndAdornmentSlots } from '../../../TextField';
+import TextField, { getEndAdornment, getEndAdornmentSlots, CustomTextFieldProps } from '../../../TextField';
 import Button from '../../../Button/Button';
 
 afterEach(cleanup);
@@ -228,7 +228,7 @@ describe('TextField', () => {
       InputProps: {
         endAdornment: <span className="clearIndicator">ClearIcon</span>,
       },
-    };
+    } as unknown as CustomTextFieldProps;
 
     // When isComboBox is true, clearNodes from InputProps are included, but endAdornmentAction is excluded
     const comboSlots = getEndAdornmentSlots(props, true);
@@ -236,8 +236,10 @@ describe('TextField', () => {
     expect(comboSlots.fixedNodes.length).toBe(1); // IconButtonNode
     expect(comboSlots.actionNodes.length).toBe(0); // Excluded for ComboBox
 
-    // When isComboBox is false, endAdornmentAction is included
+    // When isComboBox is false, endAdornmentAction is included, and InputProps overrides are skipped
     const standardSlots = getEndAdornmentSlots(props, false);
+    expect(standardSlots.flowNodes.length).toBe(2); // WarningIcon, UnitLabel (ClearIcon is not parsed)
+    expect(standardSlots.fixedNodes.length).toBe(1); // IconButtonNode
     expect(standardSlots.actionNodes.length).toBe(1); // ActionNode included for standard TextField
   });
 
@@ -254,7 +256,7 @@ describe('TextField', () => {
         startAdornment: <span>Start</span>,
       },
       unitLabel: 'cm',
-    };
+    } as unknown as CustomTextFieldProps;
 
     expect(getEndAdornment(props, false)).toBeNull();
     expect(getEndAdornment(props, true)).not.toBeNull();

@@ -29,8 +29,6 @@ import Typography from '../Typography';
 import InputLabelAndAction, { InputLabelAndActionProps, ActionProps } from '../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
 
 const ADORNMENT_GAP = 8;
-const ADORNMENT_SLOT_WIDTH = 16;
-const ADORNMENT_MIN_PADDING = 16;
 const ADORNMENT_SLOT_ATTRIBUTE = 'data-adornment-slot';
 const ADORNMENT_FIXED_SLOT_ATTRIBUTE = 'data-adornment-fixed';
 const ADORNMENT_ACTION_SLOT_ATTRIBUTE = 'data-adornment-action';
@@ -185,11 +183,19 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               ...theme.typography.body2,
               color: theme.palette.text.primary,
               padding: '0px',
+              paddingRight: '8px',
               height: '1.5em',
               '&::placeholder': {
                 fontStyle: 'italic',
                 color: theme.palette.text.secondary,
                 opacity: 9,
+              },
+              // Strip the padding ONLY for number inputs so the stepper is perfectly flush
+              '&[type="number"]': {
+                paddingRight: '0px',
+                '&::-webkit-inner-spin-button, &::-webkit-outer-spin-button': {
+                  marginRight: '0px',
+                },
               },
             },
             textarea: {
@@ -280,21 +286,20 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 cursor: 'default',
               },
             },
-            // Clean Flexbox container handles 100% of the spacing naturally
+            // Clean Flexbox container handles spacing naturally!
             '& [class*=MuiInputAdornment-positionEnd]': {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
               height: '100%',
               maxHeight: 'none',
-              gap: '8px', // Naturally separates all nodes by exactly 8px
+              gap: '8px',
               margin: '0px',
               '& svg:not(.MuiCircularProgress-svg)': {
                 margin: '0px',
                 padding: '0px',
                 fontSize: '16px',
               },
-              // Protects standard MUI Select dropdown carets
               '& .MuiSelect-icon, & .MuiNativeSelect-icon': {
                 position: 'relative !important',
                 right: 'auto !important',
@@ -303,7 +308,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 margin: '0px',
                 cursor: 'default',
               },
-              '& button, & [role="button"], & [role="combobox"]': {
+              '& [data-adornment-action="true"] button, & [data-adornment-fixed="true"] button': {
                 minWidth: '0px',
                 margin: '0px',
                 padding: '0px',
@@ -334,10 +339,6 @@ const StyledMuiFormControl = styled(MuiFormControl)((theme) => {
 
 const getStartAdornment = (props: TextFieldProps, isComboBox: boolean) => {
   if (props.InputProps?.startAdornment) {
-    // For comboBox (Autocomplete), startAdornment may contain chips from MUI's
-    // multiple mode or custom icons already wrapped by Autocomplete.
-    // Pass through as-is to avoid double-wrapping in InputAdornment which
-    // constrains chips to fixed height and breaks chip layout.
     return props.InputProps.startAdornment;
   }
   return null;
@@ -369,7 +370,6 @@ const wrapAdornmentNodes = (nodes: React.ReactNode[], type: 'flow' | 'fixed' | '
   });
 };
 
-// Group the endAdornment nodes into clear, popup, and other nodes for proper ordering and styling
 const partitionAdornmentNodes = (node: React.ReactNode) => {
   const clearNodes: React.ReactNode[] = [];
   const popupNodes: React.ReactNode[] = [];
@@ -377,21 +377,16 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
 
   const traverse = (currentNode: React.ReactNode) => {
     React.Children.forEach(currentNode, (child) => {
-      // If the child is not a valid React element, skip it
       if (!React.isValidElement(child)) return;
 
-      // Check if the child has a className and categorize it based on known classes
       const className = (child.props as { className?: string }).className || '';
 
-      // If the child has a className, check for known classes and categorize accordingly
       if (typeof className === 'string') {
-        // If we hit the clear indicator, add it to the respective array and skip further traversal
         if (className.includes(CLEAR_INDICATOR_CLASS)) {
           clearNodes.push(child);
           return;
         }
 
-        // If we hit the popup indicator, add it to the popupNodes array and skip further traversal
         if (className.includes(POPUP_INDICATOR_CLASS)) {
           popupNodes.push(child);
           return;
@@ -402,23 +397,19 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
         }
       }
 
-      // If we hit a React Fragment, unwrap it and traverse inside.
       if (child.type === React.Fragment) {
         if (child.props.children) traverse(child.props.children);
         return;
       }
 
-      // Catch everything else (like loading spinners)
       otherNodes.push(child);
     });
   };
 
-  // Start the traversal with the initial node
   traverse(node);
   return { clearNodes, popupNodes, otherNodes };
 };
 
-// Apply custom props to a React node if it's a valid element
 const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
   if (React.isValidElement(node)) {
     return React.cloneElement(node, { ...customProps, key: node.key || undefined });
@@ -427,7 +418,6 @@ const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
   return node;
 };
 
-// Group the endAdornment nodes into clear, popup, and other nodes for proper ordering and styling
 export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: boolean) => {
   const flowNodes: React.ReactNode[] = [];
   const fixedNodes: React.ReactNode[] = [];
@@ -441,16 +431,38 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
     const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
 
+    // PUSH CLEAR NODES
     flowNodes.push(...clearNodes);
+
+    // PUSH SPINNER / OTHER NODES
     flowNodes.push(...rawOtherNodes);
+
+    // PUSH ERROR ICON BEFORE CARET
+    if (props.error) {
+      flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+    }
+
+    // PUSH UNIT LABEL
+    if (props.unitLabel) {
+      flowNodes.push(
+        <Typography
+          className="erc-unit-label"
+          variant="body2"
+          key="unit-label"
+          sx={{ paddingLeft: '5px' }}
+        >
+          {props.unitLabel}
+        </Typography>,
+      );
+    }
+
+    // PUSH CARET LAST IN FLOW
     flowNodes.push(...popupNodes);
-  }
-
-  if (props.error) {
-    flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
-  }
-
-  if (props.unitLabel) {
+  } else {
+    // Non-combobox logic
+    if (props.error) {
+      flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+    }
     if (props.unitLabel) {
       flowNodes.push(
         <Typography
@@ -469,7 +481,6 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     fixedNodes.push(props.endAdornmentIconButton);
   }
 
-  // Strictly preserve non-comboBox condition for endAdornmentAction
   if (!isComboBox && props.endAdornmentAction) {
     actionNodes.push(props.endAdornmentAction);
   }
@@ -489,7 +500,6 @@ export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean
     return null;
   }
 
-  // Wrap each node in an InputAdornment
   return (
     <InputAdornment position="end" className="erc-textfield-end-adornment-root">
       <span
@@ -564,14 +574,14 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
   const userInputProps = props.InputProps ?? {};
   const userInputSx = userInputProps.sx;
 
-  // To make the endAdornment width dynamic
+  const paddingOffset = reservedAdornmentWidth > 0 ? reservedAdornmentWidth + 8 : 0;
+
   const mergedInputSx = {
     ...(typeof userInputSx === 'object' && userInputSx !== null ? userInputSx : {}),
     ...(isComboBox ? {
-      '--erc-end-adornment-width': `${Math.max(0, Math.ceil(reservedAdornmentWidth))}px`,
-      '& .MuiInputBase-input, & .MuiAutocomplete-input': {
-        paddingRight: 'calc(var(--erc-end-adornment-width, 56px)) !important',
-        maxWidth: '100%',
+      '--erc-end-adornment-width': `${Math.max(0, Math.ceil(paddingOffset))}px`,
+      '& .MuiAutocomplete-input': {
+        paddingRight: 'var(--erc-end-adornment-width) !important',
       },
     } : {}),
   };
@@ -627,39 +637,23 @@ const renderInput = (
 
 const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: React.ForwardedRef<unknown>) => {
   const [isFocus, setIsFocus] = React.useState(false);
-  const [reservedAdornmentWidth, setReservedAdornmentWidth] = React.useState(ADORNMENT_MIN_PADDING);
+  const [reservedAdornmentWidth, setReservedAdornmentWidth] = React.useState(0);
   const rootRef = React.useRef<HTMLDivElement | null>(null);
 
-  // Measure the width of the endAdornment and update the reservedAdornmentWidth state
   React.useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return undefined;
 
     const measure = () => {
-      // Get the width of the end adornment
       const adornmentRoot = root.querySelector<HTMLElement>('.erc-textfield-end-adornment-root');
 
       if (!adornmentRoot) {
-        setReservedAdornmentWidth(ADORNMENT_MIN_PADDING);
+        setReservedAdornmentWidth(0);
         return;
       }
 
-      // Get all elements that are marked as adornment slots
-      const slotElements = Array.from(adornmentRoot.querySelectorAll<HTMLElement>(`[${ADORNMENT_SLOT_ATTRIBUTE}="true"]`));
-
-      // Filter out any adornment slots that are not visible (e.g., those that are hidden due to conditional rendering)
-      const visibleSlots = slotElements.filter((element) => {
-        const style = window.getComputedStyle(element);
-        return style.display !== 'none' && style.visibility !== 'hidden';
-      });
-
-      // Calculate the width of the end adornment based on the number of visible slots
-      const countBasedWidth = visibleSlots.length > 0
-        ? (visibleSlots.length * ADORNMENT_SLOT_WIDTH) + ((visibleSlots.length - 1) * ADORNMENT_GAP) + ADORNMENT_MIN_PADDING
-        : ADORNMENT_MIN_PADDING;
-
       const measuredWidth = Math.ceil(adornmentRoot.getBoundingClientRect().width);
-      setReservedAdornmentWidth(Math.max(measuredWidth, countBasedWidth));
+      setReservedAdornmentWidth(measuredWidth);
     };
 
     measure();
