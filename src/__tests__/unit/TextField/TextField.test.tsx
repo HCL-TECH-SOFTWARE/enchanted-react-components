@@ -120,6 +120,25 @@ describe('TextField', () => {
     expect(screen.getByText(endAdornmentText)).not.toBeNull();
   });
 
+  it('Arranges end adornment items in expected order (unitLabel -> endAdornmentAction -> endAdornmentIconButton)', () => {
+    render(
+      <TextField
+        unitLabel="px"
+        endAdornmentAction={<button type="button">Action</button>}
+        endAdornmentIconButton={<button type="button">IconButton</button>}
+      />,
+    );
+
+    const unitNode = screen.getByText('px');
+    const actionNode = screen.getByRole('button', { name: 'Action' });
+    const iconButtonNode = screen.getByRole('button', { name: 'IconButton' });
+
+    /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
+    /* eslint-disable no-bitwise */
+    expect(unitNode.compareDocumentPosition(actionNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(actionNode.compareDocumentPosition(iconButtonNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('Render with non edit state', () => {
     const exampleMessage = 'Example message';
     render(<TextField nonEdit value={exampleMessage} />);

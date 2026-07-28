@@ -451,7 +451,18 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
   }
 
   if (props.unitLabel) {
-    flowNodes.push(<Typography className="erc-unit-label" variant="body2" key="unit-label">{props.unitLabel}</Typography>);
+    if (props.unitLabel) {
+      flowNodes.push(
+        <Typography
+          className="erc-unit-label"
+          variant="body2"
+          key="unit-label"
+          sx={{ paddingLeft: '5px' }}
+        >
+          {props.unitLabel}
+        </Typography>,
+      );
+    }
   }
 
   if (props.endAdornmentIconButton) {
@@ -491,8 +502,8 @@ export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean
         }}
       >
         {wrapAdornmentNodes(flowNodes, 'flow')}
-        {wrapAdornmentNodes(fixedNodes, 'fixed')}
         {wrapAdornmentNodes(actionNodes, 'action')}
+        {wrapAdornmentNodes(fixedNodes, 'fixed')}
       </span>
     </InputAdornment>
   );
