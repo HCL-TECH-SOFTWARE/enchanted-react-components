@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Added the `endAdornmentIconButton` prop to the `TextField` component to allow for an icon button at the end of the input field, and rearranged the order of the icon buttons.
 
 ### Added
 
@@ -24,7 +25,6 @@
 ### Added
 - Added the `SnackbarGroup` component and its associated tests.
 - Added RTL icon support to the TreeView component and enabled keyboard navigation for hidden icons.
-- Added the `endAdornmentIconButton` prop to the `TextField` component to allow for an icon button at the end of the input field, and rearranged the order of the icon buttons.
 
 
 ### Fixed

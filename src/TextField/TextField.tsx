@@ -435,7 +435,7 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
       flowNodes.push(...clearNodes);
     } else if (!props.disabled) {
       // Proactively reserve space for the Clear icon even when value is empty
-      flowNodes.push(<span key="clear-placeholder" style={{ width: '26px', display: 'inline-block' }} />);
+      flowNodes.push(<span key="clear-placeholder" />);
     }
 
     // PUSH SPINNER / OTHER NODES
