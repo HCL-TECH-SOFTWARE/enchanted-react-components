@@ -167,30 +167,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
   const [prevValue, setPrevValue] = React.useState('');
   const [selectedOption, setSelectedOption] = React.useState<T | null>();
 
-  const flattenAdornmentNodes = React.useCallback((node: React.ReactNode): React.ReactNode[] => {
-    if (node === null || node === undefined || typeof node === 'boolean') {
-      return [];
-    }
-
-    if (Array.isArray(node)) {
-      return node.reduce<React.ReactNode[]>((accumulator, child) => {
-        return accumulator.concat(flattenAdornmentNodes(child));
-      }, []);
-    }
-
-    if (React.isValidElement(node)) {
-      const elementProps = node.props as { hidden?: boolean; children?: React.ReactNode };
-      if (elementProps.hidden) {
-        return [];
-      }
-      if (node.type === React.Fragment) {
-        return flattenAdornmentNodes(elementProps.children);
-      }
-    }
-
-    return [node];
-  }, []);
-
   const getIconsCount = React.useCallback((adornment: React.ReactNode) => {
     return React.Children.toArray(adornment).filter((child) => { return React.isValidElement(child); }).length;
   }, []);
@@ -207,35 +183,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
     const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
     return Math.max(iconWidth, 0);
   }, [props.startAdornment, getIconsCount]);
-
-  const getEndAdornmentWidth = React.useCallback(() => {
-    let iconCount = 0;
-    const parentWidth = textfieldRef.current?.parentElement?.offsetWidth || 0;
-
-    if (props.endAdornment) {
-      iconCount += getIconsCount(props.endAdornment);
-    }
-
-    // Check for freeSolo first because if it's true, then the caret down icon will not be shown.
-    iconCount += props.freeSolo ? 0 : 1;
-
-    // Check if the component is disabled or disableClearable is true.
-    // If either is true, the clear icon will not be shown.
-    if (!props.disabled && !(props.disableClearable ?? false)) {
-      if (props.value) {
-        iconCount += 1; // show clear icon
-      }
-    }
-
-    // Check if error icon should be shown.
-    iconCount += props.error ? 1 : 0;
-
-    // Calculate the total width needed for the input adornment area based on the number of icons.
-    // Each icon is assumed to be 21px wide. If the parent width is very small (<= 150px), subtract 5px for tighter spacing.
-    const iconWidth = ((iconCount) * 21 - (parentWidth <= 150 ? 5 : 0));
-
-    return Math.max(iconWidth, 0);
-  }, [props.endAdornment, props.error, props.freeSolo, props.disabled, props.value, props.disableClearable, getIconsCount]);
 
   React.useEffect(() => {
     const textFieldElement = textfieldRef.current;
@@ -293,21 +240,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
           clearIcon={props.clearIcon ? props.clearIcon : <ClearIcon color="action" />}
           popupIcon={<CaretDownIcon color="action" />}
           renderInput={(params) => {
-            const endAdornmentCustomCount = flattenAdornmentNodes(endAdornment).length;
-            const endAdornmentActionCount = flattenAdornmentNodes(endAdornmentAction).length;
-            const popupIndicatorCount = props.freeSolo ? 0 : 1;
-
-            // Reserve clear-indicator space whenever clear can be shown, so text does not jump.
-            const clearIndicatorCount = (!props.disabled && !(props.disableClearable ?? false)) ? 1 : 0;
-            const errorIconCount = props.error ? 1 : 0;
-            const reservedAdornmentCount = Math.max(
-              1,
-              endAdornmentCustomCount + endAdornmentActionCount + popupIndicatorCount + clearIndicatorCount + errorIconCount,
-            );
-
-            // Make sure the endAdornment is not covered by the startAdornment
-            const reservedAdornmentWidth = `${reservedAdornmentCount * 26}px`;
-
             const textFieldArgs: TextFieldProps = {
               ...params,
               placeholder: props.placeholder,
@@ -318,10 +250,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
                 ...props.sx,
                 '& .MuiInputAdornment-root.MuiInputAdornment-positionStart': {
                   width: getStartAdornmentWidth(),
-                },
-                '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
-                  width: getEndAdornmentWidth(),
-                  marginLeft: getEndAdornmentWidth() > 0 ? '8px' : '0px',
                 },
               },
               focused,
@@ -338,8 +266,6 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
               enableHelpHoverEffect,
               InputProps: {
                 ...params.InputProps,
-                // To make sure the startAdornment is not covered by the endAdornment
-                sx: { '--erc-autocomplete-end-adornment-width': reservedAdornmentWidth },
                 startAdornment: startAdornment
                   ? (
                     <>

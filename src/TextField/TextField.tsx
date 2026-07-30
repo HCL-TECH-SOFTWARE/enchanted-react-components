@@ -96,26 +96,25 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               '&.MuiOutlinedInput-root': {
                 paddingRight: ownerState.disabled ? '8px' : '16px',
               },
-              ...ownerState.endAdornment ?? {
-                '& .MuiAutocomplete-input': {
-                  // Reserve a stable right-side area so selected text does not shift when icons toggle.
-                  paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
-                },
-                '& [class*=MuiInputAdornment-positionEnd]': {
-                  position: 'absolute',
-                  right: '8px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: 'calc(var(--erc-autocomplete-end-adornment-width, 56px) - 8px)',
-                  marginLeft: '0px',
-                  justifyContent: 'flex-end',
-                },
-                '& .MuiAutocomplete-endAdornment': {
-                  position: 'static',
-                  transform: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                },
+              // Reserve a stable right-side area so selected text does not shift when icons toggle.
+              '& .MuiAutocomplete-input': {
+                paddingRight: 'var(--erc-autocomplete-end-adornment-width, 56px) !important',
+              },
+              '& [class*=MuiInputAdornment-positionEnd]': {
+                position: 'absolute',
+                right: '8px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                // Width must be auto so ResizeObserver can measure actual icon widths
+                width: 'auto',
+                marginLeft: '0px',
+                justifyContent: 'flex-end',
+              },
+              '& .MuiAutocomplete-endAdornment': {
+                position: 'static',
+                transform: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
               },
               '& .MuiAutocomplete-endAdornment .MuiButtonBase-root': {
                 position: 'static',
@@ -431,8 +430,13 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
     const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
 
-    // PUSH CLEAR NODES
-    flowNodes.push(...clearNodes);
+    // PUSH CLEAR NODES OR PLACEHOLDER
+    if (clearNodes.length > 0) {
+      flowNodes.push(...clearNodes);
+    } else if (!props.disabled) {
+      // Proactively reserve space for the Clear icon even when value is empty
+      flowNodes.push(<span key="clear-placeholder" style={{ width: '26px', display: 'inline-block' }} />);
+    }
 
     // PUSH SPINNER / OTHER NODES
     flowNodes.push(...rawOtherNodes);
@@ -460,9 +464,16 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     flowNodes.push(...popupNodes);
   } else {
     // Non-combobox logic
+    if (props.InputProps?.endAdornment) {
+      // Use partitionAdornmentNodes to strip out native InputAdornment wrappers so we don't double-wrap
+      const { otherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
+      flowNodes.push(...otherNodes);
+    }
+
     if (props.error) {
       flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
     }
+
     if (props.unitLabel) {
       flowNodes.push(
         <Typography
@@ -489,7 +500,7 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
 };
 
 export const getEndAdornment = (props: CustomTextFieldProps, isComboBox: boolean) => {
-  // Hide endAdornment when startAdornment is present on a simple TextField (NOT affecting Autocomplete)
+  // Restore the check: Hide endAdornment when startAdornment is present on a simple TextField
   if (props.InputProps?.startAdornment !== undefined && !isComboBox) {
     return null;
   }
@@ -559,7 +570,7 @@ const getMuiFormControlProps = (props: TextFieldProps, forwardRef: React.Forward
 };
 
 const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: number): OutlinedTextFieldProps => {
-  const isComboBox = Boolean(props.InputProps?.className?.startsWith('MuiAutocomplete'));
+  const isComboBox = Boolean(props.InputProps?.className?.includes('MuiAutocomplete'));
   const cleanedProps = { ...props };
   delete cleanedProps.actionProps;
   delete cleanedProps.nonEdit;
@@ -574,14 +585,14 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
   const userInputProps = props.InputProps ?? {};
   const userInputSx = userInputProps.sx;
 
-  const paddingOffset = reservedAdornmentWidth > 0 ? reservedAdornmentWidth + 8 : 0;
+  const paddingOffset = reservedAdornmentWidth > 0 ? reservedAdornmentWidth + 2 : 0;
 
   const mergedInputSx = {
     ...(typeof userInputSx === 'object' && userInputSx !== null ? userInputSx : {}),
     ...(isComboBox ? {
-      '--erc-end-adornment-width': `${Math.max(0, Math.ceil(paddingOffset))}px`,
+      '--erc-autocomplete-end-adornment-width': `${Math.max(0, Math.ceil(paddingOffset))}px`,
       '& .MuiAutocomplete-input': {
-        paddingRight: 'var(--erc-end-adornment-width) !important',
+        paddingRight: 'var(--erc-autocomplete-end-adornment-width) !important',
       },
     } : {}),
   };
@@ -593,7 +604,7 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
     InputProps: {
       ...userInputProps,
       startAdornment: getStartAdornment(props, isComboBox),
-      endAdornment: props.InputProps?.endAdornment && !isComboBox ? props.InputProps?.endAdornment : getEndAdornment(props, isComboBox),
+      endAdornment: getEndAdornment(props, isComboBox),
       sx: mergedInputSx,
     },
   };

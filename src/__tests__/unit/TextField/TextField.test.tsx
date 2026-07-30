@@ -8,8 +8,6 @@
  *                                                                          *
  * Unless required by applicable law or agreed to in writing, software      *
  * distributed under the License is distributed on an "AS IS" BASIS,        *
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
- * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
 
@@ -260,5 +258,41 @@ describe('TextField', () => {
 
     expect(getEndAdornment(props, false)).toBeNull();
     expect(getEndAdornment(props, true)).not.toBeNull();
+  });
+
+  it('Injects a 26px placeholder for ComboBox when clear indicator is absent to prevent layout shift', () => {
+    const props = {
+      disabled: false,
+      InputProps: {
+        endAdornment: <span className="popupIndicator">PopupIcon</span>, // No clearIndicator passed
+      },
+    } as unknown as CustomTextFieldProps;
+
+    const comboSlots = getEndAdornmentSlots(props, true);
+
+    // flowNodes should have: placeholder (1) + popupNodes (1) = 2 nodes.
+    expect(comboSlots.flowNodes.length).toBe(2);
+
+    // Verify placeholder is structurally injected first
+    const placeholder = comboSlots.flowNodes[0] as React.ReactElement;
+    expect(placeholder.key).toBe('clear-placeholder');
+    expect(placeholder.props.style.width).toBe('26px');
+  });
+
+  it('Does not inject a 26px placeholder when ComboBox is disabled', () => {
+    const props = {
+      disabled: true, // Should prevent placeholder rendering
+      InputProps: {
+        endAdornment: <span className="popupIndicator">PopupIcon</span>,
+      },
+    } as unknown as CustomTextFieldProps;
+
+    const comboSlots = getEndAdornmentSlots(props, true);
+
+    // flowNodes should only contain the popupNode (1 node total)
+    expect(comboSlots.flowNodes.length).toBe(1);
+
+    const firstNode = comboSlots.flowNodes[0] as React.ReactElement;
+    expect(firstNode.key).not.toBe('clear-placeholder');
   });
 });
