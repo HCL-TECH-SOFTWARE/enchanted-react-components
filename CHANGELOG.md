@@ -1,9 +1,9 @@
 # Changelog
 
 ## Unreleased
-- Added the `endAdornmentIconButton` prop to the `TextField` component to allow for an icon button at the end of the input field, and rearranged the order of the icon buttons.
 
 ### Added
+- Added the `endAdornmentIconButton` prop to the `TextField` component to allow for an icon button at the end of the input field, and rearranged the order of the icon buttons.
 
 ### Fixed
 - Fixed tooltip cropping in ProgressBar when asset names exceed container width.
