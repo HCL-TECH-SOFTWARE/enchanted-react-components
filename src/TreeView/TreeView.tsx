@@ -17,8 +17,10 @@ import MuiTreeView from '@mui/lab/TreeView';
 import type { TreeViewProps } from '@mui/lab/TreeView';
 import '@mui/lab/themeAugmentation';
 import { Components, Theme } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
 import ChevronRight from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--right';
+import ChevronLeft from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--left';
 import { TreeViewContext } from './TreeItem';
 
 export { TreeViewContext, TreeDepthContext } from './TreeItem';
@@ -245,6 +247,7 @@ const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
     const {
       defaultCollapseIcon, defaultExpandIcon, onMouseLeave, showLevelLine = true, disabled, ...rest
     } = props;
+    const theme = useTheme();
 
     const treeRef = React.useRef<HTMLUListElement>(null);
     // Accordion pattern: ref (not state) so MutationObserver callbacks read it synchronously.
@@ -336,12 +339,19 @@ const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
       [focusTree, navigateWithKey, navigateToNextItemAction, showLevelLine, disabled],
     );
 
+    // If the user has not provided a defaultExpandIcon, we will use the default ChevronRight or ChevronLeft icon based on the theme direction.
+    const resolvedExpandIcon = React.useMemo(() => {
+      if (defaultExpandIcon) return defaultExpandIcon;
+      const ExpandIcon = theme.direction === 'rtl' ? ChevronLeft : ChevronRight;
+      return <ExpandIcon data-testid="treeview-default-expand-icon" data-icon-direction={theme.direction} />;
+    }, [defaultExpandIcon, theme.direction]);
+
     return (
       <TreeViewContext.Provider value={contextValue}>
         <MuiTreeView
           ref={combinedRef}
           defaultCollapseIcon={defaultCollapseIcon ?? <ChevronDownIcon />}
-          defaultExpandIcon={defaultExpandIcon ?? <ChevronRight />}
+          defaultExpandIcon={resolvedExpandIcon}
           onMouseLeave={handleMouseLeave}
           onKeyDown={handleKeyDown}
           {...rest}
