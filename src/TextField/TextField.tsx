@@ -109,6 +109,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 width: 'auto',
                 marginLeft: '0px',
                 justifyContent: 'flex-end',
+                zIndex: 2, // Raised to ensure adornments remain clickable over the input
               },
               '& .MuiAutocomplete-endAdornment': {
                 position: 'static',
@@ -184,6 +185,8 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               padding: '0px',
               paddingRight: '8px',
               height: '1.5em',
+              position: 'relative',
+              zIndex: 1,
               '&::placeholder': {
                 fontStyle: 'italic',
                 color: theme.palette.text.secondary,
@@ -202,6 +205,8 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               color: theme.palette.text.primary,
               paddingTop: '1px',
               paddingBottom: '1px',
+              position: 'relative',
+              zIndex: 1,
               '&::placeholder': {
                 fontStyle: 'italic',
                 color: theme.palette.text.secondary,
@@ -275,6 +280,8 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
             '& [class*=MuiInputAdornment-positionStart]': {
               marginRight: '8px',
               height: '18px',
+              position: 'relative',
+              zIndex: 2,
               '& svg:not(.MuiCircularProgress-svg)': {
                 margin: '0px 0px 0px 4px',
                 padding: '0px',
@@ -294,6 +301,8 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               maxHeight: 'none',
               gap: '8px',
               margin: '0px',
+              position: 'relative',
+              zIndex: 2,
               '& svg:not(.MuiCircularProgress-svg)': {
                 margin: '0px',
                 padding: '0px',

@@ -369,7 +369,7 @@ export const ExampleTextFieldWithEndAdornmentIconButton = {
       <TextField
         label="Label"
         endAdornmentIconButton={(
-          <IconButton>
+          <IconButton aria-label="popup-icon-button">
             <PopupIcon style={{ width: 16, height: 16 }} />
           </IconButton>
         )}
