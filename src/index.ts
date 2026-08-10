@@ -30,6 +30,8 @@ export { default as Breadcrumbs } from './Breadcrumbs';
 export * from './Breadcrumbs';
 export { default as Button } from './Button';
 export * from './Button';
+export { Calendar } from './Calendar';
+export * from './Calendar';
 export { default as Checkbox } from './Checkbox';
 export * from './Checkbox';
 export { default as Chip } from './Chip';
