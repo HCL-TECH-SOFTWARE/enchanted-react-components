@@ -621,7 +621,14 @@ const renderNonEditInput = (props: TextFieldProps, muiTextFieldProps: OutlinedTe
   if (props.renderNonEditInput) {
     return props.renderNonEditInput();
   }
-  return <Typography variant="body2">{muiTextFieldProps.value ? muiTextFieldProps.value : null}</Typography>;
+  const rawValue = muiTextFieldProps.value;
+  // eslint-disable-next-line no-nested-ternary
+  const displayValue = rawValue == null
+    ? null
+    : typeof rawValue === 'object'
+      ? (rawValue.label ?? JSON.stringify(rawValue))
+      : rawValue;
+  return <Typography variant="body2">{displayValue || null}</Typography>;
 };
 
 const renderInput = (
