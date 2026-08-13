@@ -186,6 +186,13 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               height: '1.5em',
               position: 'relative',
               zIndex: 1,
+              // MuiSelect-nativeInput must stay position:absolute (MUI default) so it stays
+              // off-flow. Our position:relative above would override it and make the hidden
+              // input participate in layout, expanding the Select height unexpectedly.
+              '&.MuiSelect-nativeInput': {
+                position: 'absolute',
+                height: 'auto',
+              },
               '&::placeholder': {
                 fontStyle: 'italic',
                 color: theme.palette.text.secondary,
@@ -291,13 +298,9 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 cursor: 'default',
               },
             },
-            // Clean Flexbox container handles spacing naturally!
+            // Shared styles for ALL end adornments (Select, DatePicker, TextField, etc.)
             '& [class*=MuiInputAdornment-positionEnd]': {
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
               height: '18px',
-              gap: '8px',
               margin: '0px',
               position: 'relative',
               zIndex: 2,
@@ -314,6 +317,31 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                 margin: '0px',
                 cursor: 'default',
               },
+              // Preserve the original button margin so non-erc adornments keep their spacing
+              '& button': {
+                minWidth: '0px',
+                margin: '0px 0px 0px 8px',
+                padding: '0px',
+                '& svg': {
+                  margin: '0px',
+                  height: '16px',
+                  width: '16px',
+                },
+              },
+            },
+            // Flex layout and slot-specific overrides scoped ONLY to our custom adornment root.
+            // This prevents display:flex / justifyContent / gap from leaking into
+            // Select's or DatePicker's native InputAdornments and shifting their icons.
+            '& .erc-textfield-end-adornment-root': {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              gap: `${ADORNMENT_GAP}px`,
+              // Reset the general button margin — gap on the container handles spacing
+              '& button': {
+                margin: '0px',
+              },
+              // endAdornmentIconButton fixed/action slots
               '& [data-adornment-action="true"] button, & [data-adornment-fixed="true"] button': {
                 minWidth: '0px',
                 margin: '0px',
@@ -471,7 +499,10 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
       flowNodes.push(...otherNodes);
     }
 
-    if (props.error) {
+    // Only inject the error icon when no existing endAdornment is present.
+    // Components like DatePicker already supply their own endAdornment (calendar icon)
+    // and should not additionally receive the warning icon in error state.
+    if (props.error && !props.InputProps?.endAdornment) {
       flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
     }
 
