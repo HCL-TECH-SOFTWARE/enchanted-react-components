@@ -367,7 +367,7 @@ export const ExampleTextFieldWithEndAdornmentIconButton = {
   render: Template,
   args: {
     ...ExampleTextField.args,
-    fullWidth: true,
+    fullWidth: false,
     endAdornmentIconButton: (
       <IconButton aria-label="popup-icon-button">
         <PopupIcon style={{ width: 16, height: 16 }} />

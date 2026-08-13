@@ -37,6 +37,24 @@ const POPUP_INDICATOR_CLASS = 'popupIndicator';
 const END_ADORNMENT_CLASS = 'MuiAutocomplete-endAdornment';
 
 /**
+ * Helper function to ensure passed React nodes have an aria-label if they are interactive buttons
+ */
+const ensureAccessibleNode = (node: React.ReactNode, fallbackLabel: string): React.ReactNode => {
+  if (!React.isValidElement(node)) return node;
+
+  const nodeProps = node.props as { 'aria-label'?: string; children?: React.ReactNode };
+
+  // If node is an element without aria-label and without direct string children
+  if (!nodeProps['aria-label'] && typeof nodeProps.children !== 'string') {
+    return React.cloneElement(node as React.ReactElement<{ 'aria-label'?: string }>, {
+      'aria-label': fallbackLabel,
+    });
+  }
+
+  return node;
+};
+
+/**
  * @typedef OutlinedTextFieldProps
  * @type {object}
  * @property {any} value
@@ -472,7 +490,15 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
 
     // PUSH ERROR ICON BEFORE CARET
     if (props.error) {
-      flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+      flowNodes.push(
+        <WarningIcon
+          color="error"
+          fontSize="small"
+          key="warning-icon"
+          focusable="false"
+          aria-hidden="true"
+        />,
+      );
     }
 
     // PUSH UNIT LABEL
@@ -508,7 +534,14 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     // Components like DatePicker already supply their own endAdornment (calendar icon)
     // and should not additionally receive the warning icon in error state.
     if (props.error && !hasEndAdornment) {
-      flowNodes.push(<WarningIcon key="warning-icon" data-mui-test="warningIcon" />);
+      flowNodes.push(
+        <WarningIcon
+          key="warning-icon"
+          data-mui-test="warningIcon"
+          focusable="false"
+          aria-hidden="true"
+        />,
+      );
     }
 
     if (props.unitLabel) {
@@ -519,11 +552,11 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
   }
 
   if (props.endAdornmentIconButton) {
-    fixedNodes.push(props.endAdornmentIconButton);
+    fixedNodes.push(ensureAccessibleNode(props.endAdornmentIconButton, 'Adornment Action'));
   }
 
   if (!isComboBox && props.endAdornmentAction) {
-    actionNodes.push(props.endAdornmentAction);
+    actionNodes.push(ensureAccessibleNode(props.endAdornmentAction, 'Action'));
   }
 
   return { flowNodes, fixedNodes, actionNodes };
@@ -630,12 +663,19 @@ const getMuiTextFieldProps = (props: TextFieldProps, reservedAdornmentWidth: num
   const muiTextFieldProps: OutlinedTextFieldProps = {
     ...cleanedProps,
     variant: 'outlined',
-    label: undefined, // The label will be separately handled and not via the MuiTextField
+    label: undefined,
     InputProps: {
       ...userInputProps,
       startAdornment: getStartAdornment(props, isComboBox),
       endAdornment: getEndAdornment(props, isComboBox),
       sx: mergedInputSx,
+    },
+    FormHelperTextProps: {
+      ...(props.error && {
+        role: 'alert',
+        'aria-live': 'polite',
+      }),
+      ...cleanedProps.FormHelperTextProps,
     },
   };
   return muiTextFieldProps;
