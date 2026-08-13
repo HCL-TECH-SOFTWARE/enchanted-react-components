@@ -183,7 +183,6 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               ...theme.typography.body2,
               color: theme.palette.text.primary,
               padding: '0px',
-              paddingRight: '8px',
               height: '1.5em',
               position: 'relative',
               zIndex: 1,
