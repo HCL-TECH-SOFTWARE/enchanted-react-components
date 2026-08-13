@@ -301,7 +301,7 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       endAdornment = <InformationIcon />;
       break;
     case 'Loading':
-      endAdornment = <CircularProgress color="inherit" size={16} variant="indeterminate" />;
+      endAdornment = <CircularProgress color="inherit" size={16} variant="indeterminate" aria-label="circular-progress" role="progressbar" />;
       break;
     default:
       endAdornment = null;
@@ -516,7 +516,7 @@ export const ExampleAutocompleteWithEndAdornmentIconButton = {
     startAdornment: 'SearchIcon',
     endAdornment: 'Loading',
     endAdornmentIconButton: (
-      <IconButton>
+      <IconButton aria-label="popup-icon-button">
         <PopupIcon style={{ width: 16, height: 16 }} />
       </IconButton>
     ),

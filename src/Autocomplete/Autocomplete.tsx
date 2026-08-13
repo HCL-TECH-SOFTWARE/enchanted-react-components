@@ -388,7 +388,16 @@ const Autocomplete = <T, Multiple extends boolean | undefined = undefined,
             );
           }}
         />
-        <MuiFormHelperText id={helperTextId} sx={{ marginTop: nonEdit ? '0px' : '4px' }}>{helperText}</MuiFormHelperText>
+        <MuiFormHelperText
+          id={helperTextId}
+          sx={{ marginTop: nonEdit ? '0px' : '4px' }}
+          {...(props.error && {
+            role: 'alert',
+            'aria-live': 'polite',
+          })}
+        >
+          {helperText}
+        </MuiFormHelperText>
       </MuiFormControl>
     </AutoCompleteContainer>
   );
