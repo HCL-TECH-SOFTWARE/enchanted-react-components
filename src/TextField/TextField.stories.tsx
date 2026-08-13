@@ -364,16 +364,14 @@ export const ExampleTextFieldWithUnitSelector = {
 };
 
 export const ExampleTextFieldWithEndAdornmentIconButton = {
-  render: () => {
-    return (
-      <TextField
-        label="Label"
-        endAdornmentIconButton={(
-          <IconButton aria-label="popup-icon-button">
-            <PopupIcon style={{ width: 16, height: 16 }} />
-          </IconButton>
-        )}
-      />
-    );
+  render: Template,
+  args: {
+    ...ExampleTextField.args,
+    fullWidth: true,
+    endAdornmentIconButton: (
+      <IconButton aria-label="popup-icon-button">
+        <PopupIcon style={{ width: 16, height: 16 }} />
+      </IconButton>
+    ),
   },
 };
