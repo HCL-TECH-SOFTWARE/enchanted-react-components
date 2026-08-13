@@ -460,7 +460,7 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                     width: '16px',
                     position: 'relative',
                   },
-                  '.MuiAutocomplete-endAdornment': { // end icon
+                  '.MuiAutocomplete-endAdornment': { // end icon (legacy structure)
                     position: 'static',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -476,6 +476,18 @@ export const getMuiAutocompleteThemeOverrides = (): Components<Omit<Theme, 'comp
                           width: '16px',
                         },
                       },
+                    },
+                  },
+                  // Direct selectors for new structure where MuiAutocomplete-endAdornment wrapper is extracted
+                  '.MuiAutocomplete-clearIndicator, .MuiAutocomplete-popupIndicator': {
+                    top: 'auto',
+                    margin: '0px',
+                  },
+                  '.MuiAutocomplete-popupIndicator': { // caret down icon
+                    position: 'relative',
+                    '.MuiSvgIcon-root': {
+                      height: '16px',
+                      width: '16px',
                     },
                   },
                 },

@@ -297,8 +297,7 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
-              height: '100%',
-              maxHeight: 'none',
+              height: '18px',
               gap: '8px',
               margin: '0px',
               position: 'relative',
@@ -328,6 +327,12 @@ export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'compone
                   height: '16px',
                   width: '16px',
                 },
+              },
+              // Neutralize MuiIconButton-edgeEnd negative margin — when the calendar button is
+              // extracted from MUI's native InputAdornment and re-wrapped in erc-textfield-end-adornment-root,
+              // the -12px right margin causes the icon to overflow outside the input border.
+              '& .MuiIconButton-edgeEnd': {
+                marginRight: '0px',
               },
             },
           };
@@ -418,14 +423,6 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
   return { clearNodes, popupNodes, otherNodes };
 };
 
-const applyCustomPropsToIcon = (node: React.ReactNode, customProps: object) => {
-  if (React.isValidElement(node)) {
-    return React.cloneElement(node, { ...customProps, key: node.key || undefined });
-  }
-
-  return node;
-};
-
 export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: boolean) => {
   const flowNodes: React.ReactNode[] = [];
   const fixedNodes: React.ReactNode[] = [];
@@ -435,9 +432,8 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
   if (isComboBox && props.InputProps?.endAdornment) {
     const { clearNodes: rawClearNodes, popupNodes: rawPopupNodes, otherNodes: rawOtherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
 
-    const iconPropsToOverride = { size: 'small' };
-    const clearNodes = rawClearNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
-    const popupNodes = rawPopupNodes.map((node) => { return applyCustomPropsToIcon(node, iconPropsToOverride); });
+    const clearNodes = rawClearNodes;
+    const popupNodes = rawPopupNodes;
 
     // PUSH CLEAR NODES OR PLACEHOLDER
     if (clearNodes.length > 0) {

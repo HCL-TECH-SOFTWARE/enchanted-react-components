@@ -119,6 +119,10 @@ export const getMuiTablePaginationThemeOverrides = (): Components<Omit<Theme, 'c
                   '.MuiAutocomplete-endAdornment': {
                     display: 'none',
                   },
+                  // Handle new DOM structure where MuiAutocomplete-endAdornment wrapper is extracted
+                  '.MuiAutocomplete-clearIndicator, .MuiAutocomplete-popupIndicator': {
+                    display: 'none',
+                  },
                 },
               },
             },
