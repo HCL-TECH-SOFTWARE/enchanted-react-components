@@ -493,29 +493,27 @@ export const getEndAdornmentSlots = (props: CustomTextFieldProps, isComboBox: bo
     flowNodes.push(...popupNodes);
   } else {
     // Non-combobox logic
+    let hasEndAdornment = false;
+
     if (props.InputProps?.endAdornment) {
       // Use partitionAdornmentNodes to strip out native InputAdornment wrappers so we don't double-wrap
       const { otherNodes } = partitionAdornmentNodes(props.InputProps.endAdornment);
       flowNodes.push(...otherNodes);
+      if (otherNodes.length > 0) {
+        hasEndAdornment = true;
+      }
     }
 
     // Only inject the error icon when no existing endAdornment is present.
     // Components like DatePicker already supply their own endAdornment (calendar icon)
     // and should not additionally receive the warning icon in error state.
-    if (props.error && !props.InputProps?.endAdornment) {
-      flowNodes.push(<WarningIcon color="error" fontSize="small" key="warning-icon" />);
+    if (props.error && !hasEndAdornment) {
+      flowNodes.push(<WarningIcon key="warning-icon" data-mui-test="warningIcon" />);
     }
 
     if (props.unitLabel) {
       flowNodes.push(
-        <Typography
-          className="erc-unit-label"
-          variant="body2"
-          key="unit-label"
-          sx={{ paddingLeft: '5px' }}
-        >
-          {props.unitLabel}
-        </Typography>,
+        <Typography key="unit-label" variant="body2" color="textSecondary">{props.unitLabel}</Typography>,
       );
     }
   }
