@@ -510,7 +510,7 @@ export const ExampleAutocompleteWithEndAdornmentIconButton = {
   render: Template,
   args: {
     ...ExampleAutocomplete.args,
-    value: top100Films[0],
+    value: top100Films[0].label,
     error: true,
     freeSolo: false,
     startAdornment: 'SearchIcon',
