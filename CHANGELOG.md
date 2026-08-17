@@ -3,13 +3,21 @@
 ## Unreleased
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Breaking changes
+
+## 2.10.0
+
+### Added
 - Added the `endAdornmentIconButton` prop to the `TextField` component to allow for an icon button at the end of the input field, and rearranged the order of the icon buttons.
 - Added the `Calendar` component.
 
 ### Fixed
 - Fixed tooltip cropping in ProgressBar when asset names exceed container width.
-
-### Changed
 
 ### 2.9.1
 
@@ -119,10 +127,6 @@
 - Fixed Progress Bar Storybook update
 - Fixed the CSS for ProgressBarHeader to ensure text displays in a single line.
 - Fixed click on Select down arrow to open menu (https://github.com/HCL-TECH-SOFTWARE/enchanted-react-components/issues/302)
-
-### Changed
-
-### Breaking changes
 
 ## 2.2.1
 
