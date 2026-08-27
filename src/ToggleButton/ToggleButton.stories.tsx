@@ -27,6 +27,7 @@ export default {
   component: ToggleButton,
   parameters: { controls: { sort: 'none' } },
   argTypes: {
+    component: { table: { disable: true } },
     size: {
       if: { arg: 'interactive' },
       description: 'The size of the component',

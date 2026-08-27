@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024 HCL America Inc.                                          *
+ * Copyright 2024-2026 HCL America Inc.                                     *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -8,8 +8,6 @@
  *                                                                          *
  * Unless required by applicable law or agreed to in writing, software      *
  * distributed under the License is distributed on an "AS IS" BASIS,        *
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
- * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
 
@@ -22,7 +20,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { ThemeProvider } from '@emotion/react';
 import { ThemeDirectionType, ThemeModeType, createEnchantedTheme } from '../../../theme';
 
-import TextField from '../../../TextField';
+import TextField, { getEndAdornment, getEndAdornmentSlots, CustomTextFieldProps } from '../../../TextField';
 import Button from '../../../Button/Button';
 
 afterEach(cleanup);
@@ -120,6 +118,25 @@ describe('TextField', () => {
     expect(screen.getByText(endAdornmentText)).not.toBeNull();
   });
 
+  it('Arranges end adornment items in expected order (unitLabel -> endAdornmentAction -> endAdornmentIconButton)', () => {
+    render(
+      <TextField
+        unitLabel="px"
+        endAdornmentAction={<button type="button">Action</button>}
+        endAdornmentIconButton={<button type="button">IconButton</button>}
+      />,
+    );
+
+    const unitNode = screen.getByText('px');
+    const actionNode = screen.getByRole('button', { name: 'Action' });
+    const iconButtonNode = screen.getByRole('button', { name: 'IconButton' });
+
+    /* eslint-why - DOM Node comparison API returns a bitmask that requires a bitwise operator */
+    /* eslint-disable no-bitwise */
+    expect(unitNode.compareDocumentPosition(actionNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(actionNode.compareDocumentPosition(iconButtonNode) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('Render with non edit state', () => {
     const exampleMessage = 'Example message';
     render(<TextField nonEdit value={exampleMessage} />);
@@ -179,5 +196,67 @@ describe('TextField', () => {
 
     expect(label.getAttribute('for')).toBe(input.id);
     expect(input.getAttribute('aria-describedby')).toBe(helperText.id);
+  });
+
+  it('Renders Autocomplete (isComboBox) end adornments correctly and excludes endAdornmentAction', () => {
+    const comboClass = 'MuiAutocomplete-inputRoot';
+    const comboAdornment = <span className="custom-popupIndicator">ComboBoxIcon</span>;
+    const actionText = 'ShouldNotRenderForComboBox';
+
+    render(
+      <TextField
+        InputProps={{
+          className: comboClass,
+          endAdornment: comboAdornment,
+        }}
+        endAdornmentAction={<button type="button">{actionText}</button>}
+      />,
+    );
+
+    expect(screen.getByText('ComboBoxIcon')).not.toBeNull();
+    expect(screen.queryByText(actionText)).toBeNull();
+  });
+
+  it('Verifies getEndAdornmentSlots partitions nodes properly depending on isComboBox', () => {
+    const props = {
+      error: true,
+      unitLabel: 'kg',
+      endAdornmentAction: <span>ActionNode</span>,
+      endAdornmentIconButton: <span>IconButtonNode</span>,
+      InputProps: {
+        endAdornment: <span className="clearIndicator">ClearIcon</span>,
+      },
+    } as unknown as CustomTextFieldProps;
+
+    // When isComboBox is true, clearNodes from InputProps are included, but endAdornmentAction is excluded
+    const comboSlots = getEndAdornmentSlots(props, true);
+    expect(comboSlots.flowNodes.length).toBe(3); // ClearIcon, WarningIcon, UnitLabel
+    expect(comboSlots.fixedNodes.length).toBe(1); // IconButtonNode
+    expect(comboSlots.actionNodes.length).toBe(0); // Excluded for ComboBox
+
+    // When isComboBox is false, endAdornmentAction is included, and InputProps overrides are skipped
+    const standardSlots = getEndAdornmentSlots(props, false);
+    expect(standardSlots.flowNodes.length).toBe(2); // WarningIcon, UnitLabel (ClearIcon is not parsed)
+    expect(standardSlots.fixedNodes.length).toBe(1); // IconButtonNode
+    expect(standardSlots.actionNodes.length).toBe(1); // ActionNode included for standard TextField
+  });
+
+  it('Renders endAdornmentIconButton in fixed slot', () => {
+    const buttonText = 'FixedIconButton';
+    render(<TextField endAdornmentIconButton={<button type="button">{buttonText}</button>} />);
+
+    expect(screen.getByRole('button', { name: buttonText })).not.toBeNull();
+  });
+
+  it('Returns null in getEndAdornment for non-combobox fields when startAdornment is defined', () => {
+    const props = {
+      InputProps: {
+        startAdornment: <span>Start</span>,
+      },
+      unitLabel: 'cm',
+    } as unknown as CustomTextFieldProps;
+
+    expect(getEndAdornment(props, false)).toBeNull();
+    expect(getEndAdornment(props, true)).not.toBeNull();
   });
 });

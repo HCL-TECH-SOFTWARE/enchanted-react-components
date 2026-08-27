@@ -32,6 +32,7 @@ export default {
     },
   },
   argTypes: {
+    component: { table: { disable: true } },
     open: {
       description: 'To show or hide the panel',
       if: { arg: 'interactive' },

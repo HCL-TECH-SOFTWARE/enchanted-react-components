@@ -24,6 +24,7 @@ export default {
   title: 'Data display/Table',
   component: Table,
   argTypes: {
+    component: { table: { disable: true } },
     children: {
       table: { disable: true },
       description: 'https://mui.com/material-ui/api/table/#table-prop-children',

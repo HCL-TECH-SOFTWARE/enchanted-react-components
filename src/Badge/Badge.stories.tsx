@@ -25,6 +25,7 @@ export default {
   title: 'Data display/Badge',
   component: Badge,
   argTypes: {
+    component: { table: { disable: true } },
     badgeContent: {
       description: 'The badgeContent of the Badge.',
       control: 'text',

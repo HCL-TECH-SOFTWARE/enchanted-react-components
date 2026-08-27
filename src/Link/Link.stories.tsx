@@ -24,6 +24,7 @@ export default {
   title: 'Navigation/Link',
   component: Link,
   argTypes: {
+    component: { table: { disable: true } },
     disabled: {
       description: 'If `true`, the component is disabled.',
       control: 'boolean',

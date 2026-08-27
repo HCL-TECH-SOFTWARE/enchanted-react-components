@@ -23,6 +23,7 @@ export default {
   title: 'Feedback/Dialog',
   component: Dialog,
   argTypes: {
+    component: { table: { disable: true } },
     size: {
       description: 'Sets max-width of Dialog',
       options: Object.values(DialogSizes),

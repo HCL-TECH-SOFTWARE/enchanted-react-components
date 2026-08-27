@@ -33,6 +33,7 @@ export default {
   title: 'Data display/List',
   component: List,
   argTypes: {
+    component: { table: { disable: true } },
     size: {
       if: { arg: 'interactive' },
       description: 'The size of the component',

@@ -36,6 +36,7 @@ export default {
   title: 'Navigation/Breadcrumbs',
   component: Breadcrumbs,
   argTypes: {
+    component: { table: { disable: true } },
     disabled: {
       description: 'If `true`, the component is disabled.',
       control: 'boolean',

@@ -23,6 +23,7 @@ export default {
   title: 'Surfaces/Paper',
   component: Paper,
   argTypes: {
+    component: { table: { disable: true } },
     elevation: {
       description: 'The elevation of the Paper component.',
       control: 'number',

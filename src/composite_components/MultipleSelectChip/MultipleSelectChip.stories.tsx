@@ -39,6 +39,10 @@ export default {
   title: 'Inputs/MultipleSelectChip',
   component: MultipleSelectChip,
   argTypes: {
+    startAdornment: { table: { disable: true } },
+    component: { table: { disable: true } },
+    endAdornment: { table: { disable: true } },
+    endAdornmentIconButton: { table: { disable: true } },
     size: {
       control: { type: 'radio' },
       options: ['small', 'medium'],

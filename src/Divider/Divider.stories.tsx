@@ -22,6 +22,7 @@ export default {
   title: 'Data display/Divider',
   component: Divider,
   argTypes: {
+    component: { table: { disable: true } },
     type: {
       if: { arg: 'interactive' },
       description: 'The type of the Divider. It can be primary, secondary or with margin.',

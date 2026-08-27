@@ -25,6 +25,7 @@ export default {
   title: 'Inputs/Checkbox',
   component: Checkbox,
   argTypes: {
+    component: { table: { disable: true } },
     variant: {
       description: 'Determines if the checkbox has padding or not.',
       options: [CheckboxVariants.WITHOUT_PADDING, CheckboxVariants.WITH_PADDING],

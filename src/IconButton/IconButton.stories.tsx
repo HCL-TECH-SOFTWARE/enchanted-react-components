@@ -24,6 +24,7 @@ export default {
   title: 'Data display/IconButton',
   component: IconButton,
   argTypes: {
+    component: { table: { disable: true } },
     size: {
       if: { arg: 'interactive' },
       description: 'The size of the component',

@@ -24,6 +24,7 @@ export default {
   title: 'Data display/Avatar',
   component: Avatar,
   argTypes: {
+    component: { table: { disable: true } },
     type: {
       description: 'The type of the Avatar. It can be image, letter or icon type.',
       options: [AvatarTypes.IMAGE, AvatarTypes.LETTER, AvatarTypes.ICON],

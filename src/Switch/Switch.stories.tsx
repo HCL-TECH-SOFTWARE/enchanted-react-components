@@ -26,6 +26,7 @@ export default {
   title: 'Inputs/Switch',
   component: Switch,
   argTypes: {
+    component: { table: { disable: true } },
     disabled: {
       description: 'If `true`, the component is disabled.',
       table: {

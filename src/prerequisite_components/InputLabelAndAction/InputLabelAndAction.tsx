@@ -126,8 +126,9 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
           title={props.helperIconTooltip}
           placement={props.tooltipPlacement || TooltipPlacement.BOTTOM}
         >
-          <span>
-            {props.customIcon ? styledCustomIcon(props.customIcon) : <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHelpHoverEffect={props.enableHelpHoverEffect} />}
+          <span role="img" aria-label={props.helperIconTooltip}>
+            {props.customIcon ? styledCustomIcon(props.customIcon)
+              : <MuiInputHelpIcon color="action" fontSize="small" tabIndex={0} enableHelpHoverEffect={props.enableHelpHoverEffect} focusable="false" />}
           </span>
         </Tooltip>
       ) : (

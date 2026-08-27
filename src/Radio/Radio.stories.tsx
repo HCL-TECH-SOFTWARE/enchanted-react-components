@@ -25,6 +25,7 @@ export default {
   title: 'Inputs/Radio',
   component: Radio,
   argTypes: {
+    component: { table: { disable: true } },
     disableRipple: {
       description: 'If `true`, the ripple effect is disabled.',
       table: {

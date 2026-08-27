@@ -118,6 +118,14 @@ export default {
         },
       },
     },
+    hoverPreviewMenu: {
+      control: false,
+      description: 'Custom preview menu data or elements to display on hover',
+      table: {
+        defaultValue: { summary: '' },
+      },
+    },
+
     handleCheckboxChange: {
       description: 'Event handler for checkbox change',
       control: false,

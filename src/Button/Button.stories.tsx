@@ -26,6 +26,7 @@ export default {
   title: 'Inputs/Button',
   component: Button,
   argTypes: {
+    component: { table: { disable: true } },
     disableElevation: {
       description: 'disableElevation of Button component.',
       control: 'boolean',

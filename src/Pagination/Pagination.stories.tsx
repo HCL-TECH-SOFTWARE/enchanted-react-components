@@ -21,6 +21,7 @@ export default {
   title: 'Navigation/Pagination',
   component: Pagination,
   argTypes: {
+    component: { table: { disable: true } },
     rowsPerPage: {
       description: 'Page size or number of rows to render',
       control: { type: 'select' },

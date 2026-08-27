@@ -111,6 +111,8 @@ export default {
       },
       description: 'If true, the accordion will be expanded',
     },
+    component: { table: { disable: true } },
+    TransitionComponent: { table: { disable: true } },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },

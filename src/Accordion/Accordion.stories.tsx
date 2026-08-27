@@ -91,6 +91,8 @@ export default {
       },
       description: 'If true, removes the border radius',
     },
+    component: { table: { disable: true } },
+    TransitionComponent: { table: { disable: true } },
     variant: { table: { disable: true } },
     children: { table: { disable: true } },
     elevation: { table: { disable: true } },

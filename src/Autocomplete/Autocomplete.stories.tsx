@@ -20,6 +20,7 @@ import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--d
 import SearchIcon from '@hcl-software/enchanted-icons/dist/carbon/es/search';
 import InformationIcon from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
+import PopupIcon from '@hcl-software/enchanted-icons/dist/carbon/es/popup';
 
 import { Alert, Box, SvgIconProps } from '@mui/material';
 import Autocomplete from './Autocomplete';
@@ -29,6 +30,7 @@ import ListItemText from '../List/ListItemText';
 import { TooltipPlacement } from '../Tooltip';
 import CircularProgress from '../ProgressIndicator/CircularProgress';
 import Typography from '../Typography';
+import IconButton from '../IconButton';
 
 export default {
   title: 'Inputs/Autocomplete',
@@ -192,6 +194,10 @@ export default {
       control: false,
       description: 'Action of the end endAdornment icon.',
     },
+    endAdornmentIconButton: {
+      control: false,
+      description: 'IconButton of the end endAdornment icon.',
+    },
     renderNonEditInput: {
       control: false,
       description: 'render non editable Input field.',
@@ -295,7 +301,7 @@ const Template: StoryFn<typeof Autocomplete> = (args) => {
       endAdornment = <InformationIcon />;
       break;
     case 'Loading':
-      endAdornment = <CircularProgress color="inherit" size={16} variant="indeterminate" />;
+      endAdornment = <CircularProgress color="inherit" size={16} variant="indeterminate" aria-label="circular-progress" role="progressbar" />;
       break;
     default:
       endAdornment = null;
@@ -497,5 +503,22 @@ export const ExampleAutocompleteWithCustomizedBanner = {
         story: 'Autocomplete with warning only - no errors. Shows how to display warnings about content availability without blocking user interaction.',
       },
     },
+  },
+};
+
+export const ExampleAutocompleteWithEndAdornmentIconButton = {
+  render: Template,
+  args: {
+    ...ExampleAutocomplete.args,
+    value: top100Films[0].label,
+    error: true,
+    freeSolo: false,
+    startAdornment: 'SearchIcon',
+    endAdornment: 'Loading',
+    endAdornmentIconButton: (
+      <IconButton aria-label="popup-icon-button">
+        <PopupIcon style={{ width: 16, height: 16 }} />
+      </IconButton>
+    ),
   },
 };

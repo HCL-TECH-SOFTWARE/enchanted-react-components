@@ -27,6 +27,7 @@ export default {
     },
   },
   argTypes: {
+    component: { table: { disable: true } },
     children: {
       description: 'https://mui.com/material-ui/api/backdrop/#backdrop-prop-children',
       control: false,

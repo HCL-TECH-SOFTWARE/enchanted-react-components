@@ -97,6 +97,7 @@ export default {
       description: 'https://mui.com/material-ui/api/container/',
       control: false,
     },
+    component: { table: { disable: true } },
   },
 } as Meta<typeof Header>;
 

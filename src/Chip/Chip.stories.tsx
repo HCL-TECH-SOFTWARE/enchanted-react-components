@@ -26,6 +26,7 @@ export default {
   title: 'Data display/Chip',
   component: Chip,
   argTypes: {
+    component: { table: { disable: true } },
     variant: {
       if: { arg: 'interactive' },
       options: [ChipVariants.CONTAINED, ChipVariants.OUTLINED],

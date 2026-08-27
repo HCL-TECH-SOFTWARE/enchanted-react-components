@@ -25,6 +25,7 @@ export default {
   title: 'Feedback/Alert',
   component: Alert,
   argTypes: {
+    component: { table: { disable: true } },
     variant: {
       if: { arg: 'interactive' },
       description: 'The variants for Alert.',

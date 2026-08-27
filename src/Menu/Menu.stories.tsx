@@ -32,6 +32,7 @@ export default {
   title: 'Navigation/Menu',
   component: Menu,
   argTypes: {
+    component: { table: { disable: true } },
     size: {
       description: 'Sets size of menu items',
       if: { arg: 'interactive' },

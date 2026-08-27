@@ -26,6 +26,7 @@ export default {
   title: 'Navigation/Tabs',
   component: Tabs,
   argTypes: {
+    component: { table: { disable: true } },
     orientation: {
       control: { type: 'radio' },
       options: ['horizontal', 'vertical'],
