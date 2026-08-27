@@ -163,6 +163,7 @@ interface ExtendedCalendarArgs {
   width?: string | number;
   height?: string | number;
   showItems?: boolean;
+  weekStartsOn?: 0 | 1;
 }
 
 const InteractiveTemplate: StoryFn<ExtendedCalendarArgs> = (args) => {
@@ -175,6 +176,7 @@ const InteractiveTemplate: StoryFn<ExtendedCalendarArgs> = (args) => {
     width,
     height,
     showItems = true,
+    weekStartsOn = 1,
   } = args;
   const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
   const [items] = useState<CalendarItem[]>(() => { return generateSampleItems(dayjs()); });
@@ -189,6 +191,7 @@ const InteractiveTemplate: StoryFn<ExtendedCalendarArgs> = (args) => {
       locale={locale}
       width={width}
       height={height}
+      weekStartsOn={weekStartsOn}
       currentDate={currentDate}
       items={displayItems}
       onDateChange={(date) => {
@@ -210,6 +213,7 @@ export const InteractiveExample = {
     width: undefined,
     height: undefined,
     showItems: true,
+    weekStartsOn: 1,
   },
 };
 

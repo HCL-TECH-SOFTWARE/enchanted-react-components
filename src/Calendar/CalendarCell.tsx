@@ -30,6 +30,7 @@ interface CalendarCellProps {
   isSelected: boolean;
   isFocused?: boolean;
   isLastRow?: boolean;
+  isLastColumn?: boolean;
   disabled?: boolean;
   onDateClick?: (date: Dayjs) => void;
   onItemClick?: (item: CalendarItemType) => void;
@@ -50,6 +51,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
   isSelected,
   isFocused = false,
   isLastRow = false,
+  isLastColumn = false,
   disabled = false,
   onDateClick,
   onItemClick,
@@ -118,7 +120,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
               height: theme.spacing(8.25),
               backgroundColor: theme.palette.background.default,
               borderBottom: `1px solid ${theme.palette.divider}`,
-              borderRight: `1px solid ${theme.palette.divider}`,
+              borderRight: isLastColumn ? 'none' : `1px solid ${theme.palette.divider}`,
             };
           }}
         >
@@ -172,7 +174,7 @@ const CalendarCell: React.FC<CalendarCellProps> = React.memo(({
               flex: 1,
               overflow: 'auto',
               backgroundColor: theme.palette.background.paper,
-              borderRight: `1px solid ${theme.palette.divider}`,
+              borderRight: isLastColumn ? 'none' : `1px solid ${theme.palette.divider}`,
             };
           }}
         >

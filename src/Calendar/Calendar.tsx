@@ -65,6 +65,14 @@ const DEFAULT_LABELS: Required<CalendarLabels> = {
   weekRangeEndFormat: WEEK_RANGE_END_FORMAT,
 };
 
+const getWeekStartDate = (date: Dayjs, weekStartsOn: 0 | 1): Dayjs => {
+  const day = date.day(); // 0=Sun, 1=Mon, ..., 6=Sat — locale-independent
+  if (weekStartsOn === 0) {
+    return date.subtract(day, 'day'); // back to Sunday
+  }
+  return date.subtract(day === 0 ? 6 : day - 1, 'day'); // back to Monday
+};
+
 const getCalendarStyle = (
   theme: Theme,
   customStyles: React.CSSProperties | { [key: string]: React.CSSProperties },
@@ -135,31 +143,35 @@ const Calendar = ({
   const weekdays = useMemo(() => {
     const days = mergedLabels.weekdaysShort;
     const rotated = weekStartsOn === 0 ? [days[days.length - 1], ...days.slice(0, days.length - 1)] : days;
-    return showWeekend ? rotated : rotated.slice(0, 5);
+    if (!showWeekend) {
+      // weekStartsOn=0 → rotated is [Sun,Mon,Tue,Wed,Thu,Fri,Sat]; slice(1,6) = Mon-Fri
+      // weekStartsOn=1 → rotated is [Mon,Tue,Wed,Thu,Fri,Sat,Sun]; slice(0,5) = Mon-Fri
+      return weekStartsOn === 0 ? rotated.slice(1, 6) : rotated.slice(0, 5);
+    }
+    return rotated;
   }, [showWeekend, mergedLabels.weekdaysShort, weekStartsOn]);
 
   const calendarDays = useMemo(() => {
     if (view === 'week') {
-      const startOfWeek = weekStartsOn === 0
-        ? activeDate.startOf('week')
-        : activeDate.startOf('week').add(1, 'day');
+      const weekStart = getWeekStartDate(activeDate, weekStartsOn);
       const days: Dayjs[] = [];
+      // weekStartsOn=0 starts on Sunday; when hiding weekends, skip Sunday (+1) to start from Monday
+      const startOffset = !showWeekend && weekStartsOn === 0 ? 1 : 0;
       const daysToShow = showWeekend ? 7 : 5;
-
       for (let i = 0; i < daysToShow; i += 1) {
-        days.push(startOfWeek.add(i, 'day'));
+        days.push(weekStart.add(i + startOffset, 'day'));
       }
       return days;
     }
 
     const startOfMonth = activeDate.startOf('month');
     const endOfMonth = activeDate.endOf('month');
-    const startDate = weekStartsOn === 0
-      ? startOfMonth.startOf('week')
-      : startOfMonth.startOf('week').add(1, 'day');
-    const endDate = weekStartsOn === 0
-      ? endOfMonth.endOf('week')
-      : endOfMonth.endOf('week').add(1, 'day');
+    const startDate = getWeekStartDate(startOfMonth, weekStartsOn);
+    const lastDay = endOfMonth.day();
+    const daysUntilWeekEnd = weekStartsOn === 0
+      ? 6 - lastDay
+      : (lastDay === 0 ? 0 : 7 - lastDay);
+    const endDate = endOfMonth.add(daysUntilWeekEnd, 'day');
 
     const days: Dayjs[] = [];
     let currentDay = startDate;
@@ -216,11 +228,21 @@ const Calendar = ({
         break;
       case 'Home':
         event.preventDefault();
-        newFocusDate = view === 'month' ? dateParam.startOf('month') : dateParam.startOf('week').add(1, 'day');
+        if (view === 'month') {
+          newFocusDate = dateParam.startOf('month');
+        } else {
+          const weekStart = getWeekStartDate(dateParam, weekStartsOn);
+          newFocusDate = !showWeekend && weekStartsOn === 0 ? weekStart.add(1, 'day') : weekStart;
+        }
         break;
       case 'End':
         event.preventDefault();
-        newFocusDate = view === 'month' ? dateParam.endOf('month') : dateParam.endOf('week').add(1, 'day');
+        if (view === 'month') {
+          newFocusDate = dateParam.endOf('month');
+        } else {
+          const weekStart = getWeekStartDate(dateParam, weekStartsOn);
+          newFocusDate = showWeekend ? weekStart.add(6, 'day') : weekStart.add(weekStartsOn === 0 ? 5 : 4, 'day');
+        }
         break;
       case 'PageUp':
         event.preventDefault();
@@ -248,7 +270,7 @@ const Calendar = ({
         handleNavigate(newFocusDate.isAfter(activeDate) ? 'next' : 'prev');
       }
     }
-  }, [view, activeDate, handleNavigate, calendarDays, locale, mergedLabels.dateFormatLong, itemsByDate]);
+  }, [view, activeDate, handleNavigate, calendarDays, locale, mergedLabels.dateFormatLong, itemsByDate, weekStartsOn, showWeekend]);
 
   const renderMonthView = () => {
     const weeks: Dayjs[][] = [];
@@ -263,51 +285,92 @@ const Calendar = ({
         role="grid"
         aria-readonly="true"
       >
-        {weeks.map((week, weekIndex) => {
-          const weekKey = week[0]?.format(DATE_KEY_FORMAT) || 'week';
-          const isLastWeek = weekIndex === weeks.length - 1;
-          return (
-            <Box
-              key={weekKey}
-              sx={{
+        <Box role="rowgroup">
+          <Box
+            sx={(theme) => {
+              return {
                 display: 'flex',
-                flex: 1,
-                minHeight: 0,
-              }}
-              role="row"
-            >
-              {week.map((day) => {
-                const dayItems = getItemsForDate(day);
-                const isCurrentMonth = day.month() === activeDate.month();
-                const isToday = day.isSame(dayjs(), 'day');
-                const isSelected = day.isSame(activeDate, 'day');
+                backgroundColor: theme.palette.background.default,
+                borderBottom: `1px solid ${theme.palette.divider}`,
+              };
+            }}
+            role="row"
+          >
+            {weekdays.map((day: string, index: number) => {
+              return (
+                <Box
+                  key={index}
+                  sx={(theme) => {
+                    return {
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      height: theme.spacing(3.5),
+                      padding: theme.spacing(0.75),
+                      borderRight: `1px solid ${theme.palette.divider}`,
+                      '&:last-child': {
+                        borderRight: 'none',
+                      },
+                    };
+                  }}
+                  role="columnheader"
+                >
+                  <Typography variant="body2" color="text.primary">
+                    {day}
+                  </Typography>
+                </Box>
+              );
+            })}
+          </Box>
+        </Box>
+        <Box role="rowgroup" sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          {weeks.map((week, weekIndex) => {
+            const weekKey = week[0]?.format(DATE_KEY_FORMAT) || 'week';
+            const isLastWeek = weekIndex === weeks.length - 1;
+            return (
+              <Box
+                key={weekKey}
+                sx={{
+                  display: 'flex',
+                  flex: 1,
+                  minHeight: 0,
+                }}
+                role="row"
+              >
+                {week.map((day) => {
+                  const dayItems = getItemsForDate(day);
+                  const isCurrentMonth = day.month() === activeDate.month();
+                  const isToday = day.isSame(dayjs(), 'day');
+                  const isSelected = day.isSame(activeDate, 'day');
 
-                return (
-                  <CalendarCell
-                    key={day.format(DATE_KEY_FORMAT)}
-                    date={day}
-                    items={dayItems}
-                    view="month"
-                    isCurrentMonth={isCurrentMonth}
-                    isToday={isToday}
-                    isSelected={isSelected}
-                    isFocused={focusedDate?.isSame(day, 'day')}
-                    isLastRow={isLastWeek}
-                    disabled={disabled}
-                    onDateClick={onDateChange}
-                    onItemClick={onItemClick}
-                    onKeyDown={handleGridKeyDown}
-                    dateFormatLong={mergedLabels.dateFormatLong}
-                    dayFormat={mergedLabels.dayFormat}
-                    dayAbbreviationFormat={mergedLabels.dayAbbreviationFormat}
-                    timePreposition={mergedLabels.timePreposition}
-                    locale={locale}
-                  />
-                );
-              })}
-            </Box>
-          );
-        })}
+                  return (
+                    <CalendarCell
+                      key={day.format(DATE_KEY_FORMAT)}
+                      date={day}
+                      items={dayItems}
+                      view="month"
+                      isCurrentMonth={isCurrentMonth}
+                      isToday={isToday}
+                      isSelected={isSelected}
+                      isFocused={focusedDate?.isSame(day, 'day')}
+                      isLastRow={isLastWeek}
+                      disabled={disabled}
+                      onDateClick={onDateChange}
+                      onItemClick={onItemClick}
+                      onKeyDown={handleGridKeyDown}
+                      dateFormatLong={mergedLabels.dateFormatLong}
+                      dayFormat={mergedLabels.dayFormat}
+                      dayAbbreviationFormat={mergedLabels.dayAbbreviationFormat}
+                      timePreposition={mergedLabels.timePreposition}
+                      locale={locale}
+                    />
+                  );
+                })}
+              </Box>
+            );
+          })}
+        </Box>
       </Box>
     );
   };
@@ -321,7 +384,7 @@ const Calendar = ({
           overflow: 'hidden',
         }}
       >
-        {calendarDays.map((day) => {
+        {calendarDays.map((day, index) => {
           const dayItems = getItemsForDate(day);
           const isToday = day.isSame(dayjs(), 'day');
           const isSelected = day.isSame(activeDate, 'day');
@@ -336,6 +399,7 @@ const Calendar = ({
               isToday={isToday}
               isSelected={isSelected}
               isFocused={focusedDate?.isSame(day, 'day')}
+              isLastColumn={index === calendarDays.length - 1}
               disabled={disabled}
               onDateClick={onDateChange}
               onItemClick={onItemClick}
@@ -359,46 +423,6 @@ const Calendar = ({
       role="region"
       aria-label={mergedLabels.calendar}
     >
-      {view === 'month' && (
-        <Box
-          sx={(theme) => {
-            return {
-              display: 'flex',
-              backgroundColor: theme.palette.background.default,
-              borderBottom: `1px solid ${theme.palette.divider}`,
-            };
-          }}
-          role="row"
-        >
-          {weekdays.map((day: string) => {
-            return (
-              <Box
-                key={day}
-                sx={(theme) => {
-                  return {
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: theme.spacing(3.5),
-                    padding: theme.spacing(0.75),
-                    borderRight: `1px solid ${theme.palette.divider}`,
-                    '&:last-child': {
-                      borderRight: 'none',
-                    },
-                  };
-                }}
-                role="columnheader"
-              >
-                <Typography variant="body2" color="text.primary">
-                  {day}
-                </Typography>
-              </Box>
-            );
-          })}
-        </Box>
-      )}
-
       {view === 'month' ? renderMonthView() : renderWeekView()}
 
       <Box
