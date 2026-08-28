@@ -168,9 +168,12 @@ const Calendar = ({
     const endOfMonth = activeDate.endOf('month');
     const startDate = getWeekStartDate(startOfMonth, weekStartsOn);
     const lastDay = endOfMonth.day();
-    const daysUntilWeekEnd = weekStartsOn === 0
-      ? 6 - lastDay
-      : (lastDay === 0 ? 0 : 7 - lastDay);
+    let daysUntilWeekEnd: number;
+    if (weekStartsOn === 0) {
+      daysUntilWeekEnd = 6 - lastDay;
+    } else {
+      daysUntilWeekEnd = lastDay === 0 ? 0 : 7 - lastDay;
+    }
     const endDate = endOfMonth.add(daysUntilWeekEnd, 'day');
 
     const days: Dayjs[] = [];
@@ -296,10 +299,10 @@ const Calendar = ({
             }}
             role="row"
           >
-            {weekdays.map((day: string, index: number) => {
+            {weekdays.map((day: string) => {
               return (
                 <Box
-                  key={index}
+                  key={day}
                   sx={(theme) => {
                     return {
                       flex: 1,
