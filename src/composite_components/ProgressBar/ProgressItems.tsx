@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { styled } from '@mui/material';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
@@ -192,6 +192,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
   const isRTL = direction === 'rtl';
   const [hover, setHover] = useState<string | null>(null);
   const [focus, setFocus] = useState<string | null>(null);
+  // Tracks which tooltip is open; reset on scroll to prevent tooltips floating outside the container.
+  const [openTooltipId, setOpenTooltipId] = useState<string | null>(null);
+  const tooltipContainerRef = useRef<HTMLUListElement>(null);
 
   let folderId = '';
 
@@ -228,6 +231,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
           title={translation?.navigateButtonTooltip}
           tooltipsize="small"
           placement="left"
+          open={openTooltipId === `navigate_${queueItem.name}_${queueItem.timestamp}`}
+          onOpen={() => { setOpenTooltipId(`navigate_${queueItem.name}_${queueItem.timestamp}`); }}
+          onClose={() => { setOpenTooltipId(null); }}
           PopperProps={{
             disablePortal: true,
           }}
@@ -258,6 +264,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
           title={translation?.errorButtonTooltip}
           tooltipsize="small"
           placement="left"
+          open={openTooltipId === `cancel_${queueItem.name}_${queueItem.timestamp}`}
+          onOpen={() => { setOpenTooltipId(`cancel_${queueItem.name}_${queueItem.timestamp}`); }}
+          onClose={() => { setOpenTooltipId(null); }}
           PopperProps={{
             disablePortal: true,
           }}
@@ -288,6 +297,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
           title={translation?.retryButtonTooltip}
           tooltipsize="small"
           placement="left"
+          open={openTooltipId === `retry_${queueItem.name}_${queueItem.timestamp}`}
+          onOpen={() => { setOpenTooltipId(`retry_${queueItem.name}_${queueItem.timestamp}`); }}
+          onClose={() => { setOpenTooltipId(null); }}
           PopperProps={{
             disablePortal: true,
           }}
@@ -414,7 +426,18 @@ const ProgressItems = (props: ProgressItemsProps) => {
   };
 
   return (
-    <StyledList>
+    <StyledList
+      ref={tooltipContainerRef}
+      onScroll={() => {
+        if (openTooltipId !== null) {
+          // Hide the tooltip immediately when the list is scrolled.
+          document.querySelectorAll('[role="tooltip"]').forEach((el) => {
+            (el as HTMLElement).style.visibility = 'hidden';
+          });
+          setOpenTooltipId(null);
+        }
+      }}
+    >
       {Array.from(file).map((queueItem: IProgressState) => {
         const showLearnMoreButton = queueItem && queueItem.showLearnMore !== undefined ? queueItem.showLearnMore : false;
         if (queueItem.type === ProgressItemType.Folder) {
@@ -467,6 +490,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           title={queueItem.name}
                           tooltipsize="small"
                           placement="left"
+                          open={openTooltipId === `name_${queueItem.name}_${queueItem.timestamp}`}
+                          onOpen={() => { setOpenTooltipId(`name_${queueItem.name}_${queueItem.timestamp}`); }}
+                          onClose={() => { setOpenTooltipId(null); }}
                           componentsProps={{
                             tooltip: {
                               sx: {
@@ -498,7 +524,13 @@ const ProgressItems = (props: ProgressItemsProps) => {
                             <span>{translation?.cancelledLabel}</span>
                           )}
                           {queueItem.status === EnumUploadStatus.FAILURE && (
-                            <Tooltip title={queueItem.message} tooltipsize="small">
+                            <Tooltip
+                              title={queueItem.message}
+                              tooltipsize="small"
+                              open={openTooltipId === `failure_${queueItem.name}_${queueItem.timestamp}`}
+                              onOpen={() => { setOpenTooltipId(`failure_${queueItem.name}_${queueItem.timestamp}`); }}
+                              onClose={() => { setOpenTooltipId(null); }}
+                            >
                               <span
                                 data-testid="failed-status-label"
                                 style={{
@@ -514,6 +546,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
                               title={literals.learnMoreLabel}
                               tooltipsize="small"
                               placement="left"
+                              open={openTooltipId === `learnmore_${queueItem.name}_${queueItem.timestamp}`}
+                              onOpen={() => { setOpenTooltipId(`learnmore_${queueItem.name}_${queueItem.timestamp}`); }}
+                              onClose={() => { setOpenTooltipId(null); }}
                               componentsProps={{
                                 tooltip: {
                                   sx: {
@@ -546,6 +581,9 @@ const ProgressItems = (props: ProgressItemsProps) => {
                           title={queueItem.name}
                           tooltipsize="small"
                           placement="left"
+                          open={openTooltipId === `name_${queueItem.name}_${queueItem.timestamp}`}
+                          onOpen={() => { setOpenTooltipId(`name_${queueItem.name}_${queueItem.timestamp}`); }}
+                          onClose={() => { setOpenTooltipId(null); }}
                           componentsProps={{
                             tooltip: {
                               sx: {

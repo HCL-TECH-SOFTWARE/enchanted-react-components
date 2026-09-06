@@ -6,6 +6,7 @@
 
 ### Fixed
 - Improved Calendar accessibility and fixed issues with week/month view, weekStartsOn, and keyboard navigation
+- Fixed tooltip overflow in `ProgressBar` — all item tooltips now close immediately when the user scrolls the list, preventing them from floating outside the progress bar boundary.
 
 ### Changed
 
