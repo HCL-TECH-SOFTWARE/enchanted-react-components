@@ -15,7 +15,9 @@
 
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+  render, screen, fireEvent, waitFor, act,
+} from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
 import {
   EnumUploadStatus, IProgressState, Literals, ProgressBarLocalization, ProgressItemType,
@@ -295,14 +297,17 @@ describe('ProgressItem Component', () => {
       </ThemeProvider>,
     );
 
-    // Hover over the item to trigger the hover icon
     fireEvent.mouseOver(screen.getByText('testFile.jpg'));
 
     const progressIndicator = screen.getByTestId('progress-indicator');
     expect(window.getComputedStyle(progressIndicator).marginLeft).toBe('28px');
   });
 
-  test('renders progress item tooltips through portal outside list item container', async () => {
+  // Asset name, failure message, and learn more tooltips render via MUI Portal at body level
+  // (no disablePortal) so they can extend beyond the progress bar boundary.
+  // Action button tooltips (navigate, cancel, retry) use disablePortal:true and render
+  // inside the list container.
+  test('renders asset name tooltip via portal outside list item container', async () => {
     const { unmount } = render(
       <ThemeProvider theme={theme}>
         <ProgressItems
@@ -312,20 +317,36 @@ describe('ProgressItem Component', () => {
       </ThemeProvider>,
     );
 
-    const failureListItemButton = screen.getByText('testFile.jpg').closest('.MuiListItemButton-root');
-    fireEvent.mouseOver(screen.getByText('testFile.jpg'));
+    // Trigger name tooltip via mouseEnter on the span (controlled via onOpen)
+    const nameSpan = screen.getByText('testFile.jpg');
+    fireEvent.mouseEnter(nameSpan);
     const nameTooltip = await screen.findByRole('tooltip');
     expect(document.body).toContainElement(nameTooltip);
-    expect(failureListItemButton).not.toContainElement(nameTooltip);
-
-    const learnMoreButton = screen.getByTestId('learn-more-button');
-    fireEvent.mouseOver(learnMoreButton);
-    const learnMoreTooltip = await screen.findByRole('tooltip', { name: mockProps.literals.learnMoreLabel });
-    expect(document.body).toContainElement(learnMoreTooltip);
-    expect(failureListItemButton).not.toContainElement(learnMoreTooltip);
+    expect(nameSpan.closest('.MuiListItemButton-root')).not.toContainElement(nameTooltip);
 
     unmount();
+  });
 
+  test('renders learn more tooltip via portal outside list item container', async () => {
+    const { unmount } = render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE, showLearnMore: true }]}
+        />
+      </ThemeProvider>,
+    );
+
+    const learnMoreButton = screen.getByTestId('learn-more-button');
+    fireEvent.mouseEnter(learnMoreButton);
+    const learnMoreTooltip = await screen.findByRole('tooltip', { name: mockProps.literals.learnMoreLabel });
+    expect(document.body).toContainElement(learnMoreTooltip);
+    expect(learnMoreButton.closest('.MuiListItemButton-root')).not.toContainElement(learnMoreTooltip);
+
+    unmount();
+  });
+
+  test('renders pending item name tooltip via portal outside list item container', async () => {
     render(
       <ThemeProvider theme={theme}>
         <ProgressItems
@@ -336,10 +357,117 @@ describe('ProgressItem Component', () => {
     );
 
     const pendingText = screen.getByTestId('pending-item-text-primary');
-    const pendingListItemButton = pendingText.closest('.MuiListItemButton-root');
-    fireEvent.mouseOver(pendingText);
+    fireEvent.mouseEnter(pendingText);
     const pendingTooltip = await screen.findByRole('tooltip');
     expect(document.body).toContainElement(pendingTooltip);
-    expect(pendingListItemButton).not.toContainElement(pendingTooltip);
+    expect(pendingText.closest('.MuiListItemButton-root')).not.toContainElement(pendingTooltip);
+  });
+
+  test('renders action button tooltips inside the list container via disablePortal', async () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.SUCCESS }]}
+          navigateFolder={mockProps.navigateFolder}
+        />
+      </ThemeProvider>,
+    );
+
+    // Hover the item to show action buttons
+    fireEvent.mouseOver(screen.getByText('testFile.jpg'));
+    const navigateButton = screen.getByTestId('navigate-folder');
+
+    // Trigger navigate tooltip via mouseEnter (controlled via onOpen)
+    fireEvent.mouseEnter(navigateButton);
+    const navigateTooltip = await screen.findByRole('tooltip', { name: mockProps.translation.navigateButtonTooltip });
+
+    // disablePortal:true — tooltip renders inside the list, not at body level
+    expect(navigateButton.closest('ul')).toContainElement(navigateTooltip);
+    expect(document.body).not.toHaveAttribute('data-tooltip-portal');
+  });
+
+  // All tooltips close immediately when the list is scrolled.
+  test('closes open tooltip when list is scrolled', async () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[{ ...mockProps.file[0], status: EnumUploadStatus.FAILURE, showLearnMore: true }]}
+        />
+      </ThemeProvider>,
+    );
+
+    // Open the name tooltip
+    const nameSpan = screen.getByText('testFile.jpg');
+    fireEvent.mouseEnter(nameSpan);
+    await screen.findByRole('tooltip');
+    expect(screen.queryByRole('tooltip')).not.toBeNull();
+
+    // Scroll the list — tooltip should close
+    const list = screen.getByRole('list');
+    act(() => {
+      fireEvent.scroll(list);
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByRole('tooltip')).toBeNull();
+    });
+  });
+
+  test('does not close tooltip when list is scrolled and no tooltip is open', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} />
+      </ThemeProvider>,
+    );
+
+    // No tooltip open — scroll should not throw or cause side effects
+    const list = screen.getByRole('list');
+    expect(() => {
+      fireEvent.scroll(list);
+    }).not.toThrow();
+    expect(screen.queryByRole('tooltip')).toBeNull();
+  });
+
+  test('only one tooltip is open at a time', async () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems
+          {...mockProps}
+          file={[
+            {
+              ...mockProps.file[0],
+              name: 'file1.jpg',
+              status: EnumUploadStatus.FAILURE,
+              showLearnMore: true,
+              timestamp: 1000,
+            },
+            {
+              ...mockProps.file[0],
+              name: 'file2.jpg',
+              status: EnumUploadStatus.FAILURE,
+              showLearnMore: true,
+              timestamp: 2000,
+            },
+          ]}
+        />
+      </ThemeProvider>,
+    );
+
+    // Open first file's tooltip
+    const [firstName, secondName] = screen.getAllByText(/file\d\.jpg/);
+    fireEvent.mouseEnter(firstName);
+    await screen.findByRole('tooltip');
+    expect(screen.getAllByRole('tooltip')).toHaveLength(1);
+
+    // Open second file's tooltip — first should close
+    fireEvent.mouseLeave(firstName);
+    fireEvent.mouseEnter(secondName);
+    await waitFor(() => {
+      const tooltips = screen.getAllByRole('tooltip');
+      expect(tooltips).toHaveLength(1);
+      expect(tooltips[0]).toHaveTextContent('file2.jpg');
+    });
   });
 });
