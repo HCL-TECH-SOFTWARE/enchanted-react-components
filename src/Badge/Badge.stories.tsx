@@ -16,7 +16,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react-webpack5';
 import MailIcon from '@hcl-software/enchanted-icons/dist/carbon/es/email';
-import { Stack } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import Badge, { badgeDefaultProps } from './Badge';
 import Typography from '../Typography';
@@ -70,48 +70,56 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Badge> = (args) => {
   return (
-    <Stack spacing={1}>
-      <div>
-        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60)' }} variant="body1">
+    <Grid container direction="column" spacing={1}>
+      <Grid>
+        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Circular Overlap
         </Typography>
-      </div>
-      <div>
-        <Badge overlap="circular">
+      </Grid>
+      <Grid>
+        <Badge
+          overlap="circular"
+        >
           <MailIcon color="action" />
         </Badge>
-      </div>
-      <div>
-        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60)' }} variant="body1">
+      </Grid>
+      <Grid>
+        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Rectangular Overlap
         </Typography>
-      </div>
-      <div>
-        <Badge overlap="rectangular">
+      </Grid>
+      <Grid>
+        <Badge
+          overlap="rectangular"
+        >
           <MailIcon color="action" />
         </Badge>
-      </div>
-      <div>
-        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60)' }} variant="body1">
+      </Grid>
+      <Grid>
+        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Dot
         </Typography>
-      </div>
-      <div>
-        <Badge variant="dot">
+      </Grid>
+      <Grid>
+        <Badge
+          variant="dot"
+        >
           <MailIcon color="action" />
         </Badge>
-      </div>
-      <div>
-        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60)' }} variant="body1">
+      </Grid>
+      <Grid>
+        <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Standard
         </Typography>
-      </div>
-      <div>
-        <Badge variant="standard">
+      </Grid>
+      <Grid>
+        <Badge
+          variant="standard"
+        >
           <MailIcon color="action" />
         </Badge>
-      </div>
-    </Stack>
+      </Grid>
+    </Grid>
   );
 };
 
