@@ -13,7 +13,6 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-
 module.exports = {
   "stories": [
     "../src/!(hidden_components)/**/*.stories.@(js|jsx|ts|tsx)",
@@ -57,9 +56,6 @@ module.exports = {
       ...config.watchOptions,
       ignored: ['**/node_modules/', '**/src/__tests__/unit/__image_snapshots__/**/*.png']
     };
-
-    config.resolve = config.resolve || {};
-    
 
     return config;
   }
