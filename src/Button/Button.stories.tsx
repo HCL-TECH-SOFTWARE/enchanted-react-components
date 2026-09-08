@@ -20,6 +20,8 @@ import IconStart from '@hcl-software/enchanted-icons/dist/carbon/es/add';
 import IconEnd from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import Typography from '../Typography';
 import Divider from '../Divider';
+// pulls in the palette (TypeBackground/TypeAction) module augmentation for this excluded story file
+import '../theme';
 import Button, { buttonDefaultProps, ButtonVariants } from './Button';
 
 export default {
@@ -188,7 +190,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
                   Button
                 </Button>
               </Grid>
-              <Grid size={{ xs: 4 }} paddingBottom={4}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Button
                   endIcon={<IconEnd />}
                   variant={ButtonVariants.CONTAINED}
@@ -1415,8 +1417,8 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
           rowSpacing={1}
           sx={(theme) => {
             return {
-              color: theme.palette.text.primary,
-              backgroundColor: theme.palette.background.paper,
+              color: theme.palette.action.inverse,
+              backgroundColor: theme.palette.background.dark,
               padding: '12px',
             };
           }}
