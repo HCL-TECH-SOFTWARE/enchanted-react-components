@@ -32,37 +32,47 @@ type GridColumnMenuProps = MuiGridColumnMenuProps & {
 }
 
 export const ExtendedGridColumnMenu = ({
-  colDef, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel,
+  colDef, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel, hideMenu,
 }: GridColumnMenuProps) => {
   const apiContext = useGridApiContext();
 
-  const handleSortModelChange = (value: string) => {
-    onSortModelChange([{ field: colDef.field, sort: value }]);
-  };
+  const handleSortModelChange = (
+  value: 'asc' | 'desc',
+  event: React.MouseEvent<HTMLElement>
+) => {
+  onSortModelChange([{ field: colDef.field, sort: value }]);
+  hideMenu?.(event);
+};
 
-  const handleHideColumn = () => {
-    onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
-  };
+const handleHideColumn = (event: React.MouseEvent<HTMLElement>) => {
+  onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
+  hideMenu?.(event);
+};
+
+const handleManageColumns = (event: React.MouseEvent<HTMLElement>) => {
+  apiContext.current.showPreferences(GridPreferencePanelsValue.columns);
+  hideMenu?.(event);
+};
 
   return (
     <Paper elevation={3}>
-      <MenuItem onClick={() => { handleSortModelChange('asc'); }}>
+      <MenuItem onClick={(event) => handleSortModelChange('asc', event)}>
         <ArrowUp />
         {' '}
         Ascending
       </MenuItem>
-      <MenuItem onClick={() => { handleSortModelChange('desc'); }}>
+      <MenuItem onClick={(event) => handleSortModelChange('desc', event)}>
         <ArrowDown />
         {' '}
         Descending
       </MenuItem>
       <Divider />
-      <MenuItem onClick={() => { handleHideColumn(); }}>
+      <MenuItem onClick={handleHideColumn}>
         <ViewIcon />
         {' '}
         Hide column
       </MenuItem>
-      <MenuItem onClick={() => { apiContext.current.showPreferences(GridPreferencePanelsValue.columns); }}>
+      <MenuItem onClick={handleManageColumns}>
         <ColumnIcon />
         {' '}
         Manage columns
