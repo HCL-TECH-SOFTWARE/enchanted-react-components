@@ -37,31 +37,31 @@ export const ExtendedGridColumnMenu = ({
   const apiContext = useGridApiContext();
 
   const handleSortModelChange = (
-  value: 'asc' | 'desc',
-  event: React.MouseEvent<HTMLElement>
-) => {
-  onSortModelChange([{ field: colDef.field, sort: value }]);
-  hideMenu?.(event);
-};
+    value: 'asc' | 'desc',
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    onSortModelChange([{ field: colDef.field, sort: value }]);
+    hideMenu?.(event);
+  };
 
-const handleHideColumn = (event: React.MouseEvent<HTMLElement>) => {
-  onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
-  hideMenu?.(event);
-};
+  const handleHideColumn = (event: React.MouseEvent<HTMLElement>) => {
+    onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
+    hideMenu?.(event);
+  };
 
-const handleManageColumns = (event: React.MouseEvent<HTMLElement>) => {
-  apiContext.current.showPreferences(GridPreferencePanelsValue.columns);
-  hideMenu?.(event);
-};
+  const handleManageColumns = (event: React.MouseEvent<HTMLElement>) => {
+    apiContext.current.showPreferences(GridPreferencePanelsValue.columns);
+    hideMenu?.(event);
+  };
 
   return (
     <Paper elevation={3}>
-      <MenuItem onClick={(event) => handleSortModelChange('asc', event)}>
+      <MenuItem onClick={(event) => { handleSortModelChange('asc', event); }}>
         <ArrowUp />
         {' '}
         Ascending
       </MenuItem>
-      <MenuItem onClick={(event) => handleSortModelChange('desc', event)}>
+      <MenuItem onClick={(event) => { handleSortModelChange('desc', event); }}>
         <ArrowDown />
         {' '}
         Descending
