@@ -146,7 +146,7 @@ export const MuiGrid: React.ComponentType<MuiGridProps> = styled(Grid)<MuiGridPr
       display: 'flex',
       justifyContent: 'space-between',
     },
-    '&.MuiGrid-root:not(.MuiGrid-container)': {
+    '&.MuiGrid-direction-xs-row': {
       padding: 0,
     },
   };
