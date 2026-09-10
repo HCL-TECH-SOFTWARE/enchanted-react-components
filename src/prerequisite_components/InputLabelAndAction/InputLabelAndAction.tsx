@@ -146,9 +146,6 @@ export const MuiGrid: React.ComponentType<MuiGridProps> = styled(Grid)<MuiGridPr
       display: 'flex',
       justifyContent: 'space-between',
     },
-    '&.MuiGrid-direction-xs-row': {
-      padding: 0,
-    },
   };
 });
 
@@ -169,7 +166,7 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
     const limitedActionProps = props.actionProps.slice(0, 2);
 
     return (
-      <MuiGrid container spacing={2}>
+      <MuiGrid container>
         <MuiGrid
           size="auto"
           sx={(theme: Theme) => {

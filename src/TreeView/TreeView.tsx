@@ -208,22 +208,22 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
             '&.Mui-disabled > .MuiTreeItem-content': {
               pointerEvents: 'none',
             },
-            '& .MuiTreeItem-group': {
+            '& .MuiTreeItem-groupTransition': {
               position: 'relative',
               marginLeft: 0,
               paddingLeft: 0,
             },
-            '&:has(> .MuiTreeItem-content.Mui-selected) > .MuiTreeItem-group': {
+            '&:has(> .MuiTreeItem-content.Mui-selected) > .MuiTreeItem-groupTransition': {
               backgroundColor: 'rgba(5, 80, 220, 0.04)',
               borderRadius: '0 0 2px 2px',
             },
             // When a parent is selected, colour the level-lines in the selected colour.
-            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .tree-level-line': {
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-groupTransition .tree-level-line': {
               backgroundColor: theme.palette.action.selected,
             },
             // When a parent is selected, apply the selected visual treatment to ALL
             // descendant content items at any depth (excluding disabled items).
-            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .MuiTreeItem-content': {
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-groupTransition .MuiTreeItem-content': {
               backgroundColor: theme.palette.action.selectedOpacity,
               '& .tree-item-icon svg': {
                 color: theme.palette.action.selected,
