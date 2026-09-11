@@ -1989,9 +1989,9 @@ export default {
   },
 } as Meta<typeof Icon>;
 
-const renderGridItem = (iconFileName: string, icon: JSX.Element) => {
+const renderGridItem = (iconFileName: string, icon: React.JSX.Element) => {
   return (
-    <Grid item xs={4}>
+    <Grid size={{ xs: 4 }}>
       <Card key={iconFileName}>
         <CardHeader subheader={iconFileName} />
         <CardContent style={{ textAlign: 'center' }}>{icon}</CardContent>

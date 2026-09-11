@@ -26,14 +26,14 @@ export enum PanelVariants {
 }
 export interface TabContentProps {
   title: string;
-  actionHeaderBar?: JSX.Element;
-  body: JSX.Element;
+  actionHeaderBar?: React.ReactElement;
+  body: React.ReactElement;
   showActionHeaderBar?: boolean;
   maxHeight?: string;
 }
 
 export interface TabIconProps {
-  icon: JSX.Element;
+  icon: React.ReactElement;
   label: string;
   tooltipPlacement?: TooltipPlacement;
 }
@@ -102,16 +102,16 @@ const PanelBody = styled('main')<PanelProps>((props) => {
 });
 
 const Panel: React.FC<InspectorPanelProps> = ({
-  open,
+  open = false,
   anchor,
   variant,
   tabList,
   hideSidebar,
   selectedTabValue,
-  panelVariant,
+  panelVariant = PanelVariants.WITH_PADDING,
   handleTabChange,
   togglePanel,
-  isPanelCollapsed,
+  isPanelCollapsed = false,
   translation,
   togglePanelLabel,
   ...rest
@@ -162,12 +162,6 @@ const Panel: React.FC<InspectorPanelProps> = ({
       </PanelBody>
     </StyledDrawer>
   );
-};
-
-Panel.defaultProps = {
-  open: false,
-  panelVariant: PanelVariants.WITH_PADDING,
-  isPanelCollapsed: false,
 };
 
 export default Panel;

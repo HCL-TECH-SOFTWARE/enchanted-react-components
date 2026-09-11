@@ -165,25 +165,26 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
   return (
-    <Grid container spacing={15}>
-      <Grid item>
+    <Grid container spacing={15} className="legacy-grid-spacing">
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               IconButton small With Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                 >
@@ -192,16 +193,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   className="force-to-focus"
@@ -211,16 +213,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   className="force-to-focusHover"
@@ -230,16 +233,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   disabled
@@ -249,16 +253,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -268,16 +273,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -288,16 +294,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -308,16 +315,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -328,16 +336,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -347,16 +356,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -367,16 +377,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -387,16 +398,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -407,16 +419,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -427,16 +440,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -448,16 +462,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -469,16 +484,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -490,16 +506,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -509,16 +526,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -529,16 +547,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -549,16 +568,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -569,16 +589,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -589,16 +610,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -610,16 +632,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -631,16 +654,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -652,22 +676,23 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={5}>
+          <Grid paddingTop={5}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               IconButton small Without Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                 >
@@ -676,16 +701,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -695,16 +721,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -714,16 +741,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   disabled
@@ -733,16 +761,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -752,16 +781,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -772,16 +802,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -792,16 +823,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -812,16 +844,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -831,16 +864,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -851,16 +885,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -871,16 +906,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -891,16 +927,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -911,16 +948,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -932,16 +970,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -953,16 +992,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -974,16 +1014,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -993,16 +1034,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -1013,16 +1055,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -1033,16 +1076,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1053,16 +1097,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1073,16 +1118,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1094,16 +1140,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1115,16 +1162,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.SMALL}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1138,24 +1186,25 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               IconButton medium With Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                 >
@@ -1164,16 +1213,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   className="force-to-focus"
@@ -1183,16 +1233,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   className="force-to-focusHover"
@@ -1202,16 +1253,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   disabled
@@ -1221,16 +1273,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -1240,16 +1293,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -1260,16 +1314,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -1280,16 +1335,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   selected
@@ -1300,16 +1356,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1319,16 +1376,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1339,16 +1397,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1359,16 +1418,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1379,16 +1439,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1399,16 +1460,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1420,16 +1482,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1441,16 +1504,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   showendicon
@@ -1462,16 +1526,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1481,16 +1546,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1501,16 +1567,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1521,16 +1588,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1541,16 +1609,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1561,16 +1630,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1582,16 +1652,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1603,16 +1674,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITH_PADDING}
                   label="Label"
@@ -1624,22 +1696,23 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               IconButton medium Without Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                 >
@@ -1648,16 +1721,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   className="force-to-focus"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -1667,16 +1741,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   className="force-to-focusHover"
                   variant={IconButtonVariants.WITHOUT_PADDING}
@@ -1686,16 +1761,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   disabled
@@ -1705,16 +1781,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -1724,16 +1801,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -1744,16 +1822,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -1764,16 +1843,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   selected
@@ -1784,16 +1864,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1803,16 +1884,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1823,16 +1905,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1843,16 +1926,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1863,16 +1947,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1883,16 +1968,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1904,16 +1990,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1925,16 +2012,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with End Icon
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   showendicon
@@ -1946,16 +2034,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1965,16 +2054,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -1985,16 +2075,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2005,16 +2096,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2025,16 +2117,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2045,16 +2138,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2066,16 +2160,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2087,16 +2182,17 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled with Label
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <IconButton
                   value="default"
+                  aria-label="Add"
                   size={IconButtonSizes.MEDIUM}
                   variant={IconButtonVariants.WITHOUT_PADDING}
                   label="Label"
@@ -2110,22 +2206,21 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid
           container
           direction="column"
           rowSpacing={1}
           sx={(theme) => {
             return {
-              color: theme.palette.action.inverse,
-              backgroundColor: theme.palette.background.dark,
+              color: theme.palette.text.primary,
+              backgroundColor: theme.palette.background.paper,
               padding: '12px',
             };
           }}
         >
           <Typography>IconButton on dark background</Typography>
           <Grid
-            item
             sx={{
               '.IconButtonMainContainer': {
                 marginRight: '16px',
@@ -2170,7 +2265,6 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
             </IconButton>
           </Grid>
           <Grid
-            item
             sx={{
               '.IconButtonMainContainer': {
                 marginRight: '16px',
@@ -2239,9 +2333,9 @@ InteractiveExample.parameters = {
   options: { showPanel: true },
 };
 InteractiveExample.args = {
-  ...IconButton.defaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the IconButtonProps
   interactive: true,
+  'aria-label': 'Add',
 };
 
 export const VisualTest = VisualTestTemplate.bind({});

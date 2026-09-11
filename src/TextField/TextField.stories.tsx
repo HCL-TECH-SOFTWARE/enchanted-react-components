@@ -21,7 +21,7 @@ import PopupIcon from '@hcl-software/enchanted-icons/dist/carbon/es/popup';
 
 import InputAdornment from '@mui/material/InputAdornment';
 import { Box, SvgIconProps } from '@mui/material';
-import TextField from './TextField';
+import TextField, { textFieldDefaultProps } from './TextField';
 import Button from '../Button';
 
 import UnitSelector from '../prerequisite_components/UnitSelector/UnitSelector';
@@ -39,7 +39,7 @@ export default {
       options: ['dense', 'none'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: TextField.defaultProps?.margin },
+        defaultValue: { summary: textFieldDefaultProps?.margin },
       },
     },
     color: {
@@ -48,7 +48,7 @@ export default {
       options: ['primary'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: TextField.defaultProps?.color },
+        defaultValue: { summary: textFieldDefaultProps?.color },
       },
     },
     size: {
@@ -56,25 +56,25 @@ export default {
       options: ['medium'],
       control: { type: 'radio' },
       table: {
-        defaultValue: { summary: TextField.defaultProps?.size },
+        defaultValue: { summary: textFieldDefaultProps?.size },
       },
     },
     label: {
       description: 'Attribute to set the label.',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.label },
+        defaultValue: { summary: textFieldDefaultProps?.label },
       },
     },
     id: {
       description: 'Attribute to set the id.',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.id },
+        defaultValue: { summary: textFieldDefaultProps?.id },
       },
     },
     helperText: {
       description: 'Attribute to set the helper text.',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.helperText },
+        defaultValue: { summary: textFieldDefaultProps?.helperText },
       },
     },
     enableHelpHoverEffect: {
@@ -87,54 +87,54 @@ export default {
     helperIconTooltip: {
       description: 'Attribute to set t of the tooltip for the helper icon.',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.helperIconTooltip },
+        defaultValue: { summary: textFieldDefaultProps?.helperIconTooltip },
       },
     },
     unitLabel: {
       description: 'Attribute which can be used to define the unit of that component',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.hiddenLabel },
+        defaultValue: { summary: textFieldDefaultProps?.unitLabel },
       },
     },
     placeholder: {
       description: 'Attribute which is used to define the placeholder value.',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.placeholder },
+        defaultValue: { summary: textFieldDefaultProps?.placeholder },
       },
     },
     error: {
       description: 'If `true`, the error state will be enabled.',
       control: 'boolean',
       table: {
-        disable: TextField.defaultProps?.error,
+        disable: textFieldDefaultProps?.error,
       },
     },
     hiddenLabel: {
       description: 'If `true`, the label will hide.',
       control: 'boolean',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.hiddenLabel },
+        defaultValue: { summary: textFieldDefaultProps?.hiddenLabel },
       },
     },
     nonEdit: {
       description: 'If `true`, the component is only ready. No interactions are possible..',
       control: 'boolean',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.nonEdit },
+        defaultValue: { summary: textFieldDefaultProps?.nonEdit },
       },
     },
     disabled: {
       description: 'If `true`, the component is disabled.',
       control: 'boolean',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.disabled },
+        defaultValue: { summary: textFieldDefaultProps?.disabled },
       },
     },
     required: {
       description: 'If `true`, the `input` element is required.',
       control: 'boolean',
       table: {
-        defaultValue: { summary: TextField.defaultProps?.required },
+        defaultValue: { summary: textFieldDefaultProps?.required },
       },
     },
     sx: {
@@ -212,7 +212,7 @@ const Template: StoryFn<typeof TextField> = (args) => {
 export const ExampleTextField = {
   render: Template,
   args: {
-    ...TextField.defaultProps,
+    ...textFieldDefaultProps,
     margin: 'none',
     color: 'primary',
     size: 'medium',

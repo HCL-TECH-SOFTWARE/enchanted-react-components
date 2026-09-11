@@ -74,6 +74,8 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   margin?: 'none' | 'dense';
   color?: 'primary';
   size?: 'medium';
+  focused?: boolean;
+  hiddenLabel?: boolean;
   unitLabel?: string;
   endAdornmentAction?: React.ReactNode;
   renderNonEditInput?: () => React.ReactNode;
@@ -437,30 +439,32 @@ const partitionAdornmentNodes = (node: React.ReactNode) => {
     React.Children.forEach(currentNode, (child) => {
       if (!React.isValidElement(child)) return;
 
-      const className = (child.props as { className?: string }).className || '';
+      // Type assertion to ReactElement with generic props object
+      const element = child as React.ReactElement<{ className?: string; children?: React.ReactNode }>;
+      const className = element.props.className || '';
 
       if (typeof className === 'string') {
         if (className.includes(CLEAR_INDICATOR_CLASS)) {
-          clearNodes.push(child);
+          clearNodes.push(element);
           return;
         }
 
         if (className.includes(POPUP_INDICATOR_CLASS)) {
-          popupNodes.push(child);
+          popupNodes.push(element);
           return;
         }
         if (className.includes(END_ADORNMENT_CLASS) || className.includes('MuiInputAdornment-root')) {
-          if (child.props.children) traverse(child.props.children);
+          if (element.props.children) traverse(element.props.children);
           return;
         }
       }
 
-      if (child.type === React.Fragment) {
-        if (child.props.children) traverse(child.props.children);
+      if (element.type === React.Fragment) {
+        if (element.props.children) traverse(element.props.children);
         return;
       }
 
-      otherNodes.push(child);
+      otherNodes.push(element);
     });
   };
 
@@ -783,25 +787,5 @@ const TextField = React.forwardRef(({ ...props }: TextFieldProps, forwardRef: Re
     </StyledMuiFormControl>
   );
 }) as React.FC<TextFieldProps>;
-
-TextField.defaultProps = {
-  margin: 'none',
-  color: 'primary',
-  size: 'medium',
-  label: '',
-  helperText: '',
-  helperIconTooltip: '',
-  placeholder: '',
-  unitLabel: '',
-  required: false,
-  disabled: false,
-  error: false,
-  fullWidth: false,
-  multiline: false,
-  focused: false,
-  autoFocus: false,
-  hiddenLabel: false,
-  nonEdit: false,
-};
 
 export default TextField;

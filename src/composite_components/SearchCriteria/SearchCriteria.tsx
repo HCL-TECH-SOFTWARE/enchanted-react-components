@@ -311,6 +311,4 @@ const SearchCriteria: React.FC<SearchCriteriaProps> = ({
   );
 };
 
-SearchCriteria.defaultProps = { };
-
 export default SearchCriteria;

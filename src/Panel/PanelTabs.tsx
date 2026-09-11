@@ -190,6 +190,4 @@ const PanelTabs: React.FC<PanelTabsProps> = ({
   );
 };
 
-PanelTabs.defaultProps = { };
-
 export default PanelTabs;

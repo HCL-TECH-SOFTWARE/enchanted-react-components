@@ -75,7 +75,7 @@ export interface Assets {
 }
 export interface PreviewProps {
   open: boolean;
-  reactComponent?: JSX.Element;
+  reactComponent?: React.ReactElement;
   assets: Assets[];
   renditionLabel: string;
   isSelectButtonDisabled: boolean;
@@ -270,11 +270,11 @@ const zoomOptions = [
 ];
 
 const Preview: React.FC<PreviewProps> = ({
-  open,
+  open = true,
   reactComponent,
   renditionLabel,
   assets,
-  index,
+  index = 0,
   isSelectButtonDisabled,
   selectButtonTitle,
   onClickBackButton,
@@ -870,11 +870,6 @@ const Preview: React.FC<PreviewProps> = ({
       </PreviewContainer>
     </Backdrop>
   );
-};
-
-Preview.defaultProps = {
-  open: true,
-  index: 0,
 };
 
 export default Preview;

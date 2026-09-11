@@ -95,42 +95,46 @@ export default {
 const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
   return (
     <Grid container spacing={30}>
-      <Grid item>
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButtonGroup small
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -138,35 +142,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 1st button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                   value="default1"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -174,35 +182,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 2nd button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                   value="default2"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -210,35 +222,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 3rd button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                   value="default3"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -246,35 +262,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 4th button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                   value="default4"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -282,35 +302,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.SMALL}
                   disabled
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -320,42 +344,46 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButtonGroup medium
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -363,35 +391,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 1st button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                   value="default1"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -399,35 +431,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 2nd button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                   value="default2"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -435,35 +471,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 3rd button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                   value="default3"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -471,35 +511,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected 4th button
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                   value="default4"
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -507,35 +551,39 @@ const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButtonGroup
                   size={ToggleButtonGroupSizes.MEDIUM}
                   disabled
                 >
                   <ToggleButton
                     value="default1"
+                    aria-label="Add default1"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default2"
+                    aria-label="Add default2"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default3"
+                    aria-label="Add default3"
                   >
                     <IconAdd />
                   </ToggleButton>
                   <ToggleButton
                     value="default4"
+                    aria-label="Add default4"
                   >
                     <IconAdd />
                   </ToggleButton>
@@ -556,11 +604,13 @@ const InteractiveExampleTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => 
     >
       <ToggleButton
         value="sample"
+        aria-label="Add sample"
       >
         <IconAdd />
       </ToggleButton>
       <ToggleButton
         value="sample2"
+        aria-label="Add sample2"
       >
         <IconAdd />
       </ToggleButton>

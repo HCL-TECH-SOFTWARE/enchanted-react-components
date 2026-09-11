@@ -168,7 +168,24 @@ export type IconButtonProps = MuiIconButtonProps & {
   inversecolors?: boolean | 0 | 1,
 }
 
-const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps, forwardRef) => {
+const IconButton = React.forwardRef(({ showendicon: showendiconProp, ...rawProps }: IconButtonProps, forwardRef) => {
+  const showendicon = showendiconProp ?? false;
+  const props = {
+    size: IconButtonSizes.MEDIUM as IconButtonProps['size'],
+    variant: IconButtonVariants.WITH_PADDING as IconButtonProps['variant'],
+    color: 'default' as IconButtonProps['color'],
+    selected: false,
+    disabled: false,
+    inversecolors: false as IconButtonProps['inversecolors'],
+    disableFocusRipple: true,
+    edge: false as IconButtonProps['edge'],
+    centerRipple: true,
+    disableRipple: true,
+    disableTouchRipple: true,
+    focusRipple: true,
+    tabIndex: 0,
+    ...rawProps,
+  };
   props.inversecolors = props.inversecolors ? 1 : 0;
   return (
     <StyledMainContainer
@@ -184,6 +201,7 @@ const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps,
           ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
           role="button"
           aria-disabled={props.disabled}
+          aria-label={props['aria-label'] ?? props.label}
           className={`${props.selected ? 'selected' : ''} ${props.className}`}
         >
           {props.children}
@@ -240,24 +258,6 @@ const IconButton = React.forwardRef(({ showendicon, ...props }: IconButtonProps,
     </StyledMainContainer>
   );
 }) as React.FC<IconButtonProps>;
-
-IconButton.defaultProps = {
-  size: IconButtonSizes.MEDIUM,
-  variant: IconButtonVariants.WITH_PADDING,
-  color: 'default',
-  selected: false,
-  showendicon: false,
-  label: undefined,
-  disabled: false,
-  inversecolors: false,
-  disableFocusRipple: true,
-  edge: false,
-  centerRipple: true,
-  disableRipple: true,
-  disableTouchRipple: true,
-  focusRipple: true,
-  tabIndex: 0,
-};
 
 export * from '@mui/material/IconButton';
 export default IconButton;

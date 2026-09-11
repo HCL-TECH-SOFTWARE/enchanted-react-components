@@ -13,9 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import MuiTreeView from '@mui/lab/TreeView';
-import type { TreeViewProps } from '@mui/lab/TreeView';
-import '@mui/lab/themeAugmentation';
+import { SimpleTreeView as MuiTreeView } from '@mui/x-tree-view';
+import type { TreeViewProps } from '@mui/x-tree-view/TreeView';
+import '@mui/x-tree-view/themeAugmentation';
 import { Components, Theme } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ChevronDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron--down';
@@ -25,21 +25,33 @@ import { TreeViewContext } from './TreeItem';
 
 export { TreeViewContext, TreeDepthContext } from './TreeItem';
 
+// eslint-why TreeViewProps is a re-export from MUI lab and its generic is not relevant here
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type { TreeViewProps };
 
-export type EnhancedTreeViewProps = TreeViewProps & {
+// eslint-why EnhancedTreeViewProps extends the MUI generic TreeViewProps which requires any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type EnhancedTreeViewProps = TreeViewProps<any> & {
   /** When false, hides the vertical level-line connecting parent to children. Defaults to true. */
   showLevelLine?: boolean;
   /** When true, all tree items in the tree are disabled. */
   disabled?: boolean;
+  /** The icon used to collapse the tree item. */
+  defaultCollapseIcon?: React.ReactNode;
+  /** The icon used to expand the tree item. */
+  defaultExpandIcon?: React.ReactNode;
 };
 
 /**
  * Override out of the box styling from MUI to align with designer theme.
  * @returns override TreeView and TreeItem component styles and props
  */
+// eslint-why MUI theme component overrides require the base Components type which needs any for its generic
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
-  return {
+  // eslint-why inner return cast needs any to satisfy MUI's Components type constraint
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return ({
     MuiTreeView: {
       styleOverrides: {
         root: () => {
@@ -196,22 +208,22 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
             '&.Mui-disabled > .MuiTreeItem-content': {
               pointerEvents: 'none',
             },
-            '& .MuiTreeItem-group': {
+            '& .MuiTreeItem-groupTransition': {
               position: 'relative',
               marginLeft: 0,
               paddingLeft: 0,
             },
-            '&:has(> .MuiTreeItem-content.Mui-selected) > .MuiTreeItem-group': {
+            '&:has(> .MuiTreeItem-content.Mui-selected) > .MuiTreeItem-groupTransition': {
               backgroundColor: 'rgba(5, 80, 220, 0.04)',
               borderRadius: '0 0 2px 2px',
             },
             // When a parent is selected, colour the level-lines in the selected colour.
-            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .tree-level-line': {
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-groupTransition .tree-level-line': {
               backgroundColor: theme.palette.action.selected,
             },
             // When a parent is selected, apply the selected visual treatment to ALL
             // descendant content items at any depth (excluding disabled items).
-            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-group .MuiTreeItem-content': {
+            '& > .MuiTreeItem-content.Mui-selected ~ .MuiTreeItem-groupTransition .MuiTreeItem-content': {
               backgroundColor: theme.palette.action.selectedOpacity,
               '& .tree-item-icon svg': {
                 color: theme.palette.action.selected,
@@ -239,7 +251,9 @@ export const getMuiTreeViewThemeOverrides = (): Components<Omit<Theme, 'componen
         },
       },
     },
-  };
+  // eslint-why MUI theme component overrides require the base Components type which needs any for its generic
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any) as Components<Omit<Theme, 'components'>>;
 };
 
 const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
@@ -350,8 +364,10 @@ const TreeView = React.forwardRef<HTMLUListElement, EnhancedTreeViewProps>(
       <TreeViewContext.Provider value={contextValue}>
         <MuiTreeView
           ref={combinedRef}
-          defaultCollapseIcon={defaultCollapseIcon ?? <ChevronDownIcon />}
-          defaultExpandIcon={resolvedExpandIcon}
+          slots={{
+            collapseIcon: defaultCollapseIcon ? () => { return defaultCollapseIcon; } : ChevronDownIcon,
+            expandIcon: resolvedExpandIcon ? () => { return resolvedExpandIcon; } : undefined,
+          }}
           onMouseLeave={handleMouseLeave}
           onKeyDown={handleKeyDown}
           {...rest}

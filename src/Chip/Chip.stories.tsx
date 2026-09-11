@@ -162,14 +162,14 @@ export default {
 const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
   return (
     <Grid container spacing={5} direction="row">
-      <Grid item>
+      <Grid>
         <Grid container spacing={3} direction="column">
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Contained
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Default
             </Typography>
@@ -187,7 +187,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               focus={0}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip avatar Image
             </Typography>
@@ -205,7 +205,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               focus={0}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Avatar Letter
             </Typography>
@@ -223,7 +223,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               focus={0}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Avatar Icon
             </Typography>
@@ -241,7 +241,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               focus={0}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Selected
             </Typography>
@@ -259,7 +259,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               focus={0}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Disabled
             </Typography>
@@ -278,7 +278,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               disabled
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Focus
             </Typography>
@@ -299,14 +299,14 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid container spacing={3} direction="column">
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Outlined
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Default
             </Typography>
@@ -325,7 +325,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip avatar Image
             </Typography>
@@ -344,7 +344,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Avatar Letter
             </Typography>
@@ -363,7 +363,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Avatar Icon
             </Typography>
@@ -382,7 +382,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Selected
             </Typography>
@@ -401,7 +401,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Disabled
             </Typography>
@@ -421,7 +421,7 @@ const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
               variant={ChipVariants.OUTLINED}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Chip Focus
             </Typography>

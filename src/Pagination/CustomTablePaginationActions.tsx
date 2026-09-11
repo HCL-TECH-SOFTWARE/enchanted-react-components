@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { TablePaginationActionsProps as MuiTablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions';
+import { TablePaginationProps as MuiTablePaginationProps } from '@mui/material/TablePagination';
 import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
@@ -28,6 +28,8 @@ import Autocomplete from '../Autocomplete/Autocomplete';
 import { TYPOGRAPHY, ThemeDirectionType } from '../theme';
 import { TablePaginationProps, TablePaginationLocalizationPlaceholders } from './Pagination';
 import Tooltip from '../Tooltip/Tooltip';
+
+type MuiTablePaginationActionsProps = Pick<MuiTablePaginationProps, 'count' | 'page' | 'rowsPerPage' | 'onPageChange' | 'getItemAriaLabel'>;
 
 export enum TablePaginationTestIds {
   TABLE_PAGINATION_ACTIONS_ROOT = 'tablePaginationActionsRoot',

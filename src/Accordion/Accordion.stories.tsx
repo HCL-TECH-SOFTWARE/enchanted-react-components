@@ -123,6 +123,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         onClick={() => { return null; }}
         id="1"
         showendicon={0}
+        aria-label="Launch 1"
       >
         <RocketIcon />
       </IconButton>
@@ -133,6 +134,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         onClick={() => { return null; }}
         id="2"
         showendicon={0}
+        aria-label="Launch 2"
       >
         <RocketIcon />
       </IconButton>
@@ -146,14 +148,22 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}><ChevronDownIcon /></IconButton>)}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>)}
+          aria-controls="accordion-panel1-content"
+          id="accordion-panel1-header"
           disabled={disabled}
           hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
-            {showCheckBox && <Checkbox id="1" checked={checkedItems['1'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
+            {showCheckBox && (
+              <Checkbox
+                id="1"
+                slotProps={{ input: { 'aria-label': 'Select item 1' } }}
+                checked={checkedItems['1'] || false}
+                onChange={handleCheckboxChange}
+                onClick={(event) => { return event.stopPropagation(); }}
+              />
+            )}
             <Box>
               <Typography
                 variant="body2"
@@ -170,7 +180,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel1-content" aria-labelledby="accordion-panel1-header">
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>
@@ -179,14 +189,22 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="accordion-panel2-content"
+          id="accordion-panel2-header"
           disabled={disabled}
           hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
-            {showCheckBox && <Checkbox id="2" checked={checkedItems['2'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
+            {showCheckBox && (
+              <Checkbox
+                id="2"
+                slotProps={{ input: { 'aria-label': 'Select item 2' } }}
+                checked={checkedItems['2'] || false}
+                onChange={handleCheckboxChange}
+                onClick={(event) => { return event.stopPropagation(); }}
+              />
+            )}
             <Box>
               <Typography
                 variant="body2"
@@ -203,7 +221,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel2-content" aria-labelledby="accordion-panel2-header">
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>
@@ -212,14 +230,22 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
         {...args}
       >
         <AccordionSummary
-          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="accordion-panel3-content"
+          id="accordion-panel3-header"
           disabled={disabled}
           hoveractions={showHoverActions ? hoveractions : undefined}
         >
           <Box>
-            {showCheckBox && <Checkbox id="3" checked={checkedItems['3'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
+            {showCheckBox && (
+              <Checkbox
+                id="3"
+                slotProps={{ input: { 'aria-label': 'Select item 3' } }}
+                checked={checkedItems['3'] || false}
+                onChange={handleCheckboxChange}
+                onClick={(event) => { return event.stopPropagation(); }}
+              />
+            )}
             <Box>
               <Typography
                 variant="body2"
@@ -236,7 +262,7 @@ const Template: StoryFn<ExtendedAccordionProps> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel3-content" aria-labelledby="accordion-panel3-header">
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>
@@ -264,13 +290,13 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
     <>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="accordion-panel4-content"
+          id="accordion-panel4-header"
           disabled={disabled}
         >
           <Box>
-            {showCheckBox && <Checkbox />}
+            {showCheckBox && <Checkbox slotProps={{ input: { 'aria-label': 'Select item' } }} />}
             <Box>
               <Typography
                 variant="body2"
@@ -285,19 +311,19 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel4-content" aria-labelledby="accordion-panel4-header">
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>
       <Accordion disabled={disabled} {...args} hasNested>
         <AccordionSummary
-          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="accordion-panel5-content"
+          id="accordion-panel5-header"
           disabled={disabled}
         >
           <Box>
-            {showCheckBox && <Checkbox />}
+            {showCheckBox && <Checkbox slotProps={{ input: { 'aria-label': 'Select item' } }} />}
             <Box>
               <Typography
                 variant="body2"
@@ -312,40 +338,40 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel5-content" aria-labelledby="accordion-panel5-header">
           <Accordion type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
+              expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+              aria-controls="accordion-panel6-content"
+              id="accordion-panel6-header"
             >
               <Typography variant="body2">Level 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails id="accordion-panel6-content" aria-labelledby="accordion-panel6-header">
               <PlaceholderArea height="112px" />
             </AccordionDetails>
           </Accordion>
           <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
+              expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+              aria-controls="accordion-panel7-content"
+              id="accordion-panel7-header"
             >
               <Typography variant="body2">Level 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails id="accordion-panel7-content" aria-labelledby="accordion-panel7-header">
               <PlaceholderArea height="112px" />
             </AccordionDetails>
           </Accordion>
           <Accordion {...args} type={AccordionTypes.NO_OUTLINE}>
             <AccordionSummary
-              expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
+              expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+              aria-controls="accordion-panel8-content"
+              id="accordion-panel8-header"
             >
               <Typography variant="body2">Level 2</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails id="accordion-panel8-content" aria-labelledby="accordion-panel8-header">
               <PlaceholderArea height="112px" />
             </AccordionDetails>
           </Accordion>
@@ -353,13 +379,13 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
       </Accordion>
       <Accordion disabled={disabled} {...args}>
         <AccordionSummary
-          expandIcon={<IconButton showendicon={0}><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="accordion-panel9-content"
+          id="accordion-panel9-header"
           disabled={disabled}
         >
           <Box>
-            {showCheckBox && <Checkbox />}
+            {showCheckBox && <Checkbox slotProps={{ input: { 'aria-label': 'Select item' } }} />}
             <Box>
               <Typography
                 variant="body2"
@@ -374,7 +400,7 @@ const VisualTestTemplate: StoryFn<typeof Accordion> = (args) => {
             </Box>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails id="accordion-panel9-content" aria-labelledby="accordion-panel9-header">
           <PlaceholderArea height="112px" />
         </AccordionDetails>
       </Accordion>

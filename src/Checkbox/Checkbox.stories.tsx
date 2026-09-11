@@ -18,7 +18,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { FormControl, FormGroup, FormHelperText } from '@mui/material';
 
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
-import Checkbox, { CheckboxVariants } from './Checkbox';
+import Checkbox, { checkboxDefaultProps, CheckboxVariants } from './Checkbox';
 import Typography from '../Typography';
 
 export default {
@@ -147,7 +147,7 @@ export const ExampleCheckbox = {
   render: Template,
 
   args: {
-    ...Checkbox.defaultProps,
+    ...checkboxDefaultProps,
     required: true,
     centerRipple: false,
     disableTouchRipple: false,

@@ -205,7 +205,6 @@ const Template: StoryFn<typeof Select> = (args) => {
 export const ExampleMultipleSelect = {
   render: Template,
   args: {
-    ...Select.defaultProps,
     label: 'Label',
     helperText: 'Some important text',
     helperIconTooltip: 'Some information about that component.',

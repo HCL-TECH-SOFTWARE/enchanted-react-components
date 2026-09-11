@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+import React from 'react';
 import { styled } from '@mui/material/styles';
 
 export enum SnackbarContainerPosition {
@@ -23,7 +24,9 @@ export interface SnackbarContainerProps {
   position?: SnackbarContainerPosition;
 }
 
-const SnackbarContainer = styled('div')<SnackbarContainerProps>(({ position = SnackbarContainerPosition.RIGHT }) => {
+const SnackbarContainer: React.ComponentType<SnackbarContainerProps & React.HTMLAttributes<HTMLDivElement>> = styled('div')<SnackbarContainerProps>(({
+  position = SnackbarContainerPosition.RIGHT,
+}) => {
   return {
     position: 'fixed',
     bottom: '12px',

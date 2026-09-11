@@ -147,7 +147,15 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
   };
   const getLeftSection = () => {
     if (showCheckBox) {
-      return <Checkbox id="2" checked={checkedItems['2'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />;
+      return (
+        <Checkbox
+          id="2"
+          slotProps={{ input: { 'aria-label': 'Select item 2' } }}
+          checked={checkedItems['2'] || false}
+          onChange={handleCheckboxChange}
+          onClick={(event) => { return event.stopPropagation(); }}
+        />
+      );
     } if (showAvatar) {
       return <Avatar iconImage={<RocketIcon />} type={AvatarTypes.ICON} variant="rounded" />;
     } if (showIcon) {
@@ -158,19 +166,16 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
 
   const handleChange = (accordionId: number) => {
     return () => {
-      if (expandedAccordionId === accordionId) {
-        linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');
-        setLinkLabels(linkLabels);
-        optionalLabels[accordionId] = optionalLabels[accordionId].replace('Expanded', '');
-        setOptionalLabels(optionalLabels);
-        setExpandedAccordionId(null);
-      } else {
-        linkLabels[accordionId] = `${linkLabels[accordionId]} Expanded`;
-        setLinkLabels(linkLabels);
-        optionalLabels[accordionId] = `${optionalLabels[accordionId]} Expanded`;
-        setOptionalLabels(optionalLabels);
-        setExpandedAccordionId(accordionId);
-      }
+      const collapsing = expandedAccordionId === accordionId;
+      const update = (labels: string[]) => {
+        return labels.map((label, index) => {
+          if (index !== accordionId) return label;
+          return collapsing ? label.replace('Expanded', '') : `${label} Expanded`;
+        });
+      };
+      setLinkLabels(update);
+      setOptionalLabels(update);
+      setExpandedAccordionId(collapsing ? null : accordionId);
     };
   };
 
@@ -187,9 +192,9 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
         onChange={handleChange(0)}
       >
         <PreviewAccordionSummary
-          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING}><ChevronDownIcon /></IconButton>)}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={(<IconButton variant={IconButtonVariants.WITHOUT_PADDING} aria-label="Expand"><ChevronDownIcon /></IconButton>)}
+          aria-controls="preview-panel1-content"
+          id="preview-panel1-header"
           disabled={disabled}
           leftsection={getLeftSection()}
           titlelink={(
@@ -211,7 +216,7 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
             </Typography>
           )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel1-content" aria-labelledby="preview-panel1-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>
@@ -225,9 +230,9 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
         hasavatar={showAvatar}
       >
         <PreviewAccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="preview-panel2-content"
+          id="preview-panel2-header"
           disabled={disabled}
           leftsection={getLeftSection()}
           titlelink={(
@@ -249,7 +254,7 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
             </Typography>
           )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel2-content" aria-labelledby="preview-panel2-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>
@@ -263,9 +268,9 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
         hasavatar={showAvatar}
       >
         <PreviewAccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="preview-panel3-content"
+          id="preview-panel3-header"
           disabled={disabled}
           leftsection={getLeftSection()}
           titlelink={(
@@ -287,7 +292,7 @@ const Template: StoryFn<ExtendedPreviewAccordionProps> = (args) => {
             </Typography>
           )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel3-content" aria-labelledby="preview-panel3-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>
@@ -322,19 +327,16 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
 
   const handleChange = (accordionId: number) => {
     return () => {
-      if (expandedAccordionId === accordionId) {
-        linkLabels[accordionId] = linkLabels[accordionId].replace('Expanded', '');
-        setLinkLabels(linkLabels);
-        optionalLabels[accordionId] = optionalLabels[accordionId].replace('Expanded', '');
-        setOptionalLabels(optionalLabels);
-        setExpandedAccordionId(null);
-      } else {
-        linkLabels[accordionId] = `${linkLabels[accordionId]} Expanded`;
-        setLinkLabels(linkLabels);
-        optionalLabels[accordionId] = `${optionalLabels[accordionId]} Expanded`;
-        setOptionalLabels(optionalLabels);
-        setExpandedAccordionId(accordionId);
-      }
+      const collapsing = expandedAccordionId === accordionId;
+      const update = (labels: string[]) => {
+        return labels.map((label, index) => {
+          if (index !== accordionId) return label;
+          return collapsing ? label.replace('Expanded', '') : `${label} Expanded`;
+        });
+      };
+      setLinkLabels(update);
+      setOptionalLabels(update);
+      setExpandedAccordionId(collapsing ? null : accordionId);
     };
   };
 
@@ -345,7 +347,7 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
   const getRightSection = () => {
     return (
       <>
-        <IconButton size="small"><RocketIcon /></IconButton>
+        <IconButton size="small" aria-label="Launch"><RocketIcon /></IconButton>
         <Button
           onClick={() => { return null; }}
           onFocusVisible={() => { return null; }}
@@ -368,9 +370,9 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
         hasavatar
       >
         <PreviewAccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="preview-panel4-content"
+          id="preview-panel4-header"
           disabled={disabled}
           leftsection={<Avatar iconImage={<RocketIcon />} type={AvatarTypes.ICON} variant="rounded" />}
           titlelink={(
@@ -392,7 +394,7 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
             </Typography>
 )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel4-content" aria-labelledby="preview-panel4-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>
@@ -404,11 +406,19 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
         hascheckbox
       >
         <PreviewAccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="preview-panel5-content"
+          id="preview-panel5-header"
           disabled={disabled}
-          leftsection={<Checkbox id="2" checked={checkedItems['2'] || false} onChange={handleCheckboxChange} onClick={(event) => { return event.stopPropagation(); }} />}
+          leftsection={(
+            <Checkbox
+              id="2"
+              slotProps={{ input: { 'aria-label': 'Select item 2' } }}
+              checked={checkedItems['2'] || false}
+              onChange={handleCheckboxChange}
+              onClick={(event) => { return event.stopPropagation(); }}
+            />
+          )}
           rightsection={getRightSection()}
           titlelink={(
             <Link
@@ -429,7 +439,7 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
             </Typography>
 )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel5-content" aria-labelledby="preview-panel5-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>
@@ -441,9 +451,9 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
         hasicon
       >
         <PreviewAccordionSummary
-          expandIcon={<IconButton><ChevronDownIcon /></IconButton>}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={<IconButton aria-label="Expand"><ChevronDownIcon /></IconButton>}
+          aria-controls="preview-panel6-content"
+          id="preview-panel6-header"
           disabled={disabled}
           leftsection={<RocketIcon />}
           titlelink={(
@@ -465,7 +475,7 @@ const VisualTestTemplate: StoryFn<typeof PreviewAccordion> = (args) => {
             </Typography>
 )}
         />
-        <PreviewAccordionDetails>
+        <PreviewAccordionDetails id="preview-panel6-content" aria-labelledby="preview-panel6-header">
           <PlaceholderArea height="112px" />
         </PreviewAccordionDetails>
       </PreviewAccordion>

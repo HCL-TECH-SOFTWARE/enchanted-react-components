@@ -10,6 +10,7 @@
     ],
     "declaration": true,
     "jsx": "react",
+    "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,

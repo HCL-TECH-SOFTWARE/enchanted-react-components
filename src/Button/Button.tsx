@@ -44,26 +44,8 @@ export type ButtonProps = MuiButtonProps & {
   inversecolors?: boolean | 0 | 1,
 }
 
-const Button = React.forwardRef(({ ...props }: ButtonProps, forwardRef) => {
-  props.inversecolors = props.inversecolors ? 1 : 0;
-  return (
-    <MuiButton
-      id={props.variant}
-      variant={props.variant}
-      sx={(theme) => {
-        const inverseColor = props.inversecolors && props.variant === 'contained' ? theme.palette.text.primary : theme.palette.action.selectedInverse;
-        return {
-          color: props.inversecolors ? inverseColor : '',
-        };
-      }}
-      {...props}
-      ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
-    />
-  );
-}) as React.FC<ButtonProps>;
-
-Button.defaultProps = {
-  variant: ButtonVariants.CONTAINED,
+export const buttonDefaultProps: Partial<ButtonProps> = {
+  variant: ButtonVariants.CONTAINED as ButtonProps['variant'],
   disableElevation: true,
   disableFocusRipple: true,
   fullWidth: false,
@@ -74,6 +56,32 @@ Button.defaultProps = {
   tabIndex: 0,
   inversecolors: false,
 };
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((rawProps, forwardRef) => {
+  const props = {
+    ...buttonDefaultProps,
+    ...rawProps,
+  };
+  props.inversecolors = props.inversecolors ? 1 : 0;
+
+  // 1. Extract variant and inversecolors so they are NOT inside restProps
+  const { variant, inversecolors, ...restProps } = props;
+
+  return (
+    <MuiButton
+      id={variant}
+      variant={variant}
+      sx={(theme) => {
+        const inverseColor = inversecolors && variant === 'contained' ? theme.palette.text.primary : theme.palette.action.selectedInverse;
+        return {
+          color: inversecolors ? inverseColor : '',
+        };
+      }}
+      {...restProps}
+      ref={forwardRef as ((instance: HTMLButtonElement | null) => void)}
+    />
+  );
+}) as React.FC<ButtonProps>;
 
 export const getMuiButtonThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {

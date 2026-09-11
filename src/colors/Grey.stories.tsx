@@ -18,14 +18,14 @@ import Box from '@mui/material/Box';
 import { Theme } from '@mui/material';
 import { DataGrid, ExtendedGridColDef } from '../DataGrid';
 
-const Grey = { };
+type Grey = {};
 
 export default {
   title: 'Theme/Grey',
   parameters: {
     options: { showPanel: false },
   },
-} as Meta<typeof Grey>;
+} as Meta<Grey>;
 
 const columns: ExtendedGridColDef[] = [
   {
@@ -98,7 +98,7 @@ const rows = [
     color: '1100',
   },
 ];
-const Template: StoryFn<typeof Grey> = () => {
+const Template: StoryFn<Grey> = () => {
   return (
     <Box width={600}>
       <DataGrid

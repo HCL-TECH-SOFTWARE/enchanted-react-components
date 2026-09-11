@@ -18,7 +18,6 @@ import { SvgIconProps, Theme } from '@mui/material';
 import { StaticDatePicker as MuiStaticDatePicker, StaticDatePickerProps as MuiStaticDatePickerProps } from '@mui/x-date-pickers/StaticDatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { v4 as uuid } from 'uuid';
-import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import DotMark from '@hcl-software/enchanted-icons/dist/carbon/es/dot-mark';
 import IconCalendar from '@hcl-software/enchanted-icons/dist/carbon/es/calendar';
@@ -31,18 +30,21 @@ import TextField, { TextFieldProps } from '../TextField';
 
 const DEFAULT_FORMAT: string = 'MM/DD/YYYY';
 
-// Shared formatter used by both static and regular date picker variants
-const dayOfWeekFormatter = (day: string) => { return day; };
-
-// Display mode for the static date picker
-const staticWrapperAs = 'mobile' as const;
+// Shared formatter used by both static and regular date picker variants — returns the day abbreviation unchanged
+// eslint-why dayOfWeekFormatter receives different types across MUI versions and must accept any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const dayOfWeekFormatter = (date: any) => {
+  if (dayjs.isDayjs(date)) {
+    return date.format('dd'); // or 'ddd' for 3-letter abbreviations ("Sun", "Mon")
+  }
+  return typeof date === 'string' ? date.slice(0, 2) : String(date);
+};
 
 // Number of year columns rendered in the year picker view.
-// Must match `yearsInRow` used by MUI internally (set via displayStaticWrapperAs='mobile' for StaticDatePicker).
-// Also used by handleYearPickerKeyDown to correct arrow-key navigation for the non-static DatePicker.
+// Used by handleYearPickerKeyDown to correct arrow-key navigation for the non-static DatePicker.
 const YEARS_PER_ROW = 3;
 
-export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerProps<TInputDate, TDate>, 'renderInput'> {
+export interface DatePickerProps<TDate extends Dayjs = Dayjs> extends Omit<MuiDatePickerProps<TDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   enableHelpHoverEffect?: boolean,
@@ -67,6 +69,72 @@ export interface DatePickerProps<TInputDate, TDate> extends Omit<MuiDatePickerPr
   staticMode?: boolean;
 }
 
+type CustomPickersDayOwnProps = {
+  isStaticMode?: boolean;
+  // eslint-why onStaticChange callback value and context are opaque MUI internal types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onStaticChange?: ((value: any, context: any) => void) | null;
+};
+
+// Module-level day component for v7 slots API — wraps PickersDay with a Badge dot for today
+// eslint-why PickersDayProps generic TDate is unknown at module level; any is required here
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomPickersDay = (props: PickersDayProps<any> & CustomPickersDayOwnProps) => {
+  const {
+    day, isStaticMode, onStaticChange, ...dayProps
+  } = props;
+
+  const handleDayClick = () => {
+    if (isStaticMode && dayProps.selected && onStaticChange) {
+      onStaticChange(day, {});
+    }
+  };
+
+  return (
+    <Badge
+      key={(day as unknown as Date).toString()}
+      overlap="circular"
+      variant="standard"
+      color={
+        (dayProps.today && dayProps.selected) ? 'default' : 'primary'
+      }
+      badgeContent={
+        dayProps.today ? <DotMark fontSize="small" /> : undefined
+      }
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      sx={{
+        [`& .${badgeClasses.badge}`]: {
+          right: '50%',
+          padding: '1px',
+          width: '4px',
+          height: '1px',
+          borderRadius: 'unset',
+          minWidth: '0px',
+          top: '70%',
+          [`& .${svgIconClasses.root}`]: {
+            ...(dayProps.today && dayProps.selected) && {
+              fill: 'common.white',
+              width: '2px',
+              height: '2px',
+            },
+            ...!(dayProps.today && dayProps.selected) && {
+              fill: 'none',
+              width: '1px',
+              height: '1px',
+            },
+            fontSize: '1px',
+          },
+        },
+      }}
+    >
+      <PickersDay day={day} {...dayProps} {...(isStaticMode && { onClick: handleDayClick })} />
+    </Badge>
+  );
+};
+
 const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { [key: string]: React.CSSProperties }, staticMode?: boolean) => {
   return {
     ...theme.typography.body2,
@@ -76,27 +144,24 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     width: '228px',
     color: `1px solid ${theme.palette.background.paper}`,
     boxShadow: 1,
-    '& .MuiPickerStaticWrapper-content': {
-      minWidth: 'unset',
-    },
-    '& .MuiCalendarPicker-root': {
+    '& .MuiDateCalendar-root': {
       width: '228px',
       margin: '0px',
       height: 'auto',
       overflowY: 'hidden',
       flexGrow: 1,
     },
-    '& .MuiYearPicker-root': {
+    '& .MuiYearCalendar-root': {
       maxHeight: '168px',
       overflowY: 'auto',
     },
     // Assumes year view displays 3 years across.
     // Requires `displayStaticWrapperAs: 'mobile'` to set
     // `yearsInRow = 3` for arrow key navigation.
-    '& .PrivatePickersYear-root': {
+    '& .MuiPickersYear-root': {
       flexBasis: '33.33%',
     },
-    '& .PrivatePickersYear-yearButton': {
+    '& .MuiPickersYear-yearButton': {
       width: '100%',
       maxWidth: 'unset',
     },
@@ -113,7 +178,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
       margin: '4px',
       width: 'auto',
     },
-    '& .MuiPaper-root-MuiPickersPopper-paper .MuiCalendarPicker-viewTransitionContainer': {
+    '& .MuiPickersPopper-paper, & .MuiDateCalendar-viewTransitionContainer': {
       padding: '0px',
       margin: '0px',
       width: '228px',
@@ -121,22 +186,27 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     '& .MuiPickersArrowSwitcher-spacer': {
       width: '4px',
     },
-    '& .MuiDayPicker-weekContainer': {
+    '& .MuiDayCalendar-weekContainer': {
       margin: '0px',
       width: '228px',
     },
-    '& .MuiDayPicker-weekDayLabel': {
+    '& .MuiDayCalendar-weekDayLabel': {
       ...theme.typography.body2,
       color: theme.palette.text.secondary,
       margin: '4px 2px',
       width: '24px',
       padding: '0px',
       height: '16px',
+      lineHeight: '16px',
+      overflow: 'hidden',
     },
-    '& .MuiCalendarPicker-viewTransitionContainer': {
+    '& .MuiDateCalendar-viewTransitionContainer': {
       width: '228px',
     },
-    '& .MuiDayPicker-header': {
+    '& .MuiPickersLayout-root': {
+      minWidth: '228px',
+    },
+    '& .MuiDayCalendar-header': {
       ...theme.typography.body1,
       width: '228px',
 
@@ -149,15 +219,10 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         border: 'none',
       },
     },
-    '& .MuiDayPicker-monthContainer': {
+    '& .MuiDayCalendar-monthContainer': {
       height: 'auto',
       position: 'inherit',
       width: '228px',
-    },
-    '& .PrivatePickersSlideTransition-root MuiDayPicker-slideTransition': {
-      position: 'inherit',
-      width: '228px',
-      margin: '4px 16px',
     },
     '& .MuiPickersDay-root': {
       border: 'none',
@@ -205,7 +270,7 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
         },
       },
     },
-    '& .MuiDayPicker-slideTransition': {
+    '& .MuiDayCalendar-slideTransition': {
       height: 'auto',
       minHeight: '140px',
       position: 'inherit',
@@ -249,7 +314,7 @@ export const DatePickerDefaults = {
   staticMode: false,
 };
 
-const DatePicker = <TInputDate, TDate>({
+const DatePicker = <TDate extends Dayjs = Dayjs>({
   customStyles = {},
   staticMode = false,
   margin = 'none',
@@ -273,7 +338,7 @@ const DatePicker = <TInputDate, TDate>({
   onViewChange,
   onAccept,
   ...muiProps
-}: DatePickerProps<TInputDate, TDate>) => {
+}: DatePickerProps<TDate>) => {
   const popperId = uuid();
   // Controls the active view of StaticDatePicker. Resets to 'day' on Today click since
   // MUI v5 StaticDatePicker does not reset the view automatically.
@@ -303,31 +368,28 @@ const DatePicker = <TInputDate, TDate>({
   }, [onViewChange]);
 
   // Today button fires onAccept — reset to 'day' view so the calendar returns from year/month view.
-  const handleStaticAccept = useCallback((acceptedValue: TDate | null) => {
+  // eslint-why handleStaticAccept context parameter is an opaque MUI internal type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleStaticAccept = useCallback((acceptedValue: TDate | null, context?: any) => {
     setStaticView('day');
-    onAccept?.(acceptedValue);
+    onAccept?.(acceptedValue, context);
   }, [onAccept]);
-
-  const formatValue = (dateValue: Dayjs, dateFormat: string): string => {
-    return dateValue.format(dateFormat);
-  };
 
   /**
    * Corrects Up/Down arrow key navigation in the year picker for the non-static DatePicker.
-   * MUI v5 desktop mode hard-codes yearsInRow=4, but our CSS renders 3 columns.
-   * This intercepts the event before MUI handles it and manually moves focus by 3
-   * to match the visual row layout, preventing diagonal jumps.
+   * Our CSS renders 3 columns but MUI desktop mode may use a different default.
+   * This intercepts the event before MUI handles it and manually moves focus by 3.
    */
   const handleYearPickerKeyDown = (event: KeyboardEvent) => {
     const target = event.target as HTMLElement;
-    if (!target.classList.contains('PrivatePickersYear-yearButton')) return;
+    if (!target.classList.contains('MuiPickersYear-yearButton')) return;
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
 
     event.preventDefault();
     event.stopPropagation();
 
     const yearButtons = Array.from(
-      document.querySelectorAll<HTMLElement>('.PrivatePickersYear-yearButton:not([disabled])'),
+      document.querySelectorAll<HTMLElement>('.MuiPickersYear-yearButton:not([disabled])'),
     );
     const currentIndex = yearButtons.indexOf(target);
     if (currentIndex === -1) return;
@@ -352,103 +414,48 @@ const DatePicker = <TInputDate, TDate>({
     });
   };
 
-  const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
-    let hasError = false;
-    if (value !== null) {
-      const day = value as unknown as Dayjs;
-      if (!Number.isNaN(day.day()) && !Number.isNaN(day.month()) && !Number.isNaN(day.year())) {
-        const valid = dayjs(day, format, true).isValid();
-        hasError = !valid;
-      }
+  // Compute field error state based on the current date value
+  let hasError = false;
+  if (value !== null && value !== undefined) {
+    const day = value as unknown as Dayjs;
+    if (!Number.isNaN(day.day()) && !Number.isNaN(day.month()) && !Number.isNaN(day.year())) {
+      hasError = !dayjs(day, format, true).isValid();
     }
-    const textFieldProps: TextFieldProps = {
-      ...muiTextFieldProps as TextFieldProps,
-      inputRef: muiTextFieldProps.inputRef,
-      label,
-      helperText,
-      enableHelpHoverEffect,
-      helperIconTooltip,
-      required,
-      disabled,
-      margin,
-      color,
-      size,
-      autoComplete: 'off',
-      error: error || hasError,
-      fullWidth,
-      unitLabel,
-      hiddenLabel,
-      nonEdit,
-      value: value !== null ? `${formatValue(value as unknown as Dayjs, format || DEFAULT_FORMAT)}` : '',
-      actionProps,
-      InputProps: {
-        ...muiTextFieldProps.InputProps,
-      },
-      inputProps: {
-        ...muiTextFieldProps.inputProps,
-        placeholder: format,
-      },
-      customIcon,
-    };
-    return textFieldProps;
+  }
+
+  // Text field slot props for the non-static DatePicker
+  const textFieldSlotProps: TextFieldProps = {
+    label,
+    helperText,
+    enableHelpHoverEffect,
+    helperIconTooltip,
+    required,
+    disabled,
+    margin,
+    color,
+    size,
+    autoComplete: 'off',
+    error: error || hasError,
+    fullWidth,
+    unitLabel,
+    hiddenLabel,
+    nonEdit,
+    // value: value !== null && value !== undefined ? `${formatValue(value as unknown as Dayjs, format || DEFAULT_FORMAT)}` : '',
+    actionProps,
+    inputProps: { placeholder: format },
+    customIcon,
   };
 
-  const renderDay = (day: TDate, _value: TDate[], DayComponentProps: PickersDayProps<TDate>) => {
-    // MUI v5 StaticDatePicker does not fire onChange when the user clicks an
-    // already-selected day.  For static mode we attach a manual click handler
-    // so that re-selecting the current date still notifies the consumer.
-    // The onClick is only spread in static mode so that the non-static
-    // DatePicker's built-in MUI click behaviour is never overridden.
-    const handleDayClick = () => {
-      if (staticMode && DayComponentProps.selected) {
-        muiProps?.onChange?.(day);
-      }
-    };
-
-    return (
-      <Badge
-        key={(day as unknown as Date).toString()}
-        overlap="circular"
-        variant="standard"
-        color={
-          (DayComponentProps.today && DayComponentProps.selected) ? 'default' : 'primary'
-        }
-        badgeContent={
-          DayComponentProps.today ? <DotMark fontSize="small" /> : undefined
-        }
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        sx={{
-          [`& .${badgeClasses.badge}`]: {
-            right: '50%',
-            padding: '1px',
-            width: '4px',
-            height: '1px',
-            borderRadius: 'unset',
-            minWidth: '0px',
-            top: '70%',
-            [`& .${svgIconClasses.root}`]: {
-              ...(DayComponentProps.today && DayComponentProps.selected) && {
-                fill: 'common.white',
-                width: '2px',
-                height: '2px',
-              },
-              ...!(DayComponentProps.today && DayComponentProps.selected) && {
-                fill: 'none',
-                width: '1px',
-                height: '1px',
-              },
-              fontSize: '1px',
-            },
-          },
-        }}
-      >
-        <PickersDay {...DayComponentProps} {...(staticMode && { onClick: handleDayClick })} />
-      </Badge>
-    );
+  const arrowIconButtonSlotProps = {
+    previousIconButton: { size: 'small' as const, onKeyDown: handleOnKeyDownLeft },
+    nextIconButton: { size: 'small' as const, onKeyDown: handleOnKeyDownRight },
   };
+
+  const calendarHeaderIconButtonSlotProps = {
+    switchViewButton: { size: 'small' as const },
+    ...arrowIconButtonSlotProps,
+  };
+
   // Static mode - render calendar without input field
   if (staticMode) {
     return (
@@ -456,29 +463,34 @@ const DatePicker = <TInputDate, TDate>({
         variant="elevation"
         sx={(theme) => { return getDatePickerStyle(theme, customStyles, true); }}
       >
+        {/* eslint-why muiProps is the full DatePicker props object cast through unknown for StaticDatePicker compatibility */}
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         <MuiStaticDatePicker
-          {...muiProps as unknown as MuiStaticDatePickerProps<TInputDate, TDate>}
+          {...muiProps as unknown as MuiStaticDatePickerProps<TDate>}
           disabled={disabled}
           value={value}
-          // view is forwarded to the internal CalendarPicker but not typed on StaticDatePickerProps.
+          // view is forwarded to the internal DateCalendar but not typed on StaticDatePickerProps.
           {...{ view: staticView } as object}
           onViewChange={handleStaticViewChange}
-          onAccept={handleStaticAccept}
-          displayStaticWrapperAs={staticWrapperAs}
-          closeOnSelect={false}
-          showToolbar={false}
+          onAccept={handleStaticAccept as MuiStaticDatePickerProps<TDate>['onAccept']}
+          // closeOnSelect={false}
           reduceAnimations
           dayOfWeekFormatter={dayOfWeekFormatter}
-          componentsProps={{
+          slots={{
+            switchViewIcon: CaretDownIcon,
+            day: CustomPickersDay,
+          }}
+          slotProps={{
             actionBar: { actions: ['today'] },
-            leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
-            rightArrowButton: { onKeyDown: handleOnKeyDownRight },
+            ...calendarHeaderIconButtonSlotProps,
+            toolbar: { hidden: true },
+            day: {
+              isStaticMode: staticMode,
+              onStaticChange: muiProps?.onChange,
+              // eslint-why MUI slotProps day type doesn't include custom isStaticMode/onStaticChange props
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            } as any,
           }}
-          components={{
-            SwitchViewIcon: CaretDownIcon,
-          }}
-          renderDay={renderDay}
-          renderInput={(_params: MuiTextFieldProps) => { return <span />; }}
         />
       </Paper>
     );
@@ -490,34 +502,40 @@ const DatePicker = <TInputDate, TDate>({
       {...muiProps}
       disabled={disabled}
       value={value}
+      format={format || DEFAULT_FORMAT}
       reduceAnimations
       autoFocus={false}
       onOpen={focusDialog}
       dayOfWeekFormatter={dayOfWeekFormatter}
-      PaperProps={{
-        sx: (theme) => { return getDatePickerStyle(theme, customStyles); },
-        onKeyDownCapture: handleYearPickerKeyDown,
+      sx={{
+        width: fullWidth ? '100%' : '240px',
       }}
-      PopperProps={{
-        placement: 'bottom-start',
-        id: `datepickerPopper-${popperId}`,
+      slots={{
+        openPickerIcon: IconCalendar,
+        switchViewIcon: CaretDownIcon,
+        textField: TextField,
+        day: CustomPickersDay,
       }}
-      componentsProps={{
+      slotProps={{
+        textField: textFieldSlotProps as object,
+        popper: {
+          placement: 'bottom-start',
+          id: `datepickerPopper-${popperId}`,
+        },
+        desktopPaper: {
+          sx: (theme: Theme) => { return getDatePickerStyle(theme, customStyles); },
+          onKeyDownCapture: handleYearPickerKeyDown,
+        },
         actionBar: { actions: ['today'] },
-        leftArrowButton: { onKeyDown: handleOnKeyDownLeft },
-        rightArrowButton: { onKeyDown: handleOnKeyDownRight },
+        openPickerButton: { size: 'small' },
+        ...calendarHeaderIconButtonSlotProps,
+        day: {
+          isStaticMode: false,
+          onStaticChange: null,
+          // eslint-why MUI slotProps day type doesn't include custom isStaticMode/onStaticChange props
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any,
       }}
-      components={{
-        OpenPickerIcon: IconCalendar,
-        SwitchViewIcon: CaretDownIcon,
-      }}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
-      }}
-      renderDay={renderDay}
     />
   );
 };

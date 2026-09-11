@@ -14,9 +14,10 @@
  * ======================================================================== */
 import React, { useState, useEffect } from 'react';
 import { LocalizationProvider as MuiLocalizationProvider, LocalizationProviderProps as MuiLocalizationProviderProps } from '@mui/x-date-pickers/LocalizationProvider';
+import { Dayjs } from 'dayjs';
+import * as dayjs from 'dayjs';
 import * as locales from '@mui/x-date-pickers/locales';
 import { PickersLocaleText } from '@mui/x-date-pickers/locales';
-import * as dayjs from 'dayjs';
 
 import { arAR } from './locales/arAR';
 import { caCA } from './locales/caCA';
@@ -34,6 +35,10 @@ import { skSK } from './locales/skSK';
 import { slSL } from './locales/slSL';
 import { thTH } from './locales/thTH';
 import { ukUK } from './locales/ukUK';
+
+// eslint-why MUI LocalizationProvider requires any for the date adapter generic type parameters
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type LocalizationProviderPropsAny = MuiLocalizationProviderProps<any, any>;
 
 export const SUPPORTED_LOCALE: string[] = [
   'ar',
@@ -111,7 +116,7 @@ const DAYJS_LOCALE_PACKAGE: IDayJsLocalePackage = {
   'zh-tw': import('dayjs/locale/zh-tw'),
 };
 
-const getLocaleText = (adapterLocale?: string | object): Partial<PickersLocaleText<unknown>> => {
+const getLocaleText = (adapterLocale?: string | object): Partial<PickersLocaleText<Dayjs>> => {
   if (adapterLocale === 'ar') return arAR.components.MuiLocalizationProvider.defaultProps.localeText;
   if (adapterLocale === 'ca') return caCA.components.MuiLocalizationProvider.defaultProps.localeText;
   if (adapterLocale === 'cs') return csCS.components.MuiLocalizationProvider.defaultProps.localeText;
@@ -155,7 +160,7 @@ const verfiyAdapterLocale = (adapterLocale?: string | object) => {
   }
 };
 
-export type PickersLocalizationProviderProps = MuiLocalizationProviderProps & {
+export type PickersLocalizationProviderProps = LocalizationProviderPropsAny & {
   onLocaleLoad?: (locale: string) => void;
   adapterLocale: string | object;
 }

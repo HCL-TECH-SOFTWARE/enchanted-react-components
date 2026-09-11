@@ -15,8 +15,9 @@
 
 import React from 'react';
 import {
-  GridColumnMenuContainer, GridColumnMenuProps as MuiGridColumnMenuProps, GridColumnVisibilityModel, useGridApiContext, GridPreferencePanelsValue,
+  GridColumnMenuProps as MuiGridColumnMenuProps, GridColumnVisibilityModel, useGridApiContext, GridPreferencePanelsValue,
 } from '@mui/x-data-grid';
+import { Paper } from '@mui/material';
 import ArrowUp from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--up';
 import ArrowDown from '@hcl-software/enchanted-icons/dist/carbon/es/arrow--down';
 import ColumnIcon from '@hcl-software/enchanted-icons/dist/carbon/es/column';
@@ -31,41 +32,51 @@ type GridColumnMenuProps = MuiGridColumnMenuProps & {
 }
 
 export const ExtendedGridColumnMenu = ({
-  currentColumn, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel, ...rest
+  colDef, onSortModelChange, onColumnVisibilityModelChange, columnVisibilityModel, hideMenu,
 }: GridColumnMenuProps) => {
   const apiContext = useGridApiContext();
 
-  const handleSortModelChange = (value: string) => {
-    onSortModelChange([{ field: currentColumn.field, sort: value }]);
+  const handleSortModelChange = (
+    value: 'asc' | 'desc',
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    onSortModelChange([{ field: colDef.field, sort: value }]);
+    hideMenu?.(event);
   };
 
-  const handleHideColumn = () => {
-    onColumnVisibilityModelChange({ ...columnVisibilityModel, [currentColumn.field]: false });
+  const handleHideColumn = (event: React.MouseEvent<HTMLElement>) => {
+    onColumnVisibilityModelChange({ ...columnVisibilityModel, [colDef.field]: false });
+    hideMenu?.(event);
+  };
+
+  const handleManageColumns = (event: React.MouseEvent<HTMLElement>) => {
+    apiContext.current.showPreferences(GridPreferencePanelsValue.columns);
+    hideMenu?.(event);
   };
 
   return (
-    <GridColumnMenuContainer currentColumn={currentColumn} {...rest}>
-      <MenuItem onClick={() => { handleSortModelChange('asc'); }}>
+    <Paper elevation={3}>
+      <MenuItem onClick={(event) => { handleSortModelChange('asc', event); }}>
         <ArrowUp />
         {' '}
         Ascending
       </MenuItem>
-      <MenuItem onClick={() => { handleSortModelChange('desc'); }}>
+      <MenuItem onClick={(event) => { handleSortModelChange('desc', event); }}>
         <ArrowDown />
         {' '}
         Descending
       </MenuItem>
       <Divider />
-      <MenuItem onClick={() => { handleHideColumn(); }}>
+      <MenuItem onClick={handleHideColumn}>
         <ViewIcon />
         {' '}
         Hide column
       </MenuItem>
-      <MenuItem onClick={() => { apiContext.current.showPreferences(GridPreferencePanelsValue.columns); }}>
+      <MenuItem onClick={handleManageColumns}>
         <ColumnIcon />
         {' '}
         Manage columns
       </MenuItem>
-    </GridColumnMenuContainer>
+    </Paper>
   );
 };

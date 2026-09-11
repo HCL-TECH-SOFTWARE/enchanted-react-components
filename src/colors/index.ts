@@ -12,8 +12,7 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
-
-import { ColorPartial } from '@mui/material/styles/createPalette';
+import { Color } from '@mui/material/styles';
 import blue from './blue';
 import red from './red';
 import orange from './orange';
@@ -32,7 +31,7 @@ import hclsoftwareblue from './hclsoftwareblue';
 
 export const UNKNOWN_COLOR_CODE: string = '#FFB400';
 // We just extended the color interface from material-ui-core and add new properties
-export interface ColorType extends ColorPartial {
+export interface ColorType extends Partial<Color> {
   150?: string; // some color has shade of 150 or 15
   1000?: string;
   1100?: string; // some color has shade of 1100 or 110

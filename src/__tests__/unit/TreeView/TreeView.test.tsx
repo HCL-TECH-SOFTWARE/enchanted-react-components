@@ -48,7 +48,7 @@ describe('TreeView', () => {
   it('Render TreeView with single TreeItem', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item 1" />
+        <TreeItem itemId="1" label="Item 1" />
       </TreeView>,
     );
     expect(screen.getByRole('treeitem')).not.toBeNull();
@@ -57,9 +57,9 @@ describe('TreeView', () => {
   it('Render TreeView with multiple TreeItems', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item 1" />
-        <TreeItem nodeId="2" label="Item 2" />
-        <TreeItem nodeId="3" label="Item 3" />
+        <TreeItem itemId="1" label="Item 1" />
+        <TreeItem itemId="2" label="Item 2" />
+        <TreeItem itemId="3" label="Item 3" />
       </TreeView>,
     );
     expect(screen.getAllByRole('treeitem')).toHaveLength(3);
@@ -67,9 +67,9 @@ describe('TreeView', () => {
 
   it('Render TreeView with nested items expanded via defaultExpanded', () => {
     renderWithTheme(
-      <TreeView defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView defaultExpandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -78,9 +78,9 @@ describe('TreeView', () => {
 
   it('Render TreeView with showLevelLine=false hides level line', () => {
     const { container } = renderWithTheme(
-      <TreeView showLevelLine={false} defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView showLevelLine={false} defaultExpandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -89,9 +89,9 @@ describe('TreeView', () => {
 
   it('Render TreeView with showLevelLine=true (default) shows level line', () => {
     const { container } = renderWithTheme(
-      <TreeView defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView defaultExpandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -100,8 +100,8 @@ describe('TreeView', () => {
 
   it('Render TreeView with controlled selected applies Mui-selected', () => {
     const { container } = renderWithTheme(
-      <TreeView selected="1">
-        <TreeItem nodeId="1" label="Item 1" />
+      <TreeView selectedItems="1">
+        <TreeItem itemId="1" label="Item 1" />
       </TreeView>,
     );
     expect(container.querySelector('.MuiTreeItem-content.Mui-selected')).not.toBeNull();
@@ -109,9 +109,9 @@ describe('TreeView', () => {
 
   it('Render TreeView with controlled expanded', () => {
     renderWithTheme(
-      <TreeView expanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView expandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -120,9 +120,9 @@ describe('TreeView', () => {
 
   it('Render TreeView multiSelect with multiple selected nodes', () => {
     const { container } = renderWithTheme(
-      <TreeView multiSelect selected={['1', '2']}>
-        <TreeItem nodeId="1" label="Item 1" />
-        <TreeItem nodeId="2" label="Item 2" />
+      <TreeView multiSelect selectedItems={['1', '2']}>
+        <TreeItem itemId="1" label="Item 1" />
+        <TreeItem itemId="2" label="Item 2" />
       </TreeView>,
     );
     expect(container.querySelectorAll('.MuiTreeItem-content.Mui-selected')).toHaveLength(2);
@@ -131,8 +131,8 @@ describe('TreeView', () => {
   it('Calls onNodeSelect when a TreeItem is clicked', () => {
     const handleSelect = jest.fn();
     renderWithTheme(
-      <TreeView onNodeSelect={handleSelect}>
-        <TreeItem nodeId="1" label="Item 1" />
+      <TreeView onSelectedItemsChange={handleSelect}>
+        <TreeItem itemId="1" label="Item 1" />
       </TreeView>,
     );
     fireEvent.click(screen.getByText('Item 1'));
@@ -142,9 +142,9 @@ describe('TreeView', () => {
   it('Calls onNodeToggle when expand icon is clicked', () => {
     const handleToggle = jest.fn();
     const { container } = renderWithTheme(
-      <TreeView onNodeToggle={handleToggle}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView onItemSelectionToggle={handleToggle}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -154,9 +154,9 @@ describe('TreeView', () => {
 
   it('Collapses expanded node when icon is clicked again', () => {
     const { container } = renderWithTheme(
-      <TreeView defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView defaultExpandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -168,8 +168,8 @@ describe('TreeView', () => {
   it('Uses RTL default expand icon when theme direction is RTL', () => {
     const { container } = renderWithDirection(
       <TreeView>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
       ThemeDirectionType.RTL,
@@ -183,7 +183,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with label', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="My Label" />
+        <TreeItem itemId="1" label="My Label" />
       </TreeView>,
     );
     expect(screen.getByText('My Label')).not.toBeNull();
@@ -192,7 +192,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with startIcon', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" startIcon={<span />} />
+        <TreeItem itemId="1" label="Item" startIcon={<span />} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-start-icon')).not.toBeNull();
@@ -201,7 +201,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with statusBadge', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" statusBadge={<span />} />
+        <TreeItem itemId="1" label="Item" statusBadge={<span />} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-status')).not.toBeNull();
@@ -210,7 +210,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with detailsText label-aligned', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" detailsText="Detail info" detailsAlign="label" />
+        <TreeItem itemId="1" label="Item" detailsText="Detail info" detailsAlign="label" />
       </TreeView>,
     );
     expect(screen.getByText('Detail info')).not.toBeNull();
@@ -219,7 +219,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with detailsText end-aligned', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" detailsText="End detail" detailsAlign="end" />
+        <TreeItem itemId="1" label="Item" detailsText="End detail" detailsAlign="end" />
       </TreeView>,
     );
     expect(screen.getByText('End detail')).not.toBeNull();
@@ -228,7 +228,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with detailsIcon', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" detailsIcon={<span />} />
+        <TreeItem itemId="1" label="Item" detailsIcon={<span />} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-details-icon')).not.toBeNull();
@@ -237,7 +237,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with endIcon', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" endIcon={<span />} />
+        <TreeItem itemId="1" label="Item" endIcon={<span />} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-end-icon')).not.toBeNull();
@@ -246,7 +246,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with endAction', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" endAction={<button type="button">Act</button>} />
+        <TreeItem itemId="1" label="Item" endAction={<button type="button">Act</button>} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-end-action')).not.toBeNull();
@@ -255,7 +255,7 @@ describe('TreeItem', () => {
   it('Render TreeItem with hoverActions', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Item" hoverActions={<button type="button">Hover</button>} />
+        <TreeItem itemId="1" label="Item" hoverActions={<button type="button">Hover</button>} />
       </TreeView>,
     );
     expect(container.querySelector('.tree-item-hover-actions')).not.toBeNull();
@@ -265,7 +265,7 @@ describe('TreeItem', () => {
     renderWithTheme(
       <TreeView>
         <TreeItem
-          nodeId="1"
+          itemId="1"
           label="Row with actions"
           endAction={(
             <>
@@ -288,7 +288,7 @@ describe('TreeItem', () => {
   it('Render disabled TreeItem has Mui-disabled on content', () => {
     const { container } = renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Disabled Item" disabled />
+        <TreeItem itemId="1" label="Disabled Item" disabled />
       </TreeView>,
     );
     expect(container.querySelector('.MuiTreeItem-content.Mui-disabled')).not.toBeNull();
@@ -297,7 +297,7 @@ describe('TreeItem', () => {
   it('Render disabled TreeItem has aria-disabled=true', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Disabled Item" disabled />
+        <TreeItem itemId="1" label="Disabled Item" disabled />
       </TreeView>,
     );
     expect(screen.getByRole('treeitem').getAttribute('aria-disabled')).toBe('true');
@@ -306,8 +306,8 @@ describe('TreeItem', () => {
   it('Render disabled TreeItem does not call onNodeSelect on click', () => {
     const handleSelect = jest.fn();
     renderWithTheme(
-      <TreeView onNodeSelect={handleSelect}>
-        <TreeItem nodeId="1" label="Disabled Item" disabled />
+      <TreeView onSelectedItemsChange={handleSelect}>
+        <TreeItem itemId="1" label="Disabled Item" disabled />
       </TreeView>,
     );
     fireEvent.click(screen.getByRole('treeitem'));
@@ -317,7 +317,7 @@ describe('TreeItem', () => {
   it('Render leaf TreeItem has no aria-expanded', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Leaf" />
+        <TreeItem itemId="1" label="Leaf" />
       </TreeView>,
     );
     expect(screen.getByRole('treeitem').getAttribute('aria-expanded')).toBeNull();
@@ -326,8 +326,8 @@ describe('TreeItem', () => {
   it('Render parent TreeItem has aria-expanded=false when collapsed', () => {
     renderWithTheme(
       <TreeView>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );
@@ -336,9 +336,9 @@ describe('TreeItem', () => {
 
   it('Render parent TreeItem has aria-expanded=true when expanded', () => {
     renderWithTheme(
-      <TreeView defaultExpanded={['1']}>
-        <TreeItem nodeId="1" label="Parent">
-          <TreeItem nodeId="2" label="Child" />
+      <TreeView defaultExpandedItems={['1']}>
+        <TreeItem itemId="1" label="Parent">
+          <TreeItem itemId="2" label="Child" />
         </TreeItem>
       </TreeView>,
     );

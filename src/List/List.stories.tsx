@@ -320,7 +320,6 @@ const VisualTestTemplate: StoryFn<typeof List> = (args) => {
 
 export const InteractiveExample = InteractiveExampleTemplate.bind({});
 InteractiveExample.args = {
-  ...List.defaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the HeaderProps
   interactive: true,
   args: {
@@ -333,7 +332,6 @@ VisualTest.parameters = {
   options: { showPanel: false },
 };
 VisualTest.args = {
-  ...List.defaultProps,
   dense: true,
   disablePadding: true,
 };

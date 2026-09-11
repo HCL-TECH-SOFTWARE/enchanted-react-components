@@ -179,7 +179,6 @@ const Template: StoryFn<typeof Select> = (args) => {
 export const ExampleSingleSelect = {
   render: Template,
   args: {
-    ...Select.defaultProps,
     id: 'example-single-select',
     label: 'Label',
     helperText: 'Some important text',

@@ -105,7 +105,7 @@ const StyledImageListItem = styled(ImageListItem)<ImageListContextProps>(({ them
   };
 });
 
-export const StyledBox = styled(Box)(({ theme }) => {
+export const StyledBox: React.ComponentType<React.ComponentProps<typeof Box>> = styled(Box)(({ theme }) => {
   return {
     display: 'flex',
     justifyContent: 'center',

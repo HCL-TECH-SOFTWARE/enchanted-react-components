@@ -184,7 +184,7 @@ export default {
 } as Meta<typeof DatePicker>;
 
 const Template: StoryFn<typeof DatePicker> = (args) => {
-  const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as string, DatePickerDefaults.format) : null);
+  const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as unknown as string, DatePickerDefaults.format) : null);
   // @ts-ignore - The adapterLocale control it's not a property of the DatePicker but it is need for PickersLocalizationProvider.
   const { adapterLocale } = args;
 
