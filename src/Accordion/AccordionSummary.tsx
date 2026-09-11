@@ -51,6 +51,9 @@ const StyledAccordionSummary = styled(MuiAccordionSummary)(({ theme, disabled })
         margin: '0px',
       },
     },
+    '& .MuiAccordionSummary-expandIconWrapper .MuiSvgIcon-root:not(.endIcon)': {
+      margin: '2px',
+    },
     '.MuiTypography-root': {
       ...(disabled && {
         color: theme.palette.text.disabled,
