@@ -165,7 +165,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
   return (
-    <Grid container spacing={15}>
+    <Grid container spacing={15} className="legacy-grid-spacing">
       <Grid>
         <Grid container direction="column">
           <Grid paddingBottom={0}>

@@ -473,13 +473,15 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
           root: ({ ownerState }) => {
             return {
               ...(ownerState.container && {
-                gap: 0,
-                width: 'calc(100% + var(--Grid-columnSpacing))',
-                marginLeft: 'calc(-1 * var(--Grid-columnSpacing))',
-                marginTop: 'calc(-1 * var(--Grid-rowSpacing))',
-                '& > .MuiGrid-root': {
-                  paddingLeft: 'var(--Grid-columnSpacing)',
-                  paddingTop: 'var(--Grid-rowSpacing)',
+                '&.legacy-grid-spacing': {
+                  gap: 0,
+                  width: 'calc(100% + var(--Grid-columnSpacing))',
+                  marginLeft: 'calc(-1 * var(--Grid-columnSpacing))',
+                  marginTop: 'calc(-1 * var(--Grid-rowSpacing))',
+                  '& > :where(.MuiGrid-root)': {
+                    paddingLeft: 'var(--Grid-columnSpacing)',
+                    paddingTop: 'var(--Grid-rowSpacing)',
+                  },
                 },
               }),
             };

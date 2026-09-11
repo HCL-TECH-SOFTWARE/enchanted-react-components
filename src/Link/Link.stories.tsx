@@ -458,7 +458,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
   return (
-    <Grid container spacing={30}>
+    <Grid container spacing={30} className="legacy-grid-spacing">
       <Grid>
         <Grid container direction="column">
           <Grid paddingBottom={0}>

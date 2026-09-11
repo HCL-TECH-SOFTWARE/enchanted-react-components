@@ -80,7 +80,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Alert> = (args) => {
   return (
-    <Grid container spacing={10}>
+    <Grid container spacing={10} className="legacy-grid-spacing">
       <Grid>
         <Grid container direction="column" spacing={1}>
           <Grid>

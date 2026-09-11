@@ -95,7 +95,7 @@ const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
       margin: '0px',
       display: 'flex',
       minWidth: '0',
-      justifyContent: 'space-between',
+      justifyContent: 'space-between !important',
       width: '100%',
     },
     '&.MuiGrid-root': {
