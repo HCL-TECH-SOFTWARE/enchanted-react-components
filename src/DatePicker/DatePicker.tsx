@@ -183,11 +183,6 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
       margin: '0px',
       width: '228px',
     },
-    '& .MuiPickersArrowSwitcher-root': {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px', // Adds proper space between prev (<) and next (>) buttons
-    },
     '& .MuiPickersArrowSwitcher-spacer': {
       width: '4px',
     },
@@ -207,6 +202,9 @@ const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { 
     },
     '& .MuiDateCalendar-viewTransitionContainer': {
       width: '228px',
+    },
+    '& .MuiPickersLayout-root': {
+      minWidth: '228px',
     },
     '& .MuiDayCalendar-header': {
       ...theme.typography.body1,
@@ -448,6 +446,16 @@ const DatePicker = <TDate extends Dayjs = Dayjs>({
     customIcon,
   };
 
+  const arrowIconButtonSlotProps = {
+    previousIconButton: { size: 'small' as const, onKeyDown: handleOnKeyDownLeft },
+    nextIconButton: { size: 'small' as const, onKeyDown: handleOnKeyDownRight },
+  };
+
+  const calendarHeaderIconButtonSlotProps = {
+    switchViewButton: { size: 'small' as const },
+    ...arrowIconButtonSlotProps,
+  };
+
   // Static mode - render calendar without input field
   if (staticMode) {
     return (
@@ -474,8 +482,7 @@ const DatePicker = <TDate extends Dayjs = Dayjs>({
           }}
           slotProps={{
             actionBar: { actions: ['today'] },
-            previousIconButton: { onKeyDown: handleOnKeyDownLeft },
-            nextIconButton: { onKeyDown: handleOnKeyDownRight },
+            ...calendarHeaderIconButtonSlotProps,
             toolbar: { hidden: true },
             day: {
               isStaticMode: staticMode,
@@ -520,8 +527,8 @@ const DatePicker = <TDate extends Dayjs = Dayjs>({
           onKeyDownCapture: handleYearPickerKeyDown,
         },
         actionBar: { actions: ['today'] },
-        previousIconButton: { onKeyDown: handleOnKeyDownLeft },
-        nextIconButton: { onKeyDown: handleOnKeyDownRight },
+        openPickerButton: { size: 'small' },
+        ...calendarHeaderIconButtonSlotProps,
         day: {
           isStaticMode: false,
           onStaticChange: null,
