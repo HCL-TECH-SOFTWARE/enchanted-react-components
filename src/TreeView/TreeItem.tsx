@@ -15,8 +15,7 @@
 import React, { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { TreeItemProps } from '@mui/x-tree-view/TreeItem';
-import { TreeItem2 as MuiTreeItem } from '@mui/x-tree-view/TreeItem2';
+import { TreeItem as MuiTreeItem, TreeItemProps } from '@mui/x-tree-view/TreeItem';
 
 /**
  * Context tracking nesting depth (0 = root level).
@@ -237,7 +236,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
     const contentPaddingLeft = depth > 0 ? 4 + depth * 8 : undefined;
 
     // Vertical level line sits at the horizontal center of the parent's caret:
-    const lineLeft = 11 + depth * 8;
+    const lineLeft = 11;
 
     // Wrap children: render the real line div + increment depth for grandchildren.
     const wrappedChildren = children ? (
@@ -398,12 +397,11 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       <MuiTreeItem
         ref={setRef}
         className={isFocused ? 'keyboard-focused' : undefined}
-        slotProps={{
-          root: {
-            style: contentPaddingLeft !== undefined ? { paddingInlineStart: `${contentPaddingLeft}px` } : undefined,
-          },
-        }}
         {...props}
+        style={{
+          ...props.style,
+          ...(contentPaddingLeft !== undefined && { paddingInlineStart: `${contentPaddingLeft}px` }),
+        }}
         disabled={contextDisabled || disabled}
         label={customLabel}
       >
