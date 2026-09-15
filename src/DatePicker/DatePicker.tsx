@@ -507,8 +507,32 @@ const DatePicker = <TDate extends Dayjs = Dayjs>({
       autoFocus={false}
       onOpen={focusDialog}
       dayOfWeekFormatter={dayOfWeekFormatter}
-      sx={{
-        width: fullWidth ? '100%' : '240px',
+      sx={(theme: Theme) => {
+        return {
+          ...(!nonEdit && { width: fullWidth ? '100%' : '240px' }),
+          // Override focused label color to remain text.secondary (matching MUI v5 behavior)
+          '& .MuiAutocomplete--label--focused': {
+            color: `${theme.palette.text.secondary} !important`,
+          },
+          '& .MuiInputLabel-root.Mui-focused': {
+            color: `${theme.palette.text.secondary} !important`,
+          },
+          '& .MuiFormLabel-root.Mui-focused': {
+            color: `${theme.palette.text.secondary} !important`,
+          },
+          // Override focused border color to remain border.tertiary (matching MUI v5 behavior)
+          '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: `${theme.palette.border.tertiary} !important`,
+            borderWidth: '1px !important',
+          },
+          '& .MuiOutlinedInput-root:focus-within .MuiOutlinedInput-notchedOutline': {
+            border: `1px solid ${theme.palette.border.tertiary} !important`,
+          },
+          // Add margin-top for helper text to match MUI v5 spacing
+          '& .MuiFormHelperText-root': {
+            marginTop: '4px',
+          },
+        };
       }}
       slots={{
         openPickerIcon: IconCalendar,
@@ -527,7 +551,7 @@ const DatePicker = <TDate extends Dayjs = Dayjs>({
           onKeyDownCapture: handleYearPickerKeyDown,
         },
         actionBar: { actions: ['today'] },
-        openPickerButton: { size: 'small' },
+        openPickerButton: { size: 'medium' },
         ...calendarHeaderIconButtonSlotProps,
         day: {
           isStaticMode: false,

@@ -25,7 +25,7 @@ export const parameters = {
     options: {
       light: {
         name: 'light',
-        value: ensureToGetColor(Colors.get(ColorNames.INTERFACE_BG_PAPER)),
+        value: ensureToGetColor(Colors.get(ColorNames.NEUTRALGREY100)),
       },
 
       dark: {

@@ -109,6 +109,7 @@ const zoomButtonMargin = 12;
 
 const PreviewContainer = styled(Grid)((props) => {
   return {
+    width: '100%',
     height: '100vh',
     ' .MuiSvgIcon-root': {
       pointerEvents: 'none',

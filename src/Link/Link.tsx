@@ -47,6 +47,7 @@ export const getMuiLinkThemeOverrides = (): Components<Omit<Theme, 'components'>
   return {
     MuiLink: {
       defaultProps: {
+        variant: 'body1',
         align: 'inherit',
         gutterBottom: false,
         noWrap: false,

@@ -2213,8 +2213,8 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
           rowSpacing={1}
           sx={(theme) => {
             return {
-              color: theme.palette.text.primary,
-              backgroundColor: theme.palette.background.paper,
+              color: theme.palette.action.inverse,
+              backgroundColor: theme.palette.background.dark,
               padding: '12px',
             };
           }}

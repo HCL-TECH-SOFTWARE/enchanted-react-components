@@ -171,7 +171,15 @@ const VisualTestTemplate: StoryFn<typeof Breadcrumbs> = (args) => {
               >
                 Name
               </Button>
-              <Divider orientation="vertical" color="blue" flexItem />
+              <Divider
+                orientation="vertical"
+                color="blue"
+                flexItem
+                sx={{
+                  borderWidth: '0px thin 0px 0px',
+                  backgroundColor: 'rgb(0, 0, 255)',
+                }}
+              />
               <Tooltip title="Sorted By: Z-A" placement="bottom" arrow>
                 <Button
                   variant={ButtonVariants.TEXT}
