@@ -256,6 +256,7 @@ export const ExampleDatePickerOpen = {
           // PickersDay buttons) and calendar grid patterns that trigger a11y violations.
           // This is an inherent MUI DatePicker structural pattern.
           { id: 'nested-interactive', enabled: false },
+          { id: 'aria-allowed-role', enabled: false },
         ],
       },
     },
@@ -313,6 +314,7 @@ export const ExampleStaticDatePicker = {
           // PickersDay buttons) and calendar grid patterns that trigger a11y violations.
           // This is an inherent MUI DatePicker structural pattern.
           { id: 'nested-interactive', enabled: false },
+          { id: 'aria-allowed-role', enabled: false },
         ],
       },
     },

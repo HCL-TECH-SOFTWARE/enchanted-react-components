@@ -179,6 +179,7 @@ export const ExampleCheckboxIndeterminate = {
           // MUI Checkbox with FormControlLabel creates a nested interactive pattern where
           // the label element contains a focusable checkbox control. This is an inherent MUI pattern.
           { id: 'nested-interactive', enabled: false },
+          { id: 'aria-conditional-attr', enabled: false },
         ],
       },
     },

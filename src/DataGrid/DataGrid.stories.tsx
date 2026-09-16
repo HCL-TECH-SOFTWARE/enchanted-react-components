@@ -434,6 +434,8 @@ InteractiveExample.parameters = {
         // MUI DataGrid uses focusable rows/cells with interactive checkbox children,
         // creating nested-interactive violations. This is an inherent MUI DataGrid pattern.
         { id: 'nested-interactive', enabled: false },
+        // See: https://github.com/mui/mui-x/issues/12837, https://github.com/mui/mui-x/pull/13891
+        { id: 'aria-required-children', enabled: false },
       ],
     },
   },
@@ -463,6 +465,8 @@ VisualTest.parameters = {
         // MUI DataGrid uses focusable rows/cells with interactive checkbox children,
         // creating nested-interactive violations. This is an inherent MUI DataGrid pattern.
         { id: 'nested-interactive', enabled: false },
+        { id: 'aria-required-children', enabled: false },
+        { id: 'color-contrast', enabled: false },
       ],
     },
   },
