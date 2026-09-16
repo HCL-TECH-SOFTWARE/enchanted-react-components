@@ -236,7 +236,7 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
     const contentPaddingLeft = depth > 0 ? 4 + depth * 8 : undefined;
 
     // Vertical level line sits at the horizontal center of the parent's caret:
-    const lineLeft = 11;
+    const lineLeft = 11 + depth * 8;
 
     // Wrap children: render the real line div + increment depth for grandchildren.
     const wrappedChildren = children ? (
@@ -398,9 +398,12 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
         ref={setRef}
         className={isFocused ? 'keyboard-focused' : undefined}
         {...props}
-        style={{
-          ...props.style,
-          ...(contentPaddingLeft !== undefined && { paddingInlineStart: `${contentPaddingLeft}px` }),
+        ContentProps={{
+          ...props.ContentProps,
+          style: {
+            ...props.ContentProps?.style,
+            ...(contentPaddingLeft !== undefined && { paddingInlineStart: `${contentPaddingLeft}px` }),
+          },
         }}
         disabled={contextDisabled || disabled}
         label={customLabel}

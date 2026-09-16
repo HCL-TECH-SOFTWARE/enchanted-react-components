@@ -157,7 +157,45 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
   return (
-    <Grid container spacing={30} className="legacy-grid-spacing">
+    <Grid
+      container
+      spacing={30}
+      className="legacy-grid-spacing"
+      sx={{
+        '& .MuiGrid-direction-xs-column': { gap: '0px' },
+        '& .MuiGrid-spacing-xs-3 > .MuiGrid-root': { paddingTop: '0px' },
+        '& .css-sk30qj-MuiGrid-root': { paddingBottom: '16px' },
+        '& .css-llcag8-MuiButtonBase-root-MuiButton-root': {
+          backgroundColor: 'inherit !important',
+        },
+        '& .css-11vufsl-MuiButtonBase-root-MuiButton-root': {
+          backgroundColor: 'inherit !important',
+        },
+        ['& .css-llcag8-MuiButtonBase-root-MuiButton-root.Mui-focusVisible, '
+        + '& .css-llcag8-MuiButtonBase-root-MuiButton-root.force-to-focus, '
+        + '& .css-11vufsl-MuiButtonBase-root-MuiButton-root.Mui-focusVisible, '
+        + '& .css-11vufsl-MuiButtonBase-root-MuiButton-root.force-to-focus, '
+        + '& .css-llcag8-MuiButtonBase-root-MuiButton-root.force-to-focusHover, '
+        + '& .css-11vufsl-MuiButtonBase-root-MuiButton-root.force-to-focusHover']: {
+          outlineColor: 'rgb(179, 217, 248)',
+        },
+        '& .css-umigu1.force-to-focusHover': {
+          backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
+        },
+        '& .css-l2wo52-MuiGrid-root > .css-17ctpnt-MuiGrid-root': { 
+          paddingTop: '8px' 
+        },
+        '& .css-l2wo52-MuiGrid-root': {
+          marginTop: '-8px',
+        },
+        '& .css-117uf78-MuiGrid-root > .force-to-focusHover.css-11vufsl-MuiButtonBase-root-MuiButton-root': {
+          backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
+        },
+        '& .force-to-focusHover.css-llcag8-MuiButtonBase-root-MuiButton-root': {
+          backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
+        }
+      }}
+    >
       <Grid>
         <Grid container direction="column">
           <Grid paddingBottom={0}>

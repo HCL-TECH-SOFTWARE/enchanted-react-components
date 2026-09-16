@@ -25,6 +25,7 @@ import { findNextFocusableRow, findPreviousFocusableRow, findTargetElement } fro
 import DataGridDivider from './DataGridDivider';
 import ColumnSortedAscendingIcon from './ColumnSortedAscendingIcon';
 import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
+import { borderTop } from '@mui/system';
 
 /**
  * Extension for GridColDef it lets use or custon cell
@@ -89,6 +90,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     fontFamily: theme.typography.fontFamily,
     '&.MuiDataGrid-root': {
       border: 'none',
+      '--DataGrid-containerBackground': theme.palette.common.white,
     },
     '& .MuiDataGrid-columnHeaders': {
       borderBottom: `1px ${theme.palette.border.primary} solid`,
@@ -102,8 +104,14 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         zIndex: 1,
       },
     },
+    '& .MuiDataGrid-hide-checkbox > .MuiDataGrid-cell': {
+      borderTop: 'none',
+    },
+    '& .css-1sywo8n-MuiDataGrid-root, .MuiDataGrid-withBorderColor, .MuiDataGrid-columnHeader': {
+      borderBottom: 'none !important',
+    },
     ' .MuiDataGrid-cell': {
-      borderBottom: `1px ${theme.palette.border.secondary} solid`,
+        borderBottom: `1px ${theme.palette.border.secondary} solid`,
     },
     '& .MuiDataGrid-row': {
       '.MuiCheckbox-root': {
