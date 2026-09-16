@@ -32,9 +32,6 @@ export const withThemeProvider = (Story, context) => {
   const isStoryView = context.viewMode === 'story';
   const storyBgStyle = isStoryView ? {
     backgroundColor: enchantedTheme.palette.background.default,
-    minHeight: '100vh',
-    margin: '-1rem',
-    padding: '1rem',
   } : {};
   return (
     <DirectionStyleProvider direction={themeDirection}>
