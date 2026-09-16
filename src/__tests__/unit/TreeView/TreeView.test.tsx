@@ -142,7 +142,7 @@ describe('TreeView', () => {
   it('Calls onNodeToggle when expand icon is clicked', () => {
     const handleToggle = jest.fn();
     const { container } = renderWithTheme(
-      <TreeView onItemSelectionToggle={handleToggle}>
+      <TreeView onExpandedItemsChange={handleToggle}>
         <TreeItem itemId="1" label="Parent">
           <TreeItem itemId="2" label="Child" />
         </TreeItem>

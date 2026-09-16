@@ -25,7 +25,6 @@ import { findNextFocusableRow, findPreviousFocusableRow, findTargetElement } fro
 import DataGridDivider from './DataGridDivider';
 import ColumnSortedAscendingIcon from './ColumnSortedAscendingIcon';
 import ColumnSortedDescendingIcon from './ColumnSortedDescendingIcon';
-import { borderTop } from '@mui/system';
 
 /**
  * Extension for GridColDef it lets use or custon cell
@@ -91,6 +90,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '&.MuiDataGrid-root': {
       border: 'none',
       '--DataGrid-containerBackground': theme.palette.common.white,
+      '--DataGrid-overlayHeight': 'calc(var(--height) * 3)',
     },
     '& .MuiDataGrid-columnHeaders': {
       borderBottom: `1px ${theme.palette.border.primary} solid`,
@@ -104,14 +104,23 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         zIndex: 1,
       },
     },
+    [`& .${gridClasses['row--borderBottom']} .${gridClasses.columnHeader}`]: {
+      borderBottom: 'none',
+    },
+    [`& .${gridClasses['row--borderBottom']} .${gridClasses.filler}`]: {
+      borderBottom: 'none',
+    },
+    [`& .${gridClasses['row--borderBottom']} .${gridClasses.scrollbarFiller}`]: {
+      borderBottom: 'none',
+    },
+    '& .MuiDataGrid-columnHeaderDraggableContainer > .MuiDataGrid-columnHeaderTitleContainer': {
+      gap: '0',
+    },
     '& .MuiDataGrid-hide-checkbox > .MuiDataGrid-cell': {
       borderTop: 'none',
     },
     '& .css-1sywo8n-MuiDataGrid-root, .MuiDataGrid-withBorderColor, .MuiDataGrid-columnHeader': {
       borderBottom: 'none !important',
-    },
-    ' .MuiDataGrid-cell': {
-        borderBottom: `1px ${theme.palette.border.secondary} solid`,
     },
     '& .MuiDataGrid-row': {
       '.MuiCheckbox-root': {
@@ -164,6 +173,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
       display: 'flex',
     },
     '& .MuiDataGrid-cell': {
+      borderBottom: `1px ${theme.palette.border.secondary} solid`,
       paddingLeft: '12px',
       paddingRight: '12px',
       textAlign: 'center',
@@ -288,6 +298,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '& .MuiDataGrid-columnHeader.MuiDataGrid-columnHeader--sortable:focus': {
       outline: 'none',
       border: 'none',
+    },
+    '& .MuiDataGrid-row--lastVisible .MuiDataGrid-cell': {
+      borderBottom: 'none',
     },
     '& .MuiDataGrid-overlay': {
       background: theme.palette.common.white,

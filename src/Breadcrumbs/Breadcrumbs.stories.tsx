@@ -184,6 +184,7 @@ const VisualTestTemplate: StoryFn<typeof Breadcrumbs> = (args) => {
                 <Button
                   variant={ButtonVariants.TEXT}
                   data-testid="testSortOrderIcon"
+                  aria-label="Sorted By: Z-A"
                   sx={{ padding: '0px 6px 0px 6px', minWidth: '0px', maxHeight: '28px' }}
                 >
                   <SortAscendingAlt fontSize="small" />
@@ -232,6 +233,7 @@ const VisualTestTemplate: StoryFn<typeof Breadcrumbs> = (args) => {
                     >
                       <IconButton
                         value="filter"
+                        aria-label="Filter Assets"
                         sx={{ height: '26px', width: '26px' }}
                         disabled={false}
                         data-testid="testFilterButton"

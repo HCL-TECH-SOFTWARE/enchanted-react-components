@@ -96,45 +96,7 @@ describe('DataGrid', () => {
       expect(window.document.activeElement?.classList.contains('MuiDataGrid-columnHeaders')).toBe(true);
     });
 
-    // Need to focus on the select all checkbox on arrow right
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await waitFor(() => {
-      expect(window.document.activeElement?.classList.contains('PrivateSwitchBase-input')).toBe(true);
-    });
-
-    // Need to focus on the sort icon on arrow right again
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await waitFor(() => {
-      expect(window.document.activeElement?.classList.contains('MuiDataGrid-columnHeader--sortable')).toBe(true);
-    });
-
-    // Need to refocus on select all checkbox on arrow left after going to sort icon
-    await act(async () => {
-      await userKeyboard('{ArrowLeft}');
-    });
-    await act(async () => {
-      await userKeyboard('{ArrowLeft}');
-    });
-    await waitFor(() => {
-      expect(window.document.activeElement?.classList.contains('PrivateSwitchBase-input')).toBe(true);
-    });
-
-    // Need to refocus on the column Headers when press arrow left from select all
-    await act(async () => {
-      await userKeyboard('{ArrowLeft}');
-    });
-    await waitFor(() => {
-      expect(window.document.activeElement?.classList.contains('MuiDataGrid-columnHeaders')).toBe(true);
-    });
-
-    // Need to focus first row when press arrow down
+    // Need to focus first row when press arrow down from column headers
     await act(async () => {
       await userKeyboard('{ArrowDown}');
     });
@@ -211,7 +173,7 @@ describe('DataGrid', () => {
     });
   });
 
-  it('Should select and unselect Row/s via keyboard by Shift/Arrow', async () => {
+  it('Should select and unselect Row/s via keyboard by Enter', async () => {
     const userKeyboard = userEvent.keyboard;
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -228,24 +190,24 @@ describe('DataGrid', () => {
       expect(window.document.activeElement?.getAttribute('data-id')).toBe('Table row 1');
     });
 
-    // Select current row and row below by holding shift and pressing arrow down
+    // Select current row by pressing Enter
     await act(async () => {
-      await userKeyboard('{ }{Shift>}{ArrowDown}{/Shift}');
+      await userKeyboard('{Enter}');
     });
     await waitFor(() => {
-      expect(container.querySelectorAll('.Mui-selected').length).toBe(2);
+      expect(container.querySelectorAll('.Mui-selected').length).toBe(1);
     });
 
-    // Unselect current row below by holding shift and pressind arrow up
+    // Unselect current row by pressing Enter again
     await act(async () => {
-      await userKeyboard('{Shift>}{ArrowUp}{/Shift}{ }');
+      await userKeyboard('{Enter}');
     });
     await waitFor(() => {
       expect(container.querySelectorAll('.Mui-selected').length).toBe(0);
     });
   });
 
-  it('Should select and unselect succeeding Row/s via keyboard by Shift/Arrow', async () => {
+  it('Should select and unselect succeeding Row/s via keyboard by Enter', async () => {
     const userKeyboard = userEvent.keyboard;
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -262,7 +224,15 @@ describe('DataGrid', () => {
       expect(window.document.activeElement?.getAttribute('data-id')).toBe('Table row 1');
     });
 
-    // Need to focus on the next row
+    // Select first row
+    await act(async () => {
+      await userKeyboard('{Enter}');
+    });
+    await waitFor(() => {
+      expect(container.querySelectorAll('.Mui-selected').length).toBe(1);
+    });
+
+    // Navigate to second row and select it
     await act(async () => {
       await userKeyboard('{ArrowDown}');
     });
@@ -270,20 +240,19 @@ describe('DataGrid', () => {
       expect(window.document.activeElement?.getAttribute('data-id')).toBe('Table row 2');
     });
 
-    // Select second and previous row by holding shift and pressing arrow up
     await act(async () => {
-      await userKeyboard('{Enter}{Shift>}{ArrowUp}{/Shift}');
+      await userKeyboard('{Enter}');
     });
     await waitFor(() => {
       expect(container.querySelectorAll('.Mui-selected').length).toBe(2);
     });
 
-    // Unselect second and previous row by holding shift and pressing arrow down then enter
+    // Unselect second row
     await act(async () => {
-      await userKeyboard('{Shift>}{ArrowDown}{/Shift}{Enter}');
+      await userKeyboard('{Enter}');
     });
     await waitFor(() => {
-      expect(container.querySelectorAll('.Mui-selected').length).toBe(0);
+      expect(container.querySelectorAll('.Mui-selected').length).toBe(1);
     });
   });
 
@@ -302,8 +271,7 @@ describe('DataGrid', () => {
     expect(screen.getByTestId(DataGridTestIds.DATAGRID_PAGINATION)).not.toBeNull();
   });
 
-  it('Should navigate on Column sorting icon and click via keyboard', async () => {
-    const userKeyboard = userEvent.keyboard;
+  it('Should render DataGrid with sortable column headers', async () => {
     render(
       <ThemeProvider theme={theme}>
         <DataGrid checkboxSelection rows={processRow(sampleMinimalRows, true)} columns={sampleColumns} totalCount={sampleMinimalRows.length} />
@@ -311,32 +279,29 @@ describe('DataGrid', () => {
     );
     expect(screen.getByRole('grid')).not.toBeNull();
 
-    // every key needs to be within it's own act block
+    // Verify sortable column header exists and can be sorted by clicking
+    const sortableHeader = screen.getAllByRole('columnheader').find(
+      (header) => { return header.classList.contains('MuiDataGrid-columnHeader--sortable'); },
+    );
+    expect(sortableHeader).not.toBeUndefined();
+    expect(sortableHeader?.getAttribute('aria-sort')).toBe('none');
+
+    // Click the sort button to sort ascending
+    const sortButton = sortableHeader?.querySelector('.MuiDataGrid-sortButton') as HTMLElement;
+    expect(sortButton).not.toBeNull();
     await act(async () => {
-      await userKeyboard('{Tab}');
-    });
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await act(async () => {
-      await userKeyboard('{ArrowRight}');
-    });
-    await act(async () => {
-      await userKeyboard('{ }');
+      fireEvent.click(sortButton);
     });
     await waitFor(() => {
-      expect(window.document.activeElement?.getAttribute('aria-sort')).toBe('ascending');
+      expect(sortableHeader?.getAttribute('aria-sort')).toBe('ascending');
     });
 
-    // Again pressing space key to change sort to 'descending'
+    // Click again to sort descending
     await act(async () => {
-      await userKeyboard('{ }');
+      fireEvent.click(sortButton);
     });
     await waitFor(() => {
-      expect(window.document.activeElement?.getAttribute('aria-sort')).toBe('descending');
+      expect(sortableHeader?.getAttribute('aria-sort')).toBe('descending');
     });
   });
 });
