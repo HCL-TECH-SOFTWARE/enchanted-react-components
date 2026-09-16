@@ -161,7 +161,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Chip> = (args) => {
   return (
-    <Grid container spacing={5} direction="row">
+    <Grid container className="legacy-grid-spacing" spacing={5} direction="row">
       <Grid>
         <Grid container spacing={3} direction="column">
           <Grid>

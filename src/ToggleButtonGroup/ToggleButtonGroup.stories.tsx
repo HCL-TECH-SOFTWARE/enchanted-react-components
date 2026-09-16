@@ -94,7 +94,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof ToggleButtonGroup> = (args) => {
   return (
-    <Grid container spacing={30}>
+    <Grid container className="legacy-grid-spacing" spacing={30}>
       <Grid>
         <Grid container direction="column">
           <Grid paddingBottom={0}>
