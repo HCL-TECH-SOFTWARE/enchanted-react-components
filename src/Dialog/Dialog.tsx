@@ -46,6 +46,9 @@ export const getMuiDialogThemeOverrides = (): Components<Omit<Theme, 'components
           return ({
             padding: 0,
             width: 'calc(100% - 64px)',
+            '&:focus-visible': {
+              outline: 'none',
+            },
             ...ownerState.size === DialogSizes.EXTRA_SMALL && {
               maxWidth: '444px',
             },

@@ -34,6 +34,4 @@ const IntroductionPage: React.FC<IntroductionPageProps> = (props: IntroductionPa
   );
 };
 
-IntroductionPage.defaultProps = { };
-
 export default IntroductionPage;

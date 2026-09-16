@@ -114,7 +114,6 @@ InteractiveExample.parameters = {
   options: { showPanel: true },
 };
 InteractiveExample.args = {
-  ...Paper.defaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the PaperProps
   interactive: true,
 };

@@ -31,15 +31,11 @@ export const getMuiListThemeOverrides = (): Components<Omit<Theme, 'components'>
 };
 
 const List = React.forwardRef<HTMLUListElement, ListProps>(
-  (props: ListProps, ref: React.Ref<HTMLUListElement>) => {
+  ({ ...rawProps }: ListProps, ref: React.Ref<HTMLUListElement>) => {
+    const props = { dense: true, disablePadding: true, ...rawProps };
     return <MuiList ref={ref} {...props} />;
   },
 );
-
-List.defaultProps = {
-  dense: true,
-  disablePadding: true,
-};
 
 export * from '@mui/material/List';
 export default List;

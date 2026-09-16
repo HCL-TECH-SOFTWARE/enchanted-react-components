@@ -56,8 +56,5 @@ const Tab = forwardRef<HTMLDivElement, TabProps>((props, ref) => {
   );
 });
 
-Tab.defaultProps = {
-};
-
 export * from '@mui/material/Tab';
 export default Tab;

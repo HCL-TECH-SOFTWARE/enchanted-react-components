@@ -428,6 +428,15 @@ const VisualTestTemplate: StoryFn<typeof DataGrid> = (args) => {
 export const InteractiveExample = InteractiveExampleTemplate.bind({});
 InteractiveExample.parameters = {
   options: { showPanel: true },
+  a11y: {
+    config: {
+      rules: [
+        // MUI DataGrid uses focusable rows/cells with interactive checkbox children,
+        // creating nested-interactive violations. This is an inherent MUI DataGrid pattern.
+        { id: 'nested-interactive', enabled: false },
+      ],
+    },
+  },
 };
 InteractiveExample.args = {
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the DataGridProps
@@ -448,6 +457,15 @@ InteractiveExample.args = {
 export const VisualTest = VisualTestTemplate.bind({});
 VisualTest.parameters = {
   options: { showPanel: false },
+  a11y: {
+    config: {
+      rules: [
+        // MUI DataGrid uses focusable rows/cells with interactive checkbox children,
+        // creating nested-interactive violations. This is an inherent MUI DataGrid pattern.
+        { id: 'nested-interactive', enabled: false },
+      ],
+    },
+  },
 };
 VisualTest.args = {
   checkboxSelection: true,

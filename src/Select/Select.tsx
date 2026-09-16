@@ -17,7 +17,8 @@ import React from 'react';
 import MuiSelect, { SelectProps as MuiSelectProps } from '@mui/material/Select';
 import MuiFormControl, { FormControlProps as MuiFormControlProps } from '@mui/material/FormControl';
 import MuiFormHelperText from '@mui/material/FormHelperText';
-import useId from '@mui/material/utils/useId';
+// import useId from '@mui/material/utils/useId';
+import { unstable_useId as useId } from '@mui/utils';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import CaretDownIcon from '@hcl-software/enchanted-icons/dist/carbon/es/caret--down';
 import {
@@ -258,7 +259,27 @@ const getInputLabelAndActionProps = (props : SelectProps): InputLabelAndActionPr
   return inputLabelProps;
 };
 
-const Select = React.forwardRef(({ ...props }: SelectProps, forwardRef: React.ForwardedRef<unknown>) => {
+const Select = React.forwardRef(({ ...rawProps }: SelectProps, forwardRef: React.ForwardedRef<unknown>) => {
+  const props = {
+    margin: 'none' as SelectProps['margin'],
+    color: 'primary' as SelectProps['color'],
+    size: 'medium' as SelectProps['size'],
+    label: '',
+    helperText: '',
+    enableHelpHoverEffect: false,
+    helperIconTooltip: '',
+    placeholder: '',
+    unitLabel: '',
+    required: false,
+    disabled: false,
+    error: false,
+    fullWidth: false,
+    autoFocus: false,
+    hiddenLabel: false,
+    nonEdit: false,
+    sx: { minWidth: '240px' } as SelectProps['sx'],
+    ...rawProps,
+  };
   if (!props.id) {
     const id = useId();
     props.id = id;
@@ -274,26 +295,6 @@ const Select = React.forwardRef(({ ...props }: SelectProps, forwardRef: React.Fo
     </MuiFormControl>
   );
 }) as React.FC<SelectProps>;
-
-Select.defaultProps = {
-  margin: 'none',
-  color: 'primary',
-  size: 'medium',
-  label: '',
-  helperText: '',
-  enableHelpHoverEffect: false,
-  helperIconTooltip: '',
-  placeholder: '',
-  unitLabel: '',
-  required: false,
-  disabled: false,
-  error: false,
-  fullWidth: false,
-  autoFocus: false,
-  hiddenLabel: false,
-  nonEdit: false,
-  sx: { minWidth: '240px' },
-};
 
 export * from '@mui/material/Select';
 export default Select;

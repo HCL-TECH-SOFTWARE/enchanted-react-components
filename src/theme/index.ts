@@ -15,9 +15,9 @@
 import React from 'react';
 import {
   Theme, createTheme, PaletteOptions, Shadows,
+  ThemeOptions,
 } from '@mui/material/styles';
-import { ThemeOptions } from '@mui/material/styles/createTheme';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import type { TypographyVariantsOptions } from '@mui/material/styles';
 import { Colors, ColorNames, UNKNOWN_COLOR_CODE } from '../colors';
 import { getMuiTextFieldThemeOverrides } from '../TextField';
 import { getMuiChipThemeOverrides } from '../Chip/Chip';
@@ -163,8 +163,9 @@ export const ensureToGetColor = (color: string | undefined): string => {
   }
   return color;
 };
-
-export const TYPOGRAPHY: TypographyOptions = {
+// eslint-why MUI Typography requires any for the typography variants options generic type parameters
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const TYPOGRAPHY: TypographyVariantsOptions & Record<string, any> = {
   fontFamily: 'Inter, sans-serif',
   h1: {
     fontWeight: '300',
@@ -467,6 +468,26 @@ const getThemeOptions = (direction: ThemeDirectionType, mode: ThemeModeType) => 
       ...getMuiListItemIconThemeOverrides(),
       ...getMuiListItemTextThemeOverrides(),
       ...getMuiTreeViewThemeOverrides(),
+      MuiGrid: {
+        styleOverrides: {
+          root: ({ ownerState }) => {
+            return {
+              ...(ownerState.container && {
+                '&.legacy-grid-spacing': {
+                  gap: 0,
+                  width: 'calc(100% + var(--Grid-columnSpacing))',
+                  marginLeft: 'calc(-1 * var(--Grid-columnSpacing))',
+                  marginTop: 'calc(-1 * var(--Grid-rowSpacing))',
+                  '& > :where(.MuiGrid-root)': {
+                    paddingLeft: 'var(--Grid-columnSpacing)',
+                    paddingTop: 'var(--Grid-rowSpacing)',
+                  },
+                },
+              }),
+            };
+          },
+        },
+      },
     },
   };
   return themeOptions;

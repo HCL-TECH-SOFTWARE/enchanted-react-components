@@ -87,7 +87,9 @@ describe('Tile component', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getAllByRole('img')[0].getAttribute('src')).toBe(imageUrl);
+    const imgElement = document.querySelector('img') as HTMLImageElement;
+    expect(imgElement).not.toBeNull();
+    expect(imgElement.getAttribute('src')).toBe(imageUrl);
     const favoriteIcon = screen.queryByTestId('Favorite Toggle');
     expect(favoriteIcon).not.toBeNull();
   });

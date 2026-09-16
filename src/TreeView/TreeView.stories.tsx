@@ -158,8 +158,12 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
 
   const [selected, setSelected] = React.useState<string[]>([]);
 
-  const handleNodeSelect = (_event: React.SyntheticEvent, nodeIds: string | string[]) => {
-    setSelected(Array.isArray(nodeIds) ? nodeIds : [nodeIds]);
+  const handleNodeSelect = (_event: React.SyntheticEvent, itemIds: string | string[] | null) => {
+    if (itemIds === null) {
+      setSelected([]);
+    } else {
+      setSelected(Array.isArray(itemIds) ? itemIds : [itemIds]);
+    }
   };
 
   const overflowAction = showEndAction ? (
@@ -199,14 +203,14 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
         ref={treeRef}
         key={String(disabled)}
         disableSelection={disableSelection}
-        defaultExpanded={['1']}
-        selected={selected}
-        onNodeSelect={handleNodeSelect}
+        defaultExpandedItems={['1']}
+        selectedItems={selected}
+        onSelectedItemsChange={handleNodeSelect}
         showLevelLine={showLevelLine}
         disabled={disabled}
       >
         <TreeItem
-          nodeId="1"
+          itemId="1"
           label="Item"
           startIcon={showStartIcon ? <DocumentIcon /> : undefined}
           statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -218,7 +222,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
           hoverActions={hoverActionButtons}
         >
           <TreeItem
-            nodeId="2"
+            itemId="2"
             label="Item one"
             startIcon={showStartIcon ? <DocumentIcon /> : undefined}
             statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -230,7 +234,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
             hoverActions={hoverActionButtons}
           >
             <TreeItem
-              nodeId="3"
+              itemId="3"
               label="Sub-item one"
               startIcon={showStartIcon ? <DocumentIcon /> : undefined}
               statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -242,7 +246,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
               hoverActions={hoverActionButtons}
             >
               <TreeItem
-                nodeId="4"
+                itemId="4"
                 label="Sub-sub-item one"
                 startIcon={showStartIcon ? <DocumentIcon /> : undefined}
                 statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -254,7 +258,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
                 hoverActions={hoverActionButtons}
               >
                 <TreeItem
-                  nodeId="5"
+                  itemId="5"
                   label="Sub-sub-sub-item one"
                   startIcon={showStartIcon ? <DocumentIcon /> : undefined}
                   statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -269,7 +273,7 @@ const Template: StoryFn<ExtendedTreeViewArgs> = (args) => {
             </TreeItem>
           </TreeItem>
           <TreeItem
-            nodeId="6"
+            itemId="6"
             label="Item two"
             startIcon={showStartIcon ? <DocumentIcon /> : undefined}
             statusBadge={showStatusBadge ? <StatusBadge /> : undefined}
@@ -307,14 +311,14 @@ export const InteractiveExample = {
 /* ── Visual test ─────────────────────────────────── */
 const VisualTestTemplate: StoryFn<object> = () => {
   const overflowAction = (
-    <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}>
+    <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="More actions">
       <OverflowMenuHorizontalIcon />
     </IconButton>
   );
   const hoverActionButtons = (
     <>
-      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}><EditIcon /></IconButton>
-      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0}><TrashCanIcon /></IconButton>
+      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Edit"><EditIcon /></IconButton>
+      <IconButton size="small" variant={IconButtonVariants.WITHOUT_PADDING} showendicon={0} aria-label="Delete"><TrashCanIcon /></IconButton>
     </>
   );
 
@@ -326,7 +330,7 @@ const VisualTestTemplate: StoryFn<object> = () => {
   const fullItem = (nodeId: string, extra?: ExtraProps) => {
     return (
       <TreeItem
-        nodeId={nodeId}
+        itemId={nodeId}
         label="Item"
         startIcon={<DocumentIcon />}
         statusBadge={<StatusBadge />}
@@ -347,45 +351,45 @@ const VisualTestTemplate: StoryFn<object> = () => {
     >
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>State=Default · Selected=False · Hover actions=False</Box>
-        <TreeView defaultExpanded={['a1']}>{fullItem('a1')}</TreeView>
+        <TreeView defaultExpandedItems={['a1']}>{fullItem('a1')}</TreeView>
       </Box>
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>State=Default · Selected=False · Hover actions=True</Box>
-        <TreeView defaultExpanded={['b1']}>{fullItem('b1', { hoverActions: hoverActionButtons, endAction: undefined })}</TreeView>
+        <TreeView defaultExpandedItems={['b1']}>{fullItem('b1', { hoverActions: hoverActionButtons, endAction: undefined })}</TreeView>
       </Box>
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>State=Default · Selected=True · Hover actions=False</Box>
-        <TreeView defaultExpanded={['c1']} defaultSelected="c2">
-          <TreeItem nodeId="c1" label="Folder" startIcon={<FolderIcon />}>{fullItem('c2')}</TreeItem>
+        <TreeView defaultExpandedItems={['c1']} defaultSelectedItems={['c2']}>
+          <TreeItem itemId="c1" label="Folder" startIcon={<FolderIcon />}>{fullItem('c2')}</TreeItem>
         </TreeView>
       </Box>
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>State=Default · Selected=True · Hover actions=True</Box>
-        <TreeView defaultExpanded={['d1']} defaultSelected="d2">
-          <TreeItem nodeId="d1" label="Folder" startIcon={<FolderIcon />}>{fullItem('d2', { hoverActions: hoverActionButtons, endAction: undefined })}</TreeItem>
+        <TreeView defaultExpandedItems={['d1']} defaultSelectedItems={['d2']}>
+          <TreeItem itemId="d1" label="Folder" startIcon={<FolderIcon />}>{fullItem('d2', { hoverActions: hoverActionButtons, endAction: undefined })}</TreeItem>
         </TreeView>
       </Box>
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>Minimal – label only</Box>
-        <TreeView defaultExpanded={['e1']}>
-          <TreeItem nodeId="e1" label="Folder">
-            <TreeItem nodeId="e2" label="File one" />
-            <TreeItem nodeId="e3" label="File two" />
+        <TreeView defaultExpandedItems={['e1']}>
+          <TreeItem itemId="e1" label="Folder">
+            <TreeItem itemId="e2" label="File one" />
+            <TreeItem itemId="e3" label="File two" />
           </TreeItem>
         </TreeView>
       </Box>
 
       <Box>
         <Box sx={{ mb: 1, typography: 'caption', color: 'text.secondary' }}>Disabled</Box>
-        <TreeView defaultExpanded={['f1']}>
-          <TreeItem nodeId="f1" label="Folder (disabled)" startIcon={<FolderIcon />} disabled>
-            <TreeItem nodeId="f2" label="File" startIcon={<DocumentIcon />} />
+        <TreeView defaultExpandedItems={['f1']}>
+          <TreeItem itemId="f1" label="Folder (disabled)" startIcon={<FolderIcon />} disabled>
+            <TreeItem itemId="f2" label="File" startIcon={<DocumentIcon />} />
           </TreeItem>
-          <TreeItem nodeId="f3" label="Item (disabled)" startIcon={<DocumentIcon />} disabled />
+          <TreeItem itemId="f3" label="Item (disabled)" startIcon={<DocumentIcon />} disabled />
         </TreeView>
       </Box>
     </Box>

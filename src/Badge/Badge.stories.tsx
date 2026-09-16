@@ -18,7 +18,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import MailIcon from '@hcl-software/enchanted-icons/dist/carbon/es/email';
 import { Grid } from '@mui/material';
 
-import Badge from './Badge';
+import Badge, { badgeDefaultProps } from './Badge';
 import Typography from '../Typography';
 
 export default {
@@ -71,48 +71,48 @@ export default {
 const VisualTestTemplate: StoryFn<typeof Badge> = (args) => {
   return (
     <Grid container direction="column" spacing={1}>
-      <Grid item>
+      <Grid>
         <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Circular Overlap
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid>
         <Badge
           overlap="circular"
         >
           <MailIcon color="action" />
         </Badge>
       </Grid>
-      <Grid item>
+      <Grid>
         <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Rectangular Overlap
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid>
         <Badge
           overlap="rectangular"
         >
           <MailIcon color="action" />
         </Badge>
       </Grid>
-      <Grid item>
+      <Grid>
         <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Dot
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid>
         <Badge
           variant="dot"
         >
           <MailIcon color="action" />
         </Badge>
       </Grid>
-      <Grid item>
+      <Grid>
         <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Standard
         </Typography>
       </Grid>
-      <Grid item>
+      <Grid>
         <Badge
           variant="standard"
         >
@@ -130,7 +130,7 @@ InteractiveExample.parameters = {
   options: { showPanel: true },
 };
 InteractiveExample.args = {
-  ...Badge.defaultProps,
+  ...badgeDefaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the BadgeProps
   interactive: true,
   badgeContent: 4,

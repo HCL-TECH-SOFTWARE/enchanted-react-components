@@ -14,7 +14,7 @@
  * ======================================================================== */
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react-webpack5';
-import ActionButton from './ActionButton';
+import ActionButton, { actionButtonDefaultProps } from './ActionButton';
 
 export default {
   title: 'Inputs/ActionButton',
@@ -62,6 +62,6 @@ InteractiveExample.parameters = {
 InteractiveExample.args = {
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the ActionButtonProps
   interactive: true,
-  ...ActionButton.defaultProps,
+  ...actionButtonDefaultProps,
   endIcon: true,
 };

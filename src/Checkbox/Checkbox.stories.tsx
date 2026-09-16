@@ -18,7 +18,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import { FormControl, FormGroup, FormHelperText } from '@mui/material';
 
 import FormControlLabel from '../prerequisite_components/FormControlLabel';
-import Checkbox, { CheckboxVariants } from './Checkbox';
+import Checkbox, { checkboxDefaultProps, CheckboxVariants } from './Checkbox';
 import Typography from '../Typography';
 
 export default {
@@ -147,7 +147,7 @@ export const ExampleCheckbox = {
   render: Template,
 
   args: {
-    ...Checkbox.defaultProps,
+    ...checkboxDefaultProps,
     required: true,
     centerRipple: false,
     disableTouchRipple: false,
@@ -171,5 +171,16 @@ export const ExampleCheckboxIndeterminate = {
   args: {
     ...ExampleCheckbox.args,
     indeterminate: true,
+  },
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          // MUI Checkbox with FormControlLabel creates a nested interactive pattern where
+          // the label element contains a focusable checkbox control. This is an inherent MUI pattern.
+          { id: 'nested-interactive', enabled: false },
+        ],
+      },
+    },
   },
 };

@@ -13,9 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React, { ReactNode } from 'react';
-import MuiTreeItem, { TreeItemProps } from '@mui/lab/TreeItem';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { TreeItem as MuiTreeItem, TreeItemProps } from '@mui/x-tree-view/TreeItem';
 
 /**
  * Context tracking nesting depth (0 = root level).
@@ -397,8 +397,14 @@ const TreeItem = React.forwardRef<HTMLLIElement, EnhancedTreeItemProps>(
       <MuiTreeItem
         ref={setRef}
         className={isFocused ? 'keyboard-focused' : undefined}
-        ContentProps={contentPaddingLeft !== undefined ? { style: { paddingInlineStart: `${contentPaddingLeft}px` } } : undefined}
         {...props}
+        ContentProps={{
+          ...props.ContentProps,
+          style: {
+            ...props.ContentProps?.style,
+            ...(contentPaddingLeft !== undefined && { paddingInlineStart: `${contentPaddingLeft}px` }),
+          },
+        }}
         disabled={contextDisabled || disabled}
         label={customLabel}
       >

@@ -116,8 +116,7 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
                     alignItems="center"
                   >
                     <Grid
-                      item
-                      xs={6}
+                      size={6}
                     >
                       <PanelTitle
                         variant="subtitle1"
@@ -170,7 +169,5 @@ const PanelTabContent: React.FC<PanelTabContentProps> = ({
     </>
   );
 };
-
-PanelTabContent.defaultProps = { };
 
 export default PanelTabContent;

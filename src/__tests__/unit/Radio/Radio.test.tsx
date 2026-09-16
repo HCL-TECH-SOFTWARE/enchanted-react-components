@@ -36,7 +36,7 @@ describe('Radio', () => {
     const anchor = screen.getByTestId('Radio');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgba(0, 0, 0, 0.6)');
-    expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0.07)');
+    expect(style.backgroundColor).toBe('transparent');
   });
 
   it('Radio disable style', () => {

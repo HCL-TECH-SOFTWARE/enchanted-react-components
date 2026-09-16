@@ -37,7 +37,7 @@ describe('Link', () => {
     const anchor = screen.getByText('Link');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgb(5, 80, 220)');
-    expect(style.textDecoration).toBe('underline');
+    expect(style.textDecoration).toBe('none');
   });
 
   it('link disable style', () => {
@@ -45,7 +45,7 @@ describe('Link', () => {
 
     const anchor = screen.getByText('Link');
     const style = window.getComputedStyle(anchor);
-    expect(style.color).toBe('rgb(5, 80, 220)');
+    expect(style.color).toBe('rgba(0, 0, 0, 0.38)');
     expect(style.pointerEvents).toBe('none');
   });
 

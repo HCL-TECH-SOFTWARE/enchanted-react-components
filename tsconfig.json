@@ -10,10 +10,12 @@
     ],
     "declaration": true,
     "jsx": "react",
+    "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["jest", "node"]
   },
   "exclude": [
     "node_modules",
