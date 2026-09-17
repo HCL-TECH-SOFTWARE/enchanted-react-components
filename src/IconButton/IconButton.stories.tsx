@@ -2216,6 +2216,7 @@ const VisualTestTemplate: StoryFn<typeof IconButton> = (args) => {
               color: theme.palette.action.inverse,
               backgroundColor: theme.palette.background.dark,
               padding: '12px',
+              marginTop: '-8px',
             };
           }}
         >

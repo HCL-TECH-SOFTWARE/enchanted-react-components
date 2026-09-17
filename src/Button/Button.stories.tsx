@@ -182,10 +182,10 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
         '& .css-umigu1.force-to-focusHover': {
           backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
         },
-        '& .css-l2wo52-MuiGrid-root > .css-17ctpnt-MuiGrid-root': {
+        '& .css-tzr0ej-MuiGrid-root > .css-17ctpnt-MuiGrid-root': {
           paddingTop: '8px',
         },
-        '& .css-l2wo52-MuiGrid-root': {
+        '& .css-tzr0ej-MuiGrid-root': {
           marginTop: '-8px',
         },
         '& .css-117uf78-MuiGrid-root > .force-to-focusHover.css-11vufsl-MuiButtonBase-root-MuiButton-root': {
@@ -1628,7 +1628,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
 
 const InteractiveExampleTemplate: StoryFn<typeof Button> = (args) => {
   return (
-    <Grid container spacing={2} paddingBottom={5}>
+    <Grid container spacing={2} paddingBottom={5} className="legacy-grid-spacing">
       <Grid size={{ xs: 2 }}>
         <Button {...args}>Button</Button>
       </Grid>

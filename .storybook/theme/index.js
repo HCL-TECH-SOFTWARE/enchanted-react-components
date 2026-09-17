@@ -29,14 +29,10 @@ export const withThemeProvider = (Story, context) => {
   if (themeDirection === ThemeDirectionType.RTL) {
     document.documentElement.setAttribute("dir", "rtl");
   }
-  const isStoryView = context.viewMode === 'story';
-  const storyBgStyle = isStoryView ? {
-    backgroundColor: enchantedTheme.palette.background.default,
-  } : {};
   return (
     <DirectionStyleProvider direction={themeDirection}>
       <ThemeProvider theme={enchantedTheme}>
-        <div dir={themeDirection} style={storyBgStyle}>
+        <div dir={themeDirection}>
           <CssBaseline />
           <Story {...context} />
         </div>

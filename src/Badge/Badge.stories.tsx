@@ -70,7 +70,7 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Badge> = (args) => {
   return (
-    <Grid container direction="column" spacing={1}>
+    <Grid container className="legacy-grid-spacing" direction="column" spacing={1}>
       <Grid>
         <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
           Badge Circular Overlap

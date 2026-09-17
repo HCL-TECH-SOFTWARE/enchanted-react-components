@@ -104,13 +104,7 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         zIndex: 1,
       },
     },
-    [`& .${gridClasses['row--borderBottom']} .${gridClasses.columnHeader}`]: {
-      borderBottom: 'none',
-    },
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.filler}`]: {
-      borderBottom: 'none',
-    },
-    [`& .${gridClasses['row--borderBottom']} .${gridClasses.scrollbarFiller}`]: {
       borderBottom: 'none',
     },
     '& .MuiDataGrid-columnHeaderDraggableContainer > .MuiDataGrid-columnHeaderTitleContainer': {

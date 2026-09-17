@@ -20,6 +20,10 @@ import { Colors, ColorNames } from '../src/colors';
 import { ThemeDirectionType, ThemeModeType } from '../src/theme';
 import { create } from 'storybook/theming/create';
 
+const style = document.createElement('style');
+style.innerHTML = `.sb-show-main.sb-main-padded { background: #F6F6F6 !important; }`;
+document.head.appendChild(style);
+
 export const parameters = {
   backgrounds: {
     options: {

@@ -138,7 +138,7 @@ const CustomPickersDay = (props: PickersDayProps<any> & CustomPickersDayOwnProps
 const getDatePickerStyle = (theme: Theme, customStyles: React.CSSProperties | { [key: string]: React.CSSProperties }, staticMode?: boolean) => {
   return {
     ...theme.typography.body2,
-    margin: staticMode ? '0px' : '6px 0px 0px -8px',
+    margin: staticMode ? '0px' : '1px 0px 0px 0px',
     padding: '0px',
     height: 'auto',
     width: '228px',
