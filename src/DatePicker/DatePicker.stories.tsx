@@ -180,13 +180,21 @@ export default {
         },
       },
     },
+    weekStartsOn: {
+      description: 'Day the week starts on. 0 = Sunday, 1 = Monday (default).',
+      options: [0, 1],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: { summary: '1' },
+      },
+    },
   },
 } as Meta<typeof DatePicker>;
 
 const Template: StoryFn<typeof DatePicker> = (args) => {
   const [value, setValue] = React.useState<Dayjs | null>(args.value ? dayjs(args.value as string, DatePickerDefaults.format) : null);
-  // @ts-ignore - The adapterLocale control it's not a property of the DatePicker but it is need for PickersLocalizationProvider.
-  const { adapterLocale } = args;
+  // @ts-ignore - The adapterLocale and weekStartsOn controls are not properties of DatePicker but are needed for PickersLocalizationProvider.
+  const { adapterLocale, weekStartsOn } = args;
 
   let customIcon: React.ComponentType<SvgIconProps> | undefined;
   switch (args.customIcon as unknown as string) {
@@ -201,7 +209,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
   }
 
   return (
-    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs}>
+    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs} weekStartsOn={weekStartsOn as 0 | 1}>
       <DatePicker
         {...args}
         value={value}
@@ -292,7 +300,7 @@ export const ExampleStaticDatePicker = {
   parameters: {
     controls: {
       // Only show controls relevant to the static calendar — input-field-specific controls are not applicable
-      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale'],
+      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale', 'weekStartsOn'],
     },
   },
 };
