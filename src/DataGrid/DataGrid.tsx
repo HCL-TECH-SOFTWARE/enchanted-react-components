@@ -94,6 +94,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     },
     '& .MuiDataGrid-columnHeaders': {
       borderBottom: `1px ${theme.palette.border.primary} solid`,
+      // INCLUDED within the header height. This restores v5 behavior.
+      boxSizing: 'border-box',
+      maxHeight: 'var(--DataGrid-headersTotalHeight)',
       background: theme.palette.common.white,
       '& .MuiDataGrid-columnHeaderTitle': {
         ...theme.typography.subtitle2,
@@ -104,8 +107,20 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         zIndex: 1,
       },
     },
+    // Constrain topContainer to match v5 total header height (border-inclusive)
+    [`& .${gridClasses['container--top']}`]: {
+      maxHeight: 'var(--DataGrid-headersTotalHeight)',
+    },
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.filler}`]: {
       borderBottom: 'none',
+    },
+    // In MUI v7, border-bottom on column header cells is added ON TOP of the row height.
+    // Use box-sizing: border-box so the border is included within the cell height, matching v5.
+    [`& .${gridClasses['row--borderBottom']} .${gridClasses.columnHeader}`]: {
+      boxSizing: 'border-box',
+    },
+    [`& .${gridClasses['row--borderBottom']} .${gridClasses.scrollbarFiller}`]: {
+      boxSizing: 'border-box',
     },
     '& .MuiDataGrid-columnHeaderDraggableContainer > .MuiDataGrid-columnHeaderTitleContainer': {
       gap: '0',
