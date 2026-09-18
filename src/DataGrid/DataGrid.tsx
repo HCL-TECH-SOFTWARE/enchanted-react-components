@@ -93,10 +93,6 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
       '--DataGrid-overlayHeight': 'calc(var(--height) * 3)',
     },
     '& .MuiDataGrid-columnHeaders': {
-      borderBottom: `1px ${theme.palette.border.primary} solid`,
-      // INCLUDED within the header height. This restores v5 behavior.
-      boxSizing: 'border-box',
-      maxHeight: 'var(--DataGrid-headersTotalHeight)',
       background: theme.palette.common.white,
       '& .MuiDataGrid-columnHeaderTitle': {
         ...theme.typography.subtitle2,
@@ -107,17 +103,16 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
         zIndex: 1,
       },
     },
-    // Constrain topContainer to match v5 total header height (border-inclusive)
-    [`& .${gridClasses['container--top']}`]: {
-      maxHeight: 'var(--DataGrid-headersTotalHeight)',
-    },
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.filler}`]: {
-      borderBottom: 'none',
+      borderBottom: `1px ${theme.palette.border.primary} solid !important`,
     },
-    // In MUI v7, border-bottom on column header cells is added ON TOP of the row height.
-    // Use box-sizing: border-box so the border is included within the cell height, matching v5.
+    // In MUI v7, border-bottom on column header cells (from row--borderBottom) is added ON TOP
+    // of the row height (37px content + 1px border = 38px visible). In v5, the border was on
+    // the container with box-sizing: border-box, so it was INCLUDED within 37px.
+    // This fix uses box-sizing: border-box so the border fits within the inline height.
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.columnHeader}`]: {
       boxSizing: 'border-box',
+      borderBottom: `1px ${theme.palette.border.primary} solid !important`,
     },
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.scrollbarFiller}`]: {
       boxSizing: 'border-box',
@@ -128,8 +123,10 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '& .MuiDataGrid-hide-checkbox > .MuiDataGrid-cell': {
       borderTop: 'none',
     },
-    '& .css-1sywo8n-MuiDataGrid-root, .MuiDataGrid-withBorderColor, .MuiDataGrid-columnHeader': {
-      borderBottom: 'none !important',
+    // Remove default MUI withBorderColor border from column headers.
+    // The row--borderBottom border (set above with higher specificity + !important) is preserved.
+    '& .MuiDataGrid-withBorderColor, & .MuiDataGrid-columnHeader': {
+      borderBottom: 'none',
     },
     '& .MuiDataGrid-row': {
       '.MuiCheckbox-root': {
@@ -235,6 +232,9 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '& .MuiDataGrid-columnHeaders:focus': {
       outline: 'none',
       border: `1px ${theme.palette.action.focus} solid`,
+    },
+    '& .css-bvnt8w-MuiGrid-root': {
+      height: `auto !important`,
     },
     '& .MuiDataGrid-columnHeader--alignRight .MuiDataGrid-columnHeaderTitleContainer': {
       flexDirection: 'row',
