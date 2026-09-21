@@ -313,6 +313,12 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     },
     '& .MuiDataGrid-overlay': {
       background: theme.palette.common.white,
+      height: '100% !important',
+    },
+    '& .MuiDataGrid-overlayWrapperInner': {
+      height: 'auto !important',
+      minHeight: '74px',
+      display: 'flex',
     },
     ...(props.stickyHeader === true) && {
       '& .MuiDataGrid-main': {
