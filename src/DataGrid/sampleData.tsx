@@ -270,11 +270,10 @@ export const sampleColumnsWithSubTitle = sampleColumns.map((col) => {
   }
   return col;
 });
-const disabledRow = [
-  ...sampleRows,
-  {
-    ...sampleRows[10],
-    disabled: true,
-  },
-];
+const disabledRow = sampleRows.map((row, index) => {
+  if (index === 10) {
+    return { ...row, disabled: true };
+  }
+  return row;
+});
 export const sampleRowsWithDisabledRow = processRow(disabledRow, false, true);
