@@ -110,6 +110,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
           height: '100%',
           alignItems: 'center',
           display: 'flex',
+          flexDirection: 'row',
           '& .MuiCheckbox-root': {
             marginRight: '16px',
           },
@@ -128,6 +129,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of icon before the value if the dev pass an iconStart as row data and iconStart is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
         minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {
@@ -143,6 +145,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of avatar if the dev pass an avatar as row data and avatar is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
         minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {
@@ -163,6 +166,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
         ref={valueRef}
         sx={{ // this grid is for the container of the value of the cell define in col def
           alignItems: 'normal',
+          justifyContent: 'center',
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
@@ -228,6 +232,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of icon after the value if the dev pass an iconEnd as row data and iconEnd is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
         minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {

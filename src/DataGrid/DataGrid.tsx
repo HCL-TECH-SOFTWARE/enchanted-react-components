@@ -233,7 +233,10 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
       outline: 'none',
       border: `1px ${theme.palette.action.focus} solid`,
     },
-    '& .css-bvnt8w-MuiGrid-root': {
+    '& .css-bvnt8w-MuiGrid-root, .css-p270s1-MuiGrid-root': {
+      height: `auto !important`,
+    },
+    '& .MuiDataGrid-cell--textLeft > .css-4v6mj8-MuiGrid-root': {
       height: `auto !important`,
     },
     '& .MuiDataGrid-columnHeader--alignRight .MuiDataGrid-columnHeaderTitleContainer': {
