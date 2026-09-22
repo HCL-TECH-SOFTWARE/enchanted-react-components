@@ -209,7 +209,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
   }
 
   return (
-    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs} weekStartsOn={weekStartsOn as 0 | 1}>
+    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs} weekStartsOn={(args as { weekStartsOn?: 0 | 1 }).weekStartsOn}>
       <DatePicker
         {...args}
         value={value}
