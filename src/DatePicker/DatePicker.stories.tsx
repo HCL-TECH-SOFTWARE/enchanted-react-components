@@ -180,6 +180,14 @@ export default {
         },
       },
     },
+    weekStartsOn: {
+      description: 'Day the week starts on. 0 = Sunday, 1 = Monday (default).',
+      options: [0, 1],
+      control: { type: 'radio' },
+      table: {
+        defaultValue: { summary: '1' },
+      },
+    },
   },
 } as Meta<typeof DatePicker>;
 
@@ -201,7 +209,7 @@ const Template: StoryFn<typeof DatePicker> = (args) => {
   }
 
   return (
-    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs}>
+    <PickersLocalizationProvider adapterLocale={adapterLocale} dateAdapter={AdapterDayjs} weekStartsOn={weekStartsOn as 0 | 1}>
       <DatePicker
         {...args}
         value={value}
@@ -305,7 +313,7 @@ export const ExampleStaticDatePicker = {
   parameters: {
     controls: {
       // Only show controls relevant to the static calendar — input-field-specific controls are not applicable
-      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale'],
+      include: ['staticMode', 'disabled', 'showDaysOutsideCurrentMonth', 'adapterLocale', 'weekStartsOn'],
     },
     a11y: {
       config: {

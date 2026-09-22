@@ -163,11 +163,14 @@ const verfiyAdapterLocale = (adapterLocale?: string | object) => {
 export type PickersLocalizationProviderProps = LocalizationProviderPropsAny & {
   onLocaleLoad?: (locale: string) => void;
   adapterLocale: string | object;
+  /** Day the week starts on. 0 = Sunday, 1 = Monday (default) */
+  weekStartsOn?: 0 | 1;
 }
 
 const PickersLocalizationProvider = ({
   adapterLocale: adapterLocaleProp = 'en',
   onLocaleLoad,
+  weekStartsOn = 1,
   ...rest
 }: PickersLocalizationProviderProps) => {
   const [adapterLocale, setAdapterLocale] = useState('en');
@@ -186,8 +189,8 @@ const PickersLocalizationProvider = ({
 
   verfiyAdapterLocale(adapterLocaleProp);
 
-  // Set Monday as the first day of the week in the calendar
-  dayjs.Ls[`${adapterLocale}`].weekStart = 1;
+  // Set the first day of the week in the calendar (defaults to Monday)
+  dayjs.Ls[`${adapterLocale}`].weekStart = weekStartsOn;
   return <MuiLocalizationProvider {...rest} adapterLocale={adapterLocale} localeText={getLocaleText(adapterLocaleProp)} />;
 };
 

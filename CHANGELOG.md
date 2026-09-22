@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Added `weekStartsOn` prop to `PickersLocalizationProvider` component to allow customization of the week start day in `DatePicker`.
 
 ### Changed
 
