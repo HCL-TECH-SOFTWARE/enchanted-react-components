@@ -64,13 +64,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((rawProps, forwa
   };
   props.inversecolors = props.inversecolors ? 1 : 0;
 
-  // 1. Extract variant and inversecolors so they are NOT inside restProps
+  // Extract variant separately for the local sx below; inversecolors stays in restProps
+  // so it reaches MuiButton's ownerState and the styleOverrides ternaries can see it.
   const { variant, inversecolors, ...restProps } = props;
 
   return (
     <MuiButton
       id={variant}
       variant={variant}
+      // inversecolors isn't part of MuiButtonProps; cast so it still reaches ownerState for styleOverrides
+      {...({ inversecolors } as Record<string, unknown>)}
       sx={(theme) => {
         const inverseColor = inversecolors && variant === 'contained' ? theme.palette.text.primary : theme.palette.action.selectedInverse;
         return {
