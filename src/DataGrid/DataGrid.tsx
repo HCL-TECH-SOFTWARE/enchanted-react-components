@@ -106,10 +106,6 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.filler}`]: {
       borderBottom: `1px ${theme.palette.border.primary} solid !important`,
     },
-    // In MUI v7, border-bottom on column header cells (from row--borderBottom) is added ON TOP
-    // of the row height (37px content + 1px border = 38px visible). In v5, the border was on
-    // the container with box-sizing: border-box, so it was INCLUDED within 37px.
-    // This fix uses box-sizing: border-box so the border fits within the inline height.
     [`& .${gridClasses['row--borderBottom']} .${gridClasses.columnHeader}`]: {
       boxSizing: 'border-box',
       borderBottom: `1px ${theme.palette.border.primary} solid !important`,
@@ -123,8 +119,6 @@ const StyledDataGrid = styled(MuiDataGrid)<DataGridProps>((props) => {
     '& .MuiDataGrid-hide-checkbox > .MuiDataGrid-cell': {
       borderTop: 'none',
     },
-    // Remove default MUI withBorderColor border from column headers.
-    // The row--borderBottom border (set above with higher specificity + !important) is preserved.
     '& .MuiDataGrid-withBorderColor, & .MuiDataGrid-columnHeader': {
       borderBottom: 'none',
     },
