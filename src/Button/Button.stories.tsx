@@ -164,11 +164,8 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
       sx={{
         '& .MuiGrid-direction-xs-column': { gap: '0px' },
         '& .MuiGrid-spacing-xs-3 > .MuiGrid-root': { paddingTop: '0px' },
-        '& .css-sk30qj-MuiGrid-root': { paddingBottom: '16px' },
-        '& .css-tzr0ej-MuiGrid-root > .css-17ctpnt-MuiGrid-root': {
-          paddingTop: '8px',
-        },
-        '& .css-tzr0ej-MuiGrid-root': {
+        '& .MuiGrid-direction-xs-row > .MuiGrid-spacing-xs-3 > .MuiGrid-grid-xs-3': { paddingBottom: '16px' },
+        '& .MuiGrid-container:has(> .MuiTypography-root:first-child)': {
           marginTop: '-8px',
         },
       }}
@@ -1444,7 +1441,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               Active
             </Typography>
           </Grid>
-          <Grid>
+          <Grid sx={{ pt: 1 }}>
             <Grid container spacing={3}>
               <Grid size={{ xs: 3.5 }} paddingBottom={2}>
                 <Button
@@ -1482,7 +1479,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               Focus
             </Typography>
           </Grid>
-          <Grid>
+          <Grid sx={{ pt: 1 }}>
             <Grid container spacing={3}>
               <Grid size={{ xs: 3.5 }} paddingBottom={2}>
                 <Button
@@ -1523,7 +1520,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               Focus & Hover
             </Typography>
           </Grid>
-          <Grid>
+          <Grid sx={{ pt: 1 }}>
             <Grid container spacing={3}>
               <Grid size={{ xs: 3.5 }} paddingBottom={2}>
                 <Button
@@ -1564,7 +1561,7 @@ const VisualTestTemplate: StoryFn<typeof Button> = (args) => {
               disabled
             </Typography>
           </Grid>
-          <Grid>
+          <Grid sx={{ pt: 1 }}>
             <Grid container spacing={3}>
               <Grid size={{ xs: 3.5 }} paddingBottom={2}>
                 <Button
