@@ -107,7 +107,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
           fontColor: theme.palette.text.primary,
           outline: 'none',
           width: '100%',
-          height: '100%',
+          height: 'auto',
           alignItems: 'center',
           display: 'flex',
           flexDirection: 'row',
