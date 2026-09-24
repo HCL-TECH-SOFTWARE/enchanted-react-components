@@ -10,8 +10,11 @@
 
 ### Breaking changes
 
-- Udated the react version 19 and also the mui version 7.
-- Updated other packages as well which is dependent on react and mui version update.
+## 3.0.0
+- Updated MUI to version v7 (https://mui.com/material-ui/migration/upgrade-to-v7/)
+- Updated React to version 19 and also some other dependencies related to React
+- Updated React DOM to version 19
+- Updated other packages as well which is dependent on React and MUI version update
 
 ## 2.10.2
 
