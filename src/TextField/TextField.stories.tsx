@@ -153,6 +153,13 @@ export default {
       description: 'If true, a textarea element is rendered instead of an input.',
       control: 'boolean',
     },
+    focused: {
+      description: 'If `true`, the component is displayed in focused state.',
+      control: 'boolean',
+      table: {
+        defaultValue: { summary: textFieldDefaultProps?.focused },
+      },
+    },
     endAdornmentAction: {
       control: false,
       description: 'This can be used to add a prefix, a suffix, or an action to an input.',

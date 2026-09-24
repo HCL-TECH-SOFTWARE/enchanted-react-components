@@ -43,7 +43,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@hcl-software/enchanted-icons": "github:devsatish05/enchanted-icon-dist#32a3171",
+    "@hcl-software/enchanted-icons": "^2.0.0",
     "@mui/lab": "7.0.1-beta.25",
     "@mui/material": "7.3.11",
     "@mui/system": "7.3.11",

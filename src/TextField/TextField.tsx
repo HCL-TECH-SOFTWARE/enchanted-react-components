@@ -83,6 +83,22 @@ export interface TextFieldProps extends Omit<OutlinedTextFieldProps, 'variant'> 
   customIcon?: React.ComponentType<SvgIconProps> | undefined;
 }
 
+export const textFieldDefaultProps: Partial<TextFieldProps> = {
+  margin: 'none',
+  color: 'primary',
+  size: 'medium',
+  error: false,
+  enableHelpHoverEffect: false,
+  hiddenLabel: false,
+  nonEdit: false,
+  disabled: false,
+  required: false,
+  fullWidth: false,
+  multiline: false,
+  focused: false,
+  autoFocus: false,
+};
+
 export const getMuiTextFieldThemeOverrides = (): Components<Omit<Theme, 'components'>> => {
   return {
     MuiTextField: {
