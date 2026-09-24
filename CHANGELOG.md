@@ -10,6 +10,9 @@
 
 ### Breaking changes
 
+- Udated the react version 19 and also the mui version 7.
+- Updated other packages as well which is dependent on react and mui version update.
+
 ## 2.10.2
 
 ### Fixed
