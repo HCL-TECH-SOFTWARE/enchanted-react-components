@@ -103,12 +103,14 @@ const DataGridCell = (props: GridRenderCellParams) => {
         return {
           ...theme.typography.body2,
           minHeight: '36px',
+          minWidth: 'auto',
           fontColor: theme.palette.text.primary,
           outline: 'none',
           width: '100%',
-          height: '100%',
+          height: 'auto',
           alignItems: 'center',
           display: 'flex',
+          flexDirection: 'row',
           '& .MuiCheckbox-root': {
             marginRight: '16px',
           },
@@ -127,6 +129,8 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of icon before the value if the dev pass an iconStart as row data and iconStart is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
+        minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {
           marginLeft: 'auto',
@@ -141,6 +145,8 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of avatar if the dev pass an avatar as row data and avatar is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
+        minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {
           marginLeft: 'auto',
@@ -160,11 +166,12 @@ const DataGridCell = (props: GridRenderCellParams) => {
         ref={valueRef}
         sx={{ // this grid is for the container of the value of the cell define in col def
           alignItems: 'normal',
+          justifyContent: 'center',
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
           marginRight: '8px',
-          minWidth: '0',
+          minWidth: 'auto',
           overflow: 'hidden',
           ...(isAlignRight && {
             marginLeft: `${colDef.iconStart || colDef.avatar ? '' : 'auto'}`,
@@ -225,6 +232,8 @@ const DataGridCell = (props: GridRenderCellParams) => {
       <Grid sx={{ // this grid is for the container of icon after the value if the dev pass an iconEnd as row data and iconEnd is true in column definiton
         alignItems: 'center',
         display: 'flex',
+        flexDirection: 'row',
+        minWidth: 'auto',
         marginRight: '8px',
         ...(isAlignRight && {
           marginRight: '0',
@@ -242,6 +251,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
             return {
               display: 'none',
               alignItems: 'center',
+              minWidth: 'auto',
               background: 'transparent',
               ...(isAlignRight ? {
                 marginRight: '0',
@@ -261,7 +271,7 @@ const DataGridCell = (props: GridRenderCellParams) => {
             return (
               // eslint-why index is not the sole key definition, it is prefixed by other identifiers
               // eslint-disable-next-line react/no-array-index-key
-              <Grid sx={{ marginLeft: '12px' }} key={`endActions-${row.id}-${colDef.field}-${index}`}>{elem}</Grid>// grid container button this is to margin to the buttons
+              <Grid sx={{ marginLeft: '12px', minWidth: 'auto' }} key={`endActions-${row.id}-${colDef.field}-${index}`}>{elem}</Grid>// grid container button this is to margin to the buttons
             );
           })}
         </Grid>

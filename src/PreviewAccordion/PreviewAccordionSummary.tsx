@@ -20,7 +20,7 @@ import AccordionSummary, { AccordionSummaryProps } from '../Accordion/AccordionS
 const StyledMiddleSection = styled('div')<AccordionSummaryProps>(() => {
   return {
     display: 'flex',
-    alignItems: 'left',
+    alignItems: 'flex-start',
     flexDirection: 'column',
     overflow: 'hidden',
     maxWidth: '100%',

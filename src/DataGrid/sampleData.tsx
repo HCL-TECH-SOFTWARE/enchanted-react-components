@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React from 'react';
-import { GridValueGetterParams, GridColumnHeaderParams } from '@mui/x-data-grid';
+import { GridColumnHeaderParams } from '@mui/x-data-grid';
 import IconDocument from '@hcl-software/enchanted-icons/dist/carbon/es/document--tasks';
 import IconEdit from '@hcl-software/enchanted-icons/dist/carbon/es/edit';
 import IconUser from '@hcl-software/enchanted-icons/dist/carbon/es/user';
@@ -47,7 +47,7 @@ export const sampleColumns: ExtendedGridColDef[] = [
     avatar: true,
     endActions: true,
     renderCell: (cellValues) => { return <DataGridCell {...cellValues} />; },
-    valueGetter: (params: GridValueGetterParams) => { return `${params.row.firstName || ''} ${params.row.lastName || ''}`; },
+    valueGetter: (_value: unknown, row: Person) => { return `${row.firstName || ''} ${row.lastName || ''}`; },
   },
   {
     field: 'id',
@@ -270,11 +270,10 @@ export const sampleColumnsWithSubTitle = sampleColumns.map((col) => {
   }
   return col;
 });
-const disabledRow = [
-  ...sampleRows,
-  {
-    ...sampleRows[10],
-    disabled: true,
-  },
-];
+const disabledRow = sampleRows.map((row, index) => {
+  if (index === 10) {
+    return { ...row, disabled: true };
+  }
+  return row;
+});
 export const sampleRowsWithDisabledRow = processRow(disabledRow, false, true);

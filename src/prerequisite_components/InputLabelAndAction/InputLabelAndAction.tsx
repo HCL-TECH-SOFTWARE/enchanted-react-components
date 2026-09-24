@@ -41,7 +41,7 @@ export interface InputLabelAndActionProps extends MuiInputLabelProps {
   customIcon?: React.ComponentType<SvgIconProps>;
 }
 
-export const labelFocus = styled('div')((theme) => {
+export const labelFocus: React.ComponentType<React.HTMLAttributes<HTMLDivElement>> = styled('div')((theme) => {
   // if the textbox is focused then the label should get styled with the primary theme color
   return {
     '.MuiAutocomplete--label--focused': {
@@ -50,7 +50,7 @@ export const labelFocus = styled('div')((theme) => {
   };
 });
 
-export const MuiInputHelpIcon = styled(HelpIcon, {
+export const MuiInputHelpIcon: React.ComponentType<SvgIconProps & { enableHelpHoverEffect?: boolean }> = styled(HelpIcon, {
   // Prevent `enableHelpHoverEffect` from being passed to the DOM
   shouldForwardProp: (prop) => { return prop !== 'enableHelpHoverEffect'; },
 })<{ enableHelpHoverEffect?: boolean }>(({ theme, enableHelpHoverEffect }) => {
@@ -72,7 +72,7 @@ const styledCustomIcon = (Icon: React.ComponentType<SvgIconProps>) => {
   return <Icon sx={{ marginLeft: '8px', marginBottom: '-4px', fontSize: '16px' }} color="action" fontSize="small" />;
 };
 
-export const StyledInputLabel = styled(MuiInputLabel)((theme) => {
+export const StyledInputLabel: React.ComponentType<MuiInputLabelProps> = styled(MuiInputLabel)((theme) => {
   return {
     ...theme.theme.typography.subtitle2,
     color: theme.theme.palette.text.secondary,
@@ -138,7 +138,7 @@ const renderInputLabel = (props: InputLabelAndActionProps) => {
   );
 };
 
-export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
+export const MuiGrid: React.ComponentType<MuiGridProps> = styled(Grid)<MuiGridProps>((theme) => {
   return {
     '&.MuiGrid-container': {
       margin: '0px 0px 4px 0px',
@@ -146,13 +146,10 @@ export const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
       display: 'flex',
       justifyContent: 'space-between',
     },
-    '&.MuiGrid-item': {
-      padding: 0,
-    },
   };
 });
 
-export const StyledSpan = styled('span')((theme) => {
+export const StyledSpan: React.ComponentType<React.HTMLAttributes<HTMLSpanElement>> = styled('span')((theme) => {
   return {
     display: 'inline-block',
     paddingRight: '4px', // 4px padding between action link and border divider for multiple action links
@@ -169,9 +166,9 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
     const limitedActionProps = props.actionProps.slice(0, 2);
 
     return (
-      <MuiGrid container spacing={2}>
+      <MuiGrid container>
         <MuiGrid
-          item
+          size="auto"
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -188,7 +185,7 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
           {renderInputLabel(props)}
         </MuiGrid>
         <MuiGrid
-          item
+          size="auto"
           sx={(theme: Theme) => {
             return {
               [theme.breakpoints.up('md')]: {
@@ -225,7 +222,7 @@ const renderInputLabelAndAction = (props: InputLabelAndActionProps) => {
   }
   return (
     <MuiGrid container>
-      <MuiGrid item xs={12}>
+      <MuiGrid size={12}>
         {renderInputLabel(props)}
       </MuiGrid>
     </MuiGrid>
@@ -238,9 +235,6 @@ const InputLabelAndAction: React.FC <InputLabelAndActionProps> = ({ ...props }: 
       {renderInputLabelAndAction(props)}
     </>
   );
-};
-
-InputLabelAndAction.defaultProps = {
 };
 
 export default InputLabelAndAction;

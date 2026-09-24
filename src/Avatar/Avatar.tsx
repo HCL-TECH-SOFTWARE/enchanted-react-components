@@ -118,7 +118,7 @@ const Avatar = ({ ...props }: AvatarProps) => {
    * @param avatarType Optional parameter to determine the type of Avatar
    * @returns A component of icon
    */
-  const getChildIcon = (): JSX.Element => {
+  const getChildIcon = (): React.ReactElement => {
     switch (type) {
       case AvatarTypes.IMAGE: return getImageAvatar();
       case AvatarTypes.LETTER: return getLetterAvatar();

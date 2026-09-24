@@ -17,12 +17,6 @@ import React from 'react';
 import MuiPaper, { PaperProps } from '@mui/material/Paper';
 import { Components, Theme } from '@mui/material';
 
-const Paper = React.forwardRef<HTMLDivElement, PaperProps>(
-  (props: PaperProps, ref: React.Ref<HTMLDivElement>) => {
-    return <MuiPaper ref={ref} {...props} />;
-  },
-);
-
 declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
     nopadding: true;
@@ -64,12 +58,17 @@ export const getMuiPaperThemeOverrides = (): Components<Omit<Theme, 'components'
   };
 };
 
-const defaultProps: PaperProps = {
+const paperDefaultProps: PaperProps = {
   variant: 'outlined',
   square: false,
   elevation: 0,
 };
 
-Paper.defaultProps = defaultProps;
+const Paper = React.forwardRef<HTMLDivElement, PaperProps>(
+  ({ ...rawProps }: PaperProps, ref: React.Ref<HTMLDivElement>) => {
+    const props = { ...paperDefaultProps, ...rawProps };
+    return <MuiPaper ref={ref} {...props} />;
+  },
+);
 
 export default Paper;

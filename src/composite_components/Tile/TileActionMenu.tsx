@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React, { ReactElement } from 'react';
+import React from 'react';
 import IconOverflowMenuHorizontal from '@hcl-software/enchanted-icons/dist/carbon/es/overflow-menu--horizontal';
 import IconInformation from '@hcl-software/enchanted-icons/dist/carbon/es/information';
 import ListItemText from '../../List/ListItemText';
@@ -74,7 +74,7 @@ const TileActionMenu: React.FC<ITileActionMenuProps> = (props: ITileActionMenuPr
             }}
           >
             <ListItemIcon>
-              {React.cloneElement(action.iconObject as ReactElement, { fontSize: definedSize })}
+              {React.cloneElement(action.iconObject as React.ReactElement<Record<string, unknown>>, { fontSize: definedSize })}
             </ListItemIcon>
             <ListItemText primary={action.title} />
           </MenuItem>,

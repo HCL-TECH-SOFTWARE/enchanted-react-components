@@ -18,7 +18,6 @@ import { ensureToGetColor } from '../src/theme';
 import { Colors, ColorNames } from '../src/colors';
 
 import { ThemeDirectionType, ThemeModeType } from '../src/theme';
-import { create } from 'storybook/theming/create';
 
 export const parameters = {
   backgrounds: {

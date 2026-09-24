@@ -18,7 +18,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import IconAdd from '@hcl-software/enchanted-icons/dist/carbon/es/add';
 import { Grid } from '@mui/material';
 
-import ToggleButton, { ToggleButtonSizes, ToggleButtonVariants } from './ToggleButton';
+import ToggleButton, { toggleButtonDefaultProps, ToggleButtonSizes, ToggleButtonVariants } from './ToggleButton';
 import Typography from '../Typography';
 import Divider from '../Divider';
 
@@ -159,25 +159,26 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
   return (
-    <Grid container spacing={30}>
-      <Grid item>
+    <Grid container spacing={30} className="legacy-grid-spacing">
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButton small With Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITH_PADDING}
                 >
@@ -186,16 +187,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   className="force-to-focus"
                 >
@@ -204,16 +206,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   className="force-to-focusHover"
                 >
@@ -222,16 +225,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   disabled
                 >
@@ -240,16 +244,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   selected
                 >
@@ -258,16 +263,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   selected
                   className="force-to-focus"
@@ -277,16 +283,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   selected
                   className="force-to-focusHover"
@@ -296,16 +303,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   selected
                   disabled
@@ -315,22 +323,23 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={5}>
+          <Grid paddingTop={5}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButton small Without Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                 >
@@ -339,16 +348,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   className="force-to-focus"
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
@@ -358,16 +368,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   className="force-to-focusHover"
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
@@ -377,16 +388,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   disabled
@@ -396,16 +408,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -415,16 +428,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -435,16 +449,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -455,16 +470,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.SMALL}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -477,24 +493,25 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButton medium With Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                 >
@@ -503,16 +520,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   className="force-to-focus"
@@ -522,16 +540,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   className="force-to-focusHover"
@@ -541,16 +560,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   disabled
@@ -560,16 +580,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   selected
@@ -579,16 +600,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   selected
@@ -599,16 +621,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   selected
@@ -619,16 +642,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITH_PADDING}
                   selected
@@ -639,22 +663,23 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               ToggleButton medium Without Padding
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                 >
@@ -663,16 +688,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   className="force-to-focus"
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
@@ -682,16 +708,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   className="force-to-focusHover"
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
@@ -701,16 +728,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   disabled
@@ -720,16 +748,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -739,16 +768,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -759,16 +789,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -779,16 +810,17 @@ const VisualTestTemplate: StoryFn<typeof ToggleButton> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Selected Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={3} paddingBottom={2}>
+              <Grid size={{ xs: 3 }} paddingBottom={2}>
                 <ToggleButton
                   value="default"
+                  aria-label="Add"
                   size={ToggleButtonSizes.MEDIUM}
                   variant={ToggleButtonVariants.WITHOUT_PADDING}
                   selected
@@ -824,9 +856,10 @@ InteractiveExample.args = {
   variant: ToggleButtonVariants.WITH_PADDING,
   disabled: false,
   selected: false,
-  ...ToggleButton.defaultProps,
+  ...toggleButtonDefaultProps,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the IconButtonProps
   interactive: true,
+  'aria-label': 'Add',
 };
 
 export const VisualTest = VisualTestTemplate.bind({});

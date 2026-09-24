@@ -458,23 +458,23 @@ export default {
 
 const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
   return (
-    <Grid container spacing={30}>
-      <Grid item>
+    <Grid container spacing={30} className="legacy-grid-spacing">
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link body1
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body1"
                   type={LinkType.PRIMARY}
@@ -483,7 +483,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -492,7 +492,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -503,14 +503,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.PRIMARY}
@@ -520,7 +520,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -530,7 +530,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -542,14 +542,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.PRIMARY}
@@ -559,7 +559,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -569,7 +569,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -581,14 +581,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.PRIMARY}
@@ -597,7 +597,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -606,7 +606,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -617,14 +617,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.PRIMARY}
@@ -633,7 +633,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -642,7 +642,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -653,20 +653,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link body2
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body2"
                   type={LinkType.PRIMARY}
@@ -675,7 +675,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -684,7 +684,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -695,14 +695,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.PRIMARY}
@@ -712,7 +712,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -722,7 +722,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -734,14 +734,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.PRIMARY}
@@ -751,7 +751,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -761,7 +761,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -773,14 +773,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.PRIMARY}
@@ -789,7 +789,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -798,7 +798,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -809,14 +809,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.PRIMARY}
@@ -825,7 +825,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -834,7 +834,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="body2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -845,20 +845,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link subtitle1
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.PRIMARY}
@@ -867,7 +867,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -876,7 +876,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -887,14 +887,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.PRIMARY}
@@ -904,7 +904,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -914,7 +914,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -926,14 +926,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.PRIMARY}
@@ -943,7 +943,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -953,7 +953,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -965,14 +965,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.PRIMARY}
@@ -981,7 +981,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -990,7 +990,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1001,14 +1001,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.PRIMARY}
@@ -1017,7 +1017,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1026,7 +1026,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1037,20 +1037,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link subtitle2
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.PRIMARY}
@@ -1059,7 +1059,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1068,7 +1068,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1079,14 +1079,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.PRIMARY}
@@ -1096,7 +1096,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1106,7 +1106,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1118,14 +1118,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.PRIMARY}
@@ -1135,7 +1135,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1145,7 +1145,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1157,14 +1157,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.PRIMARY}
@@ -1173,7 +1173,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1182,7 +1182,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1193,14 +1193,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.PRIMARY}
@@ -1209,7 +1209,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1218,7 +1218,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="subtitle2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1229,20 +1229,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link overline
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="overline"
                   type={LinkType.PRIMARY}
@@ -1251,7 +1251,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1260,7 +1260,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1271,14 +1271,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.PRIMARY}
@@ -1288,7 +1288,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1298,7 +1298,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1310,14 +1310,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.PRIMARY}
@@ -1327,7 +1327,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1337,7 +1337,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1349,14 +1349,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.PRIMARY}
@@ -1365,7 +1365,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1374,7 +1374,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1385,14 +1385,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.PRIMARY}
@@ -1401,7 +1401,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1410,7 +1410,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="overline"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1421,20 +1421,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link caption
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="caption"
                   type={LinkType.PRIMARY}
@@ -1443,7 +1443,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1452,7 +1452,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1463,14 +1463,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.PRIMARY}
@@ -1480,7 +1480,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1490,7 +1490,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1502,14 +1502,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.PRIMARY}
@@ -1519,7 +1519,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1529,7 +1529,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1541,14 +1541,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.PRIMARY}
@@ -1557,7 +1557,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1566,7 +1566,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1577,14 +1577,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.PRIMARY}
@@ -1593,7 +1593,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1602,7 +1602,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="caption"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1615,22 +1615,22 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
+      <Grid>
         <Grid container direction="column">
-          <Grid item paddingBottom={0}>
+          <Grid paddingBottom={0}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h1
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h1"
                   type={LinkType.PRIMARY}
@@ -1639,7 +1639,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1648,7 +1648,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1659,14 +1659,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.PRIMARY}
@@ -1676,7 +1676,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1686,7 +1686,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1698,14 +1698,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.PRIMARY}
@@ -1715,7 +1715,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1725,7 +1725,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1737,14 +1737,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.PRIMARY}
@@ -1753,7 +1753,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1762,7 +1762,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1773,14 +1773,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.PRIMARY}
@@ -1789,7 +1789,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1798,7 +1798,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h1"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1809,20 +1809,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h2
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h2"
                   type={LinkType.PRIMARY}
@@ -1831,7 +1831,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1840,7 +1840,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1851,14 +1851,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.PRIMARY}
@@ -1868,7 +1868,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1878,7 +1878,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1890,14 +1890,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.PRIMARY}
@@ -1907,7 +1907,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1917,7 +1917,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1929,14 +1929,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.PRIMARY}
@@ -1945,7 +1945,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1954,7 +1954,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -1965,14 +1965,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.PRIMARY}
@@ -1981,7 +1981,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -1990,7 +1990,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h2"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2001,20 +2001,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h3
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h3"
                   type={LinkType.PRIMARY}
@@ -2023,7 +2023,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2032,7 +2032,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2043,14 +2043,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.PRIMARY}
@@ -2060,7 +2060,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2070,7 +2070,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2082,14 +2082,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.PRIMARY}
@@ -2099,7 +2099,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2109,7 +2109,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2121,14 +2121,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.PRIMARY}
@@ -2137,7 +2137,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2146,7 +2146,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2157,14 +2157,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.PRIMARY}
@@ -2173,7 +2173,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2182,7 +2182,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h3"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2193,20 +2193,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h4
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h4"
                   type={LinkType.PRIMARY}
@@ -2215,7 +2215,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2224,7 +2224,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2235,14 +2235,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.PRIMARY}
@@ -2252,7 +2252,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2262,7 +2262,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2274,14 +2274,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.PRIMARY}
@@ -2291,7 +2291,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2301,7 +2301,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2313,14 +2313,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.PRIMARY}
@@ -2329,7 +2329,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2338,7 +2338,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2349,14 +2349,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.PRIMARY}
@@ -2365,7 +2365,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2374,7 +2374,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h4"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2385,20 +2385,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h5
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h5"
                   type={LinkType.PRIMARY}
@@ -2407,7 +2407,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2416,7 +2416,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2427,14 +2427,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.PRIMARY}
@@ -2444,7 +2444,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2454,7 +2454,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2466,14 +2466,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.PRIMARY}
@@ -2483,7 +2483,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2493,7 +2493,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2505,14 +2505,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.PRIMARY}
@@ -2521,7 +2521,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2530,7 +2530,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2541,14 +2541,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.PRIMARY}
@@ -2557,7 +2557,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2566,7 +2566,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h5"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2577,20 +2577,20 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item paddingTop={3}>
+          <Grid paddingTop={3}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Link h6
             </Typography>
           </Grid>
           <Divider />
-          <Grid item paddingTop={1}>
+          <Grid paddingTop={1}>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Active
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h6"
                   type={LinkType.PRIMARY}
@@ -2599,7 +2599,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2608,7 +2608,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4}>
+              <Grid size={{ xs: 4 }}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2619,14 +2619,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.PRIMARY}
@@ -2636,7 +2636,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2646,7 +2646,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2658,14 +2658,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.PRIMARY}
@@ -2675,7 +2675,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2685,7 +2685,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2697,14 +2697,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Hover & Focus
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.PRIMARY}
@@ -2713,7 +2713,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2722,7 +2722,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_PRIMARY}
@@ -2733,14 +2733,14 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography sx={{ color: 'rgba(0, 0, 0, 0.60);' }} variant="body1">
               Disabled
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Grid container spacing={3}>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.PRIMARY}
@@ -2749,7 +2749,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_SECONDARY}
@@ -2758,7 +2758,7 @@ const VisualTestTemplate: StoryFn<typeof Link> = (args) => {
                   Link
                 </Link>
               </Grid>
-              <Grid item xs={4} paddingBottom={2}>
+              <Grid size={{ xs: 4 }} paddingBottom={2}>
                 <Link
                   variant="h6"
                   type={LinkType.NEUTRAL_PRIMARY}

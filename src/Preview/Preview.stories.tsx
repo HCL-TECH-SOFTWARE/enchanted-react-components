@@ -148,7 +148,6 @@ const Template: StoryFn<typeof Preview> = (args) => {
 export const ExampleImagePreview = {
   render: Template,
   args: {
-    ...Preview.defaultProps,
     assets: [
       {
         title: 'Spitburg-Chair-Elemonte.jpg',
@@ -243,7 +242,6 @@ const sampleComponent = () => {
 export const ExampleComponentPreview = {
   render: TemplateComponent,
   args: {
-    ...Preview.defaultProps,
     assets: [
       {
         title: 'Hanging-chair.png',
@@ -275,7 +273,6 @@ VisualTest.parameters = {
 };
 
 VisualTest.args = {
-  ...Preview.defaultProps,
   assets: [
     {
       title: 'Hanging-chair.png',

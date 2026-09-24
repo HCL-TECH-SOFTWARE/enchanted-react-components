@@ -61,12 +61,28 @@ export const getMuiMenuItemThemeOverrides = (): Components<Omit<Theme, 'componen
                   backgroundColor: theme.palette.action.hover,
                 },
               },
+              // In MUI v7, opening Select via pointer does not set Mui-focusVisible on the focused MenuItem.
+              // This rule ensures the first focused item in a Select listbox still shows focus styling, matching MUI v5 behavior.
+              '[role="listbox"] > &:focus:not(.Mui-focusVisible)': {
+                border: `1px solid ${theme.palette.primary.main}`,
+                backgroundColor: 'transparent',
+                '&:hover': {
+                  backgroundColor: theme.palette.action.hover,
+                },
+              },
               '&.MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-root.Mui-selected': {
                 backgroundColor: `${theme.palette.action.activeOpacity}`,
                 '&:hover': {
                   backgroundColor: theme.palette.action.hover,
                 },
                 '&.Mui-focusVisible': {
+                  border: `1px solid ${theme.palette.primary.main}`,
+                  backgroundColor: 'transparent',
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                  },
+                },
+                '[role="listbox"] > &:focus:not(.Mui-focusVisible)': {
                   border: `1px solid ${theme.palette.primary.main}`,
                   backgroundColor: 'transparent',
                   '&:hover': {

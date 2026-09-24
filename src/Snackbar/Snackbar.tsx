@@ -203,7 +203,7 @@ export type SnackbarProps = MuiSnackbarProps & {
   buttonTextToolTip?: string,
   buttonAction: Function,
   onClose: Function,
-  placeholderIcon?: JSX.Element,
+  placeholderIcon?: React.ReactElement,
   placeholderIconAction: Function,
   showPlaceholderIcon?: boolean,
   progressVariant?: CircularProgressVariants,
@@ -224,7 +224,7 @@ const Snackbar = ({ ...props }: SnackbarProps) => {
    * @param statusType Optional parameter to determine the status of notification
    * @returns A component of icon
    */
-  const getStatusIcon = (statusType?: SnackbarVariants): JSX.Element => {
+  const getStatusIcon = (statusType?: SnackbarVariants): React.ReactElement => {
     switch (statusType) {
       case SnackbarVariants.ERROR: return (<ErrorIcon data-testid={SnackbarTestIds.SNACKBAR_ICON} />);
       case SnackbarVariants.WARNING: return (<WarningIcon data-testid={SnackbarTestIds.SNACKBAR_ICON} />);

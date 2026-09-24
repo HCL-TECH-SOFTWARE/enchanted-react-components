@@ -36,7 +36,7 @@ describe('Checkbox', () => {
     const anchor = screen.getByTestId('Checkbox');
     const style = window.getComputedStyle(anchor);
     expect(style.color).toBe('rgba(0, 0, 0, 0.6)');
-    expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0.07)');
+    expect(style.backgroundColor).toBe('transparent');
   });
 
   it('Checkbox disable style', () => {
@@ -60,7 +60,7 @@ describe('Checkbox', () => {
     await waitFor(() => {
       const style = window.getComputedStyle(anchor);
       expect(style.border).toBe(`1px solid ${(ensureToGetColor(Colors.get(ColorNames.HCLSOFTWAREBLUE07))).toLowerCase()}`);
-      expect(style.borderRadius).toBe('2px');
+      expect(style.borderRadius).toBe('3px');
     });
   });
 });

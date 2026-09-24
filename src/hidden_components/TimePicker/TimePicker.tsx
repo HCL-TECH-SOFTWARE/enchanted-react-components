@@ -13,13 +13,13 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 import React from 'react';
-import dayjs, { Dayjs } from 'dayjs';
 import { TimePicker as MuiTimePicker, TimePickerProps as MuiTimePickerProps } from '@mui/x-date-pickers/TimePicker';
-import { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
-import TextField, { TextFieldProps } from '../../TextField';
+import { Dayjs } from 'dayjs';
+import TextField from '../../TextField';
 import { ActionProps } from '../../prerequisite_components/InputLabelAndAction/InputLabelAndAction';
-
-export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerProps<TInputDate, TDate>, 'renderInput'> {
+// eslint-why MUI TimePicker requires any for the date adapter generic type parameters
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface TimePickerProps<TDate extends Dayjs = Dayjs> extends Omit<MuiTimePickerProps<TDate>, 'slots' | 'slotProps'> {
   label?: string;
   helperText?: string;
   helperIconTooltip?: string;
@@ -39,60 +39,37 @@ export interface TimePickerProps<TInputDate, TDate> extends Omit<MuiTimePickerPr
 }
 
 const DEFAULT_FORMAT: string = 'hh:mm';
-
-const TimePicker = <TInputDate, TDate>({ ...props }: TimePickerProps<TInputDate, TDate>) => {
-  const formatValue = (value: Dayjs, format: string): string => {
-    return value.format(format);
+// eslint-why MUI TimePicker requires any for the date adapter generic type parameters
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TimePicker = <TDate extends Dayjs = Dayjs>({ ...props }: TimePickerProps<TDate>) => {
+  // eslint-why MUI TimePicker requires any for the date adapter generic type parameters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const textFieldSlotProps = {
+    label: props.label,
+    helperText: props.helperText,
+    helperIconTooltip: props.helperIconTooltip,
+    required: props.required,
+    disabled: props.disabled,
+    margin: props.margin,
+    color: props.color,
+    size: props.size,
+    autoComplete: 'off',
+    error: props.error,
+    fullWidth: props.fullWidth,
+    unitLabel: props.unitLabel,
+    hiddenLabel: props.hiddenLabel,
+    nonEdit: props.nonEdit,
+    actionProps: props.actionProps,
+    inputProps: { placeholder: props.format },
   };
-
-  const getTextFieldProps = (muiTextFieldProps: MuiTextFieldProps) => {
-    let error = false;
-    if (props.value !== null) {
-      const day = props.value as unknown as Dayjs;
-      if (!Number.isNaN(day.day()) && !Number.isNaN(day.month()) && !Number.isNaN(day.year())) {
-        const valid = dayjs(day, props.format, true).isValid();
-        error = !valid;
-      }
-    }
-    const textFieldProps: TextFieldProps = {
-      ...muiTextFieldProps as TextFieldProps,
-      inputRef: muiTextFieldProps.inputRef,
-      label: props.label,
-      helperText: props.helperText,
-      helperIconTooltip: props.helperIconTooltip,
-      required: props.required,
-      disabled: props.disabled,
-      margin: props.margin,
-      color: props.color,
-      size: props.size,
-      autoComplete: 'off',
-      error: props.error || error,
-      fullWidth: props.fullWidth,
-      unitLabel: props.unitLabel,
-      hiddenLabel: props.hiddenLabel,
-      nonEdit: props.nonEdit,
-      value: props.value !== null ? `${formatValue(props.value as unknown as Dayjs, props.format || DEFAULT_FORMAT)}` : '',
-      actionProps: props.actionProps,
-      InputProps: {
-        ...muiTextFieldProps.InputProps,
-      },
-      inputProps: {
-        ...muiTextFieldProps.inputProps,
-        placeholder: props.format,
-      },
-    };
-    return textFieldProps;
-  };
-
+  // eslint-why MUI TimePicker requires any for the date adapter generic type parameters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const spreadProps = props as any;
   return (
     <MuiTimePicker
-      {...props}
-      renderInput={(params: MuiTextFieldProps) => {
-        const textFieldProps: TextFieldProps = getTextFieldProps(params);
-        return (
-          <TextField {...textFieldProps} />
-        );
-      }}
+      {...spreadProps}
+      slots={{ textField: TextField }}
+      slotProps={{ textField: textFieldSlotProps as object }}
     />
   );
 };

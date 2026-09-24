@@ -95,7 +95,7 @@ const MuiGrid = styled(Grid)<MuiGridProps>((theme) => {
       margin: '0px',
       display: 'flex',
       minWidth: '0',
-      justifyContent: 'space-between',
+      justifyContent: 'space-between !important',
       width: '100%',
     },
     '&.MuiGrid-root': {
@@ -225,8 +225,7 @@ const Header = ({ ...props }: HeaderProps) => {
         data-testid={HeaderTestIds.HEADER_CONTAINER}
       >
         <StartSectionGridStyled
-          item
-          xs={4}
+          size={4}
           sx={{ '&.MuiGrid-root': { paddingLeft: hamburgerSpace ? '68px' : '12px' } }}
           data-testid={HeaderTestIds.HEADER_START_SECTION}
         >
@@ -309,8 +308,7 @@ const Header = ({ ...props }: HeaderProps) => {
         {
           withMiddleSection && (
             <MiddleSectionGridStyled
-              item
-              xs={4}
+              size={4}
               data-testid={HeaderTestIds.HEADER_MIDDLE_SECTION}
             >
               {
@@ -322,8 +320,7 @@ const Header = ({ ...props }: HeaderProps) => {
           )
         }
         <EndSectionGridStyled
-          item
-          xs={withMiddleSection ? 4 : 8}
+          size={withMiddleSection ? 4 : 8}
           data-testid={HeaderTestIds.HEADER_END_SECTION}
         >
           {

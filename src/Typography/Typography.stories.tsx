@@ -17,7 +17,7 @@ import { StoryFn, Meta } from '@storybook/react-webpack5';
 import Box from '@mui/material/Box';
 
 import Divider from '../Divider';
-import Typography from './Typography';
+import Typography, { typographyDefaultProps } from './Typography';
 
 export default {
   title: 'Data display/Typography',
@@ -784,7 +784,7 @@ InteractiveExample.parameters = {
   options: { showPanel: true },
 };
 InteractiveExample.args = {
-  ...Typography.defaultProps,
+  ...typographyDefaultProps,
   variant: undefined,
   // @ts-ignore - this attribute is need to disable all controls in the InteractiveExample, but this attribute is not part of the TypographyProps
   interactive: true,

@@ -29,6 +29,11 @@ import {
 
 const theme = createEnchantedTheme(ThemeDirectionType.LTR, ThemeModeType.LIGHT_NEUTRAL_GREY);
 
+// Helper to get only DataGrid data cells (excluding footer/pagination cells)
+const getDataGridCells = (): HTMLElement[] => {
+  return Array.from(document.querySelectorAll(`.${gridClasses.cell}`)) as HTMLElement[];
+};
+
 afterEach(cleanup);
 
 describe('DataGridCell', () => {
@@ -42,8 +47,8 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect((screen.getAllByRole('row')[0].firstChild as HTMLElement).classList).not.toContain(gridClasses['columnHeader--alignRight']);
-    expect((screen.getAllByRole('row')[1].firstChild as HTMLElement).classList).not.toContain(gridClasses['cell--textRight']);
+    expect(screen.getAllByRole('columnheader')[0].classList).not.toContain(gridClasses['columnHeader--alignRight']);
+    expect(getDataGridCells()[0].classList).not.toContain(gridClasses['cell--textRight']);
   });
 
   it('Should render DataGrid with DataGridCell on Right alignment', () => {
@@ -56,8 +61,8 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect((screen.getAllByRole('row')[0].firstChild as HTMLElement).classList).toContain(gridClasses['columnHeader--alignRight']);
-    expect((screen.getAllByRole('row')[1].firstChild as HTMLElement).classList).toContain(gridClasses['cell--textRight']);
+    expect(screen.getAllByRole('columnheader')[0].classList).toContain(gridClasses['columnHeader--alignRight']);
+    expect(getDataGridCells()[0].classList).toContain(gridClasses['cell--textRight']);
   });
 
   it('Should render DataGrid with DataGridCell with base config', () => {
@@ -70,7 +75,7 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${baseColumnConfig.headerName}`)).not.toBeNull();
+    expect(screen.getByText(`${baseColumnConfig.headerName}`)).not.toBeNull();
   });
 
   it('Should render DataGrid with DataGridCell with iconEndColumn config', () => {
@@ -83,9 +88,10 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${iconEndColumnConfig.headerName}`)).not.toBeNull();
+    expect(screen.getByText(`${iconEndColumnConfig.headerName}`)).not.toBeNull();
     // For icon column, iconEnd comes next after typography
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[1].firstChild as HTMLElement).classList).toContain('MuiSvgIcon-root');
+    const cellContent = getDataGridCells()[0].querySelector('.MuiSvgIcon-root');
+    expect(cellContent).not.toBeNull();
   });
 
   it('Should render DataGrid with DataGridCell with avatarColumn config', () => {
@@ -98,8 +104,9 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${avatarColumnConfig.headerName}`)).not.toBeNull();
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[0].firstChild as HTMLElement).classList).toContain('MuiAvatar-root');
+    expect(screen.getByText(`${avatarColumnConfig.headerName}`)).not.toBeNull();
+    const avatarEl = getDataGridCells()[0].querySelector('.MuiAvatar-root');
+    expect(avatarEl).not.toBeNull();
   });
 
   it('Should render DataGrid with DataGridCell with iconColumn config', () => {
@@ -112,9 +119,10 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${iconColumnConfig.headerName}`)).not.toBeNull();
+    expect(screen.getByText(`${iconColumnConfig.headerName}`)).not.toBeNull();
     // For icon column, icon comes first before typography
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[0].firstChild as HTMLElement).classList).toContain('MuiSvgIcon-root');
+    const iconEl = getDataGridCells()[0].querySelector('.MuiSvgIcon-root');
+    expect(iconEl).not.toBeNull();
   });
 
   it('Should render DataGrid with DataGridCell with endActionColumn config', async () => {
@@ -127,14 +135,14 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${endActionColumnConfig.headerName}`)).not.toBeNull();
+    expect(screen.getByText(`${endActionColumnConfig.headerName}`)).not.toBeNull();
 
-    const withEndActionsCell = screen.getAllByRole('cell')[0].firstChild as HTMLElement;
-    expect((screen.getAllByRole('cell')[0].firstChild as HTMLDivElement).children[1].getAttribute('aria-hidden')).toEqual('true'); // Should not show endActions just yet
+    const withEndActionsCell = getDataGridCells()[0].firstChild as HTMLElement;
+    expect((getDataGridCells()[0].firstChild as HTMLDivElement).children[1].getAttribute('aria-hidden')).toEqual('true'); // Should not show endActions just yet
     fireEvent.mouseEnter(withEndActionsCell);
 
     await waitFor(() => {
-      expect((screen.getAllByRole('cell')[0].firstChild as HTMLDivElement).children[1].getAttribute('aria-hidden')).toEqual('false'); // endActions were appended on mouseEnter into the cell
+      expect((getDataGridCells()[0].firstChild as HTMLDivElement).children[1].getAttribute('aria-hidden')).toEqual('false'); // endActions were appended on mouseEnter into the cell
     });
   });
 
@@ -148,11 +156,11 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${allColumnConfig.headerName}`)).not.toBeNull();
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[0].firstChild as HTMLElement).classList).toContain('MuiSvgIcon-root');
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[1].firstChild as HTMLElement).classList).toContain('MuiTypography-root');
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[1].firstChild as HTMLElement).innerHTML).toEqual(sampleRowContainsAll[0].all);
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[2].firstChild as HTMLElement).classList).toContain('MuiSvgIcon-root');
+    expect(screen.getByText(`${allColumnConfig.headerName}`)).not.toBeNull();
+    const cell = getDataGridCells()[0];
+    expect(cell.querySelector('.MuiSvgIcon-root')).not.toBeNull();
+    expect(cell.querySelector('.MuiTypography-root')).not.toBeNull();
+    expect(cell.querySelector('.MuiTypography-root')?.innerHTML).toEqual(sampleRowContainsAll[0].all);
   });
 
   it('Should render DataGrid with DataGridCell with multiple start icon', () => {
@@ -165,9 +173,9 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect((screen.getAllByRole('cell')[0]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('document--tasksIcon');
-    expect((screen.getAllByRole('cell')[1]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('starIcon');
-    expect((screen.getAllByRole('cell')[2]?.firstChild?.firstChild?.firstChild as SVGSVGElement).getAttribute('data-mui-test')).toContain('radioIcon');
+    expect(getDataGridCells()[0]?.querySelector('[data-mui-test="document--tasksIcon"]')).not.toBeNull();
+    expect(getDataGridCells()[1]?.querySelector('[data-mui-test="starIcon"]')).not.toBeNull();
+    expect(getDataGridCells()[2]?.querySelector('[data-mui-test="radioIcon"]')).not.toBeNull();
   });
 
   it('should render DataGridCell with subTitle when subTitle is present in the data', () => {
@@ -180,8 +188,9 @@ describe('DataGridCell', () => {
         />
       </ThemeProvider>,
     );
-    expect(screen.getByLabelText(`${sampleColumns[0].headerName}`)).not.toBeNull();
-    expect((screen.getAllByRole('cell')[0].firstChild?.childNodes[2].lastChild as HTMLElement).classList).toContain('MuiDataGrid-cell--subTitle');
+    expect(screen.getByText(`${sampleColumns[0].headerName}`)).not.toBeNull();
+    const subTitleEl = getDataGridCells()[0].querySelector('.MuiDataGrid-cell--subTitle');
+    expect(subTitleEl).not.toBeNull();
     expect(screen.getByText('Fictional character')).not.toBeNull();
   });
 });

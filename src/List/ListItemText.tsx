@@ -80,7 +80,7 @@ const ListItemText = ({
         placement={tooltipPlacement}
       >
         <Grid container>
-          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{primaryReactNode}</Grid>
+          <Grid size="grow" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{primaryReactNode}</Grid>
         </Grid>
       </Tooltip>
     );
@@ -93,7 +93,7 @@ const ListItemText = ({
         placement={secondaryTooltipPlacement}
       >
         <Grid container>
-          <Grid item sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <Grid size="grow" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {secondaryReactNode}
           </Grid>
         </Grid>

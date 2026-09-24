@@ -50,7 +50,7 @@ export const sampleContentComposerOverview: Partial<HeaderProps> = {
     subtitle: '120 items',
   },
   endSection: [
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Create</Button>,
+    <Button variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Create</Button>,
     <TextField
       hiddenLabel
       sx={{
@@ -68,9 +68,9 @@ export const sampleContentComposerOverview: Partial<HeaderProps> = {
         }
       }}
     />,
-    <IconButton {...IconButton.defaultProps}><IconFilter /></IconButton>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
-    <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>,
+    <IconButton><IconFilter /></IconButton>,
+    <Button variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
+    <IconButton><IconSettings /></IconButton>,
   ],
 };
 
@@ -82,7 +82,7 @@ export const sampleContentComposerSearchResults: Partial<HeaderProps> = {
     subtitle: '120 items',
   },
   endSection: [
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Create</Button>,
+    <Button variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Create</Button>,
     <TextField
       hiddenLabel
       sx={{
@@ -100,9 +100,9 @@ export const sampleContentComposerSearchResults: Partial<HeaderProps> = {
         }
       }}
     />,
-    <IconButton {...IconButton.defaultProps}><IconFilter /></IconButton>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
-    <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>,
+    <IconButton><IconFilter /></IconButton>,
+    <Button variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
+    <IconButton><IconSettings /></IconButton>,
   ],
 };
 
@@ -120,15 +120,14 @@ export const sampleContentComposerItemPage: Partial<HeaderProps> = {
     </FormControl>,
     <IconDocumentTasks sx={{ color: (theme) => { return theme.palette.success.main; }, marginRight: '-12px' }} />,
     <Button
-      {...Button.defaultProps}
       variant={ButtonVariants.TEXT}
       endIcon={<IconCaretDown />}
       sx={(theme) => { return { ...theme.typography.body2, color: theme.palette.text.primary }; }}
     >
       Published
     </Button>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.OUTLINED} endIcon={<IconCaretDown />}>More</Button>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Save</Button>,
+    <Button variant={ButtonVariants.OUTLINED} endIcon={<IconCaretDown />}>More</Button>,
+    <Button variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Save</Button>,
   ],
 };
 
@@ -141,7 +140,7 @@ export const sampleDigitalAssetManagerOverview: Partial<HeaderProps> = {
   },
   endSection: [
     <>
-      <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>
+      <Button variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>
       <Button
         variant={ButtonVariants.OUTLINED}
         startIcon={<IconFolderAdd />}
@@ -204,7 +203,7 @@ export const sampleDigitalAssetManagerOverview: Partial<HeaderProps> = {
           </ToggleButton>
         </Tooltip>
       </ToggleButtonGroup>
-      <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>
+      <IconButton><IconSettings /></IconButton>
     </>,
   ],
 };
@@ -218,28 +217,28 @@ export const sampleDigitalAssetManagerItemPage: Partial<HeaderProps> = {
     favoritesToggleIcon: <IconStar />,
   },
   middleSection: [
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconCrop />
     </IconButton>,
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconRotateCounterClockwise />
     </IconButton>,
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconRotateClockwise />
     </IconButton>,
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconDataShare />
     </IconButton>,
   ],
   endSection: [
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconUndo />
     </IconButton>,
-    <IconButton {...IconButton.defaultProps}>
+    <IconButton>
       <IconRedo />
     </IconButton>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.OUTLINED} endIcon={<IconCaretDown />}>More</Button>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Save</Button>,
+    <Button variant={ButtonVariants.OUTLINED} endIcon={<IconCaretDown />}>More</Button>,
+    <Button variant={ButtonVariants.CONTAINED} endIcon={<IconCaretDown />}>Save</Button>,
   ],
 };
 
@@ -251,7 +250,7 @@ export const sampleDigitalAssetManagerSearchResults: Partial<HeaderProps> = {
     subtitle: '120 items',
   },
   endSection: [
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>,
+    <Button variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Upload</Button>,
     <TextField
       hiddenLabel
       sx={{
@@ -269,9 +268,9 @@ export const sampleDigitalAssetManagerSearchResults: Partial<HeaderProps> = {
         }
       }}
     />,
-    <IconButton {...IconButton.defaultProps}><IconFilter /></IconButton>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
-    <IconButton {...IconButton.defaultProps}><IconSettings /></IconButton>,
+    <IconButton><IconFilter /></IconButton>,
+    <Button variant={ButtonVariants.TEXT} startIcon={<IconColumn />} endIcon={<IconCaretDown />}>Recently added</Button>,
+    <IconButton><IconSettings /></IconButton>,
   ],
 };
 
@@ -283,9 +282,9 @@ export const sampleContentReportingOverview: Partial<HeaderProps> = {
     subtitle: '120 items',
   },
   endSection: [
-    <Button {...Button.defaultProps} variant={ButtonVariants.TEXT}>View(#)</Button>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED}>Update</Button>,
-    <Button {...Button.defaultProps} variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Export</Button>,
+    <Button variant={ButtonVariants.TEXT}>View(#)</Button>,
+    <Button variant={ButtonVariants.CONTAINED}>Update</Button>,
+    <Button variant={ButtonVariants.CONTAINED} startIcon={<IconUpload />}>Export</Button>,
   ],
 };
 
