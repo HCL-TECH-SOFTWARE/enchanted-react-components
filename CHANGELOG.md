@@ -6,6 +6,8 @@
 
 ### Fixed
 
+- Moved close button outside of DialogTitle h2 to fix an accessibility screen reader issue.
+
 ### Changed
 
 ### Breaking changes
