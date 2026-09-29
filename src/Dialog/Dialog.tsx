@@ -16,6 +16,7 @@ import React from 'react';
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import MuiDialog, { DialogProps as MuiDialogProps } from '@mui/material/Dialog';
 import { Components, Theme, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
 import IconButton from '../IconButton';
 import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
@@ -102,6 +103,14 @@ export const getMuiDialogThemeOverrides = (): Components<Omit<Theme, 'components
   };
 };
 
+const dialogTitleBoxSx = {
+  pr: 1.5,
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
+  justifyContent: 'space-between',
+};
+
 /**
  * @typedef DialogProps
  * @type {object}
@@ -140,8 +149,10 @@ const Dialog = ({ ...props }: DialogProps) => {
     >
       { (headerChildren && !hideHeader)
         && (
-          <DialogTitle data-testid={DialogTestIds.DIALOG_TITLE}>
-            <Grid>{headerChildren}</Grid>
+          <Box sx={dialogTitleBoxSx}>
+            <DialogTitle data-testid={DialogTestIds.DIALOG_TITLE}>
+              <Grid>{headerChildren}</Grid>
+            </DialogTitle>
             <Tooltip title={props.closeIconToolTip}>
               <IconButton
                 aria-label="close"
@@ -151,7 +162,7 @@ const Dialog = ({ ...props }: DialogProps) => {
                 <CloseIcon />
               </IconButton>
             </Tooltip>
-          </DialogTitle>
+          </Box>
         )}
       <DialogContent
         sx={(theme) => {
