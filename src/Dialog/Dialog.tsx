@@ -107,7 +107,6 @@ const dialogTitleBoxSx = {
   pr: 1.5,
   display: 'flex',
   flexDirection: 'row',
-  width: '100%',
   justifyContent: 'space-between',
 };
 
