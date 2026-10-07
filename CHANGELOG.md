@@ -6,11 +6,14 @@
 
 ### Fixed
 
-- Moved close button outside of DialogTitle h2 to fix an accessibility screen reader issue.
-
 ### Changed
 
 ### Breaking changes
+
+## 3.0.1
+
+### Fixed
+- Moved close button outside of DialogTitle h2 to fix an accessibility screen reader issue.
 
 ## 3.0.0
 - Updated MUI to version v7 (https://mui.com/material-ui/migration/upgrade-to-v7/)
