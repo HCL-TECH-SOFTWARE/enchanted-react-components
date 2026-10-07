@@ -5,6 +5,7 @@
 ### Added
 
 ### Fixed
+- Removed `width: 100%` style rule in Dialog to fix a downstream issue.
 
 ### Changed
 
