@@ -5,11 +5,15 @@
 ### Added
 
 ### Fixed
-- Removed `width: 100%` style rule in Dialog to fix a downstream issue.
 
 ### Changed
 
 ### Breaking changes
+
+## 3.0.2
+
+### Fixed
+- Removed `width: 100%` style rule in Dialog to fix a downstream issue.
 
 ## 3.0.1
 
