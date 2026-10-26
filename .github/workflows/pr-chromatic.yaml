@@ -41,4 +41,10 @@ jobs:
           echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
           exit 1
       - name: Publish to Chromatic
-        run: npm run chromatic -- --only-changed --skip "dependabot/**"
+        uses: chromaui/action@latest
+        with:
+          # Only snapshot stories that changed — speeds up CI significantly
+          onlyChanged: true
+          # Wait for full Chromatic results (including a11y) before reporting status
+          exitOnceUploaded: false
+          skip: "dependabot/**" # Option to skip 
