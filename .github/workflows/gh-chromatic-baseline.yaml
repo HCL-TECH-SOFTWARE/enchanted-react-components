@@ -21,6 +21,8 @@ jobs:
   chromatic:
     name: Update chromatic baseline
     runs-on: ubuntu-latest
+    env:
+      CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - uses: actions/setup-node@v4
         with:
@@ -33,10 +35,9 @@ jobs:
       - name: Install dependencies
         # See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
-      - name: Run Chromatic
-        uses: chromaui/action@latest
-        with:
-          # Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
-          projectToken: chpt_6f661388be77742
-          autoAcceptChanges: true
-          onlyChanged: true
+      - name: Publish to Chromatic
+        if: env.CHROMATIC_PROJECT_TOKEN != ''
+        run: npm run chromatic -- --only-changed --auto-accept-changes
+      - name: Skip publishing
+        if: env.CHROMATIC_PROJECT_TOKEN == ''
+        run: echo "CHROMATIC_PROJECT_TOKEN is not available; skipping publish."
