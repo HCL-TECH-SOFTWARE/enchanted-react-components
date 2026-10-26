@@ -38,7 +38,7 @@
     "test-unit": "cross-env CI=true jest --config ./jest.config.js --runInBand --testTimeout=10000 --testPathPattern \"__tests__/unit\" --testPathIgnorePatterns \"__tests__/unit/storyshots-(ltr|rtl).test.ts\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_6f661388be77742"
+    "chromatic": "chromatic"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
