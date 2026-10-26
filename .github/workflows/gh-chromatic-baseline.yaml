@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
           exit 1
-      - name: Publish to Chromatic
+      - name: Run Chromatic
         uses: chromaui/action@latest
         with:
           # Accept changes automatically when updating baseline
