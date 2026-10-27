@@ -1,4 +1,4 @@
-# @hcl-software/enchanted-react-components
+# @hcl-software/enchanted-react-components test
 
 Enchanted React Components is a collection of ui components that are being used in HCL Software products. This package depends on the [Material UI Component Library](https://github.com/mui-org/material-ui/tree/master/packages/material-ui).
 
