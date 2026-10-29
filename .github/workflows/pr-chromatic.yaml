@@ -15,20 +15,31 @@
 name: Run chromatic for a PR
 on:
   workflow_dispatch:
-  pull_request:
+  # pull_request_target runs in the context of the base repo, so secrets are
+  # available for PRs from forks. The fork's code is checked out and executed
+  # below, so the job is gated by the `chromatic-fork` environment, which MUST
+  # be configured with required reviewers (a maintainer reviews the PR diff
+  # before approving the run).
+  pull_request_target:
+
+# Least privilege: the job only needs to read the repository.
+permissions:
+  contents: read
 
 jobs:
   chromatic:
     name: PR check chromatic
     runs-on: ubuntu-latest
+    # Approval gate for untrusted code with access to secrets.
+    environment: chromatic-fork
     env:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
       - name: Check CHROMATIC_PROJECT_TOKEN
         run: |
           echo "Checking CHROMATIC_PROJECT_TOKEN..."
-          echo "CHROMATIC_PROJECT_TOKEN is set to: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}"
-          if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
+          echo "CHROMATIC_PROJECT_TOKEN is set to: $CHROMATIC_PROJECT_TOKEN"
+          if [ -z "$CHROMATIC_PROJECT_TOKEN" ]; then
             echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
             exit 1
           fi
@@ -40,6 +51,12 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          # pull_request_target defaults to the base branch; check out the PR head instead.
+          # For a workflow_dispatch run there is no PR, so fall back to the selected ref.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          # Do not leave the GITHUB_TOKEN in .git/config where fork code could read it.
+          persist-credentials: false
       - name: Install dependencies
         # See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
