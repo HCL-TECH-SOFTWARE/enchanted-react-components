@@ -36,8 +36,6 @@ jobs:
         # See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
       - name: Check CHROMATIC_PROJECT_TOKEN
-        echo "Checking CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}"
-        if: env.CHROMATIC_PROJECT_TOKEN == ''
         run: |
           echo "Checking CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}"
           if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
