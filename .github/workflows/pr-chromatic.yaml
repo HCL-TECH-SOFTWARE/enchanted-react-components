@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Check CHROMATIC_PROJECT_TOKEN
         run: |
+          echo "Checking CHROMATIC_PROJECT_TOKEN..."
+          echo "CHROMATIC_PROJECT_TOKEN is set to: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}"
           if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
             echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
             exit 1
