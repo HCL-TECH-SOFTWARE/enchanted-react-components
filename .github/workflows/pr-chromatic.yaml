@@ -21,8 +21,7 @@ jobs:
   chromatic:
     name: PR check chromatic
     runs-on: ubuntu-latest
-    secrets:
-      inherit: true
+    secrets: inherit
     env:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
