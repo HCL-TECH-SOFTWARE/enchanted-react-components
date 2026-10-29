@@ -16,13 +16,13 @@ name: Run chromatic for a PR
 on:
   workflow_dispatch:
   pull_request:
-  workflow_call:
-    secrets: inherit
 
 jobs:
   chromatic:
     name: PR check chromatic
     runs-on: ubuntu-latest
+    secrets:
+      inherit: true
     env:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
