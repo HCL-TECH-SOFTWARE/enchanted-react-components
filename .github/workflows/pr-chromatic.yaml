@@ -24,6 +24,12 @@ jobs:
     env:
       CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
     steps:
+      - name: Check CHROMATIC_PROJECT_TOKEN
+        run: |
+          if [ -z "${{ secrets.CHROMATIC_PROJECT_TOKEN }}" ]; then
+            echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
+            exit 1
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: '24.x'
@@ -35,11 +41,6 @@ jobs:
       - name: Install dependencies
         # See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
-      - name: Check CHROMATIC_PROJECT_TOKEN
-        if: env.CHROMATIC_PROJECT_TOKEN == ''
-        run: |
-          echo "::error::CHROMATIC_PROJECT_TOKEN is not set. Aborting workflow."
-          exit 1
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
