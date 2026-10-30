@@ -149,7 +149,7 @@ const Dialog = ({ ...props }: DialogProps) => {
       { (headerChildren && !hideHeader)
         && (
           <Box sx={dialogTitleBoxSx}>
-            <DialogTitle data-testid={DialogTestIds.DIALOG_TITLE}>
+            <DialogTitle component={typeof headerChildren === 'string' ? 'h2' : 'div'} data-testid={DialogTestIds.DIALOG_TITLE}>
               <Grid>{headerChildren}</Grid>
             </DialogTitle>
             <Tooltip title={props.closeIconToolTip}>
