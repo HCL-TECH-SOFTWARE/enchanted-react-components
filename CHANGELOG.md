@@ -5,11 +5,15 @@
 ### Added
 
 ### Fixed
-- Changed underlying Dialog headerChildren component type to div to fix an accessibility screen reader issue.
 
 ### Changed
 
 ### Breaking changes
+
+## 3.0.3
+
+### Fixed
+- Changed underlying Dialog headerChildren component type to div to fix an accessibility screen reader issue.
 
 ## 3.0.2
 
