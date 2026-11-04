@@ -98,7 +98,7 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-image-snapshot": "6.5.2",
     "jest-reporter-log-validator": "0.1.6",
-    "puppeteer": "24.43.1",
+    "puppeteer": "25.16.0",
     "storybook": "10.6.5",
     "stylis": "4.0.13",
     "ts-jest": "29.4.15",
