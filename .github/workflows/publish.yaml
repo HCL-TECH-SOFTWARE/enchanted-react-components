@@ -34,4 +34,11 @@ jobs:
       - run: npm install -g npm@11 # Fixing the npm publish CMD - sigstore module is missing. Check this link: https://github.com/npm/cli/issues/9722
       - run: npm ci
       - run: npm run build
-      - run: npm publish --access public
+      - name: Publish package
+        run: |
+          PACKAGE_MAJOR=$(node -p "require('./package.json').version.split('.')[0]")
+          if [[ "$PACKAGE_MAJOR" == "2" ]]; then
+            npm publish --access public --tag latest-v2
+          else
+            npm publish --access public --tag latest
+          fi
