@@ -13,9 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import ProgressBar, { EnumUploadStatus, ProgressItemType } from './ProgressBar';
+import ProgressBar, {
+  EnumUploadStatus, IProgressState, ProgressItemType, UploadBarStatus,
+} from './ProgressBar';
 
 export default {
   title: 'Data display/ProgressBar',
@@ -30,6 +32,20 @@ export default {
     uploadStatus: {
       control: 'text',
       description: 'Status of the upload progress bar',
+    },
+    overallStatus: {
+      control: 'select',
+      options: Object.values(UploadBarStatus),
+      description: 'Overall result shown as the header icon once the upload has finished: success (green), warning (yellow, mixed result) or error (red).',
+    },
+    expanded: {
+      control: 'boolean',
+      description: 'Whether the progress bar is expanded.',
+    },
+    onExpandedChange: {
+      control: false,
+      action: 'onExpandedChange',
+      description: 'Called when the user expands or collapses the progress bar.',
     },
     totalSize: {
       control: 'text',
@@ -94,6 +110,14 @@ export default {
 } as Meta<typeof ProgressBar>;
 
 const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
+  const { expanded: expandedArg, onExpandedChange } = args;
+  const [expanded, setExpanded] = useState<boolean>(expandedArg ?? false);
+
+  // Keeps the story in sync when the "expanded" control is changed in Storybook.
+  useEffect(() => {
+    setExpanded(expandedArg ?? false);
+  }, [expandedArg]);
+
   const translation = {
     closeButtonTooltip: 'Close',
     expandTooltip: 'View upload details',
@@ -112,6 +136,13 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
       <ProgressBar
         {...args}
         translation={translation}
+        expanded={expanded}
+        onExpandedChange={(next) => {
+          setExpanded(next);
+          if (onExpandedChange) {
+            onExpandedChange(next);
+          }
+        }}
       />
     </div>
   );
@@ -121,6 +152,7 @@ export const InteractiveExample = InteractiveExampleTemplate.bind({});
 InteractiveExample.args = {
   totalPercentage: 25,
   uploadStatus: 'Uploading 1 of 5 items',
+  overallStatus: UploadBarStatus.SUCCESS,
   totalSize: '50 MB',
   totalTime: '27 min 45 sec',
   uploadedFile: [
@@ -256,4 +288,47 @@ InteractiveExample.args = {
   cancelAll: () => {
     // cancel all action
   },
+};
+
+const allFiles = InteractiveExample.args.uploadedFile as IProgressState[];
+const successFiles = allFiles.filter((file) => { return file.status === EnumUploadStatus.SUCCESS; });
+const failedFiles = allFiles.filter((file) => { return file.status === EnumUploadStatus.FAILURE; });
+
+/**
+ * Upload finished and every item succeeded: green check icon.
+ */
+export const UploadSucceeded = InteractiveExampleTemplate.bind({});
+UploadSucceeded.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.SUCCESS,
+  uploadedFile: successFiles,
+  expanded: true,
+};
+
+/**
+ * Upload finished with some items succeeded and some failed: yellow warning icon.
+ */
+export const UploadPartiallySucceeded = InteractiveExampleTemplate.bind({});
+UploadPartiallySucceeded.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} of ${successFiles.length + failedFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.WARNING,
+  uploadedFile: [...successFiles, ...failedFiles],
+  expanded: true,
+};
+
+/**
+ * Upload finished and every item failed: red warning icon.
+ */
+export const UploadFailed = InteractiveExampleTemplate.bind({});
+UploadFailed.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 0,
+  uploadStatus: 'Upload failed',
+  overallStatus: UploadBarStatus.ERROR,
+  uploadedFile: failedFiles,
+  expanded: true,
 };
