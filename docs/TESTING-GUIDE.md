@@ -96,6 +96,21 @@ test: {
 `src/__tests__/setup.ts` registers jest-dom and axe matchers and cleans up after each test:
 
 ```ts
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { afterEach, expect } from 'vitest';
@@ -164,6 +179,21 @@ import { Button, ButtonVariant } from '../../../components/Button';
 Based on the existing Button tests (first-release components: Button, TextField, IconButton, SelectSingle, Checkbox, Dialog; see [ENCHANTED.md](../ENCHANTED.md)):
 
 ```tsx
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
@@ -204,7 +234,7 @@ describe('Button', () => {
 
 ### Accessibility
 
-Every component test file includes an automated axe check, and specific accessibility behavior is asserted through the accessibility tree:
+Every component test file includes an automated axe check, and specific accessibility behavior is asserted through the accessibility tree. Remember that every test file must begin with the copyright header (see [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#copyright-header)):
 
 ```tsx
 import { axe } from '../../axe';
@@ -293,6 +323,7 @@ Components must work without `ThemeProvider`, so test them bare by default. Add 
 
 Per component, the minimum set is:
 
+- [ ] The test file begins with the Apache 2.0 copyright header ([COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#copyright-header)).
 - [ ] Renders by role or label with an accessible name.
 - [ ] Figma defaults and each mapped property (default plus a non-default value).
 - [ ] Disabled and error states, including `aria-*` attributes.
