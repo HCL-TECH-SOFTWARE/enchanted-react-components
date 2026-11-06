@@ -19,10 +19,11 @@ Do not add, install, or use third-party libraries or tools beyond those already 
 - **Package output:** ESM only. The library entry point is `src/index.ts`; generated JavaScript, declarations, and styles are emitted under `dist/`.
 - **Testing:** Vitest with Testing Library (React Testing Library, user-event, jest-dom) and jsdom for unit and component tests, `vitest-axe` for automated accessibility checks, and `@vitest/coverage-v8` for coverage. WebdriverIO and browser-based test runners are not part of the setup. Conventions are in [TESTING-GUIDE.md](TESTING-GUIDE.md).
 - **Component documentation and visual review:** Storybook and Chromatic. Chromatic runs require a project token supplied through the environment; never commit the token.
-- **Styles and tokens:** Sass/SCSS consumes tokens authored in the required DTCG Design Tokens Format Module 2025.10. Use `.tokens.json` files and maintain corresponding light and dark theme sources. Transformation runs through the first-party `scripts/build-tokens.mjs` (`npm run tokens:build`); do not add a third-party generator or invent token values. Pull the tokens a component needs before styling it, and leave styles unimplemented when no approved token covers a value. See [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md).
+- **Styles and tokens:** Sass/SCSS consumes tokens authored in the required DTCG Design Tokens Format Module 2025.10. Use `.tokens.json` files and maintain corresponding light and dark theme sources. Transformation runs through the first-party `scripts/build-tokens.mjs` (`npm run tokens:build`); do not add a third-party generator or invent token values. Component styles are `<Component>.shadow.scss` files that `ThemeProvider` also injects into its shadow-root boundary. Pull the tokens a component needs before styling it, and leave styles unimplemented when no approved token covers a value. See [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md).
 - **Storybook addons:** `@storybook/addon-docs` (autodocs and MDX), `@storybook/addon-a11y` (axe checks per story), and `@storybook/addon-mcp` (exposes the component manifest to AI agents). Their versions follow Storybook. Do not add other addons without explicit approval; `@storybook/addon-vitest` is planned for when stories have `play` functions.
 - **Storybook MCP:** while `npm run storybook` runs, the addon serves an MCP endpoint at `http://localhost:6006/mcp`. Register it per user, not in the repository, for example with `npx mcp-add --type http --url "http://localhost:6006/mcp" --scope user`. It is a preview feature and only supports React.
-- **Storybook theming:** `.storybook/preview.tsx` wraps all stories with the shared `ThemeProvider`. Its Theme and Direction toolbar controls select light/dark and LTR/RTL respectively, defaulting to light and LTR.
+- **Storybook theming:** `.storybook/preview.tsx` wraps all stories with the shared `ThemeProvider`. Its Theme, Direction, and Shadow root toolbar controls select light/dark, LTR/RTL, and none/open/closed respectively, defaulting to light, LTR, and open. Stories render inside the provider's shadow-root style boundary.
+- **Copyright header:** Every source file (`.ts`, `.tsx`, `.scss`, `.js`, `.mjs`, `.figma.ts`) must begin with the Apache 2.0 copyright header. See [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#copyright-header) for the exact text and placement rules.
 - **Package:** Private internal package named `@hcl-software/enchanted-react-components`, marked `Apache-2.0` and not configured for publication. The manifest author is Hanjo Hagemeier <hanjo.hagemeier@hcl.com>; contributors are Angelo rick Asoy <angelorick.asoy@hcl.com> and Satish Kumar <kumarsati@hcl.com>.
 - **Runtime:** Node.js 24 LTS with npm. The current setup environment uses npm 11.19.0.
 - **Dependency versions:** Use only versions already recorded in `package.json` and `package-lock.json`; do not add or update dependencies without explicit approval.
@@ -53,16 +54,16 @@ Keep package versions and scripts synchronized with the manifest and configurati
 | `docs/` | Focused project and contributor guides | Present |
 | `src/` | Library source and public entry point | Present |
 | `src/components/` | Reusable UI components | Candidate scaffolds present; functional implementation awaits approved scope and specifications |
-| `src/components/<Component>/` | React component, colocated Storybook stories, and styles | Candidate scaffolds present; functional implementation awaits approved scope and specifications |
-| `src/theme/` | Shared theme provider | Initial scaffold supports light and dark modes; API, mode selection, default, persistence, and token values await approved specifications |
-| `src/utils/` | Small shared helpers, such as class name merging | Present |
+| `src/components/<Component>/` | React component, colocated Storybook stories, and styles (`<Component>.shadow.scss`) | Candidate scaffolds present; functional implementation awaits approved scope and specifications |
+| `src/theme/` | Shared theme provider and its shadow-root style boundary (`ThemeProvider.tsx`, `BoundaryContext.ts`, `boundaryStyles.ts`) | Initial scaffold supports light and dark modes and the `shadowRootType` prop (default `open`); see [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#theme-provider-boundary). Mode selection, default, persistence, and token values await approved specifications |
+| `src/utils/` | Small shared helpers, such as class name merging and `useShadowRoot` for the style boundary | Present |
 | `src/types/` | Shared type definitions, if needed | Planned |
 | `tokens/` | DTCG 2025.10 `.tokens.json` sources for light and dark themes | Present: `light.tokens.json` and `dark.tokens.json` from the Figma `Theme` collection; see [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md) |
 | `src/styles/` | SCSS source; `_tokens.generated.scss` is produced by `npm run tokens:build` and git-ignored | Present |
 | `src/__tests__/` | Shared Vitest setup (`setup.ts`: jest-dom and axe matchers); see [TESTING-GUIDE.md](TESTING-GUIDE.md) | Present |
 | `src/__tests__/unit/components/` | Unit and component tests, one `<Component>.test.tsx` per component | Present; additional component tests await component specifications |
 | `.storybook/` | Storybook configuration | Present |
-| `.storybook/preview.tsx` | Shared SCSS import, global theme/direction toolbars, and `ThemeProvider` decorator | Present |
+| `.storybook/preview.tsx` | Shared SCSS import, global theme/direction/shadow-root toolbars, and `ThemeProvider` decorator | Present |
 | `src/Library.stories.tsx` | Storybook overview for the empty library scaffold | Present; component stories await approved specifications |
 | `.chromatic/` | Optional Chromatic settings; secrets remain in environment | Optional |
 | `.github/workflows/` | GitHub Actions quality, visual-review, and Chromatic baseline workflows | Present |

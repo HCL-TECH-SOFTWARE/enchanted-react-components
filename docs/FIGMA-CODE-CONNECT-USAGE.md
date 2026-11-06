@@ -51,7 +51,7 @@ IF MCP server is not connected or not authorized:
 
 > **Tokens come first.** Pull the design tokens for a component *before* writing its styles. A component whose tokens are missing must be left unstyled — never fill the gap with literal values.
 
-Code Connect maps a component's **API**; it carries no styling. Styling comes from approved DTCG tokens, so if `tokens/` has no entry for a value the design needs, there is nothing legitimate to style with. This is the usual cause of a component that ends up with an empty `.module.scss`: the template was authored before the tokens existed.
+Code Connect maps a component's **API**; it carries no styling. Styling comes from approved DTCG tokens, so if `tokens/` has no entry for a value the design needs, there is nothing legitimate to style with. This is the usual cause of a component that ends up with an empty `.shadow.scss`: the template was authored before the tokens existed.
 
 [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md) is the authority for token format and authoring rules. This section only defines **when** to pull them.
 
@@ -63,7 +63,7 @@ Run this before styling a component, and again whenever a design adds a value th
 2. **Check `tokens/` for each value.** Resolve every variable to a token path in `light.tokens.json` and `dark.tokens.json`.
 3. **Add any missing tokens** from the Figma variable values, following [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md): DTCG 2025.10, an explicit `$type` on every token, matching paths and types across both themes. Never invent a value, and never derive one from a screenshot or a rendered pixel.
 4. **Regenerate the CSS custom properties** with `npm run tokens:build`, then consume them in SCSS by token path (`color.primary.darkInverse` becomes `var(--color-primary-dark-inverse)`).
-5. **Only then write `<Component>.module.scss`.**
+5. **Only then write `<Component>.shadow.scss`**, with component-prefixed class names and every rule inside `@layer enchanted.components { ... }`, and register it in `src/theme/boundaryStyles.ts` so the `ThemeProvider` boundary injects it (see [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#theme-provider-boundary) and [CUSTOMIZATION-GUIDE.md](CUSTOMIZATION-GUIDE.md)).
 
 ### For AI Agents — Styling Gate
 
@@ -73,7 +73,7 @@ BEFORE writing any component style:
     IF a required token is missing AND its Figma variable is available:
         Add it per DESIGN-TOKENS-GUIDE.md, then run npm run tokens:build.
     IF a required token is missing AND no approved design source defines it:
-        STOP styling that value. Leave <Component>.module.scss empty.
+        STOP styling that value. Leave <Component>.shadow.scss empty.
         Report exactly which tokens are missing and which component
         styles are blocked on them.
         Do NOT hard-code hex, px, rem, font, or shadow literals.
@@ -461,7 +461,7 @@ Everything else is derived automatically:
    - Add any missing tokens per DESIGN-TOKENS-GUIDE.md, then run
      npm run tokens:build.
    - IF a required value has no approved design source:
-       Do NOT style it. Leave <Component>.module.scss empty and record
+       Do NOT style it. Leave <Component>.shadow.scss empty and record
        which tokens are missing. Do NOT hard-code literals.
    - Template and prop work may continue regardless.
 
@@ -530,7 +530,7 @@ Call get_variable_defs; resolve each design value to a token in tokens/
   +--> Token missing, Figma variable available? --> Add per DESIGN-TOKENS-GUIDE.md,
   |                                                 run npm run tokens:build
   |
-  +--> Token missing, no approved source? -------> Leave .module.scss empty.
+  +--> Token missing, no approved source? -------> Leave .shadow.scss empty.
   |                                                Report blocked styles.
   |                                                Do NOT hard-code literals.
   |                                                (Template work continues.)
