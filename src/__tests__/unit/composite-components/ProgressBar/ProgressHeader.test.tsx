@@ -80,35 +80,42 @@ describe('ProgressHeader', () => {
       renderHeader({ totalPercentage: 50 });
       expect(screen.getByTestId('wrapper').querySelector('[data-testid="progressRoot"]')).not.toBeNull();
       expect(getLeadingIcon('checkmark--outlineIcon')).toBeNull();
-      expect(getLeadingIcon('warning--altIcon')).toBeNull();
       expect(getLeadingIcon('warningIcon')).toBeNull();
+      expect(getLeadingIcon('errorIcon')).toBeNull();
     });
 
     it('keeps showing the spinner while in progress regardless of overallStatus', () => {
-      renderHeader({ totalPercentage: 50, overallStatus: UploadBarStatus.WARNING });
+      renderHeader({ totalPercentage: 50, overallStatus: UploadBarStatus.ERROR });
       expect(screen.getByTestId('wrapper').querySelector('[data-testid="progressRoot"]')).not.toBeNull();
-      expect(getLeadingIcon('warning--altIcon')).toBeNull();
+      expect(getLeadingIcon('warningIcon')).toBeNull();
     });
 
     it('renders the success icon when the upload finished successfully', () => {
       renderHeader({ totalPercentage: 100, overallStatus: UploadBarStatus.SUCCESS });
       expect(getLeadingIcon('checkmark--outlineIcon')).not.toBeNull();
-      expect(getLeadingIcon('warning--altIcon')).toBeNull();
       expect(getLeadingIcon('warningIcon')).toBeNull();
+      expect(getLeadingIcon('errorIcon')).toBeNull();
     });
 
-    it('renders the mixed (warning) icon when the upload partially succeeded', () => {
-      renderHeader({ totalPercentage: 100, overallStatus: UploadBarStatus.WARNING });
-      expect(getLeadingIcon('warning--altIcon')).not.toBeNull();
+    it('renders the error icon when some uploads failed and some succeeded', () => {
+      renderHeader({ totalPercentage: 100, overallStatus: UploadBarStatus.ERROR });
+      expect(getLeadingIcon('warningIcon')).not.toBeNull();
       expect(getLeadingIcon('checkmark--outlineIcon')).toBeNull();
-      expect(getLeadingIcon('warningIcon')).toBeNull();
+      expect(getLeadingIcon('errorIcon')).toBeNull();
     });
 
     it('renders the error icon when every upload failed', () => {
       renderHeader({ totalPercentage: 0, overallStatus: UploadBarStatus.ERROR });
       expect(getLeadingIcon('warningIcon')).not.toBeNull();
       expect(getLeadingIcon('checkmark--outlineIcon')).toBeNull();
-      expect(getLeadingIcon('warning--altIcon')).toBeNull();
+      expect(getLeadingIcon('errorIcon')).toBeNull();
+    });
+
+    it('renders the stopped icon when the entire batch was cancelled', () => {
+      renderHeader({ totalPercentage: 100, overallStatus: UploadBarStatus.STOPPED });
+      expect(getLeadingIcon('errorIcon')).not.toBeNull();
+      expect(getLeadingIcon('checkmark--outlineIcon')).toBeNull();
+      expect(getLeadingIcon('warningIcon')).toBeNull();
     });
   });
 

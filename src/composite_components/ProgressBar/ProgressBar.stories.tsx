@@ -36,7 +36,7 @@ export default {
     overallStatus: {
       control: 'select',
       options: Object.values(UploadBarStatus),
-      description: 'Overall result shown as the header icon once the upload has finished: success (green), warning (yellow, mixed result) or error (red).',
+      description: 'Overall result shown as the header icon once the upload has finished: success (green), error (red, any failure present) or stopped (orange, entire batch cancelled).',
     },
     expanded: {
       control: 'boolean',
@@ -126,7 +126,7 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     retryButtonTooltip: 'Retry upload',
     errorButtonTooltip: 'Cancel uploading',
     successLabel: 'Uploaded.',
-    failureLabel: 'Upload Failed.',
+    failureLabel: 'Upload failed.',
     pendingLabel: 'Waiting...',
     progressLabel: 'Uploading...',
     cancelledLabel: 'Cancelled.',
@@ -308,20 +308,21 @@ UploadSucceeded.args = {
 };
 
 /**
- * Upload finished with some items succeeded and some failed: yellow warning icon.
+ * Upload finished with some items succeeded and some failed: red error icon.
+ * Any failure present - whether partial or total - shows the same error icon.
  */
 export const UploadPartiallySucceeded = InteractiveExampleTemplate.bind({});
 UploadPartiallySucceeded.args = {
   ...InteractiveExample.args,
   totalPercentage: 100,
   uploadStatus: `${successFiles.length} of ${successFiles.length + failedFiles.length} items uploaded`,
-  overallStatus: UploadBarStatus.WARNING,
+  overallStatus: UploadBarStatus.ERROR,
   uploadedFile: [...successFiles, ...failedFiles],
   expanded: true,
 };
 
 /**
- * Upload finished and every item failed: red warning icon.
+ * Upload finished and every item failed: red error icon.
  */
 export const UploadFailed = InteractiveExampleTemplate.bind({});
 UploadFailed.args = {
@@ -330,5 +331,49 @@ UploadFailed.args = {
   uploadStatus: 'Upload failed',
   overallStatus: UploadBarStatus.ERROR,
   uploadedFile: failedFiles,
+  expanded: true,
+};
+
+const cancelledFiles: IProgressState[] = allFiles.map((file) => {
+  return {
+    ...file, status: EnumUploadStatus.CANCELLED, progress: 0, message: 'Cancelled.',
+  };
+});
+
+/**
+ * User cancelled the entire batch before anything finished: no successes, no failures.
+ * Shows the round orange "stopped" icon (not green), since nothing actually succeeded.
+ */
+export const UploadCancelled = InteractiveExampleTemplate.bind({});
+UploadCancelled.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `0 of ${cancelledFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.STOPPED,
+  uploadedFile: cancelledFiles,
+  expanded: true,
+};
+
+const partiallyCancelledFiles: IProgressState[] = allFiles
+  .filter((file) => {
+    return file.status === EnumUploadStatus.PROGRESS || file.status === EnumUploadStatus.PENDING;
+  })
+  .map((file) => {
+    return {
+      ...file, status: EnumUploadStatus.CANCELLED, progress: 0, message: 'Cancelled.',
+    };
+  });
+
+/**
+ * Mixed batch: some items succeeded, some failed, and some were cancelled mid-upload.
+ * Still shows the red error icon, since at least one failure is present.
+ */
+export const UploadMixedResult = InteractiveExampleTemplate.bind({});
+UploadMixedResult.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} of ${successFiles.length + failedFiles.length + partiallyCancelledFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.ERROR,
+  uploadedFile: [...successFiles, ...failedFiles, ...partiallyCancelledFiles],
   expanded: true,
 };
