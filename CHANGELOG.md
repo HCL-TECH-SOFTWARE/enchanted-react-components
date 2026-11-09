@@ -6,6 +6,7 @@
 
 ### Fixed
 - Update off of various vulnerable dev dependencies.
+- ProgressBar: add controlled expand/collapse support; fix chevron direction; add correct error and stopped icons in progressbar header for failed and cancelled upload states.
 
 ### Changed
 - Updated publish.yaml script to separate latest tags for v2 maintenance and main branches.
