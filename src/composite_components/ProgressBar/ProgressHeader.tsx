@@ -20,7 +20,10 @@ import ChevronUpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron-
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
-import WarningAltIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning--alt';
+// Note: this is the icon library's "error" icon (a round circle with a diagonal slash), reused
+// here for our STOPPED state (entire batch cancelled) per UX. It is unrelated to our ERROR state,
+// which uses the icon library's "warning" icon above - the naming is crossed between the two.
+import StoppedIcon from '@hcl-software/enchanted-icons/dist/carbon/es/error';
 import Typography from '../../Typography';
 import IconButton from '../../IconButton';
 import CircularProgress from '../../ProgressIndicator/CircularProgress';
@@ -72,11 +75,11 @@ const StyledHeader = styled(Box)((props) => {
           '&[data-mui-test=warningIcon]': {
             color: theme.palette.error.inverse,
           },
-          // mixed result (some uploads succeeded, some failed)
-          '&[data-mui-test="warning--altIcon"]': {
+          // stopped (entire batch cancelled, no successes and no failures)
+          '&[data-mui-test=errorIcon]': {
             color: theme.palette.warning.inverse,
           },
-          '&[data-mui-test=warningIcon],&[data-mui-test=checkmark--outlineIcon],&[data-mui-test="warning--altIcon"]': {
+          '&[data-mui-test=warningIcon],&[data-mui-test=checkmark--outlineIcon],&[data-mui-test=errorIcon]': {
             height: '16px',
             width: '16px',
             margin: '2px 8px 2px 0px',
@@ -212,7 +215,7 @@ const ProgressHeader = (props: progressHeaderProps) => {
   /**
    * Renders the header icon for the current upload state.
    * - In progress (0 < percentage < 100): spinner
-   * - Finished: success, mixed (yellow) or error icon, based on overallStatus
+   * - Finished: success (green), error (red, any failure present) or stopped (orange) icon, based on overallStatus
    * @returns The icon component for the current upload state.
    */
   const renderIcon = () => {
@@ -221,11 +224,11 @@ const ProgressHeader = (props: progressHeaderProps) => {
       const isFinished = totalPercentage === 0 || totalPercentage === 100;
       if (isFinished) {
         switch (overallStatus) {
-          case UploadBarStatus.WARNING:
-            statusIcon = <WarningAltIcon />;
-            break;
           case UploadBarStatus.ERROR:
             statusIcon = <WarningIcon />;
+            break;
+          case UploadBarStatus.STOPPED:
+            statusIcon = <StoppedIcon />;
             break;
           case UploadBarStatus.SUCCESS:
           default:

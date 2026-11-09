@@ -176,8 +176,8 @@ describe('ProgressBar Component', () => {
   describe('overall status', () => {
     it.each([
       [UploadBarStatus.SUCCESS, 100, 'checkmark--outlineIcon'],
-      [UploadBarStatus.WARNING, 100, 'warning--altIcon'],
       [UploadBarStatus.ERROR, 0, 'warningIcon'],
+      [UploadBarStatus.STOPPED, 100, 'errorIcon'],
     ])('shows the matching header icon for %s once finished', (overallStatus, totalPercentage, iconName) => {
       render(
         <ThemeProvider theme={theme}>

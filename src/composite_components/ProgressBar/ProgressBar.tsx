@@ -35,14 +35,14 @@ export enum ProgressItemType {
 
 /**
  * Overall result shown by the leading icon in the header once the upload has finished.
- * SUCCESS = all items succeeded (green check)
- * WARNING = mixed result, some succeeded and some failed (yellow warning)
- * ERROR   = everything failed (red warning)
+ * SUCCESS = all items succeeded (round green check)
+ * ERROR   = at least one item failed, whether some items succeeded or every item failed (round red warning)
+ * STOPPED = the entire batch was cancelled, with no successes and no failures (round orange "stopped" icon)
  */
 export enum UploadBarStatus {
   SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
   ERROR = 'ERROR',
+  STOPPED = 'STOPPED',
 }
 
 export interface IProgressState {
@@ -95,7 +95,8 @@ interface progressBarProps {
   pauseButton?: Function;
   translation?: ProgressBarLocalization | undefined;
   isCancelAllDisabled: boolean;
-  // Overall result of the upload, shown as the header icon once the upload has finished: success (green), mixed (yellow) or error (red).
+  // Overall result of the upload, shown as the header icon once the upload has finished:
+  // success (green), error (red, any failure present) or stopped (orange, entire batch cancelled).
   overallStatus: UploadBarStatus;
   // Whether the progress bar is expanded. When omitted, the component manages this state itself.
   expanded?: boolean;
