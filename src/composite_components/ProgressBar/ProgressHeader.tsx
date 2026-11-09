@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -20,10 +20,14 @@ import ChevronUpIcon from '@hcl-software/enchanted-icons/dist/carbon/es/chevron-
 import CloseIcon from '@hcl-software/enchanted-icons/dist/carbon/es/close';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
+// Note: this is the icon library's "error" icon (a round circle with a diagonal slash), reused
+// here for our STOPPED state (entire batch cancelled) per UX. It is unrelated to our ERROR state,
+// which uses the icon library's "warning" icon above - the naming is crossed between the two.
+import StoppedIcon from '@hcl-software/enchanted-icons/dist/carbon/es/error';
 import Typography from '../../Typography';
 import IconButton from '../../IconButton';
 import CircularProgress from '../../ProgressIndicator/CircularProgress';
-import { Literals, ProgressBarLocalization } from './ProgressBar';
+import { Literals, ProgressBarLocalization, UploadBarStatus } from './ProgressBar';
 import Button from '../../Button';
 import Tooltip from '../../Tooltip';
 
@@ -71,7 +75,11 @@ const StyledHeader = styled(Box)((props) => {
           '&[data-mui-test=warningIcon]': {
             color: theme.palette.error.inverse,
           },
-          '&[data-mui-test=warningIcon],&[data-mui-test=checkmark--outlineIcon]': {
+          // stopped (entire batch cancelled, no successes and no failures)
+          '&[data-mui-test=errorIcon]': {
+            color: theme.palette.warning.inverse,
+          },
+          '&[data-mui-test=warningIcon],&[data-mui-test=checkmark--outlineIcon],&[data-mui-test=errorIcon]': {
             height: '16px',
             width: '16px',
             margin: '2px 8px 2px 0px',
@@ -161,6 +169,7 @@ interface progressHeaderProps {
   expanded: boolean;
   toggleButtonClick(): void;
   isCancelAllDisabled: boolean;
+  overallStatus: UploadBarStatus;
 }
 
 /**
@@ -172,19 +181,30 @@ const ProgressHeader = (props: progressHeaderProps) => {
   const {
     totalPercentage, uploadStatus, closeModal, stringLiterals,
     cancelAll, pauseButton, translation, expanded, toggleButtonClick, isCancelAllDisabled,
+    overallStatus,
   } = props;
 
   const collapseButtonRef = useRef<HTMLButtonElement>(null);
   const expandButtonRef = useRef<HTMLButtonElement>(null);
-  const isFirstRender = useRef(true);
+  // True only when the user toggled the bar via the chevron button.
+  const shouldFocusOnChange = useRef(false);
 
-  // Sets focus on the collapseIconButton or expandIconButton when `expanded` state changes.
-  // Skips focus on initial render to avoid auto-focusing on page refresh.
+  /**
+   * Marks the next `expanded` change as user-initiated, then toggles.
+   */
+  const handleToggle = () => {
+    shouldFocusOnChange.current = true;
+    toggleButtonClick();
+  };
+
+  // Moves focus to the collapse/expand button after the user toggles the bar.
+  // Programmatic changes of `expanded` (e.g. auto-expand when an upload starts, or the initial
+  // render) must not steal focus, so focus only moves for user-initiated toggles.
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (!shouldFocusOnChange.current) {
       return;
     }
+    shouldFocusOnChange.current = false;
     if (expanded && collapseButtonRef.current) {
       collapseButtonRef.current.focus();
     } else if (!expanded && expandButtonRef.current) {
@@ -193,16 +213,28 @@ const ProgressHeader = (props: progressHeaderProps) => {
   }, [expanded]);
 
   /**
-   * Renders an icon based on the total percentage value.
-   * @returns The icon component based on the total percentage value.
+   * Renders the header icon for the current upload state.
+   * - In progress (0 < percentage < 100): spinner
+   * - Finished: success (green), error (red, any failure present) or stopped (orange) icon, based on overallStatus
+   * @returns The icon component for the current upload state.
    */
   const renderIcon = () => {
     let statusIcon;
     if (totalPercentage != null) {
-      if (totalPercentage === 0) {
-        statusIcon = <WarningIcon />;
-      } else if (totalPercentage === 100) {
-        statusIcon = <SuccessIcon />;
+      const isFinished = totalPercentage === 0 || totalPercentage === 100;
+      if (isFinished) {
+        switch (overallStatus) {
+          case UploadBarStatus.ERROR:
+            statusIcon = <WarningIcon />;
+            break;
+          case UploadBarStatus.STOPPED:
+            statusIcon = <StoppedIcon />;
+            break;
+          case UploadBarStatus.SUCCESS:
+          default:
+            statusIcon = <SuccessIcon />;
+            break;
+        }
       } else {
         statusIcon = (
           <CircularProgress
@@ -259,16 +291,17 @@ const ProgressHeader = (props: progressHeaderProps) => {
             <Tooltip title={translation?.collapseTooltip} tooltipsize="small">
               <IconButton
                 data-testid="collapseIconButton"
-                onClick={toggleButtonClick}
+                onClick={handleToggle}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    toggleButtonClick();
+                    handleToggle();
                   }
                 }}
                 ref={collapseButtonRef}
               >
-                <ChevronUpIcon />
+                {/* Expanded state shows the arrow-down (collapse) chevron */}
+                <ChevronDownIcon />
               </IconButton>
             </Tooltip>
           )}
@@ -276,16 +309,17 @@ const ProgressHeader = (props: progressHeaderProps) => {
             <Tooltip title={translation?.expandTooltip} tooltipsize="small">
               <IconButton
                 data-testid="expandIconButton"
-                onClick={toggleButtonClick}
+                onClick={handleToggle}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    toggleButtonClick();
+                    handleToggle();
                   }
                 }}
                 ref={expandButtonRef}
               >
-                <ChevronDownIcon />
+                {/* Collapsed state shows the arrow-up (expand) chevron */}
+                <ChevronUpIcon />
               </IconButton>
             </Tooltip>
           )}

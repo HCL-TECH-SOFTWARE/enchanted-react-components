@@ -13,9 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meta, StoryFn } from '@storybook/react-webpack5';
-import ProgressBar, { EnumUploadStatus, ProgressItemType } from './ProgressBar';
+import ProgressBar, {
+  EnumUploadStatus, IProgressState, ProgressItemType, UploadBarStatus,
+} from './ProgressBar';
 
 export default {
   title: 'Data display/ProgressBar',
@@ -30,6 +32,20 @@ export default {
     uploadStatus: {
       control: 'text',
       description: 'Status of the upload progress bar',
+    },
+    overallStatus: {
+      control: 'select',
+      options: Object.values(UploadBarStatus),
+      description: 'Overall result shown as the header icon once the upload has finished: success (green), error (red, any failure present) or stopped (orange, entire batch cancelled).',
+    },
+    expanded: {
+      control: 'boolean',
+      description: 'Whether the progress bar is expanded.',
+    },
+    onExpandedChange: {
+      control: false,
+      action: 'onExpandedChange',
+      description: 'Called when the user expands or collapses the progress bar.',
     },
     totalSize: {
       control: 'text',
@@ -94,6 +110,14 @@ export default {
 } as Meta<typeof ProgressBar>;
 
 const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
+  const { expanded: expandedArg, onExpandedChange } = args;
+  const [expanded, setExpanded] = useState<boolean>(expandedArg ?? false);
+
+  // Keeps the story in sync when the "expanded" control is changed in Storybook.
+  useEffect(() => {
+    setExpanded(expandedArg ?? false);
+  }, [expandedArg]);
+
   const translation = {
     closeButtonTooltip: 'Close',
     expandTooltip: 'View upload details',
@@ -102,7 +126,7 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
     retryButtonTooltip: 'Retry upload',
     errorButtonTooltip: 'Cancel uploading',
     successLabel: 'Uploaded.',
-    failureLabel: 'Upload Failed.',
+    failureLabel: 'Upload failed.',
     pendingLabel: 'Waiting...',
     progressLabel: 'Uploading...',
     cancelledLabel: 'Cancelled.',
@@ -112,6 +136,13 @@ const InteractiveExampleTemplate: StoryFn<typeof ProgressBar> = (args) => {
       <ProgressBar
         {...args}
         translation={translation}
+        expanded={expanded}
+        onExpandedChange={(next) => {
+          setExpanded(next);
+          if (onExpandedChange) {
+            onExpandedChange(next);
+          }
+        }}
       />
     </div>
   );
@@ -121,6 +152,7 @@ export const InteractiveExample = InteractiveExampleTemplate.bind({});
 InteractiveExample.args = {
   totalPercentage: 25,
   uploadStatus: 'Uploading 1 of 5 items',
+  overallStatus: UploadBarStatus.SUCCESS,
   totalSize: '50 MB',
   totalTime: '27 min 45 sec',
   uploadedFile: [
@@ -256,4 +288,92 @@ InteractiveExample.args = {
   cancelAll: () => {
     // cancel all action
   },
+};
+
+const allFiles = InteractiveExample.args.uploadedFile as IProgressState[];
+const successFiles = allFiles.filter((file) => { return file.status === EnumUploadStatus.SUCCESS; });
+const failedFiles = allFiles.filter((file) => { return file.status === EnumUploadStatus.FAILURE; });
+
+/**
+ * Upload finished and every item succeeded: green check icon.
+ */
+export const UploadSucceeded = InteractiveExampleTemplate.bind({});
+UploadSucceeded.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.SUCCESS,
+  uploadedFile: successFiles,
+  expanded: true,
+};
+
+/**
+ * Upload finished with some items succeeded and some failed: red error icon.
+ * Any failure present - whether partial or total - shows the same error icon.
+ */
+export const UploadPartiallySucceeded = InteractiveExampleTemplate.bind({});
+UploadPartiallySucceeded.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} of ${successFiles.length + failedFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.ERROR,
+  uploadedFile: [...successFiles, ...failedFiles],
+  expanded: true,
+};
+
+/**
+ * Upload finished and every item failed: red error icon.
+ */
+export const UploadFailed = InteractiveExampleTemplate.bind({});
+UploadFailed.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 0,
+  uploadStatus: 'Upload failed',
+  overallStatus: UploadBarStatus.ERROR,
+  uploadedFile: failedFiles,
+  expanded: true,
+};
+
+const cancelledFiles: IProgressState[] = allFiles.map((file) => {
+  return {
+    ...file, status: EnumUploadStatus.CANCELLED, progress: 0, message: 'Cancelled.',
+  };
+});
+
+/**
+ * User cancelled the entire batch before anything finished: no successes, no failures.
+ * Shows the round orange "stopped" icon (not green), since nothing actually succeeded.
+ */
+export const UploadCancelled = InteractiveExampleTemplate.bind({});
+UploadCancelled.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `0 of ${cancelledFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.STOPPED,
+  uploadedFile: cancelledFiles,
+  expanded: true,
+};
+
+const partiallyCancelledFiles: IProgressState[] = allFiles
+  .filter((file) => {
+    return file.status === EnumUploadStatus.PROGRESS || file.status === EnumUploadStatus.PENDING;
+  })
+  .map((file) => {
+    return {
+      ...file, status: EnumUploadStatus.CANCELLED, progress: 0, message: 'Cancelled.',
+    };
+  });
+
+/**
+ * Mixed batch: some items succeeded, some failed, and some were cancelled mid-upload.
+ * Still shows the red error icon, since at least one failure is present.
+ */
+export const UploadMixedResult = InteractiveExampleTemplate.bind({});
+UploadMixedResult.args = {
+  ...InteractiveExample.args,
+  totalPercentage: 100,
+  uploadStatus: `${successFiles.length} of ${successFiles.length + failedFiles.length + partiallyCancelledFiles.length} items uploaded`,
+  overallStatus: UploadBarStatus.ERROR,
+  uploadedFile: [...successFiles, ...failedFiles, ...partiallyCancelledFiles],
+  expanded: true,
 };
