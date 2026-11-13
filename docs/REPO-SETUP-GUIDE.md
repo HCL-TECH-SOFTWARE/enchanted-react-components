@@ -49,7 +49,7 @@ Keep package versions and scripts synchronized with the manifest and configurati
 | `vite.config.ts` | ESM library build and Vitest configuration | Present |
 | `eslint.config.js` | ESLint flat configuration | Present |
 | `tsconfig.json` | Strict TypeScript typecheck configuration | Present |
-| `tsconfig.build.json` | Declaration-only TypeScript library build configuration | Present |
+| `tsconfig.build.json` | Declaration-only TypeScript library build configuration; excludes nothing, so `dist/` receives declarations for every file under `src` (see [Package contents](#package-contents)) | Present |
 | `src/index.ts` | Public library entry point; no components exported yet | Present |
 | `docs/` | Focused project and contributor guides | Present |
 | `src/` | Library source and public entry point | Present |
@@ -107,6 +107,39 @@ Run these commands from the repository root:
 | `npm run chromatic` | Publish the Storybook build; requires `CHROMATIC_ENCHANTED_PROJECT_TOKEN` |
 
 Vitest is configured to run tests matching `src/**/*.test.{ts,tsx}` (kept under `src/__tests__/`) and to fail when it finds no tests, so a broken test glob cannot pass CI silently (`passWithNoTests: false`). `npm test` runs with coverage. The minimum coverage is 80% per file for statements, branches, functions, and lines, and `npm test` fails below it (see [TESTING-GUIDE.md](TESTING-GUIDE.md)). Component tests, including an axe accessibility check, are added with component implementations after their specifications are approved; see [TESTING-GUIDE.md](TESTING-GUIDE.md).
+
+### Package contents
+
+The build emits everything; `npm pack` decides what ships. `tsc -p tsconfig.build.json` has no `exclude`, so `dist/` receives declarations for every file under `src`, including stories, Code Connect templates, and tests. The Vite bundle still contains only what `src/index.ts` imports. Do not add an `exclude` to `tsconfig.build.json` to keep files out of the package.
+
+The published package contains a predefined list of files, and only the `files` field in `package.json` selects them:
+
+| # | Content | Included | How |
+|---|---|---|---|
+| 1 | `package.json` | Yes | Always added by npm |
+| 2 | `README.md` | Yes | Always added by npm; also listed in `files` |
+| 3 | `LICENSE.txt` | Yes | Always added by npm (any `LICENSE` or `LICENCE` file name); also listed in `files` |
+| 4 | `CHANGELOG.md` | Yes | Listed in `files` (npm does not add it on its own) |
+| 5 | Library code: the bundle and the declarations under `dist/` | Yes, without test files, Code Connect (`*.figma.*`) files, and stories | `dist` in `files`, minus the `!dist/...` entries below |
+| 6 | Generated CSS (`dist/*.css`) | Yes | Part of `dist` |
+| 7 | SCSS source files | **Undecided** | Not included until the team decides; see below |
+
+```json
+"files": [
+  "dist",
+  "!dist/**/*.stories.*",
+  "!dist/**/*.figma.*",
+  "!dist/**/*.test.*",
+  "!dist/**/__tests__",
+  "CHANGELOG.md",
+  "README.md",
+  "LICENSE.txt"
+]
+```
+
+Everything else is not part of the package, including `src/`, `docs/`, `tokens/`, `.storybook/`, and tests. Whether to also ship the SCSS files (item 7) is an open decision. Shipping them would let consumers use the Sass sources directly, but it also publishes `src/styles/_tokens.generated.scss` and every `<Component>.shadow.scss`, which makes their structure part of the public contract. Do not add SCSS entries to `files` until the decision is made and recorded here.
+
+`tsconfig.build.json` must list `@figma/code-connect/figma-types` in `types` (next to `vite/client`), because the `*.figma.ts` files are now compiled by the build. When adding a new kind of non-public file under `src`, add a matching `!dist/...` entry to `files`. After changing the build configuration or `files`, run `npm run build` and `npm pack --dry-run` and confirm that no `__tests__`, `*.test.*`, `*.stories.*`, or `*.figma.*` files are listed. It is expected that these files exist in `dist/` after `npm run build`; only the tarball must not contain them.
 
 GitHub Actions uses five workflows under `.github/workflows/`:
 
