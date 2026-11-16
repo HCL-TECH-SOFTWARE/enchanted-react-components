@@ -10,6 +10,8 @@ Package manifests and configuration files are the source of truth for versions, 
 
 Do not add, install, or use third-party libraries or tools beyond those already recorded in the package manifests. Prefer platform APIs and existing project capabilities. Any exception requires explicit approval and an update to [ENCHANTED.md](../ENCHANTED.md) before implementation. `npm ci` restores only the lockfile-pinned dependency tree; do not use it to introduce dependencies.
 
+**Icons:** All icons come from `@hcl-software/enchanted-icons-react` (pinned at 2.1.0, a development dependency installed from the public npm registry). Import them per icon, for example `import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';`. Do not add another icon library, inline SVGs, or local icon files. `npm ci` installs it with the rest of the locked tree.
+
 ## Confirmed Setup Decisions
 
 - **UI platform:** React with TypeScript.
@@ -26,6 +28,7 @@ Do not add, install, or use third-party libraries or tools beyond those already 
 - **Copyright header:** Every source file (`.ts`, `.tsx`, `.scss`, `.js`, `.mjs`, `.figma.ts`) must begin with the Apache 2.0 copyright header. See [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#copyright-header) for the exact text and placement rules.
 - **Package:** Private internal package named `@hcl-software/enchanted-react-components`, marked `Apache-2.0` and not configured for publication. The manifest author is Hanjo Hagemeier <hanjo.hagemeier@hcl.com>; contributors are Angelo rick Asoy <angelorick.asoy@hcl.com> and Satish Kumar <kumarsati@hcl.com>.
 - **Runtime:** Node.js 24 LTS with npm. The current setup environment uses npm 11.19.0.
+- **Icons:** `@hcl-software/enchanted-icons-react` 2.1.0 is the only icon source. It is a development dependency pinned in `package.json` and installed from the public npm registry.
 - **Dependency versions:** Use only versions already recorded in `package.json` and `package-lock.json`; do not add or update dependencies without explicit approval.
 - **Figma:** The remote Figma MCP server (`https://mcp.figma.com/mcp`) and `@figma/code-connect` (a development dependency) are the approved Figma integrations. MCP is configured in `.vscode/mcp.json` (VS Code) and `.mcp.json` (Claude Code); each user authenticates with their own Figma account through the MCP client, so neither file holds a credential. The separate `FIGMA_ACCESS_TOKEN` in the ignored `.env` is for the Code Connect CLI only and is not valid for MCP. Code Connect templates (`<Component>.figma.ts`) live next to each component and are configured in `figma.config.json`. Never store tokens or credentials in the repository. Publishing mappings to Figma is forbidden in this phase; see [FIGMA-CODE-CONNECT-SETUP.md](FIGMA-CODE-CONNECT-SETUP.md) for setup and [FIGMA-CODE-CONNECT-USAGE.md](FIGMA-CODE-CONNECT-USAGE.md) for authoring.
 - **Module federation:** Out of scope for this repository.
