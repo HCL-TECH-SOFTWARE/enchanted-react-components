@@ -14,8 +14,27 @@
  * ======================================================================== */
 
 import type { Preview } from '@storybook/react-vite';
+import { useEffect } from 'react';
 import { Direction, ShadowRootType, ThemeMode, ThemeProvider } from '../src/theme/ThemeProvider';
 import '../src/styles/index.scss';
+
+// The tokens are scoped to `[data-theme]`, so mirror the mode onto <html> and paint the
+// preview <body> with them; otherwise the canvas stays white in dark mode.
+const CanvasTheme = ({ mode }: { mode: ThemeMode }) => {
+  useEffect(() => {
+    const root = document.documentElement;
+    const { body } = document;
+    root.setAttribute('data-theme', mode);
+    body.style.background = 'var(--color-background-default)';
+    body.style.color = 'var(--color-text-primary)';
+    return () => {
+      root.removeAttribute('data-theme');
+      body.style.background = '';
+      body.style.color = '';
+    };
+  }, [mode]);
+  return null;
+};
 
 const preview: Preview = {
   globalTypes: {
@@ -64,13 +83,16 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => (
-      <ThemeProvider
-        mode={context.globals.theme as ThemeMode}
-        direction={context.globals.direction as Direction}
-        shadowRootType={context.globals.shadowRootType as ShadowRootType}
-      >
-        <Story />
-      </ThemeProvider>
+      <>
+        <CanvasTheme mode={context.globals.theme as ThemeMode} />
+        <ThemeProvider
+          mode={context.globals.theme as ThemeMode}
+          direction={context.globals.direction as Direction}
+          shadowRootType={context.globals.shadowRootType as ShadowRootType}
+        >
+          <Story />
+        </ThemeProvider>
+      </>
     ),
   ],
   tags: ['autodocs'],
