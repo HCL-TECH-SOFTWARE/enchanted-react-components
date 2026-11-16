@@ -8,6 +8,14 @@ jobs:
   chromatic:
     runs-on: ubuntu-latest
     steps:
+      - name: Check Chromatic token
+        env:
+          CHROMATIC_ENCHANTED_PROJECT_TOKEN: ${{ secrets.CHROMATIC_ENCHANTED_PROJECT_TOKEN }}
+        run: |
+          if [ -z "$CHROMATIC_ENCHANTED_PROJECT_TOKEN" ]; then
+            echo "::error::CHROMATIC_ENCHANTED_PROJECT_TOKEN is not set. Aborting workflow."
+            exit 1
+          fi
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -17,14 +25,6 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.19.0
       - run: npm ci
-      - name: Check Chromatic token
-        env:
-          CHROMATIC_ENCHANTED_PROJECT_TOKEN: ${{ secrets.CHROMATIC_ENCHANTED_PROJECT_TOKEN }}
-        run: |
-          if [ -z "$CHROMATIC_ENCHANTED_PROJECT_TOKEN" ]; then
-            echo "::error::CHROMATIC_ENCHANTED_PROJECT_TOKEN is not set. Aborting workflow."
-            exit 1
-          fi
       - uses: chromaui/action@v18
         with:
           projectToken: ${{ secrets.CHROMATIC_ENCHANTED_PROJECT_TOKEN }}
