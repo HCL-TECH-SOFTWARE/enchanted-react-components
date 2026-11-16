@@ -1724,5 +1724,155 @@
         }
       }
     }
+  },
+  "padding": {
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/none."
+    },
+    "xxxxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xxxxs."
+    },
+    "xxxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xxxs."
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xxs."
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xs."
+    },
+    "s": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/s."
+    }
+  },
+  "gap": {
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/none."
+    }
+  },
+  "cornerRadius": {
+    "s": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/s."
+    }
+  },
+  "stroke": {
+    "default": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Stroke/default."
+    },
+    "focus": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Stroke/focus."
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "default": {
+        "$type": "fontFamily",
+        "$value": "Inter",
+        "$description": "Figma variable Typography/family/font family."
+      }
+    },
+    "fontWeight": {
+      "semiBold600": {
+        "$type": "fontWeight",
+        "$value": 600,
+        "$description": "Figma variable Typography/weight/Semi bold 600."
+      }
+    },
+    "fontSize": {
+      "subtitle1": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
+        "$description": "Figma variable Typography/size/subtitle1."
+      },
+      "subtitle2": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "Figma variable Typography/size/subtitle2."
+      }
+    },
+    "lineHeight": {
+      "subtitle1": {
+        "$type": "dimension",
+        "$value": {
+          "value": 22,
+          "unit": "px"
+        },
+        "$description": "Figma variable Typography/line height/subtitle1."
+      },
+      "subtitle2": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Figma variable Typography/line height/subtitle2."
+      }
+    },
+    "letterSpacing": {
+      "default": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$description": "Figma variable Typography/letter spacing/letter spacing."
+      }
+    }
   }
 }

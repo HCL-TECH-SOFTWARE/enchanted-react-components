@@ -1,0 +1,279 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+@use 'sass:map';
+
+// Source: Figma "Button" component set (Inputs page). Every color, size, and type value is a token;
+// the Figma variable it comes from is the token path (for example `text/primaryInverse`).
+//
+// The paint of a button (background, stroke, text) is set as three custom properties, so each
+// state only has to say which tokens it uses. `none` means no fill or no stroke.
+//
+// Specificity: every state selector is wrapped in `:where()` so the order of the rules below is
+// the only thing deciding which state wins, from rest to selected, hover, and disabled.
+
+@function color($name) {
+  @if $name == 'none' {
+    @return transparent;
+  }
+  @return var(--color-#{$name});
+}
+
+@mixin paint($spec) {
+  --buttonBackground: #{color(map.get($spec, bg))};
+  --buttonStroke: #{color(map.get($spec, stroke))};
+  --buttonText: #{color(map.get($spec, text))};
+}
+
+// The paint of the selected state is the same for every variant and color.
+$selected: (
+  false: (bg: 'actions-selected-opacity', stroke: 'primary-main', text: 'primary-main'),
+  true: (bg: 'actions-selected-opacity-inverse', stroke: 'primary-inverse', text: 'primary-inverse'),
+);
+$selectedHover: (
+  false: (bg: 'actions-selected-opacity-hover', stroke: 'primary-dark', text: 'primary-dark'),
+  true: (bg: 'actions-selected-opacity-hover-inverse', stroke: 'primary-dark-inverse', text: 'primary-dark-inverse'),
+);
+$selectedDisabled: (
+  false: (bg: 'actions-disabled-background', stroke: 'border-secondary', text: 'text-disabled'),
+  true: (bg: 'actions-disabled-background-inverse', stroke: 'border-inverse-primary', text: 'text-disabled-inverse'),
+);
+
+// inverse: variant: color: (bg, stroke, text)
+$rest: (
+  false: (
+    contained: (
+      primary: (bg: 'primary-main', stroke: 'none', text: 'text-primary-inverse'),
+      neutral: (bg: 'actions-background', stroke: 'none', text: 'text-primary'),
+      error: (bg: 'error-main', stroke: 'none', text: 'text-primary-inverse'),
+    ),
+    outlined: (
+      primary: (bg: 'none', stroke: 'primary-main', text: 'primary-main'),
+      neutral: (bg: 'none', stroke: 'border-secondary', text: 'text-primary'),
+      error: (bg: 'none', stroke: 'error-main', text: 'error-main'),
+    ),
+    text: (
+      primary: (bg: 'none', stroke: 'none', text: 'primary-main'),
+      neutral: (bg: 'none', stroke: 'none', text: 'text-primary'),
+      error: (bg: 'none', stroke: 'none', text: 'error-main'),
+    ),
+  ),
+  true: (
+    contained: (
+      primary: (bg: 'primary-inverse', stroke: 'none', text: 'text-primary-persist'),
+      neutral: (bg: 'actions-background-inverse', stroke: 'none', text: 'text-primary-inverse-persist'),
+      error: (bg: 'error-inverse', stroke: 'none', text: 'text-primary-persist'),
+    ),
+    outlined: (
+      primary: (bg: 'none', stroke: 'primary-inverse', text: 'primary-inverse'),
+      neutral: (bg: 'none', stroke: 'border-inverse-primary', text: 'text-primary-inverse-persist'),
+      error: (bg: 'none', stroke: 'error-inverse', text: 'error-inverse'),
+    ),
+    text: (
+      primary: (bg: 'none', stroke: 'none', text: 'primary-inverse'),
+      neutral: (bg: 'none', stroke: 'none', text: 'text-primary-inverse-persist'),
+      error: (bg: 'none', stroke: 'none', text: 'error-inverse'),
+    ),
+  ),
+);
+
+$hover: (
+  false: (
+    contained: (
+      primary: (bg: 'primary-dark', stroke: 'none', text: 'text-primary-inverse'),
+      neutral: (bg: 'actions-background-hover', stroke: 'none', text: 'text-primary'),
+      error: (bg: 'error-dark', stroke: 'none', text: 'text-primary-inverse'),
+    ),
+    outlined: (
+      primary: (bg: 'actions-hover', stroke: 'primary-dark', text: 'primary-dark'),
+      neutral: (bg: 'actions-hover', stroke: 'border-primary-hover', text: 'text-primary'),
+      error: (bg: 'actions-hover', stroke: 'error-dark', text: 'error-dark'),
+    ),
+    text: (
+      primary: (bg: 'actions-hover', stroke: 'none', text: 'primary-dark'),
+      neutral: (bg: 'actions-hover', stroke: 'none', text: 'text-primary'),
+      error: (bg: 'actions-hover', stroke: 'none', text: 'error-dark'),
+    ),
+  ),
+  true: (
+    contained: (
+      primary: (bg: 'primary-dark-inverse', stroke: 'none', text: 'text-primary-persist'),
+      neutral: (bg: 'actions-background-hover-inverse', stroke: 'none', text: 'text-primary-inverse-persist'),
+      error: (bg: 'error-dark-inverse', stroke: 'none', text: 'text-primary-persist'),
+    ),
+    outlined: (
+      primary: (bg: 'actions-hover-inverse', stroke: 'primary-dark-inverse', text: 'primary-dark-inverse'),
+      neutral: (bg: 'actions-hover-inverse', stroke: 'border-inverse-primary-hover', text: 'text-primary-inverse-persist'),
+      error: (bg: 'actions-hover-inverse', stroke: 'error-dark-inverse', text: 'error-dark-inverse'),
+    ),
+    text: (
+      primary: (bg: 'actions-hover-inverse', stroke: 'none', text: 'primary-dark-inverse'),
+      neutral: (bg: 'actions-hover-inverse', stroke: 'none', text: 'text-primary-inverse-persist'),
+      error: (bg: 'actions-hover-inverse', stroke: 'none', text: 'error-dark-inverse'),
+    ),
+  ),
+);
+
+$disabled: (
+  false: (
+    contained: (
+      primary: (bg: 'actions-disabled-background', stroke: 'none', text: 'text-disabled'),
+      neutral: (bg: 'actions-disabled-background', stroke: 'none', text: 'text-disabled'),
+      error: (bg: 'actions-disabled-background', stroke: 'none', text: 'text-disabled'),
+    ),
+    outlined: (
+      primary: (bg: 'none', stroke: 'actions-disabled-background', text: 'text-disabled'),
+      neutral: (bg: 'none', stroke: 'border-secondary', text: 'text-disabled'),
+      error: (bg: 'none', stroke: 'border-secondary', text: 'text-disabled'),
+    ),
+    text: (
+      primary: (bg: 'none', stroke: 'none', text: 'text-disabled'),
+      neutral: (bg: 'none', stroke: 'none', text: 'text-disabled'),
+      error: (bg: 'none', stroke: 'none', text: 'text-disabled'),
+    ),
+  ),
+  true: (
+    contained: (
+      primary: (bg: 'actions-disabled-background-inverse', stroke: 'none', text: 'text-disabled-inverse'),
+      neutral: (bg: 'actions-disabled-background-inverse', stroke: 'none', text: 'text-disabled-inverse'),
+      error: (bg: 'actions-disabled-background-inverse', stroke: 'none', text: 'text-disabled-inverse'),
+    ),
+    outlined: (
+      primary: (bg: 'none', stroke: 'actions-disabled-inverse', text: 'actions-disabled-inverse'),
+      neutral: (bg: 'none', stroke: 'border-inverse-primary', text: 'actions-disabled-inverse'),
+      error: (bg: 'none', stroke: 'border-inverse-primary', text: 'actions-disabled-inverse'),
+    ),
+    text: (
+      primary: (bg: 'none', stroke: 'none', text: 'actions-disabled-inverse'),
+      neutral: (bg: 'none', stroke: 'none', text: 'actions-disabled-inverse'),
+      error: (bg: 'none', stroke: 'none', text: 'actions-disabled-inverse'),
+    ),
+  ),
+);
+
+// `:not([data-inverse])` and `[data-inverse]` keep the two color sets from overlapping.
+@function inverseSelector($inverse) {
+  @if $inverse {
+    @return '[data-inverse]';
+  }
+  @return ':not([data-inverse])';
+}
+
+@layer enchanted.components {
+  .buttonRoot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    appearance: none;
+    background: var(--buttonBackground);
+    color: var(--buttonText);
+    // Figma draws the stroke inside the frame, so an inset shadow keeps the layout size unchanged.
+    box-shadow: inset 0 0 0 var(--stroke-default) var(--buttonStroke);
+    border-radius: var(--corner-radius-s);
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-semi-bold600);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  .buttonRoot[data-size='medium'] {
+    gap: var(--gap-none);
+    padding: var(--padding-xs) var(--padding-s);
+    font-size: var(--typography-font-size-subtitle1);
+    line-height: var(--typography-line-height-subtitle1);
+  }
+
+  .buttonRoot[data-size='small'] {
+    gap: var(--padding-xxxs);
+    padding: var(--padding-none) var(--padding-xxs);
+    font-size: var(--typography-font-size-subtitle2);
+    line-height: var(--typography-line-height-subtitle2);
+  }
+
+  .buttonLabel {
+    display: inline-flex;
+    padding: var(--padding-xxxxs) var(--padding-xxs);
+  }
+
+  .buttonRoot[data-size='small'] .buttonLabel {
+    padding: var(--padding-none) var(--padding-xxs);
+  }
+
+  .buttonIcon {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--padding-xxs) var(--padding-none);
+  }
+
+  // Rest, then selected, hover, selected hover, and disabled, so a later state wins.
+  @each $inverse, $variants in $rest {
+    @each $variant, $colors in $variants {
+      @each $color, $spec in $colors {
+        :where(.buttonRoot[data-variant='#{$variant}'][data-color='#{$color}']#{inverseSelector($inverse)}) {
+          @include paint($spec);
+        }
+      }
+    }
+  }
+
+  @each $inverse, $spec in $selected {
+    :where(.buttonRoot[data-selected]#{inverseSelector($inverse)}) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $variants in $hover {
+    @each $variant, $colors in $variants {
+      @each $color, $spec in $colors {
+        :where(.buttonRoot[data-variant='#{$variant}'][data-color='#{$color}']#{inverseSelector($inverse)}):hover:not([data-disabled]) {
+          @include paint($spec);
+        }
+      }
+    }
+  }
+
+  @each $inverse, $spec in $selectedHover {
+    :where(.buttonRoot[data-selected]#{inverseSelector($inverse)}):hover:not([data-disabled]) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $variants in $disabled {
+    @each $variant, $colors in $variants {
+      @each $color, $spec in $colors {
+        :where(.buttonRoot[data-variant='#{$variant}'][data-color='#{$color}']#{inverseSelector($inverse)})[data-disabled] {
+          @include paint($spec);
+        }
+      }
+    }
+  }
+
+  @each $inverse, $spec in $selectedDisabled {
+    :where(.buttonRoot[data-selected]#{inverseSelector($inverse)})[data-disabled] {
+      @include paint($spec);
+    }
+  }
+
+  // The Figma focus ring is 2px thick and sits outside the button; its offset has no token yet.
+  .buttonRoot:focus-visible {
+    outline: var(--stroke-focus) solid var(--color-actions-focus);
+  }
+
+  .buttonRoot[data-inverse]:focus-visible {
+    outline-color: var(--color-actions-focus-inverse);
+  }
+}
