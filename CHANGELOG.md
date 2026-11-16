@@ -7,6 +7,7 @@
 ### Fixed
 
 ### Changed
+- Updated publish.yaml script to separate latest tags for v2 maintenance and main branches.
 
 ### Breaking changes
 
