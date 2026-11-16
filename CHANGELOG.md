@@ -5,8 +5,11 @@
 ### Added
 
 ### Fixed
+- Update off of various vulnerable dev dependencies.
 
 ### Changed
+- Updated publish.yaml script to separate latest tags for v2 maintenance and main branches.
+- Remove version ranges, use exact version numbers in package.json.
 
 ### Breaking changes
 
