@@ -6,6 +6,8 @@ Use this guide as instructions for the initial implementation of components and 
 
 Use platform APIs and dependencies already recorded in the package manifests. Do not add, install, or use other third-party libraries or tools without explicit approval and an update to [ENCHANTED.md](../ENCHANTED.md). If a request appears to require an unapproved dependency or integration, stop and ask before proceeding.
 
+**Icons:** All icons come from `@hcl-software/enchanted-icons-react` (pinned at 2.1.0, a development dependency installed from the public npm registry). Import them per icon, for example `import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';`. Do not add another icon library, inline SVGs, or local icon files.
+
 ## AI Implementation Workflow
 
 1. Before the first component implementation, inspect the package manifest, TypeScript and lint configuration, source tree, public entry points, and available test or Storybook setup. Confirm the framework, libraries, file locations, and commands instead of assuming this guide's examples describe the current checkout.
