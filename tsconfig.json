@@ -17,5 +17,5 @@
     "types": ["vite/client", "@figma/code-connect/figma-types"]
   },
   "include": ["src", ".storybook"],
-  "exclude": ["node_modules", "dist", "**/*.figma.ts"]
+  "exclude": ["node_modules", "dist"]
 }
