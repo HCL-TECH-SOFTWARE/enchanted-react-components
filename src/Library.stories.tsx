@@ -20,7 +20,7 @@ const Overview = () => (
     <h1>Enchanted</h1>
     <p>
       Private React component library for HCL products, built on Base UI. No components are implemented yet; they are
-      added once their scope, designs, and tokens are approved.
+      added once their scope, designs, and tokens are approved. Chromatic test change added ...
     </p>
   </div>
 );
