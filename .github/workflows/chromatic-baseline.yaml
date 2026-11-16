@@ -2,7 +2,8 @@ name: Chromatic baseline
 
 on:
   push:
-    branches: [next]
+    branches:
+      - next
 
 jobs:
   chromatic-baseline:
