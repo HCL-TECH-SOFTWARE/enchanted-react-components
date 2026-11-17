@@ -2,7 +2,7 @@
   "name": "@hcl-software/enchanted-react-components",
   "version": "0.0.0",
   "description": "Private internal React component library for HCL products, built on Base UI.",
-  "private": true,
+  "private": false,
   "license": "Apache-2.0",
   "author": "Hanjo Hagemeier <hanjo.hagemeier@hcl.com>",
   "contributors": [
