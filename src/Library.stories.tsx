@@ -19,8 +19,8 @@ const Overview = () => (
   <div>
     <h1>Enchanted</h1>
     <p>
-      Private React component library for HCL products, built on Base UI. No components are implemented yet; they are
-      added once their scope, designs, and tokens are approved.
+      React component library for HCL products, built on Base UI. The library is in an early stage: Button is
+      implemented so far, and further components are added once their scope, designs, and tokens are approved.
     </p>
   </div>
 );
@@ -35,5 +35,5 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-/** Project overview shown while the library has no components. */
+/** Project overview of the library and its current implementation state. */
 export const Default: Story = {};
