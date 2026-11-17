@@ -47,6 +47,64 @@ export const Variants: Story = {
   ),
 };
 
+const allVariantStates = [
+  { name: 'Default', props: {} },
+  { name: 'Disabled', props: { disabled: true } },
+  { name: 'Error', props: { error: true, errorMessage: 'Error message' } },
+  { name: 'Error and disabled', props: { error: true, disabled: true, errorMessage: 'Error message' } },
+] as const;
+
+const allVariantSelections = [
+  { name: 'Unchecked', props: {} },
+  { name: 'Checked', props: { defaultChecked: true } },
+  { name: 'Indeterminate', props: { indeterminate: true } },
+] as const;
+
+/**
+ * Every Figma combination on one page: `variant` (with and without padding) by selection
+ * (unchecked, checked, indeterminate) by state (default, disabled, error, error and disabled),
+ * plus a row with helper text. Hover and focus are CSS states: hover a box or press Tab to see them.
+ */
+export const AllVariant: Story = {
+  name: 'All Variant',
+  parameters: { layout: 'padded' },
+  render: (args) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--padding-s)' }}>
+      {Object.values(CheckboxVariant).map((variant) => (
+        <section key={variant}>
+          <h3>{variant}</h3>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `repeat(${allVariantStates.length}, max-content)`,
+              columnGap: 'var(--padding-s)',
+              rowGap: 'var(--padding-xs)',
+            }}
+          >
+            {allVariantSelections.map((selection) =>
+              allVariantStates.map((state) => (
+                <Checkbox
+                  key={`${selection.name}-${state.name}`}
+                  {...args}
+                  variant={variant}
+                  {...selection.props}
+                  {...state.props}
+                >
+                  {`${selection.name} / ${state.name}`}
+                </Checkbox>
+              )),
+            )}
+            <Checkbox {...args} variant={variant} showHelperText helperText="Helper text">
+              With helper text
+            </Checkbox>
+            <Checkbox {...args} variant={variant} showLabel={false} aria-label="No label" />
+          </div>
+        </section>
+      ))}
+    </div>
+  ),
+};
+
 /** Use for an option that is selected. Toggle it to see the checked and unchecked icons. */
 export const Checked: Story = { args: { defaultChecked: true } };
 
