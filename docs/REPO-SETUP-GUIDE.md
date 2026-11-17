@@ -26,7 +26,7 @@ Do not add, install, or use third-party libraries or tools beyond those already 
 - **Storybook MCP:** while `npm run storybook` runs, the addon serves an MCP endpoint at `http://localhost:6006/mcp`. Register it per user, not in the repository, for example with `npx mcp-add --type http --url "http://localhost:6006/mcp" --scope user`. It is a preview feature and only supports React.
 - **Storybook theming:** `.storybook/preview.tsx` wraps all stories with the shared `ThemeProvider`. Its Theme, Direction, and Shadow root toolbar controls select light/dark, LTR/RTL, and none/open/closed respectively, defaulting to light, LTR, and open. Stories render inside the provider's shadow-root style boundary.
 - **Copyright header:** Every source file (`.ts`, `.tsx`, `.scss`, `.js`, `.mjs`, `.figma.ts`) must begin with the Apache 2.0 copyright header. See [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#copyright-header) for the exact text and placement rules.
-- **Package:** Private internal package named `@hcl-software/enchanted-react-components`, marked `Apache-2.0` and not configured for publication. The manifest author is Hanjo Hagemeier <hanjo.hagemeier@hcl.com>; contributors are Angelo rick Asoy <angelorick.asoy@hcl.com> and Satish Kumar <kumarsati@hcl.com>.
+- **Package:** Internal-use package named `@hcl-software/enchanted-react-components`, marked `Apache-2.0` and `"private": false` (publishable); no publication workflow is configured yet. The manifest author is Hanjo Hagemeier <hanjo.hagemeier@hcl.com>; contributors are Angelo rick Asoy <angelorick.asoy@hcl.com> and Satish Kumar <kumarsati@hcl.com>.
 - **Runtime:** Node.js 24 LTS with npm. The current setup environment uses npm 11.19.0.
 - **Icons:** `@hcl-software/enchanted-icons-react` 2.1.0 is the only icon source. It is a development dependency pinned in `package.json` and installed from the public npm registry.
 - **Fonts:** The `typography.fontFamily.default` token is `Inter`, with no fallback, as in Figma. The library does not ship or load the font, because `@font-face` rules must be in the main document: consumers load Inter (weight 600) themselves. Storybook and Chromatic load it from Google Fonts through a `<link>` in `.storybook/preview-head.html`. This adds no dependency, but Storybook and Chromatic need network access to `fonts.googleapis.com` and `fonts.gstatic.com`; without it the stories fall back to the browser default font.
@@ -47,7 +47,7 @@ Keep package versions and scripts synchronized with the manifest and configurati
 | `CODE_OF_CONDUCT.md` | Community participation standards and enforcement information | Present |
 | `CONTRIBUTING.md` | Contributor roles and guidance for issues, development, and pull requests | Present |
 | `LICENSE.txt` | Apache License 2.0 terms | Present |
-| `package.json` | Private package metadata, dependencies, and local commands | Present |
+| `package.json` | Package metadata (`"private": false`), dependencies, and local commands | Present |
 | `package-lock.json` | Locked dependency tree for reproducible installs | Present |
 | `.nvmrc` | Required Node.js major version | Present |
 | `vite.config.ts` | ESM library build and Vitest configuration | Present |
@@ -172,7 +172,7 @@ Do not install other Figma extensions or MCP servers, or add other Figma tooling
 
 ## Setup Automation
 
-The setup configures a private package manifest, a locked dependency tree, TypeScript/Vite/Sass tooling, Vitest, Storybook, ESLint, and GitHub Actions. The library build emits ESM only. Component implementation is deferred until first-release scope and specifications are approved. Do not introduce additional third-party dependencies or tools. No third-party token generator is added; token transformation uses the first-party `scripts/build-tokens.mjs`, and the Figma MCP and Code Connect configuration are the only Figma tooling. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt` are static files: setup automation must not modify, delete, regenerate, or otherwise write to them. Changes to these governance and legal documents are outside the setup process.
+The setup configures a package manifest (`"private": false`), a locked dependency tree, TypeScript/Vite/Sass tooling, Vitest, Storybook, ESLint, and GitHub Actions. The library build emits ESM only. Component implementation is deferred until first-release scope and specifications are approved. Do not introduce additional third-party dependencies or tools. No third-party token generator is added; token transformation uses the first-party `scripts/build-tokens.mjs`, and the Figma MCP and Code Connect configuration are the only Figma tooling. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt` are static files: setup automation must not modify, delete, regenerate, or otherwise write to them. Changes to these governance and legal documents are outside the setup process.
 
 Keep generated configuration deterministic and reviewable. Validate changes with the repository commands above, and update the README and this guide whenever package scripts or setup decisions change.
 

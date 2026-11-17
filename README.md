@@ -32,6 +32,6 @@ Set `CHROMATIC_ENCHANTED_PROJECT_TOKEN` in the environment before running Chroma
 
 ## Package Policy
 
-The package is named `@hcl-software/enchanted-react-components`, is marked `Apache-2.0` and `private`, and is not configured for publication. Base UI and React are peer dependencies for future library consumers and are included as development dependencies for local setup. Do not add, install, or use third-party libraries or tools beyond those already recorded in the package manifests. Prefer platform APIs and existing project capabilities; any exception requires explicit approval and an update to [ENCHANTED.md](ENCHANTED.md).
+The package is named `@hcl-software/enchanted-react-components`, is marked `Apache-2.0` and `"private": false`, so it can be published; no publication workflow (`publishConfig`, release pipeline) is configured yet. Base UI and React are peer dependencies for future library consumers and are included as development dependencies for local setup. Do not add, install, or use third-party libraries or tools beyond those already recorded in the package manifests. Prefer platform APIs and existing project capabilities; any exception requires explicit approval and an update to [ENCHANTED.md](ENCHANTED.md).
 
 See [ENCHANTED.md](ENCHANTED.md) for project scope and [docs/](docs/) for focused guides, including the required [DTCG token format](docs/DESIGN-TOKENS-GUIDE.md). The setup guide records selected tools and repository conventions.
