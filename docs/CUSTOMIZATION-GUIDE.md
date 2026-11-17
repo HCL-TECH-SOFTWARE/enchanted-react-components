@@ -13,6 +13,7 @@ Consumers can restyle components without forking them, but only through the rout
 | Restyle every instance in one provider | `::part(root)` on the provider's host | `.brand::part(root) { border-radius: 999px; }` with `<ThemeProvider className="brand">` |
 | Keep the page's normal CSS in charge | `shadowRootType={ShadowRootType.None}` on `ThemeProvider`, then plain unlayered CSS | `.cta { border-radius: 999px; }` on a `className` you pass. Unlayered CSS beats the library's layered rules regardless of specificity or load order. |
 
+- To see the token route on any story, switch the **Custom Overrides** toolbar in Storybook to `Custom`. It sets `--color-primary-main` and `--color-primary-dark` on the provider host (see [STORYBOOK-GUIDE.md](STORYBOOK-GUIDE.md#theming-and-setup)).
 - Tokens must be set on the provider host or on an element inside it. A token set on an ancestor of the provider has no effect, because the host declares its own.
 - Inline `style` is the safest instance-level route. Do not set `background` or the component's own custom properties inline: an inline value also beats the hover and disabled paint.
 - `::part(root)` applies to every matching part inside that provider, not to a single instance. Each exposed part is public API, so rename or remove one only as a breaking change.

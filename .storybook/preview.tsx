@@ -14,8 +14,8 @@
  * ======================================================================== */
 
 import type { Preview } from '@storybook/react-vite';
-import { useEffect } from 'react';
-import { Direction, ShadowRootType, ThemeMode, ThemeProvider } from '../src/theme/ThemeProvider';
+import { CSSProperties, useEffect } from 'react';
+import { Direction, ShadowRootType, CustomOverrides, ThemeMode, ThemeProvider } from '../src/theme/ThemeProvider';
 import '../src/styles/index.scss';
 
 // The tokens are scoped to `[data-theme]`, so mirror the mode onto <html> and paint the
@@ -75,11 +75,24 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    customOverrides: {
+      description: 'Custom CSS overrides',
+      toolbar: {
+        title: 'Custom Overrides',
+        icon: 'paintbrush',
+        items: [
+          { value: CustomOverrides.None, title: 'None' },
+          { value: CustomOverrides.Custom, title: 'Custom' },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
   initialGlobals: {
     theme: ThemeMode.Light,
     direction: Direction.Ltr,
     shadowRootType: ShadowRootType.Open,
+    customOverrides: CustomOverrides.None,
   },
   decorators: [
     (Story, context) => (
@@ -89,6 +102,11 @@ const preview: Preview = {
           mode={context.globals.theme as ThemeMode}
           direction={context.globals.direction as Direction}
           shadowRootType={context.globals.shadowRootType as ShadowRootType}
+          style={
+            (context.globals.customOverrides === CustomOverrides.Custom
+              ? { '--color-primary-main': '#0f7b6c', '--color-primary-dark': '#0a5a4f' }
+              : {}) as CSSProperties
+          }
         >
           <Story />
         </ThemeProvider>
