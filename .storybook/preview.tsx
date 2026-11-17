@@ -86,7 +86,7 @@ const preview: Preview = {
         ],
         dynamicTitle: true,
       },
-    }
+    },
   },
   initialGlobals: {
     theme: ThemeMode.Light,
@@ -102,7 +102,11 @@ const preview: Preview = {
           mode={context.globals.theme as ThemeMode}
           direction={context.globals.direction as Direction}
           shadowRootType={context.globals.shadowRootType as ShadowRootType}
-          style={{ ...(context.globals.customOverrides === 'custom' ? { '--color-primary-main': '#0f7b6c', '--color-primary-dark': '#0a5a4f', } : {}) } as CSSProperties}
+          style={
+            (context.globals.customOverrides === CustomOverrides.Custom
+              ? { '--color-primary-main': '#0f7b6c', '--color-primary-dark': '#0a5a4f' }
+              : {}) as CSSProperties
+          }
         >
           <Story />
         </ThemeProvider>

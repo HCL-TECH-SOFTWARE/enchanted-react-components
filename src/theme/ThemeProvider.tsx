@@ -31,7 +31,7 @@ export type Direction = (typeof Direction)[keyof typeof Direction];
 export const ShadowRootType = { None: 'none', Open: 'open', Closed: 'closed' } as const;
 export type ShadowRootType = (typeof ShadowRootType)[keyof typeof ShadowRootType];
 
-/** Custom CSS overrides the provider can apply. */
+/** Token overrides the Storybook toolbar can switch on to demo the customization route. */
 export const CustomOverrides = { None: 'none', Custom: 'custom' } as const;
 export type CustomOverrides = (typeof CustomOverrides)[keyof typeof CustomOverrides];
 
