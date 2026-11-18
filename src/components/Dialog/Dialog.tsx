@@ -17,11 +17,33 @@ import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
 import { useBoundary } from '../../theme/BoundaryContext';
 
+/** Width of a {@link Dialog}, matching the Figma widths. The dialog never grows wider than the viewport. */
+export const DialogSize = {
+  /** 444 pixels. */
+  ExtraSmall: 'xs',
+  /** 600 pixels. The default. */
+  Small: 'sm',
+  /** 960 pixels. */
+  Medium: 'md',
+  /** 1280 pixels. */
+  Large: 'lg',
+  /** 1920 pixels. */
+  ExtraLarge: 'xl',
+} as const;
+
+/** Union of the {@link DialogSize} values. */
+export type DialogSizeType = (typeof DialogSize)[keyof typeof DialogSize];
+
 /** Props of the {@link Dialog}. Extends the Base UI `Dialog.Root` props, which are passed through. */
 export interface DialogProps extends ReactComponentProps<typeof BaseDialog.Root> {
+  /**
+   * Width of the dialog. Figma dialog widths XS to XL.
+   * @default DialogSize.Small
+   */
+  size?: DialogSizeType;
   /** The dialog body. Figma `content` slot. */
   children?: ReactNode;
-  /** Content above the body, usually a `Dialog.Title` from Base UI. Replaces the Figma `header` swap and `showHeader` toggle. */
+  /** Content above the body, usually a {@link DialogHeader}. Replaces the Figma `header` swap and `showHeader` toggle. */
   header?: ReactNode;
   /** Content below the body, usually the actions. Replaces the Figma `footer` swap and `showFooter` toggle. */
   footer?: ReactNode;
@@ -41,19 +63,27 @@ export interface DialogProps extends ReactComponentProps<typeof BaseDialog.Root>
  * Appears in front of the app content to provide critical information or ask for a decision.
  *
  * Built on the Base UI `Dialog`; the root props, including `open`, `defaultOpen`, and
- * `onOpenChange`, are passed through to it. Put a Base UI `Dialog.Title` in `header` so the dialog
+ * `onOpenChange`, are passed through to it. Put a {@link DialogHeader} (or a Base UI `Dialog.Title`) in `header` so the dialog
  * has an accessible name. The dialog renders into the `ThemeProvider` boundary so it keeps its
  * styles. Styles live in the boundary and use the design tokens, so render it inside a
  * `ThemeProvider`.
  *
  * @example
  * ```tsx
- * <Dialog open onOpenChange={setOpen} header={<BaseDialog.Title>Delete item</BaseDialog.Title>}>
+ * <Dialog open onOpenChange={setOpen} header={<DialogHeader>Delete item</DialogHeader>}>
  *   This cannot be undone.
  * </Dialog>
  * ```
  */
-export const Dialog = ({ children, header, footer, withPadding = true, scroll = false, ...props }: DialogProps) => {
+export const Dialog = ({
+  children,
+  header,
+  footer,
+  size = DialogSize.Small,
+  withPadding = true,
+  scroll = false,
+  ...props
+}: DialogProps) => {
   const boundary = useBoundary();
 
   return (
@@ -65,6 +95,7 @@ export const Dialog = ({ children, header, footer, withPadding = true, scroll = 
           className="dialogRoot"
           // React's DOM types have no `part` attribute, so it is passed through a spread.
           {...{ part: 'root' }}
+          data-size={size}
           data-with-padding={withPadding ? '' : undefined}
           data-scroll={scroll ? '' : undefined}
         >

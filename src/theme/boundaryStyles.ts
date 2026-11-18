@@ -19,10 +19,12 @@ import checkboxStyles from '../components/Checkbox/Checkbox.shadow.scss?inline';
 import textFieldStyles from '../components/TextField/TextField.shadow.scss?inline';
 import selectSingleStyles from '../components/SelectSingle/SelectSingle.shadow.scss?inline';
 import dialogStyles from '../components/Dialog/Dialog.shadow.scss?inline';
+import dialogActionsStyles from '../components/Dialog/DialogActions.shadow.scss?inline';
+import dialogHeaderStyles from '../components/Dialog/DialogHeader.shadow.scss?inline';
 
 // One `import x from '../components/<Component>/<Component>.shadow.scss?inline'` per component
 // that has styles, concatenated below.
-const componentStyles: string[] = [buttonStyles, iconButtonStyles, checkboxStyles, textFieldStyles, selectSingleStyles, dialogStyles];
+const componentStyles: string[] = [buttonStyles, iconButtonStyles, checkboxStyles, textFieldStyles, selectSingleStyles, dialogStyles, dialogActionsStyles, dialogHeaderStyles];
 
 /** The concatenated CSS of every component, injected by `ThemeProvider`. */
 export const boundaryStyles = componentStyles.join('\n');

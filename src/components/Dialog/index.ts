@@ -13,5 +13,9 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-export { Dialog } from './Dialog';
-export type { DialogProps } from './Dialog';
+export { Dialog, DialogSize } from './Dialog';
+export type { DialogProps, DialogSizeType } from './Dialog';
+export { DialogActions, DialogActionsAlignment, DialogActionsFlow } from './DialogActions';
+export type { DialogActionsProps, DialogActionsAlignmentType, DialogActionsFlowType } from './DialogActions';
+export { DialogHeader } from './DialogHeader';
+export type { DialogHeaderProps } from './DialogHeader';

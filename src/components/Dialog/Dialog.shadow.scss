@@ -16,8 +16,9 @@
 // Source: Figma "Dialog" component set (Feedback page). Every value is a token; the Figma variable
 // it comes from is the token path (for example `background/paper`).
 //
-// Not styled, because no token exists for it: the dialog width (Figma uses fixed widths from 444 to
-// 1920 pixels). The header and the footer are the `DialogTitle` and `DialogActions` instances and keep their own styles.
+// The dialog widths (444 to 1920 pixels) are fixed sizes in the Figma component description, not
+// tokens, so they are literal values selected by `data-size`. The header and the footer are the
+// `DialogTitle` and `DialogActions` instances and keep their own styles.
 
 @layer enchanted.components {
   .dialogBackdrop {
@@ -33,6 +34,9 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    // Figma default width (SM). Never wider than the viewport.
+    width: 600px;
+    max-width: 100%;
     height: fit-content;
     max-height: 100%;
     margin: auto;
@@ -47,6 +51,22 @@
     letter-spacing: var(--typography-letter-spacing-default);
   }
 
+  .dialogRoot[data-size='xs'] {
+    width: 444px;
+  }
+
+  .dialogRoot[data-size='md'] {
+    width: 960px;
+  }
+
+  .dialogRoot[data-size='lg'] {
+    width: 1280px;
+  }
+
+  .dialogRoot[data-size='xl'] {
+    width: 1920px;
+  }
+
   .dialogContent {
     box-sizing: border-box;
     flex: 1 1 auto;
@@ -58,7 +78,32 @@
     padding: var(--padding-md);
   }
 
+  // Figma `.Scroll`: a 6px thumb in `text/secondary` with the small radius, on a track filled with
+  // `background/canvas` and a 1px inset left border. The thumb inset (4px) comes from the track border.
   .dialogRoot[data-scroll] .dialogContent {
     overflow: auto;
+
+    // Chrome ignores the `::-webkit-scrollbar` rules below when `scrollbar-width` or
+    // `scrollbar-color` is set, so the standard properties are only for browsers without them (Firefox).
+    @supports not selector(::-webkit-scrollbar) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-text-secondary) var(--color-background-default);
+    }
+
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-background-default);
+      box-shadow: inset 1px 0 0 0 var(--color-border-secondary);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: var(--padding-xxs) solid transparent;
+      border-radius: var(--corner-radius-sm);
+      background: var(--color-text-secondary);
+      background-clip: content-box;
+    }
   }
 }

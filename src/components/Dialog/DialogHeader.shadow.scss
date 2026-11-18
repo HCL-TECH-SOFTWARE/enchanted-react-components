@@ -1,0 +1,74 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Source: Figma "DialogTitle" component (code name: DialogHeader). Every value is a token; the
+// Figma variable it comes from is the token path (for example `padding/md`). The divider is a
+// Figma `Divider` instance, drawn here as the bottom border of the root: 1px in `border/secondary`.
+//
+// Known gap: Figma sets the title in the `h6` style (16px size, 24px line height, semi-bold 600), but
+// no `h6` token exists yet. The title uses the `subtitle1` tokens (14px, 22px) until it does, so it
+// renders smaller than the design. Switch the two size tokens below once `h6` is added.
+
+@layer enchanted.components {
+  .dialogHeaderRoot {
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--padding-none);
+    color: var(--color-text-primary);
+    font-family: var(--typography-font-family-default);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  .dialogHeaderRoot[data-with-divider] {
+    border-bottom: var(--stroke-default) solid var(--color-border-secondary);
+  }
+
+  .dialogHeaderContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--padding-sm) var(--padding-md) var(--padding-sm) var(--padding-none);
+  }
+
+  .dialogHeaderTitleGroup {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xxs);
+    padding: var(--padding-xs) var(--padding-md);
+  }
+
+  .dialogHeaderIcon {
+    display: flex;
+    align-items: center;
+    padding-right: var(--padding-xxs);
+  }
+
+  .dialogHeaderTitle {
+    margin: 0;
+    font-size: var(--typography-font-size-subtitle1);
+    font-weight: var(--typography-font-weight-semi-bold600);
+    line-height: var(--typography-line-height-subtitle1);
+  }
+
+  // `endActions` in Figma: the optional actions, then the close button.
+  .dialogHeaderEnd {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--gap-sm);
+    // Keeps the close button at the end when there is no title.
+    margin-inline-start: auto;
+  }
+}
