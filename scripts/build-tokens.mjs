@@ -34,7 +34,7 @@ const tokensDir = argValue('--tokens', join(root, 'tokens'));
 const outFile = argValue('--out', join(root, 'src/styles/_tokens.generated.scss'));
 
 const THEMES = ['light', 'dark'];
-const SUPPORTED_TYPES = new Set(['color', 'dimension', 'fontFamily', 'fontWeight', 'number']);
+const SUPPORTED_TYPES = new Set(['color', 'dimension', 'fontFamily', 'fontWeight', 'number', 'shadow']);
 
 const header = `/* ======================================================================== *
  * Copyright 2026 HCL America Inc.                                          *
@@ -102,12 +102,24 @@ const formatColor = (value, token, file) => {
   throw new Error(`${file}: color token "${token}" needs a hex or an srgb value`);
 };
 
+const formatDimension = (value) => `${value.value}${value.unit}`;
+
+/** Formats one DTCG shadow object as a CSS `box-shadow` layer: `[inset] x y blur spread color`. */
+const formatShadow = (layer, token, file) => {
+  const parts = [layer.offsetX, layer.offsetY, layer.blur, layer.spread].map((dimension) => formatDimension(dimension));
+  const inset = layer.inset ? 'inset ' : '';
+  return `${inset}${parts.join(' ')} ${formatColor(layer.color, token, file)}`;
+};
+
 const formatValue = (token, type, value, file) => {
   switch (type) {
     case 'color':
       return formatColor(value, token, file);
     case 'dimension':
-      return `${value.value}${value.unit}`;
+      return formatDimension(value);
+    case 'shadow':
+      // A shadow token is one layer or an array of layers; CSS joins layers with commas.
+      return (Array.isArray(value) ? value : [value]).map((layer) => formatShadow(layer, token, file)).join(', ');
     case 'fontFamily':
       return (Array.isArray(value) ? value : [value])
         .map((family) => (/[\s,]/.test(family) ? `"${family}"` : family))

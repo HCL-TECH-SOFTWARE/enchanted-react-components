@@ -13,6 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import { useRef } from 'react';
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
 import { Field as BaseField } from '@base-ui/react/field';
@@ -85,6 +86,8 @@ export const SelectSingle = ({
   ...props
 }: SelectSingleProps) => {
   const boundary = useBoundary();
+  // The popup anchors to the whole field, not to the inner input, so it matches the field's width and edge.
+  const surfaceRef = useRef<HTMLDivElement>(null);
 
   return (
     <BaseField.Root
@@ -98,15 +101,15 @@ export const SelectSingle = ({
     >
       <BaseCombobox.Root {...props} disabled={disabled}>
         {label ? <BaseField.Label className="selectSingleLabel">{label}</BaseField.Label> : null}
-        <div className="selectSingleSurface">
+        <div ref={surfaceRef} className="selectSingleSurface">
           {startAdornment ? <span className="selectSingleAdornment">{startAdornment}</span> : null}
           <BaseCombobox.Input className="selectSingleInput" placeholder={placeholder} />
         </div>
         {menu ? (
           // Base UI renders popups into `document.body` by default, outside the style boundary.
           <BaseCombobox.Portal container={boundary ?? undefined}>
-            <BaseCombobox.Positioner className="selectSinglePositioner">
-              <BaseCombobox.Popup className="selectSingleMenu">{menu}</BaseCombobox.Popup>
+            <BaseCombobox.Positioner className="selectSinglePositioner" anchor={surfaceRef}>
+              <BaseCombobox.Popup className="selectSingleMenu" data-size={size}>{menu}</BaseCombobox.Popup>
             </BaseCombobox.Positioner>
           </BaseCombobox.Portal>
         ) : null}

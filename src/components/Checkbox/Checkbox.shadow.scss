@@ -12,3 +12,124 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
+// Source: Figma "Checkbox" component set (Inputs page). Every value is a token; the Figma variable
+// it comes from is the token path (for example `actions/active`).
+//
+// The box, the check mark, and the dash are Figma's icon instances (`Checkbox`,
+// `Checkbox--checked--filled`, `Checkbox--indeterminate--filled`), 20px (`size/icon-md`) in a 24px
+// control. Each state shows one glyph; the glyph draws with `currentColor`.
+
+@layer enchanted.components {
+  .checkboxRoot {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--gap-xxs);
+    align-items: start;
+    box-sizing: border-box;
+    padding: var(--padding-none);
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  .checkboxRoot[data-variant='withPadding'] {
+    padding: var(--padding-xs) var(--padding-none);
+  }
+
+  // The label wraps the control so the text toggles it; the grid places both children.
+  .checkboxLabel {
+    display: contents;
+  }
+
+  .checkboxControl {
+    grid-column: 1;
+    grid-row: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: var(--size-control-sm);
+    height: var(--size-control-sm);
+    margin: 0;
+    padding: var(--padding-xxxs);
+    border: 0;
+    appearance: none;
+    background: none;
+    border-radius: var(--corner-radius-sm);
+    color: var(--color-actions-active);
+  }
+
+  .checkboxGlyph {
+    display: none;
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    fill: currentColor;
+  }
+
+  .checkboxControl:not([data-checked]):not([data-indeterminate]) .checkboxGlyphUnchecked,
+  .checkboxControl[data-checked]:not([data-indeterminate]) .checkboxGlyphChecked,
+  .checkboxControl[data-indeterminate] .checkboxGlyphIndeterminate {
+    display: block;
+  }
+
+  .checkboxControl[data-checked],
+  .checkboxControl[data-indeterminate] {
+    color: var(--color-primary-main);
+  }
+
+  .checkboxRoot[data-error] .checkboxControl {
+    color: var(--color-error-main);
+  }
+
+  .checkboxControl:hover:not([data-disabled]) {
+    background: var(--color-actions-hover);
+  }
+
+  .checkboxControl[data-disabled] {
+    color: var(--color-actions-disabled);
+  }
+
+  // The Figma focus ring is 2px thick and sits `focus/offset` outside the 24px control.
+  .checkboxControl:focus-visible {
+    outline: var(--stroke-focus) solid var(--color-actions-focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .checkboxRoot[data-error] .checkboxControl:focus-visible {
+    outline-color: var(--color-actions-focus-error);
+  }
+
+  .checkboxText {
+    grid-column: 2;
+    grid-row: 1;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    color: var(--color-text-primary);
+    font-size: var(--typography-font-size-body1);
+    line-height: var(--typography-line-height-body1);
+  }
+
+  .checkboxRoot[data-disabled] .checkboxText {
+    color: var(--color-text-disabled);
+  }
+
+  .checkboxHelperText,
+  .checkboxErrorMessage {
+    grid-column: 2;
+    font-size: var(--typography-font-size-caption);
+    line-height: var(--typography-line-height-caption);
+  }
+
+  .checkboxHelperText {
+    color: var(--color-text-secondary);
+  }
+
+  .checkboxErrorMessage {
+    color: var(--color-error-main);
+  }
+
+  .checkboxRoot[data-disabled] .checkboxHelperText,
+  .checkboxRoot[data-disabled] .checkboxErrorMessage {
+    color: var(--color-text-disabled);
+  }
+}

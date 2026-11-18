@@ -12,3 +12,209 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
+@use 'sass:map';
+
+// Source: Figma "IconButton" component set (Inputs page). Every value is a token; the Figma variable
+// it comes from is the token path (for example `actions/active`).
+//
+// Figma stacks the icon button and its label vertically: the label sits below the button base, and
+// only the base carries the hover, selected, and focus paint. The icon takes the text color, so the
+// icon glyph must draw with `currentColor`.
+//
+// The paint is set as four custom properties, so each state only says which tokens it uses. `none`
+// means no fill or no stroke. Every state selector is wrapped in `:where()` so the order of the
+// rules below is the only thing deciding which state wins.
+
+@function color($name) {
+  @if $name == 'none' {
+    @return transparent;
+  }
+  @return var(--color-#{$name});
+}
+
+@mixin paint($spec) {
+  --iconButtonColor: #{color(map.get($spec, color))};
+  --iconButtonBackground: #{color(map.get($spec, bg))};
+  --iconButtonStroke: #{color(map.get($spec, stroke))};
+  $overlay: map.get($spec, overlay);
+  @if $overlay {
+    --iconButtonOverlay: linear-gradient(#{color($overlay)}, #{color($overlay)});
+  } @else {
+    --iconButtonOverlay: none;
+  }
+}
+
+// inverse: (color, bg, stroke)
+$rest: (
+  false: (color: 'actions-active', bg: 'none', stroke: 'none'),
+  true: (color: 'actions-inverse', bg: 'none', stroke: 'none'),
+);
+$hover: (
+  false: (color: 'actions-active', bg: 'actions-hover', stroke: 'none'),
+  true: (color: 'actions-inverse', bg: 'actions-hover-inverse', stroke: 'none'),
+);
+$selected: (
+  false: (color: 'actions-selected', bg: 'actions-selected-opacity', stroke: 'actions-selected'),
+  true: (color: 'actions-selected-inverse', bg: 'actions-selected-opacity-inverse', stroke: 'actions-selected-inverse'),
+);
+$selectedHover: (
+  false: (color: 'primary-dark', bg: 'actions-selected-opacity-hover', stroke: 'actions-selected'),
+  true: (
+    color: 'primary-dark-inverse',
+    bg: 'actions-selected-opacity-hover-inverse',
+    overlay: 'actions-hover-inverse',
+    stroke: 'actions-selected-inverse',
+  ),
+);
+$disabled: (
+  false: (color: 'actions-disabled', bg: 'none', stroke: 'none'),
+  true: (color: 'actions-disabled-inverse', bg: 'none', stroke: 'none'),
+);
+$selectedDisabled: (
+  false: (color: 'actions-disabled', bg: 'actions-disabled-opacity', stroke: 'border-secondary'),
+  true: (color: 'actions-disabled-inverse', bg: 'actions-disabled-opacity', stroke: 'border-inverse-primary'),
+);
+
+// `:not([data-inverse])` and `[data-inverse]` keep the two color sets from overlapping.
+@function inverseSelector($inverse) {
+  @if $inverse {
+    @return '[data-inverse]';
+  }
+  @return ':not([data-inverse])';
+}
+
+@layer enchanted.components {
+  .iconButtonRoot {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-xxxs);
+    box-sizing: border-box;
+    margin: 0;
+    padding: var(--padding-none);
+    border: 0;
+    appearance: none;
+    background: none;
+    color: var(--iconButtonColor);
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    font-size: var(--typography-font-size-caption);
+    line-height: var(--typography-line-height-caption);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  .iconButtonBase {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    gap: var(--gap-none);
+    padding: var(--iconButtonPadding);
+    border-radius: var(--iconButtonRadius);
+    background-color: var(--iconButtonBackground);
+    background-image: var(--iconButtonOverlay);
+    // Figma draws the stroke inside the frame, so an inset shadow keeps the layout size unchanged.
+    box-shadow: inset 0 0 0 var(--stroke-default) var(--iconButtonStroke);
+  }
+
+  // Padding, radius, and icon size per size and variant.
+  .iconButtonRoot[data-size='small'][data-variant='withPadding'] {
+    --iconButtonPadding: var(--padding-xxs);
+    --iconButtonRadius: var(--corner-radius-sm);
+    --iconButtonIconSize: var(--size-icon-sm);
+  }
+
+  .iconButtonRoot[data-size='small'][data-variant='withoutPadding'] {
+    --iconButtonPadding: var(--padding-none);
+    --iconButtonRadius: var(--corner-radius-sm);
+    --iconButtonIconSize: var(--size-icon-sm);
+  }
+
+  .iconButtonRoot[data-size='medium'][data-variant='withPadding'] {
+    --iconButtonPadding: var(--padding-sm);
+    --iconButtonRadius: var(--corner-radius-md);
+    --iconButtonIconSize: var(--size-icon-md);
+  }
+
+  .iconButtonRoot[data-size='medium'][data-variant='withoutPadding'] {
+    --iconButtonPadding: var(--padding-xxxs);
+    --iconButtonRadius: var(--corner-radius-sm);
+    --iconButtonIconSize: var(--size-icon-md);
+  }
+
+  .iconButtonIcon {
+    display: inline-flex;
+    width: var(--iconButtonIconSize);
+    height: var(--iconButtonIconSize);
+  }
+
+  .iconButtonEndIcon {
+    display: inline-flex;
+    width: var(--size-icon-xs);
+    height: var(--size-icon-xs);
+  }
+
+  .iconButtonIcon > svg,
+  .iconButtonEndIcon > svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .iconButtonLabel {
+    display: inline-flex;
+    padding: var(--padding-none) var(--padding-xxs);
+  }
+
+  // Rest, then hover, selected, selected hover, and disabled, so a later state wins.
+  @each $inverse, $spec in $rest {
+    :where(.iconButtonRoot#{inverseSelector($inverse)}) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $spec in $hover {
+    :where(.iconButtonRoot:not([data-selected])#{inverseSelector($inverse)}):hover:not([data-disabled]) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $spec in $selected {
+    :where(.iconButtonRoot[data-selected]#{inverseSelector($inverse)}) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $spec in $selectedHover {
+    :where(.iconButtonRoot[data-selected]#{inverseSelector($inverse)}):hover:not([data-disabled]) {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $spec in $disabled {
+    :where(.iconButtonRoot:not([data-selected])#{inverseSelector($inverse)})[data-disabled] {
+      @include paint($spec);
+    }
+  }
+
+  @each $inverse, $spec in $selectedDisabled {
+    :where(.iconButtonRoot[data-selected]#{inverseSelector($inverse)})[data-disabled] {
+      @include paint($spec);
+    }
+  }
+
+  // The Figma focus ring is 2px thick and sits `focus/offset` outside the button base.
+  .iconButtonRoot:focus-visible {
+    outline: none;
+  }
+
+  .iconButtonRoot:focus-visible .iconButtonBase {
+    outline: var(--stroke-focus) solid var(--color-actions-focus);
+    outline-offset: var(--focus-offset);
+  }
+
+  .iconButtonRoot[data-inverse]:focus-visible .iconButtonBase {
+    outline-color: var(--color-actions-focus-inverse);
+  }
+}

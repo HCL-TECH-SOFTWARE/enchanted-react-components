@@ -12,3 +12,53 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
+// Source: Figma "Dialog" component set (Feedback page). Every value is a token; the Figma variable
+// it comes from is the token path (for example `background/paper`).
+//
+// Not styled, because no token exists for it: the dialog width (Figma uses fixed widths from 444 to
+// 1920 pixels). The header and the footer are the `DialogTitle` and `DialogActions` instances and keep their own styles.
+
+@layer enchanted.components {
+  .dialogBackdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-background-overlay);
+  }
+
+  // Centered in the viewport and never taller than it, so `scroll` has a height to scroll within.
+  .dialogRoot {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: fit-content;
+    max-height: 100%;
+    margin: auto;
+    padding: var(--padding-none);
+    border-radius: var(--corner-radius-lg);
+    background: var(--color-background-paper);
+    // Figma effect style `Shadows/shadows.24`.
+    box-shadow: var(--shadow-shadows24);
+    color: var(--color-text-primary);
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  .dialogContent {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: var(--padding-none);
+  }
+
+  .dialogRoot[data-with-padding] .dialogContent {
+    padding: var(--padding-md);
+  }
+
+  .dialogRoot[data-scroll] .dialogContent {
+    overflow: auto;
+  }
+}

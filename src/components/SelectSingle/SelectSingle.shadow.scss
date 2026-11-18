@@ -12,3 +12,214 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
+// Source: Figma "SelectSingle (Autocomplete)" component set (Inputs page), editable variants with an
+// input. Every value is a token; the Figma variable it comes from is the token path.
+//
+// Not styled: the caret, the clear icon, the search icon button, and the error icon (icons), the
+// `FormLabel` instance (its own component), the selected menu item (Figma fills it with
+// `primary/main`, but its text color is not defined), the menu in inverse colors (Figma has no
+// inverse items), and the Figma menu footer action.
+
+@layer enchanted.components {
+  .selectSingleRoot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    box-sizing: border-box;
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    letter-spacing: var(--typography-letter-spacing-default);
+    --selectSingleBackground: var(--color-background-paper);
+    --selectSingleStroke: var(--color-border-primary);
+    --selectSingleStrokeWidth: var(--stroke-default);
+    --selectSingleText: var(--color-text-primary);
+    --selectSingleSecondary: var(--color-text-secondary);
+    --selectSingleHelper: var(--color-text-secondary);
+  }
+
+  // The surface is the Figma `InputBase`: fill, stroke inside the frame, radius, and minimum height.
+  .selectSingleSurface {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background: var(--selectSingleBackground);
+    // Figma draws the stroke inside the frame, so an inset shadow keeps the layout size unchanged.
+    box-shadow: inset 0 0 0 var(--selectSingleStrokeWidth) var(--selectSingleStroke);
+    color: var(--selectSingleText);
+  }
+
+  .selectSingleRoot[data-size='medium'] .selectSingleSurface {
+    gap: var(--gap-sm);
+    min-height: var(--size-control-md);
+    padding: var(--padding-xs) var(--padding-md);
+    border-radius: var(--corner-radius-md);
+  }
+
+  .selectSingleRoot[data-size='small'] .selectSingleSurface {
+    gap: var(--gap-xxxs);
+    min-height: var(--size-control-sm);
+    padding: var(--padding-none) var(--padding-xs);
+    border-radius: var(--corner-radius-sm);
+  }
+
+  .selectSingleInput {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    border: 0;
+    outline: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: var(--typography-font-size-body1);
+    line-height: var(--typography-line-height-body1);
+  }
+
+  .selectSingleHelperText {
+    color: var(--selectSingleHelper);
+    font-size: var(--typography-font-size-caption);
+    line-height: var(--typography-line-height-caption);
+  }
+
+  // Inverse: the colors made for dark backgrounds.
+  .selectSingleRoot[data-inverse] {
+    --selectSingleBackground: var(--color-background-dark);
+    --selectSingleStroke: var(--color-border-inverse-primary);
+    --selectSingleText: var(--color-text-primary-inverse);
+    --selectSingleSecondary: var(--color-text-secondary-inverse);
+    --selectSingleHelper: var(--color-text-secondary-inverse);
+  }
+
+  // Hover, then focus, then error, then disabled, so a later state wins.
+  .selectSingleRoot:not([data-disabled]) .selectSingleSurface:hover {
+    --selectSingleStroke: var(--color-border-primary-hover);
+  }
+
+  .selectSingleRoot[data-inverse]:not([data-disabled]) .selectSingleSurface:hover {
+    --selectSingleStroke: var(--color-border-inverse-primary-hover);
+  }
+
+  .selectSingleRoot:not([data-disabled]) .selectSingleSurface:focus-within {
+    --selectSingleStroke: var(--color-actions-focus);
+    --selectSingleStrokeWidth: var(--stroke-focus);
+  }
+
+  .selectSingleRoot[data-inverse]:not([data-disabled]) .selectSingleSurface:focus-within {
+    --selectSingleStroke: var(--color-actions-focus-inverse);
+  }
+
+  .selectSingleRoot[data-invalid] {
+    --selectSingleHelper: var(--color-error-main);
+  }
+
+  .selectSingleRoot[data-invalid]:not([data-disabled]) .selectSingleSurface {
+    --selectSingleStroke: var(--color-error-main);
+  }
+
+  .selectSingleRoot[data-invalid][data-inverse] {
+    --selectSingleHelper: var(--color-error-inverse);
+  }
+
+  .selectSingleRoot[data-invalid][data-inverse]:not([data-disabled]) .selectSingleSurface {
+    --selectSingleStroke: var(--color-error-inverse);
+  }
+
+  .selectSingleRoot[data-invalid]:not([data-disabled]) .selectSingleSurface:focus-within {
+    --selectSingleStroke: var(--color-actions-focus-error);
+  }
+
+  .selectSingleRoot[data-invalid][data-inverse]:not([data-disabled]) .selectSingleSurface:focus-within {
+    --selectSingleStroke: var(--color-error-inverse);
+  }
+
+  .selectSingleRoot[data-disabled] {
+    --selectSingleBackground: var(--color-actions-disabled-background);
+    --selectSingleText: var(--color-text-disabled);
+    --selectSingleSecondary: var(--color-text-disabled);
+    --selectSingleHelper: var(--color-text-disabled);
+    --selectSingleStrokeWidth: var(--stroke-none);
+  }
+
+  .selectSingleRoot[data-disabled][data-inverse] {
+    --selectSingleBackground: var(--color-actions-disabled-background-inverse);
+    --selectSingleText: var(--color-text-disabled-inverse);
+  }
+
+  // Figma centers the content of a select vertically; the text field aligns it to the top.
+  .selectSingleSurface {
+    align-items: center;
+  }
+
+  .selectSingleAdornment {
+    display: inline-flex;
+    align-items: center;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+    color: var(--color-actions-active);
+  }
+
+  .selectSingleRoot[data-inverse] .selectSingleAdornment {
+    color: var(--color-actions-inverse);
+  }
+
+  .selectSingleRoot[data-disabled] .selectSingleAdornment {
+    color: var(--color-actions-disabled);
+  }
+
+  .selectSingleRoot[data-disabled][data-inverse] .selectSingleAdornment {
+    color: var(--color-actions-disabled-inverse);
+  }
+
+  .selectSingleAdornment > svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  // The menu is Figma's `Menu` on the paper surface with the large radius and the `Shadows/shadows.6`
+  // elevation. It opens below the field at the field width; the popup is anchored to the surface.
+  // `--available-height` and `--anchor-width` are set by Base UI.
+  .selectSingleMenu {
+    box-sizing: border-box;
+    width: var(--anchor-width);
+    max-height: var(--available-height);
+    overflow-y: auto;
+    padding: var(--padding-xxs) var(--padding-none);
+    border-radius: var(--corner-radius-lg);
+    background: var(--color-background-paper);
+    box-shadow: var(--shadow-shadows6);
+    color: var(--color-text-primary);
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    letter-spacing: var(--typography-letter-spacing-default);
+  }
+
+  // Menu items are Figma's `ListItem`: 12px side padding and 6px vertical padding around the title,
+  // which has 1px of its own. The title is 14/22 for `medium` and 12/16 for `small`, so the rows are
+  // 36px and 30px high. Items are styled by role, so consumers do not need a class on them.
+  .selectSingleMenu [role='option'] {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    box-sizing: border-box;
+    padding: calc(var(--padding-xs) + var(--padding-xxxxs)) var(--padding-md);
+    font-size: var(--typography-font-size-body1);
+    line-height: var(--typography-line-height-body1);
+  }
+
+  .selectSingleMenu[data-size='small'] [role='option'] {
+    font-size: var(--typography-font-size-body2);
+    line-height: var(--typography-line-height-body2);
+  }
+
+  // Hover and keyboard highlight share one state in Base UI: the highlighted item.
+  .selectSingleMenu [role='option'][data-highlighted] {
+    background: var(--color-actions-hover);
+  }
+
+  .selectSingleMenu [role='option'][data-disabled] {
+    color: var(--color-text-disabled);
+  }
+}

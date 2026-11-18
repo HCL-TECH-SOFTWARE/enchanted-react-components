@@ -106,8 +106,10 @@ export const IconButton = ({
     data-inverse={inverseColors ? '' : undefined}
     data-selected={selected ? '' : undefined}
   >
-    <span className="iconButtonIcon">{icon}</span>
+    <span className="iconButtonBase">
+      <span className="iconButtonIcon">{icon}</span>
+      {endIcon ? <span className="iconButtonEndIcon">{endIcon}</span> : null}
+    </span>
     {children ? <span className="iconButtonLabel">{children}</span> : null}
-    {endIcon ? <span className="iconButtonIcon">{endIcon}</span> : null}
   </BaseButton>
 );

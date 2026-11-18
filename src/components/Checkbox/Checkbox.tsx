@@ -16,6 +16,9 @@
 import { useId } from 'react';
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox';
+import CheckboxIcon from '@hcl-software/enchanted-icons-react/carbon/es/checkbox';
+import CheckboxCheckedIcon from '@hcl-software/enchanted-icons-react/carbon/es/checkbox--checked--filled';
+import CheckboxIndeterminateIcon from '@hcl-software/enchanted-icons-react/carbon/es/checkbox--indeterminate--filled';
 import { cn } from '../../utils/cn';
 
 /** Padding of a {@link Checkbox}. Maps to the Figma `variant` property. */
@@ -99,7 +102,10 @@ export const Checkbox = ({
           // Base UI accepts a class name or a function of its state; both are merged after the control class.
           className={(state) => cn('checkboxControl', typeof className === 'function' ? className(state) : className)}
         >
-          <BaseCheckbox.Indicator className="checkboxIndicator" />
+          {/* Figma swaps one icon per state; Base UI marks the state on the control, so CSS shows the matching glyph. */}
+          <CheckboxIcon className="checkboxGlyph checkboxGlyphUnchecked" aria-hidden />
+          <CheckboxCheckedIcon className="checkboxGlyph checkboxGlyphChecked" aria-hidden />
+          <CheckboxIndeterminateIcon className="checkboxGlyph checkboxGlyphIndeterminate" aria-hidden />
         </BaseCheckbox.Root>
         {label ? <span className="checkboxText">{label}</span> : null}
       </label>

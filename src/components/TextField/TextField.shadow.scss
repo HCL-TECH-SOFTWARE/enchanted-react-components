@@ -12,3 +12,161 @@
  * See the License for the specific language governing permissions and      *
  * limitations under the License.                                           *
  * ======================================================================== */
+
+// Source: Figma "TextField" component set (Inputs page), single-line editable variants. Every value is
+// a token; the Figma variable it comes from is the token path (for example `border/primary`).
+//
+// Not styled: the multiline variants (their layers were not read), the clear icon, the drag handle,
+// the error icon, and the `FormLabel` instance, which belongs to its own component.
+
+@layer enchanted.components {
+  .textFieldRoot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    box-sizing: border-box;
+    font-family: var(--typography-font-family-default);
+    font-weight: var(--typography-font-weight-regular400);
+    letter-spacing: var(--typography-letter-spacing-default);
+    --textFieldBackground: var(--color-background-paper);
+    --textFieldStroke: var(--color-border-primary);
+    --textFieldStrokeWidth: var(--stroke-default);
+    --textFieldText: var(--color-text-primary);
+    --textFieldSecondary: var(--color-text-secondary);
+    --textFieldHelper: var(--color-text-secondary);
+  }
+
+  // The surface is the Figma `InputBase`: fill, stroke inside the frame, radius, and minimum height.
+  .textFieldSurface {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background: var(--textFieldBackground);
+    // Figma draws the stroke inside the frame, so an inset shadow keeps the layout size unchanged.
+    box-shadow: inset 0 0 0 var(--textFieldStrokeWidth) var(--textFieldStroke);
+    color: var(--textFieldText);
+  }
+
+  .textFieldRoot[data-size='medium'] .textFieldSurface {
+    gap: var(--gap-sm);
+    min-height: var(--size-control-md);
+    padding: var(--padding-xs) var(--padding-md);
+    border-radius: var(--corner-radius-md);
+  }
+
+  .textFieldRoot[data-size='small'] .textFieldSurface {
+    gap: var(--gap-xxxs);
+    min-height: var(--size-control-sm);
+    padding: var(--padding-none) var(--padding-xs);
+    border-radius: var(--corner-radius-sm);
+  }
+
+  .textFieldInput {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    border: 0;
+    outline: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: var(--typography-font-size-body1);
+    line-height: var(--typography-line-height-body1);
+  }
+
+  .textFieldHelperText {
+    color: var(--textFieldHelper);
+    font-size: var(--typography-font-size-caption);
+    line-height: var(--typography-line-height-caption);
+  }
+
+  // Inverse: the colors made for dark backgrounds.
+  .textFieldRoot[data-inverse] {
+    --textFieldBackground: var(--color-background-dark);
+    --textFieldStroke: var(--color-border-inverse-primary);
+    --textFieldText: var(--color-text-primary-inverse);
+    --textFieldSecondary: var(--color-text-secondary-inverse);
+    --textFieldHelper: var(--color-text-secondary-inverse);
+  }
+
+  // Hover, then focus, then error, then disabled, so a later state wins.
+  .textFieldRoot:not([data-disabled]) .textFieldSurface:hover {
+    --textFieldStroke: var(--color-border-primary-hover);
+  }
+
+  .textFieldRoot[data-inverse]:not([data-disabled]) .textFieldSurface:hover {
+    --textFieldStroke: var(--color-border-inverse-primary-hover);
+  }
+
+  .textFieldRoot:not([data-disabled]) .textFieldSurface:focus-within {
+    --textFieldStroke: var(--color-actions-focus);
+    --textFieldStrokeWidth: var(--stroke-focus);
+  }
+
+  .textFieldRoot[data-inverse]:not([data-disabled]) .textFieldSurface:focus-within {
+    --textFieldStroke: var(--color-actions-focus-inverse);
+  }
+
+  .textFieldRoot[data-invalid] {
+    --textFieldHelper: var(--color-error-main);
+  }
+
+  .textFieldRoot[data-invalid]:not([data-disabled]) .textFieldSurface {
+    --textFieldStroke: var(--color-error-main);
+  }
+
+  .textFieldRoot[data-invalid][data-inverse] {
+    --textFieldHelper: var(--color-error-inverse);
+  }
+
+  .textFieldRoot[data-invalid][data-inverse]:not([data-disabled]) .textFieldSurface {
+    --textFieldStroke: var(--color-error-inverse);
+  }
+
+  .textFieldRoot[data-invalid]:not([data-disabled]) .textFieldSurface:hover {
+    --textFieldStroke: var(--color-error-dark);
+  }
+
+  .textFieldRoot[data-invalid][data-inverse]:not([data-disabled]) .textFieldSurface:hover {
+    --textFieldStroke: var(--color-error-dark-inverse);
+  }
+
+  .textFieldRoot[data-invalid]:not([data-disabled]) .textFieldSurface:focus-within {
+    --textFieldStroke: var(--color-error-main);
+  }
+
+  .textFieldRoot[data-invalid][data-inverse]:not([data-disabled]) .textFieldSurface:focus-within {
+    --textFieldStroke: var(--color-error-inverse);
+  }
+
+  .textFieldRoot[data-disabled] {
+    --textFieldBackground: var(--color-actions-disabled-background);
+    --textFieldText: var(--color-text-disabled);
+    --textFieldSecondary: var(--color-text-disabled);
+    --textFieldHelper: var(--color-text-disabled);
+    --textFieldStrokeWidth: var(--stroke-none);
+  }
+
+  .textFieldRoot[data-disabled][data-inverse] {
+    --textFieldBackground: var(--color-actions-disabled-background-inverse);
+    --textFieldText: var(--color-text-disabled-inverse);
+  }
+
+  .textFieldUnit {
+    padding: var(--padding-xxxxs) var(--padding-none);
+    color: var(--textFieldSecondary);
+    font-size: var(--typography-font-size-body1);
+    line-height: var(--typography-line-height-body1);
+  }
+
+  .textFieldAdornment {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .textFieldContentTop,
+  .textFieldContentBottom {
+    padding: var(--padding-xxs) var(--padding-sm);
+  }
+}
