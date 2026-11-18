@@ -19,6 +19,7 @@ import {
   render, screen, fireEvent, waitFor, act,
 } from '@testing-library/react';
 import { ThemeProvider } from '@emotion/react';
+import userEvent from '@testing-library/user-event';
 import {
   EnumUploadStatus, IProgressState, Literals, ProgressBarLocalization, ProgressItemType,
 } from '../../../../composite_components/ProgressBar/ProgressBar';
@@ -69,6 +70,34 @@ describe('ProgressItem Component', () => {
       </ThemeProvider>,
     );
     expect(screen.getByText('testFile.jpg')).not.toBeNull();
+  });
+
+  test.each(Object.values(EnumUploadStatus))('renders a non-focusable row without a button role for %s', (status) => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], status }]} />
+      </ThemeProvider>,
+    );
+    const row = screen.getByTestId('progress-item-row');
+    expect(row).not.toHaveAttribute('role');
+    expect(row).not.toHaveAttribute('tabindex');
+    row.focus();
+    expect(row).not.toHaveFocus();
+  });
+
+  test('allows keyboard access to the action button without focusing the row', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressItems {...mockProps} file={[{ ...mockProps.file[0], showLearnMore: false }]} />
+      </ThemeProvider>,
+    );
+
+    await user.tab();
+
+    expect(screen.getByTestId('cancel-upload')).toHaveFocus();
+    expect(screen.getByTestId('progress-item-row')).not.toHaveFocus();
+    expect(screen.getByTestId('progress-indicator')).toHaveStyle({ marginRight: '28px' });
   });
 
   test('renders the avatar icon correctly based on the file type', () => {
@@ -279,10 +308,11 @@ describe('ProgressItem Component', () => {
         />
       </ThemeProvider>,
     );
-    const listItemButton = screen.getByText('testFile.jpg').closest('.MuiListItemButton-root');
-    expect(listItemButton).toHaveClass('disabled-hover');
-    expect(listItemButton).toHaveAttribute('tabindex', '-1');
-    fireEvent.mouseOver(listItemButton!);
+    const row = screen.getByTestId('progress-item-row');
+    expect(row).toHaveClass('disabled-hover');
+    expect(row).not.toHaveAttribute('role');
+    expect(row).not.toHaveAttribute('tabindex');
+    fireEvent.mouseOver(row);
     expect(screen.queryByTestId('cancel-upload')).toBeNull();
   });
 
@@ -322,7 +352,11 @@ describe('ProgressItem Component', () => {
     fireEvent.mouseEnter(nameSpan);
     const nameTooltip = await screen.findByRole('tooltip');
     expect(document.body).toContainElement(nameTooltip);
-    expect(nameSpan.closest('.MuiListItemButton-root')).not.toContainElement(nameTooltip);
+    const row = screen.getByTestId('progress-item-row');
+    expect(row).toContainElement(nameSpan);
+    expect(row).not.toHaveAttribute('role');
+    expect(row).not.toHaveAttribute('tabindex');
+    expect(row).not.toContainElement(nameTooltip);
 
     unmount();
   });
@@ -341,7 +375,11 @@ describe('ProgressItem Component', () => {
     fireEvent.mouseEnter(learnMoreButton);
     const learnMoreTooltip = await screen.findByRole('tooltip', { name: mockProps.literals.learnMoreLabel });
     expect(document.body).toContainElement(learnMoreTooltip);
-    expect(learnMoreButton.closest('.MuiListItemButton-root')).not.toContainElement(learnMoreTooltip);
+    const row = screen.getByTestId('progress-item-row');
+    expect(row).toContainElement(learnMoreButton);
+    expect(row).not.toHaveAttribute('role');
+    expect(row).not.toHaveAttribute('tabindex');
+    expect(row).not.toContainElement(learnMoreTooltip);
 
     unmount();
   });
@@ -360,7 +398,11 @@ describe('ProgressItem Component', () => {
     fireEvent.mouseEnter(pendingText);
     const pendingTooltip = await screen.findByRole('tooltip');
     expect(document.body).toContainElement(pendingTooltip);
-    expect(pendingText.closest('.MuiListItemButton-root')).not.toContainElement(pendingTooltip);
+    const row = screen.getByTestId('progress-item-row');
+    expect(row).toContainElement(pendingText);
+    expect(row).not.toHaveAttribute('role');
+    expect(row).not.toHaveAttribute('tabindex');
+    expect(row).not.toContainElement(pendingTooltip);
   });
 
   test('renders action button tooltips inside the list container via disablePortal', async () => {

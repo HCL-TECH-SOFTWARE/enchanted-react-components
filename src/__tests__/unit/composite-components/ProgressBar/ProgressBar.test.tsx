@@ -89,6 +89,27 @@ describe('ProgressBar Component', () => {
     expect(screen.getByText('Uploading 1 of 5 items...')).not.toBeNull();
   });
 
+  it.each([EnumUploadStatus.PROGRESS, EnumUploadStatus.PENDING])('names both header and item progressbars for %s', (status) => {
+    render(
+      <ThemeProvider theme={theme}>
+        <ProgressBar
+          {...mockProps}
+          uploadedFile={[{ ...mockProps.uploadedFile[0], status }]}
+          isCancelAllDisabled
+          expanded
+        />
+      </ThemeProvider>,
+    );
+
+    expect(screen.getAllByRole('progressbar')).toHaveLength(2);
+    const headerProgress = screen.getByRole('progressbar', { name: mockProps.uploadStatus });
+    const itemProgress = screen.getByRole('progressbar', { name: 'file1.txt: 50%' });
+    expect(headerProgress).toHaveAttribute('aria-label', mockProps.uploadStatus);
+    expect(itemProgress).toHaveAttribute('aria-label', 'file1.txt: 50%');
+    expect(headerProgress).toHaveAttribute('aria-valuenow', '50');
+    expect(itemProgress).toHaveAttribute('aria-valuenow', '50');
+  });
+
   describe('expanded state', () => {
     it('is collapsed by default and the user can expand and collapse it', () => {
       render(
