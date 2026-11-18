@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import React, { useState, useRef } from 'react';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import WarningIcon from '@hcl-software/enchanted-icons/dist/carbon/es/warning';
 import SuccessIcon from '@hcl-software/enchanted-icons/dist/carbon/es/checkmark--outline';
 import ImageIcon from '@hcl-software/enchanted-icons/dist/carbon/es/image';
@@ -45,7 +45,7 @@ import List from '../../List';
 import ListItem from '../../List/ListItem';
 import ListItemText from '../../List/ListItemText';
 import ListItemIcon from '../../List/ListItemIcon';
-import ListItemButton, { ListSizes } from '../../List/ListItemButton';
+import ListItemSecondaryAction from '../../List/ListItemSecondaryAction';
 import ListItemAvatar from '../../List/ListItemAvatar';
 
 enum ItemTypes {
@@ -92,6 +92,52 @@ interface ProgressItemsProps {
   direction?: 'ltr' | 'rtl';
 }
 
+const StyledProgressItemRow = styled(Box)(({ theme }) => {
+  return {
+    display: 'flex',
+    flex: '1 1 auto',
+    minWidth: 0,
+    alignItems: 'center',
+    position: 'relative',
+    boxSizing: 'border-box',
+    padding: '6px 8px',
+    textAlign: 'left',
+    '&:hover': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: '16px',
+      marginRight: '8px',
+    },
+    '& .MuiListItemAvatar-root': {
+      minWidth: 'auto',
+      marginRight: '8px',
+    },
+    '& .MuiListItemText-root': {
+      margin: '0 8px 0 0',
+    },
+    '& .MuiListItemText-secondary': {
+      display: 'flex',
+    },
+    '& .MuiSvgIcon-root': {
+      width: '16px',
+      height: '16px',
+      color: theme.palette.action.active,
+    },
+    '& .MuiListItemSecondaryAction-root': {
+      opacity: 0,
+      transition: 'opacity 0.3s ease',
+      right: '8px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    '&:hover .MuiListItemSecondaryAction-root, &:focus-within .MuiListItemSecondaryAction-root': {
+      opacity: 1,
+    },
+  };
+});
+
 /**
  * StyledList component is a customized version of the List component from Material-UI.
  * It applies custom styling to the List and its child components.
@@ -105,7 +151,7 @@ const StyledList = styled(List)((props) => {
     width: '360px',
     overflowY: 'scroll',
     '.MuiListItem-root': {
-      '.MuiListItemButton-root': {
+      '.progress-item-row': {
         '.MuiListItemText-root': {
           '& .MuiListItemText-primary': {
             maxWidth: '252px',
@@ -169,7 +215,7 @@ const StyledList = styled(List)((props) => {
           },
         },
       },
-      '.MuiListItemButton-root.disabled-hover': {
+      '.progress-item-row.disabled-hover': {
         pointerEvents: 'none !important',
         backgroundColor: 'transparent !important',
         '&:hover': {
@@ -202,12 +248,14 @@ const ProgressItems = (props: ProgressItemsProps) => {
    * Renders the progress indicator based on the upload status and progress.
    * @returns The progress indicator component based on the upload status and progress.
    */
-  const renderProgressIndicator = (status: string, progress: number) => {
+  const renderProgressIndicator = (queueItem: IProgressState) => {
+    const { status, progress, name } = queueItem;
     if (status === EnumUploadStatus.SUCCESS) {
       return <SuccessIcon />;
     } if (status === EnumUploadStatus.PROGRESS || status === EnumUploadStatus.PENDING) {
       return (
         <CircularProgress
+          aria-label={`${name}: ${progress}%`}
           variant="determinate"
           value={progress}
           size={16}
@@ -444,6 +492,7 @@ const ProgressItems = (props: ProgressItemsProps) => {
           folderId = queueItem.collectionId;
         }
         const { iconImage } = getAvatarByFileType(queueItem.name);
+        const hoverIcon = renderHoverIcon(queueItem);
         return (
           <React.Fragment key={`${queueItem.name}_${queueItem.timestamp}`}>
             <ListItem
@@ -451,14 +500,13 @@ const ProgressItems = (props: ProgressItemsProps) => {
               sx={{ paddingLeft: (queueItem.type !== ProgressItemType.Folder && folderId === queueItem.collectionId) ? '8px' : '0px' }}
               hasBorder
             >
-              <ListItemButton
-                size={ListSizes.SMALL}
-                secondaryActionButton={renderHoverIcon(queueItem)}
+              <StyledProgressItemRow
+                data-testid="progress-item-row"
+                className={`progress-item-row${queueItem.status === EnumUploadStatus.CANCELLED ? ' disabled-hover' : ''}`}
                 onMouseEnter={() => { return setHover(`${queueItem.name}_${queueItem.timestamp}`); }}
                 onMouseLeave={() => { return setHover(null); }}
                 onFocus={() => { return setFocus(`${queueItem.name}_${queueItem.timestamp}`); }}
                 onBlur={() => { return setFocus(null); }}
-                disabledHover={queueItem.status === EnumUploadStatus.CANCELLED}
               >
                 {queueItem.status === EnumUploadStatus.SUCCESS
                   ? (
@@ -613,15 +661,20 @@ const ProgressItems = (props: ProgressItemsProps) => {
                 <ListItemIcon
                   data-testid="progress-indicator"
                   style={
-                    renderHoverIcon(queueItem) !== null
+                    hoverIcon !== null
                     && (hover === `${queueItem.name}_${queueItem.timestamp}` || focus === `${queueItem.name}_${queueItem.timestamp}`)
                       ? { [isRTL ? 'marginLeft' : 'marginRight']: '28px' }
                       : { [isRTL ? 'marginLeft' : 'marginRight']: '0px' }
                   }
                 >
-                  {renderProgressIndicator(queueItem.status, queueItem.progress)}
+                  {renderProgressIndicator(queueItem)}
                 </ListItemIcon>
-              </ListItemButton>
+                {hoverIcon && (
+                  <ListItemSecondaryAction>
+                    {hoverIcon}
+                  </ListItemSecondaryAction>
+                )}
+              </StyledProgressItemRow>
             </ListItem>
           </React.Fragment>
         );

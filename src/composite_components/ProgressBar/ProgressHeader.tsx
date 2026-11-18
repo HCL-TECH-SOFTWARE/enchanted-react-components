@@ -238,6 +238,7 @@ const ProgressHeader = (props: progressHeaderProps) => {
       } else {
         statusIcon = (
           <CircularProgress
+            aria-label={uploadStatus}
             variant="determinate"
             value={totalPercentage}
             size={16}

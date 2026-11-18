@@ -22,6 +22,15 @@ import CircularProgress, { CircularProgressVariants, CircularProgressTestIds } f
 afterEach(cleanup);
 
 describe('CircularProgress', () => {
+  it.each(Object.values(CircularProgressVariants))('hides the decorative trail from assistive technology for %s', (variant) => {
+    render(<CircularProgress variant={variant} value={30} aria-label="Upload progress" aria-hidden={false} />);
+
+    expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_TRAIL).getAttribute('aria-hidden')).toBe('true');
+    expect(screen.getByRole('progressbar', { name: 'Upload progress' })).toBe(
+      screen.getByTestId(CircularProgressTestIds.PROGRESS_CIRCLE),
+    );
+  });
+
   it('Render indeterminate variant as default', () => {
     render(<CircularProgress />);
     expect(screen.getAllByTestId(CircularProgressTestIds.PROGRESS_TRAIL)).not.toBeNull();
