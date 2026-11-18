@@ -16,9 +16,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// NOTE: The TextField component is not implemented yet. This template is written ahead of the
-// code from the Figma component properties; the prop names and values below are the proposed
-// public API and must be reconciled with `TextField.tsx` when the component is added.
+// Props follow the Figma component properties of `TextField`; see `TextField.tsx`.
 
 import figma from 'figma'
 
@@ -67,10 +65,6 @@ const showHelperText = instance.getBoolean("showHelperText")
 const unitLabel = instance.getString("unitLabel")
 const showUnitLabel = instance.getBoolean("showUnitLabel")
 
-// BOOLEAN without a content swap.
-const showClearIcon = instance.getBoolean("showClearIcon")
-const showDragHandle = instance.getBoolean("showDragHandle")
-
 // BOOLEAN and INSTANCE_SWAP: the adornment is passed only while `showInputAdornment` is on.
 const showInputAdornment = instance.getBoolean("showInputAdornment")
 const inputAdornment = instance.getInstanceSwap("inputAdornment")
@@ -81,8 +75,11 @@ const contentTop = instance.getSlot("contentTop")
 const showContentBottom = instance.getBoolean("showContentBottom")
 const contentBottom = instance.getSlot("contentBottom")
 
-// Not mapped: the `showLabel` toggle. The label is the nested `FormLabel` instance, which has no
-// Code Connect template (FormLabel is not part of the first-release scope).
+// Not mapped:
+// - `showLabel`: the label is the nested `FormLabel` instance, which has no Code Connect template
+//   (FormLabel is not part of the first-release scope). The code has a `label` prop for it.
+// - `showClearIcon` and `showDragHandle`: they need an icon or behavior that the Base UI `Input`
+//   does not provide and that has no approved specification yet.
 
 export default {
   example: figma.code`<TextField size="${size}"${
@@ -90,8 +87,6 @@ export default {
   }${disabled ? " disabled" : ""}${readOnly ? " readOnly" : ""}${
     error ? " error" : ""
   }${inverseColors ? " inverseColors" : ""}${multiline ? " multiline" : ""}${
-    showClearIcon ? " clearable" : ""
-  }${showDragHandle ? " dragHandle" : ""}${
     showHelperText ? ` helperText="${helperText}"` : ""
   }${showUnitLabel ? ` unitLabel="${unitLabel}"` : ""}${
     showInputAdornment && inputAdornment?.type === "INSTANCE"

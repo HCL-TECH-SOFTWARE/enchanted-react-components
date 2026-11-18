@@ -14,10 +14,15 @@
  * ======================================================================== */
 
 import buttonStyles from '../components/Button/Button.shadow.scss?inline';
+import iconButtonStyles from '../components/IconButton/IconButton.shadow.scss?inline';
+import checkboxStyles from '../components/Checkbox/Checkbox.shadow.scss?inline';
+import textFieldStyles from '../components/TextField/TextField.shadow.scss?inline';
+import selectSingleStyles from '../components/SelectSingle/SelectSingle.shadow.scss?inline';
+import dialogStyles from '../components/Dialog/Dialog.shadow.scss?inline';
 
 // One `import x from '../components/<Component>/<Component>.shadow.scss?inline'` per component
 // that has styles, concatenated below.
-const componentStyles: string[] = [buttonStyles];
+const componentStyles: string[] = [buttonStyles, iconButtonStyles, checkboxStyles, textFieldStyles, selectSingleStyles, dialogStyles];
 
 /** The concatenated CSS of every component, injected by `ThemeProvider`. */
 export const boundaryStyles = componentStyles.join('\n');

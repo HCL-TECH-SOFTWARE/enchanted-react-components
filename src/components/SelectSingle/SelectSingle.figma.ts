@@ -16,8 +16,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// NOTE: The SelectSingle component is not implemented yet. This template is written ahead of the
-// code from the Figma component properties (Figma name: "SelectSingle (Autocomplete)"); the prop
+// The SelectSingle props follow the Figma component properties (Figma name: "SelectSingle (Autocomplete)"); the prop
 // names and values below are the proposed public API and must be reconciled with
 // `SelectSingle.tsx` when the component is added.
 
@@ -62,11 +61,6 @@ const placeholder = instance.getString("placeholder")
 const helperText = instance.getString("helperText")
 const showHelperText = instance.getBoolean("showHelperText")
 
-// BOOLEAN without a content swap.
-const showClearIcon = instance.getBoolean("showClearIcon")
-const showEndAdornment = instance.getBoolean("showEndAdornment")
-const showEndAdornmentAction = instance.getBoolean("showEndAdornmentAction")
-
 // BOOLEAN and a fixed child layer: the start adornment is the `startAdornment` instance,
 // which is not exposed as a swap property, so it is resolved by its layer name.
 const showStartAdornment = instance.getBoolean("showStartAdornment")
@@ -76,8 +70,11 @@ const startAdornment = instance.findInstance("startAdornment")
 const showMenu = instance.getBoolean("showMenu")
 const menu = instance.getInstanceSwap("menu")
 
-// Not mapped: the `showLabel` toggle. The label is the nested `FormLabel` instance, which has no
-// Code Connect template (FormLabel is not part of the first-release scope).
+// Not mapped:
+// - `showLabel`: the label is the nested `FormLabel` instance, which has no Code Connect template
+//   (FormLabel is not part of the first-release scope). The code has a `label` prop for it.
+// - `showClearIcon`, `showEndAdornment`, and `showEndAdornmentAction`: they need icons or behavior
+//   that have no approved specification yet.
 
 export default {
   example: figma.code`<SelectSingle size="${size}"${
@@ -85,10 +82,7 @@ export default {
   }${disabled ? " disabled" : ""}${readOnly ? " readOnly" : ""}${
     error ? " error" : ""
   }${inverseColors ? " inverseColors" : ""}${
-    showClearIcon ? " clearable" : ""
-  }${showEndAdornment ? " endAdornment" : ""}${
-    showEndAdornmentAction ? " endAdornmentAction" : ""
-  }${showHelperText ? ` helperText="${helperText}"` : ""}${
+    showHelperText ? ` helperText="${helperText}"` : ""}${
     showStartAdornment && startAdornment?.type === "INSTANCE"
       ? figma.code` startAdornment={${startAdornment.executeTemplate().example}}`
       : ""

@@ -16,9 +16,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// NOTE: The IconButton component is not implemented yet. This template is written ahead of the
-// code from the Figma component properties; the prop names and values below are the proposed
-// public API and must be reconciled with `IconButton.tsx` when the component is added.
+// Props follow the Figma component properties of `IconButton`; see `IconButton.tsx`.
 
 import figma from 'figma'
 
