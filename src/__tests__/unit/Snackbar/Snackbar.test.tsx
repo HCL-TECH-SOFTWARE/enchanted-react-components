@@ -196,7 +196,7 @@ describe('Snackbar unit tests', () => {
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_ROOT)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_CIRCLE)).not.toBeNull();
     expect(screen.getByTestId(CircularProgressTestIds.PROGRESS_TRAIL)).not.toBeNull();
-    expect(screen.getAllByRole('progressbar')[1].getAttribute('aria-valuenow')).toEqual('50');
+    expect(screen.getByRole('progressbar').getAttribute('aria-valuenow')).toEqual('50');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)).not.toBeNull();
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_CLOSE)[0].dataset.muiTest).toEqual('closeIcon');
     expect(screen.getAllByTestId(SnackbarTestIds.SNACKBAR_MESSAGE)).not.toBeNull();

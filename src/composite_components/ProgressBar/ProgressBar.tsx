@@ -1,5 +1,5 @@
 /* ======================================================================== *
- * Copyright 2024, 2025 HCL America Inc.                                    *
+ * Copyright 2024, 2026 HCL America Inc.                                    *
  * Licensed under the Apache License, Version 2.0 (the "License");          *
  * you may not use this file except in compliance with the License.         *
  * You may obtain a copy of the License at                                  *
@@ -31,6 +31,18 @@ export enum EnumUploadStatus {
 export enum ProgressItemType {
   File = 'file',
   Folder = 'folder',
+}
+
+/**
+ * Overall result shown by the leading icon in the header once the upload has finished.
+ * SUCCESS = all items succeeded (round green check)
+ * ERROR   = at least one item failed, whether some items succeeded or every item failed (round red warning)
+ * STOPPED = the entire batch was cancelled, with no successes and no failures (round orange "stopped" icon)
+ */
+export enum UploadBarStatus {
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR',
+  STOPPED = 'STOPPED',
 }
 
 export interface IProgressState {
@@ -83,6 +95,13 @@ interface progressBarProps {
   pauseButton?: Function;
   translation?: ProgressBarLocalization | undefined;
   isCancelAllDisabled: boolean;
+  // Overall result of the upload, shown as the header icon once the upload has finished:
+  // success (green), error (red, any failure present) or stopped (orange, entire batch cancelled).
+  overallStatus: UploadBarStatus;
+  // Whether the progress bar is expanded. When omitted, the component manages this state itself.
+  expanded?: boolean;
+  // Called when the user expands or collapses the progress bar.
+  onExpandedChange?(expanded: boolean): void;
 }
 
 /**
@@ -94,17 +113,26 @@ const ProgressBar = (props: progressBarProps) => {
   const {
     uploadStatus, totalPercentage, totalSize, totalTime, stringLiterals, uploadedFile,
     retryUploadItem, cancelItem, navigateFolder, cancelAll, learnMoreOnFailure, closeModal,
-    pauseButton, translation, isCancelAllDisabled,
+    pauseButton, translation, isCancelAllDisabled, overallStatus,
+    expanded: expandedProp, onExpandedChange,
   } = props;
 
-  const [expanded, setExpanded] = useState(false);
+  const [internalExpanded, setInternalExpanded] = useState(false);
+  const isControlled = expandedProp !== undefined;
+  const expanded = isControlled ? expandedProp : internalExpanded;
   const theme = useTheme();
 
   /**
    * Toggles the state of the progress bar.
    */
   const toggleButtonClick = () => {
-    setExpanded(!expanded);
+    const next = !expanded;
+    if (!isControlled) {
+      setInternalExpanded(next);
+    }
+    if (onExpandedChange) {
+      onExpandedChange(next);
+    }
   };
 
   return (
@@ -126,6 +154,7 @@ const ProgressBar = (props: progressBarProps) => {
         translation={translation}
         expanded={expanded}
         toggleButtonClick={toggleButtonClick}
+        overallStatus={overallStatus}
       />
       {expanded && (
         <ProgressSubHeader
