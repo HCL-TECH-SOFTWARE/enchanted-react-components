@@ -13,6 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import type { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
@@ -64,6 +65,57 @@ describe('DialogHeader', () => {
     renderHeader({ icon: <span data-testid="icon" />, actions: <button type="button">Extra</button> });
     expect(screen.getByTestId('icon')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Extra' })).toBeInTheDocument();
+  });
+
+  describe('with parts left out', () => {
+    // The helper above always passes a title, so these render the header directly.
+    const renderBare = (header: ReactNode) =>
+      render(
+        <ThemeProvider mode={ThemeMode.Light} shadowRootType={ShadowRootType.None}>
+          <Dialog open header={header} aria-label="Bare">
+            Content
+          </Dialog>
+        </ThemeProvider>,
+      );
+
+    it('renders no title group without a title or icon', () => {
+      renderBare(<DialogHeader />);
+      expect(document.querySelector('.dialogHeaderTitleGroup')).toBeNull();
+      expect(screen.queryByRole('heading')).toBeNull();
+      expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument();
+    });
+
+    it('renders an icon without a title', () => {
+      renderBare(<DialogHeader icon={<span data-testid="icon" />} />);
+      expect(screen.getByTestId('icon')).toBeInTheDocument();
+      expect(screen.queryByRole('heading')).toBeNull();
+    });
+
+    it('renders a title without an icon', () => {
+      renderBare(<DialogHeader>Only title</DialogHeader>);
+      expect(document.querySelector('.dialogHeaderIcon')).toBeNull();
+      expect(screen.getByRole('heading', { name: 'Only title' })).toBeInTheDocument();
+    });
+
+    it('renders actions without the close button', () => {
+      renderBare(
+        <DialogHeader showCloseIcon={false} actions={<button type="button">Extra</button>}>
+          Title
+        </DialogHeader>,
+      );
+      expect(screen.getByRole('button', { name: 'Extra' })).toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
+    });
+
+    it('renders no end group without actions or the close button', () => {
+      renderBare(<DialogHeader showCloseIcon={false}>Title</DialogHeader>);
+      expect(document.querySelector('.dialogHeaderEnd')).toBeNull();
+    });
+
+    it('merges a custom className', () => {
+      renderBare(<DialogHeader className="custom">Title</DialogHeader>);
+      expect(document.querySelector('.dialogHeaderRoot')).toHaveClass('custom');
+    });
   });
 
   it('has no accessibility violations', async () => {
