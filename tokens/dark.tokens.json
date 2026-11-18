@@ -1773,6 +1773,54 @@
         "unit": "px"
       },
       "$description": "Figma variable Spacings/Padding/s."
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/sm."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/md."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/lg."
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xl."
+    },
+    "xxl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xxl."
+    },
+    "xxxl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Padding/xxxl."
     }
   },
   "gap": {
@@ -1783,6 +1831,78 @@
         "unit": "px"
       },
       "$description": "Figma variable Spacings/Gap/none."
+    },
+    "xxxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/xxxs."
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/xxs."
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/sm."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/md."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/lg."
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/xl."
+    },
+    "xxl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/xxl."
+    },
+    "xxxl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/xxxl."
+    },
+    "overlap": {
+      "$type": "dimension",
+      "$value": {
+        "value": -1,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Gap/overlap."
     }
   },
   "cornerRadius": {
@@ -1793,6 +1913,70 @@
         "unit": "px"
       },
       "$description": "Figma variable Spacings/Corner radius/s."
+    },
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/none."
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/sm."
+    },
+    "smFocus": {
+      "$type": "dimension",
+      "$value": {
+        "value": 7,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/sm-focus."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/md."
+    },
+    "mdFocus": {
+      "$type": "dimension",
+      "$value": {
+        "value": 9,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/md-focus."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/lg."
+    },
+    "lgFocus": {
+      "$type": "dimension",
+      "$value": {
+        "value": 11,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/lg-focus."
+    },
+    "circular": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1000,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Corner radius/circular."
     }
   },
   "stroke": {
@@ -1811,6 +1995,30 @@
         "unit": "px"
       },
       "$description": "Figma variable Spacings/Stroke/focus."
+    },
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Stroke/none."
+    },
+    "strong": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Stroke/strong."
+    },
+    "indicator": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1.5,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Stroke/indicator."
     }
   },
   "typography": {
@@ -1873,6 +2081,116 @@
         },
         "$description": "Figma variable Typography/letter spacing/letter spacing."
       }
+    }
+  },
+  "indent": {
+    "level1": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Indent/level-1."
+    },
+    "level2": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Indent/level-2."
+    },
+    "level3": {
+      "$type": "dimension",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Indent/level-3."
+    },
+    "level4": {
+      "$type": "dimension",
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Indent/level-4."
+    },
+    "level5": {
+      "$type": "dimension",
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Indent/level-5."
+    }
+  },
+  "size": {
+    "controlSm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/control-sm."
+    },
+    "controlMd": {
+      "$type": "dimension",
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/control-md."
+    },
+    "iconXs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/icon-xs."
+    },
+    "iconSm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/icon-sm."
+    },
+    "iconMd": {
+      "$type": "dimension",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/icon-md."
+    },
+    "iconLg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/icon-lg."
+    },
+    "iconXl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Size/icon-xl."
+    }
+  },
+  "focus": {
+    "offset": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Figma variable Spacings/Focus/offset."
     }
   }
 }
