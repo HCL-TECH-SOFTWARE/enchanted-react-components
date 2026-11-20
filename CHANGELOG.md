@@ -10,11 +10,15 @@
 
 ### Breaking changes
 
+## 3.0.4
+
+### Fixed
+- ProgressBar: add controlled expand/collapse support; fix chevron direction; add correct error and stopped icons in progressbar header for failed and cancelled upload states.
+
 ## 3.0.3
 
 ### Fixed
 - Changed underlying Dialog headerChildren component type to div to fix an accessibility screen reader issue.
-- ProgressBar: add controlled expand/collapse support; fix chevron direction; add correct error and stopped icons in progressbar header for failed and cancelled upload states.
 
 ## 3.0.2
 
