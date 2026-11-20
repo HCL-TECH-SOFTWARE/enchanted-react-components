@@ -20,3 +20,17 @@ export const BoundaryContext = createContext<ShadowRoot | null>(null);
 
 /** Returns the style boundary, for example to pass it as a portal `container`. */
 export const useBoundary = (): ShadowRoot | null => useContext(BoundaryContext);
+
+/**
+ * Where portaled content (popups, dialogs, menus) should render so it stays inside the themed host:
+ * the shadow root for `open` and `closed`, and the host element for `none`. It is `null` outside a
+ * provider and during the first render, before the host exists.
+ */
+export const PortalContainerContext = createContext<HTMLElement | ShadowRoot | null>(null);
+
+/**
+ * Returns the `container` to pass to a Base UI portal. A `null` result means "not ready or no
+ * provider"; Base UI then falls back to `document.body`, where tokens and `dir` do not apply.
+ * Portaled content is normally opened after mount, when the container is set.
+ */
+export const usePortalContainer = (): HTMLElement | ShadowRoot | null => useContext(PortalContainerContext);
