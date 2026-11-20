@@ -13,10 +13,11 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import { useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useShadowRoot } from '../utils/useShadowRoot';
-import { BoundaryContext } from './BoundaryContext';
+import { BoundaryContext, PortalContainerContext } from './BoundaryContext';
 import { boundaryStyles } from './boundaryStyles';
 
 /** Theme modes the provider can apply through `data-theme`. */
@@ -69,7 +70,9 @@ const ShadowHost = ({ mode, direction, shadowRootType, className, style, childre
         createPortal(
           <>
             <style>{boundaryStyles}</style>
-            <BoundaryContext value={root}>{children}</BoundaryContext>
+            <BoundaryContext value={root}>
+              <PortalContainerContext value={root}>{children}</PortalContainerContext>
+            </BoundaryContext>
           </>,
           root,
         )}
@@ -77,15 +80,20 @@ const ShadowHost = ({ mode, direction, shadowRootType, className, style, childre
   );
 };
 
-const DocumentHost = ({ mode, direction, className, style, children }: HostProps) => (
-  <div data-theme={mode} dir={direction} className={className} style={style}>
-    {/* React 19 hoists this tag to the document head and renders it once per `href`. */}
-    <style href="enchanted-styles" precedence="enchanted">
-      {boundaryStyles}
-    </style>
-    {children}
-  </div>
-);
+const DocumentHost = ({ mode, direction, className, style, children }: HostProps) => {
+  // State rather than a ref object so the context updates once the element exists. Portaled content
+  // renders inside the host, where the `[data-theme]` tokens, `dir` and the injected styles apply.
+  const [host, setHost] = useState<HTMLDivElement | null>(null);
+  return (
+    <div ref={setHost} data-theme={mode} dir={direction} className={className} style={style}>
+      {/* React 19 hoists this tag to the document head and renders it once per `href`. */}
+      <style href="enchanted-styles" precedence="enchanted">
+        {boundaryStyles}
+      </style>
+      <PortalContainerContext value={host}>{children}</PortalContainerContext>
+    </div>
+  );
+};
 
 /**
  * Applies the theme mode and text direction, and isolates component styles in a shadow-root

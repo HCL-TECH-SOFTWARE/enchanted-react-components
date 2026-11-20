@@ -255,7 +255,7 @@ Not available inside a boundary: global selectors from the page (`.page button {
 ### Known limitations
 
 - **Forms and labels:** a `<form>`, `<label htmlFor>`, `aria-labelledby`, or `aria-describedby` and the control it refers to must be inside the same boundary. A control inside the boundary is not associated with a form or label outside it.
-- **Portals:** Base UI renders popups (Popover, Select, Dialog, Menu) into `document.body` by default, outside the boundary, where they lose their styles. Pass `container` to the portal from `useBoundary()`. This is not wired up yet.
+- **Portals:** Base UI renders popups (Popover, Select, Dialog, Menu) into `document.body` by default, outside the boundary, where they lose their styles. Pass `container={usePortalContainer()}` to the portal. The provider supplies the shadow root for `open` and `closed`, and the themed host element for `none`, so the popup keeps the tokens, `dir` and styles. The value is `null` on the first render (and on the server), when Base UI falls back to `document.body`; popups open after mount, so this only matters for `defaultOpen`. No component wires this up yet.
 - **Content inside the boundary loses the page's CSS:** a consumer's own elements placed inside `ThemeProvider` are not styled by their page stylesheets. Only inline styles and tokens reach them.
 - **Events and focus:** code outside the boundary sees the host in `event.target` and `document.activeElement`. Events that are not `composed`, such as `change`, do not leave the boundary.
 - **Tests:** Testing Library queries on `document` cannot see inside a shadow root. Render components without a provider, or inside `<ThemeProvider shadowRootType={ShadowRootType.None}>`, in unit tests ([TESTING-GUIDE.md](TESTING-GUIDE.md)).

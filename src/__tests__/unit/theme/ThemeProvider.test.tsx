@@ -16,10 +16,17 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
-import { useBoundary } from '../../../theme/BoundaryContext';
+import { createPortal } from 'react-dom';
+import { useBoundary, usePortalContainer } from '../../../theme/BoundaryContext';
 import { Direction, ShadowRootType, ThemeMode, ThemeProvider } from '../../../theme/ThemeProvider';
 
 const BoundaryProbe = () => <span data-testid="probe">{useBoundary() ? 'boundary' : 'none'}</span>;
+
+// Mimics a Base UI portal: renders into the container the provider hands out.
+const PortalProbe = () => {
+  const target = usePortalContainer();
+  return target ? createPortal(<span data-testid="portaled">popup</span>, target) : <span data-testid="pending" />;
+};
 
 describe('ThemeProvider', () => {
   it('renders the plain host with data-theme and dir when shadowRootType is none', () => {
@@ -70,6 +77,52 @@ describe('ThemeProvider', () => {
     const first = container.firstElementChild;
     rerender(<ThemeProvider mode={ThemeMode.Light} shadowRootType={ShadowRootType.None} />);
     expect(container.firstElementChild).not.toBe(first);
+  });
+
+  it('portals into the themed host when shadowRootType is none, so tokens and dir reach it', () => {
+    const { container } = render(
+      <ThemeProvider mode={ThemeMode.Dark} direction={Direction.Rtl} shadowRootType={ShadowRootType.None}>
+        <PortalProbe />
+      </ThemeProvider>,
+    );
+    const host = container.firstElementChild as HTMLElement;
+    const popup = screen.getByTestId('portaled');
+    expect(host).toContainElement(popup);
+    expect(popup.closest('[data-theme]')).toHaveAttribute('data-theme', 'dark');
+    expect(popup.closest('[dir]')).toHaveAttribute('dir', 'rtl');
+  });
+
+  it('keeps the portal container in step with a mode and direction change in none mode', () => {
+    const { container, rerender } = render(
+      <ThemeProvider mode={ThemeMode.Light} shadowRootType={ShadowRootType.None}>
+        <PortalProbe />
+      </ThemeProvider>,
+    );
+    rerender(
+      <ThemeProvider mode={ThemeMode.Dark} direction={Direction.Rtl} shadowRootType={ShadowRootType.None}>
+        <PortalProbe />
+      </ThemeProvider>,
+    );
+    const host = container.firstElementChild as HTMLElement;
+    expect(host).toContainElement(screen.getByTestId('portaled'));
+    expect(host).toHaveAttribute('data-theme', 'dark');
+    expect(host).toHaveAttribute('dir', 'rtl');
+  });
+
+  it('provides the shadow root as the portal container for open and closed roots', () => {
+    const { container } = render(
+      <ThemeProvider mode={ThemeMode.Light}>
+        <PortalProbe />
+      </ThemeProvider>,
+    );
+    const host = container.firstElementChild as HTMLElement;
+    expect(host.shadowRoot?.querySelector('[data-testid="portaled"]')).not.toBeNull();
+    expect(screen.queryByTestId('portaled')).toBeNull();
+  });
+
+  it('has no portal container outside a provider', () => {
+    render(<PortalProbe />);
+    expect(screen.getByTestId('pending')).toBeInTheDocument();
   });
 
   it('has no automated accessibility violations', async () => {
