@@ -1,0 +1,183 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from Figma node 1338:466326 (HCLED Components V3 POC), mapped to tokens.
+@layer enchanted.components {
+  .checkboxRoot {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--padding-xxs); // Figma: Padding/xxs
+    cursor: pointer;
+    font-family: var(--typography-font-family-default); // Figma: family/font family
+    font-weight: var(--typography-font-weight-regular); // Figma: weight/Regular 400
+    letter-spacing: var(--typography-letter-spacing-default); // Figma: letter spacing
+  }
+
+  .checkboxRoot[data-disabled] {
+    cursor: default;
+  }
+
+  // The control is the Base UI element with role="checkbox"; it holds the padding and the icon.
+  .checkboxControl {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    margin: 0;
+    padding: var(--padding-xxxs); // Figma: Padding/xxxs (variant "without padding")
+    border: 0;
+    background: none;
+    color: var(--color-actions-active); // Figma: actions/active (unchecked)
+    cursor: inherit;
+    outline: none;
+  }
+
+  .checkboxRoot[data-variant='with-padding'] .checkboxControl {
+    padding: var(--padding-s) var(--padding-xxxs); // Figma: Padding/s, Padding/xxxs
+  }
+
+  .checkboxBox {
+    position: relative;
+    display: block;
+    width: var(--checkbox-icon-size);
+    height: var(--checkbox-icon-size);
+  }
+
+  .checkboxIcon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: currentcolor;
+  }
+
+  // Only the icon that matches the current state is shown.
+  .checkboxIconChecked,
+  .checkboxIconIndeterminate {
+    display: none;
+  }
+
+  .checkboxControl[data-checked] {
+    color: var(--color-primary-main); // Figma: primary/main
+
+    .checkboxIconUnchecked {
+      display: none;
+    }
+
+    .checkboxIconChecked {
+      display: block;
+    }
+  }
+
+  .checkboxControl[data-indeterminate] {
+    color: var(--color-primary-main); // Figma: primary/main
+
+    .checkboxIconUnchecked,
+    .checkboxIconChecked {
+      display: none;
+    }
+
+    .checkboxIconIndeterminate {
+      display: block;
+    }
+  }
+
+  .checkboxRoot[data-error] .checkboxControl {
+    color: var(--color-error-main); // Figma: error/main
+  }
+
+  .checkboxControl[data-disabled] {
+    color: var(--color-actions-disabled); // Figma: actions/disabled
+  }
+
+  // Hover paint behind the icon (Figma "Hover" layer).
+  .checkboxBox::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--corner-radius-s); // Figma: Corner radius/s
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .checkboxRoot:hover:not([data-disabled]) .checkboxBox::before {
+    background: var(--color-actions-hover); // Figma: actions/hover
+  }
+
+  // Focus ring around the icon (Figma "Focus" layer), shown for keyboard focus only.
+  .checkboxBox::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    width: var(--checkbox-focus-ring-size);
+    height: var(--checkbox-focus-ring-size);
+    transform: translate(-50%, -50%);
+    border: var(--stroke-focus) solid transparent; // Figma: Stroke/focus
+    border-radius: var(--corner-radius-s);
+    pointer-events: none;
+  }
+
+  .checkboxRoot[data-variant='with-padding'] .checkboxBox::after {
+    border-radius: var(--corner-radius-s-focus); // Figma: Corner radius/s (focus)
+  }
+
+  .checkboxControl:focus-visible .checkboxBox::after {
+    border-color: var(--color-actions-focus); // Figma: actions/focus
+  }
+
+  .checkboxRoot[data-error] .checkboxControl:focus-visible .checkboxBox::after {
+    border-color: var(--color-actions-focus-error); // Figma: actions/focusError
+  }
+
+  .checkboxContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .checkboxRoot[data-variant='with-padding'] .checkboxContent {
+    padding: var(--padding-xs) var(--padding-none); // Figma: Padding/xs, Padding/none
+  }
+
+  .checkboxLabel {
+    padding: var(--padding-xxxxs) var(--padding-none); // Figma: Padding/xxxxs
+    color: var(--color-text-primary); // Figma: text/primary
+    font-size: var(--typography-font-size-body1); // Figma: size/body1
+    line-height: var(--typography-line-height-body1); // Figma: line height/body1
+  }
+
+  .checkboxHelperText,
+  .checkboxErrorMessage {
+    font-size: var(--typography-font-size-caption); // Figma: size/caption
+    line-height: var(--typography-line-height-caption); // Figma: line height/caption
+  }
+
+  .checkboxHelperText {
+    color: var(--color-text-secondary); // Figma: text/secondary
+  }
+
+  .checkboxErrorMessage {
+    color: var(--color-error-main); // Figma: error/main
+  }
+
+  .checkboxRoot[data-disabled] {
+    .checkboxLabel,
+    .checkboxHelperText,
+    .checkboxErrorMessage {
+      color: var(--color-text-disabled); // Figma: text/disabled
+    }
+  }
+}

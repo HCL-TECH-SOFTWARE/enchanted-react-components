@@ -1712,5 +1712,150 @@
         }
       }
     }
+  },
+  "padding": {
+    "none": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "xxxxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "xxxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "xs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      }
+    },
+    "s": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    }
+  },
+  "cornerRadius": {
+    "s": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
+    "sFocus": {
+      "$type": "dimension",
+      "$description": "Figma variable: Corner radius/s (focus).",
+      "$value": {
+        "value": 5,
+        "unit": "px"
+      }
+    }
+  },
+  "stroke": {
+    "focus": {
+      "$type": "dimension",
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "default": {
+        "$type": "fontFamily",
+        "$value": [
+          "Inter"
+        ]
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400
+      }
+    },
+    "fontSize": {
+      "body1": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "caption": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      }
+    },
+    "lineHeight": {
+      "body1": {
+        "$type": "dimension",
+        "$value": {
+          "value": 22,
+          "unit": "px"
+        }
+      },
+      "caption": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      }
+    },
+    "letterSpacing": {
+      "default": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      }
+    }
+  },
+  "checkbox": {
+    "iconSize": {
+      "$type": "dimension",
+      "$description": "Measured from the Checkbox design; Figma has no variable for it.",
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "focusRingSize": {
+      "$type": "dimension",
+      "$description": "Measured from the Checkbox design; Figma has no variable for it.",
+      "$value": {
+        "value": 26,
+        "unit": "px"
+      }
+    }
   }
 }
