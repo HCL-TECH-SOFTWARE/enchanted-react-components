@@ -17,7 +17,7 @@ import { useRef } from 'react';
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
 import { Field as BaseField } from '@base-ui/react/field';
-import { usePortalContainer } from '../../theme/BoundaryContext';
+import { usePortalContainer } from '../../theme/PortalContainerContext';
 
 /** Size of a {@link SelectSingle}. Maps to the Figma `size` property. */
 export const SelectSingleSize = {

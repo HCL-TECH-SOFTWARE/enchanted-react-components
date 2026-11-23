@@ -59,7 +59,7 @@ Keep package versions and scripts synchronized with the manifest and configurati
 | `src/` | Library source and public entry point | Present |
 | `src/components/` | Reusable UI components | Candidate scaffolds present; functional implementation awaits approved scope and specifications |
 | `src/components/<Component>/` | React component, colocated Storybook stories, and styles (`<Component>.shadow.scss`) | Candidate scaffolds present; functional implementation awaits approved scope and specifications |
-| `src/theme/` | Shared theme provider and its shadow-root style boundary (`ThemeProvider.tsx`, `BoundaryContext.ts`, `boundaryStyles.ts`) | Initial scaffold supports light and dark modes and the `shadowRootType` prop (default `open`); see [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#theme-provider-boundary). Mode selection, default, persistence, and token values await approved specifications |
+| `src/theme/` | Shared theme provider and its shadow-root style boundary (`ThemeProvider.tsx`, `PortalContainerContext.ts`, `boundaryStyles.ts`) | Initial scaffold supports light and dark modes and the `shadowRootType` prop (default `open`); see [COMPONENT-GUIDE.md](COMPONENT-GUIDE.md#theme-provider-boundary). Mode selection, default, persistence, and token values await approved specifications |
 | `src/utils/` | Small shared helpers, such as class name merging and `useShadowRoot` for the style boundary | Present |
 | `src/types/` | Shared type definitions, if needed | Planned |
 | `tokens/` | DTCG 2025.10 `.tokens.json` sources for light and dark themes | Present: `light.tokens.json` and `dark.tokens.json` from the Figma `Theme` collection; see [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md) |

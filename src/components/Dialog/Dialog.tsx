@@ -15,7 +15,7 @@
 
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
-import { usePortalContainer } from '../../theme/BoundaryContext';
+import { usePortalContainer } from '../../theme/PortalContainerContext';
 
 /** Width of a {@link Dialog}, matching the Figma widths. The dialog never grows wider than the viewport. */
 export const DialogSize = {
