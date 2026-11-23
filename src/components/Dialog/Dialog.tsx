@@ -15,7 +15,7 @@
 
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Dialog as BaseDialog } from '@base-ui/react/dialog';
-import { useBoundary } from '../../theme/BoundaryContext';
+import { usePortalContainer } from '../../theme/BoundaryContext';
 
 /** Width of a {@link Dialog}, matching the Figma widths. The dialog never grows wider than the viewport. */
 export const DialogSize = {
@@ -84,12 +84,13 @@ export const Dialog = ({
   scroll = false,
   ...props
 }: DialogProps) => {
-  const boundary = useBoundary();
+  // The shadow root for open/closed, the themed host for none: keeps tokens, `dir` and styles on the popup.
+  const portalContainer = usePortalContainer();
 
   return (
     <BaseDialog.Root {...props}>
       {/* Base UI renders popups into `document.body` by default, outside the style boundary. */}
-      <BaseDialog.Portal container={boundary ?? undefined}>
+      <BaseDialog.Portal container={portalContainer ?? undefined}>
         <BaseDialog.Backdrop className="dialogBackdrop" />
         <BaseDialog.Popup
           className="dialogRoot"
