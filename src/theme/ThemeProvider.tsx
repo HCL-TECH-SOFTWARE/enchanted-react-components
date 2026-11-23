@@ -17,7 +17,7 @@ import { useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useShadowRoot } from '../utils/useShadowRoot';
-import { BoundaryContext, PortalContainerContext } from './BoundaryContext';
+import { PortalContainerContext } from './PortalContainerContext';
 import { boundaryStyles } from './boundaryStyles';
 
 /** Theme modes the provider can apply through `data-theme`. */
@@ -70,9 +70,7 @@ const ShadowHost = ({ mode, direction, shadowRootType, className, style, childre
         createPortal(
           <>
             <style>{boundaryStyles}</style>
-            <BoundaryContext value={root}>
-              <PortalContainerContext value={root}>{children}</PortalContainerContext>
-            </BoundaryContext>
+            <PortalContainerContext value={root}>{children}</PortalContainerContext>
           </>,
           root,
         )}

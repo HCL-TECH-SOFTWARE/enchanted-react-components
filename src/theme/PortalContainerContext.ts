@@ -15,12 +15,6 @@
 
 import { createContext, useContext } from 'react';
 
-/** The `ThemeProvider` style boundary, or `null` when there is no shadow root. */
-export const BoundaryContext = createContext<ShadowRoot | null>(null);
-
-/** Returns the style boundary, for example to pass it as a portal `container`. */
-export const useBoundary = (): ShadowRoot | null => useContext(BoundaryContext);
-
 /**
  * Where portaled content (popups, dialogs, menus) should render so it stays inside the themed host:
  * the shadow root for `open` and `closed`, and the host element for `none`. It is `null` outside a

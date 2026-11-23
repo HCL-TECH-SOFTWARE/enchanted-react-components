@@ -11,3 +11,5 @@
 ### Changed
 
 ### Breaking changes
+
+- Removed `useBoundary` and `BoundaryContext`. Nothing in the library used them once `usePortalContainer` existed, and they were `null` without a shadow root. Use `usePortalContainer()` for portal containers.
