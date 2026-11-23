@@ -17,7 +17,7 @@ import { useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useShadowRoot } from '../utils/useShadowRoot';
-import { PortalContainerContext } from './BoundaryContext';
+import { PortalContainerContext } from './PortalContainerContext';
 import { boundaryStyles } from './boundaryStyles';
 
 /** Theme modes the provider can apply through `data-theme`. */

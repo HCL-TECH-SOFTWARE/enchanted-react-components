@@ -17,10 +17,10 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { createPortal } from 'react-dom';
-import { usePortalContainer } from '../../../theme/BoundaryContext';
+import { usePortalContainer } from '../../../theme/PortalContainerContext';
 import { Direction, ShadowRootType, ThemeMode, ThemeProvider } from '../../../theme/ThemeProvider';
 
-const Probe = () => <span data-testid="probe" />;
+const Probe = () => <span data-testid="probe">child</span>;
 
 // Mimics a Base UI portal: renders into the container the provider hands out.
 const PortalProbe = () => {
@@ -38,7 +38,7 @@ describe('ThemeProvider', () => {
     const host = container.firstElementChild;
     expect(host).toHaveAttribute('data-theme', 'dark');
     expect(host).toHaveAttribute('dir', 'rtl');
-    expect(host).toContainElement(screen.getByTestId('probe'));
+    expect(screen.getByTestId('probe')).toBeInTheDocument();
   });
 
   it('defaults to an open shadow root and ltr', () => {
@@ -50,7 +50,7 @@ describe('ThemeProvider', () => {
     const host = container.firstElementChild as HTMLElement;
     expect(host).toHaveAttribute('dir', 'ltr');
     expect(host.shadowRoot).not.toBeNull();
-    expect(host.shadowRoot?.querySelector('[data-testid="probe"]')).not.toBeNull();
+    expect(host.shadowRoot?.querySelector('[data-testid="probe"]')).toHaveTextContent('child');
     expect(host.shadowRoot?.querySelector('style')).not.toBeNull();
   });
 

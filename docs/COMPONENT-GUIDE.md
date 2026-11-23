@@ -211,7 +211,7 @@ Create these in the same pass as the initial components and `ThemeProvider` (see
 | File | Purpose |
 |---|---|
 | `src/utils/useShadowRoot.ts` | Hook `useShadowRoot<T>(mode)` returning `[root, ref]`. The ref attaches a shadow root of the given mode to its element and reuses a root it already created, because `attachShadow` throws when called twice (React StrictMode re-runs ref callbacks). Keep the created root in a `WeakMap` keyed by the host, not in `host.shadowRoot`, which is always `null` for a closed root. `root` is `null` until the host has mounted. |
-| `src/theme/BoundaryContext.ts` | `PortalContainerContext` holding the portal container (the `ShadowRoot`, or the host element for `none`), and the `usePortalContainer()` hook. Components and portals read it to find where to render. |
+| `src/theme/PortalContainerContext.ts` | `PortalContainerContext` holding where portaled content renders (the shadow root, or the themed host element for `none`; `null` before mount), and the `usePortalContainer()` hook. Components pass its value as the `container` of every Base UI portal. |
 | `src/theme/boundaryStyles.ts` | Exports `boundaryStyles`, the concatenated CSS of every component, built from `import x from '../components/<Component>/<Component>.shadow.scss?inline'`. Add one import per component that has styles. |
 | `src/theme/ThemeProvider.tsx` | The provider with the `shadowRootType` prop, and the `ShadowRootType` constant (below). |
 | `src/components/<Component>/<Component>.shadow.scss` | The component's styles (see [Component styles](#boundary-component-styles)). |
