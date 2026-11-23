@@ -17,10 +17,10 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { axe } from 'vitest-axe';
 import { createPortal } from 'react-dom';
-import { useBoundary, usePortalContainer } from '../../../theme/BoundaryContext';
+import { usePortalContainer } from '../../../theme/BoundaryContext';
 import { Direction, ShadowRootType, ThemeMode, ThemeProvider } from '../../../theme/ThemeProvider';
 
-const BoundaryProbe = () => <span data-testid="probe">{useBoundary() ? 'boundary' : 'none'}</span>;
+const Probe = () => <span data-testid="probe" />;
 
 // Mimics a Base UI portal: renders into the container the provider hands out.
 const PortalProbe = () => {
@@ -32,32 +32,32 @@ describe('ThemeProvider', () => {
   it('renders the plain host with data-theme and dir when shadowRootType is none', () => {
     const { container } = render(
       <ThemeProvider mode={ThemeMode.Dark} direction={Direction.Rtl} shadowRootType={ShadowRootType.None}>
-        <BoundaryProbe />
+        <Probe />
       </ThemeProvider>,
     );
     const host = container.firstElementChild;
     expect(host).toHaveAttribute('data-theme', 'dark');
     expect(host).toHaveAttribute('dir', 'rtl');
-    expect(screen.getByTestId('probe')).toHaveTextContent('none');
+    expect(host).toContainElement(screen.getByTestId('probe'));
   });
 
   it('defaults to an open shadow root and ltr', () => {
     const { container } = render(
       <ThemeProvider mode={ThemeMode.Light}>
-        <BoundaryProbe />
+        <Probe />
       </ThemeProvider>,
     );
     const host = container.firstElementChild as HTMLElement;
     expect(host).toHaveAttribute('dir', 'ltr');
     expect(host.shadowRoot).not.toBeNull();
-    expect(host.shadowRoot?.querySelector('[data-testid="probe"]')).toHaveTextContent('boundary');
+    expect(host.shadowRoot?.querySelector('[data-testid="probe"]')).not.toBeNull();
     expect(host.shadowRoot?.querySelector('style')).not.toBeNull();
   });
 
   it('keeps a closed root unreachable from the host', () => {
     const { container } = render(
       <ThemeProvider mode={ThemeMode.Light} shadowRootType={ShadowRootType.Closed}>
-        <BoundaryProbe />
+        <Probe />
       </ThemeProvider>,
     );
     expect((container.firstElementChild as HTMLElement).shadowRoot).toBeNull();

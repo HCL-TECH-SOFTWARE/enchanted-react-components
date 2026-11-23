@@ -15,4 +15,4 @@
 
 export { ThemeProvider, ThemeMode, Direction, ShadowRootType } from './ThemeProvider';
 export type { ThemeProviderProps } from './ThemeProvider';
-export { useBoundary, usePortalContainer } from './BoundaryContext';
+export { usePortalContainer } from './BoundaryContext';
