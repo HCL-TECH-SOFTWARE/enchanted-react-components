@@ -17,7 +17,7 @@ import { useRef } from 'react';
 import type { ComponentProps as ReactComponentProps, ReactNode } from 'react';
 import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
 import { Field as BaseField } from '@base-ui/react/field';
-import { useBoundary } from '../../theme/BoundaryContext';
+import { usePortalContainer } from '../../theme/BoundaryContext';
 
 /** Size of a {@link SelectSingle}. Maps to the Figma `size` property. */
 export const SelectSingleSize = {
@@ -85,7 +85,7 @@ export const SelectSingle = ({
   disabled,
   ...props
 }: SelectSingleProps) => {
-  const boundary = useBoundary();
+  const portalContainer = usePortalContainer();
   // The popup anchors to the whole field, not to the inner input, so it matches the field's width and edge.
   const surfaceRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +107,7 @@ export const SelectSingle = ({
         </div>
         {menu ? (
           // Base UI renders popups into `document.body` by default, outside the style boundary.
-          <BaseCombobox.Portal container={boundary ?? undefined}>
+          <BaseCombobox.Portal container={portalContainer ?? undefined}>
             <BaseCombobox.Positioner className="selectSinglePositioner" anchor={surfaceRef}>
               <BaseCombobox.Popup className="selectSingleMenu" data-size={size}>{menu}</BaseCombobox.Popup>
             </BaseCombobox.Positioner>
