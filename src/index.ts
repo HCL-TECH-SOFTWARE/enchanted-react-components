@@ -13,5 +13,6 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// Public entry point. No components are exported yet; only the shared theme infrastructure.
+// Public entry point.
+export * from './components/Button';
 export * from './theme';
