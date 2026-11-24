@@ -25,7 +25,7 @@ const CanvasTheme = ({ mode }: { mode: ThemeMode }) => {
     const root = document.documentElement;
     const { body } = document;
     root.setAttribute('data-theme', mode);
-    body.style.background = 'var(--color-background-default)';
+    body.style.background = 'var(--color-background-canvas)';
     body.style.color = 'var(--color-text-primary)';
     return () => {
       root.removeAttribute('data-theme');
