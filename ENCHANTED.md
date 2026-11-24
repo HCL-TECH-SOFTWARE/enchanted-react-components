@@ -26,13 +26,15 @@ This table is the source of truth for the proposed first-release component set, 
 | Name | Base UI Link | Figma Link |
 | --- | --- | --- |
 | Button | [Base UI Button](https://base-ui.com/react/components/button) | [Button Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=1338-465763&m=dev) |
+| Select | [Base UI Select](https://base-ui.com/react/components/select) | [Select Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=29412-27437&m=dev) |
 | TextField | [Base UI Field](https://base-ui.com/react/components/field) | [TextField Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=1418-23335&m=dev) |
-| IconButton | [Base UI Button](https://base-ui.com/react/components/button) | [IconButton Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=1322-451818&m=dev) |
-| SelectSingle | [Base UI Combobox](https://base-ui.com/react/components/combobox) | [SelectSingle (Autocomplete) Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=22891-19922&m=dev) |
 | Checkbox | [Base UI Checkbox](https://base-ui.com/react/components/checkbox) | [Checkbox Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=1338-466326&m=dev) |
-| Dialog | [Base UI Dialog](https://base-ui.com/react/components/dialog) | [Dialog Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=1495-91831&m=dev) |
+| CheckboxGroup | [Base UI Checkbox Group](https://base-ui.com/react/components/checkbox-group) | [CheckboxGroup Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=3297-35178&m=dev) |
+| FormLabel | [Base UI Field](https://base-ui.com/react/components/field) | [FormLabel Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=22891-21455&m=dev) |
+| Dialog | [Base UI Dialog](https://base-ui.com/react/components/dialog) | [Dialog Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=29243-2756&m=dev) |
+| AlertDialog | [Base UI Alert Dialog](https://base-ui.com/react/components/alert-dialog) | [AlertDialog Figma](https://www.figma.com/design/hSgxFly4e92zns5LJXAsNB/HCLED-Components-V3--POC-?node-id=29412-1654&m=dev) |
 
-Component specifications and APIs are still deferred. Add the Figma links when the design sources are confirmed.
+Component specifications and APIs are still deferred.
 
 ## Documentation Ownership
 
