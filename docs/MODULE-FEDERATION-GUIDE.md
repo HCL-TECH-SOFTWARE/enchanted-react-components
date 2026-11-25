@@ -7,8 +7,7 @@ This guide describes how the Enchanted React Components library (the UI library)
 
 1. **Atom components are never exposed via Module Federation.** Components such as `Button` or `Checkbox` are not entries in
    any remote's `exposes` list.
-2. **The library is only used in a Module Federation context.** Atoms are consumed inside *composite components*, which aggregate
-   atoms with business logic. Only those composite components are exposed by a remote.
+2. **Only composite components cross the federation boundary.** Within a Module Federation architecture, atom components are consumed internally inside composite components (which pair atoms with business logic), and only those composites are exposed by a remote.
 3. **The library is a shared singleton.** Host and remote resolve the same single copy of `@hcl-software/enchanted-react-components`
    (plus `react`, `react-dom` and `@base-ui/react`) at runtime. This is what lets the host's `ThemeProvider` theme components rendered by a remote.
 
