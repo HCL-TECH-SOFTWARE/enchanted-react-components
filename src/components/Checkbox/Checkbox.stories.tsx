@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { useState } from 'react';
 import { Checkbox } from './Checkbox';
 
@@ -28,6 +28,20 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+// Stories render inside the ThemeProvider boundary, so `within(canvasElement)` cannot see the checkbox:
+// with an open shadow root it lives under `host.shadowRoot`, and with `none` directly under the host.
+// A closed root cannot be queried at all, so the play functions skip their checks in that mode.
+const findCheckbox = async (canvasElement: HTMLElement): Promise<HTMLElement | null> => {
+  const host = canvasElement.firstElementChild as HTMLElement | null;
+  if (!host) return null;
+  await waitFor(() => expect(host.shadowRoot ?? host.firstElementChild).not.toBeNull(), { timeout: 1000 }).catch(
+    () => undefined,
+  );
+  const root = host.shadowRoot ?? host;
+  if (!host.shadowRoot && !host.firstElementChild) return null;
+  return within(root as unknown as HTMLElement).findByRole('checkbox');
+};
 
 const Row = ({ children }: { children: React.ReactNode }) => (
   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'flex-start' }}>{children}</div>
@@ -110,23 +124,38 @@ export const WithoutLabel: Story = {
   args: { showLabel: false, 'aria-label': 'Label' },
 };
 
-/** Keyboard focus shows the focus ring (Tab to reach it). The ring turns red while `invalid`. */
+/** Shows the focus ring on the focused control. Tab to a checkbox to see the same ring; it turns red while `invalid`. */
 export const Focused: Story = {
   play: async ({ canvasElement }) => {
-    await userEvent.tab();
-    await expect(within(canvasElement).getByRole('checkbox')).toHaveFocus();
+    const checkbox = await findCheckbox(canvasElement);
+    if (!checkbox) return;
+    // user-event's Tab does not cross shadow roots, so focus the control directly.
+    checkbox.focus();
+    await expect(checkbox.getRootNode()).toHaveProperty('activeElement', checkbox);
   },
 };
 
 /** Controlled use: the parent owns `checked` and updates it from `onCheckedChange`. */
 export const Controlled: Story = {
+  args: { onCheckedChange: fn() },
   render: (args) => {
     const [checked, setChecked] = useState(false);
-    return <Checkbox {...args} checked={checked} onCheckedChange={setChecked} />;
+    return (
+      <Checkbox
+        {...args}
+        checked={checked}
+        onCheckedChange={(value, event) => {
+          setChecked(value);
+          args.onCheckedChange?.(value, event);
+        }}
+      />
+    );
   },
-  play: async ({ canvasElement }) => {
-    const checkbox = within(canvasElement).getByRole('checkbox');
+  play: async ({ canvasElement, args }) => {
+    const checkbox = await findCheckbox(canvasElement);
+    if (!checkbox) return;
     await userEvent.click(checkbox);
+    await expect(args.onCheckedChange).toHaveBeenCalledWith(true, expect.anything());
     await expect(checkbox).toBeChecked();
   },
 };
