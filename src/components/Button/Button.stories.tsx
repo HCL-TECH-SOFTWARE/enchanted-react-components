@@ -13,8 +13,20 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import { Fragment } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';
+import ArrowRightIcon from '@hcl-software/enchanted-icons-react/carbon/es/arrow--right';
 import { Button, ButtonColor, ButtonSize, ButtonVariant } from './Button';
+
+/**
+ * Values of an `as const` object. Storybook's docgen plugin adds `displayName` (a string) and
+ * `__docgenInfo` (an object) to these exports, and `Object.values` would return both as extra values.
+ */
+const values = <T extends Record<string, string>>(options: T): T[keyof T][] =>
+  Object.entries(options)
+    .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
+    .map(([, value]) => value as T[keyof T]);
 
 const meta = {
   title: 'Components/Inputs/Button',
@@ -22,14 +34,10 @@ const meta = {
   tags: ['autodocs'],
   args: { children: 'Button' },
   argTypes: {
-    variant: { control: 'select', options: Object.values(ButtonVariant) },
-    color: { control: 'select', options: Object.values(ButtonColor) },
-    size: { control: 'select', options: Object.values(ButtonSize) },
-    inverse: { control: 'boolean' },
-    pressed: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    children: { control: 'text' },
-    // Icons are ReactNode props with no control, and the only approved icon package is not installed here.
+    variant: { control: 'select', options: values(ButtonVariant) },
+    color: { control: 'select', options: values(ButtonColor) },
+    size: { control: 'select', options: values(ButtonSize) },
+    // Icons are ReactNode props, which have no useful control.
     startIcon: { control: false },
     endIcon: { control: false },
   },
@@ -41,3 +49,108 @@ type Story = StoryObj<typeof meta>;
 
 /** A filled brand button with a text label. Start here: it is the default for the main action of a view. */
 export const Default: Story = {};
+
+/** `contained` for the primary action of a view, `outlined` for secondary actions, `text` for low-emphasis actions. */
+export const Variants: Story = {
+  render: (args) => (
+    <>
+      {values(ButtonVariant).map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant}
+        </Button>
+      ))}
+    </>
+  ),
+};
+
+/** `brand` for normal actions, `neutral` for quiet ones, `error` for destructive or failed actions. */
+export const Colors: Story = {
+  render: (args) => (
+    <>
+      {values(ButtonColor).map((color) => (
+        <Button key={color} {...args} color={color}>
+          {color}
+        </Button>
+      ))}
+    </>
+  ),
+};
+
+/**
+ * `medium` is the default, `small` suits dense layouts, and `extraSmall` is for inline actions next
+ * to field labels. Figma defines `extraSmall` for the `text` variant only, so all sizes render as text.
+ */
+export const Sizes: Story = {
+  args: { variant: ButtonVariant.Text },
+  render: (args) => (
+    <>
+      {values(ButtonSize).map((size) => (
+        <Button key={size} {...args} size={size}>
+          {size}
+        </Button>
+      ))}
+    </>
+  ),
+};
+
+/** Use `pressed` to turn the button into a toggle. `true` shows it switched on and sets `aria-pressed`. */
+export const Pressed: Story = { args: { pressed: true } };
+
+/** Use `disabled` when the action is unavailable. The button cannot be focused or clicked. */
+export const Disabled: Story = { args: { disabled: true } };
+
+/** Use `inverse` on a dark or colored background, where the default colors would not stay readable. */
+export const Inverse: Story = { args: { inverse: true } };
+
+/** Use `startIcon` to reinforce the action with an icon before the label, such as Add for a create action. */
+export const WithStartIcon: Story = { args: { startIcon: <AddIcon /> } };
+
+/** Use `endIcon` for actions that move forward or open something, such as a next step. */
+export const WithEndIcon: Story = { args: { endIcon: <ArrowRightIcon /> } };
+
+/**
+ * Every variant, color and size combination, for visual regression review. Not documentation: learn
+ * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
+ * `extraSmall` is defined for the `text` variant only, so its cells are empty for the others.
+ */
+export const AllVariants: Story = {
+  tags: ['visual'],
+  render: (args) => {
+    const sizes = values(ButtonSize);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
+        {values(ButtonVariant).map((variant) => (
+          <div
+            key={variant}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `max-content repeat(${sizes.length}, max-content)`,
+              alignItems: 'center',
+              justifyItems: 'start',
+              gap: `calc(var(--padding-sm) * 2) calc(var(--padding-sm) * 3)`,
+            }}
+          >
+            <strong>{variant}</strong>
+            {sizes.map((size) => (
+              <span key={size}>{size}</span>
+            ))}
+            {values(ButtonColor).map((color) => (
+              <Fragment key={color}>
+                <span>{color}</span>
+                {sizes.map((size) =>
+                  size === ButtonSize.ExtraSmall && variant !== ButtonVariant.Text ? (
+                    <span key={size} />
+                  ) : (
+                    <Button key={size} {...args} variant={variant} color={color} size={size}>
+                      Button
+                    </Button>
+                  ),
+                )}
+              </Fragment>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
