@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 import { Fragment } from 'react';
+import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';
 import ArrowRightIcon from '@hcl-software/enchanted-icons-react/carbon/es/arrow--right';
@@ -27,6 +28,13 @@ const values = <T extends Record<string, string>>(options: T): T[keyof T][] =>
   Object.entries(options)
     .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
     .map(([, value]) => value as T[keyof T]);
+
+/** Lays buttons out in a wrapping row with space between them. */
+const Row = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'calc(var(--padding-sm) * 2)' }}>
+    {children}
+  </div>
+);
 
 const meta = {
   title: 'Components/Inputs/Button',
@@ -53,26 +61,26 @@ export const Default: Story = {};
 /** `contained` for the primary action of a view, `outlined` for secondary actions, `text` for low-emphasis actions. */
 export const Variants: Story = {
   render: (args) => (
-    <>
+    <Row>
       {values(ButtonVariant).map((variant) => (
         <Button key={variant} {...args} variant={variant}>
           {variant}
         </Button>
       ))}
-    </>
+    </Row>
   ),
 };
 
 /** `brand` for normal actions, `neutral` for quiet ones, `error` for destructive or failed actions. */
 export const Colors: Story = {
   render: (args) => (
-    <>
+    <Row>
       {values(ButtonColor).map((color) => (
         <Button key={color} {...args} color={color}>
           {color}
         </Button>
       ))}
-    </>
+    </Row>
   ),
 };
 
@@ -83,13 +91,13 @@ export const Colors: Story = {
 export const Sizes: Story = {
   args: { variant: ButtonVariant.Text },
   render: (args) => (
-    <>
+    <Row>
       {values(ButtonSize).map((size) => (
         <Button key={size} {...args} size={size}>
           {size}
         </Button>
       ))}
-    </>
+    </Row>
   ),
 };
 
