@@ -34,7 +34,7 @@ const tokensDir = argValue('--tokens', join(root, 'tokens'));
 const outFile = argValue('--out', join(root, 'src/styles/_tokens.generated.scss'));
 
 const THEMES = ['light', 'dark'];
-const SUPPORTED_TYPES = new Set(['color', 'dimension', 'fontFamily', 'fontWeight', 'number']);
+const SUPPORTED_TYPES = new Set(['color', 'dimension', 'fontFamily', 'fontWeight', 'number', 'shadow']);
 
 const header = `/* ======================================================================== *
  * Copyright 2026 HCL America Inc.                                          *
@@ -102,7 +102,17 @@ const formatColor = (value, token, file) => {
   throw new Error(`${file}: color token "${token}" needs a hex or an srgb value`);
 };
 
-const formatValue = (token, type, value, file) => {
+/**
+ * Formats one resolved token value as CSS.
+ * @param {string} token Dotted token path, for error messages.
+ * @param {string} type DTCG `$type` of the token.
+ * @param {unknown} value Token value with top-level aliases already resolved.
+ * @param {string} file Source file, for error messages.
+ * @param {Map<string, object>} tokens All tokens of the theme, to resolve aliases inside shadows.
+ * @returns {string} The CSS value.
+ * @throws {Error} When the type is unsupported or a color value is invalid.
+ */
+const formatValue = (token, type, value, file, tokens) => {
   switch (type) {
     case 'color':
       return formatColor(value, token, file);
@@ -111,6 +121,17 @@ const formatValue = (token, type, value, file) => {
     case 'fontFamily':
       return (Array.isArray(value) ? value : [value])
         .map((family) => (/[\s,]/.test(family) ? `"${family}"` : family))
+        .join(', ');
+    case 'shadow':
+      return (Array.isArray(value) ? value : [value])
+        .map((layer) => {
+          const parts = [layer.offsetX, layer.offsetY, layer.blur, layer.spread].map((dimension) => {
+            const resolved = resolveAlias(dimension, tokens, file);
+            return `${resolved.value}${resolved.unit}`;
+          });
+          const color = formatColor(resolveAlias(layer.color, tokens, file), token, file);
+          return `${layer.inset ? 'inset ' : ''}${parts.join(' ')} ${color}`;
+        })
         .join(', ');
     case 'fontWeight':
     case 'number':
@@ -131,7 +152,7 @@ const buildTheme = (theme) => {
     }
     const name = `--${path.split('.').map(kebab).join('-')}`;
     const value = resolveAlias(token.$value, tokens, file);
-    properties.set(name, formatValue(path, token.$type, value, file));
+    properties.set(name, formatValue(path, token.$type, value, file, tokens));
   }
   return properties;
 };

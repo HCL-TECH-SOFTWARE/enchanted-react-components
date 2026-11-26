@@ -2198,6 +2198,20 @@
         "value": 8,
         "unit": "px"
       }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
     }
   },
   "gap": {
@@ -2205,6 +2219,20 @@
       "$type": "dimension",
       "$value": {
         "value": 0,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
         "unit": "px"
       }
     }
@@ -2235,6 +2263,13 @@
       "$type": "dimension",
       "$value": {
         "value": 9,
+        "unit": "px"
+      }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
         "unit": "px"
       }
     }
@@ -2346,5 +2381,138 @@
   "fontFamily": {
     "$type": "fontFamily",
     "$value": "Inter"
+  },
+  "heading": {
+    "md": {
+      "fontSize": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      },
+      "lineHeight": {
+        "$type": "dimension",
+        "$value": {
+          "value": 30,
+          "unit": "px"
+        }
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": 600
+      }
+    }
+  },
+  "body": {
+    "md": {
+      "fontSize": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "lineHeight": {
+        "$type": "dimension",
+        "$value": {
+          "value": 22,
+          "unit": "px"
+        }
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": 400
+      }
+    }
+  },
+  "shadow": {
+    "24": {
+      "$type": "shadow",
+      "$description": "Figma Shadows/shadows.24, layers in CSS paint order (top first). Used by overlays such as Dialog.",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.2
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 11,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 15,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -7,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.14
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 24,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 38,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 3,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0,
+              0,
+              0
+            ],
+            "alpha": 0.12
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 9,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 46,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 8,
+            "unit": "px"
+          }
+        }
+      ]
+    }
   }
 }
