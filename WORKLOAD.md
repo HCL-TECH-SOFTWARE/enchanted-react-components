@@ -45,4 +45,4 @@ The release is ready when all of the following are true:
 
 ## Deferred
 
-- **Module federation:** Out of scope for this repository per [ENCHANTED.md](ENCHANTED.md). The existing guide placeholder is not an active deliverable; revisit only if project scope changes.
+- **Module federation:** It's partially out of scope per [ENCHANTED.md](ENCHANTED.md). The existing guide placeholder is not an active deliverable; revisit only if project scope changes.
