@@ -260,7 +260,7 @@ Not available inside a boundary: global selectors from the page (`.page button {
 - **Events and focus:** code outside the boundary sees the host in `event.target` and `document.activeElement`. Events that are not `composed`, such as `change`, do not leave the boundary.
 - **Tests:** Testing Library queries on `document` cannot see inside a shadow root. Render components without a provider, or inside `<ThemeProvider shadowRootType={ShadowRootType.None}>`, in unit tests ([TESTING-GUIDE.md](TESTING-GUIDE.md)).
 - **Server rendering:** the shadow root exists only in the browser, so a provider with an open or closed root renders an empty host on the server and its children appear after hydration.
-- **Fonts:** `@font-face` rules must be loaded in the main document.
+- **Fonts:** `@font-face` rules must be loaded in the main document; they do not work from inside a shadow root. Inter is bundled in `dist/enchanted.css` (fonts in `dist/fonts/`), so consumers must load `styles.css` in the page's document, not through `ThemeProvider`. Components only reference `var(--font-family)`; never declare `@font-face` in a `<Component>.shadow.scss`.
 
 ## Copyright Header
 
