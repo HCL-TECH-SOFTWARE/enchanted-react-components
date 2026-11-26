@@ -22,6 +22,7 @@ Do not add, install, or use third-party libraries or tools beyond those already 
 - **Testing:** Vitest with Testing Library (React Testing Library, user-event, jest-dom) and jsdom for unit and component tests, `vitest-axe` for automated accessibility checks, and `@vitest/coverage-v8` for coverage. WebdriverIO and browser-based test runners are not part of the setup. Conventions are in [TESTING-GUIDE.md](TESTING-GUIDE.md).
 - **Component documentation and visual review:** Storybook and Chromatic. Chromatic runs require a project token supplied through the environment; never commit the token.
 - **Styles and tokens:** Sass/SCSS consumes tokens authored in the required DTCG Design Tokens Format Module 2025.10. Use `.tokens.json` files and maintain corresponding light and dark theme sources. Transformation runs through the first-party `scripts/build-tokens.mjs` (`npm run tokens:build`); do not add a third-party generator or invent token values. Component styles are `<Component>.shadow.scss` files that `ThemeProvider` also injects into its shadow-root boundary. Pull the tokens a component needs before styling it, and leave styles unimplemented when no approved token covers a value. See [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md).
+- **Fonts:** Inter is bundled into the library styles from `@fontsource/inter` (a runtime `dependency`, pinned). See [Fonts](#fonts).
 - **Storybook addons:** `@storybook/addon-docs` (autodocs and MDX), `@storybook/addon-a11y` (axe checks per story), and `@storybook/addon-mcp` (exposes the component manifest to AI agents). Their versions follow Storybook. Do not add other addons without explicit approval; `@storybook/addon-vitest` is planned for when stories have `play` functions.
 - **Storybook MCP:** while `npm run storybook` runs, the addon serves an MCP endpoint at `http://localhost:6006/mcp`. Register it per user, not in the repository, for example with `npx mcp-add --type http --url "http://localhost:6006/mcp" --scope user`. It is a preview feature and only supports React.
 - **Storybook theming:** `.storybook/preview.tsx` wraps all stories with the shared `ThemeProvider`. Its Theme, Direction, and Shadow root toolbar controls select light/dark, LTR/RTL, and none/open/closed respectively, defaulting to light, LTR, and open. Stories render inside the provider's shadow-root style boundary.
@@ -62,7 +63,7 @@ Keep package versions and scripts synchronized with the manifest and configurati
 | `src/utils/` | Small shared helpers, such as class name merging and `useShadowRoot` for the style boundary | Present |
 | `src/types/` | Shared type definitions, if needed | Planned |
 | `tokens/` | DTCG 2025.10 `.tokens.json` sources for light and dark themes | Present: `light.tokens.json` and `dark.tokens.json` from the Figma `Theme` collection; see [DESIGN-TOKENS-GUIDE.md](DESIGN-TOKENS-GUIDE.md) |
-| `src/styles/` | SCSS source; `_tokens.generated.scss` is produced by `npm run tokens:build` and git-ignored | Present |
+| `src/styles/` | SCSS source; `_tokens.generated.scss` is produced by `npm run tokens:build`, and `_fonts.generated.scss` plus `fonts/` (Inter woff2 files) by `npm run fonts:build`; all are git-ignored | Present |
 | `src/__tests__/` | Shared Vitest setup (`setup.ts`: jest-dom and axe matchers); see [TESTING-GUIDE.md](TESTING-GUIDE.md) | Present |
 | `src/__tests__/unit/components/` | Unit and component tests, one `<Component>.test.tsx` per component | Present; additional component tests await component specifications |
 | `.storybook/` | Storybook configuration | Present |
@@ -101,10 +102,11 @@ Run these commands from the repository root:
 |---|---|
 | `npm ci` | Install locked dependencies |
 | `npm run tokens:build` | Generate CSS custom properties from `tokens/` (runs automatically before build and Storybook) |
+| `npm run fonts:build` | Bundle Inter: copy woff2 files to `src/styles/fonts/` and generate `_fonts.generated.scss` (runs automatically before build and Storybook) |
 | `npm run lint` | Run ESLint |
 | `npm run typecheck` | Check TypeScript |
 | `npm test` | Run Vitest with coverage (text summary and `coverage/lcov.info`) |
-| `npm run build` | Emit declarations, compile Sass, and build the library |
+| `npm run build` | Emit declarations, compile Sass, build the library, and copy the fonts to `dist/fonts/` |
 | `npm run storybook` | Start Storybook on port 6006 |
 | `npm run build-storybook` | Build Storybook |
 | `npm run chromatic` | Publish the Storybook build; requires `CHROMATIC_ENCHANTED_PROJECT_TOKEN` |
@@ -123,8 +125,9 @@ The published package contains a predefined list of files, and only the `files` 
 | 2 | `README.md` | Yes | Always added by npm; also listed in `files` |
 | 3 | `LICENSE.txt` | Yes | Always added by npm (any `LICENSE` or `LICENCE` file name); also listed in `files` |
 | 4 | `CHANGELOG.md` | Yes | Listed in `files` (npm does not add it on its own) |
+| 4a | `THIRD-PARTY-NOTICES.md` | Yes | Listed in `files` |
 | 5 | Library code: the bundle and the declarations under `dist/` | Yes, without test files, Code Connect (`*.figma.*`) files, and stories | `dist` in `files`, minus the `!dist/...` entries below |
-| 6 | Generated CSS (`dist/*.css`) | Yes | Part of `dist` |
+| 6 | Generated CSS (`dist/*.css`) and bundled fonts with their license (`dist/fonts/*.woff2`, `dist/fonts/LICENSE.txt`) | Yes | Part of `dist` |
 | 7 | SCSS source files | **Undecided** | Not included until the team decides; see below |
 
 ```json
@@ -135,6 +138,7 @@ The published package contains a predefined list of files, and only the `files` 
   "!dist/**/*.test.*",
   "!dist/**/__tests__",
   "CHANGELOG.md",
+  "THIRD-PARTY-NOTICES.md",
   "README.md",
   "LICENSE.txt"
 ]
@@ -154,9 +158,20 @@ GitHub Actions uses five workflows under `.github/workflows/`:
 | `chromatic.yml` | Pull request; manual (`workflow_dispatch`) | Install dependencies and publish visual review with `chromaui/action@v18` (`onlyChanged`, `externals: 'tokens/**'`, `exitOnceUploaded: false`, `skip: "dependabot/**"`); aborts with an error when `CHROMATIC_ENCHANTED_PROJECT_TOKEN` is not set |
 | `chromatic-baseline.yaml` | Push to `main` | Update the Chromatic baseline (`autoAcceptChanges`; no TurboSnap, so every story is snapshotted); aborts with an error when `CHROMATIC_ENCHANTED_PROJECT_TOKEN` is not set |
 
-The build, lint, test, and Chromatic workflows do not run on pushes alone. Each of them uses the Node version in `.nvmrc`, installs npm 11.19.0, and installs dependencies with `npm ci`. Both Chromatic workflows use the `chromaui/action` GitHub Action instead of `npm run chromatic`; the action builds Storybook (`build-storybook`, which first runs `tokens:build`) and publishes it. Both check out the full git history (`fetch-depth: 0`); the pull request workflow needs it for TurboSnap, and the baseline workflow does not use TurboSnap. The baseline workflow runs only on pushes to `main`, uses Node 24.x, and accepts changes automatically.
+The build, lint, test, and Chromatic workflows do not run on pushes alone. Each of them uses the Node version in `.nvmrc`, installs npm 11.19.0, and installs dependencies with `npm ci`. Both Chromatic workflows use the `chromaui/action` GitHub Action instead of `npm run chromatic`; the action builds Storybook (`build-storybook`, which first runs `tokens:build` and `fonts:build`) and publishes it. Both check out the full git history (`fetch-depth: 0`); the pull request workflow needs it for TurboSnap, and the baseline workflow does not use TurboSnap. The baseline workflow runs only on pushes to `main`, uses Node 24.x, and accepts changes automatically.
 
 The token is supplied through the `CHROMATIC_ENCHANTED_PROJECT_TOKEN` GitHub Actions secret; it is never stored in the repository. Both Chromatic workflows check the secret and fail the run with the error `CHROMATIC_ENCHANTED_PROJECT_TOKEN is not set. Aborting workflow.` when it is empty, so a missing secret is visible instead of silently skipping visual review. GitHub does not pass repository secrets to pull requests from forks or to Dependabot, so the Chromatic check fails on those pull requests until a maintainer runs the workflow manually with `workflow_dispatch` from a branch in this repository.
+
+## Fonts
+
+Inter is part of the library, not something consumers have to supply.
+
+- **Source:** `@fontsource/inter` (pinned, runtime `dependency`). `ENCHANTED.md` records it as an approved exception to the dependency policy.
+- **Generation:** `npm run fonts:build` runs `scripts/build-fonts.mjs`. It copies the `latin` and `latin-ext` woff2 files for weights 400, 500, 600 and 700, plus the OFL license text (`LICENSE.txt`), to `src/styles/fonts/` and writes `src/styles/_fonts.generated.scss` with matching `@font-face` rules. Both outputs are git-ignored and regenerated before `build`, `storybook` and `build-storybook`. To change weights or subsets, edit `WEIGHTS` or `SUBSETS` in the script.
+- **Output:** the rules use relative URLs (`./fonts/...`). `src/styles/index.scss` includes them, so Vite (Storybook) resolves them against `src/styles/fonts/`, and `dist/enchanted.css` resolves them against `dist/fonts/`, which `npm run build` copies from `src/styles/fonts/`. Keep `dist/fonts/` next to `dist/enchanted.css`.
+- **Usage:** components reference `var(--font-family)` only (the `fontFamily` token is `Inter`). `@font-face` is document-scoped and does not work inside a shadow root, so consumers must load `@hcl-software/enchanted-react-components/styles.css` in the page's document. Never declare `@font-face` in a `<Component>.shadow.scss`.
+- **License:** Inter is licensed under OFL-1.1, which requires the copyright notice and license text to stay with the font files. `dist/fonts/LICENSE.txt` provides the text and `THIRD-PARTY-NOTICES.md` (listed in `files`) records the attribution. Do not modify the font files; update the notice file whenever the font package or its license changes.
+- **Verification:** after changing fonts or the build, run `npm run build`, confirm `dist/fonts/` holds the expected files and `dist/enchanted.css` the matching `@font-face` rules, and check `npm pack --dry-run` lists the fonts.
 
 ## VS Code and Figma
 
@@ -171,7 +186,7 @@ Do not install other Figma extensions or MCP servers, or add other Figma tooling
 
 ## Setup Automation
 
-The setup configures a private package manifest, a locked dependency tree, TypeScript/Vite/Sass tooling, Vitest, Storybook, ESLint, and GitHub Actions. The library build emits ESM only. Component implementation is deferred until first-release scope and specifications are approved. Do not introduce additional third-party dependencies or tools. No third-party token generator is added; token transformation uses the first-party `scripts/build-tokens.mjs`, and the Figma MCP and Code Connect configuration are the only Figma tooling. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt` are static files: setup automation must not modify, delete, regenerate, or otherwise write to them. Changes to these governance and legal documents are outside the setup process.
+The setup configures a private package manifest, a locked dependency tree, TypeScript/Vite/Sass tooling, Vitest, Storybook, ESLint, and GitHub Actions. The library build emits ESM only. Component implementation is deferred until first-release scope and specifications are approved. Do not introduce additional third-party dependencies or tools; the Inter font package is the only runtime dependency. No third-party token generator is added; token transformation uses the first-party `scripts/build-tokens.mjs`, and the Figma MCP and Code Connect configuration are the only Figma tooling. `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, and `LICENSE.txt` are static files: setup automation must not modify, delete, regenerate, or otherwise write to them. Changes to these governance and legal documents are outside the setup process.
 
 Keep generated configuration deterministic and reviewable. Validate changes with the repository commands above, and update the README and this guide whenever package scripts or setup decisions change.
 
