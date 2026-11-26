@@ -2179,6 +2179,13 @@
         "value": 20,
         "unit": "px"
       }
+    },
+    "iconSm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
     }
   },
   "gap": {
@@ -2186,6 +2193,20 @@
       "$type": "dimension",
       "$value": {
         "value": 4,
+        "unit": "px"
+      }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
         "unit": "px"
       }
     }
@@ -2202,6 +2223,20 @@
       "$type": "dimension",
       "$value": {
         "value": 6,
+        "unit": "px"
+      }
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
+    },
+    "xxs": {
+      "$type": "dimension",
+      "$value": {
+        "value": 4,
         "unit": "px"
       }
     }
@@ -2283,6 +2318,26 @@
       "fontWeight": {
         "$type": "fontWeight",
         "$value": 400
+      },
+      "lineHeight": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      }
+    },
+    "bodySm": {
+      "fontSize": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "fontWeightStrong": {
+        "$type": "fontWeight",
+        "$value": 600
       },
       "lineHeight": {
         "$type": "dimension",

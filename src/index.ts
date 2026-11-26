@@ -16,3 +16,4 @@
 // Public entry point.
 export * from './theme';
 export * from './components/Checkbox';
+export * from './components/CheckboxGroup';

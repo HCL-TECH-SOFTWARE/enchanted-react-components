@@ -32,7 +32,9 @@
       padding: 0;
     }
 
-    &[data-disabled] {
+    &[data-disabled],
+    // A checkbox disabled by its CheckboxGroup has no `disabled` prop, only the control's `data-disabled`.
+    &:has(.checkboxControl[data-disabled]) {
       color: var(--color-text-disabled);
       cursor: not-allowed;
     }
@@ -134,7 +136,8 @@
     padding-block-start: 1px;
   }
 
-  .checkboxRoot[data-invalid]:not([data-disabled]) .checkboxLabel {
+  // Skipped when disabled, including a checkbox disabled by its CheckboxGroup (see the `:has` rule above).
+  .checkboxRoot[data-invalid]:not([data-disabled], :has(.checkboxControl[data-disabled])) .checkboxLabel {
     color: var(--color-text-primary);
   }
 
