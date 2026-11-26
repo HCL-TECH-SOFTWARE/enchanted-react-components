@@ -125,8 +125,9 @@ The published package contains a predefined list of files, and only the `files` 
 | 2 | `README.md` | Yes | Always added by npm; also listed in `files` |
 | 3 | `LICENSE.txt` | Yes | Always added by npm (any `LICENSE` or `LICENCE` file name); also listed in `files` |
 | 4 | `CHANGELOG.md` | Yes | Listed in `files` (npm does not add it on its own) |
+| 4a | `THIRD-PARTY-NOTICES.md` | Yes | Listed in `files` |
 | 5 | Library code: the bundle and the declarations under `dist/` | Yes, without test files, Code Connect (`*.figma.*`) files, and stories | `dist` in `files`, minus the `!dist/...` entries below |
-| 6 | Generated CSS (`dist/*.css`) and bundled fonts (`dist/fonts/*.woff2`) | Yes | Part of `dist` |
+| 6 | Generated CSS (`dist/*.css`) and bundled fonts with their license (`dist/fonts/*.woff2`, `dist/fonts/LICENSE.txt`) | Yes | Part of `dist` |
 | 7 | SCSS source files | **Undecided** | Not included until the team decides; see below |
 
 ```json
@@ -137,6 +138,7 @@ The published package contains a predefined list of files, and only the `files` 
   "!dist/**/*.test.*",
   "!dist/**/__tests__",
   "CHANGELOG.md",
+  "THIRD-PARTY-NOTICES.md",
   "README.md",
   "LICENSE.txt"
 ]
@@ -165,9 +167,10 @@ The token is supplied through the `CHROMATIC_ENCHANTED_PROJECT_TOKEN` GitHub Act
 Inter is part of the library, not something consumers have to supply.
 
 - **Source:** `@fontsource/inter` (pinned, runtime `dependency`). `ENCHANTED.md` records it as an approved exception to the dependency policy.
-- **Generation:** `npm run fonts:build` runs `scripts/build-fonts.mjs`. It copies the `latin` and `latin-ext` woff2 files for weights 400, 500, 600 and 700 to `src/styles/fonts/` and writes `src/styles/_fonts.generated.scss` with matching `@font-face` rules. Both outputs are git-ignored and regenerated before `build`, `storybook` and `build-storybook`. To change weights or subsets, edit `WEIGHTS` or `SUBSETS` in the script.
+- **Generation:** `npm run fonts:build` runs `scripts/build-fonts.mjs`. It copies the `latin` and `latin-ext` woff2 files for weights 400, 500, 600 and 700, plus the OFL license text (`LICENSE.txt`), to `src/styles/fonts/` and writes `src/styles/_fonts.generated.scss` with matching `@font-face` rules. Both outputs are git-ignored and regenerated before `build`, `storybook` and `build-storybook`. To change weights or subsets, edit `WEIGHTS` or `SUBSETS` in the script.
 - **Output:** the rules use relative URLs (`./fonts/...`). `src/styles/index.scss` includes them, so Vite (Storybook) resolves them against `src/styles/fonts/`, and `dist/enchanted.css` resolves them against `dist/fonts/`, which `npm run build` copies from `src/styles/fonts/`. Keep `dist/fonts/` next to `dist/enchanted.css`.
 - **Usage:** components reference `var(--font-family)` only (the `fontFamily` token is `Inter`). `@font-face` is document-scoped and does not work inside a shadow root, so consumers must load `@hcl-software/enchanted-react-components/styles.css` in the page's document. Never declare `@font-face` in a `<Component>.shadow.scss`.
+- **License:** Inter is licensed under OFL-1.1, which requires the copyright notice and license text to stay with the font files. `dist/fonts/LICENSE.txt` provides the text and `THIRD-PARTY-NOTICES.md` (listed in `files`) records the attribution. Do not modify the font files; update the notice file whenever the font package or its license changes.
 - **Verification:** after changing fonts or the build, run `npm run build`, confirm `dist/fonts/` holds the expected files and `dist/enchanted.css` the matching `@font-face` rules, and check `npm pack --dry-run` lists the fonts.
 
 ## VS Code and Figma

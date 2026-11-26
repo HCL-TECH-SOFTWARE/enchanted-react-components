@@ -30,6 +30,7 @@
     "!dist/**/*.test.*",
     "!dist/**/__tests__",
     "CHANGELOG.md",
+    "THIRD-PARTY-NOTICES.md",
     "README.md",
     "LICENSE.txt"
   ],

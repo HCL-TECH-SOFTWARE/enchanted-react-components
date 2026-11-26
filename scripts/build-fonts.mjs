@@ -14,7 +14,7 @@
  * ======================================================================== */
 
 // Bundles Inter (from @fontsource/inter) into the library styles: copies the woff2 files to
-// src/styles/fonts and generates src/styles/_fonts.generated.scss with matching @font-face
+// src/styles/fonts (with the OFL license text as LICENSE.txt) and generates src/styles/_fonts.generated.scss with matching @font-face
 // rules. The font URLs are relative (`./fonts/...`), so they resolve against both Vite
 // (Storybook) and the compiled dist/enchanted.css (dist/fonts, copied by `npm run build`).
 import { copyFileSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -44,6 +44,9 @@ for (const weight of WEIGHTS) {
     );
   }
 }
+
+// The OFL requires the copyright notice and license text to travel with every copy of the font.
+copyFileSync(join(pkgDir, 'LICENSE'), join(fontsDir, 'LICENSE.txt'));
 
 writeFileSync(
   join(root, 'src/styles/_fonts.generated.scss'),
