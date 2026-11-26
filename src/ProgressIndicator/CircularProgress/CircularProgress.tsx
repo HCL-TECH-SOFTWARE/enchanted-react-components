@@ -101,6 +101,7 @@ const CircularProgress = ({ withbackdrop, ...props }: CircularProgressProps) => 
       <MuiCircularProgress
         className={withbackdrop ? 'backdrop' : ''}
         {...props}
+        aria-hidden="true"
         id={CircularProgressTestIds.PROGRESS_TRAIL}
         data-testid={CircularProgressTestIds.PROGRESS_TRAIL}
         variant={CircularProgressVariants.DETERMINATE} // for the full gray trail
