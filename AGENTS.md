@@ -18,14 +18,15 @@ Run from the repository root. Use the narrowest check that covers your change, t
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript |
 | `npm test` | Vitest |
-| `npm run build` | Declarations, Sass, library build |
+| `npm run fonts:build` | Bundle Inter into `src/styles` (runs before build and Storybook) |
+| `npm run build` | Declarations, Sass, library build, and font files in `dist/fonts` |
 | `npm run storybook` | Storybook on port 6006 |
 
 Report which checks you ran and their results. Never claim a check passed unless you ran it.
 
 ## Hard rules
 
-1. **No new dependencies.** Do not add, install, or use third-party libraries or tools beyond those in the package manifests. Prefer platform APIs. If a task seems to need one, stop and ask. **Icons** come only from `@hcl-software/enchanted-icons-react` (2.1.0), which is already installed; never add another icon library, inline SVGs, or local icon files.
+1. **No new dependencies.** Do not add, install, or use third-party libraries or tools beyond those in the package manifests. Prefer platform APIs. If a task seems to need one, stop and ask. **Icons** come only from `@hcl-software/enchanted-icons-react` (2.1.0), which is already installed; never add another icon library, inline SVGs, or local icon files. **Fonts** come only from `@fontsource/inter` (5.3.0), bundled by `npm run fonts:build`; do not add other font packages, hand-edit `src/styles/_fonts.generated.scss`, or commit files under `src/styles/fonts/`.
 2. **Tokens use DTCG 2025.10 only.** Token sources are `tokens/*.tokens.json` with an explicit `$type` on every token. Never invent token values, and never hard-code design values in SCSS. See [docs/DESIGN-TOKENS-GUIDE.md](docs/DESIGN-TOKENS-GUIDE.md).
 3. **No invented styling.** Component styles come only from a confirmed Figma design mapped to approved tokens. If either is missing, leave `<Component>.shadow.scss` empty and say so.
 4. **Every component exports `<Component>Props`**, uses it in its signature, and re-exports it from its `index.ts`. Build on the matching Base UI primitive when one exists. Details: [docs/COMPONENT-GUIDE.md](docs/COMPONENT-GUIDE.md).
