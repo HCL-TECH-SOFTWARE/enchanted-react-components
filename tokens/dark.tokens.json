@@ -1,4 +1,10 @@
 {
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "$value": "Inter"
+    }
+  },
   "color": {
     "accent": {
       "amber": {
