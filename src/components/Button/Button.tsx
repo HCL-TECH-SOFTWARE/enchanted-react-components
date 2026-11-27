@@ -94,17 +94,32 @@ export interface ButtonProps extends ComponentProps<typeof BaseButton> {
    */
   pressed?: boolean;
   /**
-   * Icon shown before the label. Omit it to show none.
+   * Icon shown before the label. Omit it to show none. When `iconButton` is `true`, this is ignored
+   * and `icon` is used instead.
    */
   startIcon?: ReactNode;
   /**
-   * Icon shown after the label. Omit it to show none.
+   * Icon shown after the label. Omit it to show none. When `iconButton` is `true`, this is ignored
+   * and `icon` is used instead.
    */
   endIcon?: ReactNode;
   /**
    * Label of the button. A button with an icon and no label needs an `aria-label`.
    */
   children?: ReactNode;
+  /**
+   * Displays only an icon in a square button (36×36px by default) with no label. When `true`,
+   * the `icon` prop is required and `aria-label` must be provided for accessibility. The button
+   * will be square regardless of the `size` prop: `medium` = 36×36px, `small` = 24×24px,
+   * `extraSmall` = 16×16px.
+   * @default false
+   */
+  iconButton?: boolean;
+  /**
+   * Icon displayed in the center of the button when `iconButton` is `true`. Ignored when
+   * `iconButton` is `false` or not set.
+   */
+  icon?: ReactNode;
 }
 
 /**
@@ -118,6 +133,12 @@ export interface ButtonProps extends ComponentProps<typeof BaseButton> {
  * ```tsx
  * <Button variant={ButtonVariant.Outlined} onClick={save}>Save</Button>
  * ```
+ *
+ * @example
+ * ```tsx
+ * // Icon-only button (36×36px square, requires aria-label)
+ * <Button iconButton icon={<AddIcon />} aria-label="Add item" />
+ * ```
  */
 export const Button = ({
   variant = ButtonVariant.Contained,
@@ -128,6 +149,8 @@ export const Button = ({
   startIcon,
   endIcon,
   children,
+  iconButton = false,
+  icon,
   className,
   ...props
 }: ButtonProps) => (
@@ -138,8 +161,8 @@ export const Button = ({
     // Base UI accepts a function for `className`, so the class is merged into either form.
     className={
       typeof className === 'function'
-        ? (state) => cn('buttonRoot', className(state))
-        : cn('buttonRoot', className)
+        ? (state) => cn('buttonRoot', iconButton && 'buttonIconButton', className(state))
+        : cn('buttonRoot', iconButton && 'buttonIconButton', className)
     }
     aria-pressed={pressed}
     data-variant={variant}
@@ -148,8 +171,14 @@ export const Button = ({
     data-inverse={inverse || undefined}
     data-pressed={pressed || undefined}
   >
-    {startIcon && <span className="buttonStartIcon">{startIcon}</span>}
-    {children && <span className="buttonLabel">{children}</span>}
-    {endIcon && <span className="buttonEndIcon">{endIcon}</span>}
+    {iconButton ? (
+      icon && <span className="buttonIcon">{icon}</span>
+    ) : (
+      <>
+        {startIcon && <span className="buttonStartIcon">{startIcon}</span>}
+        {children && <span className="buttonLabel">{children}</span>}
+        {endIcon && <span className="buttonEndIcon">{endIcon}</span>}
+      </>
+    )}
   </BaseButton>
 );
