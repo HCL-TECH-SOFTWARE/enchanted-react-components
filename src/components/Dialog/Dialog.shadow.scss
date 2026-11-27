@@ -1,0 +1,184 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from Figma node 29243:2756 (Dialog) and resolve through the tokens in tokens/.
+// Component-specific values with no design token: the width per `size` and the 96px viewport
+// gutter (padding/xxxl on top and bottom) used for the max height, both from the Figma description.
+
+@layer enchanted.components {
+  .dialogBackdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--color-background-overlay); // Figma Overlay
+  }
+
+  .dialogRoot {
+    // Structural centering; Base UI gives the popup no position of its own.
+    position: fixed;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-none);
+    padding: var(--padding-none);
+    overflow: clip;
+    // Keeps a wide size inside a narrower viewport; not part of the Figma sizes.
+    max-inline-size: 100vw;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary);
+    border-radius: var(--corner-radius-lg);
+    box-shadow: var(--shadow-24); // Figma Shadows/shadows.24
+    font-family: var(--font-family);
+    letter-spacing: var(--letter-spacing-default);
+
+    &[data-size='extraSmall'] {
+      inline-size: 444px;
+      max-block-size: min(600px, calc(100dvh - 96px));
+    }
+
+    &[data-size='small'] {
+      inline-size: 600px;
+      max-block-size: min(600px, calc(100dvh - 96px));
+    }
+
+    &[data-size='medium'] {
+      inline-size: 960px;
+      max-block-size: calc(100dvh - 96px);
+    }
+
+    &[data-size='large'] {
+      inline-size: 1280px;
+      max-block-size: calc(100dvh - 96px);
+    }
+
+    &[data-size='extraLarge'] {
+      inline-size: 1920px;
+      max-block-size: 100dvh;
+    }
+  }
+
+  .dialogHeader,
+  .dialogFooter {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: var(--gap-md);
+    padding: var(--padding-lg) var(--padding-xl);
+    overflow: clip;
+  }
+
+  .dialogFooter {
+    justify-content: flex-end;
+  }
+
+  .dialogTitleGroup {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    gap: var(--gap-sm);
+    min-inline-size: 0;
+    overflow: clip;
+  }
+
+  .dialogTitleWithHelp {
+    display: flex;
+    align-items: center;
+    overflow: clip;
+  }
+
+  .dialogHeaderActions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: var(--gap-sm);
+    overflow: clip;
+  }
+
+  .dialogIcon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    inline-size: var(--size-icon-md);
+    block-size: var(--size-icon-md);
+  }
+
+  .dialogTitle {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--heading-md-font-size); // Figma heading/md
+    font-weight: var(--heading-md-font-weight);
+    line-height: var(--heading-md-line-height);
+    letter-spacing: var(--letter-spacing-default);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow-wrap: anywhere;
+  }
+
+  .dialogScrollArea {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    // Hugs its content, and only shrinks (and scrolls) once the popup reaches its max height. A zero
+    // flex basis would collapse it, because the popup has no fixed height.
+    flex: 0 1 auto;
+    min-block-size: 0;
+    padding: var(--padding-none) var(--padding-xl);
+    overflow: clip;
+
+    // Dividers (Figma `scrollPosition`): top while content is hidden above, bottom while hidden below.
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      block-size: var(--stroke-default);
+      background: var(--color-border-secondary);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    &::before {
+      inset-block-start: 0;
+    }
+
+    &::after {
+      inset-block-end: 0;
+    }
+
+    &[data-overflow-y-start]::before,
+    &[data-overflow-y-end]::after {
+      opacity: 1;
+    }
+  }
+
+  .dialogViewport {
+    flex: 1 1 auto;
+    min-block-size: 0;
+  }
+
+  .dialogContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-none);
+    font-family: var(--font-family);
+    font-size: var(--body-md-font-size); // Figma body/md
+    font-weight: var(--body-md-font-weight);
+    line-height: var(--body-md-line-height);
+    letter-spacing: var(--letter-spacing-default);
+    color: var(--color-text-primary);
+  }
+}

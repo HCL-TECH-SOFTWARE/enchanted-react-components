@@ -1,0 +1,327 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+@use 'sass:list';
+@use 'sass:map';
+
+// Values come from Figma node 1338:465763 (Button), read per variant and state, and resolve through
+// the tokens in tokens/. Not styled for lack of a Figma value: the label padding is matched by value
+// to `padding/xxs` and `padding/xxxs`, and the Figma `Compact` typography mode is not used.
+
+@function c($name) {
+  @return var(--color-#{$name});
+}
+
+// Palette entry: (background, label and icon color, border color) for one state.
+// Rest, hover and active are the Figma `state` variants; `focus` looks like rest plus a ring.
+$palette: (
+  contained: (
+    brand: (
+      rest: (c(brand-default), c(text-primary-inverse), transparent),
+      hover: (c(brand-hover), c(text-primary-inverse), transparent),
+      active: (c(brand-active), c(text-primary-inverse), transparent),
+    ),
+    error: (
+      rest: (c(error-default), c(text-primary-inverse), transparent),
+      hover: (c(error-hover), c(text-primary-inverse), transparent),
+      active: (c(error-active), c(text-primary-inverse), transparent),
+    ),
+    neutral: (
+      rest: (c(actions-background), c(actions-default), transparent),
+      hover: (c(actions-background-hover), c(actions-hover), transparent),
+      active: (c(actions-background-active), c(actions-active), transparent),
+    ),
+  ),
+  outlined: (
+    brand: (
+      rest: (transparent, c(brand-default), c(border-secondary)),
+      hover: (c(actions-hover-opacity), c(brand-hover), c(brand-hover)),
+      active: (c(actions-active-opacity), c(brand-active), c(brand-active)),
+    ),
+    error: (
+      rest: (transparent, c(error-default), c(border-secondary)),
+      hover: (c(actions-hover-opacity), c(error-hover), c(error-hover)),
+      active: (c(actions-active-opacity), c(error-active), c(error-active)),
+    ),
+    neutral: (
+      rest: (transparent, c(actions-default), c(border-secondary)),
+      hover: (c(actions-hover-opacity), c(actions-hover), c(actions-hover)),
+      active: (c(actions-active-opacity), c(actions-active), c(actions-active)),
+    ),
+  ),
+  text: (
+    brand: (
+      rest: (transparent, c(brand-default), transparent),
+      hover: (c(actions-hover-opacity), c(brand-hover), transparent),
+      active: (c(actions-active-opacity), c(brand-active), transparent),
+    ),
+    error: (
+      rest: (transparent, c(error-default), transparent),
+      hover: (c(actions-hover-opacity), c(error-hover), transparent),
+      active: (c(actions-active-opacity), c(error-active), transparent),
+    ),
+    neutral: (
+      rest: (transparent, c(actions-default), transparent),
+      hover: (c(actions-hover-opacity), c(actions-hover), transparent),
+      active: (c(actions-active-opacity), c(actions-active), transparent),
+    ),
+  ),
+);
+
+$palette-inverse: (
+  contained: (
+    brand: (
+      rest: (c(brand-inverse), c(text-primary-persist), transparent),
+      hover: (c(brand-hover-inverse), c(text-primary-persist), transparent),
+      active: (c(brand-active-inverse), c(text-primary-persist), transparent),
+    ),
+    error: (
+      rest: (c(error-inverse), c(text-primary-persist), transparent),
+      hover: (c(error-hover-inverse), c(text-primary-persist), transparent),
+      active: (c(error-active-inverse), c(text-primary-persist), transparent),
+    ),
+    neutral: (
+      rest: (c(actions-background-inverse), c(text-primary-inverse-persist), transparent),
+      hover: (c(actions-background-hover-inverse), c(text-primary-inverse-persist), transparent),
+      active: (c(actions-background-active-inverse), c(text-primary-inverse-persist), transparent),
+    ),
+  ),
+  outlined: (
+    brand: (
+      rest: (transparent, c(brand-inverse), c(border-inverse-primary)),
+      hover: (c(actions-hover-opacity-inverse), c(brand-hover-inverse), c(brand-hover-inverse)),
+      active: (c(actions-active-opacity-inverse), c(brand-active-inverse), c(brand-active-inverse)),
+    ),
+    error: (
+      rest: (transparent, c(error-inverse), c(border-inverse-primary)),
+      hover: (c(actions-hover-opacity-inverse), c(error-hover-inverse), c(error-hover-inverse)),
+      active: (c(actions-active-opacity-inverse), c(error-active-inverse), c(error-active-inverse)),
+    ),
+    neutral: (
+      rest: (transparent, c(text-primary-inverse-persist), c(border-inverse-primary)),
+      hover: (c(actions-hover-opacity-inverse), c(text-primary-inverse-persist), c(actions-hover-inverse)),
+      active: (c(actions-active-opacity-inverse), c(text-primary-inverse-persist), c(actions-active-inverse)),
+    ),
+  ),
+  text: (
+    brand: (
+      rest: (transparent, c(brand-inverse), transparent),
+      hover: (c(actions-hover-opacity-inverse), c(brand-hover-inverse), transparent),
+      active: (c(actions-active-opacity-inverse), c(brand-active-inverse), transparent),
+    ),
+    error: (
+      rest: (transparent, c(error-inverse), transparent),
+      hover: (c(actions-hover-opacity-inverse), c(error-hover-inverse), transparent),
+      active: (c(actions-active-opacity-inverse), c(error-active-inverse), transparent),
+    ),
+    neutral: (
+      rest: (transparent, c(text-primary-inverse-persist), transparent),
+      hover: (c(actions-hover-opacity-inverse), c(text-primary-inverse-persist), transparent),
+      active: (c(actions-active-opacity-inverse), c(text-primary-inverse-persist), transparent),
+    ),
+  ),
+);
+
+// Pressed looks the same for every variant and color.
+$pressed: (
+  rest: (c(actions-selected-opacity), c(actions-selected), c(actions-selected)),
+  hover: (c(actions-selected-opacity-hover), c(actions-selected-hover), c(actions-selected-hover)),
+  active: (c(actions-selected-opacity-active), c(actions-selected-active), c(actions-selected-active)),
+);
+
+$pressed-inverse: (
+  rest: (c(actions-selected-opacity-inverse), c(actions-selected-inverse), c(actions-selected-inverse)),
+  hover: (c(actions-selected-opacity-hover-inverse), c(actions-selected-hover-inverse), c(actions-selected-hover-inverse)),
+  active: (
+    c(actions-selected-opacity-active-inverse),
+    c(actions-selected-active-inverse),
+    c(actions-selected-active-inverse)
+  ),
+);
+
+// Disabled depends on the variant only: (background, label, border) and the same when pressed.
+$disabled: (
+  contained: ((c(actions-disabled-background), c(text-disabled), transparent), (c(actions-disabled-background), c(text-disabled), c(border-secondary))),
+  outlined: ((transparent, c(text-disabled), c(border-disabled)), (c(actions-disabled-background), c(text-disabled), c(border-disabled))),
+  text: ((transparent, c(text-disabled), transparent), (c(actions-disabled-background), c(text-disabled), c(border-secondary))),
+);
+
+$disabled-inverse: (
+  contained: ((c(actions-disabled-background-inverse), c(text-disabled-inverse), transparent), (c(actions-disabled-background-inverse), c(text-disabled-inverse), c(border-inverse-primary))),
+  outlined: ((transparent, c(text-disabled-inverse), c(border-disabled-inverse)), (c(actions-disabled-background-inverse), c(text-disabled-inverse), c(border-disabled-inverse))),
+  text: ((transparent, c(text-disabled-inverse), transparent), (c(actions-disabled-background-inverse), c(text-disabled-inverse), c(border-inverse-primary))),
+);
+
+@mixin colors($entry) {
+  --button-bg: #{list.nth($entry, 1)};
+  --button-fg: #{list.nth($entry, 2)};
+  --button-border: #{list.nth($entry, 3)};
+}
+
+// Rest, hover and active for one selector. The selectors are mutually exclusive (each state names
+// the pressed and disabled attributes), so no rule depends on specificity to win.
+@mixin states($selector, $states) {
+  #{$selector} {
+    @include colors(map.get($states, rest));
+  }
+
+  #{$selector}:hover {
+    @include colors(map.get($states, hover));
+  }
+
+  #{$selector}:active {
+    @include colors(map.get($states, active));
+  }
+}
+
+@layer enchanted.components {
+  .buttonRoot {
+    --button-bg: transparent;
+    --button-fg: inherit;
+    --button-border: transparent;
+    --button-min: var(--size-control-md);
+    --button-padding-block: var(--padding-xs);
+    --button-padding-inline: var(--padding-sm);
+    --button-radius: var(--corner-radius-md);
+    --button-radius-focus: var(--corner-radius-md-focus);
+    --button-font-size: var(--label-md-font-size);
+    --button-line-height: var(--label-md-line-height);
+    --button-label-padding: var(--padding-xxs);
+    --button-icon-size: var(--size-icon-md);
+    --button-focus: var(--color-actions-focus);
+
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-none);
+    min-width: var(--button-min);
+    min-height: var(--button-min);
+    margin: 0;
+    padding: var(--button-padding-block) var(--button-padding-inline);
+    border: 0 solid var(--button-border);
+    border-radius: var(--button-radius);
+    background: var(--button-bg);
+    color: var(--button-fg);
+    font-family: var(--font-family);
+    font-size: var(--button-font-size);
+    font-weight: var(--label-md-font-weight);
+    line-height: var(--button-line-height);
+    letter-spacing: var(--letter-spacing-default);
+    text-decoration: none;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .buttonRoot[data-size='small'] {
+    --button-min: var(--size-control-sm);
+    --button-padding-block: var(--padding-none);
+    --button-padding-inline: var(--padding-xxs);
+    --button-radius: var(--corner-radius-sm);
+    --button-radius-focus: var(--corner-radius-sm-focus);
+    --button-font-size: var(--label-sm-font-size);
+    --button-line-height: var(--label-sm-line-height);
+    --button-label-padding: var(--padding-xxxs);
+    --button-icon-size: var(--size-icon-sm);
+  }
+
+  .buttonRoot[data-size='extraSmall'] {
+    --button-min: var(--size-control-xs);
+    --button-padding-block: var(--padding-none);
+    --button-padding-inline: var(--padding-none);
+    --button-radius: var(--corner-radius-sm);
+    --button-radius-focus: var(--corner-radius-sm-focus);
+    --button-font-size: var(--label-sm-font-size);
+    --button-line-height: var(--label-sm-line-height);
+    --button-label-padding: var(--padding-xxxs);
+    --button-icon-size: var(--size-icon-sm);
+  }
+
+  // Icon button mode: square shape with centered icon
+  .buttonIconButton {
+    width: var(--button-min);
+    height: var(--button-min);
+    padding: 2px;
+  }
+
+  // Outlined and pressed buttons draw a border; the others have none in Figma.
+  .buttonRoot[data-variant='outlined'],
+  .buttonRoot[data-pressed] {
+    border-width: var(--stroke-default);
+  }
+
+  .buttonLabel {
+    padding-inline: var(--button-label-padding);
+  }
+
+  .buttonStartIcon,
+  .buttonEndIcon,
+  .buttonIcon {
+    display: inline-flex;
+    flex: none;
+    inline-size: var(--button-icon-size);
+    block-size: var(--button-icon-size);
+
+    svg {
+      inline-size: 100%;
+      block-size: 100%;
+      fill: currentcolor;
+    }
+  }
+
+  // The Figma focus ring sits 3px outside the button with a 2px stroke, so its outer radius is the
+  // focus radius. The offset is derived from the tokens: focus radius - radius - stroke.
+  .buttonRoot:focus-visible {
+    outline: var(--stroke-focus) solid var(--button-focus);
+    outline-offset: calc(var(--button-radius-focus) - var(--button-radius) - var(--stroke-focus));
+  }
+
+  .buttonRoot[data-inverse] {
+    --button-focus: var(--color-actions-focus-inverse);
+  }
+
+  @each $variant, $colors in $palette {
+    @each $color, $states in $colors {
+      $base: '.buttonRoot[data-variant="#{$variant}"][data-color="#{$color}"]';
+      @include states('#{$base}:not([data-inverse]):not([data-pressed]):not([data-disabled])', $states);
+      @include states('#{$base}[data-inverse]:not([data-pressed]):not([data-disabled])', map.get(map.get($palette-inverse, $variant), $color));
+    }
+
+    $base: '.buttonRoot[data-variant="#{$variant}"]';
+    @include states('#{$base}:not([data-inverse])[data-pressed]:not([data-disabled])', $pressed);
+    @include states('#{$base}[data-inverse][data-pressed]:not([data-disabled])', $pressed-inverse);
+
+    #{$base}:not([data-inverse])[data-disabled]:not([data-pressed]) {
+      @include colors(list.nth(map.get($disabled, $variant), 1));
+    }
+
+    #{$base}:not([data-inverse])[data-disabled][data-pressed] {
+      @include colors(list.nth(map.get($disabled, $variant), 2));
+    }
+
+    #{$base}[data-inverse][data-disabled]:not([data-pressed]) {
+      @include colors(list.nth(map.get($disabled-inverse, $variant), 1));
+    }
+
+    #{$base}[data-inverse][data-disabled][data-pressed] {
+      @include colors(list.nth(map.get($disabled-inverse, $variant), 2));
+    }
+  }
+
+  .buttonRoot[data-disabled] {
+    cursor: default;
+  }
+}
