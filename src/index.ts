@@ -14,6 +14,7 @@
  * ======================================================================== */
 
 // Public entry point.
+export * from './components/AlertDialog';
 export * from './components/Button';
 export * from './components/Dialog';
 export * from './theme';
