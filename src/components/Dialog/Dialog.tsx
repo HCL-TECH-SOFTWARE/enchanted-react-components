@@ -101,6 +101,11 @@ export interface DialogProps extends Omit<ComponentProps<typeof BaseDialog.Root>
   helpLabel?: string;
   /** Class name for the dialog popup. */
   className?: string;
+  /**
+   * Extra props for the Base UI popup element, such as `role`. Used by AlertDialog, which
+   * sets `role="alertdialog"`. `className` has its own prop and is not accepted here.
+   */
+  popupProps?: Omit<ComponentProps<typeof BaseDialog.Popup>, 'className' | 'children'>;
 }
 
 /**
@@ -135,6 +140,7 @@ export const Dialog = ({
   closeLabel = 'Close',
   helpLabel = 'Help',
   className,
+  popupProps,
   ...rootProps
 }: DialogProps) => {
   // Null before the provider has mounted, or without one. Base UI treats an explicit `null` as
@@ -146,6 +152,7 @@ export const Dialog = ({
       <BaseDialog.Portal container={container}>
         <BaseDialog.Backdrop className="dialogBackdrop" />
         <BaseDialog.Popup
+          {...popupProps}
           // React's DOM types have no `part` attribute, so it is passed through a spread.
           {...{ part: 'root' }}
           className={['dialogRoot', className].filter(Boolean).join(' ')}
