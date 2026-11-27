@@ -21,11 +21,23 @@ import { Checkbox } from '../Checkbox';
 import { CheckboxGroup, CheckboxGroupOrientation } from './CheckboxGroup';
 import type { CheckboxGroupProps } from './CheckboxGroup';
 
+/**
+ * Extract enum values from const objects while filtering out Storybook's injected metadata
+ * (`displayName` and `__docgenInfo`).
+ */
+const getEnumValues = <T extends Record<string, string>>(options: T): T[keyof T][] =>
+  Object.entries(options)
+    .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
+    .map(([, value]) => value as T[keyof T]);
+
 const meta = {
   title: 'Components/Inputs/CheckboxGroup',
   component: CheckboxGroup,
   tags: ['autodocs'],
   args: { label: 'Label' },
+  argTypes: {
+    orientation: { control: 'select', options: getEnumValues(CheckboxGroupOrientation) },
+  }
 } satisfies Meta<typeof CheckboxGroup>;
 
 export default meta;
