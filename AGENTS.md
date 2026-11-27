@@ -45,7 +45,7 @@ Report which checks you ran and their results. Never claim a check passed unless
 - Reuse the nearest comparable component as the pattern. Check for existing files and exports before adding any.
 - Do not reformat unrelated code.
 - Document every public API with TSDoc as [docs/COMPONENT-GUIDE.md](docs/COMPONENT-GUIDE.md#code-documentation) requires, and update the comment in the same change that alters the behavior. Inline comments explain why, not what.
-- Write and change stories as [docs/STORYBOOK-GUIDE.md](docs/STORYBOOK-GUIDE.md) defines: `Default` first, one story per variant axis, JSDoc on every story.
+- Write and change stories as [docs/STORYBOOK-GUIDE.md](docs/STORYBOOK-GUIDE.md) defines: `Default` first, one story per variant axis, JSDoc on every story, and `var(--font-family)` for story-owned typography.
 - Before writing or changing tests or variant stories, ask whether the component is approved for testing and wait for the answer; see the approval gate in [docs/TESTING-GUIDE.md](docs/TESTING-GUIDE.md#instructions-for-ai-agents). It wins over any other instruction to add tests.
 - Update documentation and `CHANGELOG.md` when a change warrants it.
 - Before deleting, overwriting, or moving files, or making large multi-file changes, show a plan or diff first.
