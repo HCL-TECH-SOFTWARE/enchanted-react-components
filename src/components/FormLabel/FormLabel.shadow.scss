@@ -1,0 +1,130 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from Figma node 22891:21455 (FormLabel), read per variant, and resolve through the
+// tokens in tokens/. Not confirmed in Figma: the colors of the helper text and the required asterisk
+// (kept at the label color and the secondary text color), the action color in the inverse variants,
+// and the default help icon (the Figma instance is hidden in the variants).
+
+@layer enchanted.components {
+  .formLabelRoot {
+    --form-label-color: var(--color-text-secondary);
+    --form-label-focus: var(--color-brand-default);
+    --form-label-error: var(--color-error-default);
+    --form-label-disabled: var(--color-text-disabled);
+    --form-label-action: var(--color-brand-default);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxxs);
+    min-width: 0;
+    font-family: var(--type-font-family);
+    letter-spacing: var(--type-letter-spacing-default);
+
+    &[data-inverse] {
+      --form-label-color: var(--color-text-secondary-inverse);
+      --form-label-focus: var(--color-brand-inverse);
+      --form-label-error: var(--color-error-inverse);
+      --form-label-disabled: var(--color-text-disabled-inverse);
+      --form-label-action: var(--color-brand-inverse);
+    }
+  }
+
+  .formLabelRow {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+  }
+
+  .formLabelStart {
+    display: flex;
+    flex: 1 1 0;
+    align-items: flex-start;
+    gap: var(--gap-xxs);
+    min-width: 0;
+    padding-inline-end: var(--padding-xxs);
+  }
+
+  .formLabelLabel {
+    margin: 0;
+    color: var(--form-label-color);
+    font-size: var(--type-label-sm-font-size);
+    font-weight: var(--type-label-sm-font-weight);
+    line-height: var(--type-label-sm-line-height);
+    white-space: nowrap;
+  }
+
+  .formLabelRequired {
+    color: inherit;
+  }
+
+  .formLabelHelpIcon,
+  .formLabelErrorIcon {
+    display: flex;
+    flex: none;
+    align-items: center;
+    color: var(--form-label-color);
+  }
+
+  .formLabelIcon {
+    display: block;
+    inline-size: var(--size-icon-sm);
+    block-size: var(--size-icon-sm);
+    fill: currentcolor;
+  }
+
+  .formLabelErrorIcon {
+    padding-inline: var(--padding-sm);
+    color: var(--form-label-error);
+  }
+
+  .formLabelActions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--gap-xxs);
+    color: var(--form-label-action);
+    font-size: var(--type-label-sm-font-size);
+    font-weight: var(--type-label-sm-font-weight);
+    line-height: var(--type-label-sm-line-height);
+  }
+
+  .formLabelHelperText {
+    margin: 0;
+    color: var(--form-label-color);
+    font-size: var(--type-caption-font-size);
+    font-weight: var(--type-caption-font-weight);
+    line-height: var(--type-caption-line-height);
+  }
+
+  // Focus: Base UI marks the label while its control has focus.
+  .formLabelLabel[data-focused] {
+    color: var(--form-label-focus);
+  }
+
+  .formLabelRoot[data-invalid] .formLabelLabel {
+    color: var(--form-label-error);
+  }
+
+  // Disabled comes last so it wins over every other state.
+  .formLabelRoot[data-disabled] {
+    .formLabelLabel,
+    .formLabelHelperText,
+    .formLabelHelpIcon {
+      color: var(--form-label-disabled);
+    }
+  }
+}
