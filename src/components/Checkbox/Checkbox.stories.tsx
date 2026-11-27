@@ -16,6 +16,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 import { useState } from 'react';
+import { ThemeMode } from '../../theme';
 import { Checkbox } from './Checkbox';
 
 const meta = {
@@ -44,13 +45,44 @@ const findCheckbox = async (canvasElement: HTMLElement): Promise<HTMLElement | n
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'flex-start' }}>{children}</div>
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--gap-xxs)', alignItems: 'flex-start' }}>{children}</div>
+);
+
+const renderAllVariants: NonNullable<Story['render']> = (args) => (
+  <div style={{ display: 'grid', gap: 'var(--gap-sm)', fontFamily: 'var(--font-family)' }}>
+    {[false, true].flatMap((invalid) =>
+      [false, true].map((disabled) => (
+        <div key={`${invalid}-${disabled}`}>
+          <Row>
+            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Unchecked" />
+            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Checked" checked />
+            <Checkbox
+              {...args}
+              invalid={invalid}
+              disabled={disabled}
+              errorMessage="Error message"
+              label="Indeterminate"
+              indeterminate
+            />
+            <Checkbox
+              {...args}
+              invalid={invalid}
+              disabled={disabled}
+              errorMessage="Error message"
+              label="Required"
+              required
+            />
+          </Row>
+        </div>
+      )),
+    )}
+  </div>
 );
 
 /** A single labelled option the user can switch on or off. Start here: every other story changes one thing about it. */
 export const Default: Story = {};
 
-/** `checked` on and off. Use `defaultChecked` for an uncontrolled starting value. Figma `checked`. */
+/** Use this comparison when reviewing the selected and unselected appearances. Figma `checked`. */
 export const Checked: Story = {
   render: (args) => (
     <Row>
@@ -60,7 +92,7 @@ export const Checked: Story = {
   ),
 };
 
-/** `indeterminate` marks a parent whose children are partly selected. Figma `indeterminate`. */
+/** Use this comparison for a parent option whose children may be partly selected. Figma `indeterminate`. */
 export const Indeterminate: Story = {
   render: (args) => (
     <Row>
@@ -70,31 +102,28 @@ export const Indeterminate: Story = {
   ),
 };
 
-/** `invalid` switches to error colors and shows the `errorMessage`, in unchecked, checked, and indeterminate states. Figma `invalid`. */
+/** Use this comparison to review validation styling and its error message. Figma `invalid`. */
 export const Invalid: Story = {
-  args: { invalid: true, errorMessage: 'Error message' },
+  args: { errorMessage: 'Error message' },
   render: (args) => (
     <Row>
-      <Checkbox {...args} label="Unchecked" checked={false} />
-      <Checkbox {...args} label="Checked" checked />
-      <Checkbox {...args} label="Indeterminate" indeterminate />
+      <Checkbox {...args} label="Not invalid" invalid={false} />
+      <Checkbox {...args} label="Invalid" invalid />
     </Row>
   ),
 };
 
-/** `disabled` blocks interaction and dims the control and label, in each selection state. Figma `disabled`. */
+/** Use this comparison to review the available and unavailable control states. Figma `disabled`. */
 export const Disabled: Story = {
-  args: { disabled: true },
   render: (args) => (
     <Row>
-      <Checkbox {...args} label="Unchecked" checked={false} />
-      <Checkbox {...args} label="Checked" checked />
-      <Checkbox {...args} label="Indeterminate" indeterminate />
+      <Checkbox {...args} label="Enabled" disabled={false} />
+      <Checkbox {...args} label="Disabled" disabled />
     </Row>
   ),
 };
 
-/** `disablePadding` removes the outer 6px padding for dense layouts such as table cells. Figma `disablePadding`. */
+/** Use this comparison when choosing between standard and dense table-cell layouts. Figma `disablePadding`. */
 export const DisablePadding: Story = {
   render: (args) => (
     <Row>
@@ -104,22 +133,22 @@ export const DisablePadding: Story = {
   ),
 };
 
-/** Supporting text under the label, for context the label alone cannot give. Figma `helperText` and `showHelperText`. */
+/** Use helper text when an option needs context beyond its short label. Figma `helperText` and `showHelperText`. */
 export const WithHelperText: Story = {
   args: { helperText: 'Helper text' },
 };
 
-/** Error text under the label while `invalid`; `showErrorMessage={false}` hides it. Figma `errorMessage` and `showErrorMessage`. */
-export const WithErrorMessage: Story = {
-  args: { invalid: true, errorMessage: 'Error message' },
+/** Suppress the message when invalid styling should remain without inline error copy. Figma `showErrorMessage`. */
+export const WithoutErrorMessage: Story = {
+  args: { invalid: true, errorMessage: 'Error message', showErrorMessage: false },
 };
 
-/** `required` adds the asterisk after the label and marks the input required. Figma `required`. */
+/** Use this when the form must receive a selection before submission. Figma `required`. */
 export const Required: Story = {
   args: { required: true },
 };
 
-/** `showLabel={false}` hides the text; give the control an `aria-label` so it keeps an accessible name. Figma `showLabel`. */
+/** Use a visually hidden label only when another accessible name is provided. Figma `showLabel`. */
 export const WithoutLabel: Story = {
   args: { showLabel: false, 'aria-label': 'Label' },
 };
@@ -135,7 +164,7 @@ export const Focused: Story = {
   },
 };
 
-/** Controlled use: the parent owns `checked` and updates it from `onCheckedChange`. */
+/** Use controlled state when the parent must coordinate this selection with other form state. */
 export const Controlled: Story = {
   args: { onCheckedChange: fn() },
   render: (args) => {
@@ -160,24 +189,19 @@ export const Controlled: Story = {
   },
 };
 
-/**
- * Every combination of selection, `invalid`, and `disabled` for visual regression review. Not documentation:
- * use the axis stories to learn the props. Hover and active are checked by hand with the pointer.
- */
-export const AllVariants: Story = {
+/** Review the full Checkbox state matrix against the light theme during visual regression checks. */
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
   tags: ['visual'],
-  render: (args) => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, max-content)', gap: 16 }}>
-      {[false, true].map((invalid) =>
-        [false, true].map((disabled) => (
-          <div key={`${invalid}-${disabled}`} style={{ display: 'contents' }}>
-            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Unchecked" />
-            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Checked" checked />
-            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Indeterminate" indeterminate />
-            <Checkbox {...args} invalid={invalid} disabled={disabled} errorMessage="Error message" label="Required" required />
-          </div>
-        )),
-      )}
-    </div>
-  ),
+  globals: { theme: ThemeMode.Light },
+  render: renderAllVariants,
 };
+
+/** Review the full Checkbox state matrix against the dark theme during visual regression checks. */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
+  render: renderAllVariants,
+};
+
