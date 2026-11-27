@@ -13,7 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import SearchIcon from '@hcl-software/enchanted-icons-react/carbon/es/search';
@@ -38,38 +38,6 @@ const Row = ({ children }: { children: ReactNode }) => (
     {children}
   </div>
 );
-
-/**
- * Paints the dark inverse canvas behind the Inverse story. In the canvas it fills the whole preview page;
- * in the docs page it only fills a box around the story, so the other stories stay on the normal page.
- * The token is the same near-black in light and dark mode, so the story reads in both.
- */
-const InverseBackground = ({ fullPage, children }: { fullPage: boolean; children: ReactNode }) => {
-  // No dependency list on purpose: the preview repaints `body` when the theme changes, so this reapplies after it.
-  useEffect(() => {
-    if (!fullPage) return undefined;
-    const { body } = document;
-    const previous = body.style.background;
-    body.style.background = 'var(--color-background-canvas-inverse)';
-    return () => {
-      body.style.background = previous;
-    };
-  });
-  return fullPage ? (
-    <>{children}</>
-  ) : (
-    <div
-      style={{
-        display: 'inline-flex',
-        padding: 'calc(var(--padding-sm) * 3)',
-        borderRadius: 'var(--corner-radius-md)',
-        background: 'var(--color-background-canvas-inverse)',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
 
 const meta = {
   title: 'Components/Inputs/TextField',
@@ -140,18 +108,6 @@ export const ReadOnly: Story = { args: { readOnly: true, defaultValue: 'Input te
 
 /** `required` adds the asterisk after the label and marks the input required. */
 export const Required: Story = { args: { required: true } };
-
-/** Use `inverse` on a dark or colored background, where the default colors would not stay readable. Figma `inverse`. */
-export const Inverse: Story = {
-  args: { inverse: true, helperText: 'This is a helper text.' },
-  decorators: [
-    (Story, { viewMode }) => (
-      <InverseBackground fullPage={viewMode === 'story'}>
-        <Story />
-      </InverseBackground>
-    ),
-  ],
-};
 
 /** Supporting text under the field, for context the label alone cannot give. Figma `helperText`. */
 export const WithHelperText: Story = { args: { helperText: 'This is a helper text.' } };

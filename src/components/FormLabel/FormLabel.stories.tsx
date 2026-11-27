@@ -13,7 +13,6 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Field } from '@base-ui/react/field';
@@ -25,38 +24,6 @@ const Row = ({ children }: { children: ReactNode }) => (
     {children}
   </div>
 );
-
-/**
- * Paints the dark inverse canvas behind the Inverse story. In the canvas it fills the whole preview page;
- * in the docs page it only fills a box around the story, so the other stories stay on the normal page.
- * The token is the same near-black in light and dark mode, so the story reads in both.
- */
-const InverseBackground = ({ fullPage, children }: { fullPage: boolean; children: ReactNode }) => {
-  // No dependency list on purpose: the preview repaints `body` when the theme changes, so this reapplies after it.
-  useEffect(() => {
-    if (!fullPage) return undefined;
-    const { body } = document;
-    const previous = body.style.background;
-    body.style.background = 'var(--color-background-canvas-inverse)';
-    return () => {
-      body.style.background = previous;
-    };
-  });
-  return fullPage ? (
-    <>{children}</>
-  ) : (
-    <div
-      style={{
-        display: 'inline-flex',
-        padding: 'calc(var(--padding-sm) * 3)',
-        borderRadius: 'var(--corner-radius-md)',
-        background: 'var(--color-background-canvas-inverse)',
-      }}
-    >
-      {children}
-    </div>
-  );
-};
 
 const meta = {
   title: 'Components/Inputs/FormLabel',
@@ -92,18 +59,6 @@ export const Invalid: Story = { args: { invalid: true, showErrorIcon: true } };
 
 /** `disabled` dims the label and helper text. Figma `disabled`. */
 export const Disabled: Story = { args: { disabled: true, helperText: 'Helper text' } };
-
-/** Use `inverse` on a dark or colored background, where the default colors would not stay readable. Figma `inverse`. */
-export const Inverse: Story = {
-  args: { inverse: true, helperText: 'Helper text' },
-  decorators: [
-    (Story, { viewMode }) => (
-      <InverseBackground fullPage={viewMode === 'story'}>
-        <Story />
-      </InverseBackground>
-    ),
-  ],
-};
 
 /** Supporting text under the label, for context the label alone cannot give. Figma `helperText`. */
 export const WithHelperText: Story = { args: { helperText: 'Helper text' } };
