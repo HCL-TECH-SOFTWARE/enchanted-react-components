@@ -204,7 +204,7 @@ export const Select = ({
       data-inverse={inverse ? '' : undefined}
       data-read-only={readOnly ? '' : undefined}
     >
-      <BaseSelect.Root {...props} items={options} disabled={disabled} readOnly={readOnly} required={required}>
+      <BaseSelect.Root {...props} items={options} disabled={disabled || readOnly} required={required}>
         {hasLabel && (
           <FormLabel
             {...labelProps}
