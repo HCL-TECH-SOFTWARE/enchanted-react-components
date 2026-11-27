@@ -4,15 +4,24 @@ import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';
 import ArrowRightIcon from '@hcl-software/enchanted-icons-react/carbon/es/arrow--right';
 import { Button, ButtonColor, ButtonSize, ButtonVariant } from './Button';
 
+/**
+ * Extract enum values from const objects while filtering out Storybook's injected metadata
+ * (`displayName` and `__docgenInfo`).
+ */
+const getEnumValues = <T extends Record<string, string>>(options: T): T[keyof T][] =>
+  Object.entries(options)
+    .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
+    .map(([, value]) => value as T[keyof T]);
+
 const meta = {
   title: 'Components/Inputs/Button',
   component: Button,
   tags: ['autodocs'],
   args: { children: 'Button' },
   argTypes: {
-    variant: { control: 'select', options: Object.values(ButtonVariant) },
-    color: { control: 'select', options: Object.values(ButtonColor) },
-    size: { control: 'select', options: Object.values(ButtonSize) },
+    variant: { control: 'select', options: getEnumValues(ButtonVariant) },
+    color: { control: 'select', options: getEnumValues(ButtonColor) },
+    size: { control: 'select', options: getEnumValues(ButtonSize) },
     icon: { control: false },
     startIcon: { control: false },
     endIcon: { control: false },
@@ -30,7 +39,7 @@ export const Default: Story = {};
 export const Variants: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'calc(var(--padding-sm) * 2)' }}>
-      {Object.values(ButtonVariant).map((variant) => (
+      {getEnumValues(ButtonVariant).map((variant) => (
         <Button key={variant} {...args} variant={variant}>
           {variant}
         </Button>
@@ -43,7 +52,7 @@ export const Variants: Story = {
 export const Colors: Story = {
   render: (args) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'calc(var(--padding-sm) * 2)' }}>
-      {Object.values(ButtonColor).map((color) => (
+      {getEnumValues(ButtonColor).map((color) => (
         <Button key={color} {...args} color={color}>
           {color}
         </Button>
@@ -60,7 +69,7 @@ export const Sizes: Story = {
   args: { variant: ButtonVariant.Text },
   render: (args) => (
     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 'calc(var(--padding-sm) * 2)' }}>
-      {Object.values(ButtonSize).map((size) => (
+      {getEnumValues(ButtonSize).map((size) => (
         <Button key={size} {...args} size={size}>
           {size}
         </Button>
@@ -92,10 +101,10 @@ export const WithEndIcon: Story = { args: { endIcon: <ArrowRightIcon /> } };
 export const AllVariants: Story = {
   tags: ['visual'],
   render: (args) => {
-    const sizes = Object.values(ButtonSize);
+    const sizes = getEnumValues(ButtonSize);
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
-        {Object.values(ButtonVariant).map((variant) => (
+        {getEnumValues(ButtonVariant).map((variant) => (
           <div
             key={variant}
             style={{
@@ -110,7 +119,7 @@ export const AllVariants: Story = {
             {sizes.map((size) => (
               <span key={size}>{size}</span>
             ))}
-            {Object.values(ButtonColor).map((color) => (
+            {getEnumValues(ButtonColor).map((color) => (
               <Fragment key={color}>
                 <span>{color}</span>
                 {sizes.map((size) =>
@@ -147,7 +156,7 @@ export const AllIconButtonVariants: Story = {
     const sizes = [ButtonSize.Medium, ButtonSize.Small];
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
-        {Object.values(ButtonVariant).map((variant) => (
+        {getEnumValues(ButtonVariant).map((variant) => (
           <div
             key={variant}
             style={{
@@ -162,7 +171,7 @@ export const AllIconButtonVariants: Story = {
             {sizes.map((size) => (
               <span key={size}>{size}</span>
             ))}
-            {Object.values(ButtonColor).map((color) => (
+            {getEnumValues(ButtonColor).map((color) => (
               <Fragment key={color}>
                 <span>{color}</span>
                 {sizes.map((size) => (
