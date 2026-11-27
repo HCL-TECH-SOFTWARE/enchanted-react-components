@@ -16,6 +16,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import { useState } from 'react';
+import { ThemeMode } from '../../theme';
 import { Checkbox } from '../Checkbox';
 import { CheckboxGroup, CheckboxGroupOrientation } from './CheckboxGroup';
 import type { CheckboxGroupProps } from './CheckboxGroup';
@@ -44,6 +45,32 @@ const renderGroup: Story['render'] = (args) => (
   <CheckboxGroup {...args}>
     <Options invalid={args.invalid} />
   </CheckboxGroup>
+);
+
+const renderAllVariants: NonNullable<Story['render']> = (args) => (
+  <div style={{ display: 'grid', gap: 'var(--gap-sm)', fontFamily: 'var(--font-family)' }}>
+    {Object.values(CheckboxGroupOrientation).flatMap((orientation) =>
+      [false, true].flatMap((disabled) =>
+        [false, true].map((invalid) => (
+          <div key={`${orientation}-${disabled}-${invalid}`}>
+            <div>
+              {orientation} / {disabled ? 'Disabled' : 'Enabled'} / {invalid ? 'Invalid' : 'Valid'}
+            </div>
+            <CheckboxGroup
+              {...args}
+              orientation={orientation}
+              disabled={disabled}
+              invalid={invalid}
+              errorMessage="Error message"
+              value={['2', '4']}
+            >
+              <Options invalid={invalid} />
+            </CheckboxGroup>
+          </div>
+        )),
+      ),
+    )}
+  </div>
 );
 
 /** A labelled group of four options. Start here: every other story changes one thing about it. */
@@ -161,4 +188,20 @@ export const Controlled: Story = {
       </CheckboxGroup>
     );
   },
+};
+
+/** Review the full CheckboxGroup state matrix against the light theme during visual regression checks. */
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Light },
+  render: renderAllVariants,
+};
+
+/** Review the full CheckboxGroup state matrix against the dark theme during visual regression checks. */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
+  render: renderAllVariants,
 };
