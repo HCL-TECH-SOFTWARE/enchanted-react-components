@@ -1,0 +1,311 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from Figma node 29412:27437 (Select), the Menu (1343:550541) and ListItem (1341:549439)
+// it uses as its popup, read per variant and state, and resolve through the tokens in tokens/.
+// Not styled for lack of a token: the popup elevation (Figma `Shadows/shadows.6`), because the token
+// build has no DTCG `shadow` type. Not confirmed in Figma, so inferred: the error message styling
+// (taken from TextField), the popup colors in the inverse variants (Figma keeps them light), and
+// the selected-option look (Figma shows no checkmark column in the Select menu).
+//
+// The border is an inset box-shadow, like a Figma inside stroke, so toggling the 2px focus stroke
+// does not move the content.
+
+@layer enchanted.components {
+  .selectRoot {
+    // Colors, by theme variant. The state rules below only pick from these.
+    --select-bg: var(--color-background-primary);
+    --select-border: var(--color-border-primary);
+    --select-border-hover: var(--color-border-primary-hover);
+    --select-focus: var(--color-actions-focus);
+    --select-focus-error: var(--color-actions-focus-error);
+    --select-value: var(--color-text-primary);
+    --select-hint: var(--color-text-hint);
+    --select-secondary: var(--color-text-secondary);
+    --select-disabled: var(--color-text-disabled);
+    --select-disabled-bg: var(--color-actions-disabled-background);
+    --select-error: var(--color-error-default);
+    --select-error-hover: var(--color-error-hover);
+    --select-caret: var(--color-actions-default);
+
+    // Dimensions, by size.
+    --select-min-height: var(--size-control-md);
+    --select-radius: var(--corner-radius-md);
+    --select-padding-block: var(--padding-xs);
+    --select-padding-inline: var(--padding-md);
+    --select-gap: var(--gap-sm);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    min-width: 0;
+    font-family: var(--type-font-family);
+    letter-spacing: var(--type-letter-spacing-default);
+
+    &[data-inverse] {
+      --select-bg: var(--color-background-primary-inverse);
+      --select-border: var(--color-border-inverse-primary);
+      --select-border-hover: var(--color-border-inverse-primary-hover);
+      --select-focus: var(--color-actions-focus-inverse);
+      --select-focus-error: var(--color-actions-focus-error-inverse);
+      --select-value: var(--color-text-primary-inverse);
+      --select-hint: var(--color-text-hint-inverse);
+      --select-secondary: var(--color-text-secondary-inverse);
+      --select-disabled: var(--color-text-disabled-inverse);
+      --select-disabled-bg: var(--color-actions-disabled-background-inverse);
+      --select-error: var(--color-error-inverse);
+      --select-error-hover: var(--color-error-hover-inverse);
+      --select-caret: var(--color-actions-default-inverse);
+    }
+
+    &[data-size='small'] {
+      --select-min-height: var(--size-control-sm);
+      --select-radius: var(--corner-radius-sm);
+      --select-padding-block: var(--padding-none);
+      --select-padding-inline: var(--padding-xs);
+      --select-gap: var(--gap-xxxs);
+    }
+  }
+
+  .selectTrigger {
+    --select-ring: var(--stroke-default);
+    --select-ring-color: var(--select-border);
+
+    display: flex;
+    align-items: center;
+    gap: var(--select-gap);
+    box-sizing: border-box;
+    inline-size: 100%;
+    min-block-size: var(--select-min-height);
+    margin: 0;
+    padding: var(--select-padding-block) var(--select-padding-inline);
+    border: 0;
+    border-radius: var(--select-radius);
+    outline: 0;
+    background-color: var(--select-bg);
+    box-shadow: inset 0 0 0 var(--select-ring) var(--select-ring-color);
+    color: var(--select-value);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+
+    &:hover {
+      --select-ring-color: var(--select-border-hover);
+    }
+
+    // Focus and an open popup share the 2px stroke in the focus color.
+    &:focus-visible,
+    &[data-popup-open] {
+      --select-ring: var(--stroke-focus);
+      --select-ring-color: var(--select-focus);
+    }
+  }
+
+  .selectValue {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    overflow: hidden;
+    color: var(--select-value);
+    font-size: var(--type-body-md-font-size);
+    font-weight: var(--type-body-md-font-weight);
+    line-height: var(--type-body-md-line-height);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &[data-placeholder] {
+      color: var(--select-hint);
+      font-style: italic;
+    }
+  }
+
+  .selectIcon {
+    display: block;
+    fill: currentcolor;
+  }
+
+  .selectErrorIcon {
+    display: flex;
+    flex: none;
+    padding: var(--padding-xxxs);
+    color: var(--select-error);
+
+    .selectIcon {
+      inline-size: var(--size-icon-md);
+      block-size: var(--size-icon-md);
+    }
+  }
+
+  .selectCaret {
+    display: flex;
+    flex: none;
+    align-items: center;
+    padding: var(--padding-xxs);
+    color: var(--select-caret);
+
+    .selectIcon {
+      inline-size: var(--size-icon-sm);
+      block-size: var(--size-icon-sm);
+    }
+  }
+
+  // The caret points up while the popup is open.
+  .selectCaretUp,
+  .selectTrigger[data-popup-open] .selectCaretDown {
+    display: none;
+  }
+
+  .selectTrigger[data-popup-open] .selectCaretUp {
+    display: block;
+  }
+
+  .selectHelperText,
+  .selectErrorMessage {
+    margin: 0;
+    font-size: var(--type-caption-font-size);
+    font-weight: var(--type-caption-font-weight);
+    line-height: var(--type-caption-line-height);
+  }
+
+  .selectHelperText {
+    color: var(--select-secondary);
+  }
+
+  .selectErrorMessage {
+    color: var(--select-error);
+  }
+
+  // Invalid: error stroke, with its own hover and focus colors.
+  .selectRoot[data-invalid] .selectTrigger {
+    --select-ring-color: var(--select-error);
+
+    &:hover {
+      --select-ring-color: var(--select-error-hover);
+    }
+
+    &:focus-visible,
+    &[data-popup-open] {
+      --select-ring-color: var(--select-focus-error);
+    }
+  }
+
+  // Read only: no fill or stroke, no padding, flush to the label, and no caret.
+  .selectRoot[data-read-only] .selectTrigger {
+    --select-ring-color: transparent;
+
+    min-block-size: 0;
+    padding: var(--padding-none);
+    background-color: transparent;
+    cursor: default;
+
+    &:hover,
+    &:focus-visible {
+      --select-ring: var(--stroke-default);
+      --select-ring-color: transparent;
+    }
+
+    .selectValue {
+      padding: var(--padding-none);
+    }
+  }
+
+  // Disabled comes last so it wins over every other state: grey fill, no stroke, disabled text.
+  .selectRoot[data-disabled] {
+    .selectTrigger {
+      --select-ring-color: transparent;
+
+      background-color: var(--select-disabled-bg);
+      cursor: not-allowed;
+
+      &:hover {
+        --select-ring-color: transparent;
+      }
+    }
+
+    .selectValue,
+    .selectValue[data-placeholder],
+    .selectHelperText,
+    .selectCaret {
+      color: var(--select-disabled);
+    }
+  }
+
+  // The popup is portaled to the end of the boundary, outside `.selectRoot`, so it sets its own values.
+  // It keeps the normal (light) colors in every variant, as in Figma.
+  .selectPopup {
+    --select-item-padding-block: var(--padding-xs);
+    --select-item-font-size: var(--type-body-md-font-size);
+    --select-item-line-height: var(--type-body-md-line-height);
+
+    box-sizing: border-box;
+    min-inline-size: var(--anchor-width);
+    padding: var(--padding-xxs) var(--padding-none);
+    border-radius: var(--corner-radius-lg);
+    background-color: var(--color-background-primary);
+    color: var(--color-text-primary);
+    font-family: var(--type-font-family);
+    letter-spacing: var(--type-letter-spacing-default);
+
+    &[data-size='small'] {
+      --select-item-font-size: var(--type-body-sm-font-size);
+      --select-item-line-height: var(--type-body-sm-line-height);
+    }
+  }
+
+  .selectList {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: var(--padding-none);
+  }
+
+  .selectItem {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    padding: var(--select-item-padding-block) var(--padding-md);
+    outline: 0;
+    color: var(--color-text-primary);
+    font-size: var(--select-item-font-size);
+    line-height: var(--select-item-line-height);
+    cursor: pointer;
+    user-select: none;
+
+    // Hover and keyboard highlight share `data-highlighted`.
+    &[data-highlighted] {
+      background-color: var(--color-actions-hover-opacity);
+    }
+
+    &:active {
+      background-color: var(--color-actions-active-opacity);
+    }
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 var(--stroke-focus) var(--color-actions-focus);
+    }
+
+    &[data-disabled] {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  .selectItemText {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--padding-xxxxs) var(--padding-none);
+  }
+}

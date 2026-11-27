@@ -2221,6 +2221,13 @@
         "value": 8,
         "unit": "px"
       }
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      }
     }
   },
   "padding": {
@@ -2288,6 +2295,13 @@
         "value": 6,
         "unit": "px"
       }
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      }
     }
   },
   "stroke": {
@@ -2334,6 +2348,26 @@
         "$type": "dimension",
         "$value": {
           "value": 22,
+          "unit": "px"
+        }
+      }
+    },
+    "bodySm": {
+      "fontSize": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "fontWeight": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "lineHeight": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
           "unit": "px"
         }
       }

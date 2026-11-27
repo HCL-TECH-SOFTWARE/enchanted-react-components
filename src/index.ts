@@ -16,4 +16,5 @@
 // Public entry point.
 export * from './theme';
 export * from './components/FormLabel';
+export * from './components/Select';
 export * from './components/TextField';
