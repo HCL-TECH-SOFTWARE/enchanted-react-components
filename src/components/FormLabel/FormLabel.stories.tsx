@@ -16,6 +16,7 @@
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Field } from '@base-ui/react/field';
+import { ThemeMode } from '../../theme/ThemeProvider';
 import { FormLabel } from './FormLabel';
 
 /** Lays labels out in a wrapping row with space between them. */
@@ -87,31 +88,38 @@ export const WithControl: Story = {
   ],
 };
 
-/**
- * Every state and option in the default and inverse colors, for visual regression review. Not
- * documentation: learn from the stories above. The focus color is checked by hand in `WithControl`.
- */
-export const AllVariants: Story = {
+/** Every state and option in the light theme, for visual regression review. */
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
   tags: ['visual'],
-  render: (args) => {
-    const all = (inverse: boolean) => (
-      <Row>
-        <FormLabel {...args} inverse={inverse} />
-        <FormLabel {...args} inverse={inverse} required />
-        <FormLabel {...args} inverse={inverse} invalid showErrorIcon />
-        <FormLabel {...args} inverse={inverse} disabled helperText="Helper text" />
-        <FormLabel {...args} inverse={inverse} helperText="Helper text" />
-        <FormLabel {...args} inverse={inverse} showHelpIcon />
-        <FormLabel {...args} inverse={inverse} showActionButton actions={<span>Action</span>} />
-      </Row>
-    );
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
-        {all(false)}
-        <div style={{ padding: 'calc(var(--padding-sm) * 3)', background: 'var(--color-background-canvas-inverse)' }}>
-          {all(true)}
-        </div>
-      </div>
-    );
-  },
+  globals: { theme: ThemeMode.Light },
+  render: (args) => (
+    <Row>
+      <FormLabel {...args} />
+      <FormLabel {...args} required />
+      <FormLabel {...args} invalid showErrorIcon />
+      <FormLabel {...args} disabled helperText="Helper text" />
+      <FormLabel {...args} helperText="Helper text" />
+      <FormLabel {...args} showHelpIcon />
+      <FormLabel {...args} showActionButton actions={<span>Action</span>} />
+    </Row>
+  ),
+};
+
+/** Every state and option in the dark theme, for visual regression review. */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
+  render: (args) => (
+    <Row>
+      <FormLabel {...args} />
+      <FormLabel {...args} required />
+      <FormLabel {...args} invalid showErrorIcon />
+      <FormLabel {...args} disabled helperText="Helper text" />
+      <FormLabel {...args} helperText="Helper text" />
+      <FormLabel {...args} showHelpIcon />
+      <FormLabel {...args} showActionButton actions={<span>Action</span>} />
+    </Row>
+  ),
 };

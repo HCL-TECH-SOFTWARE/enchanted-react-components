@@ -17,6 +17,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import SearchIcon from '@hcl-software/enchanted-icons-react/carbon/es/search';
+import { ThemeMode } from '../../theme/ThemeProvider';
 import { TextField, TextFieldSize } from './TextField';
 import type { TextFieldProps } from './TextField';
 
@@ -152,7 +153,7 @@ const columns: Array<{ name: string; props: Partial<TextFieldProps> }> = [
   { name: 'Small multiline', props: { size: TextFieldSize.Small, multiline: true } },
 ];
 
-const Matrix = ({ inverse, args }: { inverse: boolean; args: Partial<TextFieldProps> }) => (
+const Matrix = ({ args }: { args: Partial<TextFieldProps> }) => (
   <div
     style={{
       display: 'grid',
@@ -167,7 +168,6 @@ const Matrix = ({ inverse, args }: { inverse: boolean; args: Partial<TextFieldPr
           {...args}
           {...column.props}
           {...state.props}
-          inverse={inverse}
           label={`${state.name}, ${column.name}`}
         />
       )),
@@ -175,18 +175,18 @@ const Matrix = ({ inverse, args }: { inverse: boolean; args: Partial<TextFieldPr
   </div>
 );
 
-/**
- * Every state, size and line mode, in the default and inverse colors, for visual regression review. Not
- * documentation: learn from the stories above. Hover and focus are checked by hand with the pointer and keyboard.
- */
-export const AllVariants: Story = {
+/** Every state, size and line mode in the light theme, for visual regression review. */
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
   tags: ['visual'],
-  render: (args) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
-      <Matrix inverse={false} args={args} />
-      <div style={{ padding: 'calc(var(--padding-sm) * 3)', background: 'var(--color-background-canvas-inverse)' }}>
-        <Matrix inverse args={args} />
-      </div>
-    </div>
-  ),
+  globals: { theme: ThemeMode.Light },
+  render: (args) => <Matrix args={args} />,
+};
+
+/** Every state, size and line mode in the dark theme, for visual regression review. */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
+  render: (args) => <Matrix args={args} />,
 };

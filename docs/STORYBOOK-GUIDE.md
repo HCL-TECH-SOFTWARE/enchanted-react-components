@@ -92,7 +92,7 @@ Keep this order. Storybook's manifest shows the first three stories in full, so 
 | 1 | `Default` | Always | The smallest, most common use. Contains no non-default props unless the component requires them. |
 | 2 | One story per axis | One for every VARIANT property of the Figma component that is a prop | Renders every value of one axis side by side. Named after the axis, such as `Variants`, `Colors`, `Sizes`. |
 | 3 | Use-case stories | One for each distinct use or behavior | Named for the intent: `WithIcons`, `WithHelperText`, `Selected`, `Disabled`, `Controlled`. |
-| Last | `AllVariants` | Optional | A matrix of every combination for visual regression. See below. |
+| Last | `AllVariants-Light`, `AllVariants-Dark` | Optional | A visual-regression matrix preconfigured for each theme. Set the story-level `globals.theme` to `ThemeMode.Light` or `ThemeMode.Dark`. See below. |
 
 ### Axis stories
 
@@ -106,13 +106,14 @@ Keep this order. Storybook's manifest shows the first three stories in full, so 
 - Name the intent, not the prop: `WithStartIcon`, not `StartIconTrue`.
 - Include the story only if it shows something the axis stories do not, such as slots, content, or behavior.
 - Add a `play` function for behavior (selection, typing, opening, keyboard use), and assert with accessible queries.
-- Do not create standalone `Inverse` or `InverseOnDark` stories. When a component supports inverse colors, cover them in its `AllVariants` visual matrix where applicable.
+- Do not create standalone `Inverse` or `InverseOnDark` stories, or duplicate the full `AllVariants` matrix in inverse colors.
 
 ### The matrix story
 
-- `AllVariants` exists for visual regression review in Chromatic. It is not documentation: it has no explanation per variant and is too large to learn from.
-- Give it the tag `visual` so tooling can filter it, and place it last.
-- Skip it for components with only a few variants. The axis stories already cover them.
+- `AllVariants-Light` and `AllVariants-Dark` exist for visual regression review in Chromatic. They are not documentation: they have no explanation per variant and are too large to learn from.
+- Give both stories the tag `visual` so tooling can filter them, and place them last.
+- Set each story's `globals.theme` so its snapshot always uses the named theme.
+- Skip these stories for components with only a few variants. The axis stories already cover them.
 
 ## Writing Good Descriptions
 
