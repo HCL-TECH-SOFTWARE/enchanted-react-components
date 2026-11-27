@@ -13,5 +13,8 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// Public entry point. No components are exported yet; only the shared theme infrastructure.
+// Public entry point.
 export * from './theme';
+export * from './components/FormLabel';
+export * from './components/Select';
+export * from './components/TextField';

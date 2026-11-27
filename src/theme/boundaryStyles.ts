@@ -13,9 +13,13 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import selectStyles from '../components/Select/Select.shadow.scss?inline';
+import formLabelStyles from '../components/FormLabel/FormLabel.shadow.scss?inline';
+import textFieldStyles from '../components/TextField/TextField.shadow.scss?inline';
+
 // One `import x from '../components/<Component>/<Component>.shadow.scss?inline'` per component
-// that has styles, concatenated below. No component has styles yet.
-const componentStyles: string[] = [];
+// that has styles, concatenated below.
+const componentStyles: string[] = [formLabelStyles, selectStyles, textFieldStyles];
 
 /** The concatenated CSS of every component, injected by `ThemeProvider`. */
 export const boundaryStyles = componentStyles.join('\n');

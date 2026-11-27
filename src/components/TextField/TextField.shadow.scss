@@ -1,0 +1,298 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from Figma node 1418:23335 (TextField), read per variant and state, and resolve
+// through the tokens in tokens/. Not confirmed in Figma, so inferred from the variant screenshots:
+// the label color in the invalid + focus state (kept at the error color) and the error icon color
+// when disabled (kept at the error color). `font-style: italic` for the placeholder has no DTCG
+// token type (Figma `type/body-md/font-style-italic`), so it is a keyword here.
+//
+// The border is an inset box-shadow, like a Figma inside stroke, so toggling the 2px focus stroke
+// does not move the content.
+
+@layer enchanted.components {
+  .textFieldRoot {
+    // Colors, by theme variant. The state rules below only pick from these.
+    --text-field-bg: var(--color-background-primary);
+    --text-field-border: var(--color-border-primary);
+    --text-field-border-hover: var(--color-border-primary-hover);
+    --text-field-focus: var(--color-actions-focus);
+    --text-field-focus-error: var(--color-actions-focus-error);
+    --text-field-value: var(--color-text-primary);
+    --text-field-hint: var(--color-text-hint);
+    --text-field-secondary: var(--color-text-secondary);
+    --text-field-disabled: var(--color-text-disabled);
+    --text-field-disabled-bg: var(--color-actions-disabled-background);
+    --text-field-error: var(--color-error-default);
+    --text-field-error-hover: var(--color-error-hover);
+    --text-field-adornment: var(--color-actions-default);
+
+    // Dimensions, by size.
+    --text-field-min-height: var(--size-control-md);
+    --text-field-radius: var(--corner-radius-md);
+    --text-field-padding-block: var(--padding-xs);
+    --text-field-padding-inline: var(--padding-md);
+    --text-field-gap: var(--gap-sm);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+    min-width: 0;
+    font-family: var(--type-font-family);
+    letter-spacing: var(--type-letter-spacing-default);
+
+    &[data-inverse] {
+      --text-field-bg: var(--color-background-primary-inverse);
+      --text-field-border: var(--color-border-inverse-primary);
+      --text-field-border-hover: var(--color-border-inverse-primary-hover);
+      --text-field-focus: var(--color-actions-focus-inverse);
+      --text-field-focus-error: var(--color-actions-focus-error-inverse);
+      --text-field-value: var(--color-text-primary-inverse);
+      --text-field-hint: var(--color-text-hint-inverse);
+      --text-field-secondary: var(--color-text-secondary-inverse);
+      --text-field-disabled: var(--color-text-disabled-inverse);
+      --text-field-disabled-bg: var(--color-actions-disabled-background-inverse);
+      --text-field-error: var(--color-error-inverse);
+      --text-field-error-hover: var(--color-error-hover-inverse);
+      --text-field-adornment: var(--color-actions-default-inverse);
+    }
+
+    &[data-size='small'] {
+      --text-field-min-height: var(--size-control-sm);
+      --text-field-radius: var(--corner-radius-sm);
+      --text-field-padding-block: var(--padding-none);
+      --text-field-padding-inline: var(--padding-xs);
+      --text-field-gap: var(--gap-xxxs);
+    }
+  }
+
+  .textFieldInput {
+    --text-field-ring: var(--stroke-default);
+    --text-field-ring-color: var(--text-field-border);
+
+    position: relative;
+    display: flex;
+    // Never grows: a stretched parent (such as a grid row) would otherwise make a small field as tall as its neighbor.
+    flex: 0 0 auto;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: var(--text-field-min-height);
+    border-radius: var(--text-field-radius);
+    background-color: var(--text-field-bg);
+    box-shadow: inset 0 0 0 var(--text-field-ring) var(--text-field-ring-color);
+    cursor: text;
+
+    &:hover {
+      --text-field-ring-color: var(--text-field-border-hover);
+    }
+  }
+
+  .textFieldContent {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: flex-start;
+    gap: var(--text-field-gap);
+    padding: var(--text-field-padding-block) var(--text-field-padding-inline);
+  }
+
+  .textFieldControl {
+    flex: 1 1 0;
+    box-sizing: border-box;
+    min-width: 0;
+    margin: 0;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text-field-value);
+    font-family: inherit;
+    font-size: var(--type-body-md-font-size);
+    font-weight: var(--type-body-md-font-weight);
+    line-height: var(--type-body-md-line-height);
+    letter-spacing: inherit;
+    resize: none;
+
+    &::placeholder {
+      color: var(--text-field-hint);
+      font-style: italic;
+      opacity: 1;
+    }
+  }
+
+  .textFieldRoot[data-drag-handle] .textFieldControl {
+    resize: vertical;
+  }
+
+  .textFieldUnit {
+    flex: none;
+    padding: var(--padding-xxxxs) var(--padding-none);
+    color: var(--text-field-secondary);
+    font-size: var(--type-body-md-font-size);
+    font-weight: var(--type-body-md-font-weight);
+    line-height: var(--type-body-md-line-height);
+  }
+
+  .textFieldIcon {
+    display: block;
+    fill: currentcolor;
+  }
+
+  .textFieldErrorIcon {
+    display: flex;
+    flex: none;
+    padding: var(--padding-xxxs);
+    color: var(--text-field-error);
+
+    .textFieldIcon {
+      inline-size: var(--size-icon-md);
+      block-size: var(--size-icon-md);
+    }
+  }
+
+  // The Figma slot is a 24px square (a small text button) holding a 16px icon, centered in the 24px row.
+  // A bare icon passed as the adornment gets the same size and color; other content keeps its own.
+  .textFieldEndAdornment {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--size-control-sm);
+    min-block-size: var(--size-control-sm);
+    color: var(--text-field-adornment);
+
+    > svg {
+      inline-size: var(--size-icon-sm);
+      block-size: var(--size-icon-sm);
+      fill: currentcolor;
+    }
+  }
+
+  // Shown only while the field is focused and has a value (Figma: focus + filled).
+  .textFieldClear {
+    display: none;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-inline-size: var(--size-control-sm);
+    min-block-size: var(--size-control-sm);
+    margin: 0;
+    padding: var(--padding-none) var(--padding-xxs);
+    border: 0;
+    border-radius: var(--corner-radius-sm);
+    background: transparent;
+    color: var(--text-field-adornment);
+    cursor: pointer;
+
+    .textFieldIcon {
+      inline-size: var(--size-icon-sm);
+      block-size: var(--size-icon-sm);
+    }
+  }
+
+  .textFieldRoot[data-focused][data-filled] .textFieldClear {
+    display: inline-flex;
+  }
+
+  // Both render as `<p>`, whose default margin would push them away from the field.
+  .textFieldHelperText,
+  .textFieldErrorMessage {
+    margin: 0;
+    font-size: var(--type-caption-font-size);
+    font-weight: var(--type-caption-font-weight);
+    line-height: var(--type-caption-line-height);
+  }
+
+  .textFieldHelperText {
+    color: var(--text-field-secondary);
+  }
+
+  .textFieldErrorMessage {
+    color: var(--text-field-error);
+  }
+
+  // Focus: the 2px stroke replaces the 1px one in place.
+  .textFieldRoot[data-focused] {
+    .textFieldInput {
+      --text-field-ring: var(--stroke-focus);
+      --text-field-ring-color: var(--text-field-focus);
+    }
+  }
+
+  // Invalid: error stroke and label, with its own hover and focus colors.
+  .textFieldRoot[data-invalid] {
+    .textFieldInput {
+      --text-field-ring-color: var(--text-field-error);
+
+      &:hover {
+        --text-field-ring-color: var(--text-field-error-hover);
+      }
+    }
+
+    &[data-focused] .textFieldInput {
+      --text-field-ring-color: var(--text-field-focus-error);
+    }
+  }
+
+  // Read only: no fill or stroke, flush to the label, at the small control height.
+  .textFieldRoot[data-read-only] {
+    .textFieldInput {
+      --text-field-ring: var(--stroke-default);
+      --text-field-ring-color: transparent;
+
+      min-height: var(--size-control-sm);
+      background-color: transparent;
+      cursor: default;
+
+      &:hover {
+        --text-field-ring-color: transparent;
+      }
+    }
+
+    .textFieldContent {
+      padding: var(--padding-none) var(--padding-sm) var(--padding-none) var(--padding-none);
+    }
+
+    &[data-focused] .textFieldInput {
+      --text-field-ring: var(--stroke-default);
+      --text-field-ring-color: transparent;
+    }
+  }
+
+  // Disabled comes last so it wins over every other state: grey fill, no stroke, disabled text.
+  .textFieldRoot[data-disabled] {
+    .textFieldInput {
+      --text-field-ring-color: transparent;
+
+      background-color: var(--text-field-disabled-bg);
+      cursor: not-allowed;
+
+      &:hover {
+        --text-field-ring-color: transparent;
+      }
+    }
+
+    .textFieldHelperText,
+    .textFieldUnit,
+    .textFieldControl,
+    .textFieldControl::placeholder {
+      color: var(--text-field-disabled);
+    }
+
+    .textFieldControl {
+      cursor: not-allowed;
+    }
+  }
+}
