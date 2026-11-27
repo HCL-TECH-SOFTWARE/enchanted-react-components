@@ -1,0 +1,154 @@
+/* ======================================================================== *
+ * Copyright 2026 HCL America Inc.                                          *
+ * Licensed under the Apache License, Version 2.0 (the "License");          *
+ * you may not use this file except in compliance with the License.         *
+ * You may obtain a copy of the License at                                  *
+ *                                                                          *
+ * http://www.apache.org/licenses/LICENSE-2.0                               *
+ *                                                                          *
+ * Unless required by applicable law or agreed to in writing, software      *
+ * distributed under the License is distributed on an "AS IS" BASIS,        *
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. *
+ * See the License for the specific language governing permissions and      *
+ * limitations under the License.                                           *
+ * ======================================================================== */
+
+// Values come from the Figma Checkbox component set (Checkbox.Root 24px = 20px icon + 2px padding).
+@layer enchanted.components {
+  .checkboxRoot {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--gap-xxs);
+    padding: var(--padding-xs);
+    font-family: var(--type-font-family);
+    font-size: var(--type-body-md-font-size);
+    font-weight: var(--type-body-md-font-weight);
+    line-height: var(--type-body-md-line-height);
+    letter-spacing: var(--type-letter-spacing-default);
+    color: var(--color-text-primary);
+    cursor: pointer;
+
+    &[data-disable-padding] {
+      padding: 0;
+    }
+
+    &[data-disabled],
+    // A checkbox disabled by its CheckboxGroup has no `disabled` prop, only the control's `data-disabled`.
+    &:has(.checkboxControl[data-disabled]) {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  .checkboxControl {
+    all: unset;
+    position: relative;
+    flex: none;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--size-icon-md) + 2 * var(--padding-xxxs));
+    height: calc(var(--size-icon-md) + 2 * var(--padding-xxxs));
+    border-radius: var(--corner-radius-sm);
+    color: var(--color-actions-default);
+
+    &:hover {
+      color: var(--color-actions-hover);
+      background-color: var(--color-actions-hover-opacity);
+    }
+
+    &:active {
+      color: var(--color-actions-active);
+      background-color: var(--color-actions-active-opacity);
+    }
+
+    &:focus-visible {
+      outline: var(--stroke-focus) solid var(--color-actions-focus);
+      outline-offset: var(--focus-offset);
+      // Focus ring radius = control radius + 3px (Figma `corner-radius/sm-focus`).
+      border-radius: var(--corner-radius-sm-focus);
+    }
+
+    &[data-checked],
+    &[data-indeterminate] {
+      color: var(--color-actions-selected);
+
+      &:hover {
+        color: var(--color-actions-selected-hover);
+      }
+
+      &:active {
+        color: var(--color-actions-selected-active);
+      }
+    }
+
+    &[data-invalid] {
+      color: var(--color-error-default);
+
+      &:hover {
+        color: var(--color-error-hover);
+      }
+
+      &:active {
+        color: var(--color-error-active);
+      }
+
+      &:focus-visible {
+        outline-color: var(--color-actions-focus-error);
+      }
+    }
+
+    &[data-disabled] {
+      color: var(--color-actions-disabled);
+      background-color: transparent;
+      pointer-events: none;
+    }
+  }
+
+  .checkboxIcon {
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    fill: currentColor;
+  }
+
+  .checkboxControl[data-checked] .checkboxIconUnchecked,
+  .checkboxControl[data-indeterminate] .checkboxIconUnchecked {
+    display: none;
+  }
+
+  .checkboxIndicator {
+    display: inline-flex;
+
+    &[data-indeterminate] .checkboxIconChecked {
+      display: none;
+    }
+
+    &:not([data-indeterminate]) .checkboxIconIndeterminate {
+      display: none;
+    }
+  }
+
+  .checkboxContent {
+    display: flex;
+    flex-direction: column;
+    // Aligns the label's 22px line box with the 24px control.
+    padding-block-start: 1px;
+  }
+
+  // Skipped when disabled, including a checkbox disabled by its CheckboxGroup (see the `:has` rule above).
+  .checkboxRoot[data-invalid]:not([data-disabled], :has(.checkboxControl[data-disabled])) .checkboxLabel {
+    color: var(--color-text-primary);
+  }
+
+  .checkboxHelperText,
+  .checkboxErrorMessage {
+    font-size: var(--type-caption-font-size);
+    font-weight: var(--type-caption-font-weight);
+    line-height: var(--type-caption-line-height);
+  }
+
+  .checkboxErrorMessage {
+    color: var(--color-error-default);
+  }
+}

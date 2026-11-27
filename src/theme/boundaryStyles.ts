@@ -13,9 +13,12 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
+import checkboxStyles from '../components/Checkbox/Checkbox.shadow.scss?inline';
+import checkboxGroupStyles from '../components/CheckboxGroup/CheckboxGroup.shadow.scss?inline';
+
 // One `import x from '../components/<Component>/<Component>.shadow.scss?inline'` per component
-// that has styles, concatenated below. No component has styles yet.
-const componentStyles: string[] = [];
+// that has styles, concatenated below.
+const componentStyles: string[] = [checkboxStyles, checkboxGroupStyles];
 
 /** The concatenated CSS of every component, injected by `ThemeProvider`. */
 export const boundaryStyles = componentStyles.join('\n');

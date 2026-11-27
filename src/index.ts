@@ -13,5 +13,7 @@
  * limitations under the License.                                           *
  * ======================================================================== */
 
-// Public entry point. No components are exported yet; only the shared theme infrastructure.
+// Public entry point.
 export * from './theme';
+export * from './components/Checkbox';
+export * from './components/CheckboxGroup';
