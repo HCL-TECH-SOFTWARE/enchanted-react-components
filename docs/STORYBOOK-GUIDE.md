@@ -91,8 +91,8 @@ Keep this order. Storybook's manifest shows the first three stories in full, so 
 | --- | --- | --- | --- |
 | 1 | `Default` | Always | The smallest, most common use. Contains no non-default props unless the component requires them. |
 | 2 | One story per axis | One for every VARIANT property of the Figma component that is a prop | Renders every value of one axis side by side. Named after the axis, such as `Variants`, `Colors`, `Sizes`. |
-| 3 | Use-case stories | One for each distinct use or behavior | Named for the intent: `WithIcons`, `WithHelperText`, `Selected`, `Disabled`, `InverseOnDark`, `Controlled`. |
-| Last | `AllVariants` | Optional | A matrix of every combination for visual regression. See below. |
+| 3 | Use-case stories | One for each distinct use or behavior | Named for the intent: `WithIcons`, `WithHelperText`, `Selected`, `Disabled`, `Controlled`. |
+| Last | `AllVariants-Light`, `AllVariants-Dark` | Optional | A visual-regression matrix preconfigured for each theme. Set the story-level `globals.theme` to `ThemeMode.Light` or `ThemeMode.Dark`. See below. |
 
 ### Axis stories
 
@@ -106,12 +106,14 @@ Keep this order. Storybook's manifest shows the first three stories in full, so 
 - Name the intent, not the prop: `WithStartIcon`, not `StartIconTrue`.
 - Include the story only if it shows something the axis stories do not, such as slots, content, or behavior.
 - Add a `play` function for behavior (selection, typing, opening, keyboard use), and assert with accessible queries.
+- Do not create standalone `Inverse` or `InverseOnDark` stories, or duplicate the full `AllVariants` matrix in inverse colors.
 
 ### The matrix story
 
-- `AllVariants` exists for visual regression review in Chromatic. It is not documentation: it has no explanation per variant and is too large to learn from.
-- Give it the tag `visual` so tooling can filter it, and place it last.
-- Skip it for components with only a few variants. The axis stories already cover them.
+- `AllVariants-Light` and `AllVariants-Dark` exist for visual regression review in Chromatic. They are not documentation: they have no explanation per variant and are too large to learn from.
+- Give both stories the tag `visual` so tooling can filter them, and place them last.
+- Set each story's `globals.theme` so its snapshot always uses the named theme.
+- Skip these stories for components with only a few variants. The axis stories already cover them.
 
 ## Writing Good Descriptions
 
@@ -137,7 +139,7 @@ Per-component stories do not teach how to build a screen. Add:
 - `.storybook/preview.tsx` wraps every story in `ThemeProvider` and exposes the Theme, Direction, Shadow root, and Custom Overrides toolbars. Do not wrap a story in `ThemeProvider` again, and do not set `data-theme` or `dir` in a story. The one exception is an `Overrides` story, which nests a `ThemeProvider` per case so each case has its own host element for `::part(root)` and token overrides (see [CUSTOMIZATION-GUIDE.md](CUSTOMIZATION-GUIDE.md)).
 - Stories render inside the `ThemeProvider` shadow-root style boundary (`shadowRootType` defaults to `ShadowRootType.Open`). Controls such as forms, labels, and portals behave as the [known limitations](COMPONENT-GUIDE.md#theme-provider-boundary) describe.
 - **Shadow root toolbar.** `.storybook/preview.tsx` defines a global `shadowRootType` toolbar with the values `none`, `open`, and `closed`, defaulting to `open`. Import the `ShadowRootType` `as const` object from the provider and pass the global straight to `ThemeProvider` as `shadowRootType`; do not define a second copy of the values. Use it to compare the modes of the [style boundary](COMPONENT-GUIDE.md#theme-provider-boundary): `open` and `closed` render the story inside a shadow root, `none` adds the same styles to the document so page CSS can reach the components. Expect the story to remount when the type changes, because the provider renders its children in a different place.
-- **Custom Overrides toolbar.** `.storybook/preview.tsx` defines a global `customOverrides` toolbar with the values `none` and `custom`, defaulting to `none`. Import the `CustomOverrides` `as const` object from `src/theme/ThemeProvider` and compare against it, not against a string literal. With `custom`, the decorator passes the `--color-primary-main` and `--color-primary-dark` tokens as inline `style` on the `ThemeProvider` host, which is the token route in the [CUSTOMIZATION-GUIDE.md](CUSTOMIZATION-GUIDE.md#customization-levels). Use it to check that a story follows the tokens and does not hard-code colors. It works in every shadow root mode, because tokens are inherited into the boundary.
+- **Custom Overrides toolbar.** `.storybook/preview.tsx` defines a global `customOverrides` toolbar with the values `none` and `custom`, defaulting to `none`. Import the `CustomOverrides` `as const` object from `src/theme/ThemeProvider` and compare against it, not against a string literal. With `custom`, the decorator passes the `--color-brand-default` and `--color-brand-hover` tokens as inline `style` on the `ThemeProvider` host, which is the token route in the [CUSTOMIZATION-GUIDE.md](CUSTOMIZATION-GUIDE.md#customization-levels). Use it to check that a story follows the tokens and does not hard-code colors. It works in every shadow root mode, because tokens are inherited into the boundary.
 - Do not read the Shadow root or Custom Overrides globals in a story or set `shadowRootType` on a nested `ThemeProvider` to pick a type. The `Overrides` story is the exception: its cases each set `shadowRootType` explicitly, because it exists to compare modes.
 - Stories must not hard-code colors, spacing, or typography. Use the component's own props and the token custom properties. The approved `fontFamily` token is exposed as `var(--font-family)`; for story-owned text, apply `fontFamily: 'var(--font-family)'` once on the top-level story wrapper so all its text inherits it. Do not hard-code `Inter` or repeat font styles on individual text elements. Stories that only render components should rely on those components to consume the token.
 - Do not import component internals. A story imports only what a consumer would import from the public entry point, plus the component's own files.
