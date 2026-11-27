@@ -104,7 +104,7 @@ const preview: Preview = {
           shadowRootType={context.globals.shadowRootType as ShadowRootType}
           style={
             (context.globals.customOverrides === CustomOverrides.Custom
-              ? { '--color-primary-main': '#0f7b6c', '--color-primary-dark': '#0a5a4f' }
+              ? { '--color-brand-default': '#0f7b6c', '--color-brand-hover': '#0a5a4f' }
               : {}) as CSSProperties
           }
         >
