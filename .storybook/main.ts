@@ -19,6 +19,9 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-mcp'],
   framework: '@storybook/react-vite',
+  // The default `react-docgen` cannot resolve `(typeof Obj)[keyof typeof Obj]`, which is how the
+  // `as const` option types are derived, and shows them as `unknown[union]`.
+  typescript: { reactDocgen: 'react-docgen-typescript' },
 };
 
 export default config;
