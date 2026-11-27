@@ -203,3 +203,49 @@ export const AllVariants: Story = {
     );
   },
 };
+
+/** Use `iconButton` to display only an icon in a square button (36×36px). The icon is required and `aria-label` must be provided for accessibility. */
+export const IconButton: Story = {
+  args: { iconButton: true, icon: <AddIcon />, 'aria-label': 'Add' },
+};
+
+/**
+ * Every variant, color and size combination for icon buttons, for visual regression review. Not documentation: learn
+ * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
+ * Icon buttons support only `medium` and `small` sizes (36×36px and 24×24px).
+ */
+export const AllIconButtonVariants: Story = {
+  tags: ['visual'],
+  render: (args) => {
+    const sizes = [ButtonSize.Medium, ButtonSize.Small];
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
+        {values(ButtonVariant).map((variant) => (
+          <div
+            key={variant}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `max-content repeat(${sizes.length}, max-content)`,
+              alignItems: 'center',
+              justifyItems: 'start',
+              gap: `calc(var(--padding-sm) * 2) calc(var(--padding-sm) * 3)`,
+            }}
+          >
+            <strong>{variant}</strong>
+            {sizes.map((size) => (
+              <span key={size}>{size}</span>
+            ))}
+            {values(ButtonColor).map((color) => (
+              <Fragment key={color}>
+                <span>{color}</span>
+                {sizes.map((size) => (
+                  <Button key={size} {...args} variant={variant} color={color} size={size} iconButton icon={<AddIcon />} aria-label="Add" />
+                ))}
+              </Fragment>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+};

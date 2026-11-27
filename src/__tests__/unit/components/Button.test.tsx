@@ -175,4 +175,96 @@ describe('Button', () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it('renders an icon button (icon only, no label) with the icon prop', () => {
+    render(<Button iconButton icon={<span data-testid="icon">+</span>} aria-label="Add" />);
+    const button = screen.getByRole('button', { name: 'Add' });
+    expect(button).toHaveAttribute('data-variant', ButtonVariant.Contained);
+    expect(button).toHaveAttribute('data-color', ButtonColor.Brand);
+    expect(button).toHaveAttribute('data-size', ButtonSize.Medium);
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
+  });
+
+  it('applies the buttonIconButton class when iconButton is true', () => {
+    const { container } = render(<Button iconButton icon={<span />} aria-label="Add" />);
+    const button = container.querySelector('.buttonRoot');
+    expect(button).toHaveClass('buttonIconButton');
+  });
+
+  it('ignores startIcon and endIcon when iconButton is true', () => {
+    const { queryByTestId } = render(
+      <Button iconButton icon={<span data-testid="icon" />} startIcon={<span data-testid="start" />} endIcon={<span data-testid="end" />} aria-label="Add" />,
+    );
+    expect(queryByTestId('icon')).toBeInTheDocument();
+    expect(queryByTestId('start')).not.toBeInTheDocument();
+    expect(queryByTestId('end')).not.toBeInTheDocument();
+  });
+
+  it('ignores children label when iconButton is true', () => {
+    const { queryByText } = render(<Button iconButton icon={<span />} aria-label="Add">Label text</Button>);
+    expect(queryByText('Label text')).not.toBeInTheDocument();
+  });
+
+  it.each(Object.values(ButtonVariant))('icon button reflects the %s variant', (variant) => {
+    render(<Button iconButton variant={variant} icon={<span />} aria-label="Add" />);
+    expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('data-variant', variant);
+  });
+
+  it.each(Object.values(ButtonColor))('icon button reflects the %s color', (color) => {
+    render(<Button iconButton color={color} icon={<span />} aria-label="Add" />);
+    expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('data-color', color);
+  });
+
+  it.each(Object.values(ButtonSize))('icon button reflects the %s size', (size) => {
+    render(<Button iconButton size={size} icon={<span />} aria-label="Add" />);
+    expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('data-size', size);
+  });
+
+  it('icon button marks an inverse button', () => {
+    render(<Button iconButton inverse icon={<span />} aria-label="Add" />);
+    expect(screen.getByRole('button', { name: 'Add' })).toHaveAttribute('data-inverse', 'true');
+  });
+
+  it('icon button is a toggle only when `pressed` is set, and reports both states', () => {
+    const { rerender } = render(<Button iconButton pressed icon={<span />} aria-label="Favorite" />);
+    const button = screen.getByRole('button', { name: 'Favorite' });
+    expect(button).toHaveAttribute('aria-pressed', 'true');
+    expect(button).toHaveAttribute('data-pressed', 'true');
+
+    rerender(<Button iconButton pressed={false} icon={<span />} aria-label="Favorite" />);
+    expect(button).toHaveAttribute('aria-pressed', 'false');
+    expect(button).not.toHaveAttribute('data-pressed');
+  });
+
+  it('icon button calls onClick', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<Button iconButton icon={<span />} aria-label="Add" onClick={onClick} />);
+    await user.click(screen.getByRole('button', { name: 'Add' }));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('icon button does not fire when disabled', async () => {
+    const user = userEvent.setup();
+    const onClick = vi.fn();
+    render(<Button iconButton icon={<span />} aria-label="Add" disabled onClick={onClick} />);
+    const button = screen.getByRole('button', { name: 'Add' });
+    await user.click(button);
+    expect(onClick).not.toHaveBeenCalled();
+    expect(button).toBeDisabled();
+  });
+
+  it('icon button has no accessibility violations in its main states', async () => {
+    const { container } = render(
+      <>
+        <Button iconButton icon={<span aria-hidden="true">+</span>} aria-label="Default" />
+        <Button iconButton variant={ButtonVariant.Outlined} color={ButtonColor.Error} icon={<span aria-hidden="true">•</span>} aria-label="Outlined" />
+        <Button iconButton variant={ButtonVariant.Text} size={ButtonSize.ExtraSmall} icon={<span aria-hidden="true">✓</span>} aria-label="Text" />
+        <Button iconButton pressed icon={<span aria-hidden="true">★</span>} aria-label="Pressed" />
+        <Button iconButton disabled icon={<span aria-hidden="true">-</span>} aria-label="Disabled" />
+        <Button iconButton inverse icon={<span aria-hidden="true">+</span>} aria-label="Inverse" />
+      </>,
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });
