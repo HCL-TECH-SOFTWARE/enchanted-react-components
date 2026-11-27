@@ -161,10 +161,22 @@
     }
   }
 
+  // The Figma slot is a 24px square (a small text button) holding a 16px icon, centered in the 24px row.
+  // A bare icon passed as the adornment gets the same size and color; other content keeps its own.
   .textFieldEndAdornment {
     display: flex;
     flex: none;
     align-items: center;
+    justify-content: center;
+    min-inline-size: var(--size-control-sm);
+    min-block-size: var(--size-control-sm);
+    color: var(--text-field-adornment);
+
+    > svg {
+      inline-size: var(--size-icon-sm);
+      block-size: var(--size-icon-sm);
+      fill: currentcolor;
+    }
   }
 
   // Shown only while the field is focused and has a value (Figma: focus + filled).
