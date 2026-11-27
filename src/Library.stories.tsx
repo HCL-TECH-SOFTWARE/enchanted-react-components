@@ -16,7 +16,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const Overview = () => (
-  <div>
+  <div style={{ fontFamily: 'var(--font-family)' }}>
     <h1>Enchanted</h1>
     <p>
       Private React component library for HCL products, built on Base UI. No components are implemented yet; they are
