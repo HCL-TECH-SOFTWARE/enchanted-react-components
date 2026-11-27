@@ -21,32 +21,6 @@ import type { SelectOption, SelectProps } from './Select';
 import { SelectItem } from './SelectItem';
 
 /**
- * Values of an `as const` object. Storybook's docgen plugin adds `displayName` (a string) and
- * `__docgenInfo` (an object) to these exports, and `Object.values` would return both as extra values.
- */
-const values = <T extends Record<string, string>>(options: T): T[keyof T][] =>
-  Object.entries(options)
-    .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
-    .map(([, value]) => value as T[keyof T]);
-
-/** The Figma frame width (240px), built from a spacing token so the story hard-codes no length. */
-const fieldWidth = 'calc(var(--padding-md) * 20)';
-
-const options: SelectOption[] = [
-  { value: 'item-1', label: 'Item 1' },
-  { value: 'item-2', label: 'Item 2' },
-  { value: 'item-3', label: 'Item 3' },
-  { value: 'item-4', label: 'Item 4' },
-];
-
-/** Lays fields out in a wrapping row with space between them. */
-const Row = ({ children }: { children: ReactNode }) => (
-  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 'calc(var(--padding-sm) * 2)' }}>
-    {children}
-  </div>
-);
-
-/**
  * Paints the dark inverse canvas behind the Inverse story. In the canvas it fills the whole preview page;
  * in the docs page it only fills a box around the story, so the other stories stay on the normal page.
  * The token is the same near-black in light and dark mode, so the story reads in both.
@@ -77,6 +51,32 @@ const InverseBackground = ({ fullPage, children }: { fullPage: boolean; children
     </div>
   );
 };
+
+/**
+ * Values of an `as const` object. Storybook's docgen plugin adds `displayName` (a string) and
+ * `__docgenInfo` (an object) to these exports, and `Object.values` would return both as extra values.
+ */
+const values = <T extends Record<string, string>>(options: T): T[keyof T][] =>
+  Object.entries(options)
+    .filter(([key]) => key !== 'displayName' && key !== '__docgenInfo')
+    .map(([, value]) => value as T[keyof T]);
+
+/** The Figma frame width (240px), built from a spacing token so the story hard-codes no length. */
+const fieldWidth = 'calc(var(--padding-md) * 20)';
+
+const options: SelectOption[] = [
+  { value: 'item-1', label: 'Item 1' },
+  { value: 'item-2', label: 'Item 2' },
+  { value: 'item-3', label: 'Item 3' },
+  { value: 'item-4', label: 'Item 4' },
+];
+
+/** Lays fields out in a wrapping row with space between them. */
+const Row = ({ children }: { children: ReactNode }) => (
+  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: 'calc(var(--padding-sm) * 2)' }}>
+    {children}
+  </div>
+);
 
 const meta = {
   title: 'Components/Inputs/Select',
