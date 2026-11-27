@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import AddIcon from '@hcl-software/enchanted-icons-react/carbon/es/add';
 import ArrowRightIcon from '@hcl-software/enchanted-icons-react/carbon/es/arrow--right';
 import { Button, ButtonColor, ButtonSize, ButtonVariant } from './Button';
+import { ThemeMode } from '../../theme/ThemeProvider';
 
 /**
  * Extract enum values from const objects while filtering out Storybook's injected metadata
@@ -84,9 +85,6 @@ export const Pressed: Story = { args: { pressed: true } };
 /** Use `disabled` when the action is unavailable. The button cannot be focused or clicked. */
 export const Disabled: Story = { args: { disabled: true } };
 
-/** Use `inverse` on a dark or colored background, where the default colors would not stay readable. */
-export const Inverse: Story = { args: { inverse: true } };
-
 /** Use `startIcon` to reinforce the action with an icon before the label, such as Add for a create action. */
 export const WithStartIcon: Story = { args: { startIcon: <AddIcon /> } };
 
@@ -94,12 +92,63 @@ export const WithStartIcon: Story = { args: { startIcon: <AddIcon /> } };
 export const WithEndIcon: Story = { args: { endIcon: <ArrowRightIcon /> } };
 
 /**
- * Every variant, color and size combination, for visual regression review. Not documentation: learn
+ * Every variant, color and size combination, in the light theme, for visual regression review. Not documentation: learn
  * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
  * `extraSmall` is defined for the `text` variant only, so its cells are empty for the others.
  */
-export const AllVariants: Story = {
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
   tags: ['visual'],
+  globals: { theme: ThemeMode.Light },
+  render: (args) => {
+    const sizes = getEnumValues(ButtonSize);
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
+        {getEnumValues(ButtonVariant).map((variant) => (
+          <div
+            key={variant}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `max-content repeat(${sizes.length}, max-content)`,
+              alignItems: 'center',
+              justifyItems: 'start',
+              gap: `calc(var(--padding-sm) * 2) calc(var(--padding-sm) * 3)`,
+            }}
+          >
+            <strong>{variant}</strong>
+            {sizes.map((size) => (
+              <span key={size}>{size}</span>
+            ))}
+            {getEnumValues(ButtonColor).map((color) => (
+              <Fragment key={color}>
+                <span>{color}</span>
+                {sizes.map((size) =>
+                  size === ButtonSize.ExtraSmall && variant !== ButtonVariant.Text ? (
+                    <span key={size} />
+                  ) : (
+                    <Button key={size} {...args} variant={variant} color={color} size={size}>
+                      Button
+                    </Button>
+                  ),
+                )}
+              </Fragment>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+/**
+ * Every variant, color and size combination, in the dark theme, for visual regression review. Not documentation: learn
+ * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
+ * `extraSmall` is defined for the `text` variant only, so its cells are empty for the others.
+ */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
   render: (args) => {
     const sizes = getEnumValues(ButtonSize);
     return (
@@ -146,12 +195,57 @@ export const IconButton: Story = {
 };
 
 /**
- * Every variant, color and size combination for icon buttons, for visual regression review. Not documentation: learn
+ * Every variant, color and size combination for icon buttons, in the light theme, for visual regression review. Not documentation: learn
  * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
  * Icon buttons support only `medium` and `small` sizes (36×36px and 24×24px).
  */
-export const AllIconButtonVariants: Story = {
+export const AllIconButtonVariantsLight: Story = {
+  name: 'AllIconButtonVariants-Light',
   tags: ['visual'],
+  globals: { theme: ThemeMode.Light },
+  render: (args) => {
+    const sizes = [ButtonSize.Medium, ButtonSize.Small];
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'calc(var(--padding-sm) * 4)' }}>
+        {getEnumValues(ButtonVariant).map((variant) => (
+          <div
+            key={variant}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: `max-content repeat(${sizes.length}, max-content)`,
+              alignItems: 'center',
+              justifyItems: 'start',
+              gap: `calc(var(--padding-sm) * 2) calc(var(--padding-sm) * 3)`,
+            }}
+          >
+            <strong>{variant}</strong>
+            {sizes.map((size) => (
+              <span key={size}>{size}</span>
+            ))}
+            {getEnumValues(ButtonColor).map((color) => (
+              <Fragment key={color}>
+                <span>{color}</span>
+                {sizes.map((size) => (
+                  <Button key={size} {...args} variant={variant} color={color} size={size} iconButton icon={<AddIcon />} aria-label="Add" />
+                ))}
+              </Fragment>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  },
+};
+
+/**
+ * Every variant, color and size combination for icon buttons, in the dark theme, for visual regression review. Not documentation: learn
+ * from the axis stories above. One table per variant, with colors as rows and sizes as columns.
+ * Icon buttons support only `medium` and `small` sizes (36×36px and 24×24px).
+ */
+export const AllIconButtonVariantsDark: Story = {
+  name: 'AllIconButtonVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
   render: (args) => {
     const sizes = [ButtonSize.Medium, ButtonSize.Small];
     return (
