@@ -250,6 +250,13 @@ $disabled-inverse: (
     --button-icon-size: var(--size-icon-sm);
   }
 
+  // Icon button mode: square shape with centered icon
+  .buttonIconButton {
+    width: var(--button-min);
+    height: var(--button-min);
+    padding: 2px;
+  }
+
   // Outlined and pressed buttons draw a border; the others have none in Figma.
   .buttonRoot[data-variant='outlined'],
   .buttonRoot[data-pressed] {
@@ -261,7 +268,8 @@ $disabled-inverse: (
   }
 
   .buttonStartIcon,
-  .buttonEndIcon {
+  .buttonEndIcon,
+  .buttonIcon {
     display: inline-flex;
     flex: none;
     inline-size: var(--button-icon-size);
