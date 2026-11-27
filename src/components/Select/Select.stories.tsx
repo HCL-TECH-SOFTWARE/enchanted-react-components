@@ -19,6 +19,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Select, SelectSize } from './Select';
 import type { SelectOption, SelectProps } from './Select';
 import { SelectItem } from './SelectItem';
+import { ThemeMode } from '../../theme/ThemeProvider';
 
 /**
  * Paints the dark inverse canvas behind the Inverse story. In the canvas it fills the whole preview page;
@@ -211,6 +212,72 @@ const Matrix = ({ inverse, args }: { inverse: boolean; args: Partial<SelectProps
     )}
   </div>
 );
+
+/**
+ * Every state and size in the light theme, for visual regression review. Not
+ * documentation: learn from the stories above. The open popup, hover and focus are checked by hand.
+ */
+export const AllVariantsLight: Story = {
+  name: 'AllVariants-Light',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Light },
+  render: (args) => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns.length}, ${fieldWidth})`,
+        gap: 'calc(var(--padding-sm) * 3) calc(var(--padding-sm) * 2)',
+        alignItems: 'start',
+      }}
+    >
+      {states.map((state) =>
+        columns.map((column) => (
+          <Select
+            key={`${state.name}-${column.name}`}
+            {...args}
+            {...column.props}
+            {...state.props}
+            inverse={false}
+            label={`${state.name}, ${column.name}`}
+          />
+        )),
+      )}
+    </div>
+  ),
+};
+
+/**
+ * Every state and size in the dark theme, for visual regression review. Not
+ * documentation: learn from the stories above. The open popup, hover and focus are checked by hand.
+ */
+export const AllVariantsDark: Story = {
+  name: 'AllVariants-Dark',
+  tags: ['visual'],
+  globals: { theme: ThemeMode.Dark },
+  render: (args) => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns.length}, ${fieldWidth})`,
+        gap: 'calc(var(--padding-sm) * 3) calc(var(--padding-sm) * 2)',
+        alignItems: 'start',
+      }}
+    >
+      {states.map((state) =>
+        columns.map((column) => (
+          <Select
+            key={`${state.name}-${column.name}`}
+            {...args}
+            {...column.props}
+            {...state.props}
+            inverse={false}
+            label={`${state.name}, ${column.name}`}
+          />
+        )),
+      )}
+    </div>
+  ),
+};
 
 /**
  * Every state and size, in the default and inverse colors, for visual regression review. Not
